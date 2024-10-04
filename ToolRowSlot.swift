@@ -22,10 +22,6 @@ enum ToolRowSlot {
     case bottom_Secondary1
     case bottom_Primary
     
-    case graph_side_menu_1
-    case graph_side_menu_2
-    case graph_side_menu_3
-    
     case video_record_1
     case video_record_2
     

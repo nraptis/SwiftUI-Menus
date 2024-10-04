@@ -144,7 +144,7 @@ struct SegmentedPickerLayout: LayoutScheme {
                 switch squeeze {
                 case .squeezed:
                     return 6
-                case .standard:
+                case .standard, .relaxed:
                     return 8
                 }
             }
@@ -153,7 +153,7 @@ struct SegmentedPickerLayout: LayoutScheme {
                 switch squeeze {
                 case .squeezed:
                     return 4
-                case .standard:
+                case .standard, .relaxed:
                     return 6
                 }
             }
@@ -164,11 +164,11 @@ struct SegmentedPickerLayout: LayoutScheme {
     static func getIconPaddingTop(orientation: Orientation, flavor: LayoutSchemeFlavor, numberOfLines: Int) -> Int {
         if Device.isPad {
             if flavor.isStacked {
-                return 6 // Final, 6
+                return 4
             }
         } else {
             if flavor.isStacked {
-                return 4 // Final, 4
+                return 3
             }
         }
         return 0

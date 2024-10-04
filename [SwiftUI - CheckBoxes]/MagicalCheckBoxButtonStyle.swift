@@ -77,37 +77,6 @@ struct MagicalCheckBoxButtonStyle: ButtonStyle {
                     color = ToolInterfaceTheme.primaryDisabledLight
                 }
             }
-            /*
-            if isChecked {
-                if isDarkMode {
-                    if isEnabled {
-                        color = ToolInterfaceTheme.primaryUnselectedEnabledDark
-                    } else {
-                        color = ToolInterfaceTheme.primaryUnselectedDisabledDark
-                    }
-                } else {
-                    if isEnabled {
-                        color = ToolInterfaceTheme.primaryUnselectedEnabledLight
-                    } else {
-                        color = ToolInterfaceTheme.primaryUnselectedDisabledLight
-                    }
-                }
-            } else {
-                if isDarkMode {
-                    if isEnabled {
-                        color = ToolInterfaceTheme.checkPrimaryUncheckedDark
-                    } else {
-                        color = ToolInterfaceTheme.checkPrimaryUncheckedDisabledDark
-                    }
-                } else {
-                    if isEnabled {
-                        color = ToolInterfaceTheme.checkPrimaryUncheckedLight
-                    } else {
-                        color = ToolInterfaceTheme.checkPrimaryUncheckedDisabledLight
-                    }
-                }
-            }
-            */
         }
         
         let height = magicalCheckBoxViewModel.layoutHeight - (universalPaddingTop + universalPaddingBottom)

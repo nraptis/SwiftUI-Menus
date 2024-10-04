@@ -9,7 +9,7 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-    func getBreakManualWeightGraphTextIconButtonToolNode(neighborTypeLeft: ToolInterfaceElementType?,
+   @MainActor func getBreakManualWeightGraphTextIconButtonToolNode(neighborTypeLeft: ToolInterfaceElementType?,
                                       neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
         let orientation = jiggleViewModel.orientation

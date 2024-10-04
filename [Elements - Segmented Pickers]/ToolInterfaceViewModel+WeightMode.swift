@@ -9,14 +9,14 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-    func getWeightModeSegmentToolNode(neighborTypeLeft: ToolInterfaceElementType?,
+   @MainActor func getWeightModeSegmentToolNode(neighborTypeLeft: ToolInterfaceElementType?,
                                       neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
         let orientation = jiggleViewModel.orientation
         var buttonConfigurations = [ToolInterfaceElementSegmentedPickerButtonConfiguration]()
         
         
-        let affineTextIconPackable = SegmentIconLibrary.modeWeightsEditAffine
+       let affineTextIconPackable = FramedConvertibleIconLibrary.menuC
         let affineLine1 = ToolInterfaceStringLibrarySegments.segmentTextWeightModeAffineLine1()
         let affineLine2 = ToolInterfaceStringLibrarySegments.segmentTextWeightModeAffineLine2()
         let affineConfiguration = ToolInterfaceElementSegmentedPickerButtonConfiguration(id: 0,
@@ -28,7 +28,7 @@ extension ToolInterfaceViewModel {
         
         
         
-        let pointsTextIconPackable = SegmentIconLibrary.modeWeightsEditPoints
+       let pointsTextIconPackable = FramedConvertibleIconLibrary.menuB
         let pointsLine1 = ToolInterfaceStringLibrarySegments.segmentTextWeightModePointsLine1()
         let pointsLine2 = ToolInterfaceStringLibrarySegments.segmentTextWeightModePointsLine2()
         let pointsConfiguration = ToolInterfaceElementSegmentedPickerButtonConfiguration(id: 1,

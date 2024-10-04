@@ -14,7 +14,7 @@ class BottomMenuMenuVideoExportView: UIView, MenuPartWithRowsConforming {
     func getNumberOfRows() -> Int {
         ToolInterfaceTheme.getBottomMenuVideoExportRowCount(orientation: toolInterfaceViewModel.orientation)
     }
-    func getWidthSource() -> ToolRowViewContent.WidthSource { .standard }
+    
     func getToolRow(at index: Int) -> ToolRow? {
         let shift = ToolInterfaceTheme.getTopMenuVideoExportRowCount(orientation: toolInterfaceViewModel.orientation)
         let index = (index + shift)

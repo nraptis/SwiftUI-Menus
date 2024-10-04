@@ -14,6 +14,7 @@ struct SexyButtonIconPack: TextIconPackable {
                      numberOfLines: Int,
                      isDarkMode: Bool,
                      isEnabled: Bool) -> (any TextIconable) {
+        
         if numberOfLines == 2 {
             
             if Device.isPad {
@@ -141,19 +142,22 @@ struct SexyButtonIconPack: TextIconPackable {
          slicePhoneLandscapeLight1Line: AnyTextIcon,
          slicePhonePortraitDark1Line: AnyTextIcon,
          slicePhonePortraitLight1Line: AnyTextIcon,
-         slicePadDarkDisabled1Line: AnyTextIcon,
+         
          slicePadDark2Lines: AnyTextIcon,
          slicePadLight2Lines: AnyTextIcon,
          slicePhoneLandscapeDark2Lines: AnyTextIcon,
          slicePhoneLandscapeLight2Lines: AnyTextIcon,
          slicePhonePortraitDark2Lines: AnyTextIcon,
          slicePhonePortraitLight2Lines: AnyTextIcon,
-         slicePadDarkDisabled2Lines: AnyTextIcon,
+         
+         slicePadDarkDisabled1Line: AnyTextIcon,
          slicePadLightDisabled1Line: AnyTextIcon,
          slicePhoneLandscapeDarkDisabled1Line: AnyTextIcon,
          slicePhoneLandscapeLightDisabled1Line: AnyTextIcon,
          slicePhonePortraitDarkDisabled1Line: AnyTextIcon,
          slicePhonePortraitLightDisabled1Line: AnyTextIcon,
+         
+         slicePadDarkDisabled2Lines: AnyTextIcon,
          slicePadLightDisabled2Lines: AnyTextIcon,
          slicePhoneLandscapeDarkDisabled2Lines: AnyTextIcon,
          slicePhoneLandscapeLightDisabled2Lines: AnyTextIcon,

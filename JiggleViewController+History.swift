@@ -48,6 +48,21 @@ extension JiggleViewController {
                 break
             }
             
+            switch worldConfiguration.guidesType {
+            case .forceEnter:
+                if interfaceConfigurationCurrent.isGuidesEnabled == false {
+                    interfaceConfigurationCurrent.isGuidesEnabled = true
+                    result.append(ToolActionPhaseSliceSetGuidesMode(isGuideMode: true))
+                }
+            case .forceLeave:
+                if interfaceConfigurationCurrent.isGuidesEnabled == true {
+                    interfaceConfigurationCurrent.isGuidesEnabled = false
+                    result.append(ToolActionPhaseSliceSetGuidesMode(isGuideMode: false))
+                }
+            case .dontCare:
+                break
+            }
+            
             
             if interfaceConfigurationCurrent.isZoomEnabled {
                 interfaceConfigurationCurrent.isZoomEnabled = false
@@ -64,31 +79,30 @@ extension JiggleViewController {
                 result.append(ToolActionPhaseSliceSetVideoExportMode(isVideoExportEnabled: false))
             }
             
-            if worldConfiguration.isJiggleCenters {
-                result.append(ToolActionPhaseSliceSetJiggleCentersEnabled(isJiggleCentersEnabled: true))
-            } else {
-                result.append(ToolActionPhaseSliceSetJiggleCentersEnabled(isJiggleCentersEnabled: false))
-            }
-            
-            if worldConfiguration.isWeightCenters {
-                result.append(ToolActionPhaseSliceSetGuideCentersEnabled(isGuideCentersEnabled: true))
-            } else {
-                result.append(ToolActionPhaseSliceSetGuideCentersEnabled(isGuideCentersEnabled: false))
-            }
-            
             /*
-            let documentMode: DocumentMode
-            let editMode: EditMode
-            let weightModeType: WeightModeType
-            var graphType: GraphType
-            var guidesType: GuidesType
-            var phoneExpandedTopType: ExpandedType
-            var phoneExpandedBottomType: ExpandedType
-            var isJiggleCenters: Bool
-            var isWeightCenters: Bool
+            if worldConfiguration.isJiggleCenters {
+                
+                if interfaceConfigurationCurrent.creatorMode == .moveJiggleCenter {
+                    
+                } else if interfaceConfigurationCurrent.creatorMode != .none {
+                    result.append(ToolActionPhaseSliceSetCreatorMode(creatorMode: .none))
+                }
+                
+            } else if worldConfiguration.isWeightCenters {
+                
+                if interfaceConfigurationCurrent.creatorMode == .moveGuideCenter {
+                    
+                } else if interfaceConfigurationCurrent.creatorMode != .none {
+                    result.append(ToolActionPhaseSliceSetCreatorMode(creatorMode: .none))
+                }
+                
+            } else {
+                result.append(ToolActionPhaseSliceSetCreatorMode(creatorMode: .none))
+            }
             */
             
             return result
+            
         } alongsideMeshCommand: {
             [ ]
         }

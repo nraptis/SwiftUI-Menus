@@ -9,7 +9,7 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-    func getGyroscopeEnabledCheckBoxNode(neighborTypeLeft: ToolInterfaceElementType?,
+    @MainActor func getGyroscopeEnabledCheckBoxNode(neighborTypeLeft: ToolInterfaceElementType?,
                                               neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         let orientation = jiggleViewModel.orientation
         let textLine1 = ToolInterfaceStringLibraryCheckBoxes.checkBoxTextGyroscopeEnabledLine1()

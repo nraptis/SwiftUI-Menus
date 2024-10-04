@@ -9,7 +9,7 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-    func getJiggleCentersEnabledCheckBoxNode(neighborTypeLeft: ToolInterfaceElementType?,
+   @MainActor func getJiggleCentersEnabledCheckBoxNode(neighborTypeLeft: ToolInterfaceElementType?,
                                              neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
         let orientation = jiggleViewModel.orientation

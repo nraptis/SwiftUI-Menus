@@ -36,6 +36,16 @@ extension JiggleViewController {
         print("==> Apply History [\(historyState)] (REDO - B)")
         
         switch historyState.historyStateType {
+            
+        case .rotateOrFlipJiggle:
+            if let historyStateRotateOrFlipJiggle = historyState as? HistoryStateRotateOrFlipJiggle {
+                applyHistoryStateRotateOrFlipJiggleRedo(historyStateRotateOrFlipJiggle)
+            }
+        case .rotateOrFlipGuide:
+            if let historyStateRotateOrFlipGuide = historyState as? HistoryStateRotateOrFlipGuide {
+                applyHistoryStateRotateOrFlipGuideRedo(historyStateRotateOrFlipGuide)
+            }
+            
         case .createJiggle:
             if let historyStateCreateJiggle = historyState as? HistoryStateCreateJiggle {
                 applyHistoryStateCreateJiggleRedo(historyStateCreateJiggle)
@@ -60,34 +70,37 @@ extension JiggleViewController {
             if let historyStateRemoveControlPoint = historyState as? HistoryStateRemoveControlPoint {
                 applyHistoryStateRemoveControlPointRedo(historyStateRemoveControlPoint)
             }
-            
-        case .createWeightRing:
-            if let historyStateCreateWeightRing = historyState as? HistoryStateCreateWeightRing {
-                applyHistoryStateCreateWeightRingRedo(historyStateCreateWeightRing)
+        case .createGuide:
+            if let historyStateCreateGuide = historyState as? HistoryStateCreateGuide {
+                applyHistoryStateCreateGuideRedo(historyStateCreateGuide)
             }
-        case .removeWeightRing:
-            if let historyStateRemoveWeightRing = historyState as? HistoryStateRemoveWeightRing {
-                applyHistoryStateRemoveWeightRingRedo(historyStateRemoveWeightRing)
+        case .removeGuide:
+            if let historyStateDeleteGuide = historyState as? HistoryStateDeleteGuide {
+                applyHistoryStateDeleteGuideRedo(historyStateDeleteGuide)
             }
-        case .transformWeightRing:
-            if let historyStateTransformWeightRing = historyState as? HistoryStateTransformWeightRing {
-                applyHistoryStateTransformWeightRingRedo(historyStateTransformWeightRing)
+        case .transformGuide:
+            if let historyStateTransformGuide = historyState as? HistoryStateTransformGuide {
+                applyHistoryStateTransformGuideRedo(historyStateTransformGuide)
             }
-        case .moveWeightRingControlPoint:
-            if let historyStateMoveWeightRingControlPoint = historyState as? HistoryStateMoveWeightRingControlPoint {
-                applyHistoryStateMoveWeightRingControlPointRedo(historyStateMoveWeightRingControlPoint)
+        case .moveGuideControlPoint:
+            if let historyStateMoveGuideControlPoint = historyState as? HistoryStateMoveGuideControlPoint {
+                applyHistoryStateMoveGuideControlPointRedo(historyStateMoveGuideControlPoint)
             }
-        case .createWeightRingControlPoint:
-            if let historyStateCreateWeightRingControlPoint = historyState as? HistoryStateCreateWeightRingControlPoint {
-                applyHistoryStateCreateWeightRingControlPointRedo(historyStateCreateWeightRingControlPoint)
+        case .createGuideControlPoint:
+            if let historyStateCreateGuideControlPoint = historyState as? HistoryStateCreateGuideControlPoint {
+                applyHistoryStateCreateGuideControlPointRedo(historyStateCreateGuideControlPoint)
             }
-        case .removeWeightRingControlPoint:
-            if let historyStateRemoveWeightRingControlPoint = historyState as? HistoryStateRemoveWeightRingControlPoint {
-                applyHistoryStateRemoveWeightRingControlPointRedo(historyStateRemoveWeightRingControlPoint)
+        case .removeGuideControlPoint:
+            if let historyStateDeleteGuideControlPoint = historyState as? HistoryStateDeleteGuideControlPoint {
+                applyHistoryStateDeleteGuideControlPointRedo(historyStateDeleteGuideControlPoint)
             }
         case .moveWeightCenter:
             if let historyStateMoveWeightCenter = historyState as? HistoryStateMoveWeightCenter {
                 applyHistoryStateMoveWeightCenterRedo(historyStateMoveWeightCenter)
+            }
+        case .moveJiggleCenter:
+            if let historyStateMoveJiggleCenter = historyState as? HistoryStateMoveJiggleCenter {
+                applyHistoryStateMoveJiggleCenterRedo(historyStateMoveJiggleCenter)
             }
         case .moveWeightGraphPosition:
             if let historyStateMoveWeightGraphPosition = historyState as? HistoryStateMoveWeightGraphPosition {
@@ -108,6 +121,14 @@ extension JiggleViewController {
         }
         
         toolInterfaceViewModel.handleUndoRedoDidChange()
+    }
+    
+    private func applyHistoryStateRotateOrFlipJiggleRedo(_ historyState: HistoryStateRotateOrFlipJiggle) {
+        jiggleViewModel.applyHistoryStateRotateOrFlipJiggleRedo(historyState)
+    }
+    
+    private func applyHistoryStateRotateOrFlipGuideRedo(_ historyState: HistoryStateRotateOrFlipGuide) {
+        jiggleViewModel.applyHistoryStateRotateOrFlipGuideRedo(historyState)
     }
     
     private func applyHistoryStateCreateJiggleRedo(_ historyState: HistoryStateCreateJiggle) {
@@ -134,32 +155,36 @@ extension JiggleViewController {
         jiggleViewModel.applyHistoryStateRemoveControlPointRedo(historyState)
     }
     
-    private func applyHistoryStateCreateWeightRingRedo(_ historyState: HistoryStateCreateWeightRing) {
-        jiggleViewModel.applyHistoryStateCreateWeightRingRedo(historyState)
+    private func applyHistoryStateCreateGuideRedo(_ historyState: HistoryStateCreateGuide) {
+        jiggleViewModel.applyHistoryStateCreateGuideRedo(historyState)
     }
     
-    private func applyHistoryStateRemoveWeightRingRedo(_ historyState: HistoryStateRemoveWeightRing) {
-        jiggleViewModel.applyHistoryStateRemoveWeightRingRedo(historyState)
+    private func applyHistoryStateDeleteGuideRedo(_ historyState: HistoryStateDeleteGuide) {
+        jiggleViewModel.applyHistoryStateDeleteGuideRedo(historyState)
     }
     
-    private func applyHistoryStateTransformWeightRingRedo(_ historyState: HistoryStateTransformWeightRing) {
-        jiggleViewModel.applyHistoryStateTransformWeightRingRedo(historyState)
+    private func applyHistoryStateTransformGuideRedo(_ historyState: HistoryStateTransformGuide) {
+        jiggleViewModel.applyHistoryStateTransformGuideRedo(historyState)
     }
     
-    private func applyHistoryStateMoveWeightRingControlPointRedo(_ historyState: HistoryStateMoveWeightRingControlPoint) {
-        jiggleViewModel.applyHistoryStateMoveWeightRingControlPointRedo(historyState)
+    private func applyHistoryStateMoveGuideControlPointRedo(_ historyState: HistoryStateMoveGuideControlPoint) {
+        jiggleViewModel.applyHistoryStateMoveGuideControlPointRedo(historyState)
     }
     
-    private func applyHistoryStateCreateWeightRingControlPointRedo(_ historyState: HistoryStateCreateWeightRingControlPoint) {
-        jiggleViewModel.applyHistoryStateCreateWeightRingControlPointRedo(historyState)
+    private func applyHistoryStateCreateGuideControlPointRedo(_ historyState: HistoryStateCreateGuideControlPoint) {
+        jiggleViewModel.applyHistoryStateCreateGuideControlPointRedo(historyState)
     }
     
-    private func applyHistoryStateRemoveWeightRingControlPointRedo(_ historyState: HistoryStateRemoveWeightRingControlPoint) {
-        jiggleViewModel.applyHistoryStateRemoveWeightRingControlPointRedo(historyState)
+    private func applyHistoryStateDeleteGuideControlPointRedo(_ historyState: HistoryStateDeleteGuideControlPoint) {
+        jiggleViewModel.applyHistoryStateDeleteGuideControlPointRedo(historyState)
     }
     
     private func applyHistoryStateMoveWeightCenterRedo(_ historyState: HistoryStateMoveWeightCenter) {
         jiggleViewModel.applyHistoryStateMoveWeightCenterRedo(historyState)
+    }
+    
+    private func applyHistoryStateMoveJiggleCenterRedo(_ historyState: HistoryStateMoveJiggleCenter) {
+        jiggleViewModel.applyHistoryStateMoveJiggleCenterRedo(historyState)
     }
     
     func applyHistoryStateMoveWeightGraphPositionRedo(_ historyState: HistoryStateMoveWeightGraphPosition) {

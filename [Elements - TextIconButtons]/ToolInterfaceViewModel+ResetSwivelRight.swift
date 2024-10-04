@@ -9,7 +9,7 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-    func getResetSwivelRightTextIconButtonToolNode(neighborTypeLeft: ToolInterfaceElementType?,
+   @MainActor func getResetSwivelRightTextIconButtonToolNode(neighborTypeLeft: ToolInterfaceElementType?,
                                       neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
         let orientation = jiggleViewModel.orientation

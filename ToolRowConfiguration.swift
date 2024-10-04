@@ -31,7 +31,15 @@ enum ToolRowConfiguration {
     case graph_side_menu_3
     
     case top_Primary_Standard
-    case top_Primary_View
+    
+    case top_Primary_View_Grab
+    case top_Primary_View_Continuous
+    case top_Primary_View_LoopsPage1
+    case top_Primary_View_LoopsPage2
+    case top_Primary_View_LoopsPage3
+    
+    
+    
     case top_Primary_Guides
     case top_Primary_Zoom
     
@@ -39,14 +47,23 @@ enum ToolRowConfiguration {
     
     case top_Secondary1_Jiggles
     case top_Secondary1_Points
-    case top_Secondary1_View
+    case top_Secondary1_View_Grab
+    case top_Secondary1_View_Continuous
+    case top_Secondary1_View_LoopsPage1
+    case top_Secondary1_View_LoopsPage2
+    case top_Secondary1_View_LoopsPage3
+    
     case top_Secondary1_Empty
     case top_Secondary1_Guides_Affine
     case top_Secondary1_Guides_Points
     
     case top_Secondary2_Jiggles
     case top_Secondary2_Points
-    case top_Secondary2_View
+    case top_Secondary2_View_Grab
+    case top_Secondary2_View_Continuous
+    case top_Secondary2_View_LoopsPage1
+    case top_Secondary2_View_LoopsPage2
+    case top_Secondary2_View_LoopsPage3
     case top_Secondary2_Empty
     case top_Secondary2_Guides_Affine
     case top_Secondary2_Guides_Points
@@ -58,7 +75,15 @@ enum ToolRowConfiguration {
     case bottom_Secondary1_Jiggles
     case bottom_Secondary1_Points
     case bottom_Secondary1_Empty
-    case bottom_Secondary1_View
+    
+    
+    case bottom_Secondary1_View_Grab
+    case bottom_Secondary1_View_Continuous
+    case bottom_Secondary1_View_LoopsPage1
+    case bottom_Secondary1_View_LoopsPage2
+    case bottom_Secondary1_View_LoopsPage3
+    case bottom_Secondary1_View_TimeLine
+    
     case bottom_Secondary1_Guides_Affine
     case bottom_Secondary1_Guides_Points
     case bottom_Secondary1_Graph
@@ -66,7 +91,14 @@ enum ToolRowConfiguration {
     
     case bottom_Secondary2_Guides_Affine
     case bottom_Secondary2_Guides_Points
-    case bottom_Secondary2_View
+    
+    case bottom_Secondary2_View_Grab
+    case bottom_Secondary2_View_Continuous
+    case bottom_Secondary2_View_LoopsPage1
+    case bottom_Secondary2_View_LoopsPage2
+    case bottom_Secondary2_View_LoopsPage3
+    case bottom_Secondary2_View_TimeLine
+    
     case bottom_Secondary2_Graph
     
     
@@ -75,7 +107,11 @@ enum ToolRowConfiguration {
     case bottom_Primary_Standard
     case bottom_Primary_Zoom
     case bottom_Primary_Graph
-    case bottom_Primary_View
+    
+    case bottom_Primary_View_Grab
+    case bottom_Primary_View_Continuous
+    case bottom_Primary_View_Loops
+    case bottom_Primary_View_TimeLine
     
     case bottom_Test
     

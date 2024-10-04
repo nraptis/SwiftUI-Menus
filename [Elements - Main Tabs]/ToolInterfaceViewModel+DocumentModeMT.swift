@@ -9,7 +9,7 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-    func getDocumentModeMainTabToolNode(neighborTypeLeft: ToolInterfaceElementType?,
+   @MainActor func getDocumentModeMainTabToolNode(neighborTypeLeft: ToolInterfaceElementType?,
                                         neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
         let orientation = jiggleViewModel.orientation
@@ -19,7 +19,7 @@ extension ToolInterfaceViewModel {
         
         
         
-        let viewTextIconPackable = MainTabIconLibrary.polygon
+        let viewTextIconPackable = MainTabIconLibrary.glass
         let viewLine1 = ToolInterfaceStringLibraryMainTabs.buttonTextViewLine1()
         let viewLine2 = ToolInterfaceStringLibraryMainTabs.buttonTextViewLine2()
         let viewConfiguration = ToolInterfaceElementMainTabButtonConfiguration(id: 0,
@@ -29,7 +29,7 @@ extension ToolInterfaceViewModel {
                                                                                nameLabelLine2: viewLine2)
         buttonConfigurations.append(viewConfiguration)
         
-        let editTextIconPackable = MainTabIconLibrary.perfectJiggle
+        let editTextIconPackable = MainTabIconLibrary.zoom
         let editLine1 = ToolInterfaceStringLibraryMainTabs.buttonTextEditLine1()
         let editLine2 = ToolInterfaceStringLibraryMainTabs.buttonTextEditLine2()
         let editConfiguration = ToolInterfaceElementMainTabButtonConfiguration(id: 1,

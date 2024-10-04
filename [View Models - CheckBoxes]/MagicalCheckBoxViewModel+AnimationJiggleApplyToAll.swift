@@ -31,7 +31,9 @@ import Foundation
         // See if we should be enabled...
         //
         
-        finishRefreshEnableCheckForAllCreateModes()
+        if isEnabled == false {
+            isEnabled = true
+        }
     }
     
     override func handleClicked() {

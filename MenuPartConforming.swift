@@ -52,11 +52,21 @@ protocol BottomMenuConforming: AnyObject, PrimaryOrSecondaryMenuConforming where
 
 protocol PrimaryMenuStandardContainerConforming: AnyObject where Self: UIView {
     
-    var isGraphModeAnimating: Bool { set get }
+    var isModeAnimating: Bool { set get }
+    
+    func handleDarkModeDidChange()
+    func handleSelectedJiggleDidChange()
+    func handleSelectedSwatchDidChange()
+    
+    
     
     associatedtype GraphContainerViewType: GraphContainerConforming
     var graphContainerView: GraphContainerViewType { set get }
     var graphContainerViewLeftConstraint: NSLayoutConstraint { set get }
+    
+    associatedtype TimeLineContainerViewType: TimeLineContainerConforming
+    var timeLineContainerView: TimeLineContainerViewType { set get }
+    var timeLineContainerViewLeftConstraint: NSLayoutConstraint { set get }
     
     // This is the *TOP* menu, which juggles along-side
     // the graph... It's either the graph or this...
@@ -75,9 +85,11 @@ protocol PrimaryMenuStandardContainerConforming: AnyObject where Self: UIView {
 protocol GraphContainerConforming: AnyObject where Self: UIView {
     var graphClippingView: GraphClippingView { set get }
     var graphView: GraphView { set get }
-    
-    associatedtype SideMenuViewType: MenuPartWithRowsConforming
-    var sideMenuView: SideMenuViewType { set get }
+}
+
+protocol TimeLineContainerConforming: AnyObject where Self: UIView {
+    var timeLineClippingView: TimeLineClippingView { set get }
+    var timeLineView: TimeLineView { set get }
 }
 
 protocol MenuPartWithRowsConforming: AnyObject where Self: UIView {
@@ -88,7 +100,6 @@ protocol MenuPartWithRowsConforming: AnyObject where Self: UIView {
     var separatorViews: [UIView] { get set }
     
     func getNumberOfRows() -> Int
-    func getWidthSource() -> ToolRowViewContent.WidthSource
     func getToolRow(at index: Int) -> ToolRow?
     
     func handleDarkModeDidChange()
@@ -126,28 +137,24 @@ extension MenuPartWithRowsConforming {
         return toolRows
     }
     
-    func snapRowContent(configuration: any InterfaceConfigurationConforming) {
+    @MainActor func snapRowContent(configuration: any InterfaceConfigurationConforming) {
         let toolRows = getToolRows()
-        let widthSource = getWidthSource()
         if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel {
             toolInterfaceViewModel.snapRowContent(configuration: configuration,
-                                                  toolRows: toolRows,
-                                                  widthSource: widthSource)
+                                                  toolRows: toolRows)
         }
     }
     
-    func animateRowContent_Step1(configuration: any InterfaceConfigurationConforming, reversed: Bool) {
+    @MainActor func animateRowContent_Step1(configuration: any InterfaceConfigurationConforming, reversed: Bool) {
         let toolRows = getToolRows()
-        let widthSource = getWidthSource()
         if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel {
             toolInterfaceViewModel.animateRowContent_Step1(configuration: configuration,
                                                            toolRows: toolRows,
-                                                           widthSource: widthSource,
                                                            reversed: reversed)
         }
     }
     
-    func animateRowContent_Step2(configuration: any InterfaceConfigurationConforming, reversed: Bool, time: CGFloat) {
+    @MainActor func animateRowContent_Step2(configuration: any InterfaceConfigurationConforming, reversed: Bool, time: CGFloat) {
         let toolRows = getToolRows()
         if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel {
             toolInterfaceViewModel.animateRowContent_Step2(configuration: configuration,
@@ -284,7 +291,6 @@ extension MenuPartWithRowsConforming {
                 if toolRow._widthConstraint == nil {
                     let rowView = ToolRowView(toolInterfaceLayoutRelay: toolInterfaceLayoutRelay,
                                               toolRow: toolRow,
-                                              widthSource: getWidthSource(),
                                               orientation: orientation)
                     let widthConstraint = toolRow.getWidthConstraint(rowView)
                     widthConstraint.constant = CGFloat(width)
@@ -292,7 +298,7 @@ extension MenuPartWithRowsConforming {
                     
                     return rowView
                 } else {
-                    print("Fetched Row Twice @ \(index) With \(getWidthSource()) And \(getNumberOfRows())")
+                    print("Fetched Row Twice @ \(index) And \(getNumberOfRows())")
                 }
             }
         }
@@ -300,7 +306,6 @@ extension MenuPartWithRowsConforming {
         let toolRow = ToolRow(slot: .unknown)
         let rowView = ToolRowView(toolInterfaceLayoutRelay: toolInterfaceLayoutRelay,
                                   toolRow: toolRow,
-                                  widthSource: getWidthSource(),
                                   orientation: orientation)
         let widthConstraint = toolRow.getWidthConstraint(rowView)
         widthConstraint.constant = CGFloat(width)
@@ -317,43 +322,173 @@ extension PrimaryMenuStandardContainerConforming {
         graphContainerView.graphView.setNeedsDisplay()
     }
     
-    func graphModeEnableAnimated(reversed: Bool, time: CGFloat) {
-        isGraphModeAnimating = true
-        transitionChildren(previousView: topMenuView,
-                           previousConstraint: topMenuViewLeftConstraint,
-                           currentView: graphContainerView,
-                           currentConstraint: graphContainerViewLeftConstraint,
-                           reversed: reversed,
-                           time: time) {
-            self.isGraphModeAnimating = false
-        }
+    func refreshTimeLineDisplay() {
+        timeLineContainerView.timeLineClippingView.setNeedsDisplay()
+        timeLineContainerView.timeLineView.setNeedsDisplay()
     }
     
-    func graphModeEnableSnap() {
-        isGraphModeAnimating = false
-        graphContainerViewLeftConstraint.constant = 0.0
-        graphContainerView.activate()
+    func animateFromTopMenuToGraph(reversed: Bool, time: CGFloat) {
+        timeLineContainerView.deactivate()
+        isModeAnimating = true
+        transitionChildren(previousView: topMenuView, previousConstraint: topMenuViewLeftConstraint,
+                           currentView: graphContainerView, currentConstraint: graphContainerViewLeftConstraint,
+                           reversed: reversed, time: time) {
+            self.isModeAnimating = false
+        }
+    }
+
+    func animateFromGraphToTopMenu(reversed: Bool, time: CGFloat) {
+        timeLineContainerView.deactivate()
+        isModeAnimating = true
+        transitionChildren(previousView: graphContainerView, previousConstraint: graphContainerViewLeftConstraint,
+                           currentView: topMenuView, currentConstraint: topMenuViewLeftConstraint,
+                           reversed: reversed, time: time) {
+            self.isModeAnimating = false
+        }
+    }
+
+    func animateFromTopMenuToTimeLine(reversed: Bool, time: CGFloat) {
+        graphContainerView.deactivate()
+        isModeAnimating = true
+        transitionChildren(previousView: topMenuView, previousConstraint: topMenuViewLeftConstraint,
+                           currentView: timeLineContainerView, currentConstraint: timeLineContainerViewLeftConstraint,
+                           reversed: reversed, time: time) {
+            self.isModeAnimating = false
+        }
+    }
+
+    func animateFromTimeLineToTopMenu(reversed: Bool, time: CGFloat) {
+        graphContainerView.deactivate()
+        isModeAnimating = true
+        transitionChildren(previousView: timeLineContainerView, previousConstraint: timeLineContainerViewLeftConstraint,
+                           currentView: topMenuView, currentConstraint: topMenuViewLeftConstraint,
+                           reversed: reversed, time: time) {
+            self.isModeAnimating = false
+        }
+    }
+
+    func animateFromTimeLineToGraph(reversed: Bool, time: CGFloat) {
         topMenuView.deactivate()
-    }
-    
-    func graphModeDisableAnimated(reversed: Bool, time: CGFloat) {
-        isGraphModeAnimating = true
-        transitionChildren(previousView: graphContainerView,
-                           previousConstraint: graphContainerViewLeftConstraint,
-                           currentView: topMenuView,
-                           currentConstraint: topMenuViewLeftConstraint,
-                           reversed: reversed,
-                           time: time) {
-            self.isGraphModeAnimating = false
+        isModeAnimating = true
+        transitionChildren(previousView: timeLineContainerView, previousConstraint: timeLineContainerViewLeftConstraint,
+                           currentView: graphContainerView, currentConstraint: graphContainerViewLeftConstraint,
+                           reversed: reversed, time: time) {
+            self.isModeAnimating = false
         }
     }
-    
-    func graphModeDisableSnap() {
-        isGraphModeAnimating = false
-        topMenuViewLeftConstraint.constant = 0.0
+
+    func animateFromGraphToTimeLine(reversed: Bool, time: CGFloat) {
+        topMenuView.deactivate()
+        isModeAnimating = true
+        transitionChildren(previousView: graphContainerView, previousConstraint: graphContainerViewLeftConstraint,
+                           currentView: timeLineContainerView, currentConstraint: timeLineContainerViewLeftConstraint,
+                           reversed: reversed, time: time) {
+            self.isModeAnimating = false
+        }
+    }
+
+    func snapToTopMenu() {
         topMenuView.activate()
+        topMenuViewLeftConstraint.constant = 0.0
+        timeLineContainerView.deactivate()
         graphContainerView.deactivate()
     }
+
+    func snapToTimeLine() {
+        timeLineContainerView.activate()
+        timeLineContainerViewLeftConstraint.constant = 0.0
+        topMenuView.deactivate()
+        graphContainerView.deactivate()
+    }
+
+    func snapToGraph() {
+        graphContainerView.activate()
+        graphContainerViewLeftConstraint.constant = 0.0
+        topMenuView.deactivate()
+        timeLineContainerView.deactivate()
+    }
+    
+    
+    
+    /*
+     func graphModeEnableAnimated(reversed: Bool, time: CGFloat) {
+     isGraphModeAnimating = true
+     transitionChildren(previousView: topMenuView,
+     previousConstraint: topMenuViewLeftConstraint,
+     currentView: graphContainerView,
+     currentConstraint: graphContainerViewLeftConstraint,
+     reversed: reversed,
+     time: time) {
+     self.isGraphModeAnimating = false
+     }
+     }
+     
+     func graphModeEnableSnap() {
+     isGraphModeAnimating = false
+     graphContainerViewLeftConstraint.constant = 0.0
+     graphContainerView.activate()
+     topMenuView.deactivate()
+     }
+     
+     func graphModeDisableAnimated(reversed: Bool, time: CGFloat) {
+     isGraphModeAnimating = true
+     transitionChildren(previousView: graphContainerView,
+     previousConstraint: graphContainerViewLeftConstraint,
+     currentView: topMenuView,
+     currentConstraint: topMenuViewLeftConstraint,
+     reversed: reversed,
+     time: time) {
+     self.isGraphModeAnimating = false
+     }
+     }
+     
+     func graphModeDisableSnap() {
+     isGraphModeAnimating = false
+     topMenuViewLeftConstraint.constant = 0.0
+     topMenuView.activate()
+     graphContainerView.deactivate()
+     }
+     
+     
+     
+     func timeLineModeEnableAnimated(reversed: Bool, time: CGFloat) {
+     isTimeLineModeAnimating = true
+     transitionChildren(previousView: topMenuView,
+     previousConstraint: topMenuViewLeftConstraint,
+     currentView: timeLineContainerView,
+     currentConstraint: timeLineContainerViewLeftConstraint,
+     reversed: reversed,
+     time: time) {
+     self.isTimeLineModeAnimating = false
+     }
+     }
+     
+     func timeLineModeEnableSnap() {
+     isTimeLineModeAnimating = false
+     timeLineContainerViewLeftConstraint.constant = 0.0
+     timeLineContainerView.activate()
+     topMenuView.deactivate()
+     }
+     
+     func timeLineModeDisableAnimated(reversed: Bool, time: CGFloat) {
+     isTimeLineModeAnimating = true
+     transitionChildren(previousView: timeLineContainerView,
+     previousConstraint: timeLineContainerViewLeftConstraint,
+     currentView: topMenuView,
+     currentConstraint: topMenuViewLeftConstraint,
+     reversed: reversed,
+     time: time) {
+     self.isTimeLineModeAnimating = false
+     }
+     }
+     
+     func timeLineModeDisableSnap() {
+     isTimeLineModeAnimating = false
+     topMenuViewLeftConstraint.constant = 0.0
+     topMenuView.activate()
+     timeLineContainerView.deactivate()
+     }
+     */
 }
 
 extension PrimaryMenuConforming {
@@ -522,21 +657,21 @@ extension PrimaryMenuConforming {
         videoExportView.deactivate()
     }
     
-    func handle_Step1(actionPrimary: InterfacePrimaryMenuAction,
+    @MainActor func handle_Step1(actionPrimary: InterfacePrimaryMenuAction,
                       actionSecondary: InterfaceSecondaryMenuAction,
                       configuration: any InterfaceConfigurationConforming,
                       reversed: Bool) {
-    
         switch actionPrimary.startAction {
-        case .snapGraphEnter:
-            standardContainerView.graphModeEnableSnap()
-            
-        case .snapGraphExit:
-            standardContainerView.graphModeDisableSnap()
+        case .snapGraph:
+            standardContainerView.snapToGraph()
+        case .snapMenu:
+            standardContainerView.snapToTopMenu()
             standardContainerView.topMenuView.snapRowContent(configuration: configuration)
             if let secondaryMenu = standardContainerView.getSecondaryMenu() {
                 secondaryMenu.snapRowContent(configuration: configuration)
             }
+        case .snapTimeLine:
+            standardContainerView.snapToTimeLine()
         case .none:
             break
         }
@@ -551,35 +686,82 @@ extension PrimaryMenuConforming {
                 break
             case .updateRows:
                 standardContainerView.topMenuView.animateRowContent_Step1(configuration: configuration,
-                                                                    reversed: reversed)
+                                                                          reversed: reversed)
                 if let secondaryMenu = standardContainerView.getSecondaryMenu() {
                     secondaryMenu.animateRowContent_Step1(configuration: configuration,
                                                           reversed: reversed)
                 }
-            case .graphEnter:
-                switch actionSecondary.mainAction {
-                case .standardUpdateRows:
-                    if let secondaryMenu = standardContainerView.getSecondaryMenu() {
-                        secondaryMenu.animateRowContent_Step1(configuration: configuration,
-                                                              reversed: reversed)
+            case .transition(let startPane, let endPane):
+                switch startPane {
+                case .menu:
+                    switch endPane {
+                    case .menu:
+                        // Menu to Menu
+                        break
+                    case .graph:
+                        // Menu to Graph
+                        if let secondaryMenu = standardContainerView.getSecondaryMenu() {
+                            secondaryMenu.animateRowContent_Step1(configuration: configuration,
+                                                                  reversed: reversed)
+                        }
+                    case .timeLine:
+                        // Menu to TimeLine
+                        if let secondaryMenu = standardContainerView.getSecondaryMenu() {
+                            secondaryMenu.animateRowContent_Step1(configuration: configuration,
+                                                                  reversed: reversed)
+                        }
                     }
-                default:
-                    break
-                }
-                break
-            case .graphExit:
-                standardContainerView.topMenuView.snapRowContent(configuration: configuration)
-                switch actionSecondary.mainAction {
-                case .standardUpdateRows:
-                    if let secondaryMenu = standardContainerView.getSecondaryMenu() {
-                        secondaryMenu.animateRowContent_Step1(configuration: configuration,
-                                                              reversed: reversed)
+                case .graph:
+                    switch endPane {
+                    case .menu:
+                        // Graph to Menu
+                        standardContainerView.topMenuView.snapRowContent(configuration: configuration)
+                        switch actionSecondary.mainAction {
+                        case .standardUpdateRows:
+                            if let secondaryMenu = standardContainerView.getSecondaryMenu() {
+                                secondaryMenu.animateRowContent_Step1(configuration: configuration,
+                                                                      reversed: reversed)
+                            }
+                        default:
+                            break
+                        }
+                    case .graph:
+                        // Graph to Graph
+                        break
+                    case .timeLine:
+                        // Graph to TimeLine
+                        if let secondaryMenu = standardContainerView.getSecondaryMenu() {
+                            secondaryMenu.animateRowContent_Step1(configuration: configuration,
+                                                                  reversed: reversed)
+                        }
                     }
-                default:
-                    break
+                case .timeLine:
+                    switch endPane {
+                    case .menu:
+                        // TimeLine to Menu
+                        standardContainerView.topMenuView.snapRowContent(configuration: configuration)
+                        switch actionSecondary.mainAction {
+                        case .standardUpdateRows:
+                            if let secondaryMenu = standardContainerView.getSecondaryMenu() {
+                                secondaryMenu.animateRowContent_Step1(configuration: configuration,
+                                                                      reversed: reversed)
+                            }
+                        default:
+                            break
+                        }
+                    case .graph:
+                        // TimeLine to Graph
+                        if let secondaryMenu = standardContainerView.getSecondaryMenu() {
+                            secondaryMenu.animateRowContent_Step1(configuration: configuration,
+                                                                  reversed: reversed)
+                        }
+                    case .timeLine:
+                        // TimeLine to TimeLine
+                        break
+                    }
                 }
             }
-        case .transition(let startPane, let endPane):
+        case .transition:
             break
         case .snap(let pane):
             switch pane {
@@ -595,20 +777,11 @@ extension PrimaryMenuConforming {
         }
     }
     
-    func handle_Step2(actionPrimary: InterfacePrimaryMenuAction,
+    @MainActor func handle_Step2(actionPrimary: InterfacePrimaryMenuAction,
                       actionSecondary: InterfaceSecondaryMenuAction,
                       configuration: any InterfaceConfigurationConforming,
                       reversed: Bool,
                       time: CGFloat) {
-        switch actionPrimary.startAction {
-        case .snapGraphEnter:
-            break
-        case .snapGraphExit:
-            break
-        case .none:
-            break
-        }
-        
         switch actionPrimary.mainAction {
             
         case .none:
@@ -626,29 +799,104 @@ extension PrimaryMenuConforming {
                                                           reversed: reversed,
                                                           time: time)
                 }
-            case .graphEnter:
-                standardContainerView.graphModeEnableAnimated(reversed: reversed, time: time)
-                switch actionSecondary.mainAction {
-                case .standardUpdateRows:
-                    if let secondaryMenu = standardContainerView.getSecondaryMenu() {
-                        secondaryMenu.animateRowContent_Step2(configuration: configuration,
-                                                              reversed: reversed,
-                                                              time: time)
+            case .transition(let startPane, let endPane):
+                switch startPane {
+                case .menu:
+                    switch endPane {
+                    case .menu:
+                        // Menu to Menu
+                        break
+                    case .graph:
+                        // Menu to Graph
+                        standardContainerView.animateFromTopMenuToGraph(reversed: reversed, time: time)
+                        switch actionSecondary.mainAction {
+                        case .standardUpdateRows:
+                            if let secondaryMenu = standardContainerView.getSecondaryMenu() {
+                                secondaryMenu.animateRowContent_Step2(configuration: configuration,
+                                                                      reversed: reversed,
+                                                                      time: time)
+                            }
+                        default:
+                            break
+                        }
+                    case .timeLine:
+                        // Menu to TimeLine
+                        standardContainerView.animateFromTopMenuToTimeLine(reversed: reversed, time: time)
+                        switch actionSecondary.mainAction {
+                        case .standardUpdateRows:
+                            if let secondaryMenu = standardContainerView.getSecondaryMenu() {
+                                secondaryMenu.animateRowContent_Step2(configuration: configuration,
+                                                                      reversed: reversed,
+                                                                      time: time)
+                            }
+                        default:
+                            break
+                        }
                     }
-                default:
-                    break
-                }
-            case .graphExit:
-                standardContainerView.graphModeDisableAnimated(reversed: reversed, time: time)
-                switch actionSecondary.mainAction {
-                case .standardUpdateRows:
-                    if let secondaryMenu = standardContainerView.getSecondaryMenu() {
-                        secondaryMenu.animateRowContent_Step2(configuration: configuration,
-                                                              reversed: reversed,
-                                                              time: time)
+                case .graph:
+                    switch endPane {
+                    case .menu:
+                        // Graph to Menu
+                        standardContainerView.animateFromGraphToTopMenu(reversed: reversed, time: time)
+                        switch actionSecondary.mainAction {
+                        case .standardUpdateRows:
+                            if let secondaryMenu = standardContainerView.getSecondaryMenu() {
+                                secondaryMenu.animateRowContent_Step2(configuration: configuration,
+                                                                      reversed: reversed,
+                                                                      time: time)
+                            }
+                        default:
+                            break
+                        }
+                    case .graph:
+                        // Graph to Graph
+                        break
+                    case .timeLine:
+                        // Graph to TimeLine
+                        standardContainerView.animateFromGraphToTimeLine(reversed: reversed, time: time)
+                        switch actionSecondary.mainAction {
+                        case .standardUpdateRows:
+                            if let secondaryMenu = standardContainerView.getSecondaryMenu() {
+                                secondaryMenu.animateRowContent_Step2(configuration: configuration,
+                                                                      reversed: reversed,
+                                                                      time: time)
+                            }
+                        default:
+                            break
+                        }
                     }
-                default:
-                    break
+                case .timeLine:
+                    switch endPane {
+                    case .menu:
+                        // TimeLine to Menu
+                        standardContainerView.animateFromTimeLineToTopMenu(reversed: reversed, time: time)
+                        switch actionSecondary.mainAction {
+                        case .standardUpdateRows:
+                            if let secondaryMenu = standardContainerView.getSecondaryMenu() {
+                                secondaryMenu.animateRowContent_Step2(configuration: configuration,
+                                                                      reversed: reversed,
+                                                                      time: time)
+                            }
+                        default:
+                            break
+                        }
+                    case .graph:
+                        // TimeLine to Graph
+                        standardContainerView.animateFromTimeLineToGraph(reversed: reversed, time: time)
+                        switch actionSecondary.mainAction {
+                        case .standardUpdateRows:
+                            if let secondaryMenu = standardContainerView.getSecondaryMenu() {
+                                secondaryMenu.animateRowContent_Step2(configuration: configuration,
+                                                                      reversed: reversed,
+                                                                      time: time)
+                            }
+                        default:
+                            break
+                        }
+                    case .timeLine:
+                        // TimeLine to TimeLine
+                        break
+                    }
                 }
             }
         case .transition(let startPane, let endPane):
@@ -870,7 +1118,7 @@ extension SecondaryMenuConforming {
         videoExportView.deactivate()
     }
     
-    func handle_Step1(action: InterfaceSecondaryMenuAction,
+    @MainActor func handle_Step1(action: InterfaceSecondaryMenuAction,
                 configuration: any InterfaceConfigurationConforming,
                 reversed: Bool) {
     
@@ -902,7 +1150,7 @@ extension SecondaryMenuConforming {
         }
     }
     
-    func handle_Step2(action: InterfaceSecondaryMenuAction,
+    @MainActor func handle_Step2(action: InterfaceSecondaryMenuAction,
                       configuration: any InterfaceConfigurationConforming,
                       reversed: Bool,
                       time: CGFloat) {

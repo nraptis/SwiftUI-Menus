@@ -1,5 +1,5 @@
 //
-//  UIHos+Ig.swift
+//  UIHostingController+IgnoreSafeArea.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 8/1/24.

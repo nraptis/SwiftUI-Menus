@@ -114,16 +114,18 @@ extension JiggleViewController {
                         return false
                     }
                 }
-            case .animateMenuConfigurationGraph:
+            case .animateMenuConfigurationGraphOrTimeline:
                 if jiggleViewModel.jiggleScene.isDisplayTransitionActive {
                     return false
                 }
                 if Device.isPad {
-                    if padDraggableMenu.standardContainerView.isGraphModeAnimating {
+                    if padDraggableMenu.standardContainerView.isModeAnimating {
                         return false
                     }
                 } else {
-                    
+                    if phoneTopMenu.standardContainerView.isModeAnimating {
+                        return false
+                    }
                 }
                 break
             case .animateDisplayTransition:
@@ -176,10 +178,20 @@ extension JiggleViewController {
             if let slice = slice as? ToolActionPhaseSliceSetZoomMode {
                 toolActionConsumePhaseSliceSetZoomMode(slice)
             }
-        case .setAutoLoopMode:
-            if let slice = slice as? ToolActionPhaseSliceSetAutoLoopMode {
-                toolActionConsumePhaseSliceSetAutoLoopMode(slice)
+        case .setAnimationLoopsMode:
+            if let slice = slice as? ToolActionPhaseSliceSetAnimationLoopsMode {
+                toolActionConsumePhaseSliceSetAnimationLoopsMode(slice)
             }
+        case .setAnimationContinuousMode:
+            if let slice = slice as? ToolActionPhaseSliceSetAnimationContinuousMode {
+                toolActionConsumePhaseSliceSetAnimationContinuousMode(slice)
+            }
+            
+        case .setAnimationLoopsPage:
+            if let slice = slice as? ToolActionPhaseSliceSetAnimationLoopsPage {
+                toolActionConsumePhaseSliceSetAnimationLoopsPage(slice)
+            }
+            
         case .setStereoscopicMode:
             if let slice = slice as? ToolActionPhaseSliceSetStereoscopicMode {
                 toolActionConsumePhaseSliceSetStereoscopicMode(slice)
@@ -192,13 +204,9 @@ extension JiggleViewController {
             if let slice = slice as? ToolActionPhaseSliceSetVideoRecordMode {
                 toolActionConsumePhaseSliceSetVideoRecordMode(slice)
             }
-        case .setJiggleCentersEnabled:
-            if let slice = slice as? ToolActionPhaseSliceSetJiggleCentersEnabled {
-                toolActionConsumePhaseSliceSetJiggleCentersEnabled(slice)
-            }
-        case .setGuideCentersEnabled:
-            if let slice = slice as? ToolActionPhaseSliceSetGuideCentersEnabled {
-                toolActionConsumePhaseSliceSetGuideCentersEnabled(slice)
+        case .setCreatorMode:
+            if let slice = slice as? ToolActionPhaseSliceSetCreatorMode {
+                toolActionConsumePhaseSliceSetCreatorMode(slice)
             }
         case .setExpandedDraggable:
             if let slice = slice as? ToolActionPhaseSliceSetExpandedDraggable {
@@ -224,13 +232,15 @@ extension JiggleViewController {
             if let slice = slice as? ToolActionPhaseSliceSetWeightMode {
                 toolActionConsumePhaseSliceSetWeightMode(slice)
             }
+            /*
         case .setAnimationMode:
             if let slice = slice as? ToolActionPhaseSliceSetAnimationMode {
                 toolActionConsumePhaseSliceSetAnimationMode(slice)
             }
-        case .setViewMode:
-            if let slice = slice as? ToolActionPhaseSliceSetViewMode {
-                toolActionConsumePhaseSliceSetViewMode(slice)
+            */
+        case .setTimeLineMode:
+            if let slice = slice as? ToolActionPhaseSliceSetTimeLineMode {
+                toolActionConsumePhaseSliceSetTimeLineMode(slice)
             }
         case .setDarkModeEnabled:
             if let slice = slice as? ToolActionPhaseSliceSetDarkModeEnabled {

@@ -9,7 +9,7 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-    func getExitGraphExitModeToolNode(neighborTypeLeft: ToolInterfaceElementType?,
+   @MainActor func getExitGraphExitModeToolNode(neighborTypeLeft: ToolInterfaceElementType?,
                                       neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
         let orientation = jiggleViewModel.orientation
@@ -32,13 +32,13 @@ extension ToolInterfaceViewModel {
         
         let viewModelGraphExit = MagicalExitModeViewModelGraphExit(orientation: jiggleViewModel.orientation,
                                                                  exitModeConfiguration: configuration)
-        let exitZoonToolNode = ToolNode(id: getToolNodeID(),
+        let exitGraphToolNode = ToolNode(id: getToolNodeID(),
                                         element: .exitModeGraphExit,
                                         flex: flex,
                                         magicalViewModel: viewModelGraphExit,
                                         neighborTypeLeft: neighborTypeLeft,
                                         neighborTypeRight: neighborTypeRight)
         viewModelGraphExit.refresh()
-        return exitZoonToolNode
+        return exitGraphToolNode
     }
 }

@@ -7,6 +7,20 @@
 
 import Foundation
 
+struct FlexSexyStepperData {
+    let minimumWidthLarge: Int
+    let standardWidthLarge: Int
+    let maximumWidthLarge: Int
+    
+    let minimumWidthMedium: Int
+    let standardWidthMedium: Int
+    let maximumWidthMedium: Int
+    
+    let minimumWidthSmall: Int
+    let standardWidthSmall: Int
+    let maximumWidthSmall: Int
+}
+
 struct FlexSegmentData {
     let minimumWidthLong: Int
     let standardWidthLong: Int
@@ -54,6 +68,20 @@ struct FlexCreateSwatchData {
 }
 
 struct FlexEnterModeData {
+    let minimumWidthLarge: Int
+    let standardWidthLarge: Int
+    let maximumWidthLarge: Int
+    
+    let minimumWidthMedium: Int
+    let standardWidthMedium: Int
+    let maximumWidthMedium: Int
+    
+    let minimumWidthSmall: Int
+    let standardWidthSmall: Int
+    let maximumWidthSmall: Int
+}
+
+struct FlexSexyCheckBoxData {
     let minimumWidthLarge: Int
     let standardWidthLarge: Int
     let maximumWidthLarge: Int
@@ -186,6 +214,7 @@ enum ToolInterfaceElementFlex {
     case iconButton(FlexIconButtonData)
     case textIconButton(FlexTextIconButtonData)
     case sexyButton(FlexSexyButtonData)
+    case sexyCheckBox(FlexSexyCheckBoxData)
     
     case greenButton(FlexGreenButtonData)
     
@@ -201,5 +230,7 @@ enum ToolInterfaceElementFlex {
     
     case enterMode(FlexEnterModeData)
     case exitMode(FlexExitModeData)
+    
+    case sexyStepper(FlexSexyStepperData)
     
 }

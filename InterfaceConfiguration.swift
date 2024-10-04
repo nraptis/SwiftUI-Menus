@@ -17,11 +17,18 @@ struct InterfacePrimaryMenuAction {
     }
     
     enum MainAction {
+        
+        enum StandardPane {
+            case menu
+            case graph
+            case timeLine
+        }
+        
         enum StandardType {
             case none
             case updateRows
-            case graphEnter
-            case graphExit // This will update the rows too...
+            case transition(StandardPane, StandardPane)
+            //case snap(StandardPane)
         }
         case none
         case standard(StandardType)
@@ -30,8 +37,9 @@ struct InterfacePrimaryMenuAction {
     }
     
     enum StartAction {
-        case snapGraphEnter
-        case snapGraphExit // This will update the rows too...
+        case snapGraph
+        case snapMenu
+        case snapTimeLine
         case none
     }
     
@@ -80,13 +88,18 @@ protocol InterfaceConfigurationConforming {
     var isGraphEnabled: Bool { get set }
     var isZoomEnabled: Bool { get set }
     var isGuidesEnabled: Bool { get set }
+    var isAnimationLoopsEnabled: Bool { get set }
+    var isAnimationContinuousEnabled: Bool { get set }
+    var isTimeLineEnabled: Bool { get set }
     
     var documentMode: DocumentMode { get set }
     var editMode: EditMode { get set }
+    var creatorMode: CreatorMode { get set }
     
     var weightMode: WeightMode { get set }
-    var animationMode: AnimationMode { get set }
-    var viewMode: ViewMode { get set }
+    
+    var animationLoopsPage: Int { get set }
+    
     
     var isExpanded: Bool { get set }
     var isExpandedTop: Bool { get set }
@@ -185,43 +198,74 @@ extension InterfaceConfigurationConforming {
                                  orientation: Orientation) -> CGFloat {
         
         var isExpandedCollapsedAnimating = false
+        
         if previousExpanded1 != currentExpanded1 {
             isExpandedCollapsedAnimating = true
         }
+        
         if previousExpanded2 != currentExpanded2 {
             isExpandedCollapsedAnimating = true
         }
         
         var isRowsAnimationActive = false
         if currentExpanded1 || currentExpanded2 {
-            if currentConfiguration.isVideoExportEnabled != previousConfiguration.isVideoRecordEnabled {
+            if currentConfiguration.isVideoExportEnabled != previousConfiguration.isVideoExportEnabled {
                 isRowsAnimationActive = true
             } else if currentConfiguration.isVideoRecordEnabled != previousConfiguration.isVideoRecordEnabled {
                 isRowsAnimationActive = true
             } else if currentConfiguration.isZoomEnabled != previousConfiguration.isZoomEnabled {
                 isRowsAnimationActive = true
-            } else if currentConfiguration.isGraphEnabled != previousConfiguration.isGraphEnabled {
-                isRowsAnimationActive = true
             } else {
                 if currentConfiguration.documentMode != previousConfiguration.documentMode {
                     isRowsAnimationActive = true
-                }
-                if currentConfiguration.editMode != previousConfiguration.editMode {
-                    isRowsAnimationActive = true
-                }
-                if currentConfiguration.displayMode != previousConfiguration.displayMode {
-                    isRowsAnimationActive = true
-                }
-                if currentConfiguration.weightMode != previousConfiguration.weightMode {
-                    isRowsAnimationActive = true
-                }
-                if currentConfiguration.isGuidesEnabled != previousConfiguration.isGuidesEnabled {
-                    isRowsAnimationActive = true
+                } else {
+                    
+                    switch currentConfiguration.documentMode {
+                    case .__VIEW:
+                        
+                        
+                        
+                        if currentConfiguration.isAnimationLoopsEnabled != previousConfiguration.isAnimationLoopsEnabled {
+                            isRowsAnimationActive = true
+                        } else {
+                            
+                            if currentConfiguration.isAnimationLoopsEnabled {
+                                if currentConfiguration.isTimeLineEnabled != previousConfiguration.isTimeLineEnabled {
+                                    isRowsAnimationActive = true
+                                }
+                                if currentConfiguration.animationLoopsPage != previousConfiguration.animationLoopsPage {
+                                    isRowsAnimationActive = true
+                                }
+                                
+                            } else if currentConfiguration.isAnimationContinuousEnabled != previousConfiguration.isAnimationContinuousEnabled {
+                                isRowsAnimationActive = true
+                            }
+                        }
+                    case .__EDIT:
+                        if currentConfiguration.editMode != previousConfiguration.editMode {
+                            isRowsAnimationActive = true
+                        } else {
+                            if currentConfiguration.isGuidesEnabled != previousConfiguration.isGuidesEnabled {
+                                isRowsAnimationActive = true
+                            } else {
+                                if currentConfiguration.isGuidesEnabled {
+                                    if currentConfiguration.isGraphEnabled != previousConfiguration.isGraphEnabled {
+                                        isRowsAnimationActive = true
+                                    } else {
+                                        if currentConfiguration.weightMode != previousConfiguration.weightMode {
+                                            isRowsAnimationActive = true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
         
         var isDisplayAnimationActive = false
+        
         if previousConfiguration.isGuides || currentConfiguration.isGuides {
             if previousConfiguration.displayMode != currentConfiguration.displayMode {
                 isDisplayAnimationActive = true
@@ -229,18 +273,22 @@ extension InterfaceConfigurationConforming {
         }
         
         var result = CGFloat(0.0)
+        
         if isExpandedCollapsedAnimating {
             let possibleTime = JiggleViewController.getExpandCollapseAnimationTime(orientation: orientation)
             result = max(result, possibleTime)
         }
+        
         if isRowsAnimationActive {
             let possibleTime = JiggleViewController.getRowsAnimationTime(orientation: orientation)
             result = max(result, possibleTime)
         }
+        
         if isDisplayAnimationActive {
             let possibleTime = JiggleViewController.getDisplayAnimationTime()
             result = max(result, possibleTime)
         }
+        
         return result
     }
     
@@ -330,13 +378,20 @@ extension InterfaceConfigurationConforming {
             } else if currentConfiguration.isZoomEnabled {
                 return InterfacePrimaryMenuAction(mainAction: .snap(.zoom),
                                                   startAction: .none)
-            } else if currentConfiguration.isGraphEnabled {
-                return InterfacePrimaryMenuAction(mainAction: .snap(.standard),
-                                                  startAction: .snapGraphEnter)
-            } else {
-                return InterfacePrimaryMenuAction(mainAction: .snap(.standard),
-                                                  startAction: .snapGraphExit)
             }
+            
+            if currentConfiguration.isGraph {
+                return InterfacePrimaryMenuAction(mainAction: .snap(.standard),
+                                                  startAction: .snapGraph)
+            }
+            
+            if currentConfiguration.isTimeLine {
+                return InterfacePrimaryMenuAction(mainAction: .snap(.standard),
+                                                  startAction: .snapTimeLine)
+            }
+
+            return InterfacePrimaryMenuAction(mainAction: .snap(.standard),
+                                              startAction: .snapMenu)
         }
         
         //
@@ -382,15 +437,23 @@ extension InterfaceConfigurationConforming {
                 // From Export to Zoom
                 return InterfacePrimaryMenuAction(mainAction: .transition(.videoExport, .zoom),
                                                   startAction: .none)
-            } else if currentConfiguration.isGraphEnabled {
+            } 
+            
+            if currentConfiguration.isGraph {
                 // From Export to Graph
                 return InterfacePrimaryMenuAction(mainAction: .transition(.videoExport, .standard),
-                                                  startAction: .snapGraphEnter)
-            } else {
-                // From Export to Menu
-                return InterfacePrimaryMenuAction(mainAction: .transition(.videoExport, .standard),
-                                                  startAction: .snapGraphExit)
+                                                  startAction: .snapGraph)
             }
+            
+            if currentConfiguration.isTimeLine {
+                // From Export to TimeLine
+                return InterfacePrimaryMenuAction(mainAction: .transition(.videoExport, .standard),
+                                                  startAction: .snapTimeLine)
+            }
+            
+            // From Export to Menu
+            return InterfacePrimaryMenuAction(mainAction: .transition(.videoExport, .standard),
+                                              startAction: .snapMenu)
         }
         
         // // //
@@ -408,29 +471,40 @@ extension InterfaceConfigurationConforming {
             if previousConfiguration.isVideoRecordEnabled {
                 // From Record to Record
                 return InterfacePrimaryMenuAction(mainAction: .none,  startAction: .none)
-            } else if previousConfiguration.isZoomEnabled {
+            } 
+            
+            if previousConfiguration.isZoomEnabled {
                 // From Zoom to Record
                 return InterfacePrimaryMenuAction(mainAction: .transition(.zoom, .videoRecord),
                                                   startAction: .none)
-            } else  {
-                // From Standard to Record
-                return InterfacePrimaryMenuAction(mainAction: .transition(.standard, .videoRecord),
-                                                  startAction: .none)
             }
+            
+            // From Standard to Record
+            return InterfacePrimaryMenuAction(mainAction: .transition(.standard, .videoRecord),
+                                                  startAction: .none)
         } else if previousConfiguration.isVideoRecordEnabled {
             if currentConfiguration.isZoomEnabled {
                 // From Record to Zoom
                 return InterfacePrimaryMenuAction(mainAction: .transition(.videoRecord, .zoom),
                                                   startAction: .none)
-            } else if currentConfiguration.isGraphEnabled {
+            }
+            
+            if currentConfiguration.isGraph {
                 // From Record to Graph
                 return InterfacePrimaryMenuAction(mainAction: .transition(.videoRecord, .standard),
-                                                  startAction: .snapGraphEnter)
-            } else {
-                // From Record to Menu
-                return InterfacePrimaryMenuAction(mainAction: .transition(.videoRecord, .standard),
-                                                  startAction: .snapGraphExit)
+                                                  startAction: .snapGraph)
             }
+            
+            if currentConfiguration.isTimeLine {
+                // From Record to TimeLine
+                return InterfacePrimaryMenuAction(mainAction: .transition(.videoRecord, .standard),
+                                                  startAction: .snapTimeLine)
+            }
+            
+            // From Record to Menu
+            return InterfacePrimaryMenuAction(mainAction: .transition(.videoRecord, .standard),
+                                              startAction: .snapMenu)
+            
         }
         
         // // //
@@ -454,35 +528,84 @@ extension InterfaceConfigurationConforming {
                                                   startAction: .none)
             }
         } else if previousConfiguration.isZoomEnabled {
-            if currentConfiguration.isGraphEnabled {
+            
+            if currentConfiguration.isGraph {
                 // From Zoom to Graph
                 return InterfacePrimaryMenuAction(mainAction: .transition(.zoom, .standard),
-                                                  startAction: .snapGraphEnter)
-            } else {
-                // From Zoom to Menu
-                return InterfacePrimaryMenuAction(mainAction: .transition(.zoom, .standard),
-                                                  startAction: .snapGraphExit)
+                                                  startAction: .snapGraph)
             }
+            
+            if currentConfiguration.isTimeLine {
+                // From Zoom to TimeLine
+                return InterfacePrimaryMenuAction(mainAction: .transition(.zoom, .standard),
+                                                  startAction: .snapTimeLine)
+            }
+            
+            // From Zoom to Menu
+            return InterfacePrimaryMenuAction(mainAction: .transition(.zoom, .standard),
+                                              startAction: .snapMenu)
+            
         }
         
         //
         // "Graph" takes 4th priority...
         //
-        if currentConfiguration.isGraphEnabled {
-            if previousConfiguration.isGraphEnabled {
+        if currentConfiguration.isGraph {
+            if previousConfiguration.isGraph {
                 // From Graph to Graph
                 return InterfacePrimaryMenuAction(mainAction: .none,  startAction: .none)
-            } else  {
-                // From Menu to Graph
-                return InterfacePrimaryMenuAction(mainAction: .standard(.graphEnter),
+            }
+            
+            if previousConfiguration.isTimeLine {
+                // From TimeLine to Graph
+                return InterfacePrimaryMenuAction(mainAction: .standard(.transition(.timeLine, .graph)),
                                                   startAction: .none)
             }
-        } else if previousConfiguration.isGraphEnabled {
-            // From Graph to Menu
-            return InterfacePrimaryMenuAction(mainAction: .standard(.graphExit),
+            
+            // From Menu to Graph
+            return InterfacePrimaryMenuAction(mainAction: .standard(.transition(.menu, .graph)),
+                                              startAction: .none)
+            
+        }
+        
+        //
+        // "TimeLine" takes 5th priority...
+        //
+        if currentConfiguration.isTimeLine {
+            
+            if previousConfiguration.isTimeLine {
+                // From TimeLine to TimeLine
+                return InterfacePrimaryMenuAction(mainAction: .none,  startAction: .none)
+            }
+            
+            if previousConfiguration.isGraph {
+                // From Graph to TimeLine
+                return InterfacePrimaryMenuAction(mainAction: .standard(.transition(.graph, .timeLine)),
+                                                  startAction: .none)
+            }
+            
+            // From Menu to TimeLine
+            return InterfacePrimaryMenuAction(mainAction: .standard(.transition(.menu, .timeLine)),
                                               startAction: .none)
         }
         
+        //
+        // "Menu" takes 6th priority...
+        //
+        
+        if previousConfiguration.isGraph {
+            // From Graph to Menu
+            return InterfacePrimaryMenuAction(mainAction: .standard(.transition(.graph, .menu)),
+                                              startAction: .none)
+        }
+        
+        if previousConfiguration.isTimeLine {
+            // From Graph to Menu
+            return InterfacePrimaryMenuAction(mainAction: .standard(.transition(.timeLine, .menu)),
+                                              startAction: .none)
+        }
+        
+        // From Menu to Menu
         return InterfacePrimaryMenuAction(mainAction: .standard(.updateRows),
                                           startAction: .none)
     }
@@ -661,10 +784,19 @@ extension InterfaceConfigurationConforming {
         switch documentMode {
         case .__VIEW:
             isGraphEnabled = false
+            isGuidesEnabled = false
+            if isAnimationLoopsEnabled {
+                isAnimationContinuousEnabled = false
+            } else {
+                isTimeLineEnabled = false
+            }
         case .__EDIT:
             if isGuidesEnabled == false {
                 isGraphEnabled = false
             }
+            isAnimationLoopsEnabled = false
+            isTimeLineEnabled = false
+            isAnimationContinuousEnabled = false
         }
     }
     
@@ -706,24 +838,86 @@ extension InterfaceConfigurationConforming {
             return true
         }
         
-        if isGraphEnabled {
-            if configuration.isGraphEnabled {
+        if documentMode.isEdit && configuration.documentMode.isEdit {
+            
+            if isGraphEnabled {
+                if configuration.isGraphEnabled {
+                    return false
+                } else {
+                    return true
+                }
+            } else if configuration.isGraphEnabled {
                 return false
-            } else {
-                return true
             }
-        } else if configuration.isGraphEnabled {
-            return false
-        }
-        
-        if isGuidesEnabled {
-            if configuration.isGuidesEnabled {
+            
+            if isGuidesEnabled {
+                if configuration.isGuidesEnabled {
+                    return false
+                } else {
+                    return true
+                }
+            } else if configuration.isGuidesEnabled {
                 return false
-            } else {
-                return true
             }
-        } else if configuration.isGuidesEnabled {
-            return false
+            
+        } else if documentMode.isView && configuration.documentMode.isView {
+            if isAnimationLoopsEnabled {
+                if configuration.isAnimationLoopsEnabled {
+                    if isTimeLineEnabled {
+                        if configuration.isTimeLineEnabled {
+                            return false
+                        } else {
+                            return true
+                        }
+                    } else if configuration.isTimeLineEnabled {
+                        return false
+                    } else {
+                        
+                        if animationLoopsPage > configuration.animationLoopsPage {
+                            return true
+                        } else {
+                            return false
+                        }
+                    }
+                } else {
+                    return true
+                }
+            } else if configuration.isAnimationLoopsEnabled {
+                return false
+            } else if isAnimationContinuousEnabled {
+                if configuration.isAnimationContinuousEnabled {
+                    return false
+                } else {
+                    return true
+                }
+            } else if configuration.isAnimationContinuousEnabled {
+                return false
+            }
+            
+            
+            /*
+            if isAnimationLoopsEnabled {
+                if configuration.isAnimationLoopsEnabled {
+                    
+                    if isTimeLineEnabled {
+                        if configuration.isTimeLineEnabled {
+                            return false
+                        } else {
+                            return true
+                        }
+                    } else if configuration.isTimeLineEnabled {
+                        return false
+                    } else {
+                        return false
+                    }
+                    
+                } else {
+                    return true
+                }
+            } else if configuration.isAnimationLoopsEnabled {
+                return false
+            }
+            */
         }
         
         if editMode.isRightOf(editMode: configuration.editMode) {
@@ -747,12 +941,15 @@ struct InterfaceConfigurationPad: InterfaceConfigurationConforming {
     var isGraphEnabled = false
     var isZoomEnabled = false
     var isGuidesEnabled = false
+    var isAnimationLoopsEnabled = false
+    var isAnimationContinuousEnabled = false
+    var isTimeLineEnabled = false
+    var animationLoopsPage = 0
     
     var documentMode = DocumentMode.__EDIT
     var editMode = EditMode.jiggles
     var weightMode = WeightMode.affine
-    var animationMode = AnimationMode.bounce
-    var viewMode = ViewMode.standard
+    var creatorMode = CreatorMode.none
     
     mutating func calculateHeightCategories() {
         if isVideoExportEnabled {
@@ -790,13 +987,15 @@ struct InterfaceConfigurationPhone: InterfaceConfigurationConforming {
     var isGraphEnabled = false
     var isZoomEnabled = false
     var isGuidesEnabled = false
-    
+    var isAnimationLoopsEnabled = false
+    var isAnimationContinuousEnabled = false
+    var isTimeLineEnabled = false
+    var animationLoopsPage = 0
     
     var documentMode = DocumentMode.__EDIT
     var editMode = EditMode.jiggles
     var weightMode = WeightMode.affine
-    var animationMode = AnimationMode.bounce
-    var viewMode = ViewMode.standard
+    var creatorMode = CreatorMode.none
     
     mutating func calculateHeightCategories() {
         if isVideoExportEnabled {
@@ -808,11 +1007,15 @@ struct InterfaceConfigurationPhone: InterfaceConfigurationConforming {
         } else if isZoomEnabled {
             heightCategoryTop = .zoom
             heightCategoryBottom = .zoom
-        } else if isGraphEnabled {
-            heightCategoryTop = .graph
-            heightCategoryBottom = .standard
         } else {
-            heightCategoryTop = .standard
+            if isGraph {
+                heightCategoryTop = .graph
+            } else if isTimeLine {
+                heightCategoryTop = .timeLine
+            } else {
+                heightCategoryTop = .standard
+            }
+            
             heightCategoryBottom = .standard
         }
     }
@@ -824,6 +1027,79 @@ extension InterfaceConfigurationConforming {
         switch documentMode {
         case .__VIEW:
             return true
+        case .__EDIT:
+            return false
+        }
+    }
+    
+    var isEdit: Bool {
+        switch documentMode {
+        case .__VIEW:
+            return false
+        case .__EDIT:
+            return true
+        }
+    }
+    
+    var isAnimationLoops: Bool {
+        switch documentMode {
+        case .__VIEW:
+            if isAnimationLoopsEnabled {
+                return true
+            } else {
+                return false
+            }
+        case .__EDIT:
+            return false
+        }
+    }
+    
+    var isGraph: Bool {
+        switch documentMode {
+        case .__VIEW:
+            return false
+        case .__EDIT:
+            if isGuidesEnabled {
+                if isGraphEnabled {
+                    return true
+                } else {
+                    return false
+                }
+            } else {
+                return false
+            }
+        }
+    }
+    
+    var isContinuous: Bool {
+        switch documentMode {
+        case .__VIEW:
+            if isAnimationLoopsEnabled {
+                return false
+            } else {
+                if isAnimationContinuousEnabled {
+                    return true
+                } else {
+                    return false
+                }
+            }
+        case .__EDIT:
+            return false
+        }
+    }
+    
+    var isTimeLine: Bool {
+        switch documentMode {
+        case .__VIEW:
+            if isAnimationLoopsEnabled {
+                if isTimeLineEnabled {
+                    return true
+                } else {
+                    return false
+                }
+            } else {
+                return false
+            }
         case .__EDIT:
             return false
         }
@@ -923,12 +1199,26 @@ extension InterfacePrimaryMenuAction: CustomStringConvertible {
             }
         }
         
+        func getStandardPaneString(pane: InterfacePrimaryMenuAction.MainAction.StandardPane) -> String {
+            switch pane {
+            case .menu:
+                return "[menu]"
+            case .graph:
+                return "[graph]"
+            case .timeLine:
+                return "[timeLine]"
+            }
+        }
+        
         func getStartActionString(action: InterfacePrimaryMenuAction.StartAction) -> String {
+            
             switch action {
-            case .snapGraphEnter:
-                return "snapGraphEnter"
-            case .snapGraphExit:
-                return "snapGraphExit"
+            case .snapGraph:
+                return "snapGraph"
+            case .snapMenu:
+                return "snapMenu"
+            case .snapTimeLine:
+                return "snapTimeLine"
             case .none:
                 return "none"
             }
@@ -939,15 +1229,17 @@ extension InterfacePrimaryMenuAction: CustomStringConvertible {
             case .none:
                 return "none"
             case .standard(let standardType):
+                
                 switch standardType {
+                    
                 case .none:
                     return "standard(.none)"
                 case .updateRows:
                     return "standard(.updateRows)"
-                case .graphEnter:
-                    return "standard(.graphEnter)"
-                case .graphExit:
-                    return "standard(.graphExit)"
+                case .transition(let startPane, let endPane):
+                    let startString = getStandardPaneString(pane: startPane)
+                    let endString = getStandardPaneString(pane: endPane)
+                    return "standard(.transitionn(from: \(startString), to: \(endString)))"
                 }
             case .transition(let startPane, let endPane):
                 let startString = getPaneString(pane: startPane)

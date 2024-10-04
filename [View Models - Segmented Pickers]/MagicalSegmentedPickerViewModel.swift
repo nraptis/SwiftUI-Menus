@@ -10,6 +10,10 @@ import SwiftUI
 
 @Observable class MagicalSegmentedPickerViewModel: MagicalViewModel {
     
+    override class func getLayoutScheme() -> LayoutScheme.Type {
+        SegmentedPickerLayout.self
+    }
+    
     deinit {
         if ApplicationController.DEBUG_DEALLOCS {
             print("MagicalSegmentedPickerViewModel - Dealloc")
@@ -24,7 +28,7 @@ import SwiftUI
     
     let buttonViewModels: [MagicalSegmentedPickerButtonViewModel]
     let layoutNodes: [MagicalSegmentedPickerButtonLayoutNode]
-    init(orientation: Orientation,
+    @MainActor init(orientation: Orientation,
          segmentedPickerConfiguration: ToolInterfaceElementSegmentedPickerConfiguration) {
         
         self.segmentedPickerConfiguration = segmentedPickerConfiguration
@@ -48,14 +52,6 @@ import SwiftUI
     
     override func refresh() {
         
-    }
-    
-    override func refreshDisabled() {
-        super.refreshDisabled()
-    }
-    
-    override func refreshEnabled() {
-        super.refreshEnabled()
     }
     
     override func refreshLayoutFrame() {

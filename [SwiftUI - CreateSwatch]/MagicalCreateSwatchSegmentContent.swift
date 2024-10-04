@@ -12,7 +12,6 @@ struct MagicalCreateSwatchSegmentContent: View {
     @Environment(MagicalCreateSwatchViewModel.self) var magicalCreateSwatchViewModel: MagicalCreateSwatchViewModel
     @Environment(MagicalCreateSwatchButtonViewModel.self) var magicalCreateSwatchButtonViewModel: MagicalCreateSwatchButtonViewModel
     let index: Int
-    let isSelected: Bool
     let isDarkMode: Bool
     let isEnabled: Bool
     let isPressed: Bool
@@ -41,9 +40,7 @@ struct MagicalCreateSwatchSegmentContent: View {
         
         let nameLabelFont = CreateSwatchLayout.getNameLabelFont(orientation: orientation,
                                                                   flavor: layoutSchemeFlavor)
-        let nameLabelPaddingBottom = CreateSwatchLayout.getNameLabelPaddingBottom(orientation: orientation,
-                                                                                flavor: layoutSchemeFlavor,
-                                                                                numberOfLines: numberOfLines)
+        
         let nameLabelPaddingLeft = magicalCreateSwatchButtonViewModel.nameLabelPaddingLeft
         let nameLabelPaddingRight = magicalCreateSwatchButtonViewModel.nameLabelPaddingRight
         let nameLabelVerticalSpacing = CreateSwatchLayout.getNameLabelVerticalSpacing(orientation: orientation,
@@ -72,9 +69,7 @@ struct MagicalCreateSwatchSegmentContent: View {
         
         let contentHeight = magicalCreateSwatchViewModel.layoutHeight - (universalPaddingTop + universalPaddingBottom)
         
-        
         let color: Color
-        
         if isPressed {
             if isEnabled {
                 color = ToolInterfaceTheme.primaryDownEnabled
@@ -84,32 +79,16 @@ struct MagicalCreateSwatchSegmentContent: View {
         } else {
             
             if isDarkMode {
-                if isSelected {
-                    if isEnabled {
-                        color = ToolInterfaceTheme.primaryEnabledDark
-                    } else {
-                        color = ToolInterfaceTheme.primaryDisabledDark
-                    }
+                if isEnabled {
+                    color = ToolInterfaceTheme.primaryEnabledDark
                 } else {
-                    if isEnabled {
-                        color = ToolInterfaceTheme.primaryUnselectedEnabledDark
-                    } else {
-                        color = ToolInterfaceTheme.primaryUnselectedDisabledDark
-                    }
+                    color = ToolInterfaceTheme.primaryDisabledDark
                 }
             } else {
-                if isSelected {
-                    if isEnabled {
-                        color = ToolInterfaceTheme.primaryEnabledLight
-                    } else {
-                        color = ToolInterfaceTheme.primaryDisabledLight
-                    }
+                if isEnabled {
+                    color = ToolInterfaceTheme.primaryEnabledLight
                 } else {
-                    if isEnabled {
-                        color = ToolInterfaceTheme.primaryUnselectedEnabledLight
-                    } else {
-                        color = ToolInterfaceTheme.primaryUnselectedDisabledLight
-                    }
+                    color = ToolInterfaceTheme.primaryDisabledLight
                 }
             }
         }

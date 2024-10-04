@@ -8,10 +8,7 @@
 import Foundation
 
 extension JiggleViewController {
-    
     func toolActionConsumePhaseSliceLockState(_ slice: ToolActionPhaseSliceLockState) {
-        
-        print("slice. Lock Meshes")
         jiggleViewModel.lockShowingState()
     }
 }

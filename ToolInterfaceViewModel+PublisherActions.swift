@@ -12,7 +12,6 @@ extension ToolInterfaceViewModel {
     func getAllRows() -> [ToolRow] {
         var result = [ToolRow]()
         result.append(contentsOf: rowsZoom)
-        result.append(contentsOf: rowsGraphSideMenu)
         result.append(contentsOf: rowsVideoRecord)
         result.append(contentsOf: rowsVideoExport)
         if Device.isPad {
@@ -24,442 +23,622 @@ extension ToolInterfaceViewModel {
         return result
     }
     
-    func handleSelectedJiggleDidChange() {
-        func handleSelectedJiggleDidChange(row: ToolRow) {
+    private func refreshAllRows() {
+        Task { @MainActor in
+            let allRows = getAllRows()
+            for row in allRows {
+                for node in row.nodes {
+                    node.magicalViewModel.refresh()
+                }
+            }
+            
+        }
+    }
+    
+    private func refreshAllRowsMatching(elements: [ToolInterfaceElement]) {
+        Task { @MainActor in
+            var elementSet = Set<ToolInterfaceElement>()
+            for element in elements {
+                elementSet.insert(element)
+            }
+            let allRows = getAllRows()
+            for row in allRows {
+                for node in row.nodes {
+                    if elementSet.contains(node.element) {
+                        node.magicalViewModel.refresh()
+                    }
+                }
+            }
+            
+        }
+    }
+    
+    
+    func handleTimeLineUpdate() {
+        refreshAllRowsMatching(elements: [.sliderTimeLineOffset,
+                                          .sliderTimeLineDuration,
+                                          .sexyButtonTimeLineDampen,
+                                          .sexyButtonTimeLineAmplify,
+                                          .sexyButtonTimeLineInvertH,
+                                          .sexyButtonTimeLineInvertV,
+                                          .sexyButtonTimeLineBreakPoint,
+                                          .sexyButtonTimeLineResetCurve,
+                                          .sexyButtonTimeLineFlattenCurrentChannel,
+                                          .sexyButtonTimeLineResetDefaultCurrentChannel,
+                                          .sexyStepperTimelinePointCount,
+        
+        ])
+        /*
+        @MainActor func handleTimeLineUpdate(row: ToolRow) {
             for node in row.nodes {
-                if node.element == .sliderJigglePower ||
-                    node.element == .sliderJiggleSpeed ||
-                    node.element == .sliderJiggleDampen ||
-                    node.element == .textIconButtonFreezeOnSelectedJiggle ||
-                    node.element == .enterModeZoomEnter ||
-                    node.element == .enterModeGraphEnter ||
-                    node.element == .enterModeGuidesEnter
-                
+                if .sliderTimeLineOffset,
+                    .sliderTimeLineDuration,
+                    .sexyButtonTimeLineDampen,
+                    .sexyButtonTimeLineAmplify,
+                    .sexyButtonTimeLineInvertH,
+                    .sexyButtonTimeLineInvertV,
+                    .sexyButtonTimeLineBreakPoint,
+                    .sexyButtonTimeLineResetCurve,
+                    .sexyButtonTimeLineFlattenCurrentChannel,
+                    .sexyButtonTimeLineResetDefaultCurrentChannel,
+                    .sexyStepperTimelinePointCount {
+                    node.magicalViewModel.refresh()
+                }
+            }
+        }
+        Task { @MainActor in
+            for row in getAllRows() { handleTimeLineUpdate(row: row) }
+        }
+        */
+    }
+    
+    func handleSelectedTimeLineSwatchDidChange() {
+        refreshAllRowsMatching(elements: [.sliderTimeLineOffset,
+        
+        ])
+        /*
+        @MainActor func handleSelectedJiggleDidChange(row: ToolRow) {
+            for node in row.nodes {
+                if .sliderTimeLineOffset
                 {
                     node.magicalViewModel.refresh()
                 }
             }
         }
+        Task { @MainActor in
+            for row in getAllRows() { handleSelectedJiggleDidChange(row: row) }
+        }
+        */
+    }
+    
+    func handleSelectedJiggleDidChange() {
+        refreshAllRowsMatching(elements: [.sliderJigglePower,
+                                          .sliderJiggleSpeed,
+                                          .sliderJiggleDampen,
+                                          
+                                          .enterModeZoomEnter,
+                                          .enterModeGraphEnter,
+                                          .enterModeGuidesEnter,
+                                          
+                                          .createSwatchMakeAndDrawJiggle,
+                                          .createSwatchMakeAndDrawGuide,
+                                          
+                                          .createSwatchAddAndRemoveJigglePoints,
+                                          .createSwatchAddAndRemoveGuidePoints,
+                                          
+                                          .sexyStepperTimelinePointCount,
+                                          
+                                          .sexyButtonSelectNextJiggle,
+                                          .sexyButtonSelectPreviousJiggle,
+                                          .sexyButtonSelectNextGuide,
+                                          .sexyButtonSelectPreviousGuide,
+                                          
+                                        .sexyButtonFlipJiggleH,
+                                        .sexyButtonFlipJiggleV,
+                                        .sexyButtonRotateJiggleLeft,
+                                        .sexyButtonRotateJiggleRight,
+                                                                      
+                                        .sexyButtonFlipGuideH,
+                                        .sexyButtonFlipGuideV,
+                                        .sexyButtonRotateGuideLeft,
+                                        .sexyButtonRotateGuideRight,
+                                          
+                                            .sexyButtonFreezeSelectedJiggle,
+                                          .sexyButtonFreezeSelectedGuide,
+                                          .sexyButtonUnfreezeAllJiggles,
+                                          .sexyButtonUnfreezeAllGuides,
+                                          
+                                                                        
+                                          
+            .sexyButtonZoomJiggle
         
-        for row in getAllRows() { handleSelectedJiggleDidChange(row: row) }
+        ])
+        /*
+        @MainActor func handleSelectedJiggleDidChange(row: ToolRow) {
+            for node in row.nodes {
+                if .sliderJigglePower,
+                    .sliderJiggleSpeed,
+                    .sliderJiggleDampen,
+                    .textIconButtonFreezeOnSelectedJiggle,
+                    .enterModeZoomEnter,
+                    .enterModeGraphEnter,
+                    .enterModeGuidesEnter,
+                    
+                    .createSwatchMakeAndDrawJiggle,
+                    .createSwatchMakeAndDrawGuide,
+                    
+                    .createSwatchAddAndRemoveJigglePoints,
+                    .createSwatchAddAndRemoveGuidePoints,
+                    
+                    .sexyStepperTimelinePointCount,
+                    
+                    .sexyButtonSelectNextJiggle,
+                    .sexyButtonSelectPreviousJiggle,
+                    .sexyButtonSelectNextGuide,
+                    .sexyButtonSelectPreviousGuide
+                {
+                    node.magicalViewModel.refresh()
+                }
+            }
+        }
+        Task { @MainActor in
+            for row in getAllRows() { handleSelectedJiggleDidChange(row: row) }
+        }
+        */
+    }
+    
+    func handleTimelinePointCountDidChange() {
+        refreshAllRowsMatching(elements: [.sexyStepperTimelinePointCount,
+                                          
+        ])
+        /*
+        @MainActor func handleTimelinePointCountDidChange(row: ToolRow) {
+            for node in row.nodes {
+                if .sexyStepperTimelinePointCount {
+                    node.magicalViewModel.refresh()
+                }
+            }
+        }
+        Task { @MainActor in
+            for row in getAllRows() { handleTimelinePointCountDidChange(row: row) }
+        }
+        */
     }
     
     func handleZoomEnabledDidChange() {
-        func handleZoomEnabledDidChange(row: ToolRow) {
+        refreshAllRowsMatching(elements: [.checkBoxZoomEnabled
+                                          
+        ])
+        /*
+        @MainActor func handleZoomEnabledDidChange(row: ToolRow) {
             for node in row.nodes {
-                if node.element == .checkBoxZoomEnabled {
+                if .checkBoxZoomEnabled {
                     node.magicalViewModel.refresh()
                 }
             }
         }
         
-        for row in getAllRows() { handleZoomEnabledDidChange(row: row) }
-        
+        Task { @MainActor in
+            for row in getAllRows() { handleZoomEnabledDidChange(row: row) }
+        }
+        */
     }
     
-    
+    func handleRecordingEnabledDidChange() {
+        refreshAllRowsMatching(elements: [
+            
+                                          
+        ])
+        /*
+        @MainActor func handleRecordingEnabledDidChange(row: ToolRow) {
+            for node in row.nodes {
+                node.magicalViewModel.refresh()
+                
+            }
+        }
+        
+        Task { @MainActor in
+            for row in getAllRows() { handleRecordingEnabledDidChange(row: row) }
+        }
+        */
+    }
     
     func handleResetZoomActiveDidChange() {
-        func handleResetZoomActiveDidChange(row: ToolRow) {
+        refreshAllRowsMatching(elements: [
+            
+                                          
+        ])
+        /*
+        @MainActor func handleResetZoomActiveDidChange(row: ToolRow) {
             for node in row.nodes {
-                //if node.element == .OLDcheckBoxZoomEnabled {
+                //if .OLDcheckBoxZoomEnabled {
                 //    node.magicalViewModel.refresh()
                 //}
             }
         }
-        for row in getAllRows() { handleResetZoomActiveDidChange(row: row) }
+        Task { @MainActor in
+            for row in getAllRows() { handleResetZoomActiveDidChange(row: row) }
+        }
+        */
     }
     
     func handleWeightCurveGraphEnabledDidChange() {
-        func handleWeightCurveGraphEnabledDidChange(row: ToolRow) {
+        refreshAllRowsMatching(elements: [.checkBoxWeightCurveGraphEnabled
+            
+                                          
+        ])
+        /*
+        @MainActor func handleWeightCurveGraphEnabledDidChange(row: ToolRow) {
             for node in row.nodes {
-                if node.element == .checkBoxWeightCurveGraphEnabled {
+                if .checkBoxWeightCurveGraphEnabled {
                     node.magicalViewModel.refresh()
                 }
             }
         }
-        for row in getAllRows() { handleWeightCurveGraphEnabledDidChange(row: row) }
+        Task { @MainActor in
+            for row in getAllRows() { handleWeightCurveGraphEnabledDidChange(row: row) }
+        }
+        */
     }
     
     func handleGuidesEnabledDidChange() {
-        func handleGuidesEnabledDidChange(row: ToolRow) {
+        
+        /*
+        @MainActor func handleGuidesEnabledDidChange(row: ToolRow) {
             for node in row.nodes {
                 node.magicalViewModel.refresh()
             }
         }
-        for row in getAllRows() { handleGuidesEnabledDidChange(row: row) }
+        Task { @MainActor in
+            for row in getAllRows() { handleGuidesEnabledDidChange(row: row) }
+        }
+        */
     }
     
-    func handleAutoLoopEnabledDidChange() {
-        func handleAutoLoopEnabledDidChange(row: ToolRow) {
+    func handleAnimationLoopsEnabledDidChange() {
+        refreshAllRowsMatching(elements: [.checkBoxAutoLoopEnabled,
+                                          
+                                          
+        ])
+        /*
+        @MainActor func handleAnimationLoopsEnabledDidChange(row: ToolRow) {
             for node in row.nodes {
-                if node.element == .checkBoxAutoLoopEnabled {
+                if .checkBoxAutoLoopEnabled {
                     node.magicalViewModel.refresh()
                 }
             }
         }
-        for row in getAllRows() { handleAutoLoopEnabledDidChange(row: row) }
+        Task { @MainActor in
+            for row in getAllRows() { handleAnimationLoopsEnabledDidChange(row: row) }
+        }
+        */
     }
     
-    func handleCreateJiggleCentersModificationDidChange() {
-        print("handleCreateJiggleCentersModificationDidChange")
-        func handleCreateJiggleCentersModificationDidChange(row: ToolRow) {
+    func handleAnimationContinuousEnabledDidChange() {
+        refreshAllRowsMatching(elements: [
+                                          
+        ])
+        /*
+        @MainActor func handleAnimationContinuousEnabledDidChange(row: ToolRow) {
             for node in row.nodes {
-                node.magicalViewModel.refresh()
+                if .checkBoxAutoLoopEnabled {
+                    node.magicalViewModel.refresh()
+                }
             }
         }
-        for row in getAllRows() { handleCreateJiggleCentersModificationDidChange(row: row) }
+        Task { @MainActor in
+            for row in getAllRows() { handleAnimationContinuousEnabledDidChange(row: row) }
+        }
+        */
     }
     
-    func handleCreateGuideCentersModificationDidChange() {
-        print("handleCreateJiggleCentersModificationDidChange")
-        func handleCreateGuideCentersModificationDidChange(row: ToolRow) {
+    func handleAnimationLoopsPageDidChange() {
+        refreshAllRowsMatching(elements: [.checkBoxAutoLoopEnabled
+                                          
+        ])
+        /*
+        @MainActor func handleAnimationLoopsPageDidChange(row: ToolRow) {
             for node in row.nodes {
-                node.magicalViewModel.refresh()
+                if .checkBoxAutoLoopEnabled {
+                    node.magicalViewModel.refresh()
+                }
             }
         }
-        for row in getAllRows() { handleCreateGuideCentersModificationDidChange(row: row) }
+        Task { @MainActor in
+            for row in getAllRows() { handleAnimationLoopsPageDidChange(row: row) }
+        }
+        */
     }
     
-    func handleCreateJiggleStandardDidChange() {
-        print("handleCreateJiggleStandardDidChange")
-        func handleCreateJiggleStandardDidChange(row: ToolRow) {
+    
+    func handleTimeLineEnabledDidChange() {
+        
+        /*
+        @MainActor func handleTimeLineEnabledDidChange(row: ToolRow) {
             for node in row.nodes {
                 node.magicalViewModel.refresh()
+                
             }
         }
-        for row in getAllRows() { handleCreateJiggleStandardDidChange(row: row) }
+        Task { @MainActor in
+            for row in getAllRows() { handleTimeLineEnabledDidChange(row: row) }
+        }
+        */
+    }
+    
+    func handleCreatorModesDidChange() {
+        
+        //TODO: More, More
+        refreshAllRowsMatching(elements: [.sexyButtonRedo,
+                                          .sexyButtonRedo,
+                                          
+                                          .sexyButtonRotateJiggleLeft,
+                                          .sexyButtonRotateJiggleRight,
+                                          
+                                          .createSwatchMakeAndDrawJiggle,
+                                          .createSwatchMakeAndDrawGuide,
+                                          .createSwatchAddAndRemoveJigglePoints,
+                                          .createSwatchAddAndRemoveGuidePoints,
+                                          
+                                          .sexyCheckBoxDarkMode,
+                                          .sexyCheckBoxGuideCenters,
+                                          .sexyCheckBoxJiggleCenters,
+                                          
+                                          .sexyButtonSelectNextJiggle,
+                                          .sexyButtonSelectPreviousJiggle,
+                                          .sexyButtonSelectNextGuide,
+                                          .sexyButtonSelectPreviousGuide
+        ])
+        /*
+        @MainActor func handleCreatorModesDidChange(row: ToolRow) {
+            for node in row.nodes {
+                
+                if
+                {
+                    node.magicalViewModel.refresh()
+                }
+            }
+        }
+        Task { @MainActor in
+            for row in getAllRows() {
+                handleCreatorModesDidChange(row: row)
+            }
+        }
+        */
     }
     
     func handleJigglesDidChange() {
-        print("handleCreateJiggleDrawingDidChange")
-        func handleJigglesDidChange(row: ToolRow) {
+        //TODO: More, More
+        refreshAllRowsMatching(elements: [
+            
+        ])
+        /*
+        @MainActor func handleJigglesDidChange(row: ToolRow) {
             for node in row.nodes {
                 node.magicalViewModel.refresh()
             }
         }
-        for row in getAllRows() { handleJigglesDidChange(row: row) }
+        Task { @MainActor in
+            
+            for row in getAllRows() { handleJigglesDidChange(row: row) }
+        }
+        */
     }
     
-    func handleCreateJiggleDrawingDidChange() {
-        print("handleCreateJiggleDrawingDidChange")
-        func handleCreateJiggleDrawingDidChange(row: ToolRow) {
+    func handleControlPointsDidChange() {
+        
+        refreshAllRowsMatching(elements: [.createSwatchAddAndRemoveJigglePoints
+            
+        ])
+        
+        /*
+        @MainActor func handleControlPointsDidChange(row: ToolRow) {
             for node in row.nodes {
-                node.magicalViewModel.refresh()
+                if .createSwatchAddAndRemoveJigglePoints {
+                    node.magicalViewModel.refresh()
+                }
             }
         }
-        for row in getAllRows() { handleCreateJiggleDrawingDidChange(row: row) }
-    }
-    
-    func handleCreatePointsDidChange() {
-        print("handleCreatePointsDidChange")
-        func handleCreatePointsDidChange(row: ToolRow) {
-            for node in row.nodes {
-                node.magicalViewModel.refresh()
-            }
+        Task { @MainActor in
+            
+            for row in getAllRows() { handleControlPointsDidChange(row: row) }
         }
-        for row in getAllRows() { handleCreatePointsDidChange(row: row) }
-    }
-    
-    func handleRemovePointsDidChange() {
-        print("handleRemovePointsDidChange")
-        func handleRemovePointsDidChange(row: ToolRow) {
-            for node in row.nodes {
-                node.magicalViewModel.refresh()
-            }
-        }
-        for row in getAllRows() { handleRemovePointsDidChange(row: row) }
-    }
-    
-    func handleCreateWeightRingsStandardDidChange() {
-        print("handleCreateWeightRingsStandardDidChange")
-        func handleCreateWeightRingsStandardDidChange(row: ToolRow) {
-            for node in row.nodes {
-                node.magicalViewModel.refresh()
-            }
-        }
-        for row in getAllRows() { handleCreateWeightRingsStandardDidChange(row: row) }
-    }
-    
-    func handleCreateWeightRingsDrawingDidChange() {
-        print("handleCreateWeightRingsDrawingDidChange")
-        func handleCreateWeightRingsDrawingDidChange(row: ToolRow) {
-            for node in row.nodes {
-                node.magicalViewModel.refresh()
-            }
-        }
-        for row in getAllRows() { handleCreateWeightRingsDrawingDidChange(row: row) }
-    }
-    
-    func handleCreateWeightRingPointsDidChange() {
-        print("handleCreateWeightRingPointsDidChange")
-        func handleCreateWeightRingPointsDidChange(row: ToolRow) {
-            for node in row.nodes {
-                node.magicalViewModel.refresh()
-            }
-        }
-        for row in getAllRows() { handleCreateWeightRingPointsDidChange(row: row) }
-    }
-    
-    func handleRemoveWeightRingPointsDidChange() {
-        print("handleRemoveWeightRingPointsDidChange")
-        func handleRemoveWeightRingPointsDidChange(row: ToolRow) {
-            for node in row.nodes {
-                node.magicalViewModel.refresh()
-            }
-        }
-        for row in getAllRows() { handleRemoveWeightRingPointsDidChange(row: row) }
+        */
     }
     
     func handleDocumentModeDidChange() {
-        func handleDocumentModeDidChange(row: ToolRow) {
+        refreshAllRowsMatching(elements: [.mainTabDocumentMode
+            
+        ])
+        
+        /*
+        @MainActor func handleDocumentModeDidChange(row: ToolRow) {
             for node in row.nodes {
-                if node.element == .mainTabDocumentMode {
+                if .mainTabDocumentMode {
                     node.magicalViewModel.refresh()
                 }
             }
         }
-        for row in getAllRows() { handleDocumentModeDidChange(row: row) }
+        Task { @MainActor in
+            
+            for row in getAllRows() { handleDocumentModeDidChange(row: row) }
+        }
+        */
     }
     
     func handleEditModeDidChange() {
-        func handleEditModeDidChange(row: ToolRow) {
+        refreshAllRowsMatching(elements: [.segmentEditMode
+            
+        ])
+        /*
+        @MainActor func handleEditModeDidChange(row: ToolRow) {
             for node in row.nodes {
-                if node.element == .segmentEditMode {
+                if .segmentEditMode {
                     node.magicalViewModel.refresh()
                 }
             }
         }
-        for row in getAllRows() { handleEditModeDidChange(row: row) }
-    }
-    
-    func handleDisplayModeDidChange() {
-        func handleDisplayModeDidChange(row: ToolRow) {
-            for node in row.nodes {
-                
-            }
+        Task { @MainActor in
+            
+            for row in getAllRows() { handleEditModeDidChange(row: row) }
         }
-        for row in getAllRows() { handleDisplayModeDidChange(row: row) }
-    }
-    
-    func handlePointCreateModeDidChange() {
-        func handlePointCreateModeDidChange(row: ToolRow) {
-            for node in row.nodes {
-                if node.element == .segmentPointCreateMode {
-                    node.magicalViewModel.refresh()
-                }
-            }
-        }
-        for row in getAllRows() { handlePointCreateModeDidChange(row: row) }
-    }
-    
-    func handleAnimationModeDidChange() {
-        func handleAnimationModeDidChange(row: ToolRow) {
-            for node in row.nodes {
-                if node.element == .segmentAnimationMode {
-                    node.magicalViewModel.refresh()
-                }
-            }
-        }
-        for row in getAllRows() { handleAnimationModeDidChange(row: row) }
-    }
-    
-    func handleViewModeDidChange() {
-        func handleViewModeDidChange(row: ToolRow) {
-            for node in row.nodes {
-                if node.element == .segmentViewMode {
-                    node.magicalViewModel.refresh()
-                }
-            }
-        }
-        for row in getAllRows() { handleViewModeDidChange(row: row) }
-    }
-    
-    func handleWeightPointCreateModeDidChange() {
-        func handleWeightPointCreateModeDidChange(row: ToolRow) {
-            for node in row.nodes {
-                if node.element == .segmentWeightPointCreateMode {
-                    node.magicalViewModel.refresh()
-                }
-            }
-        }
-        for row in getAllRows() { handleWeightPointCreateModeDidChange(row: row) }
-    }
-    
-    func handlePointModeDidChange() {
-        func handlePointModeDidChange(row: ToolRow) {
-            for node in row.nodes {
-                if node.element == .segmentPointMode {
-                    node.magicalViewModel.refresh()
-                }
-            }
-        }
-        for row in getAllRows() { handlePointModeDidChange(row: row) }
-    }
-    
-    func handleWeightPointModeDidChange() {
-        func handleWeightPointModeDidChange(row: ToolRow) {
-            for node in row.nodes {
-                if node.element == .segmentWeightPointMode {
-                    node.magicalViewModel.refresh()
-                }
-            }
-        }
-        for row in getAllRows() { handleWeightPointModeDidChange(row: row) }
+        */
     }
     
     func handleWeightModeDidChange() {
-        func handleWeightModeDidChange(row: ToolRow) {
+        refreshAllRowsMatching(elements: [.segmentWeightMode
+            
+        ])
+        /*
+        @MainActor func handleWeightModeDidChange(row: ToolRow) {
             for node in row.nodes {
-                if node.element == .segmentWeightMode {
+                if .segmentWeightMode {
                     node.magicalViewModel.refresh()
                 }
             }
         }
-        for row in getAllRows() { handleWeightModeDidChange(row: row) }
+        Task { @MainActor in
+            
+            for row in getAllRows() { handleWeightModeDidChange(row: row) }
+        }
+        */
     }
     
     func handleUndoRedoDidChange() {
-        func handleUndoRedoDidChange(row: ToolRow) {
-            for node in row.nodes {
-                if (node.element == .textIconButtonUndo) || (node.element == .textIconButtonRedo) {
-                    node.magicalViewModel.refresh()
-                }
-                
-                if (node.element == .sexyButtonRedo) || (node.element == .sexyButtonUndo) {
-                    node.magicalViewModel.refresh()
-                }
-                
-            }
-        }
-        for row in getAllRows() { handleUndoRedoDidChange(row: row) }
+        // DONE!
+        refreshAllRowsMatching(elements: [.sexyButtonRedo,
+                                          .sexyButtonUndo])
     }
     
     func handleDarkModeDidChange() {
-        print("handleDarkModeDidChange")
-        func handleDarkModeDidChange(row: ToolRow) {
-            for node in row.nodes {
-                if node.element == .checkBoxDarkModeEnabled {
-                    node.magicalViewModel.refresh()
-                }
-            }
-        }
-        for row in getAllRows() { handleDarkModeDidChange(row: row) }
+        refreshAllRowsMatching(elements: [.sexyCheckBoxDarkMode])
     }
     
     func handleFrozenJigglesDidChange() {
-        print("handleFrozenJigglesDidChange")
-        func handleFrozenJigglesDidChange(row: ToolRow) {
-            for node in row.nodes {
-                if node.element == .textIconButtonFreezeOnSelectedJiggle ||
-                    node.element == .textIconButtonFreezeOffAllJiggle {
-                    node.magicalViewModel.refresh()
-                }
-            }
-        }
-        for row in getAllRows() { handleFrozenJigglesDidChange(row: row) }
+        refreshAllRowsMatching(elements: [.sexyButtonFreezeSelectedJiggle,
+                                          .sexyButtonFreezeSelectedGuide,
+                                          .sexyButtonUnfreezeAllJiggles,
+                                          .sexyButtonUnfreezeAllGuides,
+                                          .sexyButtonSelectNextJiggle,
+                                          .sexyButtonSelectPreviousJiggle,
+                                          .sexyButtonSelectNextGuide,
+                                          .sexyButtonSelectPreviousGuide])
+    }
+    
+    func handleFrozenGuidesDidChange() {
+        refreshAllRowsMatching(elements: [.sexyButtonFreezeSelectedGuide,
+                                          .sexyButtonUnfreezeAllGuides,
+                                          .sexyButtonSelectNextGuide,
+                                          .sexyButtonSelectPreviousGuide])
     }
     
     func handleSwivelOrbitDidChange() {
-        print("handleSwivelOrbitDidChange")
-        func handleSwivelOrbitDidChange(row: ToolRow) {
+        /*
+        @MainActor func handleSwivelOrbitDidChange(row: ToolRow) {
             for node in row.nodes {
-                if node.element == .checkBoxSwivelOrbitEnabled {
+                if .checkBoxSwivelOrbitEnabled {
                     node.magicalViewModel.refresh()
                 }
             }
         }
-        for row in getAllRows() { handleSwivelOrbitDidChange(row: row) }
+        Task { @MainActor in
+            
+            for row in getAllRows() { handleSwivelOrbitDidChange(row: row) }
+            
+        }
+        */
     }
     
     func handleStereoscopicDidChange() {
-        print("handleStereoscopicDidChange")
-        
-        func handleStereoscopicDidChange(row: ToolRow) {
+        /*
+        @MainActor func handleStereoscopicDidChange(row: ToolRow) {
             for node in row.nodes {
-                if node.element == .checkBoxStereoscopicEnabled {
+                if .checkBoxStereoscopicEnabled {
                     node.magicalViewModel.refresh()
                 }
             }
         }
-        for row in getAllRows() { handleStereoscopicDidChange(row: row) }
+        Task { @MainActor in
+            
+            for row in getAllRows() { handleStereoscopicDidChange(row: row) }
+        }
+        */
     }
     
     func handleAnimationJiggleAppliedToAllDidChange() {
-        print("handleAnimationJiggleAppliedToAllDidChange")
         
-        func handleAnimationJiggleAppliedToAllDidChange(row: ToolRow) {
+        refreshAllRowsMatching(elements: [.checkBoxAnimationJiggleApplyToAll])
+        /*
+        @MainActor func handleAnimationJiggleAppliedToAllDidChange(row: ToolRow) {
             for node in row.nodes {
-                if node.element == .checkBoxAnimationJiggleApplyToAll {
+                if .checkBoxAnimationJiggleApplyToAll {
                     node.magicalViewModel.refresh()
                 }
             }
         }
-        for row in getAllRows() { handleAnimationJiggleAppliedToAllDidChange(row: row) }
+        Task { @MainActor in
+            
+            for row in getAllRows() { handleAnimationJiggleAppliedToAllDidChange(row: row) }
+        }
+        */
     }
     
     func handleAnimationBounceAppliedToAllDidChange() {
-        print("handleAnimationBounceAppliedToAllDidChange")
-        
-        func handleAnimationBounceAppliedToAllDidChange(row: ToolRow) {
+        refreshAllRowsMatching(elements: [.checkBoxAnimationBounceApplyToAll])
+        /*
+        @MainActor func handleAnimationBounceAppliedToAllDidChange(row: ToolRow) {
             for node in row.nodes {
-                if node.element == .checkBoxAnimationBounceApplyToAll {
+                if .checkBoxAnimationBounceApplyToAll {
                     node.magicalViewModel.refresh()
                 }
             }
         }
-        for row in getAllRows() { handleAnimationBounceAppliedToAllDidChange(row: row) }
+        Task { @MainActor in
+            
+            for row in getAllRows() { handleAnimationBounceAppliedToAllDidChange(row: row) }
+        }
+        */
     }
     
     func handleAnimationWobbleAppliedToAllDidChange() {
-        print("handleAnimationWobbleAppliedToAllDidChange")
-        
-        func handleAnimationWobbleAppliedToAllDidChange(row: ToolRow) {
+        refreshAllRowsMatching(elements: [.checkBoxAnimationWobbleApplyToAll])
+        /*
+        @MainActor func handleAnimationWobbleAppliedToAllDidChange(row: ToolRow) {
             for node in row.nodes {
-                if node.element == .checkBoxAnimationWobbleApplyToAll {
+                if .checkBoxAnimationWobbleApplyToAll {
                     node.magicalViewModel.refresh()
                 }
             }
         }
-        for row in getAllRows() { handleAnimationWobbleAppliedToAllDidChange(row: row) }
+        Task { @MainActor in
+            
+            for row in getAllRows() { handleAnimationWobbleAppliedToAllDidChange(row: row) }
+        }
+        */
     }
     
     func handleAnimationTwistAppliedToAllDidChange() {
-        print("handleAnimationTwistAppliedToAllDidChange")
-        
-        func handleAnimationTwistAppliedToAllDidChange(row: ToolRow) {
+        refreshAllRowsMatching(elements: [.checkBoxAnimationTwistApplyToAll])
+        /*
+        @MainActor func handleAnimationTwistAppliedToAllDidChange(row: ToolRow) {
             for node in row.nodes {
-                if node.element == .checkBoxAnimationTwistApplyToAll {
+                if . {
                     node.magicalViewModel.refresh()
                 }
             }
         }
-        for row in getAllRows() { handleAnimationTwistAppliedToAllDidChange(row: row) }
+        Task { @MainActor in
+            
+            for row in getAllRows() { handleAnimationTwistAppliedToAllDidChange(row: row) }
+        }
+        */
     }
     
     func handleJiggleSpeedDidChange() {
-        print("handleJiggleSpeedDidChange")
-        
-        func handleJiggleSpeedDidChange(row: ToolRow) {
-            for node in row.nodes {
-                if node.element == .sliderJiggleSpeed {
-                    node.magicalViewModel.refresh()
-                }
-            }
-        }
-        for row in getAllRows() { handleJiggleSpeedDidChange(row: row) }
+        refreshAllRowsMatching(elements: [.sliderJiggleSpeed])
     }
     
     func handleJigglePowerDidChange() {
-        print("handleJiggleSpeedChange")
-        
-        func handleJigglePowerDidChange(row: ToolRow) {
-            for node in row.nodes {
-                if node.element == .sliderJigglePower {
-                    node.magicalViewModel.refresh()
-                }
-            }
-        }
-        for row in getAllRows() { handleJigglePowerDidChange(row: row) }
+        refreshAllRowsMatching(elements: [.sliderJigglePower])
     }
 }

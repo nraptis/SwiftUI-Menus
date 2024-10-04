@@ -41,18 +41,15 @@ struct MagicalSliderBar: View {
         let barColorStroke: Color
         let barColorFillOff: Color
         let barColorFillOn: Color
-        let iconColor: Color
         
         if magicalSliderViewModel.isDarkModeEnabled {
             if magicalSliderViewModel.isEnabled {
-                iconColor = ToolInterfaceTheme.primaryEnabledDark
                 thumbColorStroke = ToolInterfaceTheme.primaryEnabledDark
                 thumbColorFill = ToolInterfaceTheme.sliderFillOffEnabledDark
                 barColorStroke = ToolInterfaceTheme.primaryEnabledDark
                 barColorFillOff = ToolInterfaceTheme.sliderFillOffEnabledDark
                 barColorFillOn = ToolInterfaceTheme.sliderFillOnEnabledDark
             } else {
-                iconColor = ToolInterfaceTheme.primaryDisabledDark
                 thumbColorStroke = ToolInterfaceTheme.primaryDisabledDark
                 thumbColorFill = ToolInterfaceTheme.sliderFillOffDisabledDark
                 barColorStroke = ToolInterfaceTheme.primaryDisabledDark
@@ -61,14 +58,12 @@ struct MagicalSliderBar: View {
             }
         } else {
             if magicalSliderViewModel.isEnabled {
-                iconColor = ToolInterfaceTheme.primaryEnabledLight
                 thumbColorStroke = ToolInterfaceTheme.primaryEnabledLight
                 thumbColorFill = ToolInterfaceTheme.sliderFillOffEnabledLight
                 barColorStroke = ToolInterfaceTheme.primaryEnabledLight
                 barColorFillOff = ToolInterfaceTheme.sliderFillOffEnabledLight
                 barColorFillOn = ToolInterfaceTheme.sliderFillOnEnabledLight
             } else {
-                iconColor = ToolInterfaceTheme.primaryDisabledLight
                 thumbColorStroke = ToolInterfaceTheme.primaryDisabledLight
                 thumbColorFill = ToolInterfaceTheme.sliderFillOffDisabledLight
                 barColorStroke = ToolInterfaceTheme.primaryDisabledLight
@@ -81,13 +76,6 @@ struct MagicalSliderBar: View {
         let isEnabled = magicalSliderViewModel.isEnabled
         
         let thumbHitBoxWidth = SliderLayout.getThumbHitBoxWidth(orientation: orientation)
-        let textIcon = magicalSliderViewModel.sliderConfiguration.getTextIcon(orientation: orientation,
-                                                                              layoutSchemeFlavor: .long,
-                                                                              isDarkMode: isDarkMode,
-                                                                              isEnabled: isEnabled)
-        
-        let iconWidth = textIcon.width
-        let iconHeight = textIcon.height
         
         let sizeDifferential = thumbHitBoxWidth - thumbDiameterStroke
         let sizeDifferential2 = sizeDifferential >> 1

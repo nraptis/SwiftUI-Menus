@@ -10,6 +10,10 @@ import SwiftUI
 
 @Observable class MagicalEnterModeViewModel: MagicalViewModel {
     
+    override class func getLayoutScheme() -> LayoutScheme.Type {
+        EnterModeLayout.self
+    }
+    
     var nameLabelPaddingLeft = 0
     var nameLabelPaddingRight = 0
     
@@ -26,18 +30,10 @@ import SwiftUI
     var buttonUniversalPaddingRight = 0
     
     let enterModeConfiguration: ToolInterfaceElementEnterModeConfiguration
-    init(orientation: Orientation,
+    @MainActor init(orientation: Orientation,
          enterModeConfiguration: ToolInterfaceElementEnterModeConfiguration) {
         self.enterModeConfiguration = enterModeConfiguration
         super.init(orientation: orientation)
-    }
-    
-    override func refreshDisabled() {
-        super.refreshDisabled()
-    }
-    
-    override func refreshEnabled() {
-        super.refreshEnabled()
     }
     
     func handleClicked() {

@@ -42,7 +42,7 @@ class ToolNode {
         magicalViewModel.neighborTypeRight = neighborTypeRight
     }
     
-    var layoutX: Int {
+    @MainActor var layoutX: Int {
         get {
             magicalViewModel.layoutX
         }
@@ -53,7 +53,7 @@ class ToolNode {
         }
     }
     
-    var layoutY: Int {
+    @MainActor var layoutY: Int {
         get {
             magicalViewModel.layoutY
         }
@@ -64,7 +64,7 @@ class ToolNode {
         }
     }
     
-    var layoutWidth: Int {
+    @MainActor var layoutWidth: Int {
         get {
             magicalViewModel.layoutWidth
         }
@@ -75,7 +75,7 @@ class ToolNode {
         }
     }
     
-    var layoutHeight: Int {
+    @MainActor var layoutHeight: Int {
         get {
             magicalViewModel.layoutHeight
         }

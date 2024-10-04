@@ -10,6 +10,10 @@ import SwiftUI
 
 @Observable class MagicalTextIconButtonViewModel: MagicalViewModel {
     
+    override class func getLayoutScheme() -> LayoutScheme.Type {
+        TextIconButtonLayout.self
+    }
+    
     var nameLabelPaddingLeft = 0
     var nameLabelPaddingRight = 0
     
@@ -20,18 +24,10 @@ import SwiftUI
     var universalPaddingRight = 0
     
     let textIconButtonConfiguration: ToolInterfaceElementTextIconButtonConfiguration
-    init(orientation: Orientation,
+    @MainActor init(orientation: Orientation,
          textIconButtonConfiguration: ToolInterfaceElementTextIconButtonConfiguration) {
         self.textIconButtonConfiguration = textIconButtonConfiguration
         super.init(orientation: orientation)
-    }
-    
-    override func refreshDisabled() {
-        super.refreshDisabled()
-    }
-    
-    override func refreshEnabled() {
-        super.refreshEnabled()
     }
     
     func handleClicked() {

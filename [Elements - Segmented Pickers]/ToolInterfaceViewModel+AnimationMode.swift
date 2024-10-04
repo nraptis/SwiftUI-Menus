@@ -9,14 +9,14 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-    func getAnimationModeSegmentToolNode(neighborTypeLeft: ToolInterfaceElementType?,
+   @MainActor func getAnimationModeSegmentToolNode(neighborTypeLeft: ToolInterfaceElementType?,
                                          neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
         let orientation = jiggleViewModel.orientation
         var buttonConfigurations = [ToolInterfaceElementSegmentedPickerButtonConfiguration]()
         
         
-        let bounceTextIconPackable = CheckBoxIconLibrary.removePoints
+        let bounceTextIconPackable = FramedConvertibleIconLibrary.jiggles
         let bounceLine1 = ToolInterfaceStringLibrarySegments.segmentTextAnimationModeBounceLine1()
         let bounceLine2 = ToolInterfaceStringLibrarySegments.segmentTextAnimationModeBounceLine2()
         let bounceConfiguration = ToolInterfaceElementSegmentedPickerButtonConfiguration(id: 0,
@@ -26,7 +26,7 @@ extension ToolInterfaceViewModel {
                                                                                          nameLabelLine2: bounceLine2)
         buttonConfigurations.append(bounceConfiguration)
         
-        let wobbleTextIconPackable = CheckBoxIconLibrary.removePoints
+        let wobbleTextIconPackable = FramedConvertibleIconLibrary.jiggles
         let wobbleLine1 = ToolInterfaceStringLibrarySegments.segmentTextAnimationModeWobbleLine1()
         let wobbleLine2 = ToolInterfaceStringLibrarySegments.segmentTextAnimationModeWobbleLine2()
         let wobbleConfiguration = ToolInterfaceElementSegmentedPickerButtonConfiguration(id: 1,
@@ -36,7 +36,7 @@ extension ToolInterfaceViewModel {
                                                                                          nameLabelLine2: wobbleLine2)
         buttonConfigurations.append(wobbleConfiguration)
         
-        let twistTextIconPackable = CheckBoxIconLibrary.removePoints
+        let twistTextIconPackable = FramedConvertibleIconLibrary.jiggles
         let twistLine1 = ToolInterfaceStringLibrarySegments.segmentTextAnimationModeTwistLine1()
         let twistLine2 = ToolInterfaceStringLibrarySegments.segmentTextAnimationModeTwistLine2()
         let twistConfiguration = ToolInterfaceElementSegmentedPickerButtonConfiguration(id: 2,

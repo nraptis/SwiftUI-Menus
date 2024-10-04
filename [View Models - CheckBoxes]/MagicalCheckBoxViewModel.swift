@@ -10,6 +10,10 @@ import SwiftUI
 
 @Observable class MagicalCheckBoxViewModel: MagicalViewModel {
     
+    override class func getLayoutScheme() -> LayoutScheme.Type {
+        CheckBoxLayout.self
+    }
+    
     var isChecked = false
     
     var nameLabelPaddingLeft = 0
@@ -32,7 +36,7 @@ import SwiftUI
     
     let checkBoxConfiguration: ToolInterfaceElementCheckBoxConfiguration
     
-    init(orientation: Orientation,
+    @MainActor init(orientation: Orientation,
          checkBoxConfiguration: ToolInterfaceElementCheckBoxConfiguration) {
         self.checkBoxConfiguration = checkBoxConfiguration
         super.init(orientation: orientation)
@@ -40,14 +44,6 @@ import SwiftUI
     
     override func refresh() {
         
-    }
-    
-    override func refreshDisabled() {
-        super.refreshDisabled()
-    }
-    
-    override func refreshEnabled() {
-        super.refreshEnabled()
     }
     
     func handleClicked() {

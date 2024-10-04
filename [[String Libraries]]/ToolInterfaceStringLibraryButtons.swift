@@ -9,613 +9,860 @@ import Foundation
 
 struct ToolInterfaceStringLibraryButtons {
     
+    static func buttonTextCloneJiggleLine1() -> String? {
+        GeneralStringLibrary.get(localized: "clone_jiggle_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextCloneJiggleLine2() -> String? {
+        GeneralStringLibrary.get(localized: "clone_jiggle_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextCloneGuideLine1() -> String? {
+        GeneralStringLibrary.get(localized: "clone_guide_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextCloneGuideLine2() -> String? {
+        GeneralStringLibrary.get(localized: "clone_guide_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    
+    static func buttonTextDeleteJiggleLine1() -> String? {
+        GeneralStringLibrary.get(localized: "delete_jiggle_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextDeleteJiggleLine2() -> String? {
+        GeneralStringLibrary.get(localized: "delete_jiggle_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextDeleteGuideLine1() -> String? {
+        GeneralStringLibrary.get(localized: "delete_guide_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextDeleteGuideLine2() -> String? {
+        GeneralStringLibrary.get(localized: "delete_guide_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    
+    
+    
+    
+    static func buttonTextDeleteJigglePointLine1() -> String? {
+        GeneralStringLibrary.get(localized: "delete_jiggle_point_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextDeleteJigglePointLine2() -> String? {
+        GeneralStringLibrary.get(localized: "delete_jiggle_point_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextDeleteGuidePointLine1() -> String? {
+        GeneralStringLibrary.get(localized: "delete_guide_point_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextDeleteGuidePointLine2() -> String? {
+        GeneralStringLibrary.get(localized: "delete_guide_point_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    
+    
+    
+    
+    static func buttonTextUnfreezeAllJigglesLine1() -> String? {
+        GeneralStringLibrary.get(localized: "unfreeze_all_jiggles_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextUnfreezeAllJigglesLine2() -> String? {
+        GeneralStringLibrary.get(localized: "unfreeze_all_jiggles_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextUnfreezeAllGuidesLine1() -> String? {
+        GeneralStringLibrary.get(localized: "unfreeze_all_guides_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextUnfreezeAllGuidesLine2() -> String? {
+        GeneralStringLibrary.get(localized: "unfreeze_all_guides_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextFreezeSelectedJiggleLine1() -> String? {
+        GeneralStringLibrary.get(localized: "freeze_selected_jiggle_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextFreezeSelectedJiggleLine2() -> String? {
+        GeneralStringLibrary.get(localized: "freeze_selected_jiggle_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextFreezeSelectedGuideLine1() -> String? {
+        GeneralStringLibrary.get(localized: "freeze_selected_guide_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextFreezeSelectedGuideLine2() -> String? {
+        GeneralStringLibrary.get(localized: "freeze_selected_guide_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    
+    
+    static func buttonTextFlipJiggleHLine1() -> String? {
+        GeneralStringLibrary.get(localized: "flip_jiggle_h_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextFlipJiggleHLine2() -> String? {
+        GeneralStringLibrary.get(localized: "flip_jiggle_h_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextFlipJiggleVLine1() -> String? {
+        GeneralStringLibrary.get(localized: "flip_jiggle_v_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextFlipJiggleVLine2() -> String? {
+        GeneralStringLibrary.get(localized: "flip_jiggle_v_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextFlipGuideHLine1() -> String? {
+        GeneralStringLibrary.get(localized: "flip_guide_h_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextFlipGuideHLine2() -> String? {
+        GeneralStringLibrary.get(localized: "flip_guide_h_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextFlipGuideVLine1() -> String? {
+        GeneralStringLibrary.get(localized: "flip_guide_v_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextFlipGuideVLine2() -> String? {
+        GeneralStringLibrary.get(localized: "flip_guide_v_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    
+    static func buttonTextZoomResetLine1() -> String? {
+        GeneralStringLibrary.get(localized: "zoom_reset_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextZoomResetLine2() -> String? {
+        GeneralStringLibrary.get(localized: "zoom_reset_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextZoomJiggleLine1() -> String? {
+        GeneralStringLibrary.get(localized: "zoom_jiggle_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextZoomJiggleLine2() -> String? {
+        GeneralStringLibrary.get(localized: "zoom_jiggle_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    
+    
+    
+    
+    static func buttonTextSelectPreviousGuideLine1() -> String? {
+        GeneralStringLibrary.get(localized: "select_previous_guide_line_1", table: "ToolInterfaceButtons")
+    }
+    static func buttonTextSelectPreviousGuideLine2() -> String? {
+        GeneralStringLibrary.get(localized: "select_previous_guide_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextSelectNextGuideLine1() -> String? {
+        GeneralStringLibrary.get(localized: "select_next_guide_line_1", table: "ToolInterfaceButtons")
+    }
+    static func buttonTextSelectNextGuideLine2() -> String? {
+        GeneralStringLibrary.get(localized: "select_next_guide_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextSelectPreviousGuidePointLine1() -> String? {
+        GeneralStringLibrary.get(localized: "select_previous_guide_point_line_1", table: "ToolInterfaceButtons")
+    }
+    static func buttonTextSelectPreviousGuidePointLine2() -> String? {
+        GeneralStringLibrary.get(localized: "select_previous_guide_point_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextSelectNextGuidePointLine1() -> String? {
+        GeneralStringLibrary.get(localized: "select_next_guide_point_line_1", table: "ToolInterfaceButtons")
+    }
+    static func buttonTextSelectNextGuidePointLine2() -> String? {
+        GeneralStringLibrary.get(localized: "select_next_guide_point_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextSelectPreviousJigglePointLine1() -> String? {
+        GeneralStringLibrary.get(localized: "select_previous_jiggle_point_line_1", table: "ToolInterfaceButtons")
+    }
+    static func buttonTextSelectPreviousJigglePointLine2() -> String? {
+        GeneralStringLibrary.get(localized: "select_previous_jiggle_point_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextSelectNextJigglePointLine1() -> String? {
+        GeneralStringLibrary.get(localized: "select_next_jiggle_point_line_1", table: "ToolInterfaceButtons")
+    }
+    static func buttonTextSelectNextJigglePointLine2() -> String? {
+        GeneralStringLibrary.get(localized: "select_next_jiggle_point_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    
+    
+    static func buttonTextTimeLineFlipAllLine1() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_flip_all_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextTimeLineFlipAllLine2() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_flip_all_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    
+    
+    
+    
+    
+    static func buttonTextTimeLineDampenLine1() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_dampen_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextTimeLineDampenLine2() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_dampen_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    
+    static func buttonTextTimeLineAmplifyLine1() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_amplify_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextTimeLineAmplifyLine2() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_amplify_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    
+    
+    
+    
+    
+    static func buttonTextTimeLineInvertHLine1() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_invert_h_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextTimeLineInvertHLine2() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_invert_h_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    
+    
+    
+    static func buttonTextTimeLineInvertVLine1() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_invert_v_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextTimeLineInvertVLine2() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_invert_v_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    
+    
+    static func buttonTextTimeLineResetCurveLine1() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_reset_curve_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextTimeLineResetCurveLine2() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_reset_curve_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    
+    static func buttonTextTimeLineBreakPointLine1() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_break_point_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextTimeLineBreakPointLine2() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_break_point_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    
+    
+    static func buttonTextTimeLineBreakTangentsLine1() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_break_tangent_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextTimeLineBreakTangentsLine2() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_break_tangent_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    
+    static func buttonTextTimeLineBreakXLine1() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_break_x_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextTimeLineBreakXLine2() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_break_x_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    
+    static func buttonTextTimeLineBreakYLine1() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_break_y_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextTimeLineBreakYLine2() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_break_y_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextTimeLineResetGraphLine1() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_reset_graph_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextTimeLineResetGraphLine2() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_reset_graph_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    
+    
+    
+    
+    
+    static func buttonTextTimeLineDupeAllLine1() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_dupe_all_channels_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextTimeLineDupeAllLine2() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_dupe_all_channels_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextTimeLineDupeDurationLine1() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_dupe_duration_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextTimeLineDupeDurationLine2() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_dupe_duration_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextTimeLineDupeCurrentChannelLine1() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_dupe_current_channel_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextTimeLineDupeCurrentChannelLine2() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_dupe_current_channel_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextTimeLineFlattenCurrentChannelLine1() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_flatten_current_channel_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextTimeLineFlattenCurrentChannelLine2() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_flatten_current_channel_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextTimeLineResetDefaultCurrentChannelLine1() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_reset_default_current_channel_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextTimeLineResetDefaultCurrentChannelLine2() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_reset_default_current_channel_line_2", table: "ToolInterfaceButtons")
+    }
+    
     static func buttonTextRotateJiggleRightLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "rotate_jiggle_right_line_1", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "rotate_jiggle_right_line_1", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextRotateJiggleRightLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "rotate_jiggle_right_line_2", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "rotate_jiggle_right_line_2", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextRotateJiggleLeftLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "rotate_jiggle_left_line_1", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "rotate_jiggle_left_line_1", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextRotateJiggleLeftLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "rotate_jiggle_left_line_2", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "rotate_jiggle_left_line_2", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextRotateGuideRightLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "rotate_Guide_right_line_1", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "rotate_guide_right_line_1", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextRotateGuideRightLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "rotate_Guide_right_line_2", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "rotate_guide_right_line_2", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextRotateGuideLeftLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "rotate_Guide_left_line_1", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "rotate_guide_left_line_1", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextRotateGuideLeftLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "rotate_Guide_left_line_2", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "rotate_guide_left_line_2", table: "ToolInterfaceButtons")
     }
     
-    static func buttonTextGenerateWeightRingsLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "break_tangent_point_line_1", table: "ToolInterfaceButtons"))
+    static func buttonTextGenerateGuidesLine1() -> String? {
+        GeneralStringLibrary.get(localized: "break_tangent_point_line_1", table: "ToolInterfaceButtons")
     }
-        
-    static func buttonTextGenerateWeightRingsLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "break_tangent_point_line_2", table: "ToolInterfaceButtons"))
+    
+    static func buttonTextGenerateGuidesLine2() -> String? {
+        GeneralStringLibrary.get(localized: "break_tangent_point_line_2", table: "ToolInterfaceButtons")
     }
-
-    static func buttonTextBreakTangentWeightRingPointLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "break_tangent_weight_ring_point_line_1", table: "ToolInterfaceButtons"))
+    
+    static func buttonTextBreakTangentGuidePointLine1() -> String? {
+        GeneralStringLibrary.get(localized: "break_tangent_weight_ring_point_line_1", table: "ToolInterfaceButtons")
     }
-        
-    static func buttonTextBreakTangentWeightRingPointLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "break_tangent_weight_ring_point_line_2", table: "ToolInterfaceButtons"))
+    
+    static func buttonTextBreakTangentGuidePointLine2() -> String? {
+        GeneralStringLibrary.get(localized: "break_tangent_weight_ring_point_line_2", table: "ToolInterfaceButtons")
     }
-
+    
     static func buttonTextBreakManualWeightGraphLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "break_tangent_weight_graph_line_1", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "break_tangent_weight_graph_line_1", table: "ToolInterfaceButtons")
     }
-        
+    
     static func buttonTextBreakManualWeightGraphLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "break_tangent_weight_graph_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextCloneJiggleLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "clone_jiggle_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextCloneJiggleLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "clone_jiggle_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextCloneWeightRingLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "clone_weight_ring_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextCloneWeightRingLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "clone_weight_ring_line_2", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "break_tangent_weight_graph_line_2", table: "ToolInterfaceButtons")
     }
     
-    static func buttonTextFlipHorizontalJiggleLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "flip_horizontal_jiggle_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextFlipHorizontalJiggleLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "flip_horizontal_jiggle_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextFlipHorizontalWeightRingLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "flip_horizontal_weight_ring_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextFlipHorizontalWeightRingLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "flip_horizontal_weight_ring_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextFlipVerticalJiggleLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "flip_vertical_jiggle_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextFlipVerticalJiggleLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "flip_vertical_jiggle_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextFlipVerticalWeightRingLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "flip_vertical_weight_ring_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextFlipVerticalWeightRingLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "flip_vertical_weight_ring_line_2", table: "ToolInterfaceButtons"))
-    }
-
     static func buttonTextFreezeOffAllJiggleLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "freeze_off_all_jiggle_line_1", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "freeze_off_all_jiggle_line_1", table: "ToolInterfaceButtons")
     }
-        
+    
     static func buttonTextFreezeOffAllJiggleLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "freeze_off_all_jiggle_line_2", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "freeze_off_all_jiggle_line_2", table: "ToolInterfaceButtons")
     }
-
-    static func buttonTextFreezeOffAllWeightRingLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "freeze_off_all_weight_ring_line_1", table: "ToolInterfaceButtons"))
+    
+    static func buttonTextFreezeOffAllGuideLine1() -> String? {
+        GeneralStringLibrary.get(localized: "freeze_off_all_weight_ring_line_1", table: "ToolInterfaceButtons")
     }
-        
-    static func buttonTextFreezeOffAllWeightRingLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "freeze_off_all_weight_ring_line_2", table: "ToolInterfaceButtons"))
+    
+    static func buttonTextFreezeOffAllGuideLine2() -> String? {
+        GeneralStringLibrary.get(localized: "freeze_off_all_weight_ring_line_2", table: "ToolInterfaceButtons")
     }
-
+    
     static func buttonTextFreezeOnAllJiggleLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "freeze_on_all_jiggle_line_1", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "freeze_on_all_jiggle_line_1", table: "ToolInterfaceButtons")
     }
     
-    static func buttonTextFreezeOnAllWeightRingLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "freeze_on_all_weight_ring_line_2", table: "ToolInterfaceButtons"))
+    static func buttonTextFreezeOnAllGuideLine2() -> String? {
+        GeneralStringLibrary.get(localized: "freeze_on_all_weight_ring_line_2", table: "ToolInterfaceButtons")
     }
-
+    
     static func buttonTextFreezeOnSelectedJiggleLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "freeze_on_selected_jiggle_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextFreezeOnSelectedJiggleLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "freeze_on_selected_jiggle_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextFreezeOnSelectedWeightRingLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "freeze_on_selected_weight_ring_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextFreezeOnSelectedWeightRingLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "freeze_on_selected_weight_ring_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextMainMenuLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "main_menu_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextMainMenuLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "main_menu_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextRandomizeWeightGraphLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "randomize_weight_graph_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextRandomizeWeightGraphLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "randomize_weight_graph_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextRecordCancelLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "record_cancel_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextRecordCancelLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "record_cancel_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextRecordMovieLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "record_movie_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextRecordMovieLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "record_movie_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextRedoLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "redo_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextRedoLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "redo_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextRemoveJiggleLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "remove_jiggle_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextRemoveJiggleLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "remove_jiggle_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextRemovePointLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "remove_point_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextRemovePointLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "remove_point_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextRemoveWeightRingLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "remove_weight_ring_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextRemoveWeightRingLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "remove_weight_ring_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextRemoveWeightRingPointLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "remove_weight_ring_point_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextRemoveWeightRingPointLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "remove_weight_ring_point_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextResetSwivelCameraLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "reset_swivel_camera_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextResetSwivelCameraLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "reset_swivel_camera_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextResetToDefaultLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "reset_to_default_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextResetToDefaultLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "reset_to_default_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextResetWeightGraphLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "reset_weight_graph_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextResetWeightGraphLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "reset_weight_graph_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextResetZoomLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "reset_zoom_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextResetZoomLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "reset_zoom_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextResetZoomSelectedJiggleLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "reset_zoom_selected_jiggle_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextResetZoomSelectedJiggleLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "reset_zoom_selected_jiggle_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextSelectNextJiggleLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "select_next_jiggle_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextSelectNextJiggleLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "select_next_jiggle_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextSelectNextPointLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "select_next_point_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextSelectNextPointLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "select_next_point_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextSelectNextWeightRingLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "select_next_weight_ring_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextSelectNextWeightRingLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "select_next_weight_ring_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextSelectNextWeightRingPointLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "select_next_weight_ring_point_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextSelectNextWeightRingPointLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "select_next_weight_ring_point_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextSelectPreviousJiggleLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "select_previous_jiggle_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextSelectPreviousJiggleLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "select_previous_jiggle_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextSelectPreviousPointLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "select_previous_point_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextSelectPreviousPointLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "select_previous_point_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextSelectPreviousWeightRingLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "select_previous_weight_ring_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextSelectPreviousWeightRingLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "select_previous_weight_ring_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextSelectPreviousWeightRingPointLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "select_previous_weight_ring_point_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextSelectPreviousWeightRingPointLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "select_previous_weight_ring_point_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextSendBackJiggleLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "send_back_jiggle_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextSendBackJiggleLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "send_back_jiggle_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextSendBackWeightRingLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "send_back_weight_ring_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextSendBackWeightRingLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "send_back_weight_ring_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextSendBackwardJiggleLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "send_backward_jiggle_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextSendBackwardJiggleLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "send_backward_jiggle_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextSendBackwardWeightRingLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "send_backward_weight_ring_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextSendBackwardWeightRingLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "send_backward_weight_ring_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextSendForwardJiggleLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "send_forward_jiggle_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextSendForwardJiggleLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "send_forward_jiggle_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextSendForwardWeightRingLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "send_forward_weight_ring_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextSendForwardWeightRingLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "send_forward_weight_ring_line_2", table: "ToolInterfaceButtons"))
-    }
-
-    static func buttonTextSendFrontJiggleLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "send_front_jiggle_line_1", table: "ToolInterfaceButtons"))
-    }
-        
-    static func buttonTextSendFrontJiggleLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "send_front_jiggle_line_2", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "freeze_on_selected_jiggle_line_1", table: "ToolInterfaceButtons")
     }
     
-    static func buttonTextSendFrontWeightRingLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "send_front_weight_ring_line_1", table: "ToolInterfaceButtons"))
+    static func buttonTextFreezeOnSelectedJiggleLine2() -> String? {
+        GeneralStringLibrary.get(localized: "freeze_on_selected_jiggle_line_2", table: "ToolInterfaceButtons")
     }
-        
-    static func buttonTextSendFrontWeightRingLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "send_front_weight_ring_line_2", table: "ToolInterfaceButtons"))
+    
+    static func buttonTextFreezeOnSelectedGuideLine1() -> String? {
+        GeneralStringLibrary.get(localized: "freeze_on_selected_weight_ring_line_1", table: "ToolInterfaceButtons")
     }
-
+    
+    static func buttonTextFreezeOnSelectedGuideLine2() -> String? {
+        GeneralStringLibrary.get(localized: "freeze_on_selected_weight_ring_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextMainMenuLine1() -> String? {
+        GeneralStringLibrary.get(localized: "main_menu_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextMainMenuLine2() -> String? {
+        GeneralStringLibrary.get(localized: "main_menu_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextRandomizeWeightGraphLine1() -> String? {
+        GeneralStringLibrary.get(localized: "randomize_weight_graph_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextRandomizeWeightGraphLine2() -> String? {
+        GeneralStringLibrary.get(localized: "randomize_weight_graph_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextRecordCancelLine1() -> String? {
+        GeneralStringLibrary.get(localized: "record_cancel_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextRecordCancelLine2() -> String? {
+        GeneralStringLibrary.get(localized: "record_cancel_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextRecordMovieLine1() -> String? {
+        GeneralStringLibrary.get(localized: "record_movie_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextRecordMovieLine2() -> String? {
+        GeneralStringLibrary.get(localized: "record_movie_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextRedoLine1() -> String? {
+        GeneralStringLibrary.get(localized: "redo_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextRedoLine2() -> String? {
+        GeneralStringLibrary.get(localized: "redo_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextRemoveJiggleLine1() -> String? {
+        GeneralStringLibrary.get(localized: "remove_jiggle_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextRemoveJiggleLine2() -> String? {
+        GeneralStringLibrary.get(localized: "remove_jiggle_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextRemovePointLine1() -> String? {
+        GeneralStringLibrary.get(localized: "remove_point_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextRemovePointLine2() -> String? {
+        GeneralStringLibrary.get(localized: "remove_point_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextResetSwivelCameraLine1() -> String? {
+        GeneralStringLibrary.get(localized: "reset_swivel_camera_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextResetSwivelCameraLine2() -> String? {
+        GeneralStringLibrary.get(localized: "reset_swivel_camera_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextResetToDefaultLine1() -> String? {
+        GeneralStringLibrary.get(localized: "reset_to_default_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextResetToDefaultLine2() -> String? {
+        GeneralStringLibrary.get(localized: "reset_to_default_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextResetWeightGraphLine1() -> String? {
+        GeneralStringLibrary.get(localized: "reset_weight_graph_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextResetWeightGraphLine2() -> String? {
+        GeneralStringLibrary.get(localized: "reset_weight_graph_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextResetZoomLine1() -> String? {
+        GeneralStringLibrary.get(localized: "reset_zoom_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextResetZoomLine2() -> String? {
+        GeneralStringLibrary.get(localized: "reset_zoom_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextResetZoomSelectedJiggleLine1() -> String? {
+        GeneralStringLibrary.get(localized: "reset_zoom_selected_jiggle_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextResetZoomSelectedJiggleLine2() -> String? {
+        GeneralStringLibrary.get(localized: "reset_zoom_selected_jiggle_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextSelectNextJiggleLine1() -> String? {
+        GeneralStringLibrary.get(localized: "select_next_jiggle_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextSelectNextJiggleLine2() -> String? {
+        GeneralStringLibrary.get(localized: "select_next_jiggle_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextSelectNextPointLine1() -> String? {
+        GeneralStringLibrary.get(localized: "select_next_point_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextSelectNextPointLine2() -> String? {
+        GeneralStringLibrary.get(localized: "select_next_point_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextSelectPreviousJiggleLine1() -> String? {
+        GeneralStringLibrary.get(localized: "select_previous_jiggle_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextSelectPreviousJiggleLine2() -> String? {
+        GeneralStringLibrary.get(localized: "select_previous_jiggle_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextSelectPreviousPointLine1() -> String? {
+        GeneralStringLibrary.get(localized: "select_previous_point_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextSelectPreviousPointLine2() -> String? {
+        GeneralStringLibrary.get(localized: "select_previous_point_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextSendBackJiggleLine1() -> String? {
+        GeneralStringLibrary.get(localized: "send_back_jiggle_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextSendBackJiggleLine2() -> String? {
+        GeneralStringLibrary.get(localized: "send_back_jiggle_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextSendBackGuideLine1() -> String? {
+        GeneralStringLibrary.get(localized: "send_back_weight_ring_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextSendBackGuideLine2() -> String? {
+        GeneralStringLibrary.get(localized: "send_back_weight_ring_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextSendBackwardJiggleLine1() -> String? {
+        GeneralStringLibrary.get(localized: "send_backward_jiggle_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextSendBackwardJiggleLine2() -> String? {
+        GeneralStringLibrary.get(localized: "send_backward_jiggle_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextSendBackwardGuideLine1() -> String? {
+        GeneralStringLibrary.get(localized: "send_backward_weight_ring_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextSendBackwardGuideLine2() -> String? {
+        GeneralStringLibrary.get(localized: "send_backward_weight_ring_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextSendForwardJiggleLine1() -> String? {
+        GeneralStringLibrary.get(localized: "send_forward_jiggle_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextSendForwardJiggleLine2() -> String? {
+        GeneralStringLibrary.get(localized: "send_forward_jiggle_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextSendForwardGuideLine1() -> String? {
+        GeneralStringLibrary.get(localized: "send_forward_weight_ring_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextSendForwardGuideLine2() -> String? {
+        GeneralStringLibrary.get(localized: "send_forward_weight_ring_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextSendFrontJiggleLine1() -> String? {
+        GeneralStringLibrary.get(localized: "send_front_jiggle_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextSendFrontJiggleLine2() -> String? {
+        GeneralStringLibrary.get(localized: "send_front_jiggle_line_2", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextSendFrontGuideLine1() -> String? {
+        GeneralStringLibrary.get(localized: "send_front_weight_ring_line_1", table: "ToolInterfaceButtons")
+    }
+    
+    static func buttonTextSendFrontGuideLine2() -> String? {
+        GeneralStringLibrary.get(localized: "send_front_weight_ring_line_2", table: "ToolInterfaceButtons")
+    }
+    
     static func buttonTextUndoLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "undo_line_1", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "undo_line_1", table: "ToolInterfaceButtons")
     }
-        
+    
     static func buttonTextUndoLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "undo_line_2", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "undo_line_2", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextResetCenterJiggleLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "reset_center_jiggle_line_1", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "reset_center_jiggle_line_1", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextResetCenterJiggleLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "reset_center_jiggle_line_2", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "reset_center_jiggle_line_2", table: "ToolInterfaceButtons")
     }
     
-    static func buttonTextResetCenterWeightRingLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "reset_center_weight_ring_line_1", table: "ToolInterfaceButtons"))
+    static func buttonTextResetCenterGuideLine1() -> String? {
+        GeneralStringLibrary.get(localized: "reset_center_weight_ring_line_1", table: "ToolInterfaceButtons")
     }
     
-    static func buttonTextResetCenterWeightRingLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "reset_center_weight_ring_line_2", table: "ToolInterfaceButtons"))
+    static func buttonTextResetCenterGuideLine2() -> String? {
+        GeneralStringLibrary.get(localized: "reset_center_weight_ring_line_2", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextResetCenterWeightGeometryLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "reset_center_weight_geometry_line_1", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "reset_center_weight_geometry_line_1", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextResetCenterWeightGeometryLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "reset_center_weight_geometry_line_2", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "reset_center_weight_geometry_line_2", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextPhoneExpandTopMenuLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "phone_expand_top_menu_line_1", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "phone_expand_top_menu_line_1", table: "ToolInterfaceButtons")
     }
-        
+    
     static func buttonTextPhoneExpandTopMenuLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "phone_expand_top_menu_line_2", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "phone_expand_top_menu_line_2", table: "ToolInterfaceButtons")
     }
-
+    
     static func buttonTextPhoneExpandBottomMenuLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "phone_expand_bottom_menu_line_1", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "phone_expand_bottom_menu_line_1", table: "ToolInterfaceButtons")
     }
-        
+    
     static func buttonTextPhoneExpandBottomMenuLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "phone_expand_bottom_menu_line_2", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "phone_expand_bottom_menu_line_2", table: "ToolInterfaceButtons")
     }
-
+    
     static func buttonTextPhoneCollapseTopMenuLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "phone_collapse_top_menu_line_1", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "phone_collapse_top_menu_line_1", table: "ToolInterfaceButtons")
     }
-        
+    
     static func buttonTextPhoneCollapseTopMenuLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "phone_collapse_top_menu_line_2", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "phone_collapse_top_menu_line_2", table: "ToolInterfaceButtons")
     }
-
+    
     static func buttonTextPhoneCollapseBottomMenuLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "phone_collapse_bottom_menu_line_1", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "phone_collapse_bottom_menu_line_1", table: "ToolInterfaceButtons")
     }
-        
+    
     static func buttonTextPhoneCollapseBottomMenuLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "phone_collapse_bottom_menu_line_2", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "phone_collapse_bottom_menu_line_2", table: "ToolInterfaceButtons")
     }
-
+    
     static func buttonTextPadCollapseMenuLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "pad_collapse_menu_line_1", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "pad_collapse_menu_line_1", table: "ToolInterfaceButtons")
     }
-        
+    
     static func buttonTextPadCollapseMenuLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "pad_collapse_menu_line_2", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "pad_collapse_menu_line_2", table: "ToolInterfaceButtons")
     }
-
+    
     static func buttonTextPadExpandMenuLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "pad_expand_menu_line_1", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "pad_expand_menu_line_1", table: "ToolInterfaceButtons")
     }
-        
+    
     static func buttonTextPadExpandMenuLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "pad_expand_menu_line_2", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "pad_expand_menu_line_2", table: "ToolInterfaceButtons")
     }
-
+    
     static func buttonTextExitViewModeLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "exit_view_mode_line_1", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "exit_view_mode_line_1", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextExitViewModeLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "exit_view_mode_line_2", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "exit_view_mode_line_2", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextExitWeightModeLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "exit_weight_mode_line_1", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "exit_weight_mode_line_1", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextExitWeightModeLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "exit_weight_mode_line_2", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "exit_weight_mode_line_2", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextExitZoomModeLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "exit_zoom_mode_line_1", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "exit_zoom_mode_line_1", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextExitZoomModeLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "exit_zoom_mode_line_2", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "exit_zoom_mode_line_2", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextExitRecordModeLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "exit_record_mode_line_1", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "exit_record_mode_line_1", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextExitRecordModeLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "exit_record_mode_line_2", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "exit_record_mode_line_2", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextGenerateTopographyLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "generate_topography_line_1", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "generate_topography_line_1", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextGenerateTopographyLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "generate_topography_line_2", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "generate_topography_line_2", table: "ToolInterfaceButtons")
     }
     
     
     static func buttonTextFreezeOnAllUnselectedJiggleLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "freeze_on_all_unselected_jiggle_line_1", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "freeze_on_all_unselected_jiggle_line_1", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextFreezeOnAllUnselectedJiggleLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "freeze_on_all_unselected_jiggle_line_2", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "freeze_on_all_unselected_jiggle_line_2", table: "ToolInterfaceButtons")
     }
     
-    static func buttonTextFreezeOnAllUnselectedWeightRingLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "freeze_on_all_unselected_weight_ring_line_1", table: "ToolInterfaceButtons"))
+    static func buttonTextFreezeOnAllUnselectedGuideLine1() -> String? {
+        GeneralStringLibrary.get(localized: "freeze_on_all_unselected_weight_ring_line_1", table: "ToolInterfaceButtons")
     }
     
-    static func buttonTextFreezeOnAllUnselectedWeightRingLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "freeze_on_all_unselected_weight_ring_line_2", table: "ToolInterfaceButtons"))
+    static func buttonTextFreezeOnAllUnselectedGuideLine2() -> String? {
+        GeneralStringLibrary.get(localized: "freeze_on_all_unselected_weight_ring_line_2", table: "ToolInterfaceButtons")
     }
     
     
     static func buttonTextResetSwivelZoomLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "reset_swivel_zoom_line_1", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "reset_swivel_zoom_line_1", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextResetSwivelZoomLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "reset_swivel_zoom_line_2", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "reset_swivel_zoom_line_2", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextResetSwivelFrontLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "reset_swivel_front_line_1", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "reset_swivel_front_line_1", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextResetSwivelFrontLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "reset_swivel_front_line_2", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "reset_swivel_front_line_2", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextResetSwivelBackLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "reset_swivel_back_line_1", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "reset_swivel_back_line_1", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextResetSwivelBackLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "reset_swivel_back_line_2", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "reset_swivel_back_line_2", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextResetSwivelLeftLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "reset_swivel_left_line_1", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "reset_swivel_left_line_1", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextResetSwivelLeftLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "reset_swivel_left_line_2", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "reset_swivel_left_line_2", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextResetSwivelRightLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "reset_swivel_right_line_1", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "reset_swivel_right_line_1", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextResetSwivelRightLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "reset_swivel_right_line_2", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "reset_swivel_right_line_2", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextResetSwivelTiltLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "reset_swivel_tilt_line_1", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "reset_swivel_tilt_line_1", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextResetSwivelTiltLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "reset_swivel_tilt_line_2", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "reset_swivel_tilt_line_2", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextIncreaseJigglePointsLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "increase_jiggle_points_line_1", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "increase_jiggle_points_line_1", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextIncreaseJigglePointsLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "increase_jiggle_points_line_2", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "increase_jiggle_points_line_2", table: "ToolInterfaceButtons")
     }
     
-    static func buttonTextIncreaseWeightRingPointsLine1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "increase_weight_ring_points_line_1", table: "ToolInterfaceButtons"))
+    static func buttonTextIncreaseGuidePointsLine1() -> String? {
+        GeneralStringLibrary.get(localized: "increase_weight_ring_points_line_1", table: "ToolInterfaceButtons")
     }
     
-    static func buttonTextIncreaseWeightRingPointsLine2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "increase_weight_ring_points_line_2", table: "ToolInterfaceButtons"))
+    static func buttonTextIncreaseGuidePointsLine2() -> String? {
+        GeneralStringLibrary.get(localized: "increase_weight_ring_points_line_2", table: "ToolInterfaceButtons")
     }
     
     static func buttonTextTest1Line1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "test_1_line_1", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "test_1_line_1", table: "ToolInterfaceButtons")
     }
-        
+    
     static func buttonTextTest1Line2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "test_1_line_2", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "test_1_line_2", table: "ToolInterfaceButtons")
     }
-
+    
     static func buttonTextTest2Line1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "test_2_line_1", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "test_2_line_1", table: "ToolInterfaceButtons")
     }
-        
+    
     static func buttonTextTest2Line2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "test_2_line_2", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "test_2_line_2", table: "ToolInterfaceButtons")
     }
-
+    
     static func buttonTextTest3Line1() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "test_3_line_1", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "test_3_line_1", table: "ToolInterfaceButtons")
     }
-        
+    
     static func buttonTextTest3Line2() -> String? {
-        GeneralStringLibrary.stringOrNull(String(localized: "test_3_line_2", table: "ToolInterfaceButtons"))
+        GeneralStringLibrary.get(localized: "test_3_line_2", table: "ToolInterfaceButtons")
     }
+    
 }

@@ -19,7 +19,13 @@ enum ToolActionPhaseSliceType {
     case setVideoRecordMode
     case setVideoExportMode
     case setZoomMode
-    case setAutoLoopMode
+    case setAnimationLoopsMode
+    case setAnimationContinuousMode
+    case setAnimationLoopsPage
+    
+    
+    
+    case setTimeLineMode
     case setStereoscopicMode
     
     case setExpandedDraggable
@@ -29,8 +35,7 @@ enum ToolActionPhaseSliceType {
     case setDocumentMode
     case setEditMode
     case setWeightMode
-    case setAnimationMode
-    case setViewMode
+    //case setAnimationMode
     
     case setDarkModeEnabled
     
@@ -53,9 +58,7 @@ enum ToolActionPhaseSliceType {
     
     case anyClosure
     
-    case setJiggleCentersEnabled
-    case setGuideCentersEnabled
-    
+    case setCreatorMode
     
 }
 
@@ -185,18 +188,59 @@ class ToolActionPhaseSliceSetZoomMode: ToolActionPhaseSlice {
     }
 }
 
-class ToolActionPhaseSliceSetAutoLoopMode: ToolActionPhaseSlice {
-    let isAutoLoopMode: Bool
-    init(isAutoLoopMode: Bool) {
-        self.isAutoLoopMode = isAutoLoopMode
-        super.init(toolActionPhaseSliceType: .setAutoLoopMode, sleepTicks: 0)
+class ToolActionPhaseSliceSetAnimationLoopsMode: ToolActionPhaseSlice {
+    let isAnimationLoopsMode: Bool
+    init(isAnimationLoopsMode: Bool) {
+        self.isAnimationLoopsMode = isAnimationLoopsMode
+        super.init(toolActionPhaseSliceType: .setAnimationLoopsMode, sleepTicks: 0)
     }
     deinit {
         if ApplicationController.DEBUG_DEALLOCS {
-            print("[--] ToolActionPhaseSliceSetAutoLoopMode")
+            print("[--] ToolActionPhaseSliceSetAnimationLoopsMode")
         }
     }
 }
+
+class ToolActionPhaseSliceSetAnimationContinuousMode: ToolActionPhaseSlice {
+    let isAnimationContinuousMode: Bool
+    init(isAnimationContinuousMode: Bool) {
+        self.isAnimationContinuousMode = isAnimationContinuousMode
+        super.init(toolActionPhaseSliceType: .setAnimationContinuousMode, sleepTicks: 0)
+    }
+    deinit {
+        if ApplicationController.DEBUG_DEALLOCS {
+            print("[--] ToolActionPhaseSliceSetAnimationContinuousMode")
+        }
+    }
+}
+
+class ToolActionPhaseSliceSetAnimationLoopsPage: ToolActionPhaseSlice {
+    let animationLoopsPage: Int
+    init(animationLoopsPage: Int) {
+        self.animationLoopsPage = animationLoopsPage
+        super.init(toolActionPhaseSliceType: .setAnimationLoopsPage, sleepTicks: 0)
+    }
+    deinit {
+        if ApplicationController.DEBUG_DEALLOCS {
+            print("[--] ToolActionPhaseSliceSetAnimationLoopsPage")
+        }
+    }
+}
+
+class ToolActionPhaseSliceSetTimeLineMode: ToolActionPhaseSlice {
+    let isTimeLineMode: Bool
+    init(isTimeLineMode: Bool) {
+        self.isTimeLineMode = isTimeLineMode
+        super.init(toolActionPhaseSliceType: .setTimeLineMode, sleepTicks: 0)
+    }
+    deinit {
+        if ApplicationController.DEBUG_DEALLOCS {
+            print("[--] ToolActionPhaseSliceSetTimeLineMode")
+        }
+    }
+}
+
+
 
 class ToolActionPhaseSliceSetStereoscopicMode: ToolActionPhaseSlice {
     let isStereoscopicMode: Bool
@@ -211,28 +255,15 @@ class ToolActionPhaseSliceSetStereoscopicMode: ToolActionPhaseSlice {
     }
 }
 
-class ToolActionPhaseSliceSetJiggleCentersEnabled: ToolActionPhaseSlice {
-    let isJiggleCentersEnabled: Bool
-    init(isJiggleCentersEnabled: Bool) {
-        self.isJiggleCentersEnabled = isJiggleCentersEnabled
-        super.init(toolActionPhaseSliceType: .setJiggleCentersEnabled, sleepTicks: 0)
+class ToolActionPhaseSliceSetCreatorMode: ToolActionPhaseSlice {
+    let creatorMode: CreatorMode
+    init(creatorMode: CreatorMode) {
+        self.creatorMode = creatorMode
+        super.init(toolActionPhaseSliceType: .setCreatorMode, sleepTicks: 0)
     }
     deinit {
         if ApplicationController.DEBUG_DEALLOCS {
-            print("[--] ToolActionPhaseSliceSetJiggleCentersEnabled")
-        }
-    }
-}
-
-class ToolActionPhaseSliceSetGuideCentersEnabled: ToolActionPhaseSlice {
-    let isGuideCentersEnabled: Bool
-    init(isGuideCentersEnabled: Bool) {
-        self.isGuideCentersEnabled = isGuideCentersEnabled
-        super.init(toolActionPhaseSliceType: .setGuideCentersEnabled, sleepTicks: 0)
-    }
-    deinit {
-        if ApplicationController.DEBUG_DEALLOCS {
-            print("[--] ToolActionPhaseSliceSetGuideCentersEnabled")
+            print("[--] ToolActionPhaseSliceSetCreatorMode")
         }
     }
 }
@@ -315,6 +346,7 @@ class ToolActionPhaseSliceSetWeightMode: ToolActionPhaseSlice {
     }
 }
 
+/*
 class ToolActionPhaseSliceSetAnimationMode: ToolActionPhaseSlice {
     let animationMode: AnimationMode
     init(animationMode: AnimationMode) {
@@ -327,19 +359,7 @@ class ToolActionPhaseSliceSetAnimationMode: ToolActionPhaseSlice {
         }
     }
 }
-
-class ToolActionPhaseSliceSetViewMode: ToolActionPhaseSlice {
-    let viewMode: ViewMode
-    init(viewMode: ViewMode) {
-        self.viewMode = viewMode
-        super.init(toolActionPhaseSliceType: .setViewMode, sleepTicks: 0)
-    }
-    deinit {
-        if ApplicationController.DEBUG_DEALLOCS {
-            print("[--] ToolActionPhaseSliceSetViewMode")
-        }
-    }
-}
+*/
 
 class ToolActionPhaseSliceSetRenderingMode: ToolActionPhaseSlice {
     let isRenderingRegularMode: Bool
@@ -360,11 +380,11 @@ class ToolActionPhaseSliceSetRenderingMode: ToolActionPhaseSlice {
 
 class ToolActionPhaseSliceJiggleMeshCommandAllJiggles: ToolActionPhaseSlice {
     let meshCommand: JiggleMeshCommand
-    let weightRingCommand: JiggleWeightRingCommand
+    let guideCommand: GuideCommand
     init(meshCommand: JiggleMeshCommand,
-         weightRingCommand: JiggleWeightRingCommand) {
+         guideCommand: GuideCommand) {
         self.meshCommand = meshCommand
-        self.weightRingCommand = weightRingCommand
+        self.guideCommand = guideCommand
         super.init(toolActionPhaseSliceType: .jiggleMeshCommandAllJiggles, sleepTicks: 2)
     }
     deinit {
@@ -376,13 +396,13 @@ class ToolActionPhaseSliceJiggleMeshCommandAllJiggles: ToolActionPhaseSlice {
 
 class ToolActionPhaseSliceJiggleMeshCommandOneJiggle: ToolActionPhaseSlice {
     let meshCommand: JiggleMeshCommand
-    let weightRingCommand: JiggleWeightRingCommand
+    let guideCommand: GuideCommand
     let jiggle: Jiggle
     init(meshCommand: JiggleMeshCommand,
-         weightRingCommand: JiggleWeightRingCommand,
+         guideCommand: GuideCommand,
          jiggle: Jiggle) {
         self.meshCommand = meshCommand
-        self.weightRingCommand = weightRingCommand
+        self.guideCommand = guideCommand
         self.jiggle = jiggle
         super.init(toolActionPhaseSliceType: .jiggleMeshCommandOneJiggles, sleepTicks: 2)
     }

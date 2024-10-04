@@ -14,7 +14,7 @@ class BottomMenuZoomView: UIView, MenuPartWithRowsConforming {
     func getNumberOfRows() -> Int {
         ToolInterfaceTheme.getBottomMenuZoomRowCount(orientation: toolInterfaceViewModel.orientation)
     }
-    func getWidthSource() -> ToolRowViewContent.WidthSource { .standard }
+    
     func getToolRow(at index: Int) -> ToolRow? {
         
         let shift = ToolInterfaceTheme.getTopMenuZoomRowCount(orientation: toolInterfaceViewModel.orientation)

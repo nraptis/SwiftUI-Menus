@@ -17,9 +17,10 @@ import Foundation
     
     override func refresh() {
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
-            if let selectedJiggle = jiggleViewModel.getSelectedJiggle() {
+            switch jiggleViewModel.jiggleDocument.creatorMode {
+            case .none:
                 refreshEnabled()
-            } else {
+            default:
                 refreshDisabled()
             }
         }

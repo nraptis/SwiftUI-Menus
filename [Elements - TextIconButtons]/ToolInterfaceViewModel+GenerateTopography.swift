@@ -9,7 +9,7 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-    func getGenerateTopographyTextIconButtonToolNode(neighborTypeLeft: ToolInterfaceElementType?,
+   @MainActor func getGenerateTopographyTextIconButtonToolNode(neighborTypeLeft: ToolInterfaceElementType?,
                                                      neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
         let orientation = jiggleViewModel.orientation

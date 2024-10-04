@@ -10,28 +10,24 @@ import SwiftUI
 
 @Observable class MagicalSexyButtonViewModel: MagicalViewModel {
     
-    var nameLabelPaddingLeft = 0
-    var nameLabelPaddingRight = 0
+    override class func getLayoutScheme() -> LayoutScheme.Type {
+        SexyButtonLayout.self
+    }
     
-    var iconPaddingLeft = 0
-    var iconPaddingRight = 0
+    @MainActor var nameLabelPaddingLeft = 0
+    @MainActor var nameLabelPaddingRight = 0
     
-    var universalPaddingLeft = 0
-    var universalPaddingRight = 0
+    @MainActor var iconPaddingLeft = 0
+    @MainActor var iconPaddingRight = 0
+    
+    @MainActor var universalPaddingLeft = 0
+    @MainActor var universalPaddingRight = 0
     
     let sexyButtonConfiguration: ToolInterfaceElementSexyButtonConfiguration
-    init(orientation: Orientation,
+    @MainActor init(orientation: Orientation,
          sexyButtonConfiguration: ToolInterfaceElementSexyButtonConfiguration) {
         self.sexyButtonConfiguration = sexyButtonConfiguration
         super.init(orientation: orientation)
-    }
-    
-    override func refreshDisabled() {
-        super.refreshDisabled()
-    }
-    
-    override func refreshEnabled() {
-        super.refreshEnabled()
     }
     
     func handleClicked() {

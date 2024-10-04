@@ -9,36 +9,22 @@ import SwiftUI
 
 struct ToolRowViewContent: View {
     
-    enum WidthSource {
-        case standard
-        case graphSideMenu
-    }
-    
     @Environment(ToolInterfaceLayoutRelay.self) var toolInterfaceLayoutRelay: ToolInterfaceLayoutRelay
     
     let toolRow: ToolRow
     let height: Int
-    let widthSource: WidthSource
     let orientation: Orientation
     init(toolRow: ToolRow,
-         widthSource: WidthSource,
          height: Int,
          orientation: Orientation) {
         self.toolRow = toolRow
-        self.widthSource = widthSource
         self.height = height
         self.orientation = orientation
     }
     
     var body: some View {
         
-        var width: Int
-        switch widthSource {
-        case .standard:
-            width = toolInterfaceLayoutRelay.menuWidthWithSafeArea - (toolInterfaceLayoutRelay.safeAreaLeft + toolInterfaceLayoutRelay.safeAreaRight)
-        case .graphSideMenu:
-            width = ToolInterfaceTheme.getGraphSideMenuWidth(orientation: orientation)
-        }
+        let width = toolInterfaceLayoutRelay.menuWidthWithSafeArea - (toolInterfaceLayoutRelay.safeAreaLeft + toolInterfaceLayoutRelay.safeAreaRight)
         
         return ZStack {
             GeometryReader { _ in
@@ -65,6 +51,16 @@ struct ToolRowViewContent: View {
     
     @ViewBuilder
     func getItemForElement(_ toolNode: ToolNode, _ toolInterfaceElement: ToolInterfaceElement) -> some View {
+        
+        if toolNode.element.type == .sexyCheckBox {
+            MagicalSexyCheckBox()
+                .environment((toolNode.magicalViewModel as! MagicalSexyCheckBoxViewModel))
+        }
+        
+        if toolNode.element.type == .sexyStepper {
+            MagicalSexyStepper()
+                .environment((toolNode.magicalViewModel as! MagicalSexyStepperViewModel))
+        }
         
         if toolNode.element.type == .sexyButton {
             MagicalSexyButton()

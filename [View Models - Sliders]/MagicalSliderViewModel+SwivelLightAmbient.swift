@@ -13,7 +13,7 @@ import Foundation
         
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
             if let selectedJiggle = jiggleViewModel.getSelectedJiggle() {
-                refreshEnabled(value: selectedJiggle.bouncePower)
+                refreshEnabled(value: selectedJiggle.bouncePowerAmount)
             } else {
                 refreshDisabled()
             }

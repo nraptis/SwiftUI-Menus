@@ -20,7 +20,6 @@ struct MagicalCreateSwatchSegmentButton: View {
     @Environment(MagicalCreateSwatchViewModel.self) var magicalCreateSwatchViewModel: MagicalCreateSwatchViewModel
     @Environment(MagicalCreateSwatchButtonViewModel.self) var magicalCreateSwatchButtonViewModel: MagicalCreateSwatchButtonViewModel
     let index: Int
-    let isSelected: Bool
     let isDarkMode: Bool
     let isEnabled: Bool
     let orientation: Orientation
@@ -50,13 +49,14 @@ struct MagicalCreateSwatchSegmentButton: View {
                    height: CGFloat(magicalCreateSwatchViewModel.layoutHeight))
         }
         .buttonStyle(MagicalCreateSwatchSegmentButtonButtonStyle(index: index,
-                                                            isSelected: isSelected,
-                                                            isDarkMode: isDarkMode,
-                                                            isEnabled: isEnabled,
-                                                            orientation: orientation,
-                                                            layoutSchemeFlavor: layoutSchemeFlavor,
-                                                            segmentedPickerPosition: segmentedPickerPosition,
-                                                            universalPaddingTop: universalPaddingTop,
-                                                            universalPaddingBottom: universalPaddingBottom))
+                                                                 isDarkMode: isDarkMode,
+                                                                 isEnabled: isEnabled,
+                                                                 orientation: orientation,
+                                                                 layoutSchemeFlavor: layoutSchemeFlavor,
+                                                                 segmentedPickerPosition: segmentedPickerPosition,
+                                                                 universalPaddingTop: universalPaddingTop,
+                                                                 universalPaddingBottom: universalPaddingBottom))
+        .disabled(!isEnabled)
+        
     }
 }

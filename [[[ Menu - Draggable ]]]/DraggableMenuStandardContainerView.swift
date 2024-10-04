@@ -9,7 +9,15 @@ import UIKit
 
 class DraggableMenuStandardContainerView: UIView, PrimaryMenuStandardContainerConforming {
     
-    var isGraphModeAnimating = false
+    func handleSelectedJiggleDidChange() {
+        timeLineContainerView.handleSelectedJiggleDidChange()
+    }
+    
+    func handleSelectedSwatchDidChange() {
+        timeLineContainerView.handleSelectedSwatchDidChange()
+    }
+    
+    var isModeAnimating = false
     
     lazy var separatorTop: UIView = {
         let result = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 512.0, height: 512.0))
@@ -53,6 +61,18 @@ class DraggableMenuStandardContainerView: UIView, PrimaryMenuStandardContainerCo
         return result
     }()
     
+    lazy var timeLineContainerViewLeftConstraint: NSLayoutConstraint = {
+        NSLayoutConstraint(item: timeLineContainerView, attribute: .left, relatedBy: .equal, toItem: self,
+                           attribute: .left, multiplier: 1.0, constant: 0.0)
+    }()
+    
+    lazy var timeLineContainerView: DraggableMenuTimeLineContainerView = {
+        let result = DraggableMenuTimeLineContainerView(toolInterfaceViewModel: toolInterfaceViewModel)
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.backgroundColor = ToolInterfaceTheme._toolbarBackground
+        return result
+    }()
+    
     lazy var separatorMiddle: UIView = {
         let result = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 512.0, height: 512.0))
         result.translatesAutoresizingMaskIntoConstraints = false
@@ -79,6 +99,9 @@ class DraggableMenuStandardContainerView: UIView, PrimaryMenuStandardContainerCo
         
         topMenuView.handleDarkModeDidChange()
         bottomMenuView.handleDarkModeDidChange()
+        
+        graphContainerView.handleDarkModeDidChange()
+        timeLineContainerView.handleDarkModeDidChange()
         
         if ApplicationController.isDarkModeEnabled {
             separatorTop.backgroundColor = ToolInterfaceTheme._separatorPadBarAdjacentDark
@@ -169,6 +192,18 @@ class DraggableMenuStandardContainerView: UIView, PrimaryMenuStandardContainerCo
                                                             toItem: nil, attribute: .notAnAttribute,
                                                             multiplier: 1.0, constant: CGFloat(topHalfHeight)))
         
+        addSubview(timeLineContainerView)
+        addConstraints([
+            timeLineContainerViewLeftConstraint,
+            NSLayoutConstraint(item: timeLineContainerView, attribute: .width, relatedBy: .equal, toItem: self,
+                               attribute: .width, multiplier: 1.0, constant: 0.0),
+            NSLayoutConstraint(item: timeLineContainerView, attribute: .top, relatedBy: .equal,
+                               toItem: self, attribute: .top, multiplier: 1.0, constant: CGFloat(toolRowY)),
+        ])
+        timeLineContainerView.addConstraint(NSLayoutConstraint(item: timeLineContainerView, attribute: .height, relatedBy: .equal,
+                                                            toItem: nil, attribute: .notAnAttribute,
+                                                            multiplier: 1.0, constant: CGFloat(topHalfHeight)))
+        
         toolRowY += topHalfHeight
         
         addSubview(separatorMiddle)
@@ -212,6 +247,7 @@ class DraggableMenuStandardContainerView: UIView, PrimaryMenuStandardContainerCo
                                                          attribute: .notAnAttribute, multiplier: 1.0, constant: CGFloat(rowSeparatorHeightBottom)))
         
         graphContainerView.setup(width: width)
+        timeLineContainerView.setup(width: width)
         topMenuView.setup(width: width)
         bottomMenuView.setup(width: width)
     }

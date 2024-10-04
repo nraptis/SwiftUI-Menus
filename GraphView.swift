@@ -8,14 +8,6 @@
 import UIKit
 import Combine
 
-extension CGPoint {
-    init(x: Float, y: Float) {
-        self.init(x: CGFloat(x),
-                  y: CGFloat(y))
-    }
-    
-}
-
 class GraphView: UIView {
     
     typealias GrabWeightCurveControlPointData = JiggleDocumentPublisherLibrary.GrabWeightCurveControlPointData
@@ -55,44 +47,61 @@ class GraphView: UIView {
         return UIImage()
     }()
     
-    lazy var weightCurveDotFillUnselected: UIImage = {
-        if let tinted = tintedCircle(image: mediumDot, tintColor: ToolInterfaceTheme._graphControlPointUnselected) {
+    lazy var weightCurveDotFillDark: UIImage = {
+        if let tinted = tintedCircle(image: mediumDot,
+                                     tintColor: ToolInterfaceTheme._graphPointFillDark) {
             return tinted
         }
         return mediumDot
     }()
     
-    lazy var weightCurveDotFillSelected: UIImage = {
-        if let tinted = tintedCircle(image: mediumDot, tintColor: ToolInterfaceTheme._graphControlPointSelected) {
+    lazy var weightCurveDotFillLight: UIImage = {
+        if let tinted = tintedCircle(image: mediumDot,
+                                     tintColor: ToolInterfaceTheme._graphPointFillLight) {
             return tinted
         }
         return mediumDot
     }()
     
-    lazy var weightCurveDotStroke: UIImage = {
-        if let tinted = tintedCircle(image: mediumDotStroke, tintColor: ToolInterfaceTheme._graphStroke) {
+    lazy var weightCurveDotStrokeDark: UIImage = {
+        if let tinted = tintedCircle(image: mediumDotStroke,
+                                     tintColor: ToolInterfaceTheme._graphLineStrokeDark) {
             return tinted
         }
         return mediumDot
     }()
     
-    
-    lazy var tanDotFillUnselected: UIImage = {
-        if let tinted = tintedCircle(image: smallDot, tintColor: ToolInterfaceTheme._graphTanPointUnselected) {
+    lazy var weightCurveDotStrokeLight: UIImage = {
+        if let tinted = tintedCircle(image: mediumDotStroke,
+                                     tintColor: ToolInterfaceTheme._graphLineStrokeLight) {
             return tinted
         }
         return mediumDot
     }()
     
-    lazy var tanDotFillSelected: UIImage = {
-        if let tinted = tintedCircle(image: smallDot, tintColor: ToolInterfaceTheme._graphTanPointSelected) {
+    lazy var tanDotFillDark: UIImage = {
+        if let tinted = tintedCircle(image: smallDot, tintColor: ToolInterfaceTheme._graphTanPointFillDark) {
             return tinted
         }
         return mediumDot
     }()
     
-    lazy var tanDotStroke: UIImage = {
-        if let tinted = tintedCircle(image: smallDotStroke, tintColor: ToolInterfaceTheme._graphStroke) {
+    lazy var tanDotFillLight: UIImage = {
+        if let tinted = tintedCircle(image: smallDot, tintColor: ToolInterfaceTheme._graphTanPointFillLight) {
+            return tinted
+        }
+        return mediumDot
+    }()
+    
+    lazy var tanDotStrokeDark: UIImage = {
+        if let tinted = tintedCircle(image: smallDotStroke, tintColor: ToolInterfaceTheme._graphLineStrokeDark) {
+            return tinted
+        }
+        return mediumDot
+    }()
+    
+    lazy var tanDotStrokeLight: UIImage = {
+        if let tinted = tintedCircle(image: smallDotStroke, tintColor: ToolInterfaceTheme._graphLineStrokeLight) {
             return tinted
         }
         return mediumDot
@@ -162,8 +171,9 @@ class GraphView: UIView {
     var selectedWeightCurveControlTanStartTouchY = Float(0.0)
     var selectedWeightCurveControlTanStartHandleX = Float(0.0)
     var selectedWeightCurveControlTanStartHandleY = Float(0.0)
+    var selectedWeightCurveControlTanStartHandleOffsetX = Float(0.0)
+    var selectedWeightCurveControlTanStartHandleOffsetY = Float(0.0)
     var selectedWeightCurveControlTanType = TanType.in
-    
     
     weak var weightCurve: WeightCurve?
     weak var jiggle: Jiggle?
@@ -199,42 +209,18 @@ class GraphView: UIView {
         
 
         let floodPath = UIBezierPath(roundedRect: bounds, cornerRadius: CGFloat(cornerRadius))
-        
-        /*
-        context.saveGState()
-        context.addPath(rectPath.cgPath)
-        context.addPath(cutOutPath.cgPath)
-        context.setFillColor(ToolInterfaceTheme._toolbarBackground.cgColor)
-        //context.setFillColor(UIColor.red.withAlphaComponent(0.5).cgColor)
-        
-        context.fillPath(using: .evenOdd)
-        context.restoreGState()
-        */
-        
+
         context.saveGState()
         context.addPath(floodPath.cgPath)
-        context.setFillColor(UIColor(red: 0.0,
-                                     green: 0.0,
-                                     blue: 0.0,
-                                     alpha: 0.35).cgColor)
+        
+        if ApplicationController.isDarkModeEnabled {
+            context.setFillColor(ToolInterfaceTheme._graphBackgroundDark.cgColor)
+        } else {
+            context.setFillColor(ToolInterfaceTheme._graphBackgroundLight.cgColor)
+        }
+        
         context.fillPath()
         context.restoreGState()
-        
-        //context.saveGState()
-        //context.setFillColor(ToolInterfaceTheme._graphBackground.cgColor)
-        //context.fill([bounds])
-        //context.restoreGState()
-        
-        //static let _graphStroke = UIColor(red: 0.3125, green: 0.4125, blue: 0.515, alpha: 0.0)
-        
-        //static let _graphCurveLineFill = UIColor(red: 0.25, green: 0.78, blue: 0.65, alpha: 0.0)
-        
-        //static let _graphTanPointUnselected = UIColor(red: 0.65, green: 0.25, blue: 0.25, alpha: 0.0)
-        //static let _graphTanPointSelected = UIColor(red: 1.0, green: 0.25, blue: 0.25, alpha: 0.0)
-        
-        //static let _graphControlPointUnselected = UIColor(red: 0.25, green: 0.75, blue: 0.25, alpha: 0.0)
-        //static let _graphControlPointSelected = UIColor(red: 0.25, green: 1.0, blue: 0.25, alpha: 0.0)
-        
         
         guard let jiggleScene = jiggleScene else {
             drawEmpty(context: context)
@@ -264,6 +250,8 @@ class GraphView: UIView {
         let minY = paddingV
         let width = (frameWidth - paddingH - paddingH)
         let height = (frameHeight - paddingV - paddingV)
+        let maxX = minX + width
+        let maxY = minY + height
         
         var position = Float(0.0)
         let x = minX + spline.getX(0.0) * width * splineFactor
@@ -279,11 +267,13 @@ class GraphView: UIView {
         let thresholdSquared = (threshold * threshold)
         
         while position <= spline.maxPos {
-            let x = minX + spline.getX(position) * width * splineFactor
-            let y = minY + spline.getY(position) * height
+            var x = minX + spline.getX(position) * width * splineFactor
+            var y = minY + spline.getY(position) * height
+            
             let diffX1 = x - lastX
             let diffY1 = y - lastY
             let distanceSquared1 = diffX1 * diffX1 + diffY1 * diffY1
+            
             if distanceSquared1 > thresholdSquared {
                 let diffX2 = x - finalX
                 let diffY2 = y - finalY
@@ -291,6 +281,12 @@ class GraphView: UIView {
                 if distanceSquared2 > thresholdSquared {
                     lastX = x
                     lastY = y
+                    
+                    if x < minX { x = minX }
+                    if x > maxX { x = maxX }
+                    if y < minY { y = minY }
+                    if y > maxY { y = maxY }
+                    
                     splinePoints.append(CGPoint(x: x, y: y))
                 }
             }
@@ -298,7 +294,55 @@ class GraphView: UIView {
         }
         splinePoints.append(CGPoint(x: finalX, y: finalY))
         
-        var tanPointPairs = [(CGPoint, CGPoint)]()
+        //var tanPointPairs = [(CGPoint, CGPoint)]()
+        var tanPointPairsIn = [(CGPoint, CGPoint)]()
+        var tanPointPairsOut = [(CGPoint, CGPoint)]()
+        
+        
+        
+        let controlPointCount = weightCurve.weightCurveControlPointCount
+        let controlPointCount1 = (controlPointCount - 1)
+        
+        for controlPointIndex in 0..<controlPointCount {
+            let controlPoint = weightCurve.weightCurveControlPoints[controlPointIndex]
+            let tanHandles = controlPoint.getTanHandles(index: controlPointIndex,
+                                                        count: controlPointCount,
+                                                        frameWidth: frameWidth,
+                                                        frameHeight: frameHeight,
+                                                        paddingH: paddingH,
+                                                        paddingV: paddingV)
+            let x = controlPoint.getX(index: controlPointIndex,
+                                      count: controlPointCount,
+                                      frameWidth: frameWidth,
+                                      paddingH: paddingH)
+            let y = controlPoint.getY(index: controlPointIndex,
+                                      count: controlPointCount,
+                                      frameHeight: frameHeight,
+                                      paddingV: paddingV)
+            let center = CGPoint(x: x, y: y)
+            if controlPointIndex != 0 {
+                var pointIn = Point(x: tanHandles.inX, y: tanHandles.inY)
+                if pointIn.x < minX { pointIn.x = minX }
+                if pointIn.x > maxX { pointIn.x = maxX }
+                if pointIn.y < minY { pointIn.y = minY }
+                if pointIn.y > maxY { pointIn.y = maxY }
+                tanPointPairsIn.append((pointIn.cgPoint, center))
+            }
+            
+            if controlPointIndex != controlPointCount1 {
+                var pointOut = Point(x: tanHandles.outX, y: tanHandles.outY)
+                if pointOut.x < minX { pointOut.x = minX }
+                if pointOut.x > maxX { pointOut.x = maxX }
+                if pointOut.y < minY { pointOut.y = minY }
+                if pointOut.y > maxY { pointOut.y = maxY }
+                tanPointPairsOut.append((center, pointOut.cgPoint))
+            }
+
+        }
+        
+        /*
+        let weightCurveControlPointCount = weightCurve.weightCurveControlPointCount
+        let weightCurveControlPointCount1 = (weightCurveControlPointCount - 1)
         for weightCurveControlPointIndex in 0..<weightCurve.weightCurveControlPointCount {
             let weightCurveControlPoint = weightCurve.weightCurveControlPoints[weightCurveControlPointIndex]
             let tanHandles = weightCurveControlPoint.getTanHandles(index: weightCurveControlPointIndex,
@@ -309,8 +353,7 @@ class GraphView: UIView {
                                                                    paddingV: paddingV)
             
             var pointIn = Point(x: tanHandles.inX, y: tanHandles.inY)
-            let pointOut = Point(x: tanHandles.outX, y: tanHandles.outY)
-            
+            var pointOut = Point(x: tanHandles.outX, y: tanHandles.outY)
             
             if weightCurveControlPointIndex == 0 {
                 let index = weightCurveControlPointIndex
@@ -326,9 +369,24 @@ class GraphView: UIView {
                 pointIn.x = x
                 pointIn.y = y
             }
+            if weightCurveControlPointIndex == weightCurveControlPointCount1 {
+                let index = weightCurveControlPointIndex
+                let count = weightCurve.weightCurveControlPointCount
+                let x = weightCurveControlPoint.getX(index: index,
+                                                     count: count,
+                                                     frameWidth: frameWidth,
+                                                     paddingH: paddingH)
+                let y = weightCurveControlPoint.getY(index: index,
+                                                     count: count,
+                                                     frameHeight: frameHeight,
+                                                     paddingV: paddingV)
+                pointOut.x = x
+                pointOut.y = y
+            }
             
             tanPointPairs.append((pointIn.cgPoint, pointOut.cgPoint))
         }
+        */
         
         var controlPoints = [CGPoint]()
         for weightCurveControlPointIndex in 0..<weightCurve.weightCurveControlPointCount {
@@ -348,7 +406,11 @@ class GraphView: UIView {
         
         context.saveGState()
         context.setLineWidth(ToolInterfaceTheme.graphCurveStrokeThickness)
-        context.setStrokeColor(ToolInterfaceTheme._graphStroke.cgColor)
+        if ApplicationController.isDarkModeEnabled {
+            context.setStrokeColor(ToolInterfaceTheme._graphLineStrokeDark.cgColor)
+        } else {
+            context.setStrokeColor(ToolInterfaceTheme._graphLineStrokeLight.cgColor)
+        }
         context.setLineCap(.butt)
         if splinePoints.count > 0 {
             for splineIndex in 0..<splinePoints.count {
@@ -365,7 +427,12 @@ class GraphView: UIView {
         
         context.saveGState()
         context.setLineWidth(ToolInterfaceTheme.graphCurveFillThickness)
-        context.setStrokeColor(ToolInterfaceTheme._graphCurveLineFill.cgColor)
+        //context.setStrokeColor(ToolInterfaceTheme._graphCurveLineFill.cgColor)
+        if ApplicationController.isDarkModeEnabled {
+            context.setStrokeColor(ToolInterfaceTheme._graphLineFillDark.cgColor)
+        } else {
+            context.setStrokeColor(ToolInterfaceTheme._graphLineFillLight.cgColor)
+        }
         context.setLineCap(.butt)
         if splinePoints.count > 0 {
             for splineIndex in 0..<splinePoints.count {
@@ -381,12 +448,16 @@ class GraphView: UIView {
         context.strokePath()
         context.restoreGState()
         
-        for tanPointPair in tanPointPairs {
+        for tanPointPair in tanPointPairsIn {
             let point1 = tanPointPair.0
             let point2 = tanPointPair.1
             context.saveGState()
             context.setLineWidth(ToolInterfaceTheme.graphTanLineStrokeThickness)
-            context.setStrokeColor(ToolInterfaceTheme._graphStroke.cgColor)
+            if ApplicationController.isDarkModeEnabled {
+                context.setStrokeColor(ToolInterfaceTheme._graphLineStrokeDark.cgColor)
+            } else {
+                context.setStrokeColor(ToolInterfaceTheme._graphLineStrokeLight.cgColor)
+            }
             context.setLineCap(.butt)
             context.move(to: point1)
             context.addLine(to: point2)
@@ -394,12 +465,33 @@ class GraphView: UIView {
             context.restoreGState()
         }
         
-        for tanPointPair in tanPointPairs {
+        for tanPointPair in tanPointPairsOut {
+            let point1 = tanPointPair.0
+            let point2 = tanPointPair.1
+            context.saveGState()
+            context.setLineWidth(ToolInterfaceTheme.graphTanLineStrokeThickness)
+            if ApplicationController.isDarkModeEnabled {
+                context.setStrokeColor(ToolInterfaceTheme._graphLineStrokeDark.cgColor)
+            } else {
+                context.setStrokeColor(ToolInterfaceTheme._graphLineStrokeLight.cgColor)
+            }
+            context.setLineCap(.butt)
+            context.move(to: point1)
+            context.addLine(to: point2)
+            context.strokePath()
+            context.restoreGState()
+        }
+        
+        for tanPointPair in tanPointPairsIn {
             let point1 = tanPointPair.0
             let point2 = tanPointPair.1
             context.saveGState()
             context.setLineWidth(ToolInterfaceTheme.graphTanLineFillThickness)
-            context.setStrokeColor(ToolInterfaceTheme._graphTanLineFill.cgColor)
+            if ApplicationController.isDarkModeEnabled {
+                context.setStrokeColor(ToolInterfaceTheme._graphTanLineFillDark.cgColor)
+            } else {
+                context.setStrokeColor(ToolInterfaceTheme._graphTanLineFillLight.cgColor)
+            }
             context.setLineCap(.butt)
             context.move(to: point1)
             context.addLine(to: point2)
@@ -407,74 +499,83 @@ class GraphView: UIView {
             context.restoreGState()
         }
         
-        let weightCurveControlPointCount = weightCurve.weightCurveControlPointCount
-        let weightCurveControlPointCount1 = weightCurveControlPointCount - 1
-        for weightCurveControlPointIndex in 0..<weightCurveControlPointCount {
-            let tanPointPair = tanPointPairs[weightCurveControlPointIndex]
+        for tanPointPair in tanPointPairsOut {
             let point1 = tanPointPair.0
             let point2 = tanPointPair.1
-            if weightCurveControlPointIndex != 0 {
-                draw(context: context,
-                     image: tanDotStroke,
-                     point: point1)
-            }
-            if weightCurveControlPointIndex != weightCurveControlPointCount1 {
-                draw(context: context,
-                     image: tanDotStroke,
-                     point: point2)
-            }
-        }
-
-        for weightCurveControlPointIndex in 0..<weightCurveControlPointCount {
-            let tanPointPair = tanPointPairs[weightCurveControlPointIndex]
-            let point1 = tanPointPair.0
-            let point2 = tanPointPair.1
-            if weightCurveControlPointIndex == jiggle.selectedWeightCurveControlIndex {
-                if weightCurveControlPointIndex != 0 {
-                    draw(context: context,
-                         image: tanDotFillSelected,
-                         point: point1)
-                }
-                if weightCurveControlPointIndex != weightCurveControlPointCount1 {
-                    draw(context: context,
-                         image: tanDotFillSelected,
-                         point: point2)
-                }
+            context.saveGState()
+            context.setLineWidth(ToolInterfaceTheme.graphTanLineFillThickness)
+            if ApplicationController.isDarkModeEnabled {
+                context.setStrokeColor(ToolInterfaceTheme._graphTanLineFillDark.cgColor)
             } else {
-                if weightCurveControlPointIndex != 0 {
-                    draw(context: context,
-                         image: tanDotFillUnselected,
-                         point: point1)
-                }
-                if weightCurveControlPointIndex != weightCurveControlPointCount1 {
-                    draw(context: context,
-                         image: tanDotFillUnselected,
-                         point: point2)
-                }
+                context.setStrokeColor(ToolInterfaceTheme._graphTanLineFillLight.cgColor)
             }
+            context.setLineCap(.butt)
+            context.move(to: point1)
+            context.addLine(to: point2)
+            context.strokePath()
+            context.restoreGState()
+        }
+        
+        let tanDotStroke: UIImage
+        if ApplicationController.isDarkModeEnabled {
+            tanDotStroke = tanDotStrokeDark
+        } else {
+            tanDotStroke = tanDotStrokeLight
+        }
+        
+        for tanPointPair in tanPointPairsIn {
+            draw(context: context,
+                 image: tanDotStroke,
+                 point: tanPointPair.0)
+        }
+        
+        for tanPointPair in tanPointPairsOut {
+            draw(context: context,
+                 image: tanDotStroke,
+                 point: tanPointPair.1)
         }
 
+        let tanDotFill: UIImage
+        if ApplicationController.isDarkModeEnabled {
+            tanDotFill = tanDotFillDark
+        } else {
+            tanDotFill = tanDotFillLight
+        }
+        for tanPointPair in tanPointPairsIn {
+            draw(context: context,
+                 image: tanDotFill,
+                 point: tanPointPair.0)
+        }
+        
+        for tanPointPair in tanPointPairsOut {
+            draw(context: context,
+                 image: tanDotFill,
+                 point: tanPointPair.1)
+        }
         
         
-        
-        
+        let weightCurveDotStroke: UIImage
+        if ApplicationController.isDarkModeEnabled {
+            weightCurveDotStroke = weightCurveDotStrokeDark
+        } else {
+            weightCurveDotStroke = weightCurveDotStrokeLight
+        }
         for controlPoint in controlPoints {
             draw(context: context,
                  image: weightCurveDotStroke,
                  point: controlPoint)
         }
         
-        for weightCurveControlPointIndex in 0..<weightCurve.weightCurveControlPointCount {
-            let point = controlPoints[weightCurveControlPointIndex]
-            if weightCurveControlPointIndex == jiggle.selectedWeightCurveControlIndex {
-                draw(context: context,
-                     image: weightCurveDotFillSelected,
-                     point: point)
-            } else {
-                draw(context: context,
-                     image: weightCurveDotFillUnselected,
-                     point: point)
-            }
+        let weightCurveDotFill: UIImage
+        if ApplicationController.isDarkModeEnabled {
+            weightCurveDotFill = weightCurveDotFillDark
+        } else {
+            weightCurveDotFill = weightCurveDotFillLight
+        }
+        for controlPoint in controlPoints {
+            draw(context: context,
+                 image: weightCurveDotFill,
+                 point: controlPoint)
         }
     }
     
@@ -638,6 +739,13 @@ class GraphView: UIView {
             }
         }
         
+        let minX = paddingH
+        let minY = paddingV
+        let width = (frameWidth - paddingH - paddingH)
+        let height = (frameHeight - paddingV - paddingV)
+        let maxX = minX + width
+        let maxY = minY + height
+        
         let selectDepthControlTanDistanceThreshold = JiggleDocument.selectDepthControlTanDistanceThreshold
         var bestControlTanDistance = selectDepthControlTanDistanceThreshold * selectDepthControlTanDistanceThreshold
         var bestControlTanType = TanType.in
@@ -655,12 +763,28 @@ class GraphView: UIView {
                                                                    paddingH: paddingH,
                                                                    paddingV: paddingV)
             
-            let diffInX = tanHandles.inX - point.x
-            let diffInY = tanHandles.inY - point.y
+            var inX = tanHandles.inX
+            if inX < minX { inX = minX }
+            if inX > maxX { inX = maxX }
+            
+            var inY = tanHandles.inY
+            if inY < minY { inY = minY }
+            if inY > maxY { inY = maxY }
+            
+            var outX = tanHandles.outX
+            if outX < minX { outX = minX }
+            if outX > maxX { outX = maxX }
+            
+            var outY = tanHandles.outY
+            if outY < minY { outY = minY }
+            if outY > maxY { outY = maxY }
+            
+            let diffInX = inX - point.x
+            let diffInY = inY - point.y
             let distIn = diffInX * diffInX + diffInY * diffInY
             
-            let diffOutX = tanHandles.outX - point.x
-            let diffOutY = tanHandles.outY - point.y
+            let diffOutX = outX - point.x
+            let diffOutY = outY - point.y
             let distOut = diffOutX * diffOutX + diffOutY * diffOutY
                  
             if weightCurveControlPointIndex != 0 {
@@ -703,7 +827,7 @@ class GraphView: UIView {
                 _grabWeightCurveControlPointData.jiggleIndex = jiggleDocument.getJiggleIndex(jiggle)
                 _grabWeightCurveControlPointData.isFirstControlPoint = jiggle.getSelectedWeightCurveGraphIndexIsFirstControlPoint()
                 _grabWeightCurveControlPointData.isLastControlPoint = jiggle.getSelectedWeightCurveGraphIndexIsLastControlPoint()
-                _grabWeightCurveControlPointData.weightRingIndex = jiggle.getSelectedWeightCurveGraphIndexWeightRingIndex()
+                _grabWeightCurveControlPointData.guideIndex = jiggle.getSelectedWeightCurveGraphIndexGuideIndex()
                 
             }
         }
@@ -717,19 +841,68 @@ class GraphView: UIView {
                                                                    frameHeight: frameHeight,
                                                                    paddingH: paddingH,
                                                                    paddingV: paddingV)
+            
+            var inX = tanHandles.inX
+            if inX < minX { inX = minX }
+            if inX > maxX { inX = maxX }
+            
+            var inY = tanHandles.inY
+            if inY < minY { inY = minY }
+            if inY > maxY { inY = maxY }
+            
+            var outX = tanHandles.outX
+            if outX < minX { outX = minX }
+            if outX > maxX { outX = maxX }
+            
+            var outY = tanHandles.outY
+            if outY < minY { outY = minY }
+            if outY > maxY { outY = maxY }
+            
             selectedWeightCurveControlTanTouch = touch
             selectedWeightCurveControlTanStartTouchX = point.x
             selectedWeightCurveControlTanStartTouchY = point.y
             switch bestControlTanType {
             case .in:
-                selectedWeightCurveControlTanStartHandleX = tanHandles.inX
-                selectedWeightCurveControlTanStartHandleY = tanHandles.inY
+                selectedWeightCurveControlTanStartHandleX = inX
+                selectedWeightCurveControlTanStartHandleY = inY
+                
+                selectedWeightCurveControlTanStartHandleOffsetX = tanHandles.inX - inX
+                selectedWeightCurveControlTanStartHandleOffsetY = tanHandles.inY - inY
+                
                 selectedWeightCurveControlTanType = .in
             case .out:
-                selectedWeightCurveControlTanStartHandleX = tanHandles.outX
-                selectedWeightCurveControlTanStartHandleY = tanHandles.outY
+                selectedWeightCurveControlTanStartHandleX = outX
+                selectedWeightCurveControlTanStartHandleY = outY
+                
+                selectedWeightCurveControlTanStartHandleOffsetX = tanHandles.outX - outX
+                selectedWeightCurveControlTanStartHandleOffsetY = tanHandles.outY - outY
+                
                 selectedWeightCurveControlTanType = .out
             }
+            
+            /*
+            selectedTimeLineControlTanTouch = touch
+            selectedTimeLineControlTanStartTouchX = point.x
+            selectedTimeLineControlTanStartTouchY = point.y
+            switch bestControlTanType {
+            case .in:
+                selectedTimeLineControlTanStartHandleX = inX
+                selectedTimeLineControlTanStartHandleY = inY
+                
+                selectedTimeLineControlTanStartHandleOffsetX = tanHandles.inX - inX
+                selectedTimeLineControlTanStartHandleOffsetY = tanHandles.inY - inY
+                
+                selectedTimeLineControlTanType = .in
+            case .out:
+                selectedTimeLineControlTanStartHandleX = outX
+                selectedTimeLineControlTanStartHandleY = outY
+                
+                selectedTimeLineControlTanStartHandleOffsetX = tanHandles.outX - outX
+                selectedTimeLineControlTanStartHandleOffsetY = tanHandles.outY - outY
+                
+                selectedTimeLineControlTanType = .out
+            }
+        */
 
             _handleGraphSelection(graphIndex: bestControlTanIndex)
             
@@ -746,7 +919,7 @@ class GraphView: UIView {
                 _grabWeightCurveControlTanHandleData.jiggleIndex = jiggleDocument.getJiggleIndex(jiggle)
                 _grabWeightCurveControlTanHandleData.isFirstControlPoint = jiggle.getSelectedWeightCurveGraphIndexIsFirstControlPoint()
                 _grabWeightCurveControlTanHandleData.isLastControlPoint = jiggle.getSelectedWeightCurveGraphIndexIsLastControlPoint()
-                _grabWeightCurveControlTanHandleData.weightRingIndex = jiggle.getSelectedWeightCurveGraphIndexWeightRingIndex()
+                _grabWeightCurveControlTanHandleData.guideIndex = jiggle.getSelectedWeightCurveGraphIndexGuideIndex()
             }
         }
         
@@ -834,7 +1007,7 @@ class GraphView: UIView {
                                                                                     count: count,
                                                                                     frameHeight: frameHeight,
                                                                                     paddingV: paddingV)
-        
+        /*
         // Check the out tan handle.
         if jiggle.selectedWeightCurveControlIndex < (jiggle.weightCurve.weightCurveControlPointCount - 1) {
             if tanHandles.outY < 0.0 {
@@ -854,6 +1027,8 @@ class GraphView: UIView {
                 maxY -= tanHandles.inY
             }
         }
+        */
+         
         let rangeY = jiggle.weightCurve.rangeY
         if pointY < minY {
             pointY = minY
@@ -874,15 +1049,13 @@ class GraphView: UIView {
                                                                     paddingH: paddingH,
                                                                     paddingV: paddingV)
         
-        //jiggle.refreshMeshWeightsOnly()
-        
         if !isFromRelease {
             _grabWeightCurveControlPointData.didChange = true
         }
         
         _grabWeightCurveControlPointData.endHeightFactor = selectedWeightCurveControlPoint.normalizedHeightFactor
         
-        SEND_THIS_MESSAGE_OUT()
+        applyMeshChanges(weightCurveControlIndex: weightCurveControlIndex)
     }
     
     func attemptUpdateWeightCurveControlTan(touch: UITouch,
@@ -892,10 +1065,6 @@ class GraphView: UIView {
                                             frameHeight: Float,
                                             paddingH: Float,
                                             paddingV: Float) {
-        guard let jiggleDocument = jiggleDocument else {
-            killDragAll()
-            return
-        }
         guard let jiggle = jiggle else {
             killDragAll()
             return
@@ -917,24 +1086,9 @@ class GraphView: UIView {
         }
         let deltaX = point.x - selectedWeightCurveControlTanStartTouchX
         let deltaY = point.y - selectedWeightCurveControlTanStartTouchY
-        var tanHandleX = selectedWeightCurveControlTanStartHandleX + deltaX
-        var tanHandleY = selectedWeightCurveControlTanStartHandleY + deltaY
-        let minX = jiggle.weightCurve.minX
-        let maxX = jiggle.weightCurve.maxX
-        let minY = jiggle.weightCurve.minY
-        let maxY = jiggle.weightCurve.maxY
-        if tanHandleX < minX {
-            tanHandleX = minX
-        }
-        if tanHandleX > maxX {
-            tanHandleX = maxX
-        }
-        if tanHandleY < minY {
-            tanHandleY = minY
-        }
-        if tanHandleY > maxY {
-            tanHandleY = maxY
-        }
+        let tanHandleX = selectedWeightCurveControlTanStartHandleX + deltaX + selectedWeightCurveControlTanStartHandleOffsetX
+        let tanHandleY = selectedWeightCurveControlTanStartHandleY + deltaY + selectedWeightCurveControlTanStartHandleOffsetY
+        
         let count = jiggle.weightCurve.weightCurveControlPointCount
         let x = selectedWeightCurveControlPoint.getX(index: weightCurveControlIndex,
                                                      count: count,
@@ -965,8 +1119,6 @@ class GraphView: UIView {
                                                                              paddingV: paddingV)
         }
         
-        //jiggle.refreshMeshWeightsOnly()
-        
         if !isFromRelease {
             _grabWeightCurveControlTanHandleData.didChange = true
         }
@@ -974,10 +1126,10 @@ class GraphView: UIView {
         _grabWeightCurveControlTanHandleData.endMagnitudeIn = selectedWeightCurveControlPoint.normalizedTanMagnitudeIn
         _grabWeightCurveControlTanHandleData.endMagnitudeOut = selectedWeightCurveControlPoint.normalizedTanMagnitudeOut
         
-        SEND_THIS_MESSAGE_OUT()
+        applyMeshChanges(weightCurveControlIndex: weightCurveControlIndex)
     }
     
-    private func SEND_THIS_MESSAGE_OUT() {
+    private func applyMeshChanges(weightCurveControlIndex: Int) {
         
         guard let jiggleScene = jiggleScene else {
             return
@@ -992,6 +1144,13 @@ class GraphView: UIView {
         }
         
         if let jiggle = jiggle {
+            
+            jiggleDocument.refreshGraphModify(jiggle: jiggle,
+                                              weightCurveControlIndex: weightCurveControlIndex,
+                                              displayMode: jiggleViewModel.displayMode,
+                                              isGraphEnabled: jiggleViewModel.isGraphEnabled)
+                
+            /*
             let swivelType = ForceableTypeWithNone.forced
             let meshCommand = JiggleMeshCommand(spline: false,
                                                 triangulationType: .beautiful,
@@ -999,7 +1158,7 @@ class GraphView: UIView {
                                                 outlineType: .ifNeeded,
                                                 swivelType: swivelType,
                                                 weightCurveType: .ifNeeded)
-            let weightRingCommand = JiggleWeightRingCommand.none
+            let guideCommand = GuideCommand.none
             let worldScale = jiggleDocument.getWorldScale()
             let isSelected = (jiggleDocument.getSelectedJiggle() === jiggle)
             let isDarkModeEnabled = ApplicationController.isDarkModeEnabled
@@ -1008,9 +1167,10 @@ class GraphView: UIView {
                            isSelected: isSelected,
                            isDarkModeEnabled: isDarkModeEnabled,
                            worldScale: worldScale, 
-                           weightRingCommand: weightRingCommand,
-                           forceWeightRingCommand: false,
+                           guideCommand: guideCommand,
+                           forceGuideCommand: false,
                            orientation: jiggleDocument.orientation)
+            */
         }
         setNeedsDisplay()
     }

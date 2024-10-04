@@ -14,7 +14,7 @@ class TopMenuZoomView: UIView, MenuPartWithRowsConforming {
     func getNumberOfRows() -> Int {
         ToolInterfaceTheme.getTopMenuZoomRowCount(orientation: toolInterfaceViewModel.orientation)
     }
-    func getWidthSource() -> ToolRowViewContent.WidthSource { .standard }
+    
     func getToolRow(at index: Int) -> ToolRow? {
         if index >= 0 && index < toolInterfaceViewModel.rowsZoom.count {
             return toolInterfaceViewModel.rowsZoom[index]

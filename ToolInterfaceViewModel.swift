@@ -18,6 +18,9 @@ func getToolNodeID() -> UInt16 {
 @Observable class ToolInterfaceViewModel {
     
     @ObservationIgnored var darkModeDidChangePublisher = PassthroughSubject<Void, Never>()
+    //@ObservationIgnored var selectedJiggleDidChangePublisher = PassthroughSubject<Void, Never>()
+    //@ObservationIgnored var darkModeDidChangePublisher = PassthroughSubject<Void, Never>()
+    
     
     let layoutRelay = ToolInterfaceLayoutRelay()
     
@@ -48,11 +51,6 @@ func getToolNodeID() -> UInt16 {
                 }
             }
         }
-        for row in rowsGraphSideMenu {
-            if row.slot == slot {
-                return row
-            }
-        }
         return nil
     }
     
@@ -61,43 +59,6 @@ func getToolNodeID() -> UInt16 {
         result.configuration = .unknown
         return result
     }
-    
-    //@ObservationIgnored var allPossibleRowBluePrints = [RowBluePrint]()
-    //@ObservationIgnored var allPossibleRowBluePrintsGraphSideMenu = [RowBluePrint]()
-    
-    //@ObservationIgnored var rowStackingCategoryCalculators = [RowStackingCategoryCalculator]()
-    //@ObservationIgnored var rowStackingCategoryCalculatorsGraphSideMenu = [RowStackingCategoryCalculator]()
-    
-    //@ObservationIgnored var checkLayoutStackingCategories = ToolInterfaceLayoutStackingCategory.getAllInPriorityOrderExceptLeast()
-    
-    //@ObservationIgnored var layoutStackingCategory = ToolInterfaceLayoutStackingCategory.allVerticalSmall
-    //@ObservationIgnored var layoutStackingCategoryGraphSideMenu = ToolInterfaceLayoutStackingCategory.allVerticalSmall
-    /*
-    func calculateLayoutStackingCategoriesAndSliderFlavor(width: Int, height: Int) {
-        let contentWidth = layoutRelay.menuWidthWithSafeArea - (layoutRelay.safeAreaLeft + layoutRelay.safeAreaRight)
-        layoutStackingCategory = calculateLayoutStackingCategory(width: contentWidth,
-                                                                 height: layoutRelay.rowHeight,
-                                                                 categories: checkLayoutStackingCategories,
-                                                                 calculators: rowStackingCategoryCalculators)
-    }
-    
-    
-    func calculateLayoutSchemeFlavorSliders(width: Int,
-                                            height: Int,
-                                            calculators: [RowStackingCategoryCalculator]) -> LayoutSchemeFlavor {
-        var result = LayoutSchemeFlavor.getMax()
-        for rowStackingCategoryCalculator in calculators {
-            let layoutSchemeFlavor = rowStackingCategoryCalculator.computeSliderLayoutSchemeFlavor(width: width,
-                                                                                                   height: height,
-                                                                                                   safeAreaLeft: layoutRelay.safeAreaLeft,
-                                                                                                   safeAreaRight: layoutRelay.safeAreaRight)
-            if layoutSchemeFlavor < result {
-                result = layoutSchemeFlavor
-            }
-        }
-        return result
-    }
-    */
     
     static func calculateLayoutStackingCategory(width: Int,
                                                 height: Int,
@@ -129,6 +90,13 @@ func getToolNodeID() -> UInt16 {
                                                 centerPinnedElement: ToolInterfaceElement?,
                                                 slot: ToolRowSlot) -> ToolInterfaceLayoutStackingCategory {
         let categories = ToolInterfaceLayoutStackingCategory.getAllInPriorityOrderExceptLeast()
+        
+        if ApplicationController.FORCE_LONG_ALL {
+            return .large(.init(isSegmentLong: true, isCheckBoxLong: true, isTextIconButtonLong: true))
+        } else if ApplicationController.FORCE_STACKED_ALL {
+            return .large(.init(isSegmentLong: false, isCheckBoxLong: false, isTextIconButtonLong: false))
+        }
+        
         return calculateLayoutStackingCategory(orientation: orientation,
                                                width: width,
                                                height: height,
@@ -199,7 +167,6 @@ func getToolNodeID() -> UInt16 {
     @ObservationIgnored var rowsTop = [ToolRow]()
     @ObservationIgnored var rowsBottom = [ToolRow]()
     @ObservationIgnored var rowsDraggable = [ToolRow]()
-    @ObservationIgnored var rowsGraphSideMenu = [ToolRow]()
     
     @ObservationIgnored var rowsVideoRecord = [ToolRow]()
     @ObservationIgnored var rowsVideoExport = [ToolRow]()
@@ -219,7 +186,7 @@ func getToolNodeID() -> UInt16 {
     
     @ObservationIgnored let orientation: Orientation
     @ObservationIgnored unowned var jiggleViewModel: JiggleViewModel!
-    init(orientation: Orientation, jiggleViewModel: JiggleViewModel) {
+    @MainActor init(orientation: Orientation, jiggleViewModel: JiggleViewModel) {
         
         self.orientation = orientation
         self.jiggleViewModel = jiggleViewModel
@@ -265,10 +232,6 @@ func getToolNodeID() -> UInt16 {
             if bottomMenuStandardRowCount > 0 { rowsBottom.append(generateRow(slot: .bottom_Primary)) }
 
         }
-        
-        rowsGraphSideMenu.append(generateRow(slot: .graph_side_menu_1))
-        rowsGraphSideMenu.append(generateRow(slot: .graph_side_menu_2))
-        rowsGraphSideMenu.append(generateRow(slot: .graph_side_menu_3))
         
         if Device.isPad {
             rowsVideoRecord.append(generateRow(slot: .video_record_1))
@@ -341,130 +304,16 @@ func getToolNodeID() -> UInt16 {
             }
         }
         
-        // TODO: These need to be clones, not the original nodes.
-        if Device.isPad {
-            //allPossibleRowBluePrints.append(getRowBluePrintMainControlsStandardPad())
-            //allPossibleRowBluePrints.append(getRowBluePrintMainControlsViewPad())
-            //allPossibleRowBluePrints.append(getRowBluePrintMainControlsWeightsPad())
-            
-        } else {
-            
-        }
-        
-        /*
-        allPossibleRowBluePrints.append(getRowBluePrint_Top_Primary_Standard_Pad())
-        allPossibleRowBluePrints.append(getRowBluePrint_Top_Primary_Weights_Pad())
-        
-        allPossibleRowBluePrints.append(getRowBluePrint_Top_Secondary1_Jiggles_Pad())
-        allPossibleRowBluePrints.append(getRowBluePrint_Top_Secondary2_Jiggles_Pad())
-        
-        allPossibleRowBluePrints.append(getRowBluePrint_Top_Secondary1_Points_Pad())
-        allPossibleRowBluePrints.append(getRowBluePrint_Top_Secondary2_Points_Pad())
-        
-        allPossibleRowBluePrints.append(getRowBluePrint_Top_Secondary1_Weights_Affine_Regular_Pad())
-        allPossibleRowBluePrints.append(getRowBluePrint_Top_Secondary1_Weights_Affine_Swivel_Pad())
-        allPossibleRowBluePrints.append(getRowBluePrint_Top_Secondary1_Weights_Points_Regular_Pad())
-        allPossibleRowBluePrints.append(getRowBluePrint_Top_Secondary1_Weights_Points_Swivel_Pad())
-        allPossibleRowBluePrints.append(getRowBluePrint_Top_Secondary1_Weights_Center_Regular_Pad())
-        allPossibleRowBluePrints.append(getRowBluePrint_Top_Secondary1_Weights_Center_Swivel_Pad())
-        allPossibleRowBluePrints.append(getRowBluePrint_Top_Secondary2_Weights_Affine_Swivel_Pad())
-        allPossibleRowBluePrints.append(getRowBluePrint_Top_Secondary2_Weights_Points_Regular_Pad())
-        allPossibleRowBluePrints.append(getRowBluePrint_Top_Secondary2_Weights_Points_Swivel_Pad())
-        allPossibleRowBluePrints.append(getRowBluePrint_Top_Secondary2_Weights_Center_Regular_Pad())
-        allPossibleRowBluePrints.append(getRowBluePrint_Top_Secondary2_Weights_Center_Swivel_Pad())
-        
-        
-        
-                
-        
-        allPossibleRowBluePrints.append(getRowBluePrint_Bottom_Secondary2_Jiggles_Pad())
-        allPossibleRowBluePrints.append(getRowBluePrint_Bottom_Secondary1_Jiggles_Pad())
-        
-        allPossibleRowBluePrints.append(getRowBluePrint_Bottom_Secondary2_Points_Pad())
-        allPossibleRowBluePrints.append(getRowBluePrint_Bottom_Secondary1_Points_Pad())
-        
-        
-        allPossibleRowBluePrints.append(getRowBluePrint_Bottom_Secondary1_Weights_Affine_Regular_Pad())
-        allPossibleRowBluePrints.append(getRowBluePrint_Bottom_Secondary1_Weights_Affine_Swivel_Pad())
-        allPossibleRowBluePrints.append(getRowBluePrint_Bottom_Secondary1_Weights_Points_Regular_Pad())
-        allPossibleRowBluePrints.append(getRowBluePrint_Bottom_Secondary1_Weights_Points_Swivel_Pad())
-        allPossibleRowBluePrints.append(getRowBluePrint_Bottom_Secondary1_Weights_Center_Regular_Pad())
-        allPossibleRowBluePrints.append(getRowBluePrint_Bottom_Secondary1_Weights_Center_Swivel_Pad())
-        allPossibleRowBluePrints.append(getRowBluePrint_Bottom_Secondary2_Weights_Affine_Swivel_Pad())
-        allPossibleRowBluePrints.append(getRowBluePrint_Bottom_Secondary2_Weights_Points_Regular_Pad())
-        allPossibleRowBluePrints.append(getRowBluePrint_Bottom_Secondary2_Weights_Points_Swivel_Pad())
-        allPossibleRowBluePrints.append(getRowBluePrint_Bottom_Secondary2_Weights_Center_Regular_Pad())
-        allPossibleRowBluePrints.append(getRowBluePrint_Bottom_Secondary2_Weights_Center_Swivel_Pad())
-        
-        
-        allPossibleRowBluePrints.append(getRowBluePrint_Zoom1_Pad())
-        allPossibleRowBluePrints.append(getRowBluePrint_Zoom2_Pad())
-        allPossibleRowBluePrints.append(getRowBluePrint_Zoom3_Pad())
-        
-        allPossibleRowBluePrints.append(getRowBluePrint_VideoRecord1_Pad())
-        allPossibleRowBluePrints.append(getRowBluePrint_VideoRecord2_Pad())
-        allPossibleRowBluePrints.append(getRowBluePrint_VideoExport1_Pad())
-        allPossibleRowBluePrints.append(getRowBluePrint_VideoExport2_Pad())
-        allPossibleRowBluePrints.append(getRowBluePrint_VideoExport3_Pad())
-        
-        
-        //allPossibleRowBluePrintsGraphSideMenu.append(getRowBluePrintGraphSideMenu1())
-        //allPossibleRowBluePrintsGraphSideMenu.append(getRowBluePrintGraphSideMenu2())
-        //allPossibleRowBluePrintsGraphSideMenu.append(getRowBluePrintGraphSideMenu3())
-        //allPossibleRowBluePrintsGraphSideMenu.append(getRowBluePrintGraphSideMenu4())
-        
-        for possibleRowBluePrint in allPossibleRowBluePrintsGraphSideMenu {
-            let rowStackingCategoryCalculator = RowStackingCategoryCalculator(orientation: orientation,
-                                                                              rowBluePrint: possibleRowBluePrint)
-            rowStackingCategoryCalculatorsGraphSideMenu.append(rowStackingCategoryCalculator)
-        }
-        
-        //rowStackingCategoryCalculatorsGraphSideMenu
-        
-        
-        for possibleRowBluePrint in allPossibleRowBluePrints {
-            let rowStackingCategoryCalculator = RowStackingCategoryCalculator(orientation: orientation,
-                                                                              rowBluePrint: possibleRowBluePrint)
-            rowStackingCategoryCalculators.append(rowStackingCategoryCalculator)
-        }
-        
-        
-        
-        let graphSideMenuWidth = ToolInterfaceTheme.getGraphSideMenuWidth(orientation: orientation)
-        layoutStackingCategoryGraphSideMenu = calculateLayoutStackingCategory(width: graphSideMenuWidth,
-                                                                              height: layoutRelay.rowHeight,
-                                                                              categories: checkLayoutStackingCategories,
-                                                                              calculators: rowStackingCategoryCalculatorsGraphSideMenu)
-        
-        calculateLayoutStackingCategoriesAndSliderFlavor(width: layoutRelay.menuWidthWithSafeArea - (layoutRelay.safeAreaLeft + layoutRelay.safeAreaRight),
-                                                         height: layoutRelay.rowHeight)
-         */
-        
         // So many of the rows... Video Record, Video Export, Zoom, Graph...
         // Only need to be slotted one time... These do not change content...
         
         let interfaceConfiguration = getCurrentInterfaceConfiguration()
         snapRowContent(configuration: interfaceConfiguration,
-                       toolRows: rowsGraphSideMenu,
-                       widthSource: .graphSideMenu)
+                       toolRows: rowsZoom)
         snapRowContent(configuration: interfaceConfiguration,
-                       toolRows: rowsZoom,
-                       widthSource: .standard)
+                       toolRows: rowsVideoExport)
         snapRowContent(configuration: interfaceConfiguration,
-                       toolRows: rowsVideoExport,
-                       widthSource: .standard)
-        snapRowContent(configuration: interfaceConfiguration,
-                       toolRows: rowsVideoRecord,
-                       widthSource: .standard)
-        
-        let graphSideMenuWidth = ToolInterfaceTheme.getGraphSideMenuWidth(orientation: orientation)
-        for row in rowsGraphSideMenu {
-            row.layout(orientation: orientation,
-                       menuWidthWithSafeArea: graphSideMenuWidth,
-                       height: layoutRelay.rowHeight,
-                       safeAreaLeft: 0,
-                       safeAreaRight: 0)
-        }
+                       toolRows: rowsVideoRecord)
         
         publisherLinkUp()
     }
@@ -473,18 +322,25 @@ func getToolNodeID() -> UInt16 {
     var weightCurveGraphEnabledUpdateCancellable: AnyCancellable?
     var jigglesDidChangeCancellable: AnyCancellable?
     
-    var createJiggleCentersModificationUpdateCancellable: AnyCancellable?
-    var createGuideCentersModificationUpdateCancellable: AnyCancellable?
+    var controlPointsDidChangeCancellable: AnyCancellable?
     
-    var createJigglesStandardUpdateCancellable: AnyCancellable?
-    var createJigglesDrawingUpdateCancellable: AnyCancellable?
-    var createPointsUpdateCancellable: AnyCancellable?
-    var removePointsUpdateCancellable: AnyCancellable?
-    var createWeightRingsStandardUpdateCancellable: AnyCancellable?
-    var createWeightRingsDrawingUpdateCancellable: AnyCancellable?
-    var createWeightRingPointsUpdateCancellable: AnyCancellable?
-    var removeWeightRingPointsUpdateCancellable: AnyCancellable?
-    var selectedJiggleDataUpdateCancellable: AnyCancellable?
+    
+    var creatorModeUpdateCancellable: AnyCancellable?
+    
+    //var createJiggleCentersModificationUpdateCancellable: AnyCancellable?
+    //var createGuideCentersModificationUpdateCancellable: AnyCancellable?
+    
+    //var createJigglesStandardUpdateCancellable: AnyCancellable?
+    //var createJigglesDrawingUpdateCancellable: AnyCancellable?
+    //var createPointsUpdateCancellable: AnyCancellable?
+    //var removePointsUpdateCancellable: AnyCancellable?
+    //var createGuidesStandardUpdateCancellable: AnyCancellable?
+    //var createGuidesDrawingUpdateCancellable: AnyCancellable?
+    //var createGuidePointsUpdateCancellable: AnyCancellable?
+    //var removeGuidePointsUpdateCancellable: AnyCancellable?
+    
+    var selectedJiggleDidChangeCancellable: AnyCancellable?
+    var selectedTimeLineSwatchDidChangeCancellable: AnyCancellable?
     
     func publisherLinkUp() {
         
@@ -496,6 +352,16 @@ func getToolNodeID() -> UInt16 {
                     self.handleJigglesDidChange()
                 }
             }
+        
+        controlPointsDidChangeCancellable = jiggleViewModel
+            .jiggleDocument
+            .controlPointsDidChangePublisher
+            .sink { [weak self] in
+                if let self = self {
+                    self.handleControlPointsDidChange()
+                }
+            }
+        
         
         resetZoomActiveUpdateCancellable = jiggleViewModel
             .resetZoomActiveUpdatePublisher
@@ -515,114 +381,44 @@ func getToolNodeID() -> UInt16 {
             }
         */
         
-        selectedJiggleDataUpdateCancellable = jiggleViewModel
+        selectedJiggleDidChangeCancellable = jiggleViewModel
             .jiggleDocument
-            .selectedJiggleDataUpdatePublisher
+            .selectedJiggleDidChangePublisher
             .sink { [weak self] _ in
                 if let self = self {
                     self.handleSelectedJiggleDidChange()
                 }
             }
         
-        createJiggleCentersModificationUpdateCancellable = jiggleViewModel
+        
+        selectedTimeLineSwatchDidChangeCancellable = jiggleViewModel
             .jiggleDocument
-            .createJiggleCentersModificationUpdatePublisher
+            .selectedTimeLineSwatchUpdatePublisher
             .sink { [weak self] _ in
                 if let self = self {
-                    self.handleCreateJiggleCentersModificationDidChange()
+                    self.handleSelectedTimeLineSwatchDidChange()
                 }
             }
         
-        createGuideCentersModificationUpdateCancellable = jiggleViewModel
+        creatorModeUpdateCancellable = jiggleViewModel
             .jiggleDocument
-            .createGuideCentersModificationUpdatePublisher
+            .creatorModeUpdatePublisher
             .sink { [weak self] _ in
                 if let self = self {
-                    self.handleCreateGuideCentersModificationDidChange()
+                    self.handleCreatorModesDidChange()
                 }
             }
         
-        createJigglesStandardUpdateCancellable = jiggleViewModel
-            .jiggleDocument
-            .createJigglesStandardUpdatePublisher
-            .sink { [weak self] _ in
-                if let self = self {
-                    self.handleCreateJiggleStandardDidChange()
-                }
-            }
-        
-        createJigglesDrawingUpdateCancellable = jiggleViewModel
-            .jiggleDocument
-            .createJigglesDrawingUpdatePublisher
-            .sink { [weak self] _ in
-                if let self = self {
-                    self.handleCreateJiggleDrawingDidChange()
-                }
-            }
-        
-        createPointsUpdateCancellable = jiggleViewModel
-            .jiggleDocument
-            .createPointsUpdatePublisher
-            .sink { [weak self] _ in
-                if let self = self {
-                    self.handleCreatePointsDidChange()
-                }
-            }
-        
-        removePointsUpdateCancellable = jiggleViewModel
-            .jiggleDocument
-            .removePointsUpdatePublisher
-            .sink { [weak self] _ in
-                if let self = self {
-                    self.handleRemovePointsDidChange()
-                }
-            }
-        
-        createWeightRingsStandardUpdateCancellable = jiggleViewModel
-            .jiggleDocument
-            .createWeightRingsStandardUpdatePublisher
-            .sink { [weak self] _ in
-                if let self = self {
-                    self.handleCreateWeightRingsStandardDidChange()
-                }
-            }
-        
-        createWeightRingsDrawingUpdateCancellable = jiggleViewModel
-            .jiggleDocument
-            .createWeightRingsDrawingUpdatePublisher
-            .sink { [weak self] _ in
-                if let self = self {
-                    self.handleCreateWeightRingsDrawingDidChange()
-                }
-            }
-        
-        createWeightRingPointsUpdateCancellable = jiggleViewModel
-            .jiggleDocument
-            .createWeightRingPointsUpdatePublisher
-            .sink { [weak self] _ in
-                if let self = self {
-                    self.handleCreateWeightRingPointsDidChange()
-                }
-            }
-        
-        removeWeightRingPointsUpdateCancellable = jiggleViewModel
-            .jiggleDocument
-            .removeWeightRingPointsUpdatePublisher
-            .sink { [weak self] _ in
-                if let self = self {
-                    self.handleRemoveWeightRingPointsDidChange()
-                }
-            }
     }
     
-    static func getSpacerToolNode(neighborTypeLeft: ToolInterfaceElementType?,
+    @MainActor static func getSpacerToolNode(neighborTypeLeft: ToolInterfaceElementType?,
                                   neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         return getSpacerToolNode(neighborTypeLeft: neighborTypeLeft,
                                  neighborTypeRight: neighborTypeRight,
                                  defaultWidth: 0)
     }
     
-    static func getSpacerToolNode(neighborTypeLeft: ToolInterfaceElementType?,
+    @MainActor static func getSpacerToolNode(neighborTypeLeft: ToolInterfaceElementType?,
                                   neighborTypeRight: ToolInterfaceElementType?,
                                   defaultWidth: Int) -> ToolNode {
         if let jiggleDocument = ApplicationController.shared.jiggleDocument {
@@ -643,7 +439,7 @@ func getToolNodeID() -> UInt16 {
         }
     }
     
-    static func getSpacerToolNode(neighborTypeLeft: ToolInterfaceElementType?,
+    @MainActor static func getSpacerToolNode(neighborTypeLeft: ToolInterfaceElementType?,
                                   neighborTypeRight: ToolInterfaceElementType?,
                                   orientation: Orientation,
                                   defaultWidth: Int) -> ToolNode {
@@ -655,7 +451,7 @@ func getToolNodeID() -> UInt16 {
                  neighborTypeRight: neighborTypeRight)
     }
     
-    static func getFavoringOneLineLabelToolNode(orientation: Orientation,
+    @MainActor static func getFavoringOneLineLabelToolNode(orientation: Orientation,
                                   minimumWidth: Int,
                                   text: String,
                                   neighborTypeLeft: ToolInterfaceElementType?,
@@ -695,7 +491,7 @@ func getToolNodeID() -> UInt16 {
     //var safeAreaLeft = 0
     //var safeAreaRight = 0
     
-    func layoutAllRowsPhone(menuWidthWithSafeArea: Int, rowHeight: Int, safeAreaLeft: Int, safeAreaRight: Int) {
+    @MainActor func layoutAllRowsPhone(menuWidthWithSafeArea: Int, rowHeight: Int, safeAreaLeft: Int, safeAreaRight: Int) {
         if menuWidthWithSafeArea != layoutRelay.menuWidthWithSafeArea ||
             rowHeight != layoutRelay.rowHeight ||
             safeAreaLeft != layoutRelay.safeAreaLeft ||
@@ -750,7 +546,7 @@ func getToolNodeID() -> UInt16 {
         }
     }
     
-    func layoutAllRowsTablet(menuWidthWithSafeArea: Int, rowHeight: Int, safeAreaLeft: Int, safeAreaRight: Int) {
+    @MainActor func layoutAllRowsTablet(menuWidthWithSafeArea: Int, rowHeight: Int, safeAreaLeft: Int, safeAreaRight: Int) {
 
         if menuWidthWithSafeArea != layoutRelay.menuWidthWithSafeArea ||
             rowHeight != layoutRelay.rowHeight ||
@@ -796,67 +592,71 @@ func getToolNodeID() -> UInt16 {
         }
     }
     
-    func getRowBluePrintEmpty() -> RowBluePrint {
+    @MainActor func getRowBluePrintEmpty() -> RowBluePrint {
         RowBluePrint(nodes: [], configuration: .empty)
     }
     
-    func getRowBluePrint_Top_Secondary1_Empty() -> RowBluePrint {
+    @MainActor func getRowBluePrint_Top_Secondary1_Empty() -> RowBluePrint {
         return RowBluePrint(nodes: [], configuration: .top_Secondary1_Empty)
     }
     
-    func getRowBluePrint_Top_Secondary2_Empty() -> RowBluePrint {
+    @MainActor func getRowBluePrint_Top_Secondary2_Empty() -> RowBluePrint {
         return RowBluePrint(nodes: [], configuration: .top_Secondary2_Empty)
     }
     
-    func getRowBluePrint_Bottom_Secondary2_Empty() -> RowBluePrint {
+    @MainActor func getRowBluePrint_Bottom_Secondary2_Empty() -> RowBluePrint {
         return RowBluePrint(nodes: [], configuration: .bottom_Secondary2_Empty)
     }
     
-    func getRowBluePrint_Bottom_Secondary1_Empty() -> RowBluePrint {
+    @MainActor func getRowBluePrint_Bottom_Secondary1_Empty() -> RowBluePrint {
         return RowBluePrint(nodes: [], configuration: .bottom_Secondary1_Empty)
     }
     
-    func getRowBluePrintVideoRecord() -> RowBluePrint {
+    //TODO: This is used?
+    /*
+    @MainActor func getRowBluePrintVideoRecord() -> RowBluePrint {
         let nodes = [
-            getRecordCancelTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: .spacer),
+            getExitVideoRecordExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
             Self.getSpacerToolNode(neighborTypeLeft: .textIconButton, neighborTypeRight: .textIconButton),
-            getRecordMovieTextIconButtonToolNode(neighborTypeLeft: .spacer, neighborTypeRight: nil)
+        
+            getEnterVideoExportEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
         ]
     
         return RowBluePrint(nodes: nodes, configuration: .video_record_1, centerPinnedElement: nil)
     }
     
-    func getRowBluePrintVideoExport1() -> RowBluePrint {
+    @MainActor func getRowBluePrintVideoExport1() -> RowBluePrint {
         let nodes = [
-            getExitRecordModeTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: .spacer),
+            getExitVideoExportExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            getEnterVideoRecordEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
             Self.getSpacerToolNode(neighborTypeLeft: .textIconButton, neighborTypeRight: .textIconButton),
             getMainMenuTextIconButtonToolNode(neighborTypeLeft: .spacer, neighborTypeRight: nil)
         ]
         return RowBluePrint(nodes: nodes, configuration: .video_export_1, centerPinnedElement: nil)
     }
+    */
     
-    func getRowBluePrintVideoExport2() -> RowBluePrint {
+    @MainActor func getRowBluePrintVideoExport2() -> RowBluePrint {
         let nodes = [
             getTwistEnabledCheckBoxNode(neighborTypeLeft: nil, neighborTypeRight: .spacer),
             Self.getSpacerToolNode(neighborTypeLeft: .checkBox, neighborTypeRight: .textIconButton),
-            getMainMenuTextIconButtonToolNode(neighborTypeLeft: .spacer, neighborTypeRight: nil)
+            getMenuSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
         ]
         return RowBluePrint(nodes: nodes, configuration: .video_export_2, centerPinnedElement: nil)
     }
     
     
-    func getRowBluePrintZoom1() -> RowBluePrint {
+    @MainActor func getRowBluePrintZoom1() -> RowBluePrint {
         let nodes = [
             getExitZoomExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
             
             Self.getSpacerToolNode(neighborTypeLeft: .textIconButton, neighborTypeRight: .textIconButton),
-            getRecordMovieTextIconButtonToolNode(neighborTypeLeft: .spacer, neighborTypeRight: nil)
         ]
     
         return RowBluePrint(nodes: nodes, configuration: .zoom_1, centerPinnedElement: nil)
     }
     
-    func getRowBluePrintZoom2() -> RowBluePrint {
+    @MainActor func getRowBluePrintZoom2() -> RowBluePrint {
         let nodes = [
             getZoomAmountSliderToolNode(widthCategory: .fullWidth, neighborTypeLeft: nil, neighborTypeRight: nil)
         ]
@@ -864,14 +664,16 @@ func getToolNodeID() -> UInt16 {
         return RowBluePrint(nodes: nodes, configuration: .zoom_2, centerPinnedElement: nil)
     }
     
-    func getRowBluePrintZoom3() -> RowBluePrint {
+    @MainActor func getRowBluePrintZoom3() -> RowBluePrint {
         let nodes = [
-            getExitZoomModeTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: .spacer),
+            getExitZoomExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            
             Self.getSpacerToolNode(neighborTypeLeft: .textIconButton, neighborTypeRight: .textIconButton),
             getExitZoomExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
             
-            getResetZoomSelectedJiggleTextIconButtonToolNode(neighborTypeLeft: .spacer, neighborTypeRight: .textIconButton),
-            getResetZoomTextIconButtonToolNode(neighborTypeLeft: .textIconButton, neighborTypeRight: nil)
+            getZoomResetSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            getZoomJiggleSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
+            
         ]
         return RowBluePrint(nodes: nodes, configuration: .zoom_3, centerPinnedElement: nil)
     }
@@ -937,8 +739,8 @@ func getToolNodeID() -> UInt16 {
                     return true
                 }
 
-                if jiggleViewController.padDraggableMenu.standardContainerView.isGraphModeAnimating {
-                    print("Action Blocked - standardView.isGraphModeAnimating")
+                if jiggleViewController.padDraggableMenu.standardContainerView.isModeAnimating {
+                    print("Action Blocked - standardView.isModeAnimating")
                     return true
                 }
                 
@@ -949,8 +751,8 @@ func getToolNodeID() -> UInt16 {
                     return true
                 }
 
-                if jiggleViewController.phoneTopMenu.standardContainerView.isGraphModeAnimating {
-                    print("Action Blocked - standardView.isGraphModeAnimating")
+                if jiggleViewController.phoneTopMenu.standardContainerView.isModeAnimating {
+                    print("Action Blocked - standardView.isModeAnimating")
                     return true
                 }
             }
@@ -974,29 +776,25 @@ func getToolNodeID() -> UInt16 {
         darkModeDidChangePublisher.send(())
     }
     
-    func snapRowContent(configuration: any InterfaceConfigurationConforming,
-                        toolRows: [ToolRow],
-                        widthSource: ToolRowViewContent.WidthSource) {
+    @MainActor func snapRowContent(configuration: any InterfaceConfigurationConforming,
+                        toolRows: [ToolRow]) {
         for toolRow in toolRows {
             snapRowContent(configuration: configuration,
-                           toolRow: toolRow,
-                           widthSource: widthSource)
+                           toolRow: toolRow)
         }
     }
     
-    func animateRowContent_Step1(configuration: any InterfaceConfigurationConforming,
+    @MainActor func animateRowContent_Step1(configuration: any InterfaceConfigurationConforming,
                                  toolRows: [ToolRow],
-                                 widthSource: ToolRowViewContent.WidthSource,
                                  reversed: Bool) {
         for toolRow in toolRows {
             animateRowContent_Step1(configuration: configuration,
                                     toolRow: toolRow,
-                                    widthSource: widthSource,
                                     reversed: reversed)
         }
     }
     
-    func animateRowContent_Step2(configuration: any InterfaceConfigurationConforming,
+    @MainActor func animateRowContent_Step2(configuration: any InterfaceConfigurationConforming,
                                  toolRows: [ToolRow],
                                  reversed: Bool,
                                  time: CGFloat) {
@@ -1008,18 +806,9 @@ func getToolNodeID() -> UInt16 {
         }
     }
     
-    func snapRowContent(configuration: any InterfaceConfigurationConforming,
-                        toolRow: ToolRow,
-                        widthSource: ToolRowViewContent.WidthSource) {
-        
-        let width: Int
-        switch widthSource {
-        case .standard:
-            width = layoutRelay.menuWidthWithSafeArea
-        case .graphSideMenu:
-            width = ToolInterfaceTheme.getGraphSideMenuWidth(orientation: orientation)
-        }
-        
+    @MainActor func snapRowContent(configuration: any InterfaceConfigurationConforming,
+                        toolRow: ToolRow) {
+        let width = layoutRelay.menuWidthWithSafeArea
         if let bluePrint = getRowBluePrint(slot: toolRow.slot,
                                            configuration: configuration,
                                            orientation: orientation) {
@@ -1047,9 +836,8 @@ func getToolNodeID() -> UInt16 {
         }
     }
     
-    func animateRowContent_Step1(configuration: any InterfaceConfigurationConforming,
+    @MainActor func animateRowContent_Step1(configuration: any InterfaceConfigurationConforming,
                                  toolRow: ToolRow,
-                                 widthSource: ToolRowViewContent.WidthSource,
                                  reversed: Bool) {
         
         if let bluePrint = getRowBluePrint(slot: toolRow.slot,
@@ -1079,7 +867,7 @@ func getToolNodeID() -> UInt16 {
         }
     }
     
-    func animateRowContent_Step2(configuration: any InterfaceConfigurationConforming,
+    @MainActor func animateRowContent_Step2(configuration: any InterfaceConfigurationConforming,
                                  toolRow: ToolRow,
                                  reversed: Bool,
                                  time: CGFloat) {
@@ -1116,13 +904,17 @@ func getToolNodeID() -> UInt16 {
             result.isVideoRecordEnabled = jiggleViewModel.isVideoRecordEnabled
             result.isVideoExportEnabled = jiggleViewModel.isVideoExportEnabled
             result.isGuidesEnabled = jiggleViewModel.jiggleDocument.isGuidesEnabled
+            result.isAnimationLoopsEnabled = jiggleViewModel.jiggleDocument.isAnimationLoopsEnabled
+            result.isTimeLineEnabled = jiggleViewModel.jiggleDocument.isTimeLineEnabled
             result.isGraphEnabled = jiggleViewModel.isGraphEnabled
             result.isZoomEnabled = jiggleViewModel.isZoomEnabled
             result.documentMode = jiggleViewModel.jiggleDocument.documentMode
             result.editMode = jiggleViewModel.jiggleDocument.editMode
             result.weightMode = jiggleViewModel.jiggleDocument.weightMode
-            result.animationMode = jiggleViewModel.jiggleDocument.animationMode
-            result.viewMode = jiggleViewModel.jiggleDocument.viewMode
+            //result.animationMode = jiggleViewModel.jiggleDocument.animationMode
+            result.creatorMode = jiggleViewModel.jiggleDocument.creatorMode
+            result.isAnimationContinuousEnabled = jiggleViewModel.jiggleDocument.isAnimationContinuousEnabled
+            result.animationLoopsPage = jiggleViewModel.jiggleDocument.animationLoopsPage
         }
         return result
     }
@@ -1135,13 +927,17 @@ func getToolNodeID() -> UInt16 {
             result.isVideoRecordEnabled = jiggleViewModel.isVideoRecordEnabled
             result.isVideoExportEnabled = jiggleViewModel.isVideoExportEnabled
             result.isGuidesEnabled = jiggleViewModel.jiggleDocument.isGuidesEnabled
+            result.isAnimationLoopsEnabled = jiggleViewModel.jiggleDocument.isAnimationLoopsEnabled
+            result.isTimeLineEnabled = jiggleViewModel.jiggleDocument.isTimeLineEnabled
             result.isGraphEnabled = jiggleViewModel.isGraphEnabled
             result.isZoomEnabled = jiggleViewModel.isZoomEnabled
             result.documentMode = jiggleViewModel.jiggleDocument.documentMode
             result.editMode = jiggleViewModel.jiggleDocument.editMode
             result.weightMode = jiggleViewModel.jiggleDocument.weightMode
-            result.animationMode = jiggleViewModel.jiggleDocument.animationMode
-            result.viewMode = jiggleViewModel.jiggleDocument.viewMode
+            //result.animationMode = jiggleViewModel.jiggleDocument.animationMode
+            result.creatorMode = jiggleViewModel.jiggleDocument.creatorMode
+            result.isAnimationContinuousEnabled = jiggleViewModel.jiggleDocument.isAnimationContinuousEnabled
+            result.animationLoopsPage = jiggleViewModel.jiggleDocument.animationLoopsPage
         }
         return result
     }

@@ -9,15 +9,17 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-    func getEnterZoomEnterModeToolNode(neighborTypeLeft: ToolInterfaceElementType?,
+   @MainActor func getEnterZoomEnterModeToolNode(neighborTypeLeft: ToolInterfaceElementType?,
                                       neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
         let orientation = jiggleViewModel.orientation
         let textLine1 = ToolInterfaceStringLibraryModeChange.modeTextZoomEnterLine1()
         let textLine2 = ToolInterfaceStringLibraryModeChange.modeTextZoomEnterLine2()
-        let iconPack = MainTabIconLibrary.pinch
-        let accentPack = MainTabIconLibrary.arrowTinyFcaRight
+        let iconPack = MainTabIconLibrary.zoom
+        let accentPack = MainTabIconLibrary.glass
 
+        
+        
         let configuration = ToolInterfaceElementEnterModeConfiguration(iconPack: iconPack,
                                                                        accentPack: accentPack,
                                                                        orientation: orientation,

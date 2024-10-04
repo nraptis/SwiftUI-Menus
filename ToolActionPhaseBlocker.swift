@@ -12,7 +12,7 @@ enum ToolActionPhaseBlocker {
     case animateMenuConfigurationRows
     
     case animateMenuConfigurationVideoOrZoom
-    case animateMenuConfigurationGraph
+    case animateMenuConfigurationGraphOrTimeline
     
     case animateMenuExpandOrCollapse
     

@@ -17,7 +17,7 @@ import Foundation
             // See if we should be checked...
             //
             
-            if jiggleViewModel.jiggleDocument.isCreateJiggleCentersModificationEnabled {
+            if jiggleViewModel.jiggleDocument.creatorMode == .moveJiggleCenter {
                 if isChecked == false {
                     isChecked = true
                 }
@@ -27,66 +27,6 @@ import Foundation
                 }
             }
             
-            //
-            // See if we should be highlighted...
-            //
-            
-            if jiggleViewModel.jiggleDocument.isCreateJiggleCentersModificationEnabled {
-                if isHighlighted == false {
-                    isHighlighted = true
-                }
-            } else {
-                if isHighlighted == true {
-                    isHighlighted = false
-                }
-            }
-            
-            
-            //
-            // See if we should be enabled...
-            //
-            
-            if jiggleViewModel.jiggleDocument.isCreatePointsEnabled {
-                if isEnabled {
-                    isEnabled = false
-                }
-                return
-            }
-            
-            if jiggleViewModel.jiggleDocument.isRemovePointsEnabled {
-                if isEnabled {
-                    isEnabled = false
-                }
-                return
-            }
-            
-            if jiggleViewModel.jiggleDocument.isCreateWeightRingsStandardEnabled {
-                if isEnabled {
-                    isEnabled = false
-                }
-                return
-            }
-            
-            if jiggleViewModel.jiggleDocument.isCreateWeightRingsDrawingEnabled {
-                if isEnabled {
-                    isEnabled = false
-                }
-                return
-            }
-            
-            if jiggleViewModel.jiggleDocument.isCreateWeightRingPointsEnabled {
-                if isEnabled {
-                    isEnabled = false
-                }
-                return
-            }
-            
-            if jiggleViewModel.jiggleDocument.isRemoveWeightRingPointsEnabled {
-                if isEnabled {
-                    isEnabled = false
-                }
-                return
-            }
         }
         
         if isEnabled == false {
@@ -104,11 +44,12 @@ import Foundation
                 return
             }
             
-            if jiggleViewModel.jiggleDocument.isCreateJiggleCentersModificationEnabled {
-                jiggleViewModel.createJiggleCentersModificationDisable()
+            if jiggleViewModel.jiggleDocument.creatorMode == .moveJiggleCenter {
+                jiggleViewModel.setCreatorMode(.none)
             } else {
-                jiggleViewModel.createJiggleCentersModificationEnable()
+                jiggleViewModel.setCreatorMode(.moveJiggleCenter)
             }
+            
         }
     }
     

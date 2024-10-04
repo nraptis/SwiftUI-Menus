@@ -12,7 +12,7 @@ class DraggableMenuZoomView: UIView, MenuPartWithRowsConforming {
     var separatorViews = [UIView]()
     var rowViews = [ToolRowView]()
     func getNumberOfRows() -> Int { ToolInterfaceTheme.getDraggableMenuZoomRowCount() }
-    func getWidthSource() -> ToolRowViewContent.WidthSource { .standard }
+    
     func getToolRow(at index: Int) -> ToolRow? {
         if index >= 0 && index < toolInterfaceViewModel.rowsZoom.count {
             return toolInterfaceViewModel.rowsZoom[index]

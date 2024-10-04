@@ -8,25 +8,20 @@
 import Foundation
 
 extension ToolInterfaceViewModel {
-    func getJiggleOpacitySliderToolNode(widthCategory: ToolInterfaceElementSliderWidthCategory,
+    
+    @MainActor func getJiggleOpacitySliderToolNode(widthCategory: ToolInterfaceElementSliderWidthCategory,
                                       neighborTypeLeft: ToolInterfaceElementType?,
                                       neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         let orientation = jiggleViewModel.orientation
         let textLine1 = ToolInterfaceStringLibrarySliders.sliderTextJiggleOpacityLine1()
         let textLine2 = ToolInterfaceStringLibrarySliders.sliderTextJiggleOpacityLine2()
-        let iconPack = SliderIconLibrary.boxus
+        
         var friendLabel1Line1: String?; var friendLabel1Line2: String?
         var friendLabel2Line1: String?; var friendLabel2Line2: String?
         var friendLabel3Line1: String?; var friendLabel3Line2: String?
         var friendLabel4Line1: String?; var friendLabel4Line2: String?
-        /*
-        if widthCategory == .fullWidth {
-            friendLabel1Line1 = ToolInterfaceStringLibrarySliders.sliderTextBounceSpeedLine1()
-            friendLabel1Line2 = ToolInterfaceStringLibrarySliders.sliderTextBounceSpeedLine2()
-        }
-        */
-        let configuration = ToolInterfaceElementSliderConfiguration(iconPack: iconPack,
-                                                                    orientation: orientation,
+        
+        let configuration = ToolInterfaceElementSliderConfiguration(orientation: orientation,
                                                                     nameLabelLine1: textLine1,
                                                                     nameLabelLine2: textLine2,
                                                                     friend_1_nameLabelLine1: friendLabel1Line1,

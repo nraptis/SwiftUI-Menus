@@ -9,7 +9,7 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-    func getAlternateMotionEnabledCheckBoxNode(neighborTypeLeft: ToolInterfaceElementType?,
+    @MainActor func getAlternateMotionEnabledCheckBoxNode(neighborTypeLeft: ToolInterfaceElementType?,
                                                neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         let orientation = jiggleViewModel.orientation
         let textLine1 = ToolInterfaceStringLibraryCheckBoxes.checkBoxTextAlternateMotionEnabledLine1()

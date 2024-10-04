@@ -14,7 +14,7 @@ class BottomMenuMenuStandardView: UIView, MenuPartWithRowsConforming {
     func getNumberOfRows() -> Int {
         ToolInterfaceTheme.getBottomMenuStandardRowCount(orientation: toolInterfaceViewModel.orientation)
     }
-    func getWidthSource() -> ToolRowViewContent.WidthSource { .standard }
+    
     func getToolRow(at index: Int) -> ToolRow? {
         if index >= 0 && index < toolInterfaceViewModel.rowsBottom.count {
             return toolInterfaceViewModel.rowsBottom[index]

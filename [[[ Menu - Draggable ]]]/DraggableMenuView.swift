@@ -10,6 +10,14 @@ import Combine
 
 class DraggableMenuView: UIView, PrimaryMenuConforming {
     
+    func handleSelectedJiggleDidChange() {
+        standardContainerView.handleSelectedJiggleDidChange()
+    }
+    
+    func handleSelectedSwatchDidChange() {
+        standardContainerView.handleSelectedJiggleDidChange()
+    }
+    
     var isModeAnimating = false
     
     static let borderSize = 1
@@ -155,7 +163,11 @@ class DraggableMenuView: UIView, PrimaryMenuConforming {
     }
     
     private var darkModeDidChangeCancellable: AnyCancellable?
+    private var selectedJiggleDidChangeCancellable: AnyCancellable?
+    private var selectedTimeLineSwatchChangeCancellable: AnyCancellable?
+    
     func setup(width: Int, height: Int , orientation: Orientation) {
+        
         
         darkModeDidChangeCancellable = toolInterfaceViewModel
             .darkModeDidChangePublisher
@@ -164,6 +176,26 @@ class DraggableMenuView: UIView, PrimaryMenuConforming {
                     self.handleDarkModeDidChange()
                 }
             }
+        
+        if let jiggleDocument = ApplicationController.shared.jiggleDocument {
+            selectedJiggleDidChangeCancellable = jiggleDocument
+                .selectedJiggleDidChangePublisher
+                .sink { [weak self] in
+                    if let self = self {
+                        self.handleSelectedJiggleDidChange()
+                    }
+                }
+            selectedTimeLineSwatchChangeCancellable = jiggleDocument
+                .selectedTimeLineSwatchUpdatePublisher
+                .sink { [weak self] in
+                    if let self = self {
+                        self.handleSelectedSwatchDidChange()
+                    }
+                }
+        }
+        
+        
+        
         
         addSubview(containerView)
         addConstraints([
@@ -471,10 +503,12 @@ class DraggableMenuView: UIView, PrimaryMenuConforming {
                 snapToVideoRecord()
             } else {
                 if snapStandardMenus {
-                    if configuration.isGraphEnabled {
-                        standardContainerView.graphModeEnableSnap()
+                    if configuration.isGraph {
+                        standardContainerView.snapToGraph()
+                    } else if configuration.isTimeLine {
+                        standardContainerView.snapToTimeLine()
                     } else {
-                        standardContainerView.graphModeDisableSnap()
+                        standardContainerView.snapToTopMenu()
                         standardContainerView.topMenuView.snapRowContent(configuration: configuration)
                     }
                     standardContainerView.bottomMenuView.snapRowContent(configuration: configuration)

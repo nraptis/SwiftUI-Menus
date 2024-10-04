@@ -59,7 +59,7 @@ class ToolRow {
     private(set) var nodes = [ToolNode]()
     private(set) var centerPinnedElement: ToolInterfaceElement?
     
-    func refreshAllNodes() {
+    @MainActor func refreshAllNodes() {
         for node in nodes {
             node.magicalViewModel.refresh()
         }
@@ -67,7 +67,7 @@ class ToolRow {
     
     var isRowAnimationActive = false
     
-    func setNodes_NotAnimated(_ nodes: [ToolNode],
+    @MainActor func setNodes_NotAnimated(_ nodes: [ToolNode],
                               orientation: Orientation,
                               menuWidthWithSafeArea: Int,
                               height: Int,
@@ -106,7 +106,7 @@ class ToolRow {
         nodesDidChangePublisher_NotAnimated.send(())
     }
     
-    func setNodes_AnimatedStep1(_ nodes: [ToolNode],
+    @MainActor func setNodes_AnimatedStep1(_ nodes: [ToolNode],
                                 orientation: Orientation,
                                 reversed: Bool,
                                 menuWidthWithSafeArea: Int,
@@ -149,7 +149,7 @@ class ToolRow {
         nodesDidChangePublisher_AnimatedStep1.send(reversed)
     }
     
-    func setNodes_AnimatedStep2(reversed: Bool,
+    @MainActor func setNodes_AnimatedStep2(reversed: Bool,
                                 time: CGFloat) {
         nodesDidChangePublisher_AnimatedStep2.send((reversed, time))
     }
@@ -303,7 +303,7 @@ class ToolRow {
     }
     
     // In this case, we are *not* over-sized, let's grow as big as we can.
-    private func grow(layoutNodes1: [LayoutNode], layoutNodes2: [LayoutNode], into space: Int) {
+    @MainActor private func grow(layoutNodes1: [LayoutNode], layoutNodes2: [LayoutNode], into space: Int) {
         var consumedWidth = 0
         for layoutNode in layoutNodes1 {
             consumedWidth += layoutNode.width
@@ -325,7 +325,7 @@ class ToolRow {
     }
     
     // Here the nodes should have "width" calculated (e.g. call "cram" first...)
-    func place(layoutNodes: [LayoutNode], into space: Int, startingAt x: Int) {
+    @MainActor func place(layoutNodes: [LayoutNode], into space: Int, startingAt x: Int) {
         
         var contentWidth = 0
         for layoutNode in layoutNodes {
@@ -344,7 +344,7 @@ class ToolRow {
     }
     
     // Here the nodes should have "width" calculated (e.g. call "cram" first...)
-    func place(layoutNodes: [LayoutNode], startingAt x: Int) {
+    @MainActor func place(layoutNodes: [LayoutNode], startingAt x: Int) {
         var layoutX = x
         for index in 0..<layoutNodes.count {
             layoutNodes[index].x = layoutX
@@ -352,7 +352,7 @@ class ToolRow {
         }
     }
     
-    private func place(layoutNodes1: [LayoutNode], layoutNodes2: [LayoutNode], into space: Int, startingAt x: Int) {
+    @MainActor private func place(layoutNodes1: [LayoutNode], layoutNodes2: [LayoutNode], into space: Int, startingAt x: Int) {
         var layoutNodes = [LayoutNode]()
         layoutNodes.append(contentsOf: layoutNodes1)
         layoutNodes.append(contentsOf: layoutNodes2)
@@ -361,7 +361,7 @@ class ToolRow {
     
     
     // In this case, we are *not* over-sized, let's grow as big as we can.
-    private func cramAndPlaceNew(layoutNodesLeft: [LayoutNode],
+    @MainActor private func cramAndPlaceNew(layoutNodesLeft: [LayoutNode],
                                  layoutNodeCenter: LayoutNode,
                                  layoutNodesRight: [LayoutNode],
                                  totalWidth: Int) {
@@ -751,7 +751,7 @@ class ToolRow {
     }
     
     // In this case, we are *not* over-sized, let's grow as big as we can.
-    private func cramAndPlace(layoutNodesLeft: [LayoutNode],
+    @MainActor private func cramAndPlace(layoutNodesLeft: [LayoutNode],
                               layoutNodeCenter: LayoutNode,
                               layoutNodesRight: [LayoutNode],
                               totalWidth: Int) {
@@ -940,7 +940,7 @@ class ToolRow {
     }
     
     
-    func layout(orientation: Orientation,
+    @MainActor func layout(orientation: Orientation,
                 menuWidthWithSafeArea: Int,
                 height: Int,
                 safeAreaLeft: Int,
@@ -971,7 +971,23 @@ class ToolRow {
         for node in nodes {
             let layoutNode = LayoutNode()
             switch node.flex {
-                
+            case .sexyStepper(let flexSexyStepperData):
+                if isSmall {
+                    layoutNode.width = flexSexyStepperData.minimumWidthSmall
+                    layoutNode.maximumWidthHigh = flexSexyStepperData.standardWidthSmall
+                    layoutNode.maximumWidthMedium = flexSexyStepperData.standardWidthSmall
+                    layoutNode.maximumWidthLow = flexSexyStepperData.maximumWidthSmall
+                } else if isMedium {
+                    layoutNode.width = flexSexyStepperData.minimumWidthMedium
+                    layoutNode.maximumWidthHigh = flexSexyStepperData.standardWidthMedium
+                    layoutNode.maximumWidthMedium = flexSexyStepperData.standardWidthMedium
+                    layoutNode.maximumWidthLow = flexSexyStepperData.maximumWidthMedium
+                } else {
+                    layoutNode.width = flexSexyStepperData.minimumWidthLarge
+                    layoutNode.maximumWidthHigh = flexSexyStepperData.standardWidthLarge
+                    layoutNode.maximumWidthMedium = flexSexyStepperData.standardWidthLarge
+                    layoutNode.maximumWidthLow = flexSexyStepperData.maximumWidthLarge
+                }
             case .enterMode(let flexEnterModeData):
                 if isSmall {
                     layoutNode.width = flexEnterModeData.minimumWidthSmall
@@ -989,7 +1005,6 @@ class ToolRow {
                     layoutNode.maximumWidthMedium = flexEnterModeData.standardWidthLarge
                     layoutNode.maximumWidthLow = flexEnterModeData.maximumWidthLarge
                 }
-                
             case .exitMode(let flexExitModeData):
                 if isSmall {
                     layoutNode.width = flexExitModeData.minimumWidthSmall
@@ -1007,7 +1022,23 @@ class ToolRow {
                     layoutNode.maximumWidthMedium = flexExitModeData.standardWidthLarge
                     layoutNode.maximumWidthLow = flexExitModeData.maximumWidthLarge
                 }
-                
+            case .sexyCheckBox(let flexSexyCheckBoxData):
+                if isSmall {
+                    layoutNode.width = flexSexyCheckBoxData.minimumWidthSmall
+                    layoutNode.maximumWidthHigh = flexSexyCheckBoxData.standardWidthSmall
+                    layoutNode.maximumWidthMedium = flexSexyCheckBoxData.standardWidthSmall
+                    layoutNode.maximumWidthLow = flexSexyCheckBoxData.maximumWidthSmall
+                } else if isMedium {
+                    layoutNode.width = flexSexyCheckBoxData.minimumWidthMedium
+                    layoutNode.maximumWidthHigh = flexSexyCheckBoxData.standardWidthMedium
+                    layoutNode.maximumWidthMedium = flexSexyCheckBoxData.standardWidthMedium
+                    layoutNode.maximumWidthLow = flexSexyCheckBoxData.maximumWidthMedium
+                } else {
+                    layoutNode.width = flexSexyCheckBoxData.minimumWidthLarge
+                    layoutNode.maximumWidthHigh = flexSexyCheckBoxData.standardWidthLarge
+                    layoutNode.maximumWidthMedium = flexSexyCheckBoxData.standardWidthLarge
+                    layoutNode.maximumWidthLow = flexSexyCheckBoxData.maximumWidthLarge
+                }
             case .favoringOneLineLabel(let flexFavoringOneLineLabelData):
                 layoutNode.width = flexFavoringOneLineLabelData.minimumWidth
                 layoutNode.maximumWidthHigh = flexFavoringOneLineLabelData.twoLineWidth
@@ -1213,7 +1244,6 @@ class ToolRow {
             layoutNodes.append(layoutNode)
         }
         
-        
         // Let's figure out if we need to center one of the elements...
         
         var layoutNodesLeft = [LayoutNode]()
@@ -1256,13 +1286,6 @@ class ToolRow {
             //   c.) It will work fine, but the content on the right will need to nudge the center content.
             //   d.) The layout will not work;
             
-            
-            if slot == .bottom_Primary {
-            
-                print("prima")
-            }
-            
-            
             var consumedWidthLeft = 0
             for index in 0..<layoutNodesLeft.count {
                 consumedWidthLeft += layoutNodesLeft[index].width
@@ -1278,72 +1301,10 @@ class ToolRow {
                 cram(layoutNodes: layoutNodes, into: rowContentWidth)
                 place(layoutNodes: layoutNodes, into: rowContentWidth, startingAt: 0)
             } else {
-                
                 cramAndPlaceNew(layoutNodesLeft: layoutNodesLeft,
                             layoutNodeCenter: layoutNodeCenterPinnedElement,
                             layoutNodesRight: layoutNodesRight,
                             totalWidth: rowContentWidth)
-                
-                /*
-                let centerItemLeft = (rowContentWidth >> 1) - (layoutNodeCenterPinnedElement.width >> 1)
-                let availableSpaceLeftSide = centerItemLeft
-                let availableSpaceRightSide = (rowContentWidth - (centerItemLeft + layoutNodeCenterPinnedElement.width))
-                if consumedWidthLeft > availableSpaceLeftSide {
-                    
-                    layoutNodesLeft.append(layoutNodeCenterPinnedElement)
-                    var leftPackingWidth = consumedWidthLeft + layoutNodeCenterPinnedElement.width
-                    let rightPackingWidth = rowContentWidth - leftPackingWidth
-                    
-                    cram(layoutNodes: layoutNodesRight, into: rightPackingWidth)
-                    
-                    consumedWidthRight = 0
-                    for index in 0..<layoutNodesRight.count {
-                        consumedWidthRight += layoutNodesRight[index].width
-                    }
-                    place(layoutNodes: layoutNodesRight, startingAt: rowContentWidth - consumedWidthRight)
-                    
-                    
-                    leftPackingWidth = rowContentWidth - consumedWidthRight
-                    cram(layoutNodes: layoutNodesLeft, into: leftPackingWidth)
-                    
-                    consumedWidthLeft = 0
-                    for index in 0..<layoutNodesLeft.count {
-                        consumedWidthLeft += layoutNodesLeft[index].width
-                    }
-                    
-                    place(layoutNodes: layoutNodesLeft, startingAt: 0)
-                } else if consumedWidthRight > availableSpaceRightSide {
-                    
-                    layoutNodesRight.insert(layoutNodeCenterPinnedElement, at: 0)
-                    var rightPackingWidth = consumedWidthRight + layoutNodeCenterPinnedElement.width
-                    let leftPackingWidth = rowContentWidth - rightPackingWidth
-                    
-                    cram(layoutNodes: layoutNodesLeft, into: leftPackingWidth)
-                    
-                    consumedWidthLeft = 0
-                    for index in 0..<layoutNodesLeft.count {
-                        consumedWidthLeft += layoutNodesLeft[index].width
-                    }
-                    place(layoutNodes: layoutNodesLeft, startingAt: 0)
-                    
-                    rightPackingWidth = rowContentWidth - consumedWidthLeft
-                    cram(layoutNodes: layoutNodesRight, into: rightPackingWidth)
-                    
-                    consumedWidthRight = 0
-                    for index in 0..<layoutNodesRight.count {
-                        consumedWidthRight += layoutNodesRight[index].width
-                    }
-                    
-                    place(layoutNodes: layoutNodesRight, startingAt: rowContentWidth - consumedWidthRight)
-                    
-                } else {
-                 cramAndPlace(layoutNodesLeft: layoutNodesLeft,
-                             layoutNodeCenter: layoutNodeCenterPinnedElement,
-                             layoutNodesRight: layoutNodesRight,
-                             totalWidth: rowContentWidth)
-                    
-                }
-                */
             }
         } else {
             cram(layoutNodes: layoutNodes, into: rowContentWidth)

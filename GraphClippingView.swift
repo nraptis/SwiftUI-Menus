@@ -35,28 +35,21 @@ class GraphClippingView: UIView {
         
         context.clear(bounds)
         
-        let cutOutRect = CGRect(x: bounds.origin.x + CGFloat(insetLeft),
+        let strokeRect = CGRect(x: bounds.origin.x + CGFloat(insetLeft),
                                 y: bounds.origin.y + CGFloat(insetTop),
                                 width: bounds.size.width - CGFloat(insetLeft + insetRight),
                                 height: bounds.size.height - CGFloat(insetTop + insetBottom))
-        //let rectPath = UIBezierPath(rect: bounds)
-        let cutOutPath = UIBezierPath(roundedRect: cutOutRect, cornerRadius: CGFloat(cornerRadius))
-        
-        /*
-        context.saveGState()
-        context.addPath(rectPath.cgPath)
-        context.addPath(cutOutPath.cgPath)
-        context.setFillColor(ToolInterfaceTheme._toolbarBackground.cgColor)
-        //context.setFillColor(UIColor.red.withAlphaComponent(0.5).cgColor)
-        
-        context.fillPath(using: .evenOdd)
-        context.restoreGState()
-        */
-        
+        let cutOutPath = UIBezierPath(roundedRect: strokeRect, cornerRadius: CGFloat(cornerRadius))
         context.saveGState()
         context.addPath(cutOutPath.cgPath)
         //TODO: Diff
-        context.setStrokeColor(ToolInterfaceTheme._primaryDisabledDark.cgColor)
+        
+        if ApplicationController.isDarkModeEnabled {
+            context.setStrokeColor(ToolInterfaceTheme._graphBorderDark.cgColor)
+        } else {
+            context.setStrokeColor(ToolInterfaceTheme._graphBorderLight.cgColor)
+        }
+        
         context.setLineWidth(Device.isPad ? 2.0 : 1.0)
         context.strokePath()
         context.restoreGState()

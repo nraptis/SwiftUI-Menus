@@ -9,12 +9,34 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-    func getRowBluePrint_Bottom_Primary_Pad(_ configuration: any InterfaceConfigurationConforming) -> RowBluePrint? {
+   @MainActor func getRowBluePrint_Bottom_Primary_Pad(_ configuration: any InterfaceConfigurationConforming) -> RowBluePrint? {
+        
         if configuration.isGraphEnabled { return getRowBluePrint_Bottom_Primary_Graph_Pad() }
+        
+        if configuration.isView {
+            if configuration.isAnimationLoopsEnabled {
+                if configuration.isTimeLineEnabled {
+                    return getRowBluePrint_Bottom_Primary_View_TimeLine_Pad()
+                } else {
+                    if configuration.animationLoopsPage == 3 {
+                        
+                    }
+                    return getRowBluePrint_Bottom_Primary_View_Loops_Pad()
+                }
+                
+            }
+            if configuration.isAnimationContinuousEnabled {
+                return getRowBluePrint_Bottom_Primary_View_Continuous_Pad()
+            }
+            return getRowBluePrint_Bottom_Primary_View_Grab_Pad()
+            
+        }
+        
+        
         return getRowBluePrint_Bottom_Primary_Standard_Pad()
     }
     
-    func getRowBluePrint_Bottom_Secondary1_Pad(_ configuration: any InterfaceConfigurationConforming) -> RowBluePrint? {
+    @MainActor func getRowBluePrint_Bottom_Secondary1_Pad(_ configuration: any InterfaceConfigurationConforming) -> RowBluePrint? {
         if configuration.isZoomEnabled { return getRowBluePrint_Top_Secondary1_Empty() }
         
         
@@ -32,14 +54,34 @@ extension ToolInterfaceViewModel {
             }
         }
         
-        if configuration.isView { return getRowBluePrint_Bottom_Secondary1_View_Pad() }
+        if configuration.isView {
+            if configuration.isAnimationLoopsEnabled {
+                if configuration.isTimeLineEnabled {
+                    return getRowBluePrint_Bottom_Secondary1_View_TimeLine_Pad()
+                } else {
+                    if configuration.animationLoopsPage == 3 {
+                        return getRowBluePrint_Bottom_Secondary1_View_LoopsPage3_Pad()
+                    } else if configuration.animationLoopsPage == 2 {
+                        return getRowBluePrint_Bottom_Secondary1_View_LoopsPage2_Pad()
+                    } else {
+                        return getRowBluePrint_Bottom_Secondary1_View_LoopsPage1_Pad()
+                    }
+                    
+                }
+                
+            }
+            if configuration.isAnimationContinuousEnabled {
+                return getRowBluePrint_Bottom_Secondary1_View_Continuous_Pad()
+            }
+            return getRowBluePrint_Bottom_Secondary1_View_Grab_Pad()
+        }
         
         if configuration.isPoints { return getRowBluePrint_Bottom_Secondary1_Points_Pad() }
         
         return getRowBluePrint_Bottom_Secondary1_Jiggles_Pad()
     }
     
-    func getRowBluePrint_Bottom_Secondary2_Pad(_ configuration: any InterfaceConfigurationConforming) -> RowBluePrint? {
+    @MainActor func getRowBluePrint_Bottom_Secondary2_Pad(_ configuration: any InterfaceConfigurationConforming) -> RowBluePrint? {
         
         if configuration.isZoomEnabled { return getRowBluePrint_Top_Secondary2_Empty() }
         if configuration.isPoints { return getRowBluePrint_Bottom_Secondary2_Points_Pad() }
@@ -58,129 +100,252 @@ extension ToolInterfaceViewModel {
             }
         }
         
-        if configuration.isView { return getRowBluePrint_Bottom_Secondary2_View_Pad() }
+        if configuration.isView {
+            if configuration.isAnimationLoopsEnabled {
+                if configuration.isTimeLineEnabled {
+                    return getRowBluePrint_Bottom_Secondary2_View_TimeLine_Pad()
+                } else {
+                    if configuration.animationLoopsPage == 3 {
+                        return getRowBluePrint_Bottom_Secondary2_View_LoopsPage3_Pad()
+                    } else if configuration.animationLoopsPage == 2 {
+                        return getRowBluePrint_Bottom_Secondary2_View_LoopsPage2_Pad()
+                    } else {
+                        return getRowBluePrint_Bottom_Secondary2_View_LoopsPage1_Pad()
+                    }
+                    
+                }
+                
+            }
+            if configuration.isAnimationContinuousEnabled {
+                return getRowBluePrint_Bottom_Secondary2_View_Continuous_Pad()
+            }
+            return getRowBluePrint_Bottom_Secondary2_View_Grab_Pad()
+        }
         
         return getRowBluePrint_Bottom_Secondary2_Jiggles_Pad()
     }
     
-    func getRowBluePrint_Bottom_Primary_Standard_Pad() -> RowBluePrint {
+    @MainActor func getRowBluePrint_Bottom_Primary_Standard_Pad() -> RowBluePrint {
         let centerPinnedNode = getDocumentModeMainTabToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
-        let nodes = [getUndoTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+        let nodes = [getUndoSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getRedoTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getRedoSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      centerPinnedNode,
                      getEnterZoomEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     
-                     getRedoSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
-                     getUndoSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
         ]
         
         return RowBluePrint(nodes: nodes, configuration: .bottom_Primary_Standard, centerPinnedNode: centerPinnedNode)
     }
     
-    func getRowBluePrint_Bottom_Primary_Graph_Pad() -> RowBluePrint {
+    @MainActor func getRowBluePrint_Bottom_Primary_Graph_Pad() -> RowBluePrint {
         let centerPinnedNode = getDocumentModeMainTabToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
-        let nodes = [getUndoTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+        let nodes = [getUndoSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getRedoTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getRedoSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      centerPinnedNode,
         ]
         
         return RowBluePrint(nodes: nodes, configuration: .bottom_Primary_Graph, centerPinnedNode: centerPinnedNode)
     }
     
-    func getRowBluePrint_Bottom_Secondary1_Jiggles_Pad() -> RowBluePrint {
-        let nodes = [
-            
-            getRedoSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getUndoSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            
-            getAnimationModeSegmentToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            //getExitGraphExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            
-            getMakeAndDrawJiggleCreateSwatchToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            
-            //getExitGuidesExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getExitZoomExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            
-                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getEditModeSegmentToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getJiggleCentersEnabledCheckBoxNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+    @MainActor func getRowBluePrint_Bottom_Primary_View_Grab_Pad() -> RowBluePrint {
+        let centerPinnedNode = getDocumentModeMainTabToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
+        let nodes = [getUndoSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getRedoSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     centerPinnedNode,
                      
+                     getZoomResetSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getEnterVideoRecordEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+        ]
+        return RowBluePrint(nodes: nodes, configuration: .bottom_Primary_View_Grab)
+    }
+    
+    @MainActor func getRowBluePrint_Bottom_Primary_View_Continuous_Pad() -> RowBluePrint {
+        let centerPinnedNode = getDocumentModeMainTabToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
+        let nodes = [getUndoSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getRedoSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
+                     centerPinnedNode,
                      Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     
-                     getResetZoomSelectedJiggleTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getResetZoomTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getZoomResetSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getEnterVideoRecordEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+        ]
+        return RowBluePrint(nodes: nodes, configuration: .bottom_Primary_View_Continuous)
+    }
+    
+    @MainActor func getRowBluePrint_Bottom_Primary_View_Loops_Pad() -> RowBluePrint {
+        let centerPinnedNode = getDocumentModeMainTabToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
+        let nodes = [getUndoSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getRedoSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
+                     centerPinnedNode,
+                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getZoomResetSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getEnterVideoRecordEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+        ]
+        return RowBluePrint(nodes: nodes, configuration: .bottom_Primary_View_Loops)
+    }
+    
+    
+    @MainActor func getRowBluePrint_Bottom_Primary_View_TimeLine_Pad() -> RowBluePrint {
+        let centerPinnedNode = getDocumentModeMainTabToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
+        let nodes = [getUndoSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getRedoSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
+                     centerPinnedNode,
+                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getZoomResetSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getEnterVideoRecordEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+        ]
+        return RowBluePrint(nodes: nodes, configuration: .bottom_Primary_View_TimeLine)
+    }
+    
+    @MainActor func getRowBluePrint_Bottom_Secondary1_Jiggles_Pad() -> RowBluePrint {
+        let nodes = [getEditModeSegmentToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getJiggleCentersSexyCheckBoxToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getZoomJiggleSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getZoomResetSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
         ]
         return RowBluePrint(nodes: nodes, configuration: .bottom_Secondary1_Jiggles)
     }
     
-    func getRowBluePrint_Bottom_Secondary2_Jiggles_Pad() -> RowBluePrint {
-        let nodes = [
-            
-            getRedoSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
-            getUndoSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            
-            getMakeAndDrawJiggleCreateSwatchToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            
-            getCreateJigglesStandardCheckBoxNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getCreateJigglesDrawingCheckBoxNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getCloneJiggleTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+    @MainActor func getRowBluePrint_Bottom_Secondary2_Jiggles_Pad() -> RowBluePrint {
+        let nodes = [getMakeAndDrawJiggleCreateSwatchToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     
+                     
+                     getCloneJiggleSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
                      Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
                      
-                     getRemoveJiggleTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     
+                     getDeleteJiggleSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
                      Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            
-            getViewModeSegmentToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
                      getEnterGuidesEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
         ]
         return RowBluePrint(nodes: nodes, configuration: .bottom_Secondary2_Jiggles)
     }
     
-    
-    
-    func getRowBluePrint_Bottom_Secondary1_Points_Pad() -> RowBluePrint {
-        let nodes = [getCreatePointsCheckBoxNode(neighborTypeLeft: nil, neighborTypeRight: .checkBox),
-                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getEditModeSegmentToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getJiggleCentersEnabledCheckBoxNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+    @MainActor func getRowBluePrint_Bottom_Secondary1_Points_Pad() -> RowBluePrint {
+        let nodes = [getEditModeSegmentToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getJiggleCentersSexyCheckBoxToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
                      Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
-                     getResetZoomSelectedJiggleTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getResetZoomTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getZoomJiggleSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getZoomResetSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
         ]
         return RowBluePrint(nodes: nodes, configuration: .bottom_Secondary1_Points)
     }
     
-    func getRowBluePrint_Bottom_Secondary1_View_Pad() -> RowBluePrint {
-        let nodes = [getAnimationModeSegmentToolNode(neighborTypeLeft: nil, neighborTypeRight: .spacer),
+    @MainActor func getRowBluePrint_Bottom_Secondary1_View_Grab_Pad() -> RowBluePrint {
+        let nodes = [getEnterVideoRecordEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
                      Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
                      getAnimationJiggleApplyToAllCheckBoxNode(neighborTypeLeft: .spacer, neighborTypeRight: .checkBox),
-                     getAnimationBounceApplyToAllCheckBoxNode(neighborTypeLeft: .checkBox, neighborTypeRight: .checkBox),
-                     getAnimationWobbleApplyToAllCheckBoxNode(neighborTypeLeft: .checkBox, neighborTypeRight: .checkBox),
-                     getAnimationTwistApplyToAllCheckBoxNode(neighborTypeLeft: .spacer, neighborTypeRight: .textIconButton),
                      
-                     getResetZoomSelectedJiggleTextIconButtonToolNode(neighborTypeLeft: .spacer, neighborTypeRight: .textIconButton),
-                     getResetZoomTextIconButtonToolNode(neighborTypeLeft: .textIconButton, neighborTypeRight: nil),
+                     getEnterAnimationLoopsEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getEnterAnimationContinuousEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     
+                     getZoomJiggleSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getZoomResetSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
         ]
-        return RowBluePrint(nodes: nodes, configuration: .bottom_Secondary1_View)
+        return RowBluePrint(nodes: nodes, configuration: .bottom_Secondary1_View_Grab)
     }
     
-    func getRowBluePrint_Bottom_Secondary2_Points_Pad() -> RowBluePrint {
-        let nodes = [getRemovePointsCheckBoxNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+    @MainActor func getRowBluePrint_Bottom_Secondary1_View_Continuous_Pad() -> RowBluePrint {
+        let nodes = [getEnterVideoRecordEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
-                     getMakeAndDrawJiggleCreateSwatchToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
+                     getAnimationJiggleApplyToAllCheckBoxNode(neighborTypeLeft: .spacer, neighborTypeRight: .checkBox),
+                     
+                     getEnterAnimationLoopsEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getEnterAnimationContinuousEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     
+                     getZoomJiggleSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getZoomResetSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+        ]
+        return RowBluePrint(nodes: nodes, configuration: .bottom_Secondary1_View_Continuous)
+    }
+    
+    @MainActor func getRowBluePrint_Bottom_Secondary1_View_LoopsPage1_Pad() -> RowBluePrint {
+        let nodes = [getExitAnimationLoopsExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getEnterTimeLineEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     
+                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
+                     getAnimationJiggleApplyToAllCheckBoxNode(neighborTypeLeft: .spacer, neighborTypeRight: .checkBox),
+                     
+                     
+        ]
+        return RowBluePrint(nodes: nodes, configuration: .bottom_Secondary1_View_LoopsPage1)
+    }
+    
+    @MainActor func getRowBluePrint_Bottom_Secondary1_View_LoopsPage2_Pad() -> RowBluePrint {
+        let nodes = [getExitAnimationLoopsExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                    getEnterTimeLineEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     
+                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
+                     getAnimationJiggleApplyToAllCheckBoxNode(neighborTypeLeft: .spacer, neighborTypeRight: .checkBox),
+
+        ]
+        return RowBluePrint(nodes: nodes, configuration: .bottom_Secondary1_View_LoopsPage2)
+    }
+    
+    @MainActor func getRowBluePrint_Bottom_Secondary1_View_LoopsPage3_Pad() -> RowBluePrint {
+        let nodes = [getExitAnimationLoopsExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getEnterTimeLineEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     
+                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
+                     getAnimationJiggleApplyToAllCheckBoxNode(neighborTypeLeft: .spacer, neighborTypeRight: .checkBox),
+                     
+                     getEnterAnimationLoopsEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getEnterAnimationContinuousEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+
+        ]
+        return RowBluePrint(nodes: nodes, configuration: .bottom_Secondary1_View_LoopsPage3)
+    }
+    
+    @MainActor func getRowBluePrint_Bottom_Secondary1_View_TimeLine_Pad() -> RowBluePrint {
+        let nodes = [getTimeLineInvertHSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getTimeLineInvertVSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getTimeLineResetCurveSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     
+                     
+                     getTimeLineBreakPointSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     
+                     getTimeLineResetGraphSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     
+                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
+                     
+                     getTimeLineDurationSliderToolNode(widthCategory: .stretch, neighborTypeLeft: nil, neighborTypeRight: nil),
+                     
+                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
+                     
+                     getAnimationBounceApplyToAllCheckBoxNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     
+                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
+                     
+                     getExitAnimationLoopsExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+        ]
+        return RowBluePrint(nodes: nodes, configuration: .bottom_Secondary1_View_TimeLine)
+    }
+    
+    @MainActor func getRowBluePrint_Bottom_Secondary2_Points_Pad() -> RowBluePrint {
+        let nodes = [getAddAndRemoveJigglePointsCreateSwatchToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
                      Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
                      
-                     getRemovePointTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getDeleteJigglePointSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
                      Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
@@ -189,42 +354,61 @@ extension ToolInterfaceViewModel {
         return RowBluePrint(nodes: nodes, configuration: .bottom_Secondary2_Points)
     }
     
-    func getRowBluePrint_Bottom_Secondary1_Guides_Affine_Pad() -> RowBluePrint {
+    @MainActor func getRowBluePrint_Bottom_Secondary1_Guides_Affine_Pad() -> RowBluePrint {
         let nodes = [
-            getExitGuidesExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
             getWeightModeSegmentToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getGuideCentersEnabledCheckBoxNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            
             Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getResetZoomSelectedJiggleTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getResetZoomTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            
+            getGuideCentersSexyCheckBoxToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            
+            Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            
+            
+            getZoomJiggleSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            getZoomResetSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
         ]
         return RowBluePrint(nodes: nodes, configuration: .bottom_Secondary1_Guides_Affine)
     }
     
-    func getRowBluePrint_Bottom_Secondary1_Guides_Points_Pad() -> RowBluePrint {
-        return getRowBluePrint_Bottom_Secondary1_Guides_Affine_Pad()
+    @MainActor func getRowBluePrint_Bottom_Secondary1_Guides_Points_Pad() -> RowBluePrint {
+        let nodes = [
+            getWeightModeSegmentToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            
+            Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            
+            getGuideCentersSexyCheckBoxToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            
+            getZoomJiggleSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            getZoomResetSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            
+            
+            
+            
+        ]
+        return RowBluePrint(nodes: nodes, configuration: .bottom_Secondary1_Guides_Points)
     }
     
-    
-    func getRowBluePrint_Bottom_Secondary1_Graph_Pad() -> RowBluePrint {
-        let nodes = [
-            getExitGuidesExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
-            getResetZoomSelectedJiggleTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getResetZoomTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+    @MainActor func getRowBluePrint_Bottom_Secondary1_Graph_Pad() -> RowBluePrint {
+        let nodes = [getExitGuidesExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
+                     
+                     getBreakManualWeightGraphTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getResetWeightGraphTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
         ]
         return RowBluePrint(nodes: nodes, configuration: .bottom_Secondary1_Graph)
     }
     
-    func getRowBluePrint_Bottom_Secondary2_Guides_Affine_Pad() -> RowBluePrint {
-        let nodes = [getCreateWeightRingsStandardCheckBoxNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getCreateWeightRingsDrawingCheckBoxNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getCloneWeightRingTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+    @MainActor func getRowBluePrint_Bottom_Secondary2_Guides_Affine_Pad() -> RowBluePrint {
+        let nodes = [getExitGuidesExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getMakeAndDrawGuideCreateSwatchToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getCloneGuideSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
                      Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
                      
-                     getRemoveWeightRingTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getDeleteGuideSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
                      Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
@@ -233,34 +417,105 @@ extension ToolInterfaceViewModel {
         return RowBluePrint(nodes: nodes, configuration: .bottom_Secondary2_Guides_Affine)
     }
     
-    
-    
-    func getRowBluePrint_Bottom_Secondary2_Guides_Points_Pad() -> RowBluePrint {
-        let nodes = [getCreateWeightRingPointsCheckBoxNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getRemoveWeightRingPointsCheckBoxNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
-                     getRemoveWeightRingPointTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+    @MainActor func getRowBluePrint_Bottom_Secondary2_Guides_Points_Pad() -> RowBluePrint {
+        let nodes = [Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
+                     getDeleteGuidePointSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getEnterGraphEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
+                     getEnterGraphEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getAddAndRemoveGuidePointsCreateSwatchToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
         ]
         return RowBluePrint(nodes: nodes, configuration: .bottom_Secondary2_Guides_Points)
     }
     
-    func getRowBluePrint_Bottom_Secondary2_Graph_Pad() -> RowBluePrint {
-        let nodes = [
-            getExitGraphExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
-            getResetZoomSelectedJiggleTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getResetZoomTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+    @MainActor func getRowBluePrint_Bottom_Secondary2_Graph_Pad() -> RowBluePrint {
+        let nodes = [getExitGraphExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getDarkModeEnabledCheckBoxNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
+                     getZoomJiggleSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getZoomResetSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
         ]
         return RowBluePrint(nodes: nodes, configuration: .bottom_Secondary2_Graph)
     }
     
-    func getRowBluePrint_Bottom_Secondary2_View_Pad() -> RowBluePrint {
-        let nodes = [getJigglePowerSliderToolNode(widthCategory: .halfWidthLeft, neighborTypeLeft: nil, neighborTypeRight: .slider),
-                     getJiggleSpeedSliderToolNode(widthCategory: .halfWidthRight, neighborTypeLeft: .slider, neighborTypeRight: nil),
-                                  
+    @MainActor func getRowBluePrint_Bottom_Secondary2_View_Grab_Pad() -> RowBluePrint {
+        let nodes = [Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
+                     getAnimationJiggleApplyToAllCheckBoxNode(neighborTypeLeft: .spacer, neighborTypeRight: .checkBox),
+                     
+                     getEnterAnimationLoopsEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getEnterAnimationContinuousEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
         ]
-        return RowBluePrint(nodes: nodes, configuration: .bottom_Secondary2_View)
+        return RowBluePrint(nodes: nodes, configuration: .bottom_Secondary2_View_Grab)
     }
+    
+    @MainActor func getRowBluePrint_Bottom_Secondary2_View_Continuous_Pad() -> RowBluePrint {
+        let nodes = [getExitAnimationLoopsExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getEnterAnimationLoopsEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     
+                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
+                     getAnimationJiggleApplyToAllCheckBoxNode(neighborTypeLeft: .spacer, neighborTypeRight: .checkBox),
+        ]
+        return RowBluePrint(nodes: nodes, configuration: .bottom_Secondary2_View_Continuous)
+    }
+    
+    @MainActor func getRowBluePrint_Bottom_Secondary2_View_LoopsPage1_Pad() -> RowBluePrint {
+        let nodes = [getExitAnimationLoopsExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getEnterTimeLineEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     
+                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
+                     getAnimationJiggleApplyToAllCheckBoxNode(neighborTypeLeft: .spacer, neighborTypeRight: .checkBox),
+                     getEnterLoopsPage2EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
+        ]
+        return RowBluePrint(nodes: nodes, configuration: .bottom_Secondary2_View_LoopsPage1)
+    }
+    
+    @MainActor func getRowBluePrint_Bottom_Secondary2_View_LoopsPage2_Pad() -> RowBluePrint {
+        let nodes = [getExitAnimationLoopsExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getEnterTimeLineEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     
+                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
+                     getAnimationJiggleApplyToAllCheckBoxNode(neighborTypeLeft: .spacer, neighborTypeRight: .checkBox),
+                     getEnterLoopsPage3EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
+        ]
+        return RowBluePrint(nodes: nodes, configuration: .bottom_Secondary2_View_LoopsPage2)
+    }
+    
+    @MainActor func getRowBluePrint_Bottom_Secondary2_View_LoopsPage3_Pad() -> RowBluePrint {
+        let nodes = [getExitAnimationLoopsExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getEnterTimeLineEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     
+                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
+                     getAnimationJiggleApplyToAllCheckBoxNode(neighborTypeLeft: .spacer, neighborTypeRight: .checkBox),
+                     getEnterLoopsPage1EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
+        ]
+        return RowBluePrint(nodes: nodes, configuration: .bottom_Secondary2_View_LoopsPage3)
+    }
+    
+    @MainActor func getRowBluePrint_Bottom_Secondary2_View_TimeLine_Pad() -> RowBluePrint {
+        
+        let centerPinnedNode = getTimelinePointCountSexyStepperToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
+        
+        let nodes = [getTimeLineFlipAllSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getTimeLineDampenSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getTimeLineAmplifySexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     
+                     getExitTimeLineExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     
+                     getTimeLineDupeAllSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getTimeLineDupeDurationSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getTimeLineDupeCurrentChannelSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getTimeLineFlattenCurrentChannelSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getTimeLineResetDefaultCurrentChannelSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     
+                     centerPinnedNode,
+                     
+                     getTimeLineOffsetSliderToolNode(widthCategory: .stretch, neighborTypeLeft: nil, neighborTypeRight: nil),
+                     
+                     getDarkModeEnabledCheckBoxNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     
+                     
+        ]
+        return RowBluePrint(nodes: nodes, configuration: .bottom_Secondary2_View_TimeLine, centerPinnedNode: centerPinnedNode)
+    }
+    
 }

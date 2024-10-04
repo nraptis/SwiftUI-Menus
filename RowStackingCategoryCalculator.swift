@@ -32,6 +32,14 @@ class RowStackingCategoryCalculator {
                           width: Int,
                           layoutStackingCategory: ToolInterfaceLayoutStackingCategory) -> Int {
         switch node.flex {
+        case .sexyStepper(let flexSexyStepperData):
+            if layoutStackingCategory.isSmall {
+                return flexSexyStepperData.standardWidthSmall
+            } else if layoutStackingCategory.isMedium {
+                return flexSexyStepperData.standardWidthMedium
+            } else {
+                return flexSexyStepperData.standardWidthLarge
+            }
         case .enterMode(let flexEnterModeData):
             if layoutStackingCategory.isSmall {
                 return flexEnterModeData.standardWidthSmall
@@ -47,6 +55,14 @@ class RowStackingCategoryCalculator {
                 return flexExitModeData.standardWidthMedium
             } else {
                 return flexExitModeData.standardWidthLarge
+            }
+        case .sexyCheckBox(let flexSexyCheckBoxData):
+            if layoutStackingCategory.isSmall {
+                return flexSexyCheckBoxData.standardWidthSmall
+            } else if layoutStackingCategory.isMedium {
+                return flexSexyCheckBoxData.standardWidthMedium
+            } else {
+                return flexSexyCheckBoxData.standardWidthLarge
             }
         case .favoringOneLineLabel(let flexFavoringOneLineLabelData):
             return flexFavoringOneLineLabelData.oneLineWidthPadded

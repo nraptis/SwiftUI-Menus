@@ -9,17 +9,15 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-    
-    
-    func getUndoSexyButtonToolNode(neighborTypeLeft: ToolInterfaceElementType?,
+    @MainActor func getUndoSexyButtonToolNode(neighborTypeLeft: ToolInterfaceElementType?,
                                       neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
         let orientation = jiggleViewModel.orientation
         let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextUndoLine1()
         let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextUndoLine2()
-        let iconPack = SexyButtonIconLibrary.graph
+        let iconPack = LooseConvertibleIconLibrary.menuB
         
-        let configuration = ToolInterfaceElementSexyButtonConfiguration(iconPack: iconPack, 
+        let configuration = ToolInterfaceElementSexyButtonConfiguration(iconPack: iconPack,
                                                                         orientation: orientation,
                                                                         nameLabelLine1: textLine1,
                                                                         nameLabelLine2: textLine2)
@@ -39,4 +37,5 @@ extension ToolInterfaceViewModel {
         viewModelUndo.refresh()
         return undoToolNode
     }
+    
 }

@@ -27,7 +27,7 @@ struct MagicalCreateSwatch: View {
 #endif
         .offset(x: CGFloat(magicalCreateSwatchViewModel.layoutX),
                 y: CGFloat(magicalCreateSwatchViewModel.layoutY))
-        //.disabled(!magicalCreateSwatchViewModel.isEnabled)
+        .disabled(!magicalCreateSwatchViewModel.isEnabled)
         .transaction { transaction in
             transaction.animation = nil
         }

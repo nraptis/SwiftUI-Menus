@@ -26,23 +26,18 @@ extension JiggleViewController {
     }
     
     func toolActionPhoneExpandTopMenu() {
-        
         if toolInterfaceViewModel.isBlocked { return }
         if Device.isPad { return }
-        
         if jiggleViewModel.isPhoneTopMenuExpanded == false {
-            let interfaceConfigurationPrevious = toolInterfaceViewModel.getCurrentInterfaceConfigurationPhone()
-            var interfaceConfigurationCurrent = interfaceConfigurationPrevious
-            interfaceConfigurationCurrent.isExpandedTop = true
             
-            let time = Self.getExpandCollapseAnimationTime(orientation: jiggleDocument.orientation)
-            
-            let phaseSliceModify = ToolActionPhaseSliceSetExpandedPhoneTop(isExpanded: true)
-            let phaseSliceInterface = ToolActionPhaseSliceUpdateInterfaceConfigurationPhone(interfaceConfigurationPrevious: interfaceConfigurationPrevious,
-                                                                                       interfaceConfigurationCurrent: interfaceConfigurationCurrent)
-            let phase = ToolActionPhase(slices: [phaseSliceModify, phaseSliceInterface],
-                                        time: time)
-            let toolAction = ToolAction(phase: phase)
+            let toolAction = batchInterfaceAction { interfaceConfiguration in
+                interfaceConfiguration.isExpandedTop = true
+                return [
+                    ToolActionPhaseSliceSetExpandedPhoneTop(isExpanded: true)
+                ]
+            } alongsideMeshCommand: {
+                [ ]
+            }
             toolActionPerform(toolAction)
         }
     }
@@ -50,41 +45,31 @@ extension JiggleViewController {
     func toolActionPhoneCollapseTopMenu() {
         if toolInterfaceViewModel.isBlocked { return }
         if Device.isPad { return }
-        
         if jiggleViewModel.isPhoneTopMenuExpanded == true {
-            let interfaceConfigurationPrevious = toolInterfaceViewModel.getCurrentInterfaceConfigurationPhone()
-            var interfaceConfigurationCurrent = interfaceConfigurationPrevious
-            interfaceConfigurationCurrent.isExpandedTop = false
-            let time = Self.getExpandCollapseAnimationTime(orientation: jiggleDocument.orientation)
-            
-            let phaseSliceModify = ToolActionPhaseSliceSetExpandedPhoneTop(isExpanded: false)
-            let phaseSliceInterface = ToolActionPhaseSliceUpdateInterfaceConfigurationPhone(interfaceConfigurationPrevious: interfaceConfigurationPrevious,
-                                                                                       interfaceConfigurationCurrent: interfaceConfigurationCurrent)
-            let phase = ToolActionPhase(slices: [phaseSliceModify, phaseSliceInterface],
-                                        time: time)
-            let toolAction = ToolAction(phase: phase)
+            let toolAction = batchInterfaceAction { interfaceConfiguration in
+                interfaceConfiguration.isExpandedTop = false
+                return [
+                    ToolActionPhaseSliceSetExpandedPhoneTop(isExpanded: false)
+                ]
+            } alongsideMeshCommand: {
+                [ ]
+            }
             toolActionPerform(toolAction)
         }
     }
     
     func toolActionPhoneExpandBottomMenu() {
-        
         if toolInterfaceViewModel.isBlocked { return }
         if Device.isPad { return }
-        
         if jiggleViewModel.isPhoneBottomMenuExpanded == false {
-            let interfaceConfigurationPrevious = toolInterfaceViewModel.getCurrentInterfaceConfigurationPhone()
-            var interfaceConfigurationCurrent = interfaceConfigurationPrevious
-            interfaceConfigurationCurrent.isExpandedBottom = true
-            
-            let time = Self.getExpandCollapseAnimationTime(orientation: jiggleDocument.orientation)
-            
-            let phaseSliceModify = ToolActionPhaseSliceSetExpandedPhoneBottom(isExpanded: true)
-            let phaseSliceInterface = ToolActionPhaseSliceUpdateInterfaceConfigurationPhone(interfaceConfigurationPrevious: interfaceConfigurationPrevious,
-                                                                                       interfaceConfigurationCurrent: interfaceConfigurationCurrent)
-            let phase = ToolActionPhase(slices: [phaseSliceModify, phaseSliceInterface],
-                                        time: time)
-            let toolAction = ToolAction(phase: phase)
+            let toolAction = batchInterfaceAction { interfaceConfiguration in
+                interfaceConfiguration.isExpandedBottom = true
+                return [
+                    ToolActionPhaseSliceSetExpandedPhoneBottom(isExpanded: true)
+                ]
+            } alongsideMeshCommand: {
+                [ ]
+            }
             toolActionPerform(toolAction)
         }
     }
@@ -92,20 +77,15 @@ extension JiggleViewController {
     func toolActionPhoneCollapseBottomMenu() {
         if toolInterfaceViewModel.isBlocked { return }
         if Device.isPad { return }
-        
         if jiggleViewModel.isPhoneBottomMenuExpanded == true {
-            let interfaceConfigurationPrevious = toolInterfaceViewModel.getCurrentInterfaceConfigurationPhone()
-            var interfaceConfigurationCurrent = interfaceConfigurationPrevious
-            interfaceConfigurationCurrent.isExpandedBottom = false
-            
-            let time = Self.getExpandCollapseAnimationTime(orientation: jiggleDocument.orientation)
-            
-            let phaseSliceModify = ToolActionPhaseSliceSetExpandedPhoneBottom(isExpanded: false)
-            let phaseSliceInterface = ToolActionPhaseSliceUpdateInterfaceConfigurationPhone(interfaceConfigurationPrevious: interfaceConfigurationPrevious,
-                                                                                       interfaceConfigurationCurrent: interfaceConfigurationCurrent)
-            let phase = ToolActionPhase(slices: [phaseSliceModify, phaseSliceInterface],
-                                        time: time)
-            let toolAction = ToolAction(phase: phase)
+            let toolAction = batchInterfaceAction { interfaceConfiguration in
+                interfaceConfiguration.isExpandedBottom = false
+                return [
+                    ToolActionPhaseSliceSetExpandedPhoneBottom(isExpanded: false)
+                ]
+            } alongsideMeshCommand: {
+                [ ]
+            }
             toolActionPerform(toolAction)
         }
     }

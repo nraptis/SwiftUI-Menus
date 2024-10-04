@@ -59,9 +59,8 @@ enum MenuHeightCategoryPad: UInt8 {
     static func `get`(configuration: InterfaceConfigurationPad,
                       orientation: Orientation) -> Int {
         get(category: configuration.heightCategory,
-              orientation: orientation,
-              isExpanded: configuration.isExpanded)
-        
+            orientation: orientation,
+            isExpanded: configuration.isExpanded)
     }
     
     static func `get`(category: MenuHeightCategoryPad,
@@ -98,9 +97,10 @@ enum MenuHeightCategoryPad: UInt8 {
 }
 
 enum MenuHeightCategoryPhoneTop: UInt8 {
-
+    
     case standard
     case graph
+    case timeLine
     case videoRecord
     case videoExport
     case zoom
@@ -120,6 +120,8 @@ enum MenuHeightCategoryPhoneTop: UInt8 {
             rowCount = ToolInterfaceTheme.getTopMenuStandardRowCount(orientation: orientation)
         case .graph:
             rowCount = ToolInterfaceTheme.getTopMenuGraphRowCount(orientation: orientation)
+        case .timeLine:
+            rowCount = ToolInterfaceTheme.getTopMenuTimeLineRowCount(orientation: orientation)
         case .videoRecord:
             rowCount = ToolInterfaceTheme.getTopMenuVideoRecordRowCount(orientation: orientation)
         case .videoExport:
@@ -127,6 +129,7 @@ enum MenuHeightCategoryPhoneTop: UInt8 {
         case .zoom:
             rowCount = ToolInterfaceTheme.getTopMenuZoomRowCount(orientation: orientation)
         }
+            
         let rowHeight = ToolInterfaceTheme.getRowHeight(orientation: orientation)
         let rowSeparatorHeight = ToolInterfaceTheme.getStationaryRowSeparatorHeight(orientation: orientation)
         var result = 0

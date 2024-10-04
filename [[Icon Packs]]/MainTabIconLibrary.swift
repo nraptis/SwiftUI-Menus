@@ -8,7 +8,61 @@
 import Foundation
 
 struct MainTabIconLibrary {
+    
+    static var checkBoxCheck: MainTabIconPack {
+        let name = "mode_switch_check_box_check"
+        let widthPad = 42
+        let heightPad = 42
+        let widthPhonePortrait = 32
+        let heightPhonePortrait = 32
+        let widthPhoneLandscape = 27
+        let heightPhoneLandscape = 27
+        return Self.build(name: name, widthPad: widthPad, heightPad: heightPad,
+                          widthPhoneLandscape: widthPhoneLandscape, heightPhoneLandscape: heightPhoneLandscape,
+                          widthPhonePortrait: widthPhonePortrait, heightPhonePortrait: heightPhonePortrait)
+    }
 
+
+    static var checkBoxSquare: MainTabIconPack {
+        let name = "mode_switch_check_box_square"
+        let widthPad = 42
+        let heightPad = 42
+        let widthPhonePortrait = 32
+        let heightPhonePortrait = 32
+        let widthPhoneLandscape = 27
+        let heightPhoneLandscape = 27
+        return Self.build(name: name, widthPad: widthPad, heightPad: heightPad,
+                          widthPhoneLandscape: widthPhoneLandscape, heightPhoneLandscape: heightPhoneLandscape,
+                          widthPhonePortrait: widthPhonePortrait, heightPhonePortrait: heightPhonePortrait)
+    }
+    
+    
+    static var glass: MainTabIconPack {
+        let name = "mode_switch_glass"
+        let widthPad = 43
+        let heightPad = 44
+        let widthPhonePortrait = 33
+        let heightPhonePortrait = 36
+        let widthPhoneLandscape = 28
+        let heightPhoneLandscape = 28
+        return Self.build(name: name, widthPad: widthPad, heightPad: heightPad,
+                          widthPhoneLandscape: widthPhoneLandscape, heightPhoneLandscape: heightPhoneLandscape,
+                          widthPhonePortrait: widthPhonePortrait, heightPhonePortrait: heightPhonePortrait)
+    }
+
+
+    static var zoom: MainTabIconPack {
+        let name = "mode_switch_zoom"
+        let widthPad = 42
+        let heightPad = 44
+        let widthPhonePortrait = 32
+        let heightPhonePortrait = 36
+        let widthPhoneLandscape = 27
+        let heightPhoneLandscape = 28
+        return Self.build(name: name, widthPad: widthPad, heightPad: heightPad,
+                          widthPhoneLandscape: widthPhoneLandscape, heightPhoneLandscape: heightPhoneLandscape,
+                          widthPhonePortrait: widthPhonePortrait, heightPhonePortrait: heightPhonePortrait)
+    }
     
     static var arrowTinyBwLeft: MainTabIconPack {
         let name = "mode_switch_arrow_tiny_bw_left"

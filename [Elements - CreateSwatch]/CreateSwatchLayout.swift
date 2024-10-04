@@ -59,14 +59,14 @@ struct CreateSwatchLayout: LayoutScheme {
             switch squeeze {
             case .squeezed:
                 return 2
-            case .standard:
+            case .standard, .relaxed:
                 return 6
             }
         } else {
             switch squeeze {
             case .squeezed:
                 return 2
-            case .standard:
+            case .standard, .relaxed:
                 return 4
             }
         }
@@ -81,14 +81,14 @@ struct CreateSwatchLayout: LayoutScheme {
             switch squeeze {
             case .squeezed:
                 return 2
-            case .standard:
+            case .standard, .relaxed:
                 return 6
             }
         } else {
             switch squeeze {
             case .squeezed:
                 return 2
-            case .standard:
+            case .standard, .relaxed:
                 return 4
             }
         }
@@ -104,17 +104,37 @@ struct CreateSwatchLayout: LayoutScheme {
     
     static func getButtonUniversalPaddingLeft(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
         if Device.isPad {
-            return 4
+            switch squeeze {
+            case .squeezed:
+                return 6
+            case .standard, .relaxed:
+                return 10
+            }
         } else {
-            return 2
+            switch squeeze {
+            case .squeezed:
+                return 4
+            case .standard, .relaxed:
+                return 6
+            }
         }
     }
     
     static func getButtonUniversalPaddingRight(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
         if Device.isPad {
-            return 4
+            switch squeeze {
+            case .squeezed:
+                return 6
+            case .standard, .relaxed:
+                return 10
+            }
         } else {
-            return 2
+            switch squeeze {
+            case .squeezed:
+                return 4
+            case .standard, .relaxed:
+                return 6
+            }
         }
     }
     
@@ -178,5 +198,58 @@ struct CreateSwatchLayout: LayoutScheme {
             return -3
         }
         return 0
+    }
+    
+    static func getCheckBoxCornerRadius(orientation: Orientation) -> Int {
+        if Device.isPad {
+            return 8
+        } else {
+            if orientation.isLandscape {
+                return 5
+            } else {
+                return 6
+            }
+        }
+    }
+    
+    static func getCheckBoxLineThickness(orientation: Orientation) -> Int {
+        return 1
+    }
+    
+    static func getCheckBoxWidth(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
+        if Device.isPad {
+            return 36
+        } else {
+            switch orientation {
+            case .landscape:
+                return 26
+            case .portrait:
+                return 30
+            }
+        }
+    }
+    
+    static func getCheckBoxPaddingLeft(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
+        if Device.isPad {
+            return 13
+        } else {
+            if orientation.isLandscape {
+                return 9
+            } else {
+                return 10
+            }
+        }
+    }
+    
+    static func getCheckBoxPaddingRight(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
+        if Device.isPad {
+            return 13
+        } else {
+            if orientation.isLandscape {
+                return 9
+            } else {
+                return 10
+            }
+        }
     }
 }

@@ -13,14 +13,16 @@ import Foundation
         print("MagicalSegmentedPickerViewModelAnimationMode ===> handleSelectedIndex(\(index))")
         
         if let jiggleViewController = ApplicationController.shared.jiggleViewController {
-            if index == 0 { jiggleViewController.set(animationMode: .bounce) }
-            if index == 1 { jiggleViewController.set(animationMode: .wobble) }
-            if index == 2 { jiggleViewController.set(animationMode: .twist) }
+            //if index == 0 { jiggleViewController.set(animationMode: .bounce) }
+            //if index == 1 { jiggleViewController.set(animationMode: .wobble) }
+            //if index == 2 { jiggleViewController.set(animationMode: .twist) }
+            
         }
     }
     
     override func refresh() {
         if let jiggleDocument = ApplicationController.shared.jiggleDocument {
+            /*
             switch jiggleDocument.animationMode {
             case .bounce:
                 selectedSegmentIndex = 0
@@ -29,6 +31,7 @@ import Foundation
             case .twist:
                 selectedSegmentIndex = 2
             }
+            */
         }
     }
     deinit {

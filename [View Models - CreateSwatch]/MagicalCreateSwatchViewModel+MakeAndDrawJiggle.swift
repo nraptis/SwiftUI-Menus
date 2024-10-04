@@ -10,29 +10,40 @@ import Foundation
 @Observable class MagicalCreateSwatchViewModelMakeAndDrawJiggle: MagicalCreateSwatchViewModel {
     
     override func refresh() {
-        
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
-            if jiggleViewModel.jiggleDocument.isCreatePointsEnabled {
-                refreshDisabled()
+            
+            //TODO: Temp
+            if let selectedJiggle = jiggleViewModel.getSelectedJiggle() {
+                //refreshEnabled()
             } else {
-                refreshEnabled()
+                //refreshDisabled()
             }
-        }
-        
-        if let jiggleDocument = ApplicationController.shared.jiggleDocument {
-            switch jiggleDocument.documentMode {
-            case .__VIEW:
-                selectedSegmentIndex = 0
-            case .__EDIT:
-                selectedSegmentIndex = 1
+            
+            switch jiggleViewModel.jiggleDocument.creatorMode {
+            case .makeJiggle:
+                setActiveButton(0)
+                refreshEnabledAllButtons()
+            case .drawJiggle:
+                setActiveButton(1)
+                refreshEnabledAllButtons()
+            case .none:
+                activeButtonViewModel = nil
+                refreshEnabledAllButtons()
+            default:
+                activeButtonViewModel = nil
+                refreshDisabledAllButtons()
             }
         }
     }
     
     override func handleSelectedIndex(_ index: Int) {
-        if let jiggleViewController = ApplicationController.shared.jiggleViewController {
-            if index == 0 { jiggleViewController.set(documentMode: .__VIEW) }
-            if index == 1 { jiggleViewController.set(documentMode: .__EDIT) }
+        if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
+            if index == 0 {
+                jiggleViewModel.setCreatorMode(.makeJiggle)
+            }
+            if index == 1 {
+                jiggleViewModel.setCreatorMode(.drawJiggle)
+            }
         }
     }
     

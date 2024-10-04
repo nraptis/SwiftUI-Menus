@@ -6,14 +6,6 @@
 //
 
 import Foundation
-//
-//  MagicalExitModeViewModel+Zoom.swift
-//  Jiggle3
-//
-//  Created by Nicky Taylor on 8/25/24.
-//
-
-import Foundation
 
 @Observable class MagicalExitModeViewModelZoomExit: MagicalExitModeViewModel {
     
@@ -25,9 +17,10 @@ import Foundation
     
     override func refresh() {
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
-            if let selectedJiggle = jiggleViewModel.getSelectedJiggle() {
+            switch jiggleViewModel.jiggleDocument.creatorMode {
+            case .none:
                 refreshEnabled()
-            } else {
+            default:
                 refreshDisabled()
             }
         }

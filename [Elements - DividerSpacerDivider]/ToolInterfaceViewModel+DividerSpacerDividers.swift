@@ -17,7 +17,7 @@ extension ToolInterfaceViewModel {
         return ToolInterfaceElementFlex.dividerSpacerDivider(flexDividerSpacerDividerData)
     }
     
-    static func getDividerSpacerDividerToolNode(neighborTypeLeft: ToolInterfaceElementType?,
+    @MainActor static func getDividerSpacerDividerToolNode(neighborTypeLeft: ToolInterfaceElementType?,
                                                 neighborTypeRight: ToolInterfaceElementType?,
                                                 orientation: Orientation) -> ToolNode {
         let flex = Self.getDividerSpacerDividerFlex(orientation: orientation)

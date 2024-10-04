@@ -9,7 +9,7 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-    func getRowBluePrint(slot: ToolRowSlot,
+   @MainActor func getRowBluePrint(slot: ToolRowSlot,
                          configuration: any InterfaceConfigurationConforming,
                          orientation: Orientation) -> RowBluePrint? {
         switch slot {
@@ -31,12 +31,6 @@ extension ToolInterfaceViewModel {
             return getRowBluePrint_Bottom_Secondary1(configuration: configuration, orientation: orientation)
         case .bottom_Primary:
             return getRowBluePrint_Bottom_Primary(configuration: configuration, orientation: orientation)
-        case .graph_side_menu_1:
-            return getRowBluePrint_GraphSideMenu1(configuration: configuration, orientation: orientation)
-        case .graph_side_menu_2:
-            return getRowBluePrint_GraphSideMenu2(configuration: configuration, orientation: orientation)
-        case .graph_side_menu_3:
-            return getRowBluePrint_GraphSideMenu3(configuration: configuration, orientation: orientation)
         case .video_record_1:
             return getRowBluePrint_VideoRecord1(configuration: configuration, orientation: orientation)
         case .video_record_2:
@@ -61,18 +55,17 @@ extension ToolInterfaceViewModel {
         return nil
     }
     
-    func getRowBluePrint_Top_Test() -> RowBluePrint? {
+    @MainActor func getRowBluePrint_Top_Test() -> RowBluePrint? {
         let nodes = [
             getDocumentModeMainTabToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
             //getDocumentModeSegmentToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
             
-            Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
-            getPhoneCollapseTopToolNode(neighborTypeLeft: .spacer, neighborTypeRight: nil)
+            Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton)
         ]
         return RowBluePrint(nodes: nodes, configuration: .top_Test)
     }
     
-    func getRowBluePrint_Bottom_Test() -> RowBluePrint? {
+    @MainActor func getRowBluePrint_Bottom_Test() -> RowBluePrint? {
         let nodes = [
             Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
             getWeightCurveGraphEnabledCheckBoxNode(neighborTypeLeft: .spacer, neighborTypeRight: .checkBox),
@@ -81,7 +74,7 @@ extension ToolInterfaceViewModel {
         return RowBluePrint(nodes: nodes, configuration: .bottom_Test)
     }
     
-    func getRowBluePrint_Top_Primary(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
+    @MainActor func getRowBluePrint_Top_Primary(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
         if Device.isPad {
             return getRowBluePrint_Top_Primary_Pad(configuration)
         } else {
@@ -89,7 +82,7 @@ extension ToolInterfaceViewModel {
         }
     }
     
-    func getRowBluePrint_Top_Secondary1(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
+    @MainActor func getRowBluePrint_Top_Secondary1(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
         if Device.isPad {
             return getRowBluePrint_Top_Secondary1_Pad(configuration)
         } else {
@@ -97,7 +90,7 @@ extension ToolInterfaceViewModel {
         }
     }
     
-    func getRowBluePrint_Top_Secondary2(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
+    @MainActor func getRowBluePrint_Top_Secondary2(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
         if Device.isPad {
             return getRowBluePrint_Top_Secondary2_Pad(configuration)
         } else {
@@ -105,7 +98,7 @@ extension ToolInterfaceViewModel {
         }
     }
     
-    func getRowBluePrint_Bottom_Primary(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
+    @MainActor func getRowBluePrint_Bottom_Primary(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
         if Device.isPad {
             return getRowBluePrint_Bottom_Primary_Pad(configuration)
         } else {
@@ -113,7 +106,7 @@ extension ToolInterfaceViewModel {
         }
     }
     
-    func getRowBluePrint_Bottom_Secondary1(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
+    @MainActor func getRowBluePrint_Bottom_Secondary1(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
         if Device.isPad {
             return getRowBluePrint_Bottom_Secondary1_Pad(configuration)
         } else {
@@ -121,39 +114,15 @@ extension ToolInterfaceViewModel {
         }
     }
     
-    func getRowBluePrint_Bottom_Secondary2(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
+    @MainActor func getRowBluePrint_Bottom_Secondary2(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
         if Device.isPad {
             return getRowBluePrint_Bottom_Secondary2_Pad(configuration)
         } else {
             return getRowBluePrint_Bottom_Secondary2_Pad(configuration)
         }
     }
-    
-    func getRowBluePrint_GraphSideMenu1(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
-        let nodes = [
-            getResetWeightGraphTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: .spacer),
-            Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
-        ]
-        return RowBluePrint(nodes: nodes, configuration: .graph_side_menu_1)
-    }
-    
-    func getRowBluePrint_GraphSideMenu2(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
-        let nodes = [
-            getBreakManualWeightGraphTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: .spacer),
-            Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
-        ]
-        return RowBluePrint(nodes: nodes, configuration: .graph_side_menu_2)
-    }
-    
-    func getRowBluePrint_GraphSideMenu3(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
-        let nodes = [
-            getExitWeightModeTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: .spacer),
-            Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
-        ]
-        return RowBluePrint(nodes: nodes, configuration: .graph_side_menu_3)
-    }
 
-    func getRowBluePrint_VideoRecord1(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
+    @MainActor func getRowBluePrint_VideoRecord1(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
         if Device.isPad {
             return getRowBluePrint_VideoRecord1_Pad()
         } else {
@@ -161,7 +130,7 @@ extension ToolInterfaceViewModel {
         }
     }
     
-    func getRowBluePrint_VideoRecord2(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
+    @MainActor func getRowBluePrint_VideoRecord2(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
         if Device.isPad {
             return getRowBluePrint_VideoRecord2_Pad()
         } else {
@@ -169,7 +138,7 @@ extension ToolInterfaceViewModel {
         }
     }
 
-    func getRowBluePrint_VideoExport1(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
+    @MainActor func getRowBluePrint_VideoExport1(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
         if Device.isPad {
             return getRowBluePrint_VideoExport1_Pad()
         } else {
@@ -177,7 +146,7 @@ extension ToolInterfaceViewModel {
         }
     }
     
-    func getRowBluePrint_VideoExport2(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
+    @MainActor func getRowBluePrint_VideoExport2(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
         if Device.isPad {
             return getRowBluePrint_VideoExport2_Pad()
         } else {
@@ -185,7 +154,7 @@ extension ToolInterfaceViewModel {
         }
     }
     
-    func getRowBluePrint_VideoExport3(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
+    @MainActor func getRowBluePrint_VideoExport3(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
         if Device.isPad {
             return getRowBluePrint_VideoExport3_Pad()
         } else {
@@ -193,11 +162,11 @@ extension ToolInterfaceViewModel {
         }
     }
     
-    func getRowBluePrint_VideoExport4(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
+    @MainActor func getRowBluePrint_VideoExport4(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
         return nil
     }
 
-    func getRowBluePrint_Zoom1(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
+    @MainActor func getRowBluePrint_Zoom1(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
         if Device.isPad {
             return getRowBluePrint_Zoom1_Pad()
         } else {
@@ -205,7 +174,7 @@ extension ToolInterfaceViewModel {
         }
     }
     
-    func getRowBluePrint_Zoom2(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
+    @MainActor func getRowBluePrint_Zoom2(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
         if Device.isPad {
             return getRowBluePrint_Zoom2_Pad()
         } else {
@@ -213,7 +182,7 @@ extension ToolInterfaceViewModel {
         }
     }
     
-    func getRowBluePrint_Zoom3(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
+    @MainActor func getRowBluePrint_Zoom3(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
         if Device.isPad {
             return getRowBluePrint_Zoom3_Pad()
         } else {
@@ -221,7 +190,7 @@ extension ToolInterfaceViewModel {
         }
     }
     
-    func getRowBluePrint_Zoom4(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
+    @MainActor func getRowBluePrint_Zoom4(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {
         return nil
     }
     

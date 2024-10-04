@@ -16,13 +16,6 @@ class DraggableMenuGraphContainerView: UIView, GraphContainerConforming {
         return result
     }()
     
-    lazy var sideMenuView: DraggableMenuGraphSideMenuView = {
-        let result = DraggableMenuGraphSideMenuView(toolInterfaceViewModel: toolInterfaceViewModel)
-        result.translatesAutoresizingMaskIntoConstraints = false
-        result.backgroundColor = ToolInterfaceTheme._toolbarBackground
-        return result
-    }()
-    
     lazy var graphContainerView: UIView = {
         let result = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 512.0, height: 512.0))
         result.translatesAutoresizingMaskIntoConstraints = false
@@ -53,7 +46,6 @@ class DraggableMenuGraphContainerView: UIView, GraphContainerConforming {
     }()
     
     func handleDarkModeDidChange() {
-        sideMenuView.handleDarkModeDidChange()
         graphClippingView.setNeedsDisplay()
         graphView.setNeedsDisplay()
     }
@@ -70,9 +62,6 @@ class DraggableMenuGraphContainerView: UIView, GraphContainerConforming {
     
     func setup(width: Int) {
         
-        let orientation = toolInterfaceViewModel.orientation
-        let graphSideMenuWidth = ToolInterfaceTheme.getGraphSideMenuWidth(orientation: orientation)
-        
         addSubview(containerView)
         addConstraints([
             NSLayoutConstraint(item: containerView, attribute: .left, relatedBy: .equal,
@@ -85,20 +74,6 @@ class DraggableMenuGraphContainerView: UIView, GraphContainerConforming {
                                toItem: self, attribute: .bottom, multiplier: 1.0, constant: 0.0)
         ])
         
-        containerView.addSubview(sideMenuView)
-        containerView.addConstraints([
-            NSLayoutConstraint(item: sideMenuView, attribute: .left, relatedBy: .equal,
-                               toItem: containerView, attribute: .left, multiplier: 1.0, constant: 0.0),
-            NSLayoutConstraint(item: sideMenuView, attribute: .top, relatedBy: .equal,
-                               toItem: containerView, attribute: .top, multiplier: 1.0, constant: 0.0),
-            NSLayoutConstraint(item: sideMenuView, attribute: .bottom, relatedBy: .equal,
-                               toItem: containerView, attribute: .bottom, multiplier: 1.0, constant: 0.0)
-        ])
-        sideMenuView.addConstraint(NSLayoutConstraint(item: sideMenuView,
-                                                      attribute: .width, relatedBy: .equal,
-                                                      toItem: nil, attribute: .notAnAttribute,
-                                                      multiplier: 1.0, constant: CGFloat(graphSideMenuWidth)))
-        
         containerView.addSubview(graphContainerView)
         containerView.addConstraints([
             NSLayoutConstraint(item: graphContainerView, attribute: .right, relatedBy: .equal,
@@ -109,9 +84,8 @@ class DraggableMenuGraphContainerView: UIView, GraphContainerConforming {
                                toItem: containerView, attribute: .bottom, multiplier: 1.0, constant: 0.0),
             NSLayoutConstraint(item: graphContainerView, attribute: .width, relatedBy: .equal,
                                toItem: containerView, attribute: .width, multiplier: 1.0,
-                               constant: CGFloat(-(graphSideMenuWidth)))
+                               constant: 0.0)
         ])
-        
         
         let insetLeft = ToolInterfaceTheme.getDraggableMenuGraphInsetLeft()
         let insetRight = ToolInterfaceTheme.getDraggableMenuGraphInsetRight()
@@ -141,7 +115,5 @@ class DraggableMenuGraphContainerView: UIView, GraphContainerConforming {
             NSLayoutConstraint(item: graphClippingView, attribute: .bottom, relatedBy: .equal,
                                toItem: graphContainerView, attribute: .bottom, multiplier: 1.0, constant: 0.0),
         ])
-        
-        sideMenuView.setup(width: graphSideMenuWidth)
     }
 }

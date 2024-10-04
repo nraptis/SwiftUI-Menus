@@ -10,21 +10,25 @@ import SwiftUI
 
 @Observable class MagicalMainTabViewModel: MagicalViewModel {
     
+    override class func getLayoutScheme() -> LayoutScheme.Type {
+        MainTabLayout.self
+    }
+    
     deinit {
         if ApplicationController.DEBUG_DEALLOCS {
             print("MagicalMainTabViewModel - Dealloc")
         }
     }
     
-    var selectedSegmentIndex = 0
+    @MainActor var selectedSegmentIndex = 0
     
-    var universalPaddingLeft = 0
-    var universalPaddingRight = 0
+    @MainActor var universalPaddingLeft = 0
+    @MainActor var universalPaddingRight = 0
     let mainTabConfiguration: ToolInterfaceElementMainTabConfiguration
     
     let buttonViewModels: [MagicalMainTabButtonViewModel]
     let layoutNodes: [MagicalMainTabButtonLayoutNode]
-    init(orientation: Orientation,
+    @MainActor init(orientation: Orientation,
          mainTabConfiguration: ToolInterfaceElementMainTabConfiguration) {
         
         self.mainTabConfiguration = mainTabConfiguration
@@ -48,14 +52,6 @@ import SwiftUI
     
     override func refresh() {
         
-    }
-    
-    override func refreshDisabled() {
-        super.refreshDisabled()
-    }
-    
-    override func refreshEnabled() {
-        super.refreshEnabled()
     }
     
     override func refreshLayoutFrame() {

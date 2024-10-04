@@ -12,7 +12,7 @@ class DraggableMenuVideoRecordView: UIView, MenuPartWithRowsConforming {
     var separatorViews = [UIView]()
     var rowViews = [ToolRowView]()
     func getNumberOfRows() -> Int { ToolInterfaceTheme.getDraggableMenuVideoRecordRowCount() }
-    func getWidthSource() -> ToolRowViewContent.WidthSource { .standard }
+    
     func getToolRow(at index: Int) -> ToolRow? {
         if index >= 0 && index < toolInterfaceViewModel.rowsVideoRecord.count {
             return toolInterfaceViewModel.rowsVideoRecord[index]

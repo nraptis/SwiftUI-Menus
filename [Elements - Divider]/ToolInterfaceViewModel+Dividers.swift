@@ -17,7 +17,7 @@ extension ToolInterfaceViewModel {
         ToolInterfaceElementFlex.fixed(DividerLayout.getPillWidthHuge(orientation: orientation))
     }
     
-    static func getDividerTinyToolNode(neighborTypeLeft: ToolInterfaceElementType?,
+    @MainActor static func getDividerTinyToolNode(neighborTypeLeft: ToolInterfaceElementType?,
                                        neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         if let jiggleDocument = ApplicationController.shared.jiggleDocument {
             return getDividerTinyToolNode(neighborTypeLeft: neighborTypeLeft,
@@ -34,7 +34,7 @@ extension ToolInterfaceViewModel {
         }
     }
     
-    static func getDividerTinyToolNode(neighborTypeLeft: ToolInterfaceElementType?,
+    @MainActor static func getDividerTinyToolNode(neighborTypeLeft: ToolInterfaceElementType?,
                                        neighborTypeRight: ToolInterfaceElementType?,
                                        orientation: Orientation) -> ToolNode {
         let flex = getDividerTinyFlex(orientation: orientation)
@@ -48,7 +48,7 @@ extension ToolInterfaceViewModel {
         return result
     }
     
-    static func getDividerHugeToolNode(neighborTypeLeft: ToolInterfaceElementType?,
+    @MainActor static func getDividerHugeToolNode(neighborTypeLeft: ToolInterfaceElementType?,
                                        neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         if let jiggleDocument = ApplicationController.shared.jiggleDocument {
             return getDividerHugeToolNode(neighborTypeLeft: neighborTypeLeft,
@@ -65,7 +65,7 @@ extension ToolInterfaceViewModel {
         }
     }
     
-    static func getDividerHugeToolNode(neighborTypeLeft: ToolInterfaceElementType?,
+    @MainActor static func getDividerHugeToolNode(neighborTypeLeft: ToolInterfaceElementType?,
                                        neighborTypeRight: ToolInterfaceElementType?,
                                        orientation: Orientation) -> ToolNode {
         let flex = getDividerHugeFlex(orientation: orientation)

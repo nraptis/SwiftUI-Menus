@@ -21,14 +21,11 @@ class ToolRowView: UIView {
     let toolInterfaceLayoutRelay: ToolInterfaceLayoutRelay
     let toolRow: ToolRow
     let orientation: Orientation
-    let widthSource: ToolRowViewContent.WidthSource
     init(toolInterfaceLayoutRelay: ToolInterfaceLayoutRelay,
          toolRow: ToolRow,
-         widthSource: ToolRowViewContent.WidthSource,
          orientation: Orientation) {
         self.toolInterfaceLayoutRelay = toolInterfaceLayoutRelay
         self.toolRow = toolRow
-        self.widthSource = widthSource
         self.orientation = orientation
         super.init(frame: .zero)
         self.translatesAutoresizingMaskIntoConstraints = false
@@ -38,7 +35,6 @@ class ToolRowView: UIView {
         
         let height = ToolInterfaceTheme.getRowHeight(orientation: orientation)
         hostingControllerCurrent = UIHostingController(rootView: ToolRowViewContent(toolRow: toolRow,
-                                                                                    widthSource: widthSource,
                                                                                     height: height,
                                                                                     orientation: orientation).environment(toolInterfaceLayoutRelay),
                                                        ignoreSafeArea: true)
@@ -92,7 +88,6 @@ class ToolRowView: UIView {
         
         let height = ToolInterfaceTheme.getRowHeight(orientation: orientation)
         hostingControllerCurrent = UIHostingController(rootView: ToolRowViewContent(toolRow: toolRow,
-                                                                                    widthSource: widthSource,
                                                                                     height: height,
                                                                                     orientation: orientation).environment(toolInterfaceLayoutRelay),
                                                        ignoreSafeArea: true)
@@ -122,7 +117,6 @@ class ToolRowView: UIView {
         
         let height = ToolInterfaceTheme.getRowHeight(orientation: orientation)
         hostingControllerCurrent = UIHostingController(rootView: ToolRowViewContent(toolRow: toolRow,
-                                                                                    widthSource: widthSource,
                                                                                     height: height,
                                                                                     orientation: orientation).environment(toolInterfaceLayoutRelay),
                                                        ignoreSafeArea: true)

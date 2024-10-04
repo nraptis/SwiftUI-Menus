@@ -59,14 +59,14 @@ struct MainTabLayout: LayoutScheme {
             switch squeeze {
             case .squeezed:
                 return 2
-            case .standard:
+            case .standard, .relaxed:
                 return 6
             }
         } else {
             switch squeeze {
             case .squeezed:
                 return 2
-            case .standard:
+            case .standard, .relaxed:
                 return 4
             }
         }
@@ -81,14 +81,14 @@ struct MainTabLayout: LayoutScheme {
             switch squeeze {
             case .squeezed:
                 return 2
-            case .standard:
+            case .standard, .relaxed:
                 return 6
             }
         } else {
             switch squeeze {
             case .squeezed:
                 return 2
-            case .standard:
+            case .standard, .relaxed:
                 return 4
             }
         }

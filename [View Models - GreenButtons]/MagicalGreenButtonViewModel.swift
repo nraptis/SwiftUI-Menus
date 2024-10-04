@@ -10,6 +10,10 @@ import SwiftUI
 
 @Observable class MagicalGreenButtonViewModel: MagicalViewModel {
     
+    override class func getLayoutScheme() -> LayoutScheme.Type {
+        GreenButtonLayout.self
+    }
+    
     var nameLabelPaddingLeft = 0
     var nameLabelPaddingRight = 0
     
@@ -20,18 +24,10 @@ import SwiftUI
     var universalPaddingRight = 0
     
     let greenButtonConfiguration: ToolInterfaceElementGreenButtonConfiguration
-    init(orientation: Orientation,
+    @MainActor init(orientation: Orientation,
          greenButtonConfiguration: ToolInterfaceElementGreenButtonConfiguration) {
         self.greenButtonConfiguration = greenButtonConfiguration
         super.init(orientation: orientation)
-    }
-    
-    override func refreshDisabled() {
-        super.refreshDisabled()
-    }
-    
-    override func refreshEnabled() {
-        super.refreshEnabled()
     }
     
     func handleClicked() {

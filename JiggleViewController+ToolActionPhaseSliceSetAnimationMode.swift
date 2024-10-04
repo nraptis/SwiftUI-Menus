@@ -7,6 +7,7 @@
 
 import Foundation
 
+    /*
 extension JiggleViewController {
     func toolActionConsumePhaseSliceSetAnimationMode(_ slice: ToolActionPhaseSliceSetAnimationMode) {
         jiggleViewModel.jiggleDocument.animationMode = slice.animationMode
@@ -15,3 +16,4 @@ extension JiggleViewController {
         jiggleViewModel.killDragAll()
     }
 }
+*/

@@ -9,7 +9,7 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-    func getAnimationWobbleApplyToAllCheckBoxNode(neighborTypeLeft: ToolInterfaceElementType?,
+   @MainActor func getAnimationWobbleApplyToAllCheckBoxNode(neighborTypeLeft: ToolInterfaceElementType?,
                                                   neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         let orientation = jiggleViewModel.orientation
         let textLine1 = ToolInterfaceStringLibraryCheckBoxes.checkBoxTextAnimationWobbleApplyToAllLine1()

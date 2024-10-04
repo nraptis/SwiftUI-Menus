@@ -9,15 +9,15 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-    func getRedoSexyButtonToolNode(neighborTypeLeft: ToolInterfaceElementType?,
+   @MainActor func getRedoSexyButtonToolNode(neighborTypeLeft: ToolInterfaceElementType?,
                                       neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
         let orientation = jiggleViewModel.orientation
         let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextRedoLine1()
         let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextRedoLine2()
-        let iconPack = SexyButtonIconLibrary.graph
-        
-        let configuration = ToolInterfaceElementSexyButtonConfiguration(iconPack: iconPack, 
+       let iconPack = LooseConvertibleIconLibrary.menuA
+       
+        let configuration = ToolInterfaceElementSexyButtonConfiguration(iconPack: iconPack,
                                                                         orientation: orientation,
                                                                         nameLabelLine1: textLine1,
                                                                         nameLabelLine2: textLine2)

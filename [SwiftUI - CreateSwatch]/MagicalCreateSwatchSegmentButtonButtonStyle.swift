@@ -12,7 +12,6 @@ struct MagicalCreateSwatchSegmentButtonButtonStyle: ButtonStyle {
     @Environment(MagicalCreateSwatchViewModel.self) var magicalCreateSwatchViewModel: MagicalCreateSwatchViewModel
     @Environment(MagicalCreateSwatchButtonViewModel.self) var magicalCreateSwatchButtonViewModel: MagicalCreateSwatchButtonViewModel
     let index: Int
-    let isSelected: Bool
     let isDarkMode: Bool
     let isEnabled: Bool
     let orientation: Orientation
@@ -35,14 +34,13 @@ struct MagicalCreateSwatchSegmentButtonButtonStyle: ButtonStyle {
     func bodyContent(isPressed: Bool) -> some View {
         return HStack(spacing: 0.0) {
             MagicalCreateSwatchSegmentContent(index: index,
-                                                        isSelected: isSelected,
-                                                        isDarkMode: isDarkMode,
-                                                        isEnabled: isEnabled,
-                                                        isPressed: isPressed,
-                                                        orientation: orientation,
-                                                        layoutSchemeFlavor: layoutSchemeFlavor,
-                                                        universalPaddingTop: universalPaddingTop,
-                                                        universalPaddingBottom: universalPaddingBottom)
+                                              isDarkMode: isDarkMode,
+                                              isEnabled: isEnabled,
+                                              isPressed: isPressed,
+                                              orientation: orientation,
+                                              layoutSchemeFlavor: layoutSchemeFlavor,
+                                              universalPaddingTop: universalPaddingTop,
+                                              universalPaddingBottom: universalPaddingBottom)
             
         }
         .frame(width: CGFloat(magicalCreateSwatchButtonViewModel.width),
@@ -58,9 +56,17 @@ struct MagicalCreateSwatchSegmentButtonButtonStyle: ButtonStyle {
         
         let color: Color
         if isDarkMode {
-            color = ToolInterfaceTheme.primaryEnabledDark
+            if isEnabled {
+                color = ToolInterfaceTheme.primaryEnabledDark
+            } else {
+                color = ToolInterfaceTheme.primaryDisabledDark
+            }
         } else {
-            color = ToolInterfaceTheme.primaryEnabledLight
+            if isEnabled {
+                color = ToolInterfaceTheme.primaryEnabledLight
+            } else {
+                color = ToolInterfaceTheme.primaryDisabledLight
+            }
         }
         
         let unevenRoundedRectangle: UnevenRoundedRectangle
@@ -127,29 +133,33 @@ struct MagicalCreateSwatchSegmentButtonButtonStyle: ButtonStyle {
         
         let color: Color
         if isDarkMode {
-            
+            if isEnabled {
+                if isPressed {
+                    color = ToolInterfaceTheme.contextUnderlayDownEnabledDark
+                } else {
+                    color = ToolInterfaceTheme.contextUnderlayHighlightedEnabledDark
+                }
+            } else {
                 if isPressed {
                     color = ToolInterfaceTheme.contextUnderlayDownDisabledDark
                 } else {
-                    if isSelected {
-                        color = ToolInterfaceTheme.contextUnderlayHighlightedDisabledDark
-                    } else {
-                        color = ToolInterfaceTheme.contextUnderlayDisabledDark
-                    }
+                    color = ToolInterfaceTheme.contextUnderlayHighlightedDisabledDark
                 }
-            
+            }
         } else {
-            
+            if isEnabled {
+                if isPressed {
+                    color = ToolInterfaceTheme.contextUnderlayDownEnabledLight
+                } else {
+                    color = ToolInterfaceTheme.contextUnderlayHighlightedEnabledLight
+                }
+            } else {
                 if isPressed {
                     color = ToolInterfaceTheme.contextUnderlayDownDisabledLight
                 } else {
-                    if isSelected {
-                        color = ToolInterfaceTheme.contextUnderlayHighlightedDisabledLight
-                    } else {
-                        color = ToolInterfaceTheme.contextUnderlayDisabledLight
-                    }
+                    color = ToolInterfaceTheme.contextUnderlayHighlightedDisabledLight
                 }
-            
+            }
         }
         
         return HStack(spacing: 0.0) {

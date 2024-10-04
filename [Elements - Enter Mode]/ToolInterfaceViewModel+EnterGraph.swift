@@ -9,7 +9,7 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-    func getEnterGraphEnterModeToolNode(neighborTypeLeft: ToolInterfaceElementType?,
+   @MainActor func getEnterGraphEnterModeToolNode(neighborTypeLeft: ToolInterfaceElementType?,
                                       neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
         

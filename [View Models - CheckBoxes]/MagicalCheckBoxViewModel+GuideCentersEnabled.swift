@@ -17,7 +17,7 @@ import Foundation
             // See if we should be checked...
             //
             
-            if jiggleViewModel.jiggleDocument.isCreateGuideCentersModificationEnabled {
+            if jiggleViewModel.jiggleDocument.creatorMode == .moveGuideCenter {
                 if isChecked == false {
                     isChecked = true
                 }
@@ -26,27 +26,6 @@ import Foundation
                     isChecked = false
                 }
             }
-            
-            //
-            // See if we should be highlighted...
-            //
-            
-            if jiggleViewModel.jiggleDocument.isCreateGuideCentersModificationEnabled {
-                if isHighlighted == false {
-                    isHighlighted = true
-                }
-            } else {
-                if isHighlighted == true {
-                    isHighlighted = false
-                }
-            }
-            
-            
-            //
-            // See if we should be enabled...
-            //
-            
-            
         }
         
         if isEnabled == false {
@@ -64,10 +43,10 @@ import Foundation
                 return
             }
             
-            if jiggleViewModel.jiggleDocument.isCreateGuideCentersModificationEnabled {
-                jiggleViewModel.createGuideCentersModificationDisable()
+            if jiggleViewModel.jiggleDocument.creatorMode == .moveGuideCenter {
+                jiggleViewModel.setCreatorMode(.none)
             } else {
-                jiggleViewModel.createGuideCentersModificationEnable()
+                jiggleViewModel.setCreatorMode(.moveGuideCenter)
             }
         }
     }

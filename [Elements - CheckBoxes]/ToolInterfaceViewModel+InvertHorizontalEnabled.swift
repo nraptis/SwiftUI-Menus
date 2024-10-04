@@ -9,7 +9,7 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-    func getInvertHorizontalEnabledCheckBoxNode(neighborTypeLeft: ToolInterfaceElementType?,
+    @MainActor func getInvertHorizontalEnabledCheckBoxNode(neighborTypeLeft: ToolInterfaceElementType?,
                                               neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         let orientation = jiggleViewModel.orientation
         let textLine1 = ToolInterfaceStringLibraryCheckBoxes.checkBoxTextInvertHorizontalEnabledLine1()

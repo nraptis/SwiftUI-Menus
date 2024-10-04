@@ -26,7 +26,7 @@ struct FavoringOneLineLabelLayout: LayoutScheme {
         switch squeeze {
         case .squeezed:
             return 4
-        case .standard:
+        case .standard, .relaxed:
             return 8
         }
     }
@@ -39,7 +39,7 @@ struct FavoringOneLineLabelLayout: LayoutScheme {
         switch squeeze {
         case .squeezed:
             return 4
-        case .standard:
+        case .standard, .relaxed:
             return 8
         }
     }

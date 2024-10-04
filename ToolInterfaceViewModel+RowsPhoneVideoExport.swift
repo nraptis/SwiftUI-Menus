@@ -9,27 +9,29 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-    func getRowBluePrint_VideoExport1_Pad() -> RowBluePrint {
+   @MainActor func getRowBluePrint_VideoExport1_Pad() -> RowBluePrint {
         let nodes = [
-            getMainMenuTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: .spacer),
+            getMenuSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
             Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
             getTwistEnabledCheckBoxNode(neighborTypeLeft: .spacer, neighborTypeRight: nil)
         ]
         return RowBluePrint(nodes: nodes, configuration: .video_export_1)
     }
     
-    func getRowBluePrint_VideoExport2_Pad() -> RowBluePrint {
+    @MainActor func getRowBluePrint_VideoExport2_Pad() -> RowBluePrint {
         let nodes = [
             getDocumentModeMainTabToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
         ]
         return RowBluePrint(nodes: nodes, configuration: .video_export_2)
     }
     
-    func getRowBluePrint_VideoExport3_Pad() -> RowBluePrint {
+    @MainActor func getRowBluePrint_VideoExport3_Pad() -> RowBluePrint {
         let nodes = [
-            getExitZoomExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getExitZoomModeTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            getExitVideoExportExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            getExitVideoRecordExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            
             Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
+            getEnterVideoRecordEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
         ]
         return RowBluePrint(nodes: nodes, configuration: .video_export_3)
     }

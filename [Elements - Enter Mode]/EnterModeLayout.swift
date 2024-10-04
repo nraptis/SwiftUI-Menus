@@ -102,14 +102,14 @@ struct EnterModeLayout: LayoutScheme {
             switch squeeze {
             case .squeezed:
                 return 3
-            case .standard:
+            case .standard, .relaxed:
                 return 6
             }
         } else {
             switch squeeze {
             case .squeezed:
                 return 2
-            case .standard:
+            case .standard, .relaxed:
                 return 4
             }
         }
@@ -120,14 +120,14 @@ struct EnterModeLayout: LayoutScheme {
             switch squeeze {
             case .squeezed:
                 return 3
-            case .standard:
+            case .standard, .relaxed:
                 return 6
             }
         } else {
             switch squeeze {
             case .squeezed:
                 return 2
-            case .standard:
+            case .standard, .relaxed:
                 return 4
             }
         }

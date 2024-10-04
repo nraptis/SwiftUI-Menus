@@ -10,24 +10,20 @@ import SwiftUI
 
 @Observable class MagicalFavoringOneLineLabelViewModel: MagicalViewModel {
     
+    override class func getLayoutScheme() -> LayoutScheme.Type {
+        FavoringOneLineLabelLayout.self
+    }
+    
     var universalPaddingLeft = 0
     var universalPaddingRight = 0
     
     var isTwoLine = false
     
     let favoringOneLineLabelConfiguration: ToolInterfaceElementFavoringOneLineLabelConfiguration
-    init(orientation: Orientation,
+    @MainActor init(orientation: Orientation,
          favoringOneLineLabelConfiguration: ToolInterfaceElementFavoringOneLineLabelConfiguration) {
         self.favoringOneLineLabelConfiguration = favoringOneLineLabelConfiguration
         super.init(orientation: orientation)
-    }
-    
-    override func refreshDisabled() {
-        super.refreshDisabled()
-    }
-    
-    override func refreshEnabled() {
-        super.refreshEnabled()
     }
     
     func handleClicked() {

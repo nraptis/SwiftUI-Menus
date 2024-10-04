@@ -10,21 +10,25 @@ import SwiftUI
 
 @Observable class MagicalCreateSwatchViewModel: MagicalViewModel {
     
+    override class func getLayoutScheme() -> LayoutScheme.Type {
+        CreateSwatchLayout.self
+    }
+    
     deinit {
         if ApplicationController.DEBUG_DEALLOCS {
             print("MagicalCreateSwatchViewModel - Dealloc")
         }
     }
     
-    var selectedSegmentIndex = 0
-    
     var universalPaddingLeft = 0
     var universalPaddingRight = 0
     let createSwatchConfiguration: ToolInterfaceElementCreateSwatchConfiguration
     
+    var activeButtonViewModel: MagicalCreateSwatchButtonViewModel?
+    
     let buttonViewModels: [MagicalCreateSwatchButtonViewModel]
     let layoutNodes: [MagicalCreateSwatchButtonLayoutNode]
-    init(orientation: Orientation,
+    @MainActor init(orientation: Orientation,
          createSwatchConfiguration: ToolInterfaceElementCreateSwatchConfiguration) {
         
         self.createSwatchConfiguration = createSwatchConfiguration
@@ -46,16 +50,47 @@ import SwiftUI
         super.init(orientation: orientation)
     }
     
-    override func refresh() {
-        
+    func setActiveButton(_ index: Int) {
+        if index >= 0 && index < buttonViewModels.count {
+            if activeButtonViewModel !== buttonViewModels[index] {
+                activeButtonViewModel = buttonViewModels[index]
+            }
+        }
     }
     
-    override func refreshDisabled() {
-        super.refreshDisabled()
+    func refreshEnabledButton(at index: Int) {
+        if index >= 0 && index < buttonViewModels.count {
+            buttonViewModels[index].refreshEnabled()
+        }
     }
     
-    override func refreshEnabled() {
-        super.refreshEnabled()
+    func refreshDisabledButton(at index: Int) {
+        if index >= 0 && index < buttonViewModels.count {
+            buttonViewModels[index].refreshDisabled()
+        }
+    }
+    
+    func refreshEnabledAllButtons() {
+        for index in 0..<buttonViewModels.count {
+            buttonViewModels[index].refreshEnabled()
+        }
+    }
+    
+    func refreshDisabledAllButtons() {
+        for index in 0..<buttonViewModels.count {
+            buttonViewModels[index].refreshDisabled()
+        }
+    }
+    
+    func handleSelectedIndex(_ index: Int) {
+        print("MagicalCreateSwatchViewModel => handleSelectedIndex(\(index))")
+    }
+    
+    func handleActiveSwatchClicked() {
+        print("MagicalCreateSwatchViewModel -> ActiveSwatchClicked!!!!!!!")
+        if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
+            jiggleViewModel.setCreatorMode(.none)
+        }
     }
     
     override func refreshLayoutFrame() {
@@ -297,10 +332,6 @@ import SwiftUI
         }
         universalPaddingLeft = _universalPaddingLeft
         universalPaddingRight = _universalPaddingRight
-    }
-    
-    func handleSelectedIndex(_ index: Int) {
-        print("MagicalCreateSwatchViewModel => handleSelectedIndex(\(index))")
     }
     
     override func setDarkModeEnabled(isDarkModeEnabled: Bool) {

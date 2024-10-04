@@ -11,14 +11,6 @@ import Foundation
     
     override func refresh() {
         
-        if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
-            if jiggleViewModel.jiggleDocument.isCreatePointsEnabled {
-                refreshDisabled()
-            } else {
-                refreshEnabled()
-            }
-        }
-        
         if let jiggleDocument = ApplicationController.shared.jiggleDocument {
             switch jiggleDocument.documentMode {
             case .__VIEW:
@@ -26,6 +18,10 @@ import Foundation
             case .__EDIT:
                 selectedSegmentIndex = 1
             }
+        }
+        
+        if !isEnabled {
+            isEnabled = true
         }
     }
     

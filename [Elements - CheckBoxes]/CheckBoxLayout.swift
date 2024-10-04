@@ -106,6 +106,7 @@ struct CheckBoxLayout: LayoutScheme {
     }
     
     static func getButtonUniversalPaddingRight(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
+        /*
         if Device.isPad {
             return 11 + 2
         } else {
@@ -115,6 +116,8 @@ struct CheckBoxLayout: LayoutScheme {
                 return 8 + 2
             }
         }
+        */
+        0
     }
     
     static func getIconPaddingLeft(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
@@ -127,7 +130,7 @@ struct CheckBoxLayout: LayoutScheme {
                 switch squeeze {
                 case .squeezed:
                     return 6
-                case .standard:
+                case .standard, .relaxed:
                     return 8
                 }
             }
@@ -136,7 +139,7 @@ struct CheckBoxLayout: LayoutScheme {
                 switch squeeze {
                 case .squeezed:
                     return 4
-                case .standard:
+                case .standard, .relaxed:
                     return 6
                 }
             }
@@ -159,29 +162,37 @@ struct CheckBoxLayout: LayoutScheme {
     
     static func getCheckBoxWidth(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
         if Device.isPad {
-            return 36 - 6
+            return 36
         } else {
             switch orientation {
             case .landscape:
-                return 26 - 6
+                return 26
             case .portrait:
-                return 30 - 6
+                return 30
             }
         }
     }
     
     static func getCheckBoxPaddingLeft(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
-        0
+        if Device.isPad {
+            return 13
+        } else {
+            if orientation.isLandscape {
+                return 9
+            } else {
+                return 10
+            }
+        }
     }
     
     static func getCheckBoxPaddingRight(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
         if Device.isPad {
-            return 11 + 2
+            return 13
         } else {
             if orientation.isLandscape {
-                return 7 + 2
+                return 9
             } else {
-                return 8 + 2
+                return 10
             }
         }
     }

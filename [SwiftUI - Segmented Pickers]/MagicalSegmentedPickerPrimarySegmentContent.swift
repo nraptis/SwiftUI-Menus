@@ -141,13 +141,12 @@ struct MagicalSegmentedPickerPrimarySegmentContent: View {
                         switch layoutSchemeFlavor {
                         case .long:
                             HStack(spacing: 0.0) {
-                                IconBox(icon: textIcon,
-                                        iconWidth: iconWidth,
-                                        iconHeight: iconHeight,
-                                        iconPaddingLeft: iconPaddingLeft,
-                                        iconPaddingRight: iconPaddingRight,
-                                        iconPaddingTop: iconPaddingTop,
-                                        color: color)
+                                IconBoxMainTab(icon: textIcon,
+                                                iconWidth: iconWidth,
+                                                iconHeight: iconHeight,
+                                                iconPaddingLeft: iconPaddingLeft,
+                                                iconPaddingRight: iconPaddingRight,
+                                                iconPaddingTop: iconPaddingTop)
                                 LabelBox(line1: line1,
                                          line2: line2,
                                          numberOfLines: numberOfLines,
@@ -164,13 +163,12 @@ struct MagicalSegmentedPickerPrimarySegmentContent: View {
                             
                             ZStack {
                                 VStack(spacing: 0.0) {
-                                    IconBox(icon: textIcon,
+                                    IconBoxMainTab(icon: textIcon,
                                             iconWidth: iconWidth,
                                             iconHeight: iconHeight,
                                             iconPaddingLeft: iconPaddingLeft,
                                             iconPaddingRight: iconPaddingRight,
-                                            iconPaddingTop: iconPaddingTop,
-                                            color: color)
+                                            iconPaddingTop: iconPaddingTop)
                                     Spacer(minLength: 0.0)
                                 }
                                 VStack(spacing: 0.0) {

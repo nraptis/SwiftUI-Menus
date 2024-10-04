@@ -33,6 +33,7 @@ struct ToolInterfaceTheme {
     
     static func getNumberOfLines(line1: String?,
                                  line2: String?) -> Int {
+        
         var numberOfLines = 0
         if line1 != nil { numberOfLines += 1 }
         if line2 != nil { numberOfLines += 1 }
@@ -153,7 +154,7 @@ struct ToolInterfaceTheme {
     }
     
     static func getDraggableMenuGraphInsetTop() -> Int {
-        return 12
+        return 6
     }
     
     static func getDraggableMenuGraphInsetBottom() -> Int {
@@ -161,6 +162,27 @@ struct ToolInterfaceTheme {
     }
     
     static func getDraggableMenuGraphCornerRadius() -> Int {
+        return 12
+    }
+    
+    
+    static func getDraggableMenuTimeLineInsetLeft() -> Int {
+        return 104
+    }
+    
+    static func getDraggableMenuTimeLineInsetRight() -> Int {
+        return 12
+    }
+    
+    static func getDraggableMenuTimeLineInsetTop() -> Int {
+        return 6
+    }
+    
+    static func getDraggableMenuTimeLineInsetBottom() -> Int {
+        return 12
+    }
+    
+    static func getDraggableMenuTimeLineCornerRadius() -> Int {
         return 12
     }
     
@@ -197,7 +219,7 @@ struct ToolInterfaceTheme {
         return 1
     }
     
-    static func getTopGraphBlockerHeight(orientation: Orientation, safeAreaTop: Int) -> Int {
+    static func getTopBlockerHeight(orientation: Orientation, safeAreaTop: Int) -> Int {
         var result = (46 - safeAreaTop - 6)
         if result < 0 {
             result = 0
@@ -225,17 +247,24 @@ struct ToolInterfaceTheme {
         return 8
     }
     
-    static func getGraphSideMenuWidth(orientation: Orientation) -> Int {
-        if Device.isPad {
-            return 144
-        } else {
-            switch orientation {
-            case .landscape:
-                return 126
-            case .portrait:
-                return 82
-            }
-        }
+    static func getTopTimeLineInsetLeft(orientation: Orientation) -> Int {
+        return 70
+    }
+    
+    static func getTopTimeLineInsetRight(orientation: Orientation) -> Int {
+        return 6
+    }
+    
+    static func getTopTimeLineInsetTop(orientation: Orientation) -> Int {
+        return 12
+    }
+    
+    static func getTopTimeLineInsetBottom(orientation: Orientation) -> Int {
+        return 12
+    }
+    
+    static func getTopTimeLineCornerRadius(orientation: Orientation) -> Int {
+        return 8
     }
     
     static func getTopMenuStandardRowCount(orientation: Orientation) -> Int {
@@ -296,6 +325,25 @@ struct ToolInterfaceTheme {
             return result
         }
     }
+    
+    static func getTopMenuTimeLineRowCount(orientation: Orientation) -> Int {
+        switch orientation {
+        case .landscape:
+            var result = 4
+            if ApplicationController.TEST_ROW_TOP {
+                result += 1
+            }
+            return result
+        case .portrait:
+            var result = 5
+            if ApplicationController.TEST_ROW_TOP {
+                result += 1
+            }
+            return result
+        }
+    }
+    
+    
     
     static func getTopMenuShadowHeight(orientation: Orientation) -> Int {
         switch orientation {
@@ -410,8 +458,8 @@ struct ToolInterfaceTheme {
     static let _gray600 = UIColor(red: 0.6, green: 0.6, blue: 0.6, alpha: 1.0)
     static let _gray700 = UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1.0)
     static let _gray750 = UIColor(red: 0.75, green: 0.75, blue: 0.75, alpha: 1.0)
-    static let _gray800 = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0)
-    static let _gray850 = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.0)
+    //static let _gray800 = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0)
+    //static let _gray850 = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.0)
     //static let _gray900 = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0)
     //static let _gray925 = UIColor(red: 0.925, green: 0.925, blue: 0.925, alpha: 1.0)
     //static let _gray950 = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1.0)
@@ -458,7 +506,48 @@ struct ToolInterfaceTheme {
     //static let gray950 = Color(uiColor: _gray950)
     //static let gray975 = Color(uiColor: _gray975)
     
-    //static let _toolbarBackground =
+    static let _graphBackgroundDark = UIColor(named: "graph_background_dark") ?? UIColor()
+    static let graphBackgroundDark = Color(uiColor: _graphBackgroundDark)
+    
+    static let _graphBackgroundLight = UIColor(named: "graph_background_light") ?? UIColor()
+    static let graphBackgroundLight = Color(uiColor: _graphBackgroundLight)
+    
+    static let _graphBorderDark = UIColor(named: "graph_border_dark") ?? UIColor()
+    static let graphBorderDark = Color(uiColor: _graphBorderDark)
+    
+    static let _graphBorderLight = UIColor(named: "graph_border_light") ?? UIColor()
+    static let graphBorderLight = Color(uiColor: _graphBorderLight)
+    
+    static let _graphLineFillDark = UIColor(named: "graph_line_fill_dark") ?? UIColor()
+    static let graphLineFillDark = Color(uiColor: _graphLineFillDark)
+    
+    static let _graphLineFillLight = UIColor(named: "graph_line_fill_light") ?? UIColor()
+    static let graphLineFillLight = Color(uiColor: _graphLineFillLight)
+    
+    static let _graphTanLineFillDark = UIColor(named: "graph_tan_line_fill_dark") ?? UIColor()
+    static let graphTanLineFillDark = Color(uiColor: _graphTanLineFillDark)
+    
+    static let _graphTanLineFillLight = UIColor(named: "graph_tan_line_fill_light") ?? UIColor()
+    static let graphTanLineFillLight = Color(uiColor: _graphTanLineFillLight)
+    
+    static let _graphPointFillDark = UIColor(named: "graph_point_fill_dark") ?? UIColor()
+    static let graphPointFillDark = Color(uiColor: _graphPointFillDark)
+    
+    static let _graphPointFillLight = UIColor(named: "graph_point_fill_light") ?? UIColor()
+    static let graphPointFillLight = Color(uiColor: _graphPointFillLight)
+    
+    static let _graphTanPointFillDark = UIColor(named: "graph_tan_point_fill_dark") ?? UIColor()
+    static let graphTanPointFillDark = Color(uiColor: _graphTanPointFillDark)
+    
+    static let _graphTanPointFillLight = UIColor(named: "graph_tan_point_fill_light") ?? UIColor()
+    static let graphTanPointFillLight = Color(uiColor: _graphTanPointFillLight)
+    
+    static let _graphLineStrokeDark = UIColor(named: "graph_line_stroke_dark") ?? UIColor()
+    static let graphLineStrokeDark = Color(uiColor: _graphLineStrokeDark)
+    
+    static let _graphLineStrokeLight = UIColor(named: "graph_line_stroke_light") ?? UIColor()
+    static let graphLineStrokeLight = Color(uiColor: _graphLineStrokeLight)
+    
     static let _toolbarBackground = UIColor.clear//.withAlphaComponent(0.05)
     static let toolbarBackground = Color(uiColor: _toolbarBackground)
     
@@ -494,7 +583,6 @@ struct ToolInterfaceTheme {
     //
     ////
     //
-    
     static let _checkBoxDisabled = UIColor(named: "tool_check_box_disabled") ?? UIColor()
     static let checkBoxDisabled = Color(uiColor: _checkBoxDisabled)
     
@@ -608,8 +696,65 @@ struct ToolInterfaceTheme {
     
     
     
+    static let _createSwatchActiveBackgroundDark = UIColor(named: "create_swatch_active_background_dark") ?? UIColor()
+    static let createSwatchActiveBackgroundDark = Color(uiColor: _createSwatchActiveBackgroundDark)
     
+    static let _createSwatchActiveBackgroundLight = UIColor(named: "create_swatch_active_background_light") ?? UIColor()
+    static let createSwatchActiveBackgroundLight = Color(uiColor: _createSwatchActiveBackgroundLight)
     
+    static let _createSwatchActiveBackgroundPressedDark = UIColor(named: "create_swatch_active_background_pressed_dark") ?? UIColor()
+    static let createSwatchActiveBackgroundPressedDark = Color(uiColor: _createSwatchActiveBackgroundPressedDark)
+    
+    static let _createSwatchActiveBackgroundPressedLight = UIColor(named: "create_swatch_active_background_pressed_light") ?? UIColor()
+    static let createSwatchActiveBackgroundPressedLight = Color(uiColor: _createSwatchActiveBackgroundPressedLight)
+    
+    static let _createSwatchActiveBorderDark = UIColor(named: "create_swatch_active_border_dark") ?? UIColor()
+    static let createSwatchActiveBorderDark = Color(uiColor: _createSwatchActiveBorderDark)
+    
+    static let _createSwatchActiveBorderLight = UIColor(named: "create_swatch_active_border_light") ?? UIColor()
+    static let createSwatchActiveBorderLight = Color(uiColor: _createSwatchActiveBorderLight)
+    
+    static let _createSwatchActiveBorderPressedDark = UIColor(named: "create_swatch_active_border_pressed_dark") ?? UIColor()
+    static let createSwatchActiveBorderPressedDark = Color(uiColor: _createSwatchActiveBorderPressedDark)
+    
+    static let _createSwatchActiveBorderPressedLight = UIColor(named: "create_swatch_active_border_pressed_light") ?? UIColor()
+    static let createSwatchActiveBorderPressedLight = Color(uiColor: _createSwatchActiveBorderPressedLight)
+    
+    static let _createSwatchActiveCheckBackgroundDark = UIColor(named: "create_swatch_active_check_background_dark") ?? UIColor()
+    static let createSwatchActiveCheckBackgroundDark = Color(uiColor: _createSwatchActiveCheckBackgroundDark)
+    
+    static let _createSwatchActiveCheckBackgroundLight = UIColor(named: "create_swatch_active_check_background_light") ?? UIColor()
+    static let createSwatchActiveCheckBackgroundLight = Color(uiColor: _createSwatchActiveCheckBackgroundLight)
+    
+    static let _createSwatchActiveCheckBackgroundPressedDark = UIColor(named: "create_swatch_active_check_background_pressed_dark") ?? UIColor()
+    static let createSwatchActiveCheckBackgroundPressedDark = Color(uiColor: _createSwatchActiveCheckBackgroundPressedDark)
+    
+    static let _createSwatchActiveCheckBackgroundPressedLight = UIColor(named: "create_swatch_active_check_background_pressed_light") ?? UIColor()
+    static let createSwatchActiveCheckBackgroundPressedLight = Color(uiColor: _createSwatchActiveCheckBackgroundPressedLight)
+    
+    static let _createSwatchActiveCheckStrokeDark = UIColor(named: "create_swatch_active_check_stroke_dark") ?? UIColor()
+    static let createSwatchActiveCheckStrokeDark = Color(uiColor: _createSwatchActiveCheckStrokeDark)
+    
+    static let _createSwatchActiveCheckStrokeLight = UIColor(named: "create_swatch_active_check_stroke_light") ?? UIColor()
+    static let createSwatchActiveCheckStrokeLight = Color(uiColor: _createSwatchActiveCheckStrokeLight)
+    
+    static let _createSwatchActiveCheckStrokePressedDark = UIColor(named: "create_swatch_active_check_stroke_pressed_dark") ?? UIColor()
+    static let createSwatchActiveCheckStrokePressedDark = Color(uiColor: _createSwatchActiveCheckStrokePressedDark)
+    
+    static let _createSwatchActiveCheckStrokePressedLight = UIColor(named: "create_swatch_active_check_stroke_pressed_light") ?? UIColor()
+    static let createSwatchActiveCheckStrokePressedLight = Color(uiColor: _createSwatchActiveCheckStrokePressedLight)
+    
+    static let _createSwatchActivePrimaryDark = UIColor(named: "create_swatch_active_primary_dark") ?? UIColor()
+    static let createSwatchActivePrimaryDark = Color(uiColor: _createSwatchActivePrimaryDark)
+    
+    static let _createSwatchActivePrimaryLight = UIColor(named: "create_swatch_active_primary_light") ?? UIColor()
+    static let createSwatchActivePrimaryLight = Color(uiColor: _createSwatchActivePrimaryLight)
+    
+    static let _createSwatchActivePrimaryPressedDark = UIColor(named: "create_swatch_active_primary_pressed_dark") ?? UIColor()
+    static let createSwatchActivePrimaryPressedDark = Color(uiColor: _createSwatchActivePrimaryPressedDark)
+    
+    static let _createSwatchActivePrimaryPressedLight = UIColor(named: "create_swatch_active_primary_pressed_light") ?? UIColor()
+    static let createSwatchActivePrimaryPressedLight = Color(uiColor: _createSwatchActivePrimaryPressedLight)
     
     
     
@@ -655,21 +800,5 @@ struct ToolInterfaceTheme {
     
     static let graphTanLineStrokeThickness = CGFloat(Device.isPad ? 5.0 : 4.0)
     static let graphTanLineFillThickness = CGFloat(Device.isPad ? 3.0 : 2.5)
-    
-    static let _graphStroke = UIColor(red: 0.3125, green: 0.4125, blue: 0.515, alpha: 1.0)
-    
-    static let _graphCurveLineFill = UIColor(red: 0.25, green: 0.78, blue: 0.65, alpha: 1.0)
-    
-    static let _graphTanLineFill = UIColor(red: 0.55, green: 0.78, blue: 0.95, alpha: 1.0)
-    
-    static let _graphTanPointUnselected = UIColor(red: 0.65, green: 0.25, blue: 0.25, alpha: 1.0)
-    static let _graphTanPointSelected = UIColor(red: 1.0, green: 0.25, blue: 0.25, alpha: 1.0)
-    
-    static let _graphControlPointUnselected = UIColor(red: 0.25, green: 0.75, blue: 0.25, alpha: 1.0)
-    static let _graphControlPointSelected = UIColor(red: 0.25, green: 1.0, blue: 0.25, alpha: 1.0)
-    
-    //static let ___gray300 = RGBA(uiColor: _gray300)
-    //static let ___gray400 = RGBA(uiColor: _gray400)
-    //static let ___gray500 = RGBA(uiColor: _gray500)
     
 }

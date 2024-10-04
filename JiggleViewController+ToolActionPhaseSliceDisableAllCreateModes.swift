@@ -8,11 +8,7 @@
 import Foundation
 
 extension JiggleViewController {
-    
     func toolActionConsumePhaseSliceDisableAllCreateModes(_ slice: ToolActionPhaseSliceDisableAllCreateModes) {
-        //print("slice.JiggleMeshCommand = \(slice.command)")
-        
-        print("slice. DisableAllCreateModes///")
-        jiggleViewModel.disableAllCreateModes()
+        jiggleViewModel.setCreatorMode(.none)
     }
 }

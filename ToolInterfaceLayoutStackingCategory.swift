@@ -28,6 +28,7 @@ extension ToolInterfaceLayoutStackingCategory {
         case .allVerticalMedium:
             return .stackedMedium
         case .large(let stackingLargeData):
+            
             switch toolInterfaceElementType {
             case .textIconButton:
                 if stackingLargeData.isTextIconButtonLong {

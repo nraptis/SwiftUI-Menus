@@ -237,6 +237,7 @@ extension JiggleViewController: GestureViewDelegate {
                                                                                    safeAreaRight: 0)
                         
                         registerGraphFrame()
+                        registerTimeLineFrame()
                         
                         return
                     } else {
@@ -269,6 +270,7 @@ extension JiggleViewController: GestureViewDelegate {
                                                                                    safeAreaRight: 0)
                         
                         registerGraphFrame()
+                        registerTimeLineFrame()
                         
                         return
                     }
@@ -333,40 +335,69 @@ extension JiggleViewController: GestureViewDelegate {
         
         if jiggleViewModel.toolInterfaceViewModel.isBlocked { return }
         
-        
         let interfaceConfigurationPrevious = toolInterfaceViewModel.getCurrentInterfaceConfigurationPhone()
-        var interfaceConfigurationCurrent = interfaceConfigurationPrevious
-        let time = Self.getExpandCollapseAnimationTime(orientation: jiggleDocument.orientation)
+        //var interfaceConfigurationCurrent = interfaceConfigurationPrevious
+        //let time = Self.getExpandCollapseAnimationTime(orientation: jiggleDocument.orientation)
         
         let expandCollapseSlices: [ToolActionPhaseSlice]
         if (interfaceConfigurationPrevious.isExpandedTop == true) && (interfaceConfigurationPrevious.isExpandedBottom == true) {
             // Collapse both top and bottom.
-            expandCollapseSlices = [
-                ToolActionPhaseSliceSetExpandedPhoneTop(isExpanded: false),
-                ToolActionPhaseSliceSetExpandedPhoneBottom(isExpanded: false)
-            ]
-            interfaceConfigurationCurrent.isExpandedTop = false
-            interfaceConfigurationCurrent.isExpandedBottom = false
+            let toolAction = batchInterfaceAction { interfaceConfiguration in
+                interfaceConfiguration.isExpandedTop = false
+                interfaceConfiguration.isExpandedBottom = false
+                return [
+                    ToolActionPhaseSliceSetExpandedPhoneTop(isExpanded: false),
+                    ToolActionPhaseSliceSetExpandedPhoneBottom(isExpanded: false)
+                ]
+            } alongsideMeshCommand: {
+                [ ]
+            }
+            toolActionPerform(toolAction)
             
         } else if (interfaceConfigurationPrevious.isExpandedTop == false) && (interfaceConfigurationPrevious.isExpandedBottom == false) {
             // Expand both top and bottom.
-            expandCollapseSlices = [
-                ToolActionPhaseSliceSetExpandedPhoneTop(isExpanded: true),
-                ToolActionPhaseSliceSetExpandedPhoneBottom(isExpanded: true)
-            ]
-            interfaceConfigurationCurrent.isExpandedTop = true
-            interfaceConfigurationCurrent.isExpandedBottom = true
+            
+            let toolAction = batchInterfaceAction { interfaceConfiguration in
+                interfaceConfiguration.isExpandedTop = true
+                interfaceConfiguration.isExpandedBottom = true
+                return [
+                    ToolActionPhaseSliceSetExpandedPhoneTop(isExpanded: true),
+                    ToolActionPhaseSliceSetExpandedPhoneBottom(isExpanded: true)
+                ]
+            } alongsideMeshCommand: {
+                [ ]
+            }
+            toolActionPerform(toolAction)
+            
             
         } else if (interfaceConfigurationPrevious.isExpandedTop == true) {
             // Collapse top only.
-            expandCollapseSlices = [ToolActionPhaseSliceSetExpandedPhoneTop(isExpanded: false)]
-            interfaceConfigurationCurrent.isExpandedTop = false
+            let toolAction = batchInterfaceAction { interfaceConfiguration in
+                interfaceConfiguration.isExpandedTop = false
+                return [
+                    ToolActionPhaseSliceSetExpandedPhoneTop(isExpanded: false)
+                ]
+            } alongsideMeshCommand: {
+                [ ]
+            }
+            toolActionPerform(toolAction)
+            
         } else {
             // Collapse bottom only.
-            expandCollapseSlices = [ToolActionPhaseSliceSetExpandedPhoneBottom(isExpanded: false)]
-            interfaceConfigurationCurrent.isExpandedBottom = false
+            
+            let toolAction = batchInterfaceAction { interfaceConfiguration in
+                interfaceConfiguration.isExpandedBottom = false
+                return [
+                    ToolActionPhaseSliceSetExpandedPhoneBottom(isExpanded: false)
+                ]
+            } alongsideMeshCommand: {
+                [ ]
+            }
+            toolActionPerform(toolAction)
         }
         
+        
+        /*
         let phaseSliceInterface = ToolActionPhaseSliceUpdateInterfaceConfigurationPhone(interfaceConfigurationPrevious: interfaceConfigurationPrevious,
                                                                                    interfaceConfigurationCurrent: interfaceConfigurationCurrent)
         
@@ -378,7 +409,7 @@ extension JiggleViewController: GestureViewDelegate {
                                     time: time)
         let toolAction = ToolAction(phase: phase)
         toolActionPerform(toolAction)
-        
+        */
            
         
     }

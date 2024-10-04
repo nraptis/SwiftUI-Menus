@@ -8,7 +8,8 @@
 import Foundation
 
 extension ToolInterfaceViewModel {
-    func getJiggleDampenSliderToolNode(widthCategory: ToolInterfaceElementSliderWidthCategory,
+    
+    @MainActor func getJiggleDampenSliderToolNode(widthCategory: ToolInterfaceElementSliderWidthCategory,
                                       neighborTypeLeft: ToolInterfaceElementType?,
                                       neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         let orientation = jiggleViewModel.orientation
@@ -18,7 +19,7 @@ extension ToolInterfaceViewModel {
         
         let textLine1 = ToolInterfaceStringLibrarySliders.sliderTextJiggleDampenLine1()
         let textLine2 = ToolInterfaceStringLibrarySliders.sliderTextJiggleDampenLine2()
-        let iconPack = SliderIconLibrary.boxus
+        
         var friendLabel1Line1: String?; var friendLabel1Line2: String?
         var friendLabel2Line1: String?; var friendLabel2Line2: String?
         var friendLabel3Line1: String?; var friendLabel3Line2: String?
@@ -29,8 +30,7 @@ extension ToolInterfaceViewModel {
             friendLabel1Line2 = ToolInterfaceStringLibrarySliders.sliderTextBounceDampenLine2()
         }
         */
-        let configuration = ToolInterfaceElementSliderConfiguration(iconPack: iconPack,
-                                                                    orientation: orientation,
+        let configuration = ToolInterfaceElementSliderConfiguration(orientation: orientation,
                                                                     nameLabelLine1: textLine1,
                                                                     nameLabelLine2: textLine2,
                                                                     friend_1_nameLabelLine1: friendLabel1Line1,

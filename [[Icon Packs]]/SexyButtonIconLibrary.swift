@@ -9,6 +9,207 @@ import Foundation
 
 struct SexyButtonIconLibrary {
 
+    
+    static var delete: SexyButtonIconPack {
+        let name = "sexy_button_delete"
+        let widthPad1Line = 31
+        let heightPad1Line = 41
+        let widthPhonePortrait1Line = 24
+        let heightPhonePortrait1Line = 31
+        let widthPhoneLandscape1Line = 20
+        let heightPhoneLandscape1Line = 26
+        
+        let widthPad2Lines = 21
+        let heightPad2Lines = 27
+        let widthPhonePortrait2Lines = 16
+        let heightPhonePortrait2Lines = 21
+        let widthPhoneLandscape2Lines = 13
+        let heightPhoneLandscape2Lines = 17
+        
+        return Self.build(name: name, widthPad1Line: widthPad1Line, heightPad1Line: heightPad1Line,
+                          widthPhoneLandscape1Line: widthPhoneLandscape1Line, heightPhoneLandscape1Line: heightPhoneLandscape1Line,
+                          widthPhonePortrait1Line: widthPhonePortrait1Line, heightPhonePortrait1Line: heightPhonePortrait1Line,
+                          widthPad2Lines: widthPad2Lines, heightPad2Lines: heightPad2Lines,
+                          widthPhoneLandscape2Lines: widthPhoneLandscape2Lines, heightPhoneLandscape2Lines: heightPhoneLandscape2Lines,
+                          widthPhonePortrait2Lines: widthPhonePortrait2Lines, heightPhonePortrait2Lines: heightPhonePortrait2Lines)
+    }
+    
+    static var zoomReset: SexyButtonIconPack {
+        let name = "sexy_button_zoom_reset"
+        let widthPad1Line = 41
+        let heightPad1Line = 41
+        let widthPhonePortrait1Line = 32
+        let heightPhonePortrait1Line = 32
+        let widthPhoneLandscape1Line = 27
+        let heightPhoneLandscape1Line = 27
+        
+        let widthPad2Lines = 27
+        let heightPad2Lines = 27
+        let widthPhonePortrait2Lines = 21
+        let heightPhonePortrait2Lines = 21
+        let widthPhoneLandscape2Lines = 17
+        let heightPhoneLandscape2Lines = 17
+        
+        return Self.build(name: name, widthPad1Line: widthPad1Line, heightPad1Line: heightPad1Line,
+                          widthPhoneLandscape1Line: widthPhoneLandscape1Line, heightPhoneLandscape1Line: heightPhoneLandscape1Line,
+                          widthPhonePortrait1Line: widthPhonePortrait1Line, heightPhonePortrait1Line: heightPhonePortrait1Line,
+                          widthPad2Lines: widthPad2Lines, heightPad2Lines: heightPad2Lines,
+                          widthPhoneLandscape2Lines: widthPhoneLandscape2Lines, heightPhoneLandscape2Lines: heightPhoneLandscape2Lines,
+                          widthPhonePortrait2Lines: widthPhonePortrait2Lines, heightPhonePortrait2Lines: heightPhonePortrait2Lines)
+    }
+
+
+
+    static var zoomJiggle: SexyButtonIconPack {
+        let name = "sexy_button_zoom_jiggle"
+        let widthPad1Line = 41
+        let heightPad1Line = 41
+        let widthPhonePortrait1Line = 32
+        let heightPhonePortrait1Line = 32
+        let widthPhoneLandscape1Line = 27
+        let heightPhoneLandscape1Line = 27
+        
+        let widthPad2Lines = 27
+        let heightPad2Lines = 27
+        let widthPhonePortrait2Lines = 21
+        let heightPhonePortrait2Lines = 21
+        let widthPhoneLandscape2Lines = 17
+        let heightPhoneLandscape2Lines = 17
+        
+        return Self.build(name: name, widthPad1Line: widthPad1Line, heightPad1Line: heightPad1Line,
+                          widthPhoneLandscape1Line: widthPhoneLandscape1Line, heightPhoneLandscape1Line: heightPhoneLandscape1Line,
+                          widthPhonePortrait1Line: widthPhonePortrait1Line, heightPhonePortrait1Line: heightPhonePortrait1Line,
+                          widthPad2Lines: widthPad2Lines, heightPad2Lines: heightPad2Lines,
+                          widthPhoneLandscape2Lines: widthPhoneLandscape2Lines, heightPhoneLandscape2Lines: heightPhoneLandscape2Lines,
+                          widthPhonePortrait2Lines: widthPhonePortrait2Lines, heightPhonePortrait2Lines: heightPhonePortrait2Lines)
+    }
+    
+    static var menu: SexyButtonIconPack {
+        let name = "sexy_button_menu"
+        let widthPad1Line = 54
+        let heightPad1Line = 41
+        let widthPhonePortrait1Line = 42
+        let heightPhonePortrait1Line = 32
+        let widthPhoneLandscape1Line = 36
+        let heightPhoneLandscape1Line = 27
+        
+        let widthPad2Lines = 36
+        let heightPad2Lines = 27
+        let widthPhonePortrait2Lines = 28
+        let heightPhonePortrait2Lines = 21
+        let widthPhoneLandscape2Lines = 22
+        let heightPhoneLandscape2Lines = 17
+        
+        return Self.build(name: name, widthPad1Line: widthPad1Line, heightPad1Line: heightPad1Line,
+                          widthPhoneLandscape1Line: widthPhoneLandscape1Line, heightPhoneLandscape1Line: heightPhoneLandscape1Line,
+                          widthPhonePortrait1Line: widthPhonePortrait1Line, heightPhonePortrait1Line: heightPhonePortrait1Line,
+                          widthPad2Lines: widthPad2Lines, heightPad2Lines: heightPad2Lines,
+                          widthPhoneLandscape2Lines: widthPhoneLandscape2Lines, heightPhoneLandscape2Lines: heightPhoneLandscape2Lines,
+                          widthPhonePortrait2Lines: widthPhonePortrait2Lines, heightPhonePortrait2Lines: heightPhonePortrait2Lines)
+    }
+
+
+
+    static var rotateLeft: SexyButtonIconPack {
+        let name = "sexy_button_rotate_left"
+        let widthPad1Line = 41
+        let heightPad1Line = 41
+        let widthPhonePortrait1Line = 32
+        let heightPhonePortrait1Line = 32
+        let widthPhoneLandscape1Line = 27
+        let heightPhoneLandscape1Line = 27
+        
+        let widthPad2Lines = 27
+        let heightPad2Lines = 27
+        let widthPhonePortrait2Lines = 21
+        let heightPhonePortrait2Lines = 21
+        let widthPhoneLandscape2Lines = 17
+        let heightPhoneLandscape2Lines = 17
+        
+        return Self.build(name: name, widthPad1Line: widthPad1Line, heightPad1Line: heightPad1Line,
+                          widthPhoneLandscape1Line: widthPhoneLandscape1Line, heightPhoneLandscape1Line: heightPhoneLandscape1Line,
+                          widthPhonePortrait1Line: widthPhonePortrait1Line, heightPhonePortrait1Line: heightPhonePortrait1Line,
+                          widthPad2Lines: widthPad2Lines, heightPad2Lines: heightPad2Lines,
+                          widthPhoneLandscape2Lines: widthPhoneLandscape2Lines, heightPhoneLandscape2Lines: heightPhoneLandscape2Lines,
+                          widthPhonePortrait2Lines: widthPhonePortrait2Lines, heightPhonePortrait2Lines: heightPhonePortrait2Lines)
+    }
+
+
+
+    static var rotateRight: SexyButtonIconPack {
+        let name = "sexy_button_rotate_right"
+        let widthPad1Line = 41
+        let heightPad1Line = 41
+        let widthPhonePortrait1Line = 32
+        let heightPhonePortrait1Line = 32
+        let widthPhoneLandscape1Line = 27
+        let heightPhoneLandscape1Line = 27
+        
+        let widthPad2Lines = 27
+        let heightPad2Lines = 27
+        let widthPhonePortrait2Lines = 21
+        let heightPhonePortrait2Lines = 21
+        let widthPhoneLandscape2Lines = 17
+        let heightPhoneLandscape2Lines = 17
+        
+        return Self.build(name: name, widthPad1Line: widthPad1Line, heightPad1Line: heightPad1Line,
+                          widthPhoneLandscape1Line: widthPhoneLandscape1Line, heightPhoneLandscape1Line: heightPhoneLandscape1Line,
+                          widthPhonePortrait1Line: widthPhonePortrait1Line, heightPhonePortrait1Line: heightPhonePortrait1Line,
+                          widthPad2Lines: widthPad2Lines, heightPad2Lines: heightPad2Lines,
+                          widthPhoneLandscape2Lines: widthPhoneLandscape2Lines, heightPhoneLandscape2Lines: heightPhoneLandscape2Lines,
+                          widthPhonePortrait2Lines: widthPhonePortrait2Lines, heightPhonePortrait2Lines: heightPhonePortrait2Lines)
+    }
+    
+    static var redo: SexyButtonIconPack {
+        let name = "sexy_button_redo"
+        let widthPad1Line = 38
+        let heightPad1Line = 41
+        let widthPhonePortrait1Line = 30
+        let heightPhonePortrait1Line = 32
+        let widthPhoneLandscape1Line = 25
+        let heightPhoneLandscape1Line = 27
+        
+        let widthPad2Lines = 25
+        let heightPad2Lines = 27
+        let widthPhonePortrait2Lines = 20
+        let heightPhonePortrait2Lines = 21
+        let widthPhoneLandscape2Lines = 16
+        let heightPhoneLandscape2Lines = 17
+        
+        return Self.build(name: name, widthPad1Line: widthPad1Line, heightPad1Line: heightPad1Line,
+                          widthPhoneLandscape1Line: widthPhoneLandscape1Line, heightPhoneLandscape1Line: heightPhoneLandscape1Line,
+                          widthPhonePortrait1Line: widthPhonePortrait1Line, heightPhonePortrait1Line: heightPhonePortrait1Line,
+                          widthPad2Lines: widthPad2Lines, heightPad2Lines: heightPad2Lines,
+                          widthPhoneLandscape2Lines: widthPhoneLandscape2Lines, heightPhoneLandscape2Lines: heightPhoneLandscape2Lines,
+                          widthPhonePortrait2Lines: widthPhonePortrait2Lines, heightPhonePortrait2Lines: heightPhonePortrait2Lines)
+    }
+
+
+
+    static var undo: SexyButtonIconPack {
+        let name = "sexy_button_undo"
+        let widthPad1Line = 38
+        let heightPad1Line = 41
+        let widthPhonePortrait1Line = 30
+        let heightPhonePortrait1Line = 32
+        let widthPhoneLandscape1Line = 25
+        let heightPhoneLandscape1Line = 27
+        
+        let widthPad2Lines = 25
+        let heightPad2Lines = 27
+        let widthPhonePortrait2Lines = 20
+        let heightPhonePortrait2Lines = 21
+        let widthPhoneLandscape2Lines = 16
+        let heightPhoneLandscape2Lines = 17
+        
+        return Self.build(name: name, widthPad1Line: widthPad1Line, heightPad1Line: heightPad1Line,
+                          widthPhoneLandscape1Line: widthPhoneLandscape1Line, heightPhoneLandscape1Line: heightPhoneLandscape1Line,
+                          widthPhonePortrait1Line: widthPhonePortrait1Line, heightPhonePortrait1Line: heightPhonePortrait1Line,
+                          widthPad2Lines: widthPad2Lines, heightPad2Lines: heightPad2Lines,
+                          widthPhoneLandscape2Lines: widthPhoneLandscape2Lines, heightPhoneLandscape2Lines: heightPhoneLandscape2Lines,
+                          widthPhonePortrait2Lines: widthPhonePortrait2Lines, heightPhonePortrait2Lines: heightPhonePortrait2Lines)
+    }
+
     static var graph: SexyButtonIconPack {
         let name = "sexy_button_draw_guide"
         let widthPad1Line = 42
@@ -173,19 +374,19 @@ struct SexyButtonIconLibrary {
                                   slicePhoneLandscapeLight1Line: slicePhoneLandscapeLight1Line,
                                   slicePhonePortraitDark1Line: slicePhonePortraitDark1Line,
                                   slicePhonePortraitLight1Line: slicePhonePortraitLight1Line,
-                                  slicePadDarkDisabled1Line: slicePadDarkDisabled1Line,
-                                  slicePadDark2Lines: slicePadDark2Lines,
-                                  slicePadLight2Lines: slicePadLight2Lines,
-                                  slicePhoneLandscapeDark2Lines: slicePhoneLandscapeDark2Lines,
-                                  slicePhoneLandscapeLight2Lines: slicePhoneLandscapeLight2Lines,
-                                  slicePhonePortraitDark2Lines: slicePhonePortraitDark2Lines,
-                                  slicePhonePortraitLight2Lines: slicePhonePortraitLight2Lines,
-                                  slicePadDarkDisabled2Lines: slicePadDarkDisabled2Lines,
-                                  slicePadLightDisabled1Line: slicePadLightDisabled1Line,
-                                  slicePhoneLandscapeDarkDisabled1Line: slicePhoneLandscapeDarkDisabled1Line,
-                                  slicePhoneLandscapeLightDisabled1Line: slicePhoneLandscapeLightDisabled1Line,
-                                  slicePhonePortraitDarkDisabled1Line: slicePhonePortraitDarkDisabled1Line,
-                                  slicePhonePortraitLightDisabled1Line: slicePhonePortraitLightDisabled1Line,
+                                  slicePadDark2Lines: slicePadDarkDisabled1Line,
+                                  slicePadLight2Lines: slicePadDark2Lines,
+                                  slicePhoneLandscapeDark2Lines: slicePadLight2Lines,
+                                  slicePhoneLandscapeLight2Lines: slicePhoneLandscapeDark2Lines,
+                                  slicePhonePortraitDark2Lines: slicePhoneLandscapeLight2Lines,
+                                  slicePhonePortraitLight2Lines: slicePhonePortraitDark2Lines,
+                                  slicePadDarkDisabled1Line: slicePhonePortraitLight2Lines,
+                                  slicePadLightDisabled1Line: slicePadDarkDisabled2Lines,
+                                  slicePhoneLandscapeDarkDisabled1Line: slicePadLightDisabled1Line,
+                                  slicePhoneLandscapeLightDisabled1Line: slicePhoneLandscapeDarkDisabled1Line,
+                                  slicePhonePortraitDarkDisabled1Line: slicePhoneLandscapeLightDisabled1Line,
+                                  slicePhonePortraitLightDisabled1Line: slicePhonePortraitDarkDisabled1Line,
+                                  slicePadDarkDisabled2Lines: slicePhonePortraitLightDisabled1Line,
                                   slicePadLightDisabled2Lines: slicePadLightDisabled2Lines,
                                   slicePhoneLandscapeDarkDisabled2Lines: slicePhoneLandscapeDarkDisabled2Lines,
                                   slicePhoneLandscapeLightDisabled2Lines: slicePhoneLandscapeLightDisabled2Lines,

@@ -21,9 +21,9 @@ extension JiggleViewController {
                                                                          currentConfiguration: configurationCurrent,
                                                                          currentExpanded: configurationCurrent.isExpandedTop)
         let secondaryAction = InterfaceConfigurationPhone.getSecondaryAction(previousConfiguration: configurationPrevious,
-                                                                             previousExpanded: configurationPrevious.isExpandedTop,
+                                                                             previousExpanded: configurationPrevious.isExpandedBottom,
                                                                              currentConfiguration: configurationCurrent,
-                                                                             currentExpanded: configurationCurrent.isExpandedTop)
+                                                                             currentExpanded: configurationCurrent.isExpandedBottom)
         phoneTopMenu.handle_Step1(actionPrimary: primaryAction,
                                   actionSecondary: secondaryAction,
                                   configuration: configurationCurrent,

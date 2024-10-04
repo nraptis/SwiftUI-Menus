@@ -36,30 +36,48 @@ struct MagicalCreateSwatchGuts: View {
         }
         
         let universalPaddingTop = CreateSwatchLayout.getUniversalPaddingTop(orientation: orientation,
-                                                                               flavor: layoutSchemeFlavor,
-                                                                               numberOfLines: greatestNumberOfLines)
+                                                                            flavor: layoutSchemeFlavor,
+                                                                            numberOfLines: greatestNumberOfLines)
         let universalPaddingBottom = CreateSwatchLayout.getUniversalPaddingBottom(orientation: orientation,
-                                                                                     flavor: layoutSchemeFlavor,
-                                                                                     numberOfLines: greatestNumberOfLines)
+                                                                                  flavor: layoutSchemeFlavor,
+                                                                                  numberOfLines: greatestNumberOfLines)
         
         let isDarkMode = magicalCreateSwatchViewModel.isDarkModeEnabled
         let isEnabled = magicalCreateSwatchViewModel.isEnabled
-        return GeometryReader { _ in
-            ForEach(magicalCreateSwatchViewModel.createSwatchConfiguration.buttonConfigurations) { buttonConfiguration in
-                let index = Int(buttonConfiguration.id)
-                let buttonViewModel = magicalCreateSwatchViewModel.buttonViewModels[index]
-                let segmentedPickerPosition = getPosition(index: index, count1: buttonCount1)
-                let isSelected = magicalCreateSwatchViewModel.selectedSegmentIndex == index
-                MagicalCreateSwatchSegmentButton(index: index,
-                                                           isSelected: isSelected,
-                                                           isDarkMode: isDarkMode,
-                                                           isEnabled: isEnabled,
-                                                           orientation: orientation,
-                                                           layoutSchemeFlavor: layoutSchemeFlavor,
-                                                           segmentedPickerPosition: segmentedPickerPosition,
-                                                           universalPaddingTop: universalPaddingTop,
-                                                           universalPaddingBottom: universalPaddingBottom)
-                .environment(buttonViewModel)
+        
+        let activeButtonViewModel = magicalCreateSwatchViewModel.activeButtonViewModel
+        
+        return ZStack {
+            if let activeButtonViewModel = activeButtonViewModel {
+                MagicalActiveSwatchButton(orientation: orientation,
+                                          layoutSchemeFlavor: layoutSchemeFlavor,
+                                          buttonViewModel: activeButtonViewModel,
+                                          universalPaddingTop: universalPaddingTop,
+                                          universalPaddingBottom: universalPaddingBottom,
+                                          isEnabled: isEnabled,
+                                          isDarkMode: isDarkMode,
+                                          layoutWidth: layoutWidth)
+                .frame(width: CGFloat(layoutWidth),
+                       height: CGFloat(magicalCreateSwatchViewModel.layoutHeight))
+            } else {
+                GeometryReader { _ in
+                    ForEach(magicalCreateSwatchViewModel.createSwatchConfiguration.buttonConfigurations) { buttonConfiguration in
+                        let index = Int(buttonConfiguration.id)
+                        let buttonViewModel = magicalCreateSwatchViewModel.buttonViewModels[index]
+                        let segmentedPickerPosition = getPosition(index: index, count1: buttonCount1)
+                        MagicalCreateSwatchSegmentButton(index: index,
+                                                         isDarkMode: isDarkMode,
+                                                         isEnabled: isEnabled && buttonViewModel.isEnabled,
+                                                         orientation: orientation,
+                                                         layoutSchemeFlavor: layoutSchemeFlavor,
+                                                         segmentedPickerPosition: segmentedPickerPosition,
+                                                         universalPaddingTop: universalPaddingTop,
+                                                         universalPaddingBottom: universalPaddingBottom)
+                        .environment(buttonViewModel)
+                    }
+                }
+                .frame(width: CGFloat(layoutWidth),
+                       height: CGFloat(magicalCreateSwatchViewModel.layoutHeight))
             }
         }
         .frame(width: CGFloat(layoutWidth),

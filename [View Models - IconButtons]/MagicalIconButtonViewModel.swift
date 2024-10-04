@@ -20,18 +20,10 @@ import SwiftUI
     var universalPaddingRight = 0
     
     let iconButtonConfiguration: ToolInterfaceElementIconButtonConfiguration
-    init(orientation: Orientation,
+    @MainActor init(orientation: Orientation,
          iconButtonConfiguration: ToolInterfaceElementIconButtonConfiguration) {
         self.iconButtonConfiguration = iconButtonConfiguration
         super.init(orientation: orientation)
-    }
-    
-    override func refreshDisabled() {
-        super.refreshDisabled()
-    }
-    
-    override func refreshEnabled() {
-        super.refreshEnabled()
     }
     
     func handleClicked() {

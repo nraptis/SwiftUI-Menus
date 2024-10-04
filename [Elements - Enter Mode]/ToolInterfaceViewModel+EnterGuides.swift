@@ -9,7 +9,7 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-    func getEnterGuidesEnterModeToolNode(neighborTypeLeft: ToolInterfaceElementType?,
+   @MainActor func getEnterGuidesEnterModeToolNode(neighborTypeLeft: ToolInterfaceElementType?,
                                       neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
         
@@ -19,8 +19,9 @@ extension ToolInterfaceViewModel {
         let orientation = jiggleViewModel.orientation
         let textLine1 = ToolInterfaceStringLibraryModeChange.modeTextGuidesEnterLine1()
         let textLine2 = ToolInterfaceStringLibraryModeChange.modeTextGuidesEnterLine2()
-        let iconPack = MainTabIconLibrary.guideRings
+        let iconPack = MainTabIconLibrary.zoom
         let accentPack = MainTabIconLibrary.arrowTinyFcaRight
+        
         
         
         let configuration = ToolInterfaceElementEnterModeConfiguration(iconPack: iconPack,

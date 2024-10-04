@@ -9,7 +9,7 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-    static func getCheckBoxFlex(orientation: Orientation,
+    @MainActor static func getCheckBoxFlex(orientation: Orientation,
                                 configuration: ToolInterfaceElementCheckBoxConfiguration,
                                 neighborTypeLeft: ToolInterfaceElementType?,
                                 neighborTypeRight: ToolInterfaceElementType?) -> ToolInterfaceElementFlex {

@@ -9,7 +9,7 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-    func getBulgeEnabledCheckBoxNode(neighborTypeLeft: ToolInterfaceElementType?,
+    @MainActor func getBulgeEnabledCheckBoxNode(neighborTypeLeft: ToolInterfaceElementType?,
                                      neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         let orientation = jiggleViewModel.orientation
         let textLine1 = ToolInterfaceStringLibraryCheckBoxes.checkBoxTextBulgeEnabledLine1()

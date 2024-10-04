@@ -9,16 +9,11 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-    func getMakeAndDrawJiggleCreateSwatchToolNode(neighborTypeLeft: ToolInterfaceElementType?,
+   @MainActor func getMakeAndDrawJiggleCreateSwatchToolNode(neighborTypeLeft: ToolInterfaceElementType?,
                                                   neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
         let orientation = jiggleViewModel.orientation
         var buttonConfigurations = [ToolInterfaceElementCreateSwatchButtonConfiguration]()
-        
-        
-        
-        
-        
         
         let makeJiggleTextIconPack = MainTabIconLibrary.makeJiggle
         let makeJiggleLine1 = ToolInterfaceStringLibraryCreateSwatches.swatchTextMakeJiggleLine1()
@@ -49,9 +44,6 @@ extension ToolInterfaceViewModel {
                                        neighborTypeRight: neighborTypeRight)
         let viewModelDocumentMode = MagicalCreateSwatchViewModelMakeAndDrawJiggle(orientation: jiggleViewModel.orientation,
                                                                                   createSwatchConfiguration: configuration)
-        
-        
-        
         
         let result = ToolNode(id: getToolNodeID(),
                               element: .createSwatchMakeAndDrawJiggle,

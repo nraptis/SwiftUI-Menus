@@ -9,7 +9,7 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-    func getAnimationBounceApplyToAllCheckBoxNode(neighborTypeLeft: ToolInterfaceElementType?,
+   @MainActor func getAnimationBounceApplyToAllCheckBoxNode(neighborTypeLeft: ToolInterfaceElementType?,
                                                   neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         let orientation = jiggleViewModel.orientation
         let textLine1 = ToolInterfaceStringLibraryCheckBoxes.checkBoxTextAnimationBounceApplyToAllLine1()

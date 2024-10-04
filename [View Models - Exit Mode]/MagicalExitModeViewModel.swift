@@ -10,6 +10,10 @@ import SwiftUI
 
 @Observable class MagicalExitModeViewModel: MagicalViewModel {
     
+    override class func getLayoutScheme() -> LayoutScheme.Type {
+        ExitModeLayout.self
+    }
+    
     var nameLabelPaddingLeft = 0
     var nameLabelPaddingRight = 0
     
@@ -26,18 +30,10 @@ import SwiftUI
     var buttonUniversalPaddingRight = 0
     
     let exitModeConfiguration: ToolInterfaceElementExitModeConfiguration
-    init(orientation: Orientation,
+    @MainActor init(orientation: Orientation,
          exitModeConfiguration: ToolInterfaceElementExitModeConfiguration) {
         self.exitModeConfiguration = exitModeConfiguration
         super.init(orientation: orientation)
-    }
-    
-    override func refreshDisabled() {
-        super.refreshDisabled()
-    }
-    
-    override func refreshEnabled() {
-        super.refreshEnabled()
     }
     
     func handleClicked() {

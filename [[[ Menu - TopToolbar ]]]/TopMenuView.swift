@@ -10,6 +10,16 @@ import Combine
 
 class TopMenuView: UIView, PrimaryMenuConforming {
     
+    func handleSelectedJiggleDidChange() {
+        print("TopMenuView => handleSelectedJiggleDidChange")
+        standardContainerView.handleSelectedJiggleDidChange()
+    }
+    
+    func handleSelectedSwatchDidChange() {
+        print("TopMenuView => handleSelectedSwatchDidChange")
+        standardContainerView.handleSelectedJiggleDidChange()
+    }
+    
     var isModeAnimating = false
 
     lazy var containerView: UIView = {
@@ -139,10 +149,14 @@ class TopMenuView: UIView, PrimaryMenuConforming {
     }
     
     private var darkModeDidChangeCancellable: AnyCancellable?
+    private var selectedJiggleDidChangeCancellable: AnyCancellable?
+    private var selectedTimeLineSwatchChangeCancellable: AnyCancellable?
+    
     func setup(width: Int,
                safeAreaLeft: Int,
                safeAreaRight: Int,
                safeAreaTop: Int) {
+      
         
         darkModeDidChangeCancellable = toolInterfaceViewModel
             .darkModeDidChangePublisher
@@ -151,6 +165,24 @@ class TopMenuView: UIView, PrimaryMenuConforming {
                     self.handleDarkModeDidChange()
                 }
             }
+        
+        if let jiggleDocument = ApplicationController.shared.jiggleDocument {
+            selectedJiggleDidChangeCancellable = jiggleDocument
+                .selectedJiggleDidChangePublisher
+                .sink { [weak self] in
+                    if let self = self {
+                        self.handleSelectedJiggleDidChange()
+                    }
+                }
+            selectedTimeLineSwatchChangeCancellable = jiggleDocument
+                .selectedTimeLineSwatchUpdatePublisher
+                .sink { [weak self] in
+                    if let self = self {
+                        self.handleSelectedSwatchDidChange()
+                    }
+                }
+        }
+        
         
         let orientation = toolInterfaceViewModel.orientation
         
@@ -204,7 +236,6 @@ class TopMenuView: UIView, PrimaryMenuConforming {
                                toItem: self, attribute: .bottom, multiplier: 1.0,
                                constant: 0.0),
         ])
-        
         
         containerView.addSubview(materialViewLightMode)
         containerView.addConstraints([
@@ -323,6 +354,10 @@ class TopMenuView: UIView, PrimaryMenuConforming {
         standardContainerView.refreshGraphDisplay()
     }
     
+    func refreshTimeLineDisplay() {
+        standardContainerView.refreshTimeLineDisplay()
+    }
+    
     func refreshShadowDisplay() {
         shadowLayer.frame = shadowView.bounds
     }
@@ -334,10 +369,12 @@ class TopMenuView: UIView, PrimaryMenuConforming {
             snapToVideoRecord()
         } else {
             if snapStandardMenus {
-                if configuration.isGraphEnabled {
-                    standardContainerView.graphModeEnableSnap()
+                if configuration.isGraph {
+                    standardContainerView.snapToGraph()
+                } else if configuration.isTimeLine {
+                    standardContainerView.snapToTimeLine()
                 } else {
-                    standardContainerView.graphModeDisableSnap()
+                    standardContainerView.snapToTopMenu()
                     standardContainerView.topMenuView.snapRowContent(configuration: configuration)
                 }
             }

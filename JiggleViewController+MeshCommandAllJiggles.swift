@@ -10,6 +10,6 @@ import Foundation
 extension JiggleViewController {
     func toolActionConsumePhaseSliceJiggleMeshCommandAllJiggles(_ slice: ToolActionPhaseSliceJiggleMeshCommandAllJiggles) {
         jiggleViewModel.applyMeshCommandAllJiggles(meshCommand: slice.meshCommand,
-                                                   weightRingCommand: slice.weightRingCommand)
+                                                   guideCommand: slice.guideCommand)
     }
 }

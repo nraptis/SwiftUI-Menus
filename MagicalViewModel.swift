@@ -11,6 +11,10 @@ import SwiftUI
 
 @Observable class MagicalViewModel {
     
+    class func getLayoutScheme() -> LayoutScheme.Type {
+        fatalError("Shoudl not use generic layout scheme...")
+    }
+    
     //@ObservationIgnored unowned var jiggleViewModel: JiggleViewModel!
     //@ObservationIgnored unowned var toolInterfaceViewModel: ToolInterfaceViewModel!
     @ObservationIgnored var orientation: Orientation
@@ -20,22 +24,33 @@ import SwiftUI
     @ObservationIgnored var layoutStackingCategory = ToolInterfaceLayoutStackingCategory.allVerticalSmall
     //@ObservationIgnored var layoutSchemeFlavorSliders = LayoutSchemeFlavor.stackedSmall
     
-    var isEnabled = true
-    var isHighlighted = false
     
-    var layoutX = 0
-    var layoutY = 0
-    var layoutWidth = 320
-    var layoutHeight = 44
+    @MainActor var outsideBoxPaddingLeft = 0
+    @MainActor var outsideBoxPaddingRight = 0
     
-    private(set) var isDarkModeEnabled = false
-    func setDarkModeEnabled(isDarkModeEnabled: Bool) {
+    @MainActor var slavePaddingLeft = 0
+    @MainActor var slavePaddingRight = 0
+    
+    @MainActor var heroPaddingLeft = 0
+    @MainActor var heroPaddingRight = 0
+    
+    
+    @MainActor var isEnabled = true
+    @MainActor var isHighlighted = false
+    
+    @MainActor var layoutX = 0
+    @MainActor var layoutY = 0
+    @MainActor var layoutWidth = 320
+    @MainActor var layoutHeight = 44
+    
+    @MainActor private(set) var isDarkModeEnabled = false
+    @MainActor func setDarkModeEnabled(isDarkModeEnabled: Bool) {
         if isDarkModeEnabled != self.isDarkModeEnabled {
             self.isDarkModeEnabled = isDarkModeEnabled
         }
     }
     
-    init(orientation: Orientation
+    @MainActor init(orientation: Orientation
         //jiggleViewModel: JiggleViewModel,
          //toolInterfaceViewModel: ToolInterfaceViewModel
     ) {
@@ -46,20 +61,55 @@ import SwiftUI
         //self.orientation = jiggleViewModel.orientation
     }
     
-    func refreshLayoutFrame() {
+    @MainActor func refreshLayoutFrame() {
         
     }
     
-    func refresh() {
+    @MainActor func refresh() {
         
     }
     
-    func refreshDisabled() {
-        isEnabled = false
+    @MainActor func refreshDisableIfNoGuideSelectedOtherwiseEnable() {
+        if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
+            if jiggleViewModel.getSelectedGuide() !== nil {
+                refreshEnabled()
+            } else {
+                refreshDisabled()
+            }
+        }
     }
     
-    func refreshEnabled() {
-        isEnabled = true
+    @MainActor func refreshDisableIfNoJiggleSelectedOtherwiseEnable() {
+        if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
+            if jiggleViewModel.getSelectedJiggle() !== nil {
+                refreshEnabled()
+            } else {
+                refreshDisabled()
+            }
+        }
+    }
+    
+    @MainActor func refreshDisableIfCreatorModeOtherwiseEnable() {
+        if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
+            switch jiggleViewModel.jiggleDocument.creatorMode {
+            case .none:
+                refreshEnabled()
+            default:
+                refreshDisabled()
+            }
+        }
+    }
+    
+    @MainActor func refreshDisabled() {
+        if isEnabled == true {
+            isEnabled = false
+        }
+    }
+    
+    @MainActor func refreshEnabled() {
+        if isEnabled == false {
+            isEnabled = true
+        }
     }
     
     func getLayoutSchemeFlavor() -> LayoutSchemeFlavor {
@@ -83,7 +133,7 @@ import SwiftUI
         return max(width1, width2)
     }
     
-    func getTextAndIconColor(isPressed: Bool, isDarkModeEnabled: Bool) -> Color {
+    @MainActor func getTextAndIconColor(isPressed: Bool, isDarkModeEnabled: Bool) -> Color {
         if isDarkModeEnabled {
             if isEnabled {
                 if isPressed {
@@ -107,7 +157,7 @@ import SwiftUI
         }
     }
     
-    func getTextAndIconColor(isDarkModeEnabled: Bool) -> Color {
+    @MainActor func getTextAndIconColor(isDarkModeEnabled: Bool) -> Color {
         if isDarkModeEnabled {
             if isEnabled {
                 if isHighlighted {
@@ -120,74 +170,6 @@ import SwiftUI
             }
         } else {
             return Color.black
-        }
-    }
-    
-    func finishRefreshEnableCheckForAllCreateModes() {
-        
-        //
-        
-        if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
-            
-            if jiggleViewModel.jiggleDocument.isCreateJiggleStandardEnabled {
-                if isEnabled {
-                    isEnabled = false
-                }
-                return
-            }
-            
-            if jiggleViewModel.jiggleDocument.isCreateJiggleDrawingEnabled {
-                if isEnabled {
-                    isEnabled = false
-                }
-                return
-            }
-            
-            if jiggleViewModel.jiggleDocument.isCreatePointsEnabled {
-                if isEnabled {
-                    isEnabled = false
-                }
-                return
-            }
-            
-            if jiggleViewModel.jiggleDocument.isRemovePointsEnabled {
-                if isEnabled {
-                    isEnabled = false
-                }
-                return
-            }
-            
-            if jiggleViewModel.jiggleDocument.isCreateWeightRingsStandardEnabled {
-                if isEnabled {
-                    isEnabled = false
-                }
-                return
-            }
-            
-            if jiggleViewModel.jiggleDocument.isCreateWeightRingsDrawingEnabled {
-                if isEnabled {
-                    isEnabled = false
-                }
-                return
-            }
-            
-            if jiggleViewModel.jiggleDocument.isCreateWeightRingPointsEnabled {
-                if isEnabled {
-                    isEnabled = false
-                }
-                return
-            }
-            
-            if jiggleViewModel.jiggleDocument.isRemoveWeightRingPointsEnabled {
-                if isEnabled {
-                    isEnabled = false
-                }
-                return
-            }
-        }
-        
-        if isEnabled == false {
-            isEnabled = true
         }
     }
     

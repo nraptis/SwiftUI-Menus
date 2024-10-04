@@ -28,12 +28,7 @@ import Foundation
     var y = 0
     var width = 128
     
-    private(set) var isDarkModeEnabled = false
-    func setDarkModeEnabled(isDarkModeEnabled: Bool) {
-        if isDarkModeEnabled != self.isDarkModeEnabled {
-            self.isDarkModeEnabled = isDarkModeEnabled
-        }
-    }
+    var isEnabled = true
     
     let orientation: Orientation
     let createSwatchButtonConfiguration: ToolInterfaceElementCreateSwatchButtonConfiguration
@@ -42,6 +37,26 @@ import Foundation
         self.createSwatchButtonConfiguration = createSwatchButtonConfiguration
         isDarkModeEnabled = ApplicationController.isDarkModeEnabled
     }
+    
+    func refreshDisabled() {
+        if isEnabled == true {
+            isEnabled = false
+        }
+    }
+    
+    func refreshEnabled() {
+        if isEnabled == false {
+            isEnabled = true
+        }
+    }
+    
+    private(set) var isDarkModeEnabled = false
+    func setDarkModeEnabled(isDarkModeEnabled: Bool) {
+        if isDarkModeEnabled != self.isDarkModeEnabled {
+            self.isDarkModeEnabled = isDarkModeEnabled
+        }
+    }
+    
 }
 
 class MagicalCreateSwatchButtonLayoutNode {

@@ -8,6 +8,7 @@
 import Foundation
 
 enum ToolInterfaceElementType: UInt16 {
+    case sexyStepper
     case enterMode
     case exitMode
     case mainTab
@@ -24,24 +25,114 @@ enum ToolInterfaceElementType: UInt16 {
     case checkBox
     case favoringOneLineLabel
     case createSwatch
+    case sexyCheckBox
     
 }
 
 enum ToolInterfaceElement: UInt16 {
     
+    case sexyCheckBoxGuideCenters
+    case sexyCheckBoxJiggleCenters
+    case sexyCheckBoxDarkMode
+    
+    
+    case sexyStepperTimelinePointCount
+    
     case sexyButtonUndo
     case sexyButtonRedo
     
+    case sexyButtonMenu
+    case sexyButtonRotateJiggleRight
+    case sexyButtonRotateJiggleLeft
+    case sexyButtonRotateGuideLeft
+    case sexyButtonRotateGuideRight
+
+    case sexyButtonFlipJiggleH
+    case sexyButtonFlipJiggleV
+    case sexyButtonFlipGuideH
+    case sexyButtonFlipGuideV
+    
+    case sexyButtonFreezeSelectedJiggle
+    case sexyButtonFreezeSelectedGuide
+    case sexyButtonUnfreezeAllJiggles
+    case sexyButtonUnfreezeAllGuides
+    
+    case sexyButtonCloneJiggle
+    case sexyButtonCloneGuide
+    case sexyButtonDeleteJiggle
+    case sexyButtonDeleteGuide
+    case sexyButtonDeleteJigglePoint
+    case sexyButtonDeleteGuidePoint
+    
+    
+    case sexyButtonTimeLineDupeAll
+    case sexyButtonTimeLineDupeDuration
+    case sexyButtonTimeLineDupeCurrentChannel
+    case sexyButtonTimeLineFlattenCurrentChannel
+    case sexyButtonTimeLineResetDefaultCurrentChannel
+    //case sexyButtonTimeLineBreakTangents
+    //case sexyButtonTimeLineBreakX
+    //case sexyButtonTimeLineBreakY
+    case sexyButtonTimeLineResetGraph
+    
+    case sexyButtonTimeLineBreakPoint
+    
+    case sexyButtonTimeLineInvertH
+    case sexyButtonTimeLineInvertV
+    case sexyButtonTimeLineResetCurve
+    
+    
+    case sexyButtonTimeLineAmplify
+    case sexyButtonTimeLineDampen
+    case sexyButtonTimeLineFlipAll
+    
+    
+    case sexyButtonSelectNextJigglePoint
+    case sexyButtonSelectPreviousJigglePoint
+    case sexyButtonSelectNextGuidePoint
+    case sexyButtonSelectPreviousGuidePoint
+    
+    
+    case sexyButtonSelectNextJiggle
+    case sexyButtonSelectPreviousJiggle
+    case sexyButtonSelectNextGuide
+    case sexyButtonSelectPreviousGuide
+    
+    case sexyButtonZoomReset
+    case sexyButtonZoomJiggle
+    
+    
+    
+    
+    
     
     case createSwatchMakeAndDrawJiggle
+    case createSwatchMakeAndDrawGuide
+    case createSwatchAddAndRemoveJigglePoints
+    case createSwatchAddAndRemoveGuidePoints
     
     case enterModeZoomEnter
     case enterModeGuidesEnter
     case enterModeGraphEnter
+    case enterModeAnimationLoopsEnter
+    case enterModeVideoRecordEnter
+    case enterModeVideoExportEnter
+    case enterModeTimeLineEnter
+    
+    case enterModeLoopsPage1
+    case enterModeLoopsPage2
+    case enterModeLoopsPage3
+    case enterModeAnimationContinuous
+    
     
     case exitModeZoomExit
     case exitModeGuidesExit
     case exitModeGraphExit
+    case exitModeAnimationLoopsExit
+    case exitModeVideoRecordExit
+    case exitModeVideoExportExit
+    case exitModeTimeLineExit
+    case exitModeAnimationContinuous
     
     case greenButtonCreateScene
     
@@ -70,87 +161,92 @@ enum ToolInterfaceElement: UInt16 {
     case sliderZoomAmount
     case sliderJiggleOpacity
     case sliderJiggleDampen
+    case sliderTimeLineDuration
+    case sliderTimeLineOffset
     
-    case buttonPhoneCollapseTop
-    case buttonPhoneCollapseBottom
+    //case buttonPhoneCollapseTop
+    //case buttonPhoneCollapseBottom
     
-    //case textIconButtonGenerateWeightRings
-    //case textIconButtonBreakTangentWeightRingPoint
+    //case textIconButtonGenerateGuides
+    //case textIconButtonBreakTangentGuidePoint
     case textIconButtonBreakManualWeightGraph
-    case textIconButtonCloneJiggle
-    case textIconButtonCloneWeightRing
+    //case textIconButtonCloneJiggle
+    //case textIconButtonCloneGuide
     //case textIconButtonCloseWeightGraph
     //case textIconButtonCreateJiggle
     //case textIconButtonCreatePoint
-    //case textIconButtonCreateWeightRing
-    //case textIconButtonCreateWeightRingPoint
+    //case textIconButtonCreateGuide
+    //case textIconButtonCreateGuidePoint
     //case textIconButtonDrawJiggles
-    case textIconButtonRotateJiggleRight
-    case textIconButtonRotateGuideRight
-    case textIconButtonRotateJiggleLeft
-    case textIconButtonRotateGuideLeft
-    //case textIconButtonDrawWeightRing
-    case textIconButtonFlipHorizontalJiggle
-    case textIconButtonFlipHorizontalWeightRing
-    case textIconButtonFlipVerticalJiggle
-    case textIconButtonFlipVerticalWeightRing
-    case textIconButtonFreezeOffAllJiggle
-    case textIconButtonFreezeOffAllWeightRing
+    //case textIconButtonRotateJiggleRight
+    //case textIconButtonRotateGuideRight
+    //case textIconButtonRotateJiggleLeft
+    //case textIconButtonRotateGuideLeft
+    //case textIconButtonDrawGuide
+    //case textIconButtonFlipHorizontalJiggle
+    //case textIconButtonFlipHorizontalGuide
+    //case textIconButtonFlipVerticalJiggle
+    //case textIconButtonFlipVerticalGuide
+    //case textIconButtonFreezeOffAllJiggle
+    //case textIconButtonFreezeOffAllGuide
     //case textIconButtonFreezeOnAllJiggle
-    //case textIconButtonFreezeOnAllWeightRing
-    case textIconButtonFreezeOnSelectedJiggle
-    case textIconButtonFreezeOnSelectedWeightRing
-    case textIconButtonMainMenu
+    //case textIconButtonFreezeOnAllGuide
+    //case textIconButtonFreezeOnSelectedJiggle
+    //case textIconButtonFreezeOnSelectedGuide
+    //case textIconButtonMainMenu
     case textIconButtonRandomizeWeightGraph
     case textIconButtonRecordCancel
-    case textIconButtonRecordMovie
-    case textIconButtonRedo
-    case textIconButtonRemoveJiggle
-    case textIconButtonRemovePoint
-    case textIconButtonRemoveWeightRing
-    case textIconButtonRemoveWeightRingPoint
+    //case textIconButtonRecordMovie
+    //case textIconButtonRedo
+    //case textIconButtonRemoveJiggle
+    //case textIconButtonRemovePoint
+    //case textIconButtonDeleteGuide
+    //case textIconButtonDeleteGuidePoint
     case textIconButtonResetSwivelCamera
     case textIconButtonResetToDefault
     case textIconButtonResetWeightGraph
-    case textIconButtonResetZoom
-    case textIconButtonResetZoomSelectedJiggle
-    case textIconButtonSelectNextJiggle
-    case textIconButtonSelectNextPoint
-    case textIconButtonSelectNextWeightRing
-    case textIconButtonSelectNextWeightRingPoint
-    case textIconButtonSelectPreviousJiggle
-    case textIconButtonSelectPreviousPoint
-    case textIconButtonSelectPreviousWeightRing
-    case textIconButtonSelectPreviousWeightRingPoint
-    case textIconButtonSendBackJiggle
-    case textIconButtonSendBackWeightRing
-    case textIconButtonSendBackwardJiggle
-    case textIconButtonSendBackwardWeightRing
-    case textIconButtonSendForwardJiggle
-    case textIconButtonSendForwardWeightRing
-    case textIconButtonSendFrontWeightRing
-    case textIconButtonUndo
+    //case textIconButtonResetZoom
+    //case textIconButtonResetZoomSelectedJiggle
+    //case textIconButtonSelectNextJiggle
+    //case textIconButtonSelectNextPoint
+    //case textIconButtonSelectNextGuide
+    //case textIconButtonSelectNextGuidePoint
+    //case textIconButtonSelectPreviousJiggle
+    //case textIconButtonSelectPreviousPoint
+    //case textIconButtonSelectPreviousGuide
+    //case textIconButtonSelectPreviousGuidePoint
+    //case textIconButtonSendBackJiggle
+    //case textIconButtonSendBackGuide
+    //case textIconButtonSendBackwardJiggle
+    //case textIconButtonSendBackwardGuide
+    //case textIconButtonSendForwardJiggle
+    //case textIconButtonSendForwardGuide
+    //case textIconButtonSendFrontGuide
+    //case textIconButtonUndo
     
     //case textIconButtonResetCenterJiggle
-    //case textIconButtonResetCenterWeightRing
+    //case textIconButtonResetCenterGuide
     
-    case textIconButtonPhoneExpandTopMenu
-    case textIconButtonPhoneExpandBottomMenu
-    case textIconButtonPhoneCollapseTopMenu
-    case textIconButtonPhoneCollapseBottomMenu
+    //case textIconButtonPhoneExpandTopMenu
+    //case textIconButtonPhoneExpandBottomMenu
+    //case textIconButtonPhoneCollapseTopMenu
+    //case textIconButtonPhoneCollapseBottomMenu
     //case textIconButtonPadCollapseMenu
     //case textIconButtonPadExpandMenu
     
-    case textIconButtonFreezeOnAllUnselectedJiggle
-    case textIconButtonFreezeOnAllUnselectedWeightRing
-    case textIconButtonSendFrontJiggle
-    case textIconButtonExitZoomMode
+    //case textIconButtonFreezeOnAllUnselectedJiggle
+    //case textIconButtonFreezeOnAllUnselectedGuide
     
-    case textIconButtonExitViewMode
-    case textIconButtonExitWeightMode
+    //case textIconButtonSendFrontJiggle
+    
+    //case textIconButtonExitZoomMode
+    
+    //case textIconButtonExitViewMode
+    //case textIconButtonExitWeightMode
+    
     case textIconButtonGenerateTopography
     
-    case textIconButtonExitRecordMode
+    //case textIconButtonExitRecordMode
     //case textIconButtonResetCenterWeightGeometry
     case textIconButtonResetSwivelFront
     case textIconButtonResetSwivelBack
@@ -158,7 +254,7 @@ enum ToolInterfaceElement: UInt16 {
     case textIconButtonResetSwivelRight
     case textIconButtonResetSwivelTilt
     case textIconButtonIncreaseJigglePoints
-    case textIconButtonIncreaseWeightRingPoints
+    case textIconButtonIncreaseGuidePoints
     
     case textIconButtonRotateRight
     case textIconButtonRotateLeft
@@ -174,23 +270,14 @@ enum ToolInterfaceElement: UInt16 {
     //case segmentDocumentMode
     
     case segmentEditMode
-    case segmentPointMode
-    case segmentPointCreateMode
     case segmentWeightMode
-    case segmentWeightPointMode
-    case segmentWeightPointCreateMode
     case segmentAnimationMode
-    case segmentViewMode
+    
     
     case checkBoxAlternateMotionEnabled
     case checkBoxAutoLoopEnabled
     case checkBoxBulgeEnabled
-    case checkBoxCreateJigglesDrawing
-    case checkBoxCreateJigglesStandard
-    case checkBoxCreatePoints
-    case checkBoxCreateWeightRingPoints
-    case checkBoxCreateWeightRingsDrawing
-    case checkBoxCreateWeightRingsStandard
+    
     case checkBoxGyroscopeEnabled
     case checkBoxHorizontalEnabled
     case checkBoxInvertHorizontalEnabled
@@ -201,8 +288,7 @@ enum ToolInterfaceElement: UInt16 {
     case checkBoxOvershootEnabled
     case checkBoxRecordAudioEnabled
     case checkBoxRelaxEnabled
-    case checkBoxRemovePoints
-    case checkBoxRemoveWeightRingPoints
+    
     case checkBoxReverseMotionEnabled
     case checkBoxReverseMotionEvenEnabled
     case checkBoxReverseMotionOddEnabled
@@ -244,19 +330,160 @@ enum ToolInterfaceElement: UInt16 {
     var type: ToolInterfaceElementType {
         switch self {
             
+        case .sexyCheckBoxGuideCenters:
+            return .sexyCheckBox
+        case .sexyCheckBoxJiggleCenters:
+            return .sexyCheckBox
+        case .sexyCheckBoxDarkMode:
+            return .sexyCheckBox
+            
+            
+            
+        case .sexyStepperTimelinePointCount:
+            return .sexyStepper
+            
         case .sexyButtonUndo:
             return .sexyButton
         case .sexyButtonRedo:
             return .sexyButton
             
+        case .sexyButtonMenu:
+            return .sexyButton
+        case .sexyButtonRotateJiggleRight:
+            return .sexyButton
+        case .sexyButtonRotateJiggleLeft:
+            return .sexyButton
+            
+        case .sexyButtonRotateGuideLeft:
+            return .sexyButton
+        case .sexyButtonRotateGuideRight:
+            return .sexyButton
+        case .sexyButtonFlipJiggleH:
+            return .sexyButton
+        case .sexyButtonFlipJiggleV:
+            return .sexyButton
+        case .sexyButtonFlipGuideH:
+            return .sexyButton
+        case .sexyButtonFlipGuideV:
+            return .sexyButton
+            
+            
+        case .sexyButtonFreezeSelectedJiggle:
+            return .sexyButton
+        case .sexyButtonFreezeSelectedGuide:
+            return .sexyButton
+        case .sexyButtonUnfreezeAllJiggles:
+            return .sexyButton
+        case .sexyButtonUnfreezeAllGuides:
+            return .sexyButton
+            
+            
+            
+            
+        case .sexyButtonCloneJiggle:
+            return .sexyButton
+        case .sexyButtonCloneGuide:
+            return .sexyButton
+        case .sexyButtonDeleteJiggle:
+            return .sexyButton
+        case .sexyButtonDeleteGuide:
+            return .sexyButton
+        case .sexyButtonDeleteJigglePoint:
+            return .sexyButton
+        case .sexyButtonDeleteGuidePoint:
+            return .sexyButton
+            
+            
+        case .sexyButtonTimeLineDupeAll:
+            return .sexyButton
+        case .sexyButtonTimeLineDupeDuration:
+            return .sexyButton
+        case .sexyButtonTimeLineDupeCurrentChannel:
+            return .sexyButton
+        case .sexyButtonTimeLineFlattenCurrentChannel:
+            return .sexyButton
+        case .sexyButtonTimeLineResetDefaultCurrentChannel:
+            return .sexyButton
+            
+        case .sexyButtonTimeLineResetGraph:
+            return .sexyButton
+        case .sexyButtonTimeLineBreakPoint:
+            return .sexyButton
+            
+        case .sexyButtonTimeLineInvertH:
+            return .sexyButton
+        case .sexyButtonTimeLineInvertV:
+            return .sexyButton
+        case .sexyButtonTimeLineResetCurve:
+            return .sexyButton
+            
+        case .sexyButtonTimeLineAmplify:
+            return .sexyButton
+        case .sexyButtonTimeLineDampen:
+            return .sexyButton
+            
+        case .sexyButtonTimeLineFlipAll:
+            return .sexyButton
+            
+            
+            
+        case .sexyButtonSelectNextJigglePoint:
+            return .sexyButton
+        case .sexyButtonSelectPreviousJigglePoint:
+            return .sexyButton
+        case .sexyButtonSelectNextGuidePoint:
+            return .sexyButton
+        case .sexyButtonSelectPreviousGuidePoint:
+            return .sexyButton
+            
+        case .sexyButtonSelectNextJiggle:
+            return .sexyButton
+        case .sexyButtonSelectPreviousJiggle:
+            return .sexyButton
+        case .sexyButtonSelectNextGuide:
+            return .sexyButton
+        case .sexyButtonSelectPreviousGuide:
+            return .sexyButton
+        case .sexyButtonZoomReset:
+            return .sexyButton
+        case .sexyButtonZoomJiggle:
+            return .sexyButton
+            
+            
+            
+            
         case .createSwatchMakeAndDrawJiggle:
             return .createSwatch
-            
+        case .createSwatchMakeAndDrawGuide:
+            return .createSwatch
+        case .createSwatchAddAndRemoveJigglePoints:
+            return .createSwatch
+        case .createSwatchAddAndRemoveGuidePoints:
+            return .createSwatch
+        
         case .enterModeZoomEnter:
             return .enterMode
         case .enterModeGuidesEnter:
             return .enterMode
         case .enterModeGraphEnter:
+            return .enterMode
+        case .enterModeAnimationLoopsEnter:
+            return .enterMode
+        case .enterModeVideoRecordEnter:
+            return .enterMode
+        case .enterModeVideoExportEnter:
+            return .enterMode
+        case .enterModeTimeLineEnter:
+            return .enterMode
+            
+            
+        case .enterModeLoopsPage1:
+            return .enterMode
+        case .enterModeLoopsPage2:
+            return .enterMode
+        case .enterModeLoopsPage3:
+            return .enterMode
+        case .enterModeAnimationContinuous:
             return .enterMode
             
             
@@ -265,6 +492,16 @@ enum ToolInterfaceElement: UInt16 {
         case .exitModeGuidesExit:
             return .exitMode
         case .exitModeGraphExit:
+            return .exitMode
+        case .exitModeAnimationLoopsExit:
+            return .exitMode
+        case .exitModeVideoRecordExit:
+            return .exitMode
+        case .exitModeVideoExportExit:
+            return .exitMode
+        case .exitModeTimeLineExit:
+            return .exitMode
+        case .exitModeAnimationContinuous:
             return .exitMode
             
         case .mainTabDocumentMode:
@@ -319,48 +556,26 @@ enum ToolInterfaceElement: UInt16 {
             return .slider
         case .sliderJiggleDampen:
             return .slider
+        case .sliderTimeLineDuration:
+            return .slider
+        case .sliderTimeLineOffset:
+            return .slider
             
-            
-        case .buttonPhoneCollapseTop:
-            return .iconButton
-        case .buttonPhoneCollapseBottom:
-            return .iconButton
             
         case .segmentEditMode:
             return .segment
-        case .segmentPointMode:
-            return .segment
-        case .segmentPointCreateMode:
-            return .segment
         case .segmentWeightMode:
-            return .segment
-        case .segmentWeightPointMode:
-            return .segment
-        case .segmentWeightPointCreateMode:
             return .segment
         case .segmentAnimationMode:
             return .segment
-        case .segmentViewMode:
-            return .segment
-            
+
         case .checkBoxAlternateMotionEnabled:
             return .checkBox
         case .checkBoxAutoLoopEnabled:
             return .checkBox
         case .checkBoxBulgeEnabled:
             return .checkBox
-        case .checkBoxCreateJigglesDrawing:
-            return .checkBox
-        case .checkBoxCreateJigglesStandard:
-            return .checkBox
-        case .checkBoxCreatePoints:
-            return .checkBox
-        case .checkBoxCreateWeightRingPoints:
-            return .checkBox
-        case .checkBoxCreateWeightRingsDrawing:
-            return .checkBox
-        case .checkBoxCreateWeightRingsStandard:
-            return .checkBox
+            
         case .checkBoxGyroscopeEnabled:
             return .checkBox
         case .checkBoxHorizontalEnabled:
@@ -381,10 +596,7 @@ enum ToolInterfaceElement: UInt16 {
             return .checkBox
         case .checkBoxRelaxEnabled:
             return .checkBox
-        case .checkBoxRemovePoints:
-            return .checkBox
-        case .checkBoxRemoveWeightRingPoints:
-            return .checkBox
+            
         case .checkBoxReverseMotionEnabled:
             return .checkBox
         case .checkBoxReverseMotionEvenEnabled:
@@ -449,114 +661,20 @@ enum ToolInterfaceElement: UInt16 {
             
         case .textIconButtonBreakManualWeightGraph:
             return .textIconButton
-        case .textIconButtonCloneJiggle:
-            return .textIconButton
-        case .textIconButtonCloneWeightRing:
-            return .textIconButton
-        case .textIconButtonFlipHorizontalJiggle:
-            return .textIconButton
-        case .textIconButtonFlipHorizontalWeightRing:
-            return .textIconButton
-        case .textIconButtonFlipVerticalJiggle:
-            return .textIconButton
-        case .textIconButtonFlipVerticalWeightRing:
-            return .textIconButton
+
             
-        case .textIconButtonRotateJiggleRight:
-            return .textIconButton
-        case .textIconButtonRotateGuideRight:
-            return .textIconButton
-        case .textIconButtonRotateJiggleLeft:
-            return .textIconButton
-        case .textIconButtonRotateGuideLeft:
-            return .textIconButton
-            
-        case .textIconButtonFreezeOffAllJiggle:
-            return .textIconButton
-        case .textIconButtonFreezeOffAllWeightRing:
-            return .textIconButton
-        case .textIconButtonFreezeOnSelectedJiggle:
-            return .textIconButton
-        case .textIconButtonFreezeOnSelectedWeightRing:
-            return .textIconButton
-        case .textIconButtonMainMenu:
-            return .textIconButton
         case .textIconButtonRandomizeWeightGraph:
             return .textIconButton
         case .textIconButtonRecordCancel:
             return .textIconButton
-        case .textIconButtonRecordMovie:
-            return .textIconButton
-        case .textIconButtonRedo:
-            return .textIconButton
-        case .textIconButtonRemoveJiggle:
-            return .textIconButton
-        case .textIconButtonRemovePoint:
-            return .textIconButton
-        case .textIconButtonRemoveWeightRing:
-            return .textIconButton
-        case .textIconButtonRemoveWeightRingPoint:
-            return .textIconButton
+            
         case .textIconButtonResetSwivelCamera:
             return .textIconButton
         case .textIconButtonResetToDefault:
             return .textIconButton
         case .textIconButtonResetWeightGraph:
             return .textIconButton
-        case .textIconButtonResetZoom:
-            return .textIconButton
-        case .textIconButtonResetZoomSelectedJiggle:
-            return .textIconButton
-        case .textIconButtonSelectNextJiggle:
-            return .textIconButton
-        case .textIconButtonSelectNextPoint:
-            return .textIconButton
-        case .textIconButtonSelectNextWeightRing:
-            return .textIconButton
-        case .textIconButtonSelectNextWeightRingPoint:
-            return .textIconButton
-        case .textIconButtonSelectPreviousJiggle:
-            return .textIconButton
-        case .textIconButtonSelectPreviousPoint:
-            return .textIconButton
-        case .textIconButtonSelectPreviousWeightRing:
-            return .textIconButton
-        case .textIconButtonSelectPreviousWeightRingPoint:
-            return .textIconButton
-        case .textIconButtonSendBackJiggle:
-            return .textIconButton
-        case .textIconButtonSendBackWeightRing:
-            return .textIconButton
-        case .textIconButtonSendBackwardJiggle:
-            return .textIconButton
-        case .textIconButtonSendBackwardWeightRing:
-            return .textIconButton
-        case .textIconButtonSendForwardJiggle:
-            return .textIconButton
-        case .textIconButtonSendForwardWeightRing:
-            return .textIconButton
-        case .textIconButtonSendFrontWeightRing:
-            return .textIconButton
-        case .textIconButtonUndo:
-            return .textIconButton
-        case .textIconButtonPhoneExpandTopMenu:
-            return .textIconButton
-        case .textIconButtonPhoneExpandBottomMenu:
-            return .textIconButton
-        case .textIconButtonPhoneCollapseTopMenu:
-            return .textIconButton
-        case .textIconButtonPhoneCollapseBottomMenu:
-            return .textIconButton
-        case .textIconButtonFreezeOnAllUnselectedJiggle:
-            return .textIconButton
-        case .textIconButtonFreezeOnAllUnselectedWeightRing:
-            return .textIconButton
-        case .textIconButtonSendFrontJiggle:
-            return .textIconButton
-        case .textIconButtonExitZoomMode:
-            return .textIconButton
-        case .textIconButtonExitRecordMode:
-            return .textIconButton
+            
         case .textIconButtonResetSwivelFront:
             return .textIconButton
         case .textIconButtonResetSwivelBack:
@@ -569,12 +687,10 @@ enum ToolInterfaceElement: UInt16 {
             return .textIconButton
         case .textIconButtonIncreaseJigglePoints:
             return .textIconButton
-        case .textIconButtonIncreaseWeightRingPoints:
+        case .textIconButtonIncreaseGuidePoints:
             return .textIconButton
-        case .textIconButtonExitViewMode:
-            return .textIconButton
-        case .textIconButtonExitWeightMode:
-            return .textIconButton
+
+            
         case .textIconButtonGenerateTopography:
             return .textIconButton
         case .textIconButtonRotateRight:

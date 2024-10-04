@@ -17,13 +17,13 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-    func getEditModeSegmentToolNode(neighborTypeLeft: ToolInterfaceElementType?,
+   @MainActor func getEditModeSegmentToolNode(neighborTypeLeft: ToolInterfaceElementType?,
                                         neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
         let orientation = jiggleViewModel.orientation
         var buttonConfigurations = [ToolInterfaceElementSegmentedPickerButtonConfiguration]()
 
-        let jigglesTextIconPackable = SegmentIconLibrary.modeJiggleEditAffine
+       let jigglesTextIconPackable = FramedConvertibleIconLibrary.menuA
         let jigglesLine1 = ToolInterfaceStringLibrarySegments.segmentTextEditModeJigglesLine1()
         let jigglesLine2 = ToolInterfaceStringLibrarySegments.segmentTextEditModeJigglesLine2()
         let jigglesConfiguration = ToolInterfaceElementSegmentedPickerButtonConfiguration(id: 0,
@@ -33,7 +33,7 @@ extension ToolInterfaceViewModel {
                                                                                           nameLabelLine2: jigglesLine2)
         buttonConfigurations.append(jigglesConfiguration)
         
-        let pointsTextIconPackable = SegmentIconLibrary.modeWeightsEditCenters
+        let pointsTextIconPackable = FramedConvertibleIconLibrary.menuB
         let pointsLine1 = ToolInterfaceStringLibrarySegments.segmentTextEditModePointsLine1()
         let pointsLine2 = ToolInterfaceStringLibrarySegments.segmentTextEditModePointsLine2()
         let pointsConfiguration = ToolInterfaceElementSegmentedPickerButtonConfiguration(id: 1,

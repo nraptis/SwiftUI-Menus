@@ -12,7 +12,7 @@ class DraggableMenuBottomMenuView: UIView, MenuPartWithRowsConforming {
     var separatorViews = [UIView]()
     var rowViews = [ToolRowView]()
     func getNumberOfRows() -> Int { ToolInterfaceTheme.getDraggableMenuStandardBottomHalfRowCount() }
-    func getWidthSource() -> ToolRowViewContent.WidthSource { .standard }
+    
     func getToolRow(at index: Int) -> ToolRow? {
         let index = (index + ToolInterfaceTheme.getDraggableMenuStandardTopHalfRowCount())
         if index >= 0 && index < toolInterfaceViewModel.rowsDraggable.count {

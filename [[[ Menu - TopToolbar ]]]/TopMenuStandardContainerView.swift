@@ -9,7 +9,17 @@ import UIKit
 
 class TopMenuStandardContainerView: UIView, PrimaryMenuStandardContainerConforming {
     
-    var isGraphModeAnimating = false
+    func handleSelectedJiggleDidChange() {
+        print("TopMenuStandardContainerView => handleSelectedJiggleDidChange")
+        timeLineContainerView.handleSelectedJiggleDidChange()
+    }
+    
+    func handleSelectedSwatchDidChange() {
+        print("TopMenuStandardContainerView => handleSelectedSwatchDidChange")
+        timeLineContainerView.handleSelectedSwatchDidChange()
+    }
+    
+    var isModeAnimating = false
     
     lazy var topMenuViewLeftConstraint: NSLayoutConstraint = {
         NSLayoutConstraint(item: topMenuView, attribute: .left, relatedBy: .equal, toItem: self,
@@ -23,6 +33,7 @@ class TopMenuStandardContainerView: UIView, PrimaryMenuStandardContainerConformi
         return result
     }()
     
+    
     lazy var graphContainerViewLeftConstraint: NSLayoutConstraint = {
         NSLayoutConstraint(item: graphContainerView, attribute: .left, relatedBy: .equal, toItem: self,
                            attribute: .left, multiplier: 1.0, constant: 0.0)
@@ -35,8 +46,23 @@ class TopMenuStandardContainerView: UIView, PrimaryMenuStandardContainerConformi
         return result
     }()
     
+    
+    lazy var timeLineContainerViewLeftConstraint: NSLayoutConstraint = {
+        NSLayoutConstraint(item: timeLineContainerView, attribute: .left, relatedBy: .equal, toItem: self,
+                           attribute: .left, multiplier: 1.0, constant: 0.0)
+    }()
+    
+    lazy var timeLineContainerView: TopMenuTimeLineContainerView = {
+        let result = TopMenuTimeLineContainerView(toolInterfaceViewModel: toolInterfaceViewModel)
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.backgroundColor = ToolInterfaceTheme._toolbarBackground
+        return result
+    }()
+    
+    
     func handleDarkModeDidChange() {
         graphContainerView.handleDarkModeDidChange()
+        timeLineContainerView.handleDarkModeDidChange()
         topMenuView.handleDarkModeDidChange()
     }
     
@@ -51,8 +77,10 @@ class TopMenuStandardContainerView: UIView, PrimaryMenuStandardContainerConformi
     }
     
     func handleSafeArea(width: Int, safeAreaLeft: Int, safeAreaRight: Int, safeAreaTop: Int) {
-        graphContainerView.handleSafeArea(width: width, safeAreaLeft: safeAreaLeft, 
+        graphContainerView.handleSafeArea(width: width, safeAreaLeft: safeAreaLeft,
                                           safeAreaRight: safeAreaRight, safeAreaTop: safeAreaTop)
+        timeLineContainerView.handleSafeArea(width: width, safeAreaLeft: safeAreaLeft,
+                                             safeAreaRight: safeAreaRight, safeAreaTop: safeAreaTop)
         topMenuView.handleSafeArea(width: width, safeAreaLeft: safeAreaLeft,
                                    safeAreaRight: safeAreaRight, safeAreaTop: safeAreaTop)
     }
@@ -94,8 +122,25 @@ class TopMenuStandardContainerView: UIView, PrimaryMenuStandardContainerConformi
                                                             multiplier: 1.0,
                                                             constant: CGFloat(graphMenuHeight)))
         
+        addSubview(timeLineContainerView)
+        addConstraints([
+            timeLineContainerViewLeftConstraint,
+            NSLayoutConstraint(item: timeLineContainerView, attribute: .width, relatedBy: .equal, toItem: self,
+                               attribute: .width, multiplier: 1.0, 
+                               constant: 0.0),
+            NSLayoutConstraint(item: timeLineContainerView, attribute: .bottom, relatedBy: .equal,
+                               toItem: self, attribute: .bottom, multiplier: 1.0,
+                               constant: 0.0)
+        ])
+        timeLineContainerView.addConstraint(NSLayoutConstraint(item: timeLineContainerView, attribute: .height, relatedBy: .equal,
+                                                            toItem: nil, attribute: .notAnAttribute,
+                                                            multiplier: 1.0,
+                                                            constant: CGFloat(graphMenuHeight)))
+        
         graphContainerView.setup(width: width, safeAreaLeft: safeAreaLeft,
                                  safeAreaRight: safeAreaRight, safeAreaTop: safeAreaTop)
+        timeLineContainerView.setup(width: width, safeAreaLeft: safeAreaLeft,
+                                    safeAreaRight: safeAreaRight, safeAreaTop: safeAreaTop)
         topMenuView.setup(width: width, safeAreaLeft: safeAreaLeft,
                           safeAreaRight: safeAreaRight, safeAreaTop: safeAreaTop)
     }

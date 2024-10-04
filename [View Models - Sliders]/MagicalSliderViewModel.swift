@@ -10,54 +10,47 @@ import SwiftUI
 
 @Observable class MagicalSliderViewModel: MagicalViewModel {
     
-    var percent = CGFloat(0.0)
-    var thumbMinimumX: CGFloat
-    var thumbMaximumX: CGFloat
-    var thumbOffsetX = CGFloat(0.0)
+    override class func getLayoutScheme() -> LayoutScheme.Type {
+        SliderLayout.self
+    }
     
-    var nameLabelPaddingLeft = 0
-    var nameLabelPaddingRight = 0
+    @MainActor var percent = CGFloat(0.0)
+    @MainActor var thumbMinimumX: CGFloat = 0.0
+    @MainActor var thumbMaximumX: CGFloat = 100.0
+    @MainActor var thumbOffsetX = CGFloat(0.0)
     
-    var valueLabelPaddingLeft = 0
-    var valueLabelPaddingRight = 0
+    @MainActor var nameLabelPaddingLeft = 0
+    @MainActor var nameLabelPaddingRight = 0
     
-    var universalPaddingLeft = 0
-    var universalPaddingRight = 0
+    @MainActor var valueLabelPaddingLeft = 0
+    @MainActor var valueLabelPaddingRight = 0
     
-    var sliderBoxWidth = 0
+    @MainActor var universalPaddingLeft = 0
+    @MainActor var universalPaddingRight = 0
+    
+    @MainActor var sliderBoxWidth = 0
     
     let sliderConfiguration: ToolInterfaceElementSliderConfiguration
-    init(orientation: Orientation,
+    @MainActor init(orientation: Orientation,
          sliderConfiguration: ToolInterfaceElementSliderConfiguration) {
         
         self.sliderConfiguration = sliderConfiguration
-        
-        self.thumbMinimumX = 0.0
-        self.thumbMaximumX = 100.0
         super.init(orientation: orientation)
     }
     
-    func handleSlideStarted(percent: CGFloat) {
+    @MainActor func handleSlideStarted(percent: CGFloat) {
         self.percent = CGFloat(percent)
     }
     
-    func handleSlideUpdated(percent: CGFloat) {
+    @MainActor func handleSlideUpdated(percent: CGFloat) {
         self.percent = percent
     }
     
-    func handleSlideFinished(percent: CGFloat) {
+    @MainActor func handleSlideFinished(percent: CGFloat) {
         self.percent = percent
     }
     
-    override func refreshDisabled() {
-        super.refreshDisabled()
-    }
-    
-    override func refreshEnabled() {
-        super.refreshEnabled()
-    }
-    
-    func refreshEnabled(value: Float) {
+    @MainActor func refreshEnabled(value: Float) {
         let delta = (sliderConfiguration.maximumValue - sliderConfiguration.minimumValue)
         if delta > Math.epsilon {
             var _percent = CGFloat((value - sliderConfiguration.minimumValue) / delta)
@@ -71,11 +64,7 @@ import SwiftUI
         refreshEnabled()
     }
     
-    func refreshThumbPosition() {
-        
-    }
-    
-    func getValueString() -> String {
+    @MainActor func getValueString() -> String {
         let value = sliderConfiguration.minimumValue + (sliderConfiguration.maximumValue - sliderConfiguration.minimumValue) * Float(percent)
         let formatString = "%.\(sliderConfiguration.valueDecimalCount)f"
         return String(format: formatString, value)

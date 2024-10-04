@@ -9,35 +9,8 @@ import UIKit
 
 class JiggleViewController: MetalViewController {
     
-    /*
-    lazy var ___ringBuilderViewController: RingBuilderViewController = {
-        let result = RingBuilderViewController(nibName: nil, bundle: nil)
-        result.view.translatesAutoresizingMaskIntoConstraints = false
-        return result
-    }()
-    
-    lazy var TEST_POPOVA_BUTTON_01: UIButton = {
-        let result = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: 512.0, height: 512.0))
-        result.translatesAutoresizingMaskIntoConstraints = false
-        result.setTitle("Popover 01", for: .normal)
-        result.backgroundColor = UIColor.green
-        result.layer.cornerRadius = 16.0
-        result.clipsToBounds = true
-        result.setTitleColor(UIColor.black, for: .normal)
-        return result
-    }()
-    
-    lazy var TEST_POPOVA_BUTTON_02: UIButton = {
-        let result = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: 512.0, height: 512.0))
-        result.translatesAutoresizingMaskIntoConstraints = false
-        result.setTitle("Popover 02", for: .normal)
-        result.backgroundColor = UIColor.green
-        result.layer.cornerRadius = 16.0
-        result.clipsToBounds = true
-        result.setTitleColor(UIColor.black, for: .normal)
-        return result
-    }()
-    */
+    static let expandButtonWidth: CGFloat = 48.0
+    static let expandButtonHeight: CGFloat = 44.0
     
     weak var jiggleContainerViewController: JiggleContainerViewController?
     
@@ -96,7 +69,11 @@ class JiggleViewController: MetalViewController {
     }()
     
     lazy var phoneExpandToolbarButtonTopLeftConstraint: NSLayoutConstraint = {
-        return phoneExpandToolbarButtonTop.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 0.0)
+        return phoneExpandToolbarButtonTop.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 4096.0)
+    }()
+    
+    lazy var phoneExpandToolbarButtonTopTopConstraint: NSLayoutConstraint = {
+        return phoneExpandToolbarButtonTop.topAnchor.constraint(equalTo: view.topAnchor, constant: 0.0)
     }()
     
     lazy var phoneExpandToolbarButtonBottom: ExpandToolbarButton = {
@@ -106,8 +83,12 @@ class JiggleViewController: MetalViewController {
         return result
     }()
     
+    lazy var phoneExpandToolbarButtonBottomBottomConstraint: NSLayoutConstraint = {
+        return phoneExpandToolbarButtonBottom.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0.0)
+    }()
+    
     lazy var phoneExpandToolbarButtonBottomLeftConstraint: NSLayoutConstraint = {
-        return phoneExpandToolbarButtonBottom.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 0.0)
+        return phoneExpandToolbarButtonBottom.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0.0)
     }()
 
     lazy var padDraggableMenuTopConstraint: NSLayoutConstraint = {
@@ -157,6 +138,9 @@ class JiggleViewController: MetalViewController {
         result.translatesAutoresizingMaskIntoConstraints = false
         result.standardContainerView.graphContainerView.graphView.jiggleScene = jiggleScene
         result.standardContainerView.graphContainerView.graphView.jiggleDocument = jiggleDocument
+        result.standardContainerView.timeLineContainerView.timeLineView.jiggleScene = jiggleScene
+        result.standardContainerView.timeLineContainerView.timeLineView.jiggleDocument = jiggleDocument
+        result.standardContainerView.timeLineContainerView.timeLineView.jiggleViewModel = jiggleViewModel
         return result
     }()
     
@@ -170,6 +154,9 @@ class JiggleViewController: MetalViewController {
         result.translatesAutoresizingMaskIntoConstraints = false
         result.standardContainerView.graphContainerView.graphView.jiggleScene = jiggleScene
         result.standardContainerView.graphContainerView.graphView.jiggleDocument = jiggleDocument
+        result.standardContainerView.timeLineContainerView.timeLineView.jiggleScene = jiggleScene
+        result.standardContainerView.timeLineContainerView.timeLineView.jiggleDocument = jiggleDocument
+        result.standardContainerView.timeLineContainerView.timeLineView.jiggleViewModel = jiggleViewModel
         return result
     }()
     
@@ -181,7 +168,7 @@ class JiggleViewController: MetalViewController {
     
     lazy var phoneBottomMenuPositionConstraint: NSLayoutConstraint = {
         NSLayoutConstraint(item: phoneBottomMenu, attribute: .top, relatedBy: .equal,
-                           toItem: self.view, attribute: .bottom, multiplier: 1.0, constant: 10.0)
+                           toItem: self.view, attribute: .bottom, multiplier: 1.0, constant: 0.0)
     }()
     
     let jiggleViewModel: JiggleViewModel
@@ -251,12 +238,8 @@ class JiggleViewController: MetalViewController {
         
         //modeTestViewController.update()
         
-        let safeWidth = ApplicationController.rootViewController.view.bounds.size.width -
-        (ApplicationController.rootViewController.view.safeAreaInsets.left +
-         ApplicationController.rootViewController.view.safeAreaInsets.right)
-        
-        phoneExpandToolbarButtonTop.update(deltaTime: deltaTime, safeWidth: safeWidth)
-        phoneExpandToolbarButtonBottom.update(deltaTime: deltaTime, safeWidth: safeWidth)
+        phoneExpandToolbarButtonTop.update(deltaTime: deltaTime)
+        phoneExpandToolbarButtonBottom.update(deltaTime: deltaTime)
         
         if jiggleViewModel.isBlockedAnyTransition {
             isStereoscopicEnabled = false
@@ -304,6 +287,17 @@ class JiggleViewController: MetalViewController {
                 gestureView.topAnchor.constraint(equalTo: view.topAnchor),
                 gestureView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             ])
+        }
+        
+        let appWidth: Int
+        let appHeight: Int
+        switch orientation {
+        case .landscape:
+            appWidth = Int(ApplicationController.widthLandscape + 0.5)
+            appHeight = Int(ApplicationController.heightLandscape + 0.5)
+        case .portrait:
+            appWidth = Int(ApplicationController.widthPortrait + 0.5)
+            appHeight = Int(ApplicationController.heightPortrait + 0.5)
         }
         
         let safeAreaLeft = Int(ApplicationController.rootViewController.view.safeAreaInsets.left + 0.5)
@@ -390,36 +384,44 @@ class JiggleViewController: MetalViewController {
         }
         
         if Device.isPhone {
-            let expandButtonInset: CGFloat = 4.0
-            let expandButtonWidth: CGFloat = 48.0
-            let expandButtonHeight: CGFloat = 44.0
+            
+            phoneExpandToolbarButtonBottom.masterBoundsWidth = CGFloat(appWidth)
+            phoneExpandToolbarButtonBottom.masterSafeAreaLeft = CGFloat(safeAreaLeft)
+            phoneExpandToolbarButtonBottom.masterSafeAreaRight = CGFloat(safeAreaRight)
+            
+            phoneExpandToolbarButtonTop.masterBoundsWidth = CGFloat(appWidth)
+            phoneExpandToolbarButtonTop.masterSafeAreaLeft = CGFloat(safeAreaLeft)
+            phoneExpandToolbarButtonTop.masterSafeAreaRight = CGFloat(safeAreaRight)
             
             phoneExpandToolbarButtonBottom.leftConstraint = phoneExpandToolbarButtonBottomLeftConstraint
+            phoneExpandToolbarButtonBottomLeftConstraint.constant = CGFloat(safeAreaLeft)
             view.addSubview(phoneExpandToolbarButtonBottom)
             phoneExpandToolbarButtonBottom.addConstraints([
                 NSLayoutConstraint(item: phoneExpandToolbarButtonBottom, attribute: .width, relatedBy: .equal, toItem: nil,
-                                   attribute: .notAnAttribute, multiplier: 1.0, constant: expandButtonWidth),
+                                   attribute: .notAnAttribute, multiplier: 1.0, constant: Self.expandButtonWidth),
                 NSLayoutConstraint(item: phoneExpandToolbarButtonBottom, attribute: .height, relatedBy: .equal, toItem: nil,
-                                   attribute: .notAnAttribute, multiplier: 1.0, constant: expandButtonHeight),
-                
+                                   attribute: .notAnAttribute, multiplier: 1.0, constant: Self.expandButtonHeight),
             ])
             
-            view.addConstraints([phoneExpandToolbarButtonBottom.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
-                                                                                        constant: -expandButtonInset),
+            view.addConstraints([phoneExpandToolbarButtonBottomBottomConstraint,
                                  phoneExpandToolbarButtonBottomLeftConstraint])
             
             phoneExpandToolbarButtonTop.leftConstraint = phoneExpandToolbarButtonTopLeftConstraint
+            phoneExpandToolbarButtonTopLeftConstraint.constant = CGFloat(safeAreaLeft)
             view.addSubview(phoneExpandToolbarButtonTop)
             phoneExpandToolbarButtonTop.addConstraints([
                 NSLayoutConstraint(item: phoneExpandToolbarButtonTop, attribute: .width, relatedBy: .equal, toItem: nil,
-                                   attribute: .notAnAttribute, multiplier: 1.0, constant: expandButtonWidth),
+                                   attribute: .notAnAttribute, multiplier: 1.0, constant: Self.expandButtonWidth),
                 NSLayoutConstraint(item: phoneExpandToolbarButtonTop, attribute: .height, relatedBy: .equal, toItem: nil,
-                                   attribute: .notAnAttribute, multiplier: 1.0, constant: expandButtonHeight),
+                                   attribute: .notAnAttribute, multiplier: 1.0, constant: Self.expandButtonHeight),
             ])
             
-            view.addConstraints([phoneExpandToolbarButtonTop.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
-                                                                                  constant: expandButtonInset),
+            view.addConstraints([phoneExpandToolbarButtonTopTopConstraint,
                                  phoneExpandToolbarButtonTopLeftConstraint])
+            
+            phoneExpandToolbarButtonBottomBottomConstraint.constant = CGFloat(-safeAreaBottom) - 4.0
+            phoneExpandToolbarButtonTopTopConstraint.constant = CGFloat(safeAreaTop) + 4.0
+            
         }
         
         if Device.isPad {
@@ -440,6 +442,8 @@ class JiggleViewController: MetalViewController {
             phoneTopMenu.layoutIfNeeded()
             phoneTopMenu.refreshShadowDisplay()
             phoneTopMenu.refreshGraphDisplay()
+            phoneTopMenu.refreshTimeLineDisplay()
+            
             
             phoneBottomMenu.setNeedsLayout()
             phoneBottomMenu.layoutIfNeeded()
@@ -454,68 +458,7 @@ class JiggleViewController: MetalViewController {
                              safeAreaRight: safeAreaRight,
                              safeAreaTop: safeAreaTop,
                              safeAreaBottom: safeAreaBottom)
-        
-        
-        /*
-        view.addSubview(TEST_POPOVA_BUTTON_01)
-        TEST_POPOVA_BUTTON_01.addConstraints([NSLayoutConstraint(item: TEST_POPOVA_BUTTON_01,
-                                                                 attribute: .width, relatedBy: .equal,
-                                                                 toItem: nil, attribute: .notAnAttribute,
-                                                                 multiplier: 1.0, constant: 120.0)])
-        TEST_POPOVA_BUTTON_01.addConstraints([NSLayoutConstraint(item: TEST_POPOVA_BUTTON_01,
-                                                                 attribute: .height, relatedBy: .equal,
-                                                                 toItem: nil, attribute: .notAnAttribute,
-                                                                 multiplier: 1.0, constant: 44.0)])
-        TEST_POPOVA_BUTTON_01.addTarget(self, action: #selector(Self.clockTestPopover1(sender:)), for: .touchUpInside)
-        view.addConstraints([
-            NSLayoutConstraint(item: TEST_POPOVA_BUTTON_01, attribute: .right, relatedBy: .equal,
-                               toItem: view, attribute: .right, multiplier: 1.0, constant: -24.0),
-            NSLayoutConstraint(item: TEST_POPOVA_BUTTON_01, attribute: .centerY, relatedBy: .equal,
-                               toItem: view, attribute: .centerY, multiplier: 1.0, constant: 0.0),
-        ])
-        
-        view.addSubview(TEST_POPOVA_BUTTON_02)
-        TEST_POPOVA_BUTTON_02.addConstraints([NSLayoutConstraint(item: TEST_POPOVA_BUTTON_02,
-                                                                 attribute: .width, relatedBy: .equal,
-                                                                 toItem: nil, attribute: .notAnAttribute,
-                                                                 multiplier: 1.0, constant: 120.0)])
-        TEST_POPOVA_BUTTON_02.addConstraints([NSLayoutConstraint(item: TEST_POPOVA_BUTTON_02,
-                                                                 attribute: .height, relatedBy: .equal,
-                                                                 toItem: nil, attribute: .notAnAttribute,
-                                                                 multiplier: 1.0, constant: 44.0)])
-        TEST_POPOVA_BUTTON_02.addTarget(self, action: #selector(Self.clockTestPopover2(sender:)), for: .touchUpInside)
-        view.addConstraints([
-            NSLayoutConstraint(item: TEST_POPOVA_BUTTON_02, attribute: .left, relatedBy: .equal,
-                               toItem: view, attribute: .left, multiplier: 1.0, constant: 24.0),
-            NSLayoutConstraint(item: TEST_POPOVA_BUTTON_02, attribute: .centerY, relatedBy: .equal,
-                               toItem: view, attribute: .centerY, multiplier: 1.0, constant: 0.0),
-        ])
-        
-        */
-        
-        /*
-        let dbWidth = DialogBoxStackContainerView.getDialogWidth()
-        view.addSubview(___ringBuilderViewController.view)
-        ___ringBuilderViewController.view.addConstraints([
-            NSLayoutConstraint(item: ___ringBuilderViewController.view, attribute: .width,
-                               relatedBy: .equal, toItem: nil, attribute: .notAnAttribute,
-                               multiplier: 1.0, constant: CGFloat(dbWidth)),
-            NSLayoutConstraint(item: ___ringBuilderViewController.view, attribute: .height,
-                               relatedBy: .equal, toItem: nil, attribute: .notAnAttribute,
-                               multiplier: 1.0, constant: 300.0),
-            
-        ])
-        view.addConstraints([
-            NSLayoutConstraint(item: ___ringBuilderViewController.view, attribute: .left,
-                               relatedBy: .equal, toItem: self.view, attribute: .left,
-                               multiplier: 1.0, constant: 24.0),
-            NSLayoutConstraint(item: ___ringBuilderViewController.view, attribute: .top,
-                               relatedBy: .equal, toItem: self.view, attribute: .top,
-                               multiplier: 1.0, constant: 24.0),
-            
-        ])
-        */
-        
+
     }
     
     @objc func clockTestPopover1(sender: UIButton) {
@@ -539,10 +482,8 @@ class JiggleViewController: MetalViewController {
             return
         }
         
-        let device = Device()
-        
-        let scaledWidth = device.widthPortraitScaled
-        let scaledHeight = device.heightPortraitScaled
+        let scaledWidth = ApplicationController.widthPortraitScaled
+        let scaledHeight = ApplicationController.heightPortraitScaled
         let scaledSize = CGSize(width: CGFloat(scaledWidth), height: CGFloat(scaledHeight))
         
         let aspect = scaledSize.getAspectFit(image.size)
@@ -603,13 +544,64 @@ class JiggleViewController: MetalViewController {
                                            safeAreaLeft: safeAreaLeft, safeAreaRight: safeAreaRight,
                                            safeAreaBottom: safeAreaBottom)
             
-            let graphBlockerHeight = ToolInterfaceTheme.getTopGraphBlockerHeight(orientation: orientation,
+            let blockerHeight = ToolInterfaceTheme.getTopBlockerHeight(orientation: orientation,
                                                                                  safeAreaTop: safeAreaTop)
-            phoneTopMenu.standardContainerView.graphContainerView.dragBlockerViewHeightConstraint.constant = CGFloat(graphBlockerHeight)
+            phoneTopMenu.standardContainerView.graphContainerView.dragBlockerViewHeightConstraint.constant = CGFloat(blockerHeight)
             phoneTopMenu.standardContainerView.graphContainerView.setNeedsLayout()
+            phoneTopMenu.standardContainerView.timeLineContainerView.dragBlockerViewHeightConstraint.constant = CGFloat(blockerHeight)
+            phoneTopMenu.standardContainerView.timeLineContainerView.setNeedsLayout()
+            
             phoneTopMenu.standardContainerView.setNeedsLayout()
             phoneTopMenu.setNeedsLayout()
             phoneTopMenu.layoutIfNeeded()
+            
+            
+            phoneExpandToolbarButtonBottom.masterBoundsWidth = CGFloat(appWidth)
+            phoneExpandToolbarButtonBottom.masterSafeAreaLeft = CGFloat(safeAreaLeft)
+            phoneExpandToolbarButtonBottom.masterSafeAreaRight = CGFloat(safeAreaRight)
+            
+            phoneExpandToolbarButtonTop.masterBoundsWidth = CGFloat(appWidth)
+            phoneExpandToolbarButtonTop.masterSafeAreaLeft = CGFloat(safeAreaLeft)
+            phoneExpandToolbarButtonTop.masterSafeAreaRight = CGFloat(safeAreaRight)
+            
+            print("=.=.=.=")
+            
+            print("AAA phoneExpandToolbarButtonTop.masterBoundsWidth = \(phoneExpandToolbarButtonTop.masterBoundsWidth)")
+            print("AAA phoneExpandToolbarButtonBottom.masterBoundsWidth = \(phoneExpandToolbarButtonBottom.masterBoundsWidth)")
+            
+            print("=.=.=.=")
+            
+            print("AAA phoneExpandToolbarButtonTop.masterSafeAreaLeft = \(phoneExpandToolbarButtonTop.masterSafeAreaLeft)")
+            print("AAA phoneExpandToolbarButtonBottom.masterSafeAreaLeft = \(phoneExpandToolbarButtonBottom.masterSafeAreaLeft)")
+            
+            print("=.=.=.=")
+            
+            print("AAA phoneExpandToolbarButtonTop.masterSafeAreaRight = \(phoneExpandToolbarButtonTop.masterSafeAreaRight)")
+            print("AAA phoneExpandToolbarButtonBottom.masterSafeAreaRight = \(phoneExpandToolbarButtonBottom.masterSafeAreaRight)")
+            
+            print("=.=.=.=")
+            
+            phoneExpandToolbarButtonBottomBottomConstraint.constant = CGFloat(-safeAreaBottom) - 4.0
+            phoneExpandToolbarButtonTopTopConstraint.constant = CGFloat(safeAreaTop) + 4.0
+            
+            let safeLeft = CGFloat(safeAreaLeft)
+            let safeRight = CGFloat(appWidth) - CGFloat(safeAreaRight) - CGFloat(Self.expandButtonWidth)
+            
+            if phoneExpandToolbarButtonTopLeftConstraint.constant < safeLeft {
+                phoneExpandToolbarButtonTopLeftConstraint.constant = safeLeft
+            }
+            
+            if (phoneExpandToolbarButtonTopLeftConstraint.constant) > safeRight {
+                phoneExpandToolbarButtonTopLeftConstraint.constant = safeRight
+            }
+            
+            if phoneExpandToolbarButtonBottomLeftConstraint.constant < safeLeft {
+                phoneExpandToolbarButtonBottomLeftConstraint.constant = safeLeft
+            }
+            
+            if (phoneExpandToolbarButtonBottomLeftConstraint.constant) > safeRight {
+                phoneExpandToolbarButtonBottomLeftConstraint.constant = safeRight
+            }
             
         } else {
             var interfaceConfiguration = toolInterfaceViewModel.getCurrentInterfaceConfigurationPad()
@@ -625,6 +617,7 @@ class JiggleViewController: MetalViewController {
         }
         
         registerGraphFrame()
+        registerTimeLineFrame()
         
     }
     
@@ -658,19 +651,17 @@ class JiggleViewController: MetalViewController {
             }
             
             graphWidth -= safeAreaLeft
-            graphWidth -= ToolInterfaceTheme.getGraphSideMenuWidth(orientation: orientation)
             graphWidth -= ToolInterfaceTheme.getTopGraphInsetLeft(orientation: orientation)
             graphWidth -= ToolInterfaceTheme.getTopGraphInsetRight(orientation: orientation)
             graphWidth -= safeAreaRight
             
             graphHeight -= ToolInterfaceTheme.getTopGraphInsetTop(orientation: orientation)
             graphHeight -= ToolInterfaceTheme.getTopGraphInsetBottom(orientation: orientation)
-            graphHeight -= ToolInterfaceTheme.getTopGraphBlockerHeight(orientation: orientation,
+            graphHeight -= ToolInterfaceTheme.getTopBlockerHeight(orientation: orientation,
                                                                        safeAreaTop: safeAreaTop)
             
         } else {
             graphWidth = Int(padDraggableMenu.bounds.size.width + 0.5)
-            
             
             let graphRowCount = ToolInterfaceTheme.getDraggableMenuStandardTopHalfRowCount()
             let rowSeparatorHeight = ToolInterfaceTheme.getDraggableMenuRowSeparatorHeight()
@@ -679,7 +670,6 @@ class JiggleViewController: MetalViewController {
                 graphHeight += ((graphRowCount - 1) * rowSeparatorHeight)
             }
             
-            graphWidth -= ToolInterfaceTheme.getGraphSideMenuWidth(orientation: orientation)
             graphWidth -= ToolInterfaceTheme.getDraggableMenuGraphInsetLeft()
             graphWidth -= ToolInterfaceTheme.getDraggableMenuGraphInsetRight()
             graphHeight -= ToolInterfaceTheme.getDraggableMenuGraphInsetTop()
@@ -693,6 +683,80 @@ class JiggleViewController: MetalViewController {
             phoneTopMenu.standardContainerView.refreshGraphDisplay()
         } else {
             padDraggableMenu.standardContainerView.refreshGraphDisplay()
+            
+        }
+    }
+    
+    func registerTimeLineFrame() {
+        let orientation = jiggleDocument.orientation
+        
+        let rowHeight = ToolInterfaceTheme.getRowHeight(orientation: orientation)
+        
+        var timeLineWidth: Int
+        var timeLineHeight: Int
+        if Device.isPhone {
+            
+            let safeAreaLeft = Int(ApplicationController.rootViewController.view.safeAreaInsets.left + 0.5)
+            let safeAreaRight = Int(ApplicationController.rootViewController.view.safeAreaInsets.right + 0.5)
+            let safeAreaTop = Int(ApplicationController.rootViewController.view.safeAreaInsets.top + 0.5)
+            
+            switch orientation {
+            case .landscape:
+                timeLineWidth = Int(ApplicationController.widthLandscape + 0.5)
+            case .portrait:
+                timeLineWidth = Int(ApplicationController.widthPortrait + 0.5)
+            }
+            
+            let timeLineRowCount = ToolInterfaceTheme.getTopMenuTimeLineRowCount(orientation: orientation)
+            
+            let rowSeparatorHeight = ToolInterfaceTheme.getStationaryRowSeparatorHeight(orientation: orientation)
+            
+            timeLineHeight = (timeLineRowCount * rowHeight)
+            if timeLineRowCount > 1 {
+                timeLineHeight += ((timeLineRowCount - 1) * rowSeparatorHeight)
+            }
+            
+            timeLineWidth -= safeAreaLeft
+            timeLineWidth -= ToolInterfaceTheme.getTopTimeLineInsetLeft(orientation: orientation)
+            timeLineWidth -= ToolInterfaceTheme.getTopTimeLineInsetRight(orientation: orientation)
+            timeLineWidth -= safeAreaRight
+            
+            timeLineHeight -= ToolInterfaceTheme.getTopTimeLineInsetTop(orientation: orientation)
+            timeLineHeight -= ToolInterfaceTheme.getTopTimeLineInsetBottom(orientation: orientation)
+            timeLineHeight -= ToolInterfaceTheme.getTopBlockerHeight(orientation: orientation,
+                                                                     safeAreaTop: safeAreaTop)
+            
+        } else {
+            timeLineWidth = Int(padDraggableMenu.bounds.size.width + 0.5)
+            
+            let timeLineRowCount = ToolInterfaceTheme.getDraggableMenuStandardTopHalfRowCount()
+            let rowSeparatorHeight = ToolInterfaceTheme.getDraggableMenuRowSeparatorHeight()
+            timeLineHeight = (timeLineRowCount * rowHeight)
+            if timeLineRowCount > 1 {
+                timeLineHeight += ((timeLineRowCount - 1) * rowSeparatorHeight)
+            }
+            
+            timeLineWidth -= ToolInterfaceTheme.getDraggableMenuTimeLineInsetLeft()
+            timeLineWidth -= ToolInterfaceTheme.getDraggableMenuTimeLineInsetRight()
+            timeLineHeight -= ToolInterfaceTheme.getDraggableMenuTimeLineInsetTop()
+            timeLineHeight -= ToolInterfaceTheme.getDraggableMenuTimeLineInsetBottom()
+        }
+        
+        jiggleScene.timeLineWidth = Float(timeLineWidth)
+        jiggleScene.timeLineHeight = Float(timeLineHeight)
+        
+        if jiggleViewModel.jiggleDocument.isTimeLineMode {
+            jiggleViewModel.timeLineUpdateRelay()
+        }
+        
+        refreshTimeLineDisplay()
+    }
+    
+    func refreshTimeLineDisplay() {
+        if Device.isPhone {
+            phoneTopMenu.standardContainerView.refreshTimeLineDisplay()
+        } else {
+            padDraggableMenu.standardContainerView.refreshTimeLineDisplay()
         }
     }
     
@@ -766,6 +830,7 @@ class JiggleViewController: MetalViewController {
         toolActionPerform(toolAction)
     }
     
+    /*
     func set(animationMode: AnimationMode) {
         if toolInterfaceViewModel.isBlocked { return }
         let toolAction = batchInterfaceAction { configuration in
@@ -776,17 +841,7 @@ class JiggleViewController: MetalViewController {
         }
         toolActionPerform(toolAction)
     }
-    
-    func set(viewMode: ViewMode) {
-        if toolInterfaceViewModel.isBlocked { return }
-        let toolAction = batchInterfaceAction { configuration in
-            configuration.viewMode = viewMode
-            return [ToolActionPhaseSliceSetViewMode(viewMode: viewMode)]
-        } alongsideMeshCommand: {
-            [ ]
-        }
-        toolActionPerform(toolAction)
-    }
+    */
     
     func batchInterfaceAction(changeCommand: (inout any InterfaceConfigurationConforming) -> [ToolActionPhaseSlice],
                               alongsideMeshCommand: () -> [ToolActionPhaseSlice]) -> ToolAction {
@@ -862,8 +917,8 @@ class JiggleViewController: MetalViewController {
             
             let meshCommand = InterfaceConfigurationPhone.getMeshCommand(previous: interfaceConfigurationPrevious,
                                                                          current: interfaceConfigurationCurrent)
-            let weightRingCommand = JiggleWeightRingCommand.none
-            let phaseSliceMeshCommand = ToolActionPhaseSliceJiggleMeshCommandAllJiggles(meshCommand: meshCommand, weightRingCommand: weightRingCommand)
+            let guideCommand = GuideCommand.none
+            let phaseSliceMeshCommand = ToolActionPhaseSliceJiggleMeshCommandAllJiggles(meshCommand: meshCommand, guideCommand: guideCommand)
             
             //alongsideMeshCommand
             var phaseMeshSlices = [ToolActionPhaseSlice]()
@@ -878,7 +933,7 @@ class JiggleViewController: MetalViewController {
                                                                 ToolActionPhaseSliceUnlockState()],
                                                        time: interfaceTime)
             phaseInterfaceUpdate.blockers.append(.animateMenuConfigurationRows)
-            phaseInterfaceUpdate.blockers.append(.animateMenuConfigurationGraph)
+            phaseInterfaceUpdate.blockers.append(.animateMenuConfigurationGraphOrTimeline)
             phaseInterfaceUpdate.blockers.append(.animateMenuExpandOrCollapse)
             phaseInterfaceUpdate.blockers.append(.animateDisplayTransition)
             phases.append(phaseInterfaceUpdate)
@@ -899,7 +954,7 @@ class JiggleViewController: MetalViewController {
                                                                 phaseSliceRenderingModeTransition],
                                                        time: interfaceTime)
             phaseInterfaceUpdate.blockers.append(.animateMenuConfigurationRows)
-            phaseInterfaceUpdate.blockers.append(.animateMenuConfigurationGraph)
+            phaseInterfaceUpdate.blockers.append(.animateMenuConfigurationGraphOrTimeline)
             phaseInterfaceUpdate.blockers.append(.animateMenuExpandOrCollapse)
             phaseInterfaceUpdate.blockers.append(.animateDisplayTransition)
             phases.append(phaseInterfaceUpdate)
@@ -934,13 +989,8 @@ class JiggleViewController: MetalViewController {
     }
     
     func graphEnter() {
-        
-        if let selectedJiggle = jiggleDocument.getSelectedJiggle() {
-            
+        if jiggleDocument.getSelectedJiggle() !== nil {
             graphGo(isEnabled: true)
-            
-        } else {
-            print("no jiggle is selected, can't go graph...")
         }
     }
     
@@ -1046,33 +1096,6 @@ class JiggleViewController: MetalViewController {
         toolActionPerform(toolAction)
     }
     
-    /*
-    func autoLoopEnter() {
-        autoLoopGo(isEnabled: true)
-    }
-    
-    func autoLoopExit() {
-        autoLoopGo(isEnabled: false)
-    }
-    
-    func autoLoopGo(isEnabled: Bool) {
-        
-        if jiggleViewModel.isAutoLoopEnabled == isEnabled {
-            return
-        }
-        
-        if toolInterfaceViewModel.isBlocked { return }
-        
-        let toolAction = batchInterfaceAction { configuration in
-            configuration.isAutoLoopEnabled = isEnabled
-            return [ToolActionPhaseSliceSetAutoLoopMode(isAutoLoopMode: isEnabled)]
-        }
-        
-        toolActionPerform(toolAction)
-        
-    }
-    */
-    
     // All the modifications to "current" must already be done... Such as "is graph enabled..."...
     func getInterfaceConfigurationUpdateSlice(previous: (any InterfaceConfigurationConforming),
                                               current: (any InterfaceConfigurationConforming)) -> ToolActionPhaseSlice {
@@ -1134,6 +1157,89 @@ class JiggleViewController: MetalViewController {
         
     }
     
+    
+    
+    func animationLoopsEnter() {
+        animationLoopsGo(isEnabled: true)
+    }
+        
+    func animationLoopsExit() {
+        animationLoopsGo(isEnabled: false)
+    }
+        
+    func animationLoopsGo(isEnabled: Bool) {
+        
+        if jiggleViewModel.jiggleDocument.isAnimationLoopsEnabled == isEnabled {
+            return
+        }
+        
+        if toolInterfaceViewModel.isBlocked { return }
+        
+        let toolAction = batchInterfaceAction { configuration in
+            configuration.isAnimationLoopsEnabled = isEnabled
+            return [ToolActionPhaseSliceSetAnimationLoopsMode(isAnimationLoopsMode: isEnabled)]
+        } alongsideMeshCommand: {
+            [ ]
+        }
+        toolActionPerform(toolAction)
+    }
+    
+    
+    func animationContinuousEnter() {
+        animationContinuousGo(isEnabled: true)
+    }
+        
+    func animationContinuousExit() {
+        animationContinuousGo(isEnabled: false)
+    }
+        
+    func animationContinuousGo(isEnabled: Bool) {
+        
+        if jiggleViewModel.jiggleDocument.isAnimationContinuousEnabled == isEnabled {
+            return
+        }
+        
+        if toolInterfaceViewModel.isBlocked { return }
+        
+        let toolAction = batchInterfaceAction { configuration in
+            configuration.isAnimationContinuousEnabled = isEnabled
+            return [ToolActionPhaseSliceSetAnimationContinuousMode(isAnimationContinuousMode: isEnabled)]
+        } alongsideMeshCommand: {
+            [ ]
+        }
+        toolActionPerform(toolAction)
+    }
+    
+    func animationLoopsPage1Enter() {
+        animationLoopsPageGo(page: 1)
+    }
+    
+    func animationLoopsPage2Enter() {
+        animationLoopsPageGo(page: 2)
+    }
+    
+    func animationLoopsPage3Enter() {
+        animationLoopsPageGo(page: 3)
+    }
+    
+    func animationLoopsPageGo(page: Int) {
+        
+        if jiggleViewModel.jiggleDocument.animationLoopsPage == page {
+            return
+        }
+        
+        if toolInterfaceViewModel.isBlocked { return }
+        
+        let toolAction = batchInterfaceAction { configuration in
+            configuration.animationLoopsPage = page
+            print("configuration.animationLoopsPage = \(configuration.animationLoopsPage)")
+            return [ToolActionPhaseSliceSetAnimationLoopsPage(animationLoopsPage: page)]
+        } alongsideMeshCommand: {
+            [ ]
+        }
+        toolActionPerform(toolAction)
+    }
+    
     func darkModeGo(isEnabled: Bool) {
         
         if ApplicationController.isDarkModeEnabled == isEnabled {
@@ -1165,8 +1271,8 @@ class JiggleViewController: MetalViewController {
                                             outlineType: .forced,
                                             swivelType: swivelType,
                                             weightCurveType: weightCurveType)
-        let weightRingCommand = JiggleWeightRingCommand.none
-        let phaseSliceMeshCommand = ToolActionPhaseSliceJiggleMeshCommandAllJiggles(meshCommand: meshCommand, weightRingCommand: weightRingCommand)
+        let guideCommand = GuideCommand.none
+        let phaseSliceMeshCommand = ToolActionPhaseSliceJiggleMeshCommandAllJiggles(meshCommand: meshCommand, guideCommand: guideCommand)
         
         let sliceUpdateToolbars = ToolActionPhaseSliceAnyClosure { [weak self] in
             if let self = self {
@@ -1211,6 +1317,32 @@ class JiggleViewController: MetalViewController {
         toolActionPerform(toolAction)
     }
     
+    func timeLineEnter() {
+        timeLineGo(isEnabled: true)
+    }
+    
+    func timeLineExit() {
+        timeLineGo(isEnabled: false)
+    }
+    
+    func timeLineGo(isEnabled: Bool) {
+        if jiggleViewModel.jiggleDocument.isTimeLineEnabled == isEnabled {
+            return
+        }
+        if toolInterfaceViewModel.isBlocked { 
+            return
+        }
+        let toolAction = batchInterfaceAction { configuration in
+            configuration.isTimeLineEnabled = isEnabled
+            return [
+                ToolActionPhaseSliceSetTimeLineMode(isTimeLineMode: isEnabled)
+            ]
+        } alongsideMeshCommand: {
+            [ ]
+        }
+        toolActionPerform(toolAction)
+    }
+    
     func padMenuExpandedEnter() {
         padMenuExpandedGo(isEnabled: true)
     }
@@ -1239,28 +1371,6 @@ class JiggleViewController: MetalViewController {
         let toolAction = ToolAction(phase: phase)
         toolActionPerform(toolAction)
         
-        
-        /*
-        //TODO: Temp
-        for a in 0..<jiggleDocument.jiggleCount {
-            
-            let jj = jiggleDocument.jiggles[a]
-            
-            let mc = jiggleDocument.getMeshCommandForNewJiggle(displayMode: .split,
-                                                               isGraphEnabled: true)
-            
-            let isSelected = jiggleDocument.selectedJiggleIndex == a
-            jj.execute(meshCommand: mc,
-                       isSelected: isSelected,
-                       isDarkModeEnabled: ApplicationController.isDarkModeEnabled,
-                       worldScale: jiggleDocument.getWorldScale(),
-                       weightRingCommand: JiggleWeightRingCommand(spline: true, outlineType: .forced),
-                       forceWeightRingCommand: true)
-            
-        }
-        */
-        //TODO: Temp
-        //toolInterfaceViewModel.handleAni
         toolInterfaceViewModel.handleJiggleSpeedDidChange()
         toolInterfaceViewModel.handleJigglePowerDidChange()
         
@@ -1331,11 +1441,16 @@ class JiggleViewController: MetalViewController {
                                                                         orientation: orientation) + safeAreaBottom
         
         if menuHeightTopPrevious != menuHeightTopCurrent {
-            isAnimatingTopLateral = true
+            if configurationPrevious.isExpandedTop == true && configurationCurrent.isExpandedTop == true {
+                isAnimatingTopLateral = true
+            }
         }
         
         if menuHeightBottomPrevious != menuHeightBottomCurrent {
-            isAnimatingBottomLateral = true
+            
+            if configurationPrevious.isExpandedBottom == true && configurationCurrent.isExpandedBottom == true {
+                isAnimatingBottomLateral = true
+            }
         }
         
         if isAnimatingTopOut {
@@ -1343,6 +1458,7 @@ class JiggleViewController: MetalViewController {
                                                                       y: CGFloat(menuHeightTopPrevious - safeAreaTop))
         } else if isAnimatingTopIn {
             phoneExpandToolbarButtonTop.transform = CGAffineTransform.identity
+            
         }
         
         if isAnimatingBottomOut {
@@ -1352,6 +1468,34 @@ class JiggleViewController: MetalViewController {
             phoneExpandToolbarButtonBottom.transform = CGAffineTransform.identity
         }
         
+        if configurationCurrent.isExpandedTop {
+            if phoneExpandToolbarButtonTop.isUpArrow == true {
+                phoneExpandToolbarButtonTop.isUpArrow = false
+                phoneExpandToolbarButtonTop.setNeedsDisplay()
+                phoneExpandToolbarButtonTop.renderContent.setNeedsDisplay()
+            }
+        } else {
+            if phoneExpandToolbarButtonTop.isUpArrow == false {
+                phoneExpandToolbarButtonTop.isUpArrow = true
+                phoneExpandToolbarButtonTop.setNeedsDisplay()
+                phoneExpandToolbarButtonTop.renderContent.setNeedsDisplay()
+            }
+        }
+        
+        if configurationCurrent.isExpandedBottom {
+            if phoneExpandToolbarButtonBottom.isUpArrow == false {
+                phoneExpandToolbarButtonBottom.isUpArrow = true
+                phoneExpandToolbarButtonBottom.setNeedsDisplay()
+                phoneExpandToolbarButtonBottom.renderContent.setNeedsDisplay()
+            }
+        } else {
+            if phoneExpandToolbarButtonBottom.isUpArrow == true {
+                phoneExpandToolbarButtonBottom.isUpArrow = false
+                phoneExpandToolbarButtonBottom.setNeedsDisplay()
+                phoneExpandToolbarButtonBottom.renderContent.setNeedsDisplay()
+            }
+        }
+        
         isMenuExpandCollapseAnimating = true
         UIView.animate(withDuration: TimeInterval(time), delay: 0.0, options: .curveLinear, animations: {
             self.phoneTopMenuPositionConstraint.constant = CGFloat(topMenuPosition)
@@ -1359,12 +1503,15 @@ class JiggleViewController: MetalViewController {
             
             if isAnimatingTopOut {
                 self.phoneExpandToolbarButtonTop.transform = CGAffineTransform.identity
+                
             } else if isAnimatingTopIn {
                 self.phoneExpandToolbarButtonTop.transform = CGAffineTransform(translationX: 0.0,
                                                                                y: CGFloat(menuHeightTopCurrent - safeAreaTop))
+                
             } else if isAnimatingTopLateral {
                 self.phoneExpandToolbarButtonTop.transform = CGAffineTransform(translationX: 0.0,
                                                                                y: CGFloat(menuHeightTopCurrent - safeAreaTop))
+                
             }
             if isAnimatingBottomOut {
                 self.phoneExpandToolbarButtonBottom.transform = CGAffineTransform.identity
@@ -1416,9 +1563,11 @@ class JiggleViewController: MetalViewController {
         if configuration.isExpandedTop {
             phoneExpandToolbarButtonTop.transform = CGAffineTransform(translationX: 0.0,
                                                                       y: CGFloat(topMenuHeight))
+            print("[Phone Menu Snaps, Top] C1A [\(topMenuHeight)]")
             
         } else {
             phoneExpandToolbarButtonTop.transform = CGAffineTransform.identity
+            print("[Phone Menu Snaps, Top] C2A [default, 0]")
         }
         
         if configuration.isExpandedBottom {
@@ -1427,6 +1576,34 @@ class JiggleViewController: MetalViewController {
            
         } else {
             phoneExpandToolbarButtonBottom.transform = CGAffineTransform.identity
+        }
+        
+        if configuration.isExpandedTop {
+            if phoneExpandToolbarButtonTop.isUpArrow == true {
+                phoneExpandToolbarButtonTop.isUpArrow = false
+                phoneExpandToolbarButtonTop.setNeedsDisplay()
+                phoneExpandToolbarButtonTop.renderContent.setNeedsDisplay()
+            }
+        } else {
+            if phoneExpandToolbarButtonTop.isUpArrow == false {
+                phoneExpandToolbarButtonTop.isUpArrow = true
+                phoneExpandToolbarButtonTop.setNeedsDisplay()
+                phoneExpandToolbarButtonTop.renderContent.setNeedsDisplay()
+            }
+        }
+        
+        if configuration.isExpandedBottom {
+            if phoneExpandToolbarButtonBottom.isUpArrow == false {
+                phoneExpandToolbarButtonBottom.isUpArrow = true
+                phoneExpandToolbarButtonBottom.setNeedsDisplay()
+                phoneExpandToolbarButtonBottom.renderContent.setNeedsDisplay()
+            }
+        } else {
+            if phoneExpandToolbarButtonBottom.isUpArrow == true {
+                phoneExpandToolbarButtonBottom.isUpArrow = false
+                phoneExpandToolbarButtonBottom.setNeedsDisplay()
+                phoneExpandToolbarButtonBottom.renderContent.setNeedsDisplay()
+            }
         }
         
         isMenuExpandCollapseAnimating = false
@@ -1476,10 +1653,8 @@ class JiggleViewController: MetalViewController {
         
         var isDisplayNeeded = false
         
-        if jiggleDocument.isGuidesMode {
-            if jiggleViewModel.isGraphEnabled {
-                isDisplayNeeded = true
-            }
+        if jiggleViewModel.isGraphMode {
+            isDisplayNeeded = true
         }
         
         if let jiggle = jiggle {
@@ -1511,7 +1686,44 @@ class JiggleViewController: MetalViewController {
                 }
             }
         }
-    }    
+    }
+    
+    func timeLineUpdateRelay(jiggle: Jiggle?) {
+        
+        var isDisplayNeeded = false
+        if jiggleDocument.isTimeLineMode {
+            isDisplayNeeded = true
+        }
+        
+        if let jiggle = jiggle {
+            
+            jiggle.refreshTimeLine()
+            
+            if Device.isPad {
+                padDraggableMenu.standardContainerView.timeLineContainerView.timeLineView.jiggle = jiggle
+                if isDisplayNeeded {
+                    padDraggableMenu.standardContainerView.timeLineContainerView.timeLineView.setNeedsDisplay()
+                }
+            } else {
+                phoneTopMenu.standardContainerView.timeLineContainerView.timeLineView.jiggle = jiggle
+                if isDisplayNeeded {
+                    phoneTopMenu.standardContainerView.timeLineContainerView.timeLineView.setNeedsDisplay()
+                }
+            }
+        } else {
+            if Device.isPad {
+                padDraggableMenu.standardContainerView.timeLineContainerView.timeLineView.jiggle = nil
+                if isDisplayNeeded {
+                    padDraggableMenu.standardContainerView.timeLineContainerView.timeLineView.setNeedsDisplay()
+                }
+            } else {
+                phoneTopMenu.standardContainerView.timeLineContainerView.timeLineView.jiggle = nil
+                if isDisplayNeeded {
+                    phoneTopMenu.standardContainerView.timeLineContainerView.timeLineView.setNeedsDisplay()
+                }
+            }
+        }
+    }
     
     func sideMenuEnter() {
         if let jiggleContainerViewController = jiggleContainerViewController {
@@ -1544,7 +1756,9 @@ class JiggleViewController: MetalViewController {
     func handleDarkModeDidChange() {
         if Device.isPhone {
             phoneExpandToolbarButtonTop.setNeedsDisplay()
+            phoneExpandToolbarButtonTop.renderContent.setNeedsDisplay()
             phoneExpandToolbarButtonBottom.setNeedsDisplay()
+            phoneExpandToolbarButtonBottom.renderContent.setNeedsDisplay()
         }
     }
     

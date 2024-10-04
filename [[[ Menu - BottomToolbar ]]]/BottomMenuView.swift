@@ -275,7 +275,6 @@ class BottomMenuView: UIView, SecondaryMenuConforming {
                                                          multiplier: 1.0,
                                                          constant: CGFloat(totalVideoRecordMenuHeight)))
         
-        
         containerView.addSubview(zoomView)
         addConstraints([
             zoomViewLeftConstraint,
