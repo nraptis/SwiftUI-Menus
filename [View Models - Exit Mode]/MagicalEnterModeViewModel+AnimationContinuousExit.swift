@@ -1,5 +1,5 @@
 //
-//  MagicalEnterModeViewModel+AnimationContinuousExit.swift
+//  MagicalModeChangeViewModel+AnimationContinuousExit.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 10/1/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-@Observable class MagicalExitModeViewModelAnimationContinuousExit: MagicalExitModeViewModel {
+@Observable class MagicalExitModeViewModelAnimationContinuousExit: MagicalModeChangeViewModel {
     
     override func handleClicked() {
         if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel {

@@ -1,5 +1,5 @@
 //
-//  MagicalEnterModeViewModel+AnimationContinuousEnter.swift
+//  MagicalModeChangeViewModel+AnimationContinuousEnter.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 10/1/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-@Observable class MagicalEnterModeViewModelAnimationContinuousEnter: MagicalEnterModeViewModel {
+@Observable class MagicalModeChangeViewModelAnimationContinuousEnter: MagicalModeChangeViewModel {
     
     override func handleClicked() {
         if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel {
@@ -28,7 +28,7 @@ import Foundation
     
     deinit {
         if ApplicationController.DEBUG_DEALLOCS {
-            print("[Deinit] MagicalEnterModeViewModelAnimationContinuousEnter (Dealloc)")
+            print("[Deinit] MagicalModeChangeViewModelAnimationContinuousEnter (Dealloc)")
         }
     }
 }

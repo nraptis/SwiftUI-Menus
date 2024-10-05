@@ -101,6 +101,8 @@ extension ToolInterfaceViewModel {
                      
                      Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
                      
+                     getExitZoomExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getExitTimeLineExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
                      getRotateJiggleLeftSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
@@ -136,9 +138,14 @@ extension ToolInterfaceViewModel {
                      
                      Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
                      
+                     getExitVideoExportExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getEnterLoopsPage1EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     
                      getUnfreezeAllJigglesSexyButtonToolNode(neighborTypeLeft: .textIconButton, neighborTypeRight: nil),
                      Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      getFreezeSelectedJiggleSexyButtonToolNode(neighborTypeLeft: .textIconButton, neighborTypeRight: nil),
+                     
+                     getDarkModeSexyCheckBoxToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
                      
         ]
         return RowBluePrint(nodes: nodes, configuration: .top_Secondary2_Jiggles)

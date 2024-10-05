@@ -15,7 +15,7 @@ import Foundation
 
 import Foundation
 
-@Observable class MagicalExitModeViewModelGuidesExit: MagicalExitModeViewModel {
+@Observable class MagicalExitModeViewModelGuidesExit: MagicalModeChangeViewModel {
     
     override func handleClicked() {
         if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel {

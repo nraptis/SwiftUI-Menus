@@ -119,12 +119,12 @@ struct ToolRowViewContent: View {
         
         if toolNode.element.type == .enterMode {
             MagicalEnterMode()
-                .environment((toolNode.magicalViewModel as! MagicalEnterModeViewModel))
+                .environment((toolNode.magicalViewModel as! MagicalModeChangeViewModel))
         }
         
         if toolNode.element.type == .exitMode {
             MagicalExitMode()
-                .environment((toolNode.magicalViewModel as! MagicalExitModeViewModel))
+                .environment((toolNode.magicalViewModel as! MagicalModeChangeViewModel))
         }
         
         if toolNode.element.type == .greenButton {

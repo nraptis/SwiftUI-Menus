@@ -26,9 +26,9 @@ enum ToolRowConfiguration {
     case zoom_3
     case zoom_4
     
-    case graph_side_menu_1
-    case graph_side_menu_2
-    case graph_side_menu_3
+    //case graph_side_menu_1
+    //case graph_side_menu_2
+    //case graph_side_menu_3
     
     case top_Primary_Standard
     

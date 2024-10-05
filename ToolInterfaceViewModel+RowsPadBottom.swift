@@ -131,6 +131,9 @@ extension ToolInterfaceViewModel {
                      Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      getRedoSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      centerPinnedNode,
+                     
+                     //get
+                     
                      getEnterZoomEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
         ]
         
@@ -207,6 +210,11 @@ extension ToolInterfaceViewModel {
     @MainActor func getRowBluePrint_Bottom_Secondary1_Jiggles_Pad() -> RowBluePrint {
         let nodes = [getEditModeSegmentToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      getJiggleCentersSexyCheckBoxToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     
+                     getDarkModeSexyCheckBoxToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getGuideCentersSexyCheckBoxToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     // TODO: Remo
+                     
                      Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      getZoomJiggleSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
@@ -218,6 +226,9 @@ extension ToolInterfaceViewModel {
     @MainActor func getRowBluePrint_Bottom_Secondary2_Jiggles_Pad() -> RowBluePrint {
         let nodes = [getMakeAndDrawJiggleCreateSwatchToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
+                     // TODO: Remo
+                     getDarkModeSexyCheckBoxToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getGuideCentersSexyCheckBoxToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
                      getCloneJiggleSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      

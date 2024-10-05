@@ -27,7 +27,6 @@ extension LayoutSchemeFlavor: Comparable {
     }
 }
 
-
 extension LayoutSchemeFlavor {
     var isStacked: Bool {
         switch self {
@@ -95,22 +94,39 @@ protocol LayoutScheme {
     static func getIconPaddingRight(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int
     static func getIconPaddingTop(orientation: Orientation, flavor: LayoutSchemeFlavor, numberOfLines: Int) -> Int
     
-    static func getOutsideBoxPaddingLeftStacked(orientation: Orientation, numberOfLines: Int, squeeze: LayoutSchemeSqueeze) -> Int
-    static func getOutsideBoxPaddingLeftLong(orientation: Orientation, numberOfLines: Int, squeeze: LayoutSchemeSqueeze) -> Int
-    static func getOutsideBoxPaddingRightStacked(orientation: Orientation, numberOfLines: Int, squeeze: LayoutSchemeSqueeze) -> Int
-    static func getOutsideBoxPaddingRightLong(orientation: Orientation, numberOfLines: Int, squeeze: LayoutSchemeSqueeze) -> Int
     
-    static func getHeroPaddingLeftStacked(orientation: Orientation, numberOfLines: Int, squeeze: LayoutSchemeSqueeze) -> Int
-    static func getHeroPaddingLeftLong(orientation: Orientation, numberOfLines: Int, squeeze: LayoutSchemeSqueeze) -> Int
-    static func getHeroPaddingRightStacked(orientation: Orientation, numberOfLines: Int, squeeze: LayoutSchemeSqueeze) -> Int
-    static func getHeroPaddingRightLong(orientation: Orientation, numberOfLines: Int, squeeze: LayoutSchemeSqueeze) -> Int
     
-    static func getSlavePaddingLeftStacked(orientation: Orientation, numberOfLines: Int, squeeze: LayoutSchemeSqueeze) -> Int
-    static func getSlavePaddingLeftLong(orientation: Orientation, numberOfLines: Int, squeeze: LayoutSchemeSqueeze) -> Int
-    static func getSlavePaddingRightStacked(orientation: Orientation, numberOfLines: Int, squeeze: LayoutSchemeSqueeze) -> Int
-    static func getSlavePaddingRightLong(orientation: Orientation, numberOfLines: Int, squeeze: LayoutSchemeSqueeze) -> Int
     
-    static func getHeroSpacingLong(orientation: Orientation, numberOfLines: Int, squeeze: LayoutSchemeSqueeze) -> Int
+    
+    
+    static func getOutsideBoxPaddingTop(orientation: Orientation) -> Int
+    static func getOutsideBoxPaddingBottom(orientation: Orientation) -> Int
+    
+    
+    
+    static func getOutsideBoxPaddingLeftStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
+                                                neighborTypeRight: ToolInterfaceElementType?) -> Int
+    static func getOutsideBoxPaddingLeftLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
+                                             neighborTypeRight: ToolInterfaceElementType?) -> Int
+    static func getOutsideBoxPaddingRightStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
+                                                 neighborTypeRight: ToolInterfaceElementType?) -> Int
+    static func getOutsideBoxPaddingRightLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
+                                              neighborTypeRight: ToolInterfaceElementType?) -> Int
+    
+    static func getHeroPaddingLeftStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
+    static func getHeroPaddingLeftLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
+    static func getHeroPaddingRightStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
+    static func getHeroPaddingRightLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
+    
+    static func getSlavePaddingLeftStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
+    static func getSlavePaddingLeftLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
+    static func getSlavePaddingRightStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
+    static func getSlavePaddingRightLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
+    
+    static func getHeroPaddingTopStacked(orientation: Orientation) -> Int
+    static func getHeroPaddingBottomStacked(orientation: Orientation) -> Int
+    
+    static func getHeroSpacingLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
 }
 
 extension LayoutScheme {
@@ -123,137 +139,146 @@ extension LayoutScheme {
         return true
     }
     
-    static func getOutsideBoxPaddingLeftStacked(orientation: Orientation, numberOfLines: Int, squeeze: LayoutSchemeSqueeze) -> Int {
-        switch squeeze {
-        case .squeezed:
-            return 3
-        case .standard:
-            return 7
-        case .relaxed:
-            return 17
+    static func getOutsideBoxPaddingTop(orientation: Orientation) -> Int {
+        if Device.isPad {
+            return 2
+        } else {
+            return 1
         }
     }
-    static func getOutsideBoxPaddingLeftLong(orientation: Orientation, numberOfLines: Int, squeeze: LayoutSchemeSqueeze) -> Int {
-        switch squeeze {
-        case .squeezed:
-            return 3
-        case .standard:
-            return 7
-        case .relaxed:
-            return 17
-        }
-    }
-    static func getOutsideBoxPaddingRightStacked(orientation: Orientation, numberOfLines: Int, squeeze: LayoutSchemeSqueeze) -> Int {
-        switch squeeze {
-        case .squeezed:
-            return 3
-        case .standard:
-            return 7
-        case .relaxed:
-            return 17
-        }
-    }
-    static func getOutsideBoxPaddingRightLong(orientation: Orientation, numberOfLines: Int, squeeze: LayoutSchemeSqueeze) -> Int {
-        switch squeeze {
-        case .squeezed:
-            return 3
-        case .standard:
-            return 7
-        case .relaxed:
-            return 17
+    static func getOutsideBoxPaddingBottom(orientation: Orientation) -> Int {
+        if Device.isPad {
+            return 2
+        } else {
+            return 1
         }
     }
     
-    static func getHeroPaddingLeftStacked(orientation: Orientation, numberOfLines: Int, squeeze: LayoutSchemeSqueeze) -> Int {
-        switch squeeze {
-        case .squeezed:
-            return 3
-        case .standard:
-            return 7
-        case .relaxed:
-            return 17
-        }
-    }
-    static func getHeroPaddingLeftLong(orientation: Orientation, numberOfLines: Int, squeeze: LayoutSchemeSqueeze) -> Int {
-        switch squeeze {
-        case .squeezed:
-            return 3
-        case .standard:
-            return 7
-        case .relaxed:
-            return 17
-        }
-    }
-    static func getHeroPaddingRightStacked(orientation: Orientation, numberOfLines: Int, squeeze: LayoutSchemeSqueeze) -> Int {
-        switch squeeze {
-        case .squeezed:
-            return 3
-        case .standard:
-            return 7
-        case .relaxed:
-            return 17
-        }
-    }
-    static func getHeroPaddingRightLong(orientation: Orientation, numberOfLines: Int, squeeze: LayoutSchemeSqueeze) -> Int {
-        switch squeeze {
-        case .squeezed:
-            return 3
-        case .standard:
-            return 7
-        case .relaxed:
-            return 17
+    static func getHeroPaddingTopStacked(orientation: Orientation) -> Int {
+        if Device.isPad {
+            return 2
+        } else {
+            return 1
         }
     }
     
-    static func getSlavePaddingLeftStacked(orientation: Orientation, numberOfLines: Int, squeeze: LayoutSchemeSqueeze) -> Int {
-        switch squeeze {
-        case .squeezed:
-            return 3
-        case .standard:
-            return 7
-        case .relaxed:
-            return 17
-        }
-    }
-    static func getSlavePaddingLeftLong(orientation: Orientation, numberOfLines: Int, squeeze: LayoutSchemeSqueeze) -> Int {
-        switch squeeze {
-        case .squeezed:
-            return 3
-        case .standard:
-            return 7
-        case .relaxed:
-            return 17
-        }
-    }
-    static func getSlavePaddingRightStacked(orientation: Orientation, numberOfLines: Int, squeeze: LayoutSchemeSqueeze) -> Int {
-        switch squeeze {
-        case .squeezed:
-            return 3
-        case .standard:
-            return 7
-        case .relaxed:
-            return 17
-        }
-    }
-    static func getSlavePaddingRightLong(orientation: Orientation, numberOfLines: Int, squeeze: LayoutSchemeSqueeze) -> Int {
-        switch squeeze {
-        case .squeezed:
-            return 3
-        case .standard:
-            return 7
-        case .relaxed:
-            return 17
+    static func getHeroPaddingBottomStacked(orientation: Orientation) -> Int {
+        if Device.isPad {
+            return 2
+        } else {
+            return 1
         }
     }
     
-    static func getHeroSpacingLong(orientation: Orientation, numberOfLines: Int, squeeze: LayoutSchemeSqueeze) -> Int {
+    
+    static func getOutsideBoxPaddingLeftStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
+                                                neighborTypeRight: ToolInterfaceElementType?) -> Int {
+    
+        return 0
+    }
+    static func getOutsideBoxPaddingLeftLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
+                                             neighborTypeRight: ToolInterfaceElementType?) -> Int {
+        return 0
+    }
+    static func getOutsideBoxPaddingRightStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
+                                                 neighborTypeRight: ToolInterfaceElementType?) -> Int {
+        return 0
+    }
+    static func getOutsideBoxPaddingRightLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
+                                              neighborTypeRight: ToolInterfaceElementType?) -> Int {
+        return 0
+    }
+    
+    static func getHeroPaddingLeftStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
         switch squeeze {
         case .squeezed:
-            return 3
+            return 1
         case .standard:
-            return 7
+            return 3
         case .relaxed:
-            return 17
+            return 22
+        }
+    }
+    static func getHeroPaddingLeftLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        switch squeeze {
+        case .squeezed:
+            return 1
+        case .standard:
+            return 3
+        case .relaxed:
+            return 22
+        }
+    }
+    static func getHeroPaddingRightStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        switch squeeze {
+        case .squeezed:
+            return 1
+        case .standard:
+            return 3
+        case .relaxed:
+            return 22
+        }
+    }
+    static func getHeroPaddingRightLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        switch squeeze {
+        case .squeezed:
+            return 1
+        case .standard:
+            return 3
+        case .relaxed:
+            return 22
+        }
+    }
+    
+    static func getSlavePaddingLeftStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        switch squeeze {
+        case .squeezed:
+            return 5
+        case .standard:
+            return 11
+        case .relaxed:
+            return 21
+        }
+    }
+    static func getSlavePaddingLeftLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        switch squeeze {
+        case .squeezed:
+            return 5
+        case .standard:
+            return 11
+        case .relaxed:
+            return 21
+        }
+    }
+    static func getSlavePaddingRightStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        switch squeeze {
+        case .squeezed:
+            return 4
+        case .standard:
+            return 8
+        case .relaxed:
+            return 12
+        }
+    }
+    static func getSlavePaddingRightLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        switch squeeze {
+        case .squeezed:
+            return 5
+        case .standard:
+            return 11
+        case .relaxed:
+            return 21
+        }
+    }
+    
+    static func getHeroSpacingLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        switch squeeze {
+        case .squeezed:
+            return 1
+        case .standard:
+            return 3
+        case .relaxed:
+            return 6
         }
     }
     

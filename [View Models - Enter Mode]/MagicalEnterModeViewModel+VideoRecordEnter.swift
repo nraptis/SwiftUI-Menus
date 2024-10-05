@@ -1,5 +1,5 @@
 //
-//  MagicalEnterModeViewModel+VideoRecordEnter.swift
+//  MagicalModeChangeViewModel+VideoRecordEnter.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 9/10/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-@Observable class MagicalEnterModeViewModelVideoRecordEnter: MagicalEnterModeViewModel {
+@Observable class MagicalModeChangeViewModelVideoRecordEnter: MagicalModeChangeViewModel {
     
     override func handleClicked() {
         if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel {
@@ -28,7 +28,7 @@ import Foundation
     
     deinit {
         if ApplicationController.DEBUG_DEALLOCS {
-            print("[Deinit] MagicalEnterModeViewModelVideoRecordEnter (Dealloc)")
+            print("[Deinit] MagicalModeChangeViewModelVideoRecordEnter (Dealloc)")
         }
     }
 }

@@ -25,16 +25,19 @@ struct MagicalTextIconButtonContent: View {
     var body: some View {
         
         let configuration = magicalTextIconButtonViewModel.textIconButtonConfiguration
+        let numberOfLines = configuration.nameLabelNumberOfLines
+        
         let isDarkMode = magicalTextIconButtonViewModel.isDarkModeEnabled
-        let textIcon = configuration.getTextIcon(orientation: orientation,
-                                                 layoutSchemeFlavor: layoutSchemeFlavor,
-                                                 isDarkMode: isDarkMode,
-                                                 isEnabled: isEnabled)
+        let textIcon = configuration.iconPack.getTextIcon(orientation: orientation,
+                                                           layoutSchemeFlavor: layoutSchemeFlavor,
+                                                           numberOfLines: numberOfLines,
+                                                           isDarkMode: isDarkMode,
+                                                           isEnabled: isEnabled)
         
         let line1 = configuration.nameLabelLine1
         let line2 = configuration.nameLabelLine2
         
-        let numberOfLines = configuration.nameLabelNumberOfLines
+        
         
         let nameLabelFont = TextIconButtonLayout.getNameLabelFont(orientation: orientation,
                                                                   flavor: layoutSchemeFlavor)

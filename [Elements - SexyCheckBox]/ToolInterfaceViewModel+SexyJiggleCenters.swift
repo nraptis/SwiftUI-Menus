@@ -9,14 +9,13 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-   @MainActor func getJiggleCentersSexyCheckBoxToolNode(neighborTypeLeft: ToolInterfaceElementType?,
-                                         neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+    @MainActor func getJiggleCentersSexyCheckBoxToolNode(neighborTypeLeft: ToolInterfaceElementType?,
+                                                         neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
         let orientation = jiggleViewModel.orientation
         let textLine1 = ToolInterfaceStringLibraryCheckBoxes.checkBoxTextJiggleCentersEnabledLine1()
         let textLine2 = ToolInterfaceStringLibraryCheckBoxes.checkBoxTextJiggleCentersEnabledLine2()
-        let iconPack = MainTabIconLibrary.drawGuide
-        
+        let iconPack = FramedConvertibleIconLibrary.menuB
         
         let configuration = ToolInterfaceElementSexyCheckBoxConfiguration(iconPack: iconPack,
                                                                           orientation: orientation,
@@ -29,13 +28,13 @@ extension ToolInterfaceViewModel {
                                             neighborTypeRight: neighborTypeRight)
         
         let viewModelJiggleCenters = MagicalSexyCheckBoxViewModelJiggleCenters(orientation: orientation,
-                                                                     sexyCheckBoxConfiguration: configuration)
+                                                                               sexyCheckBoxConfiguration: configuration)
         let jiggleCentersToolNode = ToolNode(id: getToolNodeID(),
-                                        element: .sexyCheckBoxJiggleCenters,
-                                        flex: flex,
-                                        magicalViewModel: viewModelJiggleCenters,
-                                        neighborTypeLeft: neighborTypeLeft,
-                                        neighborTypeRight: neighborTypeRight)
+                                             element: .sexyCheckBoxJiggleCenters,
+                                             flex: flex,
+                                             magicalViewModel: viewModelJiggleCenters,
+                                             neighborTypeLeft: neighborTypeLeft,
+                                             neighborTypeRight: neighborTypeRight)
         viewModelJiggleCenters.refresh()
         return jiggleCentersToolNode
     }

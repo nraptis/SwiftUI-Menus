@@ -101,11 +101,6 @@ enum ToolInterfaceElement: UInt16 {
     case sexyButtonZoomReset
     case sexyButtonZoomJiggle
     
-    
-    
-    
-    
-    
     case createSwatchMakeAndDrawJiggle
     case createSwatchMakeAndDrawGuide
     case createSwatchAddAndRemoveJigglePoints

@@ -15,10 +15,10 @@ extension ToolInterfaceViewModel {
         let orientation = jiggleViewModel.orientation
         let textLine1 = ToolInterfaceStringLibraryModeChange.modeTextVideoRecordExitLine1()
         let textLine2 = ToolInterfaceStringLibraryModeChange.modeTextVideoRecordExitLine2()
-        let iconPack = MainTabIconLibrary.jelly
-        let accentPack = MainTabIconLibrary.arrowSmallLeft
+       let iconPack = FramedConvertibleIconLibrary.menuC
+       let accentPack = FramedLongIconLibrary.menuA
         
-        let configuration = ToolInterfaceElementExitModeConfiguration(iconPack: iconPack,
+        let configuration = ToolInterfaceElementChangeModeConfiguration(iconPack: iconPack,
                                                                       accentPack: accentPack,
                                                                       orientation: orientation,
                                                                       nameLabelLine1: textLine1,
@@ -30,7 +30,7 @@ extension ToolInterfaceViewModel {
                                         neighborTypeRight: neighborTypeRight)
         
         let viewModelVideoRecordExit = MagicalExitModeViewModelVideoRecordExit(orientation: jiggleViewModel.orientation,
-                                                                 exitModeConfiguration: configuration)
+                                                                 modeChangeConfiguration: configuration)
         let exitVideoRecordToolNode = ToolNode(id: getToolNodeID(),
                                         element: .exitModeVideoRecordExit,
                                         flex: flex,

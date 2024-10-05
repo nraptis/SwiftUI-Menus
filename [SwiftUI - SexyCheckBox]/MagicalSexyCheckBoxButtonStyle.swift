@@ -9,6 +9,182 @@ import SwiftUI
 
 struct MagicalSexyCheckBoxButtonStyle: ButtonStyle {
     
+    @Environment(MagicalSexyCheckBoxViewModel.self) var magicalViewModel
+    let layoutSchemeFlavor: LayoutSchemeFlavor
+    let outsideBoxPaddingTop: Int
+    let outsideBoxPaddingBottom: Int
+    func makeBody(configuration: Configuration) -> some View {
+        return ZStack {
+            
+            getBox(isPressed: configuration.isPressed)
+            bodyContent(isPressed: configuration.isPressed)
+        }
+        .frame(width: CGFloat(magicalViewModel.layoutWidth),
+               height: CGFloat(magicalViewModel.layoutHeight))
+        .transaction { transaction in
+            transaction.animation = nil
+        }
+    }
+    
+    func getBox(isPressed: Bool) -> some View {
+        
+        let boxWidth = magicalViewModel.layoutWidth - magicalViewModel.outsideBoxPaddingLeft - magicalViewModel.outsideBoxPaddingRight
+        let boxHeight = magicalViewModel.layoutHeight - outsideBoxPaddingTop - outsideBoxPaddingBottom
+
+        return HStack(spacing: 0.0) {
+            Spacer()
+                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingLeft))
+            
+            VStack(spacing: 0.0) {
+                Spacer()
+                    .frame(height: CGFloat(outsideBoxPaddingTop))
+                ZStack {
+                    
+                }
+                    .frame(width: CGFloat(boxWidth),
+                           height: CGFloat(boxHeight))
+                    .background(getStrokeRect(isPressed: isPressed))
+                    .background(getFillRect(isPressed: isPressed))
+                
+                Spacer()
+                    .frame(height: CGFloat(outsideBoxPaddingBottom))
+            }
+            
+            Spacer()
+            .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight))
+        }
+    }
+    
+    func getStrokeRect(isPressed: Bool) -> some View {
+        
+        let orientation = magicalViewModel.orientation
+        let isEnabled = magicalViewModel.isEnabled
+        let cornerRadius = CheckBoxLayout.getCornerRadius(orientation: orientation)
+        let lineThickness = CheckBoxLayout.getLineThickness(orientation: orientation)
+        let color: Color
+        if isPressed {
+            if isEnabled {
+                color = ToolInterfaceTheme.primaryDownEnabled
+            } else {
+                color = ToolInterfaceTheme.primaryDownDisabled
+            }
+        } else {
+            if magicalViewModel.isDarkModeEnabled {
+                if isEnabled {
+                    color = ToolInterfaceTheme.primaryEnabledDark
+                } else {
+                    color = ToolInterfaceTheme.primaryDisabledDark
+                }
+            } else {
+                if isEnabled {
+                    color = ToolInterfaceTheme.primaryEnabledLight
+                } else {
+                    color = ToolInterfaceTheme.primaryDisabledLight
+                }
+            }
+        }
+        
+        return RoundedRectangle(cornerRadius: CGFloat(cornerRadius))
+            .stroke(style: StrokeStyle(lineWidth: CGFloat(lineThickness)))
+            .foregroundStyle(color)
+    }
+    
+    func getFillRect(isPressed: Bool) -> some View {
+        let orientation = magicalViewModel.orientation
+        let isEnabled = magicalViewModel.isEnabled
+        let cornerRadius = CheckBoxLayout.getCornerRadius(orientation: orientation)
+        let color: Color
+        if magicalViewModel.isDarkModeEnabled {
+            if isEnabled {
+                if isPressed {
+                    color = ToolInterfaceTheme.contextUnderlayDownEnabledDark
+                } else {
+                    color = ToolInterfaceTheme.contextUnderlayHighlightedEnabledDark
+                }
+            } else {
+                if isPressed {
+                    color = ToolInterfaceTheme.contextUnderlayDownDisabledDark
+                } else {
+                    color = ToolInterfaceTheme.contextUnderlayHighlightedDisabledDark
+                }
+            }
+        } else {
+            if isEnabled {
+                if isPressed {
+                    color = ToolInterfaceTheme.contextUnderlayDownEnabledLight
+                } else {
+                    color = ToolInterfaceTheme.contextUnderlayHighlightedEnabledLight
+                }
+            } else {
+                if isPressed {
+                    color = ToolInterfaceTheme.contextUnderlayDownDisabledLight
+                } else {
+                    color = ToolInterfaceTheme.contextUnderlayHighlightedDisabledLight
+                }
+            }
+        }
+        return RoundedRectangle(cornerRadius: CGFloat(cornerRadius))
+            .foregroundStyle(color)
+    }
+    
+    func bodyContent(isPressed: Bool) -> some View {
+        
+        let contentLayoutWidth = magicalViewModel.layoutWidth - magicalViewModel.outsideBoxPaddingLeft - magicalViewModel.outsideBoxPaddingRight
+        let contentLayoutHeight = magicalViewModel.layoutHeight - outsideBoxPaddingTop - outsideBoxPaddingBottom
+        
+        return HStack(spacing: 0.0) {
+#if INTERFACE_HINTS
+            Spacer()
+                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingLeft), height: 24.0)
+                .background(Color(red: 0.15, green: 0.95, blue: 0.55, opacity: 0.40))
+#else
+            Spacer()
+                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingLeft))
+#endif
+            
+            VStack(spacing: 0.0) {
+                
+#if INTERFACE_HINTS
+                Spacer()
+                    .frame(width: 24.0, height: CGFloat(outsideBoxPaddingTop))
+                    .background(Color(red: 0.25, green: 0.45, blue: 0.15, opacity: 0.40))
+#else
+                Spacer()
+                    .frame(height: CGFloat(outsideBoxPaddingTop))
+#endif
+                
+                
+                MagicalSexyCheckBoxContent(layoutSchemeFlavor: layoutSchemeFlavor,
+                                           isPressed: isPressed,
+                                           layoutWidth: contentLayoutWidth,
+                                           layoutHeight: contentLayoutHeight)
+                
+#if INTERFACE_HINTS
+                Spacer()
+                    .frame(width: 24.0, height: CGFloat(outsideBoxPaddingBottom))
+                    .background(Color(red: 0.25, green: 0.45, blue: 0.15, opacity: 0.40))
+#else
+                Spacer()
+                    .frame(height: CGFloat(outsideBoxPaddingBottom))
+#endif
+                
+            }
+#if INTERFACE_HINTS
+            Spacer()
+                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight), height: 24.0)
+                .background(Color(red: 0.55, green: 0.35, blue: 0.84, opacity: 0.40))
+#else
+            Spacer()
+            .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight))
+#endif
+        }
+    }
+}
+
+
+/*
+struct MagicalSexyCheckBoxButtonStyle: ButtonStyle {
+    
     @Environment(MagicalSexyCheckBoxViewModel.self) var magicalSexyCheckBoxViewModel: MagicalSexyCheckBoxViewModel
     
     let orientation: Orientation
@@ -115,8 +291,8 @@ struct MagicalSexyCheckBoxButtonStyle: ButtonStyle {
     
     func getStrokeRect(isPressed: Bool) -> some View {
         
-        let cornerRadius = CheckBoxLayout.getCornerRadius(orientation: orientation)
-        let lineThickness = CheckBoxLayout.getLineThickness(orientation: orientation)
+        let cornerRadius = OLDOLDCheckBoxLayout.getCornerRadius(orientation: orientation)
+        let lineThickness = OLDOLDCheckBoxLayout.getLineThickness(orientation: orientation)
         
         let color: Color
         if isPressed {
@@ -163,7 +339,7 @@ struct MagicalSexyCheckBoxButtonStyle: ButtonStyle {
     
     func getFillRect(isPressed: Bool) -> some View {
         
-        let cornerRadius = CheckBoxLayout.getCornerRadius(orientation: orientation)
+        let cornerRadius = OLDOLDCheckBoxLayout.getCornerRadius(orientation: orientation)
         var height = magicalSexyCheckBoxViewModel.layoutHeight
         height -= universalPaddingTop
         height -= universalPaddingBottom
@@ -208,3 +384,4 @@ struct MagicalSexyCheckBoxButtonStyle: ButtonStyle {
         
     }
 }
+*/

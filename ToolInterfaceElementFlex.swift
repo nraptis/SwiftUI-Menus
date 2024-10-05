@@ -10,103 +10,103 @@ import Foundation
 struct FlexSexyStepperData {
     let minimumWidthLarge: Int
     let standardWidthLarge: Int
-    let maximumWidthLarge: Int
+    let relaxedWidthLarge: Int
     
     let minimumWidthMedium: Int
     let standardWidthMedium: Int
-    let maximumWidthMedium: Int
+    let relaxedWidthMedium: Int
     
     let minimumWidthSmall: Int
     let standardWidthSmall: Int
-    let maximumWidthSmall: Int
+    let relaxedWidthSmall: Int
 }
 
 struct FlexSegmentData {
     let minimumWidthLong: Int
     let standardWidthLong: Int
-    let maximumWidthLong: Int
+    let relaxedWidthLong: Int
     
     let minimumWidthStackedLarge: Int
     let standardWidthStackedLarge: Int
-    let maximumWidthStackedLarge: Int
+    let relaxedWidthStackedLarge: Int
     
     let minimumWidthStackedMedium: Int
     let standardWidthStackedMedium: Int
-    let maximumWidthStackedMedium: Int
+    let relaxedWidthStackedMedium: Int
     
     let minimumWidthStackedSmall: Int
     let standardWidthStackedSmall: Int
-    let maximumWidthStackedSmall: Int
+    let relaxedWidthStackedSmall: Int
 }
 
 struct FlexMainTabData {
     let minimumWidthLarge: Int
     let standardWidthLarge: Int
-    let maximumWidthLarge: Int
+    let relaxedWidthLarge: Int
     
     let minimumWidthMedium: Int
     let standardWidthMedium: Int
-    let maximumWidthMedium: Int
+    let relaxedWidthMedium: Int
     
     let minimumWidthSmall: Int
     let standardWidthSmall: Int
-    let maximumWidthSmall: Int
+    let relaxedWidthSmall: Int
 }
 
 struct FlexCreateSwatchData {
     let minimumWidthLarge: Int
     let standardWidthLarge: Int
-    let maximumWidthLarge: Int
+    let relaxedWidthLarge: Int
     
     let minimumWidthMedium: Int
     let standardWidthMedium: Int
-    let maximumWidthMedium: Int
+    let relaxedWidthMedium: Int
     
     let minimumWidthSmall: Int
     let standardWidthSmall: Int
-    let maximumWidthSmall: Int
+    let relaxedWidthSmall: Int
 }
 
 struct FlexEnterModeData {
     let minimumWidthLarge: Int
     let standardWidthLarge: Int
-    let maximumWidthLarge: Int
+    let relaxedWidthLarge: Int
     
     let minimumWidthMedium: Int
     let standardWidthMedium: Int
-    let maximumWidthMedium: Int
+    let relaxedWidthMedium: Int
     
     let minimumWidthSmall: Int
     let standardWidthSmall: Int
-    let maximumWidthSmall: Int
+    let relaxedWidthSmall: Int
 }
 
 struct FlexSexyCheckBoxData {
     let minimumWidthLarge: Int
     let standardWidthLarge: Int
-    let maximumWidthLarge: Int
+    let relaxedWidthLarge: Int
     
     let minimumWidthMedium: Int
     let standardWidthMedium: Int
-    let maximumWidthMedium: Int
+    let relaxedWidthMedium: Int
     
     let minimumWidthSmall: Int
     let standardWidthSmall: Int
-    let maximumWidthSmall: Int
+    let relaxedWidthSmall: Int
 }
 
 struct FlexExitModeData {
     let minimumWidthLarge: Int
     let standardWidthLarge: Int
-    let maximumWidthLarge: Int
+    let relaxedWidthLarge: Int
     
     let minimumWidthMedium: Int
     let standardWidthMedium: Int
-    let maximumWidthMedium: Int
+    let relaxedWidthMedium: Int
     
     let minimumWidthSmall: Int
     let standardWidthSmall: Int
-    let maximumWidthSmall: Int
+    let relaxedWidthSmall: Int
 }
 
 struct FlexSliderData {
@@ -115,15 +115,15 @@ struct FlexSliderData {
     
     let minimumWidthLarge: Int
     let standardWidthLarge: Int
-    let maximumWidthLarge: Int
+    let relaxedWidthLarge: Int
     
     let minimumWidthMedium: Int
     let standardWidthMedium: Int
-    let maximumWidthMedium: Int
+    let relaxedWidthMedium: Int
     
     let minimumWidthSmall: Int
     let standardWidthSmall: Int
-    let maximumWidthSmall: Int
+    let relaxedWidthSmall: Int
 }
 
 struct FlexSpacerData {
@@ -135,66 +135,52 @@ struct FlexDividerSpacerDividerData {
     let standardWidth: Int
 }
 
-struct FlexTextIconButtonData {
-    let minimumWidthLong: Int
+struct FlexConvertibleData {
+    let squeezedWidthLong: Int
     let standardWidthLong: Int
-    let maximumWidthLong: Int
+    let relaxedWidthLong: Int
     
-    let minimumWidthStackedLarge: Int
+    let squeezedWidthStackedLarge: Int
     let standardWidthStackedLarge: Int
-    let maximumWidthStackedLarge: Int
+    let relaxedWidthStackedLarge: Int
     
-    let minimumWidthStackedMedium: Int
+    let squeezedWidthStackedMedium: Int
     let standardWidthStackedMedium: Int
-    let maximumWidthStackedMedium: Int
+    let relaxedWidthStackedMedium: Int
     
-    let minimumWidthStackedSmall: Int
+    let squeezedWidthStackedSmall: Int
     let standardWidthStackedSmall: Int
-    let maximumWidthStackedSmall: Int
-}
-
-struct FlexSexyButtonData {
-    let minimumWidthLarge: Int
-    let standardWidthLarge: Int
-    let maximumWidthLarge: Int
-    
-    let minimumWidthMedium: Int
-    let standardWidthMedium: Int
-    let maximumWidthMedium: Int
-    
-    let minimumWidthSmall: Int
-    let standardWidthSmall: Int
-    let maximumWidthSmall: Int
+    let relaxedWidthStackedSmall: Int
 }
 
 struct FlexGreenButtonData {
     let minimumWidth: Int
     let standardWidth: Int
-    let maximumWidth: Int
+    let relaxedWidth: Int
 }
 
 struct FlexIconButtonData {
     let minimumWidth: Int
     let standardWidth: Int
-    let maximumWidth: Int
+    let relaxedWidth: Int
 }
 
 struct FlexCheckBoxData {
     let minimumWidthLong: Int
     let standardWidthLong: Int
-    let maximumWidthLong: Int
+    let relaxedWidthLong: Int
     
     let minimumWidthStackedLarge: Int
     let standardWidthStackedLarge: Int
-    let maximumWidthStackedLarge: Int
+    let relaxedWidthStackedLarge: Int
     
     let minimumWidthStackedMedium: Int
     let standardWidthStackedMedium: Int
-    let maximumWidthStackedMedium: Int
+    let relaxedWidthStackedMedium: Int
     
     let minimumWidthStackedSmall: Int
     let standardWidthStackedSmall: Int
-    let maximumWidthStackedSmall: Int
+    let relaxedWidthStackedSmall: Int
 }
 
 struct FlexFavoringOneLineLabelData {
@@ -212,9 +198,12 @@ enum ToolInterfaceElementFlex {
     case dividerSpacerDivider(FlexDividerSpacerDividerData)
     
     case iconButton(FlexIconButtonData)
-    case textIconButton(FlexTextIconButtonData)
-    case sexyButton(FlexSexyButtonData)
-    case sexyCheckBox(FlexSexyCheckBoxData)
+    
+    case textIconButton(FlexConvertibleData)
+    
+    case sexyButton(FlexConvertibleData)
+    
+    case sexyCheckBox(FlexConvertibleData)
     
     case greenButton(FlexGreenButtonData)
     
@@ -228,8 +217,8 @@ enum ToolInterfaceElementFlex {
     
     case favoringOneLineLabel(FlexFavoringOneLineLabelData)
     
-    case enterMode(FlexEnterModeData)
-    case exitMode(FlexExitModeData)
+    case enterMode(FlexConvertibleData)
+    case exitMode(FlexConvertibleData)
     
     case sexyStepper(FlexSexyStepperData)
     

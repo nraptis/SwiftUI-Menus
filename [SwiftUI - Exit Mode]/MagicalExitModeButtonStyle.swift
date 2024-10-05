@@ -9,6 +9,182 @@ import SwiftUI
 
 struct MagicalExitModeButtonStyle: ButtonStyle {
     
+    @Environment(MagicalModeChangeViewModel.self) var magicalViewModel
+    let layoutSchemeFlavor: LayoutSchemeFlavor
+    let outsideBoxPaddingTop: Int
+    let outsideBoxPaddingBottom: Int
+    func makeBody(configuration: Configuration) -> some View {
+        return ZStack {
+            
+            getBox(isPressed: configuration.isPressed)
+            bodyContent(isPressed: configuration.isPressed)
+        }
+        .frame(width: CGFloat(magicalViewModel.layoutWidth),
+               height: CGFloat(magicalViewModel.layoutHeight))
+        .transaction { transaction in
+            transaction.animation = nil
+        }
+    }
+    
+    func getBox(isPressed: Bool) -> some View {
+        
+        let boxWidth = magicalViewModel.layoutWidth - magicalViewModel.outsideBoxPaddingLeft - magicalViewModel.outsideBoxPaddingRight
+        let boxHeight = magicalViewModel.layoutHeight - outsideBoxPaddingTop - outsideBoxPaddingBottom
+        
+        return HStack(spacing: 0.0) {
+            Spacer()
+                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingLeft))
+            
+            VStack(spacing: 0.0) {
+                Spacer()
+                    .frame(height: CGFloat(outsideBoxPaddingTop))
+                ZStack {
+                    
+                }
+                .frame(width: CGFloat(boxWidth),
+                       height: CGFloat(boxHeight))
+                .background(getStrokeRect(isPressed: isPressed))
+                .background(getFillRect(isPressed: isPressed))
+                
+                Spacer()
+                    .frame(height: CGFloat(outsideBoxPaddingBottom))
+            }
+            
+            Spacer()
+                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight))
+        }
+    }
+    
+    func getStrokeRect(isPressed: Bool) -> some View {
+        
+        let orientation = magicalViewModel.orientation
+        let isEnabled = magicalViewModel.isEnabled
+        let cornerRadius = CheckBoxLayout.getCornerRadius(orientation: orientation)
+        let lineThickness = CheckBoxLayout.getLineThickness(orientation: orientation)
+        let color: Color
+        if isPressed {
+            if isEnabled {
+                color = ToolInterfaceTheme.primaryDownEnabled
+            } else {
+                color = ToolInterfaceTheme.primaryDownDisabled
+            }
+        } else {
+            if magicalViewModel.isDarkModeEnabled {
+                if isEnabled {
+                    color = ToolInterfaceTheme.primaryEnabledDark
+                } else {
+                    color = ToolInterfaceTheme.primaryDisabledDark
+                }
+            } else {
+                if isEnabled {
+                    color = ToolInterfaceTheme.primaryEnabledLight
+                } else {
+                    color = ToolInterfaceTheme.primaryDisabledLight
+                }
+            }
+        }
+        
+        return RoundedRectangle(cornerRadius: CGFloat(cornerRadius))
+            .stroke(style: StrokeStyle(lineWidth: CGFloat(lineThickness)))
+            .foregroundStyle(color)
+    }
+    
+    func getFillRect(isPressed: Bool) -> some View {
+        let orientation = magicalViewModel.orientation
+        let isEnabled = magicalViewModel.isEnabled
+        let cornerRadius = CheckBoxLayout.getCornerRadius(orientation: orientation)
+        let color: Color
+        if magicalViewModel.isDarkModeEnabled {
+            if isEnabled {
+                if isPressed {
+                    color = ToolInterfaceTheme.contextUnderlayDownEnabledDark
+                } else {
+                    color = ToolInterfaceTheme.contextUnderlayHighlightedEnabledDark
+                }
+            } else {
+                if isPressed {
+                    color = ToolInterfaceTheme.contextUnderlayDownDisabledDark
+                } else {
+                    color = ToolInterfaceTheme.contextUnderlayHighlightedDisabledDark
+                }
+            }
+        } else {
+            if isEnabled {
+                if isPressed {
+                    color = ToolInterfaceTheme.contextUnderlayDownEnabledLight
+                } else {
+                    color = ToolInterfaceTheme.contextUnderlayHighlightedEnabledLight
+                }
+            } else {
+                if isPressed {
+                    color = ToolInterfaceTheme.contextUnderlayDownDisabledLight
+                } else {
+                    color = ToolInterfaceTheme.contextUnderlayHighlightedDisabledLight
+                }
+            }
+        }
+        return RoundedRectangle(cornerRadius: CGFloat(cornerRadius))
+            .foregroundStyle(color)
+    }
+    
+    func bodyContent(isPressed: Bool) -> some View {
+        
+        let contentLayoutWidth = magicalViewModel.layoutWidth - magicalViewModel.outsideBoxPaddingLeft - magicalViewModel.outsideBoxPaddingRight
+        let contentLayoutHeight = magicalViewModel.layoutHeight - outsideBoxPaddingTop - outsideBoxPaddingBottom
+        
+        return HStack(spacing: 0.0) {
+#if INTERFACE_HINTS
+            Spacer()
+                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingLeft), height: 24.0)
+                .background(Color(red: 0.65, green: 0.655, blue: 0.155, opacity: 0.40))
+#else
+            Spacer()
+                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingLeft))
+#endif
+            
+            VStack(spacing: 0.0) {
+                
+#if INTERFACE_HINTS
+                Spacer()
+                    .frame(width: 24.0, height: CGFloat(outsideBoxPaddingTop))
+                    .background(Color(red: 0.90, green: 0.67, blue: 0.45, opacity: 0.40))
+#else
+                Spacer()
+                    .frame(height: CGFloat(outsideBoxPaddingTop))
+#endif
+                
+                MagicalExitModeContent(layoutSchemeFlavor: layoutSchemeFlavor,
+                                        isPressed: isPressed,
+                                        layoutWidth: contentLayoutWidth,
+                                        layoutHeight: contentLayoutHeight)
+                
+#if INTERFACE_HINTS
+                Spacer()
+                    .frame(width: 24.0, height: CGFloat(outsideBoxPaddingBottom))
+                    .background(Color(red: 0.93, green: 0.21, blue: 0.26, opacity: 0.40))
+#else
+                Spacer()
+                    .frame(height: CGFloat(outsideBoxPaddingBottom))
+#endif
+                
+            }
+#if INTERFACE_HINTS
+            Spacer()
+                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight), height: 24.0)
+                .background(Color(red: 0.58, green: 0.367, blue: 0.91, opacity: 0.40))
+#else
+            Spacer()
+                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight))
+#endif
+        }
+    }
+}
+
+/*
+import SwiftUI
+
+struct MagicalExitModeButtonStyle: ButtonStyle {
+    
     @Environment(MagicalExitModeViewModel.self) var magicalExitModeViewModel: MagicalExitModeViewModel
     
     let orientation: Orientation
@@ -113,8 +289,8 @@ struct MagicalExitModeButtonStyle: ButtonStyle {
     
     func getStrokeRect(isPressed: Bool) -> some View {
         
-        let cornerRadius = CheckBoxLayout.getCornerRadius(orientation: orientation)
-        let lineThickness = CheckBoxLayout.getLineThickness(orientation: orientation)
+        let cornerRadius = OLDOLDCheckBoxLayout.getCornerRadius(orientation: orientation)
+        let lineThickness = OLDOLDCheckBoxLayout.getLineThickness(orientation: orientation)
         
         let color: Color
         if isPressed {
@@ -137,37 +313,7 @@ struct MagicalExitModeButtonStyle: ButtonStyle {
                     color = ToolInterfaceTheme.primaryDisabledLight
                 }
             }
-            /*
-             if isChecked {
-             if isDarkMode {
-             if isEnabled {
-             color = ToolInterfaceTheme.primaryUnselectedEnabledDark
-             } else {
-             color = ToolInterfaceTheme.primaryUnselectedDisabledDark
-             }
-             } else {
-             if isEnabled {
-             color = ToolInterfaceTheme.primaryUnselectedEnabledLight
-             } else {
-             color = ToolInterfaceTheme.primaryUnselectedDisabledLight
-             }
-             }
-             } else {
-             if isDarkMode {
-             if isEnabled {
-             color = ToolInterfaceTheme.checkPrimaryUncheckedDark
-             } else {
-             color = ToolInterfaceTheme.checkPrimaryUncheckedDisabledDark
-             }
-             } else {
-             if isEnabled {
-             color = ToolInterfaceTheme.checkPrimaryUncheckedLight
-             } else {
-             color = ToolInterfaceTheme.checkPrimaryUncheckedDisabledLight
-             }
-             }
-             }
-             */
+
         }
         
         let height = magicalExitModeViewModel.layoutHeight - (universalPaddingTop + universalPaddingBottom)
@@ -179,20 +325,12 @@ struct MagicalExitModeButtonStyle: ButtonStyle {
         .frame(width: CGFloat(layoutWidth - universalPaddingLeft - universalPaddingRight),
                height: CGFloat(height))
         .foregroundStyle(color)
-        /*
-         return HStack(spacing: 0.0) {
-         RoundedRectangle(cornerRadius: CGFloat(cornerRadius))
-         .stroke(style: StrokeStyle(lineWidth: CGFloat(lineThickness)))
-         }
-         .frame(width: CGFloat(layoutWidth),
-         height: CGFloat(height))
-         .foregroundStyle(color)
-         */
+
     }
     
     func getFillRect(isPressed: Bool) -> some View {
         
-        let cornerRadius = CheckBoxLayout.getCornerRadius(orientation: orientation)
+        let cornerRadius = OLDOLDCheckBoxLayout.getCornerRadius(orientation: orientation)
         var height = magicalExitModeViewModel.layoutHeight
         height -= universalPaddingTop
         height -= universalPaddingBottom
@@ -237,3 +375,4 @@ struct MagicalExitModeButtonStyle: ButtonStyle {
         
     }
 }
+*/

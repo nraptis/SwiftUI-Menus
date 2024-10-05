@@ -1,5 +1,5 @@
 //
-//  MagicalEnterModeViewModel+Guides.swift
+//  MagicalModeChangeViewModel+Guides.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 8/25/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-@Observable class MagicalEnterModeViewModelGuidesEnter: MagicalEnterModeViewModel {
+@Observable class MagicalModeChangeViewModelGuidesEnter: MagicalModeChangeViewModel {
     
     override func handleClicked() {
         if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel {
@@ -28,7 +28,7 @@ import Foundation
     
     deinit {
         if ApplicationController.DEBUG_DEALLOCS {
-            print("[Deinit] MagicalEnterModeViewModelGuidesEnter (Dealloc)")
+            print("[Deinit] MagicalModeChangeViewModelGuidesEnter (Dealloc)")
         }
     }
 }

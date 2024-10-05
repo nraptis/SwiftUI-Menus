@@ -8,8 +8,31 @@
 import SwiftUI
 
 struct MagicalEnterModeButton: View {
+    @Environment(MagicalModeChangeViewModel.self) var magicalViewModel
+    let layoutSchemeFlavor: LayoutSchemeFlavor
+    let outsideBoxPaddingTop: Int
+    let outsideBoxPaddingBottom: Int
+    var body: some View {
+        Button {
+            magicalViewModel.handleClicked()
+        } label: {
+            ZStack {
+                
+            }
+            .frame(width: CGFloat(magicalViewModel.layoutWidth),
+                   height: CGFloat(magicalViewModel.layoutHeight))
+        }
+        .buttonStyle(MagicalEnterModeButtonStyle(layoutSchemeFlavor: layoutSchemeFlavor,
+                                                    outsideBoxPaddingTop: outsideBoxPaddingTop,
+                                                    outsideBoxPaddingBottom: outsideBoxPaddingBottom))
+        
+    }
+}
+
+/*
+struct MagicalEnterModeButton: View {
     
-    @Environment(MagicalEnterModeViewModel.self) var magicalEnterModeViewModel: MagicalEnterModeViewModel
+    @Environment(MagicalModeChangeViewModel.self) var magicalEnterModeViewModel: MagicalModeChangeViewModel
     
     let orientation: Orientation
     let layoutSchemeFlavor: LayoutSchemeFlavor
@@ -50,3 +73,4 @@ struct MagicalEnterModeButton: View {
                                                       layoutWidth: layoutWidth))
     }
 }
+*/

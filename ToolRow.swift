@@ -201,20 +201,20 @@ class ToolRow {
         }
         var x = 0
         var width = 0
-        var maximumWidthHigh = 0
-        var maximumWidthMedium = 0
-        var maximumWidthLow = 0
+        var relaxedWidthHigh = 0
+        var relaxedWidthMedium = 0
+        var relaxedWidthLow = 0
         var minimumWidth = 0
         var isShrinkable = false
         var isSpacer = false
         func getWidth(`class`: WidthClass) -> Int {
             switch `class` {
             case .high:
-                return maximumWidthHigh
+                return relaxedWidthHigh
             case .medium:
-                return maximumWidthMedium
+                return relaxedWidthMedium
             case .low:
-                return maximumWidthLow
+                return relaxedWidthLow
             }
         }
         
@@ -962,282 +962,326 @@ class ToolRow {
         let isSmall = layoutStackingCategory.isSmall
         let isMedium = layoutStackingCategory.isMedium
         
-        let isSegmentLong = layoutStackingCategory.isSegmentLong
+        let isButtonLong = layoutStackingCategory.isButtonLong
+        let isModeSwitchLong = layoutStackingCategory.isModeSwitchLong
         let isCheckBoxLong = layoutStackingCategory.isCheckBoxLong
-        let isTextIconButtonLong = layoutStackingCategory.isTextIconButtonLong
+        let isSegmentLong = layoutStackingCategory.isSegmentLong
         
         var layoutNodes = [LayoutNode]()
         let rowContentWidth = (menuWidthWithSafeArea - (safeAreaLeft + safeAreaRight))
         for node in nodes {
             let layoutNode = LayoutNode()
             switch node.flex {
+            case .enterMode(let flexConvertibleData):
+                if isModeSwitchLong {
+                    layoutNode.width = flexConvertibleData.squeezedWidthLong
+                    layoutNode.relaxedWidthHigh = flexConvertibleData.standardWidthLong
+                    layoutNode.relaxedWidthMedium = flexConvertibleData.standardWidthLong
+                    layoutNode.relaxedWidthLow = flexConvertibleData.relaxedWidthLong
+                    
+                } else {
+                    if isSmall {
+                        layoutNode.width = flexConvertibleData.squeezedWidthStackedSmall
+                        layoutNode.relaxedWidthHigh = flexConvertibleData.standardWidthStackedSmall
+                        layoutNode.relaxedWidthMedium = flexConvertibleData.standardWidthStackedSmall
+                        layoutNode.relaxedWidthLow = flexConvertibleData.relaxedWidthStackedSmall
+                        
+                    } else if isMedium {
+                        layoutNode.width = flexConvertibleData.squeezedWidthStackedMedium
+                        layoutNode.relaxedWidthHigh = flexConvertibleData.standardWidthStackedMedium
+                        layoutNode.relaxedWidthMedium = flexConvertibleData.standardWidthStackedMedium
+                        layoutNode.relaxedWidthLow = flexConvertibleData.relaxedWidthStackedMedium
+                        
+                    } else {
+                        layoutNode.width = flexConvertibleData.squeezedWidthStackedLarge
+                        layoutNode.relaxedWidthHigh = flexConvertibleData.standardWidthStackedLarge
+                        layoutNode.relaxedWidthMedium = flexConvertibleData.standardWidthStackedLarge
+                        layoutNode.relaxedWidthLow = flexConvertibleData.relaxedWidthStackedLarge
+                    }
+                }
+                layoutNode.isShrinkable = false
+            case .exitMode(let flexConvertibleData):
+                if isModeSwitchLong {
+                    layoutNode.width = flexConvertibleData.squeezedWidthLong
+                    layoutNode.relaxedWidthHigh = flexConvertibleData.standardWidthLong
+                    layoutNode.relaxedWidthMedium = flexConvertibleData.standardWidthLong
+                    layoutNode.relaxedWidthLow = flexConvertibleData.relaxedWidthLong
+                } else {
+                    if isSmall {
+                        layoutNode.width = flexConvertibleData.squeezedWidthStackedSmall
+                        layoutNode.relaxedWidthHigh = flexConvertibleData.standardWidthStackedSmall
+                        layoutNode.relaxedWidthMedium = flexConvertibleData.standardWidthStackedSmall
+                        layoutNode.relaxedWidthLow = flexConvertibleData.relaxedWidthStackedSmall
+                    } else if isMedium {
+                        layoutNode.width = flexConvertibleData.squeezedWidthStackedMedium
+                        layoutNode.relaxedWidthHigh = flexConvertibleData.standardWidthStackedMedium
+                        layoutNode.relaxedWidthMedium = flexConvertibleData.standardWidthStackedMedium
+                        layoutNode.relaxedWidthLow = flexConvertibleData.relaxedWidthStackedMedium
+                    } else {
+                        layoutNode.width = flexConvertibleData.squeezedWidthStackedLarge
+                        layoutNode.relaxedWidthHigh = flexConvertibleData.standardWidthStackedLarge
+                        layoutNode.relaxedWidthMedium = flexConvertibleData.standardWidthStackedLarge
+                        layoutNode.relaxedWidthLow = flexConvertibleData.relaxedWidthStackedLarge
+                    }
+                }
+                layoutNode.isShrinkable = false
+            case .sexyCheckBox(let flexConvertibleData):
+                if isCheckBoxLong {
+                    layoutNode.width = flexConvertibleData.squeezedWidthLong
+                    layoutNode.relaxedWidthHigh = flexConvertibleData.standardWidthLong
+                    layoutNode.relaxedWidthMedium = flexConvertibleData.standardWidthLong
+                    layoutNode.relaxedWidthLow = flexConvertibleData.relaxedWidthLong
+                    
+                } else {
+                    if isSmall {
+                        layoutNode.width = flexConvertibleData.squeezedWidthStackedSmall
+                        layoutNode.relaxedWidthHigh = flexConvertibleData.standardWidthStackedSmall
+                        layoutNode.relaxedWidthMedium = flexConvertibleData.standardWidthStackedSmall
+                        layoutNode.relaxedWidthLow = flexConvertibleData.relaxedWidthStackedSmall
+                        
+                    } else if isMedium {
+                        layoutNode.width = flexConvertibleData.squeezedWidthStackedMedium
+                        layoutNode.relaxedWidthHigh = flexConvertibleData.standardWidthStackedMedium
+                        layoutNode.relaxedWidthMedium = flexConvertibleData.standardWidthStackedMedium
+                        layoutNode.relaxedWidthLow = flexConvertibleData.relaxedWidthStackedMedium
+                        
+                    } else {
+                        layoutNode.width = flexConvertibleData.squeezedWidthStackedLarge
+                        layoutNode.relaxedWidthHigh = flexConvertibleData.standardWidthStackedLarge
+                        layoutNode.relaxedWidthMedium = flexConvertibleData.standardWidthStackedLarge
+                        layoutNode.relaxedWidthLow = flexConvertibleData.relaxedWidthStackedLarge
+                    }
+                }
+                layoutNode.isShrinkable = false
+            case .textIconButton(let flexConvertibleData):
+                if isButtonLong {
+                    layoutNode.width = flexConvertibleData.squeezedWidthLong
+                    layoutNode.relaxedWidthHigh = flexConvertibleData.standardWidthLong
+                    layoutNode.relaxedWidthMedium = flexConvertibleData.standardWidthLong
+                    layoutNode.relaxedWidthLow = flexConvertibleData.relaxedWidthLong
+                } else {
+                    if isSmall {
+                        layoutNode.width = flexConvertibleData.squeezedWidthStackedSmall
+                        layoutNode.relaxedWidthHigh = flexConvertibleData.standardWidthStackedSmall
+                        layoutNode.relaxedWidthMedium = flexConvertibleData.standardWidthStackedSmall
+                        layoutNode.relaxedWidthLow = flexConvertibleData.relaxedWidthStackedSmall
+                    } else if isMedium {
+                        layoutNode.width = flexConvertibleData.squeezedWidthStackedMedium
+                        layoutNode.relaxedWidthHigh = flexConvertibleData.standardWidthStackedMedium
+                        layoutNode.relaxedWidthMedium = flexConvertibleData.standardWidthStackedMedium
+                        layoutNode.relaxedWidthLow = flexConvertibleData.relaxedWidthStackedMedium
+                    } else {
+                        layoutNode.width = flexConvertibleData.squeezedWidthStackedLarge
+                        layoutNode.relaxedWidthHigh = flexConvertibleData.standardWidthStackedLarge
+                        layoutNode.relaxedWidthMedium = flexConvertibleData.standardWidthStackedLarge
+                        layoutNode.relaxedWidthLow = flexConvertibleData.relaxedWidthStackedLarge
+                    }
+                }
+                layoutNode.isShrinkable = false
+            case .sexyButton(let flexConvertibleData):
+                if isButtonLong {
+                    layoutNode.width = flexConvertibleData.squeezedWidthLong
+                    layoutNode.relaxedWidthHigh = flexConvertibleData.standardWidthLong
+                    layoutNode.relaxedWidthMedium = flexConvertibleData.standardWidthLong
+                    layoutNode.relaxedWidthLow = flexConvertibleData.relaxedWidthLong
+                } else {
+                    if isSmall {
+                        layoutNode.width = flexConvertibleData.squeezedWidthStackedSmall
+                        layoutNode.relaxedWidthHigh = flexConvertibleData.standardWidthStackedSmall
+                        layoutNode.relaxedWidthMedium = flexConvertibleData.standardWidthStackedSmall
+                        layoutNode.relaxedWidthLow = flexConvertibleData.relaxedWidthStackedSmall
+                    } else if isMedium {
+                        layoutNode.width = flexConvertibleData.squeezedWidthStackedMedium
+                        layoutNode.relaxedWidthHigh = flexConvertibleData.standardWidthStackedMedium
+                        layoutNode.relaxedWidthMedium = flexConvertibleData.standardWidthStackedMedium
+                        layoutNode.relaxedWidthLow = flexConvertibleData.relaxedWidthStackedMedium
+                    } else {
+                        layoutNode.width = flexConvertibleData.squeezedWidthStackedLarge
+                        layoutNode.relaxedWidthHigh = flexConvertibleData.standardWidthStackedLarge
+                        layoutNode.relaxedWidthMedium = flexConvertibleData.standardWidthStackedLarge
+                        layoutNode.relaxedWidthLow = flexConvertibleData.relaxedWidthStackedLarge
+                    }
+                }
+                layoutNode.isShrinkable = false
+                
             case .sexyStepper(let flexSexyStepperData):
                 if isSmall {
                     layoutNode.width = flexSexyStepperData.minimumWidthSmall
-                    layoutNode.maximumWidthHigh = flexSexyStepperData.standardWidthSmall
-                    layoutNode.maximumWidthMedium = flexSexyStepperData.standardWidthSmall
-                    layoutNode.maximumWidthLow = flexSexyStepperData.maximumWidthSmall
+                    layoutNode.relaxedWidthHigh = flexSexyStepperData.standardWidthSmall
+                    layoutNode.relaxedWidthMedium = flexSexyStepperData.standardWidthSmall
+                    layoutNode.relaxedWidthLow = flexSexyStepperData.relaxedWidthSmall
                 } else if isMedium {
                     layoutNode.width = flexSexyStepperData.minimumWidthMedium
-                    layoutNode.maximumWidthHigh = flexSexyStepperData.standardWidthMedium
-                    layoutNode.maximumWidthMedium = flexSexyStepperData.standardWidthMedium
-                    layoutNode.maximumWidthLow = flexSexyStepperData.maximumWidthMedium
+                    layoutNode.relaxedWidthHigh = flexSexyStepperData.standardWidthMedium
+                    layoutNode.relaxedWidthMedium = flexSexyStepperData.standardWidthMedium
+                    layoutNode.relaxedWidthLow = flexSexyStepperData.relaxedWidthMedium
                 } else {
                     layoutNode.width = flexSexyStepperData.minimumWidthLarge
-                    layoutNode.maximumWidthHigh = flexSexyStepperData.standardWidthLarge
-                    layoutNode.maximumWidthMedium = flexSexyStepperData.standardWidthLarge
-                    layoutNode.maximumWidthLow = flexSexyStepperData.maximumWidthLarge
+                    layoutNode.relaxedWidthHigh = flexSexyStepperData.standardWidthLarge
+                    layoutNode.relaxedWidthMedium = flexSexyStepperData.standardWidthLarge
+                    layoutNode.relaxedWidthLow = flexSexyStepperData.relaxedWidthLarge
                 }
-            case .enterMode(let flexEnterModeData):
-                if isSmall {
-                    layoutNode.width = flexEnterModeData.minimumWidthSmall
-                    layoutNode.maximumWidthHigh = flexEnterModeData.standardWidthSmall
-                    layoutNode.maximumWidthMedium = flexEnterModeData.standardWidthSmall
-                    layoutNode.maximumWidthLow = flexEnterModeData.maximumWidthSmall
-                } else if isMedium {
-                    layoutNode.width = flexEnterModeData.minimumWidthMedium
-                    layoutNode.maximumWidthHigh = flexEnterModeData.standardWidthMedium
-                    layoutNode.maximumWidthMedium = flexEnterModeData.standardWidthMedium
-                    layoutNode.maximumWidthLow = flexEnterModeData.maximumWidthMedium
-                } else {
-                    layoutNode.width = flexEnterModeData.minimumWidthLarge
-                    layoutNode.maximumWidthHigh = flexEnterModeData.standardWidthLarge
-                    layoutNode.maximumWidthMedium = flexEnterModeData.standardWidthLarge
-                    layoutNode.maximumWidthLow = flexEnterModeData.maximumWidthLarge
-                }
-            case .exitMode(let flexExitModeData):
-                if isSmall {
-                    layoutNode.width = flexExitModeData.minimumWidthSmall
-                    layoutNode.maximumWidthHigh = flexExitModeData.standardWidthSmall
-                    layoutNode.maximumWidthMedium = flexExitModeData.standardWidthSmall
-                    layoutNode.maximumWidthLow = flexExitModeData.maximumWidthSmall
-                } else if isMedium {
-                    layoutNode.width = flexExitModeData.minimumWidthMedium
-                    layoutNode.maximumWidthHigh = flexExitModeData.standardWidthMedium
-                    layoutNode.maximumWidthMedium = flexExitModeData.standardWidthMedium
-                    layoutNode.maximumWidthLow = flexExitModeData.maximumWidthMedium
-                } else {
-                    layoutNode.width = flexExitModeData.minimumWidthLarge
-                    layoutNode.maximumWidthHigh = flexExitModeData.standardWidthLarge
-                    layoutNode.maximumWidthMedium = flexExitModeData.standardWidthLarge
-                    layoutNode.maximumWidthLow = flexExitModeData.maximumWidthLarge
-                }
-            case .sexyCheckBox(let flexSexyCheckBoxData):
-                if isSmall {
-                    layoutNode.width = flexSexyCheckBoxData.minimumWidthSmall
-                    layoutNode.maximumWidthHigh = flexSexyCheckBoxData.standardWidthSmall
-                    layoutNode.maximumWidthMedium = flexSexyCheckBoxData.standardWidthSmall
-                    layoutNode.maximumWidthLow = flexSexyCheckBoxData.maximumWidthSmall
-                } else if isMedium {
-                    layoutNode.width = flexSexyCheckBoxData.minimumWidthMedium
-                    layoutNode.maximumWidthHigh = flexSexyCheckBoxData.standardWidthMedium
-                    layoutNode.maximumWidthMedium = flexSexyCheckBoxData.standardWidthMedium
-                    layoutNode.maximumWidthLow = flexSexyCheckBoxData.maximumWidthMedium
-                } else {
-                    layoutNode.width = flexSexyCheckBoxData.minimumWidthLarge
-                    layoutNode.maximumWidthHigh = flexSexyCheckBoxData.standardWidthLarge
-                    layoutNode.maximumWidthMedium = flexSexyCheckBoxData.standardWidthLarge
-                    layoutNode.maximumWidthLow = flexSexyCheckBoxData.maximumWidthLarge
-                }
+            
+            
+            
             case .favoringOneLineLabel(let flexFavoringOneLineLabelData):
                 layoutNode.width = flexFavoringOneLineLabelData.minimumWidth
-                layoutNode.maximumWidthHigh = flexFavoringOneLineLabelData.twoLineWidth
-                layoutNode.maximumWidthMedium = flexFavoringOneLineLabelData.oneLineWidthPadded
-                layoutNode.maximumWidthLow = flexFavoringOneLineLabelData.oneLineWidthPadded
+                layoutNode.relaxedWidthHigh = flexFavoringOneLineLabelData.twoLineWidth
+                layoutNode.relaxedWidthMedium = flexFavoringOneLineLabelData.oneLineWidthPadded
+                layoutNode.relaxedWidthLow = flexFavoringOneLineLabelData.oneLineWidthPadded
             case .slider(let flexSliderData):
                 let width: Int
                 switch flexSliderData.widthCategory {
                 case .fullWidth:
                     width = rowContentWidth
                     layoutNode.width = width
-                    layoutNode.maximumWidthHigh = width
-                    layoutNode.maximumWidthMedium = width
-                    layoutNode.maximumWidthLow = width
+                    layoutNode.relaxedWidthHigh = width
+                    layoutNode.relaxedWidthMedium = width
+                    layoutNode.relaxedWidthLow = width
                     layoutNode.minimumWidth = width
                 case .stretch:
                     if isSmall {
                         layoutNode.width = flexSliderData.minimumWidthSmall
-                        layoutNode.maximumWidthHigh = flexSliderData.standardWidthSmall
-                        layoutNode.maximumWidthMedium = max(flexSliderData.standardWidthSmall, rowContentWidth / 2)
-                        layoutNode.maximumWidthLow = 100_000_000
+                        layoutNode.relaxedWidthHigh = flexSliderData.standardWidthSmall
+                        layoutNode.relaxedWidthMedium = max(flexSliderData.standardWidthSmall, rowContentWidth / 2)
+                        layoutNode.relaxedWidthLow = 100_000_000
                     } else if isMedium {
                         layoutNode.width = flexSliderData.minimumWidthMedium
-                        layoutNode.maximumWidthHigh = flexSliderData.standardWidthMedium
-                        layoutNode.maximumWidthMedium = max(flexSliderData.standardWidthSmall, rowContentWidth / 2)
-                        layoutNode.maximumWidthLow = 100_000_000
+                        layoutNode.relaxedWidthHigh = flexSliderData.standardWidthMedium
+                        layoutNode.relaxedWidthMedium = max(flexSliderData.standardWidthSmall, rowContentWidth / 2)
+                        layoutNode.relaxedWidthLow = 100_000_000
                     } else {
                         layoutNode.width = flexSliderData.minimumWidthLarge
-                        layoutNode.maximumWidthHigh = flexSliderData.standardWidthLarge
-                        layoutNode.maximumWidthMedium = max(flexSliderData.standardWidthSmall, rowContentWidth / 2)
-                        layoutNode.maximumWidthLow = 100_000_000
+                        layoutNode.relaxedWidthHigh = flexSliderData.standardWidthLarge
+                        layoutNode.relaxedWidthMedium = max(flexSliderData.standardWidthSmall, rowContentWidth / 2)
+                        layoutNode.relaxedWidthLow = 100_000_000
                     }
                 case .halfWidthLeft:
                     width = rowContentWidth / 2
                     layoutNode.width = width
-                    layoutNode.maximumWidthHigh = width
-                    layoutNode.maximumWidthMedium = width
-                    layoutNode.maximumWidthLow = width
+                    layoutNode.relaxedWidthHigh = width
+                    layoutNode.relaxedWidthMedium = width
+                    layoutNode.relaxedWidthLow = width
                     layoutNode.minimumWidth = width
                 case .halfWidthRight:
                     width = rowContentWidth - (rowContentWidth / 2)
                     layoutNode.width = width
-                    layoutNode.maximumWidthHigh = width
-                    layoutNode.maximumWidthMedium = width
-                    layoutNode.maximumWidthLow = width
+                    layoutNode.relaxedWidthHigh = width
+                    layoutNode.relaxedWidthMedium = width
+                    layoutNode.relaxedWidthLow = width
                     layoutNode.minimumWidth = width
                 }
             case .dividerSpacerDivider(let flexDividerSpacerDividerData):
                 layoutNode.width = flexDividerSpacerDividerData.minimumWidth
-                layoutNode.maximumWidthHigh = flexDividerSpacerDividerData.minimumWidth
-                layoutNode.maximumWidthMedium = flexDividerSpacerDividerData.standardWidth
-                layoutNode.maximumWidthLow = 100_000_000
+                layoutNode.relaxedWidthHigh = flexDividerSpacerDividerData.minimumWidth
+                layoutNode.relaxedWidthMedium = flexDividerSpacerDividerData.standardWidth
+                layoutNode.relaxedWidthLow = 100_000_000
             case .iconButton(let flexIconButtonData):
                 layoutNode.width = flexIconButtonData.minimumWidth
-                layoutNode.maximumWidthHigh = flexIconButtonData.standardWidth
-                layoutNode.maximumWidthMedium = flexIconButtonData.standardWidth
-                layoutNode.maximumWidthLow = flexIconButtonData.maximumWidth
-            case .textIconButton(let flexTextIconButtonData):
-                if isTextIconButtonLong {
-                    layoutNode.width = flexTextIconButtonData.minimumWidthLong
-                    layoutNode.maximumWidthHigh = flexTextIconButtonData.standardWidthLong
-                    layoutNode.maximumWidthMedium = flexTextIconButtonData.standardWidthLong
-                    layoutNode.maximumWidthLow = flexTextIconButtonData.maximumWidthLong
-                } else {
-                    if isSmall {
-                        layoutNode.width = flexTextIconButtonData.minimumWidthStackedSmall
-                        layoutNode.maximumWidthHigh = flexTextIconButtonData.standardWidthStackedSmall
-                        layoutNode.maximumWidthMedium = flexTextIconButtonData.standardWidthStackedSmall
-                        layoutNode.maximumWidthLow = flexTextIconButtonData.maximumWidthStackedSmall
-                    } else if isMedium {
-                        layoutNode.width = flexTextIconButtonData.minimumWidthStackedMedium
-                        layoutNode.maximumWidthHigh = flexTextIconButtonData.standardWidthStackedMedium
-                        layoutNode.maximumWidthMedium = flexTextIconButtonData.standardWidthStackedMedium
-                        layoutNode.maximumWidthLow = flexTextIconButtonData.maximumWidthStackedMedium
-                    } else {
-                        layoutNode.width = flexTextIconButtonData.minimumWidthStackedLarge
-                        layoutNode.maximumWidthHigh = flexTextIconButtonData.standardWidthStackedLarge
-                        layoutNode.maximumWidthMedium = flexTextIconButtonData.standardWidthStackedLarge
-                        layoutNode.maximumWidthLow = flexTextIconButtonData.maximumWidthStackedLarge
-                    }
-                }
-                layoutNode.isShrinkable = false
-            case .sexyButton(let flexSexyButtonData):
-                if isSmall {
-                    layoutNode.width = flexSexyButtonData.minimumWidthSmall
-                    layoutNode.maximumWidthHigh = flexSexyButtonData.standardWidthSmall
-                    layoutNode.maximumWidthMedium = flexSexyButtonData.standardWidthSmall
-                    layoutNode.maximumWidthLow = flexSexyButtonData.maximumWidthSmall
-                } else if isMedium {
-                    layoutNode.width = flexSexyButtonData.minimumWidthMedium
-                    layoutNode.maximumWidthHigh = flexSexyButtonData.standardWidthMedium
-                    layoutNode.maximumWidthMedium = flexSexyButtonData.standardWidthMedium
-                    layoutNode.maximumWidthLow = flexSexyButtonData.maximumWidthMedium
-                } else {
-                    layoutNode.width = flexSexyButtonData.minimumWidthLarge
-                    layoutNode.maximumWidthHigh = flexSexyButtonData.standardWidthLarge
-                    layoutNode.maximumWidthMedium = flexSexyButtonData.standardWidthLarge
-                    layoutNode.maximumWidthLow = flexSexyButtonData.maximumWidthLarge
-                }
+                layoutNode.relaxedWidthHigh = flexIconButtonData.standardWidth
+                layoutNode.relaxedWidthMedium = flexIconButtonData.standardWidth
+                layoutNode.relaxedWidthLow = flexIconButtonData.relaxedWidth
+            
                 
             case .greenButton(let flexGreenButtonData):
                 layoutNode.width = flexGreenButtonData.minimumWidth
-                layoutNode.maximumWidthHigh = flexGreenButtonData.standardWidth
-                layoutNode.maximumWidthMedium = flexGreenButtonData.standardWidth
-                layoutNode.maximumWidthLow = flexGreenButtonData.maximumWidth
+                layoutNode.relaxedWidthHigh = flexGreenButtonData.standardWidth
+                layoutNode.relaxedWidthMedium = flexGreenButtonData.standardWidth
+                layoutNode.relaxedWidthLow = flexGreenButtonData.relaxedWidth
             case .checkBox(let flexCheckBoxData):
                 if isCheckBoxLong {
                     layoutNode.width = flexCheckBoxData.minimumWidthLong
-                    layoutNode.maximumWidthHigh = flexCheckBoxData.standardWidthLong
-                    layoutNode.maximumWidthMedium = flexCheckBoxData.standardWidthLong
-                    layoutNode.maximumWidthLow = flexCheckBoxData.maximumWidthLong
+                    layoutNode.relaxedWidthHigh = flexCheckBoxData.standardWidthLong
+                    layoutNode.relaxedWidthMedium = flexCheckBoxData.standardWidthLong
+                    layoutNode.relaxedWidthLow = flexCheckBoxData.relaxedWidthLong
                 } else {
                     if isSmall {
                         layoutNode.width = flexCheckBoxData.minimumWidthStackedSmall
-                        layoutNode.maximumWidthHigh = flexCheckBoxData.standardWidthStackedSmall
-                        layoutNode.maximumWidthMedium = flexCheckBoxData.standardWidthStackedSmall
-                        layoutNode.maximumWidthLow = flexCheckBoxData.maximumWidthStackedSmall
+                        layoutNode.relaxedWidthHigh = flexCheckBoxData.standardWidthStackedSmall
+                        layoutNode.relaxedWidthMedium = flexCheckBoxData.standardWidthStackedSmall
+                        layoutNode.relaxedWidthLow = flexCheckBoxData.relaxedWidthStackedSmall
                     } else if isMedium {
                         layoutNode.width = flexCheckBoxData.minimumWidthStackedMedium
-                        layoutNode.maximumWidthHigh = flexCheckBoxData.standardWidthStackedMedium
-                        layoutNode.maximumWidthMedium = flexCheckBoxData.standardWidthStackedMedium
-                        layoutNode.maximumWidthLow = flexCheckBoxData.maximumWidthStackedMedium
+                        layoutNode.relaxedWidthHigh = flexCheckBoxData.standardWidthStackedMedium
+                        layoutNode.relaxedWidthMedium = flexCheckBoxData.standardWidthStackedMedium
+                        layoutNode.relaxedWidthLow = flexCheckBoxData.relaxedWidthStackedMedium
                     } else {
                         layoutNode.width = flexCheckBoxData.minimumWidthStackedLarge
-                        layoutNode.maximumWidthHigh = flexCheckBoxData.standardWidthStackedLarge
-                        layoutNode.maximumWidthMedium = flexCheckBoxData.standardWidthStackedLarge
-                        layoutNode.maximumWidthLow = flexCheckBoxData.maximumWidthStackedLarge
+                        layoutNode.relaxedWidthHigh = flexCheckBoxData.standardWidthStackedLarge
+                        layoutNode.relaxedWidthMedium = flexCheckBoxData.standardWidthStackedLarge
+                        layoutNode.relaxedWidthLow = flexCheckBoxData.relaxedWidthStackedLarge
                     }
                 }
             case .segment(let flexSegmentData):
                 if isSegmentLong {
                     layoutNode.width = flexSegmentData.minimumWidthLong
-                    layoutNode.maximumWidthHigh = flexSegmentData.standardWidthLong
-                    layoutNode.maximumWidthMedium = flexSegmentData.standardWidthLong
-                    layoutNode.maximumWidthLow = flexSegmentData.maximumWidthLong
+                    layoutNode.relaxedWidthHigh = flexSegmentData.standardWidthLong
+                    layoutNode.relaxedWidthMedium = flexSegmentData.standardWidthLong
+                    layoutNode.relaxedWidthLow = flexSegmentData.relaxedWidthLong
                 } else {
                     if isSmall {
                         layoutNode.width = flexSegmentData.minimumWidthStackedSmall
-                        layoutNode.maximumWidthHigh = flexSegmentData.standardWidthStackedSmall
-                        layoutNode.maximumWidthMedium = flexSegmentData.standardWidthStackedSmall
-                        layoutNode.maximumWidthLow = flexSegmentData.maximumWidthStackedSmall
+                        layoutNode.relaxedWidthHigh = flexSegmentData.standardWidthStackedSmall
+                        layoutNode.relaxedWidthMedium = flexSegmentData.standardWidthStackedSmall
+                        layoutNode.relaxedWidthLow = flexSegmentData.relaxedWidthStackedSmall
                     } else if isMedium {
                         layoutNode.width = flexSegmentData.minimumWidthStackedMedium
-                        layoutNode.maximumWidthHigh = flexSegmentData.standardWidthStackedMedium
-                        layoutNode.maximumWidthMedium = flexSegmentData.standardWidthStackedMedium
-                        layoutNode.maximumWidthLow = flexSegmentData.maximumWidthStackedMedium
+                        layoutNode.relaxedWidthHigh = flexSegmentData.standardWidthStackedMedium
+                        layoutNode.relaxedWidthMedium = flexSegmentData.standardWidthStackedMedium
+                        layoutNode.relaxedWidthLow = flexSegmentData.relaxedWidthStackedMedium
                     } else {
                         layoutNode.width = flexSegmentData.minimumWidthStackedLarge
-                        layoutNode.maximumWidthHigh = flexSegmentData.standardWidthStackedLarge
-                        layoutNode.maximumWidthMedium = flexSegmentData.standardWidthStackedLarge
-                        layoutNode.maximumWidthLow = flexSegmentData.maximumWidthStackedLarge
+                        layoutNode.relaxedWidthHigh = flexSegmentData.standardWidthStackedLarge
+                        layoutNode.relaxedWidthMedium = flexSegmentData.standardWidthStackedLarge
+                        layoutNode.relaxedWidthLow = flexSegmentData.relaxedWidthStackedLarge
                     }
                 }
             case .mainTab(let flexMainTabData):
                 if isSmall {
                     layoutNode.width = flexMainTabData.minimumWidthSmall
-                    layoutNode.maximumWidthHigh = flexMainTabData.standardWidthSmall
-                    layoutNode.maximumWidthMedium = flexMainTabData.standardWidthSmall
-                    layoutNode.maximumWidthLow = flexMainTabData.maximumWidthSmall
+                    layoutNode.relaxedWidthHigh = flexMainTabData.standardWidthSmall
+                    layoutNode.relaxedWidthMedium = flexMainTabData.standardWidthSmall
+                    layoutNode.relaxedWidthLow = flexMainTabData.relaxedWidthSmall
                 } else if isMedium {
                     layoutNode.width = flexMainTabData.minimumWidthMedium
-                    layoutNode.maximumWidthHigh = flexMainTabData.standardWidthMedium
-                    layoutNode.maximumWidthMedium = flexMainTabData.standardWidthMedium
-                    layoutNode.maximumWidthLow = flexMainTabData.maximumWidthMedium
+                    layoutNode.relaxedWidthHigh = flexMainTabData.standardWidthMedium
+                    layoutNode.relaxedWidthMedium = flexMainTabData.standardWidthMedium
+                    layoutNode.relaxedWidthLow = flexMainTabData.relaxedWidthMedium
                 } else {
                     layoutNode.width = flexMainTabData.minimumWidthLarge
-                    layoutNode.maximumWidthHigh = flexMainTabData.standardWidthLarge
-                    layoutNode.maximumWidthMedium = flexMainTabData.standardWidthLarge
-                    layoutNode.maximumWidthLow = flexMainTabData.maximumWidthLarge
+                    layoutNode.relaxedWidthHigh = flexMainTabData.standardWidthLarge
+                    layoutNode.relaxedWidthMedium = flexMainTabData.standardWidthLarge
+                    layoutNode.relaxedWidthLow = flexMainTabData.relaxedWidthLarge
                 }
                 
             case .createSwatch(let flexCreateSwatchData):
                 if isSmall {
                     layoutNode.width = flexCreateSwatchData.minimumWidthSmall
-                    layoutNode.maximumWidthHigh = flexCreateSwatchData.standardWidthSmall
-                    layoutNode.maximumWidthMedium = flexCreateSwatchData.standardWidthSmall
-                    layoutNode.maximumWidthLow = flexCreateSwatchData.maximumWidthSmall
+                    layoutNode.relaxedWidthHigh = flexCreateSwatchData.standardWidthSmall
+                    layoutNode.relaxedWidthMedium = flexCreateSwatchData.standardWidthSmall
+                    layoutNode.relaxedWidthLow = flexCreateSwatchData.relaxedWidthSmall
                 } else if isMedium {
                     layoutNode.width = flexCreateSwatchData.minimumWidthMedium
-                    layoutNode.maximumWidthHigh = flexCreateSwatchData.standardWidthMedium
-                    layoutNode.maximumWidthMedium = flexCreateSwatchData.standardWidthMedium
-                    layoutNode.maximumWidthLow = flexCreateSwatchData.maximumWidthMedium
+                    layoutNode.relaxedWidthHigh = flexCreateSwatchData.standardWidthMedium
+                    layoutNode.relaxedWidthMedium = flexCreateSwatchData.standardWidthMedium
+                    layoutNode.relaxedWidthLow = flexCreateSwatchData.relaxedWidthMedium
                 } else {
                     layoutNode.width = flexCreateSwatchData.minimumWidthLarge
-                    layoutNode.maximumWidthHigh = flexCreateSwatchData.standardWidthLarge
-                    layoutNode.maximumWidthMedium = flexCreateSwatchData.standardWidthLarge
-                    layoutNode.maximumWidthLow = flexCreateSwatchData.maximumWidthLarge
+                    layoutNode.relaxedWidthHigh = flexCreateSwatchData.standardWidthLarge
+                    layoutNode.relaxedWidthMedium = flexCreateSwatchData.standardWidthLarge
+                    layoutNode.relaxedWidthLow = flexCreateSwatchData.relaxedWidthLarge
                 }
             case .fixed(let fixedWidth):
                 layoutNode.width = fixedWidth
-                layoutNode.maximumWidthHigh = fixedWidth
-                layoutNode.maximumWidthMedium = fixedWidth
-                layoutNode.maximumWidthLow = fixedWidth
+                layoutNode.relaxedWidthHigh = fixedWidth
+                layoutNode.relaxedWidthMedium = fixedWidth
+                layoutNode.relaxedWidthLow = fixedWidth
                 layoutNode.isShrinkable = false
             case .spacer(let flexSpacerData):
                 layoutNode.width = flexSpacerData.defaultWidth
-                layoutNode.maximumWidthHigh = flexSpacerData.defaultWidth
-                layoutNode.maximumWidthMedium = flexSpacerData.defaultWidth
-                layoutNode.maximumWidthLow = 100_000_000
+                layoutNode.relaxedWidthHigh = flexSpacerData.defaultWidth
+                layoutNode.relaxedWidthMedium = flexSpacerData.defaultWidth
+                layoutNode.relaxedWidthLow = 100_000_000
                 layoutNode.isShrinkable = true
                 layoutNode.isSpacer = true
             }

@@ -9,30 +9,28 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-   @MainActor func getEnterLoopsPage3EnterModeToolNode(neighborTypeLeft: ToolInterfaceElementType?,
-                                             neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+    @MainActor func getEnterLoopsPage3EnterModeToolNode(neighborTypeLeft: ToolInterfaceElementType?,
+                                                        neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
         let orientation = jiggleViewModel.orientation
         let textLine1 = ToolInterfaceStringLibraryModeChange.modeTextLoopsPage3Line1()
         let textLine2 = ToolInterfaceStringLibraryModeChange.modeTextLoopsPage3Line2()
-        let iconPack = MainTabIconLibrary.zoom
-        let accentPack = MainTabIconLibrary.arrowTinyFcaRight
+        let iconPack = FramedConvertibleIconLibrary.menuA
+        let accentPack = FramedLongIconLibrary.menuB
         
-        
-        
-        let configuration = ToolInterfaceElementEnterModeConfiguration(iconPack: iconPack,
-                                                                       accentPack: accentPack,
-                                                                       orientation: orientation,
-                                                                       nameLabelLine1: textLine1,
-                                                                       nameLabelLine2: textLine2)
+        let configuration = ToolInterfaceElementChangeModeConfiguration(iconPack: iconPack,
+                                                                        accentPack: accentPack,
+                                                                        orientation: orientation,
+                                                                        nameLabelLine1: textLine1,
+                                                                        nameLabelLine2: textLine2)
         
         let flex = Self.getEnterModeFlex(orientation: orientation,
                                          configuration: configuration,
                                          neighborTypeLeft: neighborTypeLeft,
                                          neighborTypeRight: neighborTypeRight)
         
-        let viewModelLoopsPage3Enter = MagicalEnterModeViewModelLoopsPage3Enter(orientation: jiggleViewModel.orientation,
-                                                                                enterModeConfiguration: configuration)
+        let viewModelLoopsPage3Enter = MagicalModeChangeViewModelLoopsPage3Enter(orientation: jiggleViewModel.orientation,
+                                                                                 modeChangeConfiguration: configuration)
         let enterLoopsPage3ToolNode = ToolNode(id: getToolNodeID(),
                                                element: .enterModeLoopsPage3,
                                                flex: flex,

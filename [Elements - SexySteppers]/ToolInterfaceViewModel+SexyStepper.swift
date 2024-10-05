@@ -110,15 +110,15 @@ extension ToolInterfaceViewModel {
         
         let flexSexyStepperData = FlexSexyStepperData(minimumWidthLarge: minimumWidthLarge,
                                                       standardWidthLarge: standardWidthLarge,
-                                                      maximumWidthLarge: standardWidthLarge,
+                                                      relaxedWidthLarge: standardWidthLarge,
                                                       
                                                       minimumWidthMedium: minimumWidthMedium,
                                                       standardWidthMedium: standardWidthMedium,
-                                                      maximumWidthMedium: standardWidthMedium,
+                                                      relaxedWidthMedium: standardWidthMedium,
                                                       
                                                       minimumWidthSmall: minimumWidthSmall,
                                                       standardWidthSmall: standardWidthSmall,
-                                                      maximumWidthSmall: standardWidthSmall)
+                                                      relaxedWidthSmall: standardWidthSmall)
         
         return ToolInterfaceElementFlex.sexyStepper(flexSexyStepperData)
         

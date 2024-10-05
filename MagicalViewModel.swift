@@ -25,6 +25,8 @@ import SwiftUI
     //@ObservationIgnored var layoutSchemeFlavorSliders = LayoutSchemeFlavor.stackedSmall
     
     
+    
+    
     @MainActor var outsideBoxPaddingLeft = 0
     @MainActor var outsideBoxPaddingRight = 0
     
@@ -34,6 +36,7 @@ import SwiftUI
     @MainActor var heroPaddingLeft = 0
     @MainActor var heroPaddingRight = 0
     
+    @MainActor var heroSpacing = 0
     
     @MainActor var isEnabled = true
     @MainActor var isHighlighted = false
@@ -172,5 +175,92 @@ import SwiftUI
             return Color.black
         }
     }
+    
+    @MainActor func refreshLayoutFrameStacked(nameLabelWidth: Int,
+                                              numberOfLines: Int,
+                                              iconPackMain: (any TextIconPackable),
+                                              iconPackSecondary: (any TextIconPackable)?) {
+        
+        let G_L = GENERIC_LAYOUT.computeStacked(layoutSchemeType: Self.getLayoutScheme(),
+                                                layoutWidth: layoutWidth,
+                                                orientation: orientation,
+                                                nameLabelWidth: nameLabelWidth,
+                                                numberOfLines: numberOfLines,
+                                                iconPackMain: iconPackMain,
+                                                iconPackSecondary: iconPackSecondary,
+                                                neighborTypeLeft: toolNode.neighborTypeLeft,
+                                                neighborTypeRight: toolNode.neighborTypeRight)
+        
+        if outsideBoxPaddingLeft != G_L.outsideBoxPaddingLeft {
+            outsideBoxPaddingLeft = G_L.outsideBoxPaddingLeft
+        }
+        
+        if outsideBoxPaddingRight != G_L.outsideBoxPaddingRight {
+            outsideBoxPaddingRight = G_L.outsideBoxPaddingRight
+        }
+        
+        if heroPaddingLeft != G_L.heroPaddingLeft {
+            heroPaddingLeft = G_L.heroPaddingLeft
+        }
+        
+        if heroPaddingRight != G_L.heroPaddingRight {
+            heroPaddingRight = G_L.heroPaddingRight
+        }
+        
+        if slavePaddingLeft != G_L.slavePaddingLeft {
+            slavePaddingLeft = G_L.slavePaddingLeft
+        }
+        
+        if slavePaddingRight != G_L.slavePaddingRight {
+            slavePaddingRight = G_L.slavePaddingRight
+        }
+        
+    }
+    
+    @MainActor func refreshLayoutFrameLong(nameLabelWidth: Int,
+                                           numberOfLines: Int,
+                                           iconPackMain: (any TextIconPackable),
+                                           iconPackSecondary: (any TextIconPackable)?) {
+        
+        let G_L = GENERIC_LAYOUT.computeLong(layoutSchemeType: Self.getLayoutScheme(),
+                                             layoutWidth: layoutWidth,
+                                             orientation: orientation,
+                                             nameLabelWidth: nameLabelWidth,
+                                             numberOfLines: numberOfLines,
+                                             iconPackMain: iconPackMain,
+                                             iconPackSecondary: iconPackSecondary,
+                                             neighborTypeLeft: toolNode.neighborTypeLeft,
+                                             neighborTypeRight: toolNode.neighborTypeRight)
+        
+        if outsideBoxPaddingLeft != G_L.outsideBoxPaddingLeft {
+            outsideBoxPaddingLeft = G_L.outsideBoxPaddingLeft
+        }
+        
+        if outsideBoxPaddingRight != G_L.outsideBoxPaddingRight {
+            outsideBoxPaddingRight = G_L.outsideBoxPaddingRight
+        }
+        
+        if heroPaddingLeft != G_L.heroPaddingLeft {
+            heroPaddingLeft = G_L.heroPaddingLeft
+        }
+        
+        if heroPaddingRight != G_L.heroPaddingRight {
+            heroPaddingRight = G_L.heroPaddingRight
+        }
+        
+        if slavePaddingLeft != G_L.slavePaddingLeft {
+            slavePaddingLeft = G_L.slavePaddingLeft
+        }
+        
+        if slavePaddingRight != G_L.slavePaddingRight {
+            slavePaddingRight = G_L.slavePaddingRight
+        }
+        
+        if heroSpacing != G_L.heroSpacing {
+            heroSpacing = G_L.heroSpacing
+        }
+        
+    }
+    
     
 }

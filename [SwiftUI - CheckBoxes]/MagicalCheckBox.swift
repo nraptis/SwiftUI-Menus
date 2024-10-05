@@ -43,10 +43,10 @@ struct MagicalCheckBox: View {
         
         let numberOfLines = configuration.nameLabelNumberOfLines
         
-        let universalPaddingTop = CheckBoxLayout.getUniversalPaddingTop(orientation: orientation,
+        let universalPaddingTop = OLDOLDCheckBoxLayout.getUniversalPaddingTop(orientation: orientation,
                                                                         flavor: layoutSchemeFlavor,
                                                                         numberOfLines: numberOfLines)
-        let universalPaddingBottom = CheckBoxLayout.getUniversalPaddingBottom(orientation: orientation,
+        let universalPaddingBottom = OLDOLDCheckBoxLayout.getUniversalPaddingBottom(orientation: orientation,
                                                                               flavor: layoutSchemeFlavor,
                                                                               numberOfLines: numberOfLines)
         

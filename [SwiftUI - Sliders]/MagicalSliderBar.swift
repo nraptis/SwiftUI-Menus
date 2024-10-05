@@ -98,11 +98,11 @@ struct MagicalSliderBar: View {
         }
         
         let minimumWidth = (barDiameterFill)
-        let maximumWidth = (barFillWidth - minimumWidth)
+        let relaxedWidth = (barFillWidth - minimumWidth)
         
         var barFillWidthLHS = Int(thumbPercent * CGFloat(barFillWidth) + 0.5)
         if barFillWidthLHS < minimumWidth { barFillWidthLHS = minimumWidth }
-        if barFillWidthLHS > maximumWidth { barFillWidthLHS = maximumWidth }
+        if barFillWidthLHS > relaxedWidth { barFillWidthLHS = relaxedWidth }
         let barFillWidthRHS = barFillWidth - barFillWidthLHS
         
         var sliderBoxWidthMinusBoxWidth = sliderBoxWidth - thumbHitBoxWidth

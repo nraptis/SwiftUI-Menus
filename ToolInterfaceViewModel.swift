@@ -92,9 +92,9 @@ func getToolNodeID() -> UInt16 {
         let categories = ToolInterfaceLayoutStackingCategory.getAllInPriorityOrderExceptLeast()
         
         if ApplicationController.FORCE_LONG_ALL {
-            return .large(.init(isSegmentLong: true, isCheckBoxLong: true, isTextIconButtonLong: true))
+            return .large(.init(isButtonLong: true, isModeSwitchLong: true, isCheckBoxLong: true, isSegmentLong: true))
         } else if ApplicationController.FORCE_STACKED_ALL {
-            return .large(.init(isSegmentLong: false, isCheckBoxLong: false, isTextIconButtonLong: false))
+                return .large(.init(isButtonLong: false, isModeSwitchLong: false, isCheckBoxLong: false, isSegmentLong: false))
         }
         
         return calculateLayoutStackingCategory(orientation: orientation,

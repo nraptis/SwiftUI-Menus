@@ -39,14 +39,14 @@ struct MagicalCheckBoxContent: View {
         let iconWidth = textIcon.width
         let iconHeight = textIcon.height
         
-        let nameLabelFont = CheckBoxLayout.getNameLabelFont(orientation: orientation,
+        let nameLabelFont = OLDOLDCheckBoxLayout.getNameLabelFont(orientation: orientation,
                                                                   flavor: layoutSchemeFlavor)
-        let nameLabelPaddingBottom = CheckBoxLayout.getNameLabelPaddingBottom(orientation: orientation,
+        let nameLabelPaddingBottom = OLDOLDCheckBoxLayout.getNameLabelPaddingBottom(orientation: orientation,
                                                                                 flavor: layoutSchemeFlavor,
                                                                                 numberOfLines: numberOfLines)
         let nameLabelPaddingLeft = magicalCheckBoxViewModel.nameLabelPaddingLeft
         let nameLabelPaddingRight = magicalCheckBoxViewModel.nameLabelPaddingRight
-        let nameLabelVerticalSpacing = CheckBoxLayout.getNameLabelVerticalSpacing(orientation: orientation,
+        let nameLabelVerticalSpacing = OLDOLDCheckBoxLayout.getNameLabelVerticalSpacing(orientation: orientation,
                                                                                   flavor: layoutSchemeFlavor)
         
         let nameLabelTextWidth: Int
@@ -66,7 +66,7 @@ struct MagicalCheckBoxContent: View {
         
         let iconPaddingLeft = magicalCheckBoxViewModel.iconPaddingLeft
         let iconPaddingRight = magicalCheckBoxViewModel.iconPaddingRight
-        let iconPaddingTop = CheckBoxLayout.getIconPaddingTop(orientation: orientation,
+        let iconPaddingTop = OLDOLDCheckBoxLayout.getIconPaddingTop(orientation: orientation,
                                                               flavor: layoutSchemeFlavor,
                                                               numberOfLines: numberOfLines)
         
@@ -355,8 +355,8 @@ struct MagicalCheckBoxContent: View {
     }
     
     func getCheckBoxStrokeRect(isPressed: Bool, width: Int, height: Int) -> some View {
-        let cornerRadius = CheckBoxLayout.getCheckBoxCornerRadius(orientation: orientation)
-        let lineThickness = CheckBoxLayout.getCheckBoxLineThickness(orientation: orientation)
+        let cornerRadius = OLDOLDCheckBoxLayout.getCheckBoxCornerRadius(orientation: orientation)
+        let lineThickness = OLDOLDCheckBoxLayout.getCheckBoxLineThickness(orientation: orientation)
         
         let color: Color
         if isPressed {
@@ -424,7 +424,7 @@ struct MagicalCheckBoxContent: View {
     
     func getCheckBoxFillRect(isPressed: Bool, width: Int, height: Int) -> some View {
         
-        let cornerRadius = CheckBoxLayout.getCheckBoxCornerRadius(orientation: orientation)
+        let cornerRadius = OLDOLDCheckBoxLayout.getCheckBoxCornerRadius(orientation: orientation)
         
         let color: Color
         if isChecked {

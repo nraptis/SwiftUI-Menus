@@ -17,26 +17,26 @@ extension ToolInterfaceViewModel {
         
         let minimumWidthLarge = configuration.layoutNameLabelWidthLarge + configuration.valueLabelWidthLarge + SliderLayout.getPreferredMinimumBarWidth(orientation: orientation, widthCategory: .stretch) + 0
         let standardWidthLarge = configuration.layoutNameLabelWidthLarge + configuration.valueLabelWidthLarge + SliderLayout.getPreferredMinimumBarWidth(orientation: orientation, widthCategory: .stretch) + 24
-        let maximumWidthLarge = configuration.layoutNameLabelWidthLarge + configuration.valueLabelWidthLarge + SliderLayout.getPreferredMinimumBarWidth(orientation: orientation, widthCategory: .stretch) + 128
+        let relaxedWidthLarge = configuration.layoutNameLabelWidthLarge + configuration.valueLabelWidthLarge + SliderLayout.getPreferredMinimumBarWidth(orientation: orientation, widthCategory: .stretch) + 128
         
         let minimumWidthMedium = configuration.layoutNameLabelWidthMedium + configuration.valueLabelWidthMedium + SliderLayout.getPreferredMinimumBarWidth(orientation: orientation, widthCategory: .stretch) + 0
         let standardWidthMedium = configuration.layoutNameLabelWidthMedium + configuration.valueLabelWidthMedium + SliderLayout.getPreferredMinimumBarWidth(orientation: orientation, widthCategory: .stretch) + 24
-        let maximumWidthMedium = configuration.layoutNameLabelWidthMedium + configuration.valueLabelWidthMedium + SliderLayout.getPreferredMinimumBarWidth(orientation: orientation, widthCategory: .stretch) + 128
+        let relaxedWidthMedium = configuration.layoutNameLabelWidthMedium + configuration.valueLabelWidthMedium + SliderLayout.getPreferredMinimumBarWidth(orientation: orientation, widthCategory: .stretch) + 128
         
         let minimumWidthSmall = configuration.layoutNameLabelWidthSmall + configuration.valueLabelWidthSmall + SliderLayout.getPreferredMinimumBarWidth(orientation: orientation, widthCategory: .stretch) + 0
         let standardWidthSmall = configuration.layoutNameLabelWidthSmall + configuration.valueLabelWidthSmall + SliderLayout.getPreferredMinimumBarWidth(orientation: orientation, widthCategory: .stretch) + 24
-        let maximumWidthSmall = configuration.layoutNameLabelWidthSmall + configuration.valueLabelWidthSmall + SliderLayout.getPreferredMinimumBarWidth(orientation: orientation, widthCategory: .stretch) + 128
+        let relaxedWidthSmall = configuration.layoutNameLabelWidthSmall + configuration.valueLabelWidthSmall + SliderLayout.getPreferredMinimumBarWidth(orientation: orientation, widthCategory: .stretch) + 128
         
         let flexSliderData = FlexSliderData(widthCategory: widthCategory,
                                             minimumWidthLarge: minimumWidthLarge,
                                             standardWidthLarge: standardWidthLarge,
-                                            maximumWidthLarge: maximumWidthLarge,
+                                            relaxedWidthLarge: relaxedWidthLarge,
                                             minimumWidthMedium: minimumWidthMedium,
                                             standardWidthMedium: standardWidthMedium,
-                                            maximumWidthMedium: maximumWidthMedium,
+                                            relaxedWidthMedium: relaxedWidthMedium,
                                             minimumWidthSmall: minimumWidthSmall,
                                             standardWidthSmall: standardWidthSmall,
-                                            maximumWidthSmall: maximumWidthSmall)
+                                            relaxedWidthSmall: relaxedWidthSmall)
         
         return ToolInterfaceElementFlex.slider(flexSliderData)
         

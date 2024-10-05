@@ -15,9 +15,9 @@ extension ToolInterfaceViewModel {
         let orientation = jiggleViewModel.orientation
         let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextTest3Line1()
         let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextTest3Line2()
-        let iconPack = TextIconButtonIconLibrary.box
+        let iconPack = LooseConvertibleIconLibrary.menuA
         
-        let configuration = ToolInterfaceElementTextIconButtonConfiguration(iconPack: iconPack, orientation: orientation, nameLabelLine1: textLine1, nameLabelLine2: textLine2)
+        let configuration = ToolInterfaceElementButtonConfiguration(iconPack: iconPack, orientation: orientation, nameLabelLine1: textLine1, nameLabelLine2: textLine2)
         let flex = Self.getTextIconButtonFlex(orientation: orientation,
                                               configuration: configuration,
                                               neighborTypeLeft: neighborTypeLeft,

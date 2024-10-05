@@ -1,5 +1,5 @@
 //
-//  MagicalEnterModeViewModel+TimeLineEnter.swift
+//  MagicalModeChangeViewModel+TimeLineEnter.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 9/11/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-@Observable class MagicalEnterModeViewModelTimeLineEnter: MagicalEnterModeViewModel {
+@Observable class MagicalModeChangeViewModelTimeLineEnter: MagicalModeChangeViewModel {
     
     override func handleClicked() {
         if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel {
@@ -28,7 +28,7 @@ import Foundation
     
     deinit {
         if ApplicationController.DEBUG_DEALLOCS {
-            print("[Deinit] MagicalEnterModeViewModelTimeLineEnter (Dealloc)")
+            print("[Deinit] MagicalModeChangeViewModelTimeLineEnter (Dealloc)")
         }
     }
 }

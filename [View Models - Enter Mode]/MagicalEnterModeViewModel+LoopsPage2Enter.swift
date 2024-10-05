@@ -1,5 +1,5 @@
 //
-//  MagicalEnterModeViewModel+LoopsPage2Enter.swift
+//  MagicalModeChangeViewModel+LoopsPage2Enter.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 10/1/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-@Observable class MagicalEnterModeViewModelLoopsPage2Enter: MagicalEnterModeViewModel {
+@Observable class MagicalModeChangeViewModelLoopsPage2Enter: MagicalModeChangeViewModel {
     
     override func handleClicked() {
         if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel {
@@ -28,7 +28,7 @@ import Foundation
     
     deinit {
         if ApplicationController.DEBUG_DEALLOCS {
-            print("[Deinit] MagicalEnterModeViewModelLoopsPage2Enter (Dealloc)")
+            print("[Deinit] MagicalModeChangeViewModelLoopsPage2Enter (Dealloc)")
         }
     }
 }

@@ -11,46 +11,46 @@ struct LooseConvertibleIconLibrary {
     
     static var menuA: LooseConvertibleIconPack {
         Self.build(prefix: "loose",
-                   name: "menu_a",
-                   widthPad_0: 43, heightPad_0: 42,
-                   widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
-                   widthPhonePortrait_0: 33, heightPhonePortrait_0: 32,
-                   widthPad_1: 42, heightPad_1: 41,
-                   widthPhoneLandscape_1: 27, heightPhoneLandscape_1: 26,
-                   widthPhonePortrait_1: 32, heightPhonePortrait_1: 31,
-                   widthPad_2: 28, heightPad_2: 27,
-                   widthPhoneLandscape_2: 18, heightPhoneLandscape_2: 17,
-                   widthPhonePortrait_2: 22, heightPhonePortrait_2: 21)
+                  name: "menu_a",
+                  widthPad_0: 43, heightPad_0: 42,
+                  widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 33, heightPhonePortrait_0: 32,
+                  widthPad_1: 38, heightPad_1: 37,
+                  widthPhoneLandscape_1: 27, heightPhoneLandscape_1: 26,
+                  widthPhonePortrait_1: 32, heightPhonePortrait_1: 31,
+                  widthPad_2: 26, heightPad_2: 25,
+                  widthPhoneLandscape_2: 18, heightPhoneLandscape_2: 17,
+                  widthPhonePortrait_2: 22, heightPhonePortrait_2: 21)
     }
-    
-    
+
+
     static var menuB: LooseConvertibleIconPack {
         Self.build(prefix: "loose",
-                   name: "menu_b",
-                   widthPad_0: 43, heightPad_0: 42,
-                   widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
-                   widthPhonePortrait_0: 33, heightPhonePortrait_0: 32,
-                   widthPad_1: 42, heightPad_1: 41,
-                   widthPhoneLandscape_1: 27, heightPhoneLandscape_1: 26,
-                   widthPhonePortrait_1: 32, heightPhonePortrait_1: 31,
-                   widthPad_2: 28, heightPad_2: 27,
-                   widthPhoneLandscape_2: 18, heightPhoneLandscape_2: 17,
-                   widthPhonePortrait_2: 22, heightPhonePortrait_2: 21)
+                  name: "menu_b",
+                  widthPad_0: 43, heightPad_0: 42,
+                  widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 33, heightPhonePortrait_0: 32,
+                  widthPad_1: 38, heightPad_1: 37,
+                  widthPhoneLandscape_1: 27, heightPhoneLandscape_1: 26,
+                  widthPhonePortrait_1: 32, heightPhonePortrait_1: 31,
+                  widthPad_2: 26, heightPad_2: 25,
+                  widthPhoneLandscape_2: 18, heightPhoneLandscape_2: 17,
+                  widthPhonePortrait_2: 22, heightPhonePortrait_2: 21)
     }
-    
-    
+
+
     static var menuC: LooseConvertibleIconPack {
         Self.build(prefix: "loose",
-                   name: "menu_c",
-                   widthPad_0: 43, heightPad_0: 42,
-                   widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
-                   widthPhonePortrait_0: 33, heightPhonePortrait_0: 32,
-                   widthPad_1: 42, heightPad_1: 41,
-                   widthPhoneLandscape_1: 27, heightPhoneLandscape_1: 26,
-                   widthPhonePortrait_1: 32, heightPhonePortrait_1: 31,
-                   widthPad_2: 28, heightPad_2: 27,
-                   widthPhoneLandscape_2: 18, heightPhoneLandscape_2: 17,
-                   widthPhonePortrait_2: 22, heightPhonePortrait_2: 21)
+                  name: "menu_c",
+                  widthPad_0: 43, heightPad_0: 42,
+                  widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 33, heightPhonePortrait_0: 32,
+                  widthPad_1: 38, heightPad_1: 37,
+                  widthPhoneLandscape_1: 27, heightPhoneLandscape_1: 26,
+                  widthPhonePortrait_1: 32, heightPhonePortrait_1: 31,
+                  widthPad_2: 26, heightPad_2: 25,
+                  widthPhoneLandscape_2: 18, heightPhoneLandscape_2: 17,
+                  widthPhonePortrait_2: 22, heightPhonePortrait_2: 21)
     }
     
     private static func build(prefix: String,

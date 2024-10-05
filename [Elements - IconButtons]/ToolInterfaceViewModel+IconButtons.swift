@@ -24,7 +24,7 @@ extension ToolInterfaceViewModel {
                                                                               neighborTypeRight: neighborTypeRight)
         let flexTextIconButtonData = FlexIconButtonData(minimumWidth: minimumWidth,
                                                         standardWidth: standardWidth,
-                                                        maximumWidth: standardWidth)
+                                                        relaxedWidth: standardWidth)
         return ToolInterfaceElementFlex.iconButton(flexTextIconButtonData)
     }
 }

@@ -16,11 +16,11 @@ struct FramedConvertibleIconLibrary {
                   widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
                   widthPhonePortrait_0: 33, heightPhonePortrait_0: 32,
                   widthPad_1: 36, heightPad_1: 35,
-                  widthPhoneLandscape_1: 24, heightPhoneLandscape_1: 23,
-                  widthPhonePortrait_1: 30, heightPhonePortrait_1: 29,
-                  widthPad_2: 22, heightPad_2: 21,
-                  widthPhoneLandscape_2: 16, heightPhoneLandscape_2: 15,
-                  widthPhonePortrait_2: 20, heightPhonePortrait_2: 19)
+                  widthPhoneLandscape_1: 25, heightPhoneLandscape_1: 24,
+                  widthPhonePortrait_1: 31, heightPhonePortrait_1: 30,
+                  widthPad_2: 24, heightPad_2: 23,
+                  widthPhoneLandscape_2: 17, heightPhoneLandscape_2: 16,
+                  widthPhonePortrait_2: 21, heightPhonePortrait_2: 20)
     }
 
 
@@ -31,13 +31,14 @@ struct FramedConvertibleIconLibrary {
                   widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
                   widthPhonePortrait_0: 33, heightPhonePortrait_0: 32,
                   widthPad_1: 36, heightPad_1: 35,
-                  widthPhoneLandscape_1: 24, heightPhoneLandscape_1: 23,
-                  widthPhonePortrait_1: 30, heightPhonePortrait_1: 29,
-                  widthPad_2: 22, heightPad_2: 21,
-                  widthPhoneLandscape_2: 16, heightPhoneLandscape_2: 15,
-                  widthPhonePortrait_2: 20, heightPhonePortrait_2: 19)
+                  widthPhoneLandscape_1: 25, heightPhoneLandscape_1: 24,
+                  widthPhonePortrait_1: 31, heightPhonePortrait_1: 30,
+                  widthPad_2: 24, heightPad_2: 23,
+                  widthPhoneLandscape_2: 17, heightPhoneLandscape_2: 16,
+                  widthPhonePortrait_2: 21, heightPhonePortrait_2: 20)
     }
-    
+
+
     static var menuC: FramedConvertibleIconPack {
         Self.build(prefix: "framed",
                   name: "menu_c",
@@ -45,11 +46,11 @@ struct FramedConvertibleIconLibrary {
                   widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
                   widthPhonePortrait_0: 33, heightPhonePortrait_0: 32,
                   widthPad_1: 36, heightPad_1: 35,
-                  widthPhoneLandscape_1: 24, heightPhoneLandscape_1: 23,
-                  widthPhonePortrait_1: 30, heightPhonePortrait_1: 29,
-                  widthPad_2: 22, heightPad_2: 21,
-                  widthPhoneLandscape_2: 16, heightPhoneLandscape_2: 15,
-                  widthPhonePortrait_2: 20, heightPhonePortrait_2: 19)
+                  widthPhoneLandscape_1: 25, heightPhoneLandscape_1: 24,
+                  widthPhonePortrait_1: 31, heightPhonePortrait_1: 30,
+                  widthPad_2: 24, heightPad_2: 23,
+                  widthPhoneLandscape_2: 17, heightPhoneLandscape_2: 16,
+                  widthPhonePortrait_2: 21, heightPhonePortrait_2: 20)
     }
     
     static var jiggles: FramedConvertibleIconPack {

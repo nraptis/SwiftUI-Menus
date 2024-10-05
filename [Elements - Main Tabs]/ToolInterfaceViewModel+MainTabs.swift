@@ -229,7 +229,7 @@ extension ToolInterfaceViewModel {
         universalPaddingLeftStackedLargeStandard +
         universalPaddingRightStackedLargeStandard
         
-        let maximumWidthLarge = sumAllEqualStackedLargeStandard +
+        let relaxedWidthLarge = sumAllEqualStackedLargeStandard +
         buttonUniversalPaddingLeftStackedLargeStandard +
         buttonUniversalPaddingRightStackedLargeStandard +
         universalPaddingLeftStackedLargeStandard +
@@ -248,7 +248,7 @@ extension ToolInterfaceViewModel {
         universalPaddingLeftStackedMediumStandard +
         universalPaddingRightStackedMediumStandard
         
-        let maximumWidthMedium = sumAllEqualStackedMediumStandard +
+        let relaxedWidthMedium = sumAllEqualStackedMediumStandard +
         buttonUniversalPaddingLeftStackedMediumStandard +
         buttonUniversalPaddingRightStackedMediumStandard +
         universalPaddingLeftStackedMediumStandard +
@@ -267,7 +267,7 @@ extension ToolInterfaceViewModel {
         universalPaddingLeftStackedSmallStandard +
         universalPaddingRightStackedSmallStandard
         
-        let maximumWidthSmall = sumAllEqualStackedSmallStandard +
+        let relaxedWidthSmall = sumAllEqualStackedSmallStandard +
         buttonUniversalPaddingLeftStackedSmallStandard +
         buttonUniversalPaddingRightStackedSmallStandard +
         universalPaddingLeftStackedSmallStandard +
@@ -276,15 +276,15 @@ extension ToolInterfaceViewModel {
         
         let flexMainTabData = FlexMainTabData(minimumWidthLarge: minimumWidthLarge,
                                               standardWidthLarge: standardWidthLarge,
-                                              maximumWidthLarge: maximumWidthLarge,
+                                              relaxedWidthLarge: relaxedWidthLarge,
                                               
                                               minimumWidthMedium: minimumWidthMedium,
                                               standardWidthMedium: standardWidthMedium,
-                                              maximumWidthMedium: maximumWidthMedium,
+                                              relaxedWidthMedium: relaxedWidthMedium,
                                               
                                               minimumWidthSmall: minimumWidthSmall,
                                               standardWidthSmall: standardWidthSmall,
-                                              maximumWidthSmall: maximumWidthSmall)
+                                              relaxedWidthSmall: relaxedWidthSmall)
         
         return ToolInterfaceElementFlex.mainTab(flexMainTabData)
     }

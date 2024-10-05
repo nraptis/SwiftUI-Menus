@@ -10,7 +10,7 @@ import Foundation
 extension ToolInterfaceViewModel {
     
     static func getTextIconButtonFlex(orientation: Orientation,
-                                      configuration: ToolInterfaceElementTextIconButtonConfiguration,
+                                      configuration: ToolInterfaceElementButtonConfiguration,
                                       neighborTypeLeft: ToolInterfaceElementType?,
                                       neighborTypeRight: ToolInterfaceElementType?) -> ToolInterfaceElementFlex {
         let iconPack = configuration.iconPack
@@ -82,22 +82,8 @@ extension ToolInterfaceViewModel {
                                                                                                               neighborTypeLeft: neighborTypeLeft,
                                                                                                               neighborTypeRight: neighborTypeRight)
         
-        let flexTextIconButtonData = FlexTextIconButtonData(minimumWidthLong: minimumWidthLong,
-                                                            standardWidthLong: standardWidthLong,
-                                                            maximumWidthLong: standardWidthLong,
-                                                    
-                                                            minimumWidthStackedLarge: minimumWidthStackedLarge,
-                                                            standardWidthStackedLarge: standardWidthStackedLarge,
-                                                            maximumWidthStackedLarge: standardWidthStackedLarge,
-                                                    
-                                                            minimumWidthStackedMedium: minimumWidthStackedMedium,
-                                                            standardWidthStackedMedium: standardWidthStackedMedium,
-                                                            maximumWidthStackedMedium: standardWidthStackedMedium,
-                                                            
-                                                            minimumWidthStackedSmall: minimumWidthStackedSmall,
-                                                            standardWidthStackedSmall: standardWidthStackedSmall,
-                                                            maximumWidthStackedSmall: standardWidthStackedSmall)
+        let flexConvertibleData = FlexConvertibleData(squeezedWidthLong: 68, standardWidthLong: 68, relaxedWidthLong: 68, squeezedWidthStackedLarge: 68, standardWidthStackedLarge: 68, relaxedWidthStackedLarge: 68, squeezedWidthStackedMedium: 68, standardWidthStackedMedium: 68, relaxedWidthStackedMedium: 68, squeezedWidthStackedSmall: 68, standardWidthStackedSmall: 68, relaxedWidthStackedSmall: 68)
         
-        return ToolInterfaceElementFlex.textIconButton(flexTextIconButtonData)
+        return ToolInterfaceElementFlex.textIconButton(flexConvertibleData)
     }
 }

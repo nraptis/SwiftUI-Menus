@@ -8,45 +8,22 @@
 import SwiftUI
 
 struct MagicalSexyButtonButton: View {
-    
-    @Environment(MagicalSexyButtonViewModel.self) var magicalSexyButtonViewModel: MagicalSexyButtonViewModel
-    
-    let orientation: Orientation
+    @Environment(MagicalSexyButtonViewModel.self) var magicalViewModel
     let layoutSchemeFlavor: LayoutSchemeFlavor
-    let isDarkMode: Bool
-    let isEnabled: Bool
-    let universalPaddingLeft: Int
-    let universalPaddingRight: Int
-    let universalPaddingTop: Int
-    let universalPaddingBottom: Int
-    let layoutWidth: Int
-    
+    let outsideBoxPaddingTop: Int
+    let outsideBoxPaddingBottom: Int
     var body: some View {
-        return ZStack {
-            bodyContent()
-        }
-        .frame(width: CGFloat(layoutWidth),
-               height: CGFloat(magicalSexyButtonViewModel.layoutHeight))
-    }
-    
-    func bodyContent() -> some View {
         Button {
-            magicalSexyButtonViewModel.handleClicked()
+            magicalViewModel.handleClicked()
         } label: {
-            HStack(spacing: 0.0) {
+            ZStack {
                 
             }
-            .frame(width: CGFloat(layoutWidth),
-                   height: CGFloat(magicalSexyButtonViewModel.layoutHeight))
+            .frame(width: CGFloat(magicalViewModel.layoutWidth),
+                   height: CGFloat(magicalViewModel.layoutHeight))
         }
-        .buttonStyle(MagicalSexyButtonButtonStyle(orientation: orientation,
-                                                      layoutSchemeFlavor: layoutSchemeFlavor,
-                                                      isDarkMode: isDarkMode,
-                                                      isEnabled: isEnabled,
-                                                      universalPaddingLeft: universalPaddingLeft,
-                                                      universalPaddingRight: universalPaddingRight,
-                                                      universalPaddingTop: universalPaddingTop,
-                                                      universalPaddingBottom: universalPaddingBottom,
-                                                      layoutWidth: layoutWidth))
+        .buttonStyle(MagicalSexyButtonButtonStyle(layoutSchemeFlavor: layoutSchemeFlavor,
+                                                  outsideBoxPaddingTop: outsideBoxPaddingTop,
+                                                  outsideBoxPaddingBottom: outsideBoxPaddingBottom))
     }
 }

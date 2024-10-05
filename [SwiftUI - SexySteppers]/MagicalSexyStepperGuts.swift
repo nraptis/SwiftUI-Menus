@@ -119,8 +119,8 @@ struct MagicalSexyStepperGuts: View {
     
     func getStrokeRect() -> some View {
         
-        let cornerRadius = CheckBoxLayout.getCornerRadius(orientation: orientation)
-        let lineThickness = CheckBoxLayout.getLineThickness(orientation: orientation)
+        let cornerRadius = OLDOLDCheckBoxLayout.getCornerRadius(orientation: orientation)
+        let lineThickness = OLDOLDCheckBoxLayout.getLineThickness(orientation: orientation)
         
         let color: Color
         
@@ -152,7 +152,7 @@ struct MagicalSexyStepperGuts: View {
     
     func getFillRect() -> some View {
         
-        let cornerRadius = CheckBoxLayout.getCornerRadius(orientation: orientation)
+        let cornerRadius = OLDOLDCheckBoxLayout.getCornerRadius(orientation: orientation)
         var height = magicalSexyStepperViewModel.layoutHeight
         height -= universalPaddingTop
         height -= universalPaddingBottom

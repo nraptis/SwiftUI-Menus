@@ -1,5 +1,5 @@
 //
-//  MagicalEnterModeViewModel+TimeLineExit.swift
+//  MagicalModeChangeViewModel+TimeLineExit.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 9/11/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-@Observable class MagicalExitModeViewModelTimeLineExit: MagicalExitModeViewModel {
+@Observable class MagicalExitModeViewModelTimeLineExit: MagicalModeChangeViewModel {
     
     override func handleClicked() {
         if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel {

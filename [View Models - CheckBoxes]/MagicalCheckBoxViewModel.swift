@@ -11,7 +11,7 @@ import SwiftUI
 @Observable class MagicalCheckBoxViewModel: MagicalViewModel {
     
     override class func getLayoutScheme() -> LayoutScheme.Type {
-        CheckBoxLayout.self
+        OLDOLDCheckBoxLayout.self
     }
     
     var isChecked = false
@@ -74,22 +74,22 @@ import SwiftUI
             nameLabelTextWidth = checkBoxConfiguration.nameLabelWidthStackedSmall
         }
         
-        let universalPaddingLeftSqueezed = CheckBoxLayout.getUniversalPaddingLeft(orientation: orientation,
+        let universalPaddingLeftSqueezed = OLDOLDCheckBoxLayout.getUniversalPaddingLeft(orientation: orientation,
                                                                                   flavor: layoutSchemeFlavor,
                                                                                   squeeze: .squeezed,
                                                                                   neighborTypeLeft: neighborTypeLeft,
                                                                                   neighborTypeRight: neighborTypeRight)
-        let universalPaddingLeftStandard = CheckBoxLayout.getUniversalPaddingLeft(orientation: orientation,
+        let universalPaddingLeftStandard = OLDOLDCheckBoxLayout.getUniversalPaddingLeft(orientation: orientation,
                                                                                   flavor: layoutSchemeFlavor,
                                                                                   squeeze: .standard,
                                                                                   neighborTypeLeft: neighborTypeLeft,
                                                                                   neighborTypeRight: neighborTypeRight)
-        let universalPaddingRightSqueezed = CheckBoxLayout.getUniversalPaddingRight(orientation: orientation,
+        let universalPaddingRightSqueezed = OLDOLDCheckBoxLayout.getUniversalPaddingRight(orientation: orientation,
                                                                                     flavor: layoutSchemeFlavor,
                                                                                     squeeze: .squeezed,
                                                                                     neighborTypeLeft: neighborTypeLeft,
                                                                                     neighborTypeRight: neighborTypeRight)
-        let universalPaddingRightStandard = CheckBoxLayout.getUniversalPaddingRight(orientation: orientation,
+        let universalPaddingRightStandard = OLDOLDCheckBoxLayout.getUniversalPaddingRight(orientation: orientation,
                                                                                     flavor: layoutSchemeFlavor,
                                                                                     squeeze: .standard,
                                                                                     neighborTypeLeft: neighborTypeLeft,
@@ -99,64 +99,64 @@ import SwiftUI
         var _universalPaddingRight = universalPaddingRightSqueezed
         
         
-        let buttonUniversalPaddingLeftSqueezed = CheckBoxLayout.getButtonUniversalPaddingLeft(orientation: orientation,
+        let buttonUniversalPaddingLeftSqueezed = OLDOLDCheckBoxLayout.getButtonUniversalPaddingLeft(orientation: orientation,
                                                                                               flavor: layoutSchemeFlavor,
                                                                                               squeeze: .squeezed)
-        let buttonUniversalPaddingLeftStandard = CheckBoxLayout.getButtonUniversalPaddingLeft(orientation: orientation,
+        let buttonUniversalPaddingLeftStandard = OLDOLDCheckBoxLayout.getButtonUniversalPaddingLeft(orientation: orientation,
                                                                                               flavor: layoutSchemeFlavor,
                                                                                               squeeze: .standard)
-        let buttonUniversalPaddingRightSqueezed = CheckBoxLayout.getButtonUniversalPaddingRight(orientation: orientation,
+        let buttonUniversalPaddingRightSqueezed = OLDOLDCheckBoxLayout.getButtonUniversalPaddingRight(orientation: orientation,
                                                                                                 flavor: layoutSchemeFlavor,
                                                                                                 squeeze: .squeezed)
-        let buttonUniversalPaddingRightStandard = CheckBoxLayout.getButtonUniversalPaddingRight(orientation: orientation,
+        let buttonUniversalPaddingRightStandard = OLDOLDCheckBoxLayout.getButtonUniversalPaddingRight(orientation: orientation,
                                                                                                 flavor: layoutSchemeFlavor,
                                                                                                 squeeze: .standard)
         
         var _buttonUniversalPaddingLeft = buttonUniversalPaddingLeftSqueezed
         var _buttonUniversalPaddingRight = buttonUniversalPaddingRightSqueezed
         
-        let nameLabelPaddingLeftSqueezed = CheckBoxLayout.getNameLabelPaddingLeft(orientation: orientation,
+        let nameLabelPaddingLeftSqueezed = OLDOLDCheckBoxLayout.getNameLabelPaddingLeft(orientation: orientation,
                                                                                   flavor: layoutSchemeFlavor,
                                                                                   squeeze: .squeezed)
-        let nameLabelPaddingLeftStandard = CheckBoxLayout.getNameLabelPaddingLeft(orientation: orientation,
+        let nameLabelPaddingLeftStandard = OLDOLDCheckBoxLayout.getNameLabelPaddingLeft(orientation: orientation,
                                                                                   flavor: layoutSchemeFlavor,
                                                                                   squeeze: .standard)
-        let nameLabelPaddingRightSqueezed = CheckBoxLayout.getNameLabelPaddingRight(orientation: orientation,
+        let nameLabelPaddingRightSqueezed = OLDOLDCheckBoxLayout.getNameLabelPaddingRight(orientation: orientation,
                                                                                     flavor: layoutSchemeFlavor,
                                                                                     squeeze: .squeezed)
-        let nameLabelPaddingRightStandard = CheckBoxLayout.getNameLabelPaddingRight(orientation: orientation,
+        let nameLabelPaddingRightStandard = OLDOLDCheckBoxLayout.getNameLabelPaddingRight(orientation: orientation,
                                                                                     flavor: layoutSchemeFlavor,
                                                                                     squeeze: .standard)
         
         var _nameLabelPaddingLeft = nameLabelPaddingLeftSqueezed
         var _nameLabelPaddingRight = nameLabelPaddingRightSqueezed
         
-        let iconPaddingLeftSqueezed = CheckBoxLayout.getIconPaddingLeft(orientation: orientation,
+        let iconPaddingLeftSqueezed = OLDOLDCheckBoxLayout.getIconPaddingLeft(orientation: orientation,
                                                                         flavor: layoutSchemeFlavor,
                                                                         squeeze: .squeezed)
-        let iconPaddingLeftStandard = CheckBoxLayout.getIconPaddingLeft(orientation: orientation,
+        let iconPaddingLeftStandard = OLDOLDCheckBoxLayout.getIconPaddingLeft(orientation: orientation,
                                                                         flavor: layoutSchemeFlavor,
                                                                         squeeze: .standard)
-        let iconPaddingRightSqueezed = CheckBoxLayout.getIconPaddingRight(orientation: orientation,
+        let iconPaddingRightSqueezed = OLDOLDCheckBoxLayout.getIconPaddingRight(orientation: orientation,
                                                                           flavor: layoutSchemeFlavor,
                                                                           squeeze: .squeezed)
-        let iconPaddingRightStandard = CheckBoxLayout.getIconPaddingRight(orientation: orientation,
+        let iconPaddingRightStandard = OLDOLDCheckBoxLayout.getIconPaddingRight(orientation: orientation,
                                                                           flavor: layoutSchemeFlavor,
                                                                           squeeze: .standard)
         
         var _iconPaddingLeft = iconPaddingLeftSqueezed
         var _iconPaddingRight = iconPaddingRightSqueezed
         
-        let checkBoxPaddingLeftSqueezed = CheckBoxLayout.getCheckBoxPaddingLeft(orientation: orientation,
+        let checkBoxPaddingLeftSqueezed = OLDOLDCheckBoxLayout.getCheckBoxPaddingLeft(orientation: orientation,
                                                                                 flavor: layoutSchemeFlavor,
                                                                                 squeeze: .squeezed)
-        let checkBoxPaddingLeftStandard = CheckBoxLayout.getCheckBoxPaddingLeft(orientation: orientation,
+        let checkBoxPaddingLeftStandard = OLDOLDCheckBoxLayout.getCheckBoxPaddingLeft(orientation: orientation,
                                                                                 flavor: layoutSchemeFlavor,
                                                                                 squeeze: .standard)
-        let checkBoxPaddingRightSqueezed = CheckBoxLayout.getCheckBoxPaddingRight(orientation: orientation,
+        let checkBoxPaddingRightSqueezed = OLDOLDCheckBoxLayout.getCheckBoxPaddingRight(orientation: orientation,
                                                                                   flavor: layoutSchemeFlavor,
                                                                                   squeeze: .squeezed)
-        let checkBoxPaddingRightStandard = CheckBoxLayout.getCheckBoxPaddingRight(orientation: orientation,
+        let checkBoxPaddingRightStandard = OLDOLDCheckBoxLayout.getCheckBoxPaddingRight(orientation: orientation,
                                                                                   flavor: layoutSchemeFlavor,
                                                                                   squeeze: .standard)
         
@@ -166,10 +166,10 @@ import SwiftUI
         
         
         
-        let checkBoxWidthSqueezed = CheckBoxLayout.getCheckBoxWidth(orientation: orientation,
+        let checkBoxWidthSqueezed = OLDOLDCheckBoxLayout.getCheckBoxWidth(orientation: orientation,
                                                                     flavor: layoutSchemeFlavor,
                                                                     squeeze: .squeezed)
-        let checkBoxWidthStandard = CheckBoxLayout.getCheckBoxWidth(orientation: orientation,
+        let checkBoxWidthStandard = OLDOLDCheckBoxLayout.getCheckBoxWidth(orientation: orientation,
                                                                     flavor: layoutSchemeFlavor,
                                                                     squeeze: .standard)
         

@@ -23,9 +23,9 @@ import SwiftUI
     var universalPaddingLeft = 0
     var universalPaddingRight = 0
     
-    let textIconButtonConfiguration: ToolInterfaceElementTextIconButtonConfiguration
+    let textIconButtonConfiguration: ToolInterfaceElementButtonConfiguration
     @MainActor init(orientation: Orientation,
-         textIconButtonConfiguration: ToolInterfaceElementTextIconButtonConfiguration) {
+         textIconButtonConfiguration: ToolInterfaceElementButtonConfiguration) {
         self.textIconButtonConfiguration = textIconButtonConfiguration
         super.init(orientation: orientation)
     }

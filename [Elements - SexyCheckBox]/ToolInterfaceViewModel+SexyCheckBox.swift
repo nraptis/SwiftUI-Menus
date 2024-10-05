@@ -13,72 +13,17 @@ extension ToolInterfaceViewModel {
                                     configuration: ToolInterfaceElementSexyCheckBoxConfiguration,
                                     neighborTypeLeft: ToolInterfaceElementType?,
                                     neighborTypeRight: ToolInterfaceElementType?) -> ToolInterfaceElementFlex {
-        let iconPack = configuration.iconPack
-        //let accentPack = configuration.accentPack
-        
-        let minimumWidthLarge = SexyCheckBoxLayout.getTextIconAndCheckBoxAndNameLabelWidthWithUniversalPadding(nameLabelWidth: configuration.nameLabelWidthLarge,
-                                                                                                               nameLabelNumberOfLines: configuration.nameLabelNumberOfLines,
-                                                                                                               iconPack: iconPack,
-                                                                                                               orientation: orientation,
-                                                                                                               flavor: .stackedLarge,
-                                                                                                               squeeze: .squeezed,
-                                                                                                               neighborTypeLeft: neighborTypeLeft,
-                                                                                                               neighborTypeRight: neighborTypeRight)
-        let standardWidthLarge = SexyCheckBoxLayout.getTextIconAndCheckBoxAndNameLabelWidthWithUniversalPadding(nameLabelWidth: configuration.nameLabelWidthLarge,
-                                                                                                                nameLabelNumberOfLines: configuration.nameLabelNumberOfLines,
-                                                                                                                iconPack: iconPack,
-                                                                                                                orientation: orientation,
-                                                                                                                flavor: .stackedLarge,
-                                                                                                                squeeze: .standard,
-                                                                                                                neighborTypeLeft: neighborTypeLeft,
-                                                                                                                neighborTypeRight: neighborTypeRight)
-        
-        let minimumWidthMedium = SexyCheckBoxLayout.getTextIconAndCheckBoxAndNameLabelWidthWithUniversalPadding(nameLabelWidth: configuration.nameLabelWidthMedium,
-                                                                                                                nameLabelNumberOfLines: configuration.nameLabelNumberOfLines,
-                                                                                                                iconPack: iconPack,
-                                                                                                                orientation: orientation,
-                                                                                                                flavor: .stackedMedium,
-                                                                                                                squeeze: .squeezed,
-                                                                                                                neighborTypeLeft: neighborTypeLeft,
-                                                                                                                neighborTypeRight: neighborTypeRight)
-        let standardWidthMedium = SexyCheckBoxLayout.getTextIconAndCheckBoxAndNameLabelWidthWithUniversalPadding(nameLabelWidth: configuration.nameLabelWidthMedium,
-                                                                                                                 nameLabelNumberOfLines: configuration.nameLabelNumberOfLines,
-                                                                                                                 iconPack: iconPack,
-                                                                                                                 orientation: orientation,
-                                                                                                                 flavor: .stackedMedium,
-                                                                                                                 squeeze: .standard,
-                                                                                                                 neighborTypeLeft: neighborTypeLeft,
-                                                                                                                 neighborTypeRight: neighborTypeRight)
-        
-        let minimumWidthSmall = SexyCheckBoxLayout.getTextIconAndCheckBoxAndNameLabelWidthWithUniversalPadding(nameLabelWidth: configuration.nameLabelWidthSmall,
-                                                                                                               nameLabelNumberOfLines: configuration.nameLabelNumberOfLines,
-                                                                                                               iconPack: iconPack,
-                                                                                                               orientation: orientation,
-                                                                                                               flavor: .stackedSmall,
-                                                                                                               squeeze: .squeezed,
-                                                                                                               neighborTypeLeft: neighborTypeLeft,
-                                                                                                               neighborTypeRight: neighborTypeRight)
-        let standardWidthSmall = SexyCheckBoxLayout.getTextIconAndCheckBoxAndNameLabelWidthWithUniversalPadding(nameLabelWidth: configuration.nameLabelWidthSmall,
-                                                                                                                nameLabelNumberOfLines: configuration.nameLabelNumberOfLines,
-                                                                                                                iconPack: iconPack,
-                                                                                                                orientation: orientation,
-                                                                                                                flavor: .stackedSmall,
-                                                                                                                squeeze: .standard,
-                                                                                                                neighborTypeLeft: neighborTypeLeft,
-                                                                                                                neighborTypeRight: neighborTypeRight)
-        
-        let flexSexyCheckBox = FlexSexyCheckBoxData(minimumWidthLarge: minimumWidthLarge,
-                                                    standardWidthLarge: standardWidthLarge,
-                                                    maximumWidthLarge: standardWidthLarge,
-                                                    
-                                                    minimumWidthMedium: minimumWidthMedium,
-                                                    standardWidthMedium: standardWidthMedium,
-                                                    maximumWidthMedium: standardWidthMedium,
-                                                    
-                                                    minimumWidthSmall: minimumWidthSmall,
-                                                    standardWidthSmall: standardWidthSmall,
-                                                    maximumWidthSmall: standardWidthSmall)
-        
-        return ToolInterfaceElementFlex.sexyCheckBox(flexSexyCheckBox)
+        let flexConvertibleData = getConvertibleFlex(orientation: orientation,
+                                                     scheme: CheckBoxLayout.self,
+                                                     neighborTypeLeft: neighborTypeLeft,
+                                                     neighborTypeRight: neighborTypeRight,
+                                                     iconPackMain: configuration.iconPack,
+                                                     iconPackSecondary: MagicalSexyCheckBoxViewModel.checkBoxSquare,
+                                                     nameLabelWidthLong: configuration.nameLabelWidthLong,
+                                                     nameLabelWidthStackedLarge: configuration.nameLabelWidthStackedLarge,
+                                                     nameLabelWidthStackedMedium: configuration.nameLabelWidthStackedMedium,
+                                                     nameLabelWidthStackedSmall: configuration.nameLabelWidthStackedSmall,
+                                                     numberOfLines: configuration.nameLabelNumberOfLines)
+        return ToolInterfaceElementFlex.sexyCheckBox(flexConvertibleData)
     }
 }

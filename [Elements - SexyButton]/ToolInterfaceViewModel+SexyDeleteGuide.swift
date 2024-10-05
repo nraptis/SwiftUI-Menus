@@ -18,7 +18,7 @@ extension ToolInterfaceViewModel {
         
         let iconPack = LooseConvertibleIconLibrary.menuA
         
-        let configuration = ToolInterfaceElementSexyButtonConfiguration(iconPack: iconPack,
+        let configuration = ToolInterfaceElementButtonConfiguration(iconPack: iconPack,
                                                                         orientation: orientation,
                                                                         nameLabelLine1: textLine1,
                                                                         nameLabelLine2: textLine2)

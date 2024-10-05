@@ -34,7 +34,7 @@ extension ToolInterfaceViewModel {
         
         let flexGreenButtonData = FlexGreenButtonData(minimumWidth: minimumWidth,
                                                       standardWidth: standardWidth,
-                                                      maximumWidth: standardWidth)
+                                                      relaxedWidth: standardWidth)
         
         return ToolInterfaceElementFlex.greenButton(flexGreenButtonData)
     }

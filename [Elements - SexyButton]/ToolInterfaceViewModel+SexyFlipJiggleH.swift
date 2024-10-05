@@ -17,7 +17,7 @@ extension ToolInterfaceViewModel {
         let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextFlipJiggleHLine2()
         let iconPack = LooseConvertibleIconLibrary.menuC
         
-        let configuration = ToolInterfaceElementSexyButtonConfiguration(iconPack: iconPack,
+        let configuration = ToolInterfaceElementButtonConfiguration(iconPack: iconPack,
                                                                         orientation: orientation,
                                                                         nameLabelLine1: textLine1,
                                                                         nameLabelLine2: textLine2)

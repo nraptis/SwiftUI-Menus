@@ -15,8 +15,8 @@ extension ToolInterfaceViewModel {
         let orientation = jiggleViewModel.orientation
         let textLine1 = ToolInterfaceStringLibraryCheckBoxes.checkBoxTextGuideCentersEnabledLine1()
         let textLine2 = ToolInterfaceStringLibraryCheckBoxes.checkBoxTextGuideCentersEnabledLine2()
-        let iconPack = MainTabIconLibrary.drawGuide
-        
+      
+       let iconPack = FramedConvertibleIconLibrary.menuC
         
         let configuration = ToolInterfaceElementSexyCheckBoxConfiguration(iconPack: iconPack,
                                                                           orientation: orientation,

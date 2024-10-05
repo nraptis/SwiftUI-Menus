@@ -53,8 +53,8 @@ struct MagicalCheckBoxButtonStyle: ButtonStyle {
     
     func getStrokeRect(isPressed: Bool) -> some View {
         
-        let cornerRadius = CheckBoxLayout.getCornerRadius(orientation: orientation)
-        let lineThickness = CheckBoxLayout.getLineThickness(orientation: orientation)
+        let cornerRadius = OLDOLDCheckBoxLayout.getCornerRadius(orientation: orientation)
+        let lineThickness = OLDOLDCheckBoxLayout.getLineThickness(orientation: orientation)
         
         let color: Color
         if isPressed {
@@ -101,7 +101,7 @@ struct MagicalCheckBoxButtonStyle: ButtonStyle {
     
     func getFillRect(isPressed: Bool) -> some View {
         
-        let cornerRadius = CheckBoxLayout.getCornerRadius(orientation: orientation)
+        let cornerRadius = OLDOLDCheckBoxLayout.getCornerRadius(orientation: orientation)
         var height = magicalCheckBoxViewModel.layoutHeight
         height -= universalPaddingTop
         height -= universalPaddingBottom
@@ -178,7 +178,7 @@ struct MagicalCheckBoxButtonStyle: ButtonStyle {
     }
     /*
     func getStrokeRect(isPressed: Bool) -> some View {
-        let cornerRadius = CheckBoxLayout.getCornerRadiusOuter(orientation: orientation)
+        let cornerRadius = OLDOLDCheckBoxLayout.getCornerRadiusOuter(orientation: orientation)
         let width = layoutWidth
         let height = magicalCheckBoxViewModel.layoutHeight - (universalPaddingTop + universalPaddingBottom)
         return RoundedRectangle(cornerRadius: CGFloat(cornerRadius))
@@ -188,8 +188,8 @@ struct MagicalCheckBoxButtonStyle: ButtonStyle {
     
     func getFillRect(isPressed: Bool) -> some View {
         
-        let lineThickness = CheckBoxLayout.getLineThickness(orientation: orientation)
-        let cornerRadius = CheckBoxLayout.getCornerRadiusInner(orientation: orientation)
+        let lineThickness = OLDOLDCheckBoxLayout.getLineThickness(orientation: orientation)
+        let cornerRadius = OLDOLDCheckBoxLayout.getCornerRadiusInner(orientation: orientation)
 
         let color: Color
         if isPressed {

@@ -9,16 +9,16 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-   @MainActor func getExitTimeLineExitModeToolNode(neighborTypeLeft: ToolInterfaceElementType?,
-                                      neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+    @MainActor func getExitTimeLineExitModeToolNode(neighborTypeLeft: ToolInterfaceElementType?,
+                                                    neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
         let orientation = jiggleViewModel.orientation
         let textLine1 = ToolInterfaceStringLibraryModeChange.modeTextTimeLineExitLine1()
         let textLine2 = ToolInterfaceStringLibraryModeChange.modeTextTimeLineExitLine2()
-        let iconPack = MainTabIconLibrary.jelly
-        let accentPack = MainTabIconLibrary.arrowSmallLeft
+        let iconPack = FramedConvertibleIconLibrary.menuC
+        let accentPack = FramedLongIconLibrary.menuA
         
-        let configuration = ToolInterfaceElementExitModeConfiguration(iconPack: iconPack,
+        let configuration = ToolInterfaceElementChangeModeConfiguration(iconPack: iconPack,
                                                                       accentPack: accentPack,
                                                                       orientation: orientation,
                                                                       nameLabelLine1: textLine1,
@@ -30,13 +30,13 @@ extension ToolInterfaceViewModel {
                                         neighborTypeRight: neighborTypeRight)
         
         let viewModelTimeLineExit = MagicalExitModeViewModelTimeLineExit(orientation: jiggleViewModel.orientation,
-                                                                 exitModeConfiguration: configuration)
+                                                                         modeChangeConfiguration: configuration)
         let exitTimeLineToolNode = ToolNode(id: getToolNodeID(),
-                                        element: .exitModeTimeLineExit,
-                                        flex: flex,
-                                        magicalViewModel: viewModelTimeLineExit,
-                                        neighborTypeLeft: neighborTypeLeft,
-                                        neighborTypeRight: neighborTypeRight)
+                                            element: .exitModeTimeLineExit,
+                                            flex: flex,
+                                            magicalViewModel: viewModelTimeLineExit,
+                                            neighborTypeLeft: neighborTypeLeft,
+                                            neighborTypeRight: neighborTypeRight)
         viewModelTimeLineExit.refresh()
         return exitTimeLineToolNode
     }

@@ -60,7 +60,7 @@ import Foundation
     
     deinit {
         if ApplicationController.DEBUG_DEALLOCS {
-            print("[Deinit] MagicalEnterModeViewModelGuidesEnter (Dealloc)")
+            print("[Deinit] MagicalModeChangeViewModelGuidesEnter (Dealloc)")
         }
     }
 }

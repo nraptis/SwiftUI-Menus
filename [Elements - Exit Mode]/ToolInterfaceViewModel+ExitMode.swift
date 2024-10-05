@@ -10,81 +10,20 @@ import Foundation
 extension ToolInterfaceViewModel {
     
     static func getExitModeFlex(orientation: Orientation,
-                                configuration: ToolInterfaceElementExitModeConfiguration,
+                                configuration: ToolInterfaceElementChangeModeConfiguration,
                                 neighborTypeLeft: ToolInterfaceElementType?,
                                 neighborTypeRight: ToolInterfaceElementType?) -> ToolInterfaceElementFlex {
-        let iconPack = configuration.iconPack
-        let accentPack = configuration.accentPack
-        
-        let minimumWidthLarge = ExitModeLayout.getTextIconAndAccentAndNameLabelWidthWithUniversalPadding(nameLabelWidth: configuration.nameLabelWidthLarge,
-                                                                                                         nameLabelNumberOfLines: configuration.nameLabelNumberOfLines,
-                                                                                                         iconPack: iconPack,
-                                                                                                         accentPack: accentPack,
-                                                                                                         orientation: orientation,
-                                                                                                         flavor: .stackedLarge,
-                                                                                                         squeeze: .squeezed,
-                                                                                                         neighborTypeLeft: neighborTypeLeft,
-                                                                                                         neighborTypeRight: neighborTypeRight)
-        let standardWidthLarge = ExitModeLayout.getTextIconAndAccentAndNameLabelWidthWithUniversalPadding(nameLabelWidth: configuration.nameLabelWidthLarge,
-                                                                                                          nameLabelNumberOfLines: configuration.nameLabelNumberOfLines,
-                                                                                                          iconPack: iconPack,
-                                                                                                          accentPack: accentPack,
-                                                                                                          orientation: orientation,
-                                                                                                          flavor: .stackedLarge,
-                                                                                                          squeeze: .standard,
-                                                                                                          neighborTypeLeft: neighborTypeLeft,
-                                                                                                          neighborTypeRight: neighborTypeRight)
-        
-        let minimumWidthMedium = ExitModeLayout.getTextIconAndAccentAndNameLabelWidthWithUniversalPadding(nameLabelWidth: configuration.nameLabelWidthMedium,
-                                                                                                          nameLabelNumberOfLines: configuration.nameLabelNumberOfLines,
-                                                                                                          iconPack: iconPack,
-                                                                                                          accentPack: accentPack,
-                                                                                                          orientation: orientation,
-                                                                                                          flavor: .stackedMedium,
-                                                                                                          squeeze: .squeezed,
-                                                                                                          neighborTypeLeft: neighborTypeLeft,
-                                                                                                          neighborTypeRight: neighborTypeRight)
-        let standardWidthMedium = ExitModeLayout.getTextIconAndAccentAndNameLabelWidthWithUniversalPadding(nameLabelWidth: configuration.nameLabelWidthMedium,
-                                                                                                           nameLabelNumberOfLines: configuration.nameLabelNumberOfLines,
-                                                                                                           iconPack: iconPack,
-                                                                                                           accentPack: accentPack,
-                                                                                                           orientation: orientation,
-                                                                                                           flavor: .stackedMedium,
-                                                                                                           squeeze: .standard,
-                                                                                                           neighborTypeLeft: neighborTypeLeft,
-                                                                                                           neighborTypeRight: neighborTypeRight)
-        
-        let minimumWidthSmall = ExitModeLayout.getTextIconAndAccentAndNameLabelWidthWithUniversalPadding(nameLabelWidth: configuration.nameLabelWidthSmall,
-                                                                                                         nameLabelNumberOfLines: configuration.nameLabelNumberOfLines,
-                                                                                                         iconPack: iconPack,
-                                                                                                         accentPack: accentPack,
-                                                                                                         orientation: orientation,
-                                                                                                         flavor: .stackedSmall,
-                                                                                                         squeeze: .squeezed,
-                                                                                                         neighborTypeLeft: neighborTypeLeft,
-                                                                                                         neighborTypeRight: neighborTypeRight)
-        let standardWidthSmall = ExitModeLayout.getTextIconAndAccentAndNameLabelWidthWithUniversalPadding(nameLabelWidth: configuration.nameLabelWidthSmall,
-                                                                                                          nameLabelNumberOfLines: configuration.nameLabelNumberOfLines,
-                                                                                                          iconPack: iconPack,
-                                                                                                          accentPack: accentPack,
-                                                                                                          orientation: orientation,
-                                                                                                          flavor: .stackedSmall,
-                                                                                                          squeeze: .standard,
-                                                                                                          neighborTypeLeft: neighborTypeLeft,
-                                                                                                          neighborTypeRight: neighborTypeRight)
-        
-        let flexExitModeData = FlexExitModeData(minimumWidthLarge: minimumWidthLarge,
-                                                standardWidthLarge: standardWidthLarge,
-                                                maximumWidthLarge: standardWidthLarge,
-                                                
-                                                minimumWidthMedium: minimumWidthMedium,
-                                                standardWidthMedium: standardWidthMedium,
-                                                maximumWidthMedium: standardWidthMedium,
-                                                
-                                                minimumWidthSmall: minimumWidthSmall,
-                                                standardWidthSmall: standardWidthSmall,
-                                                maximumWidthSmall: standardWidthSmall)
-        
-        return ToolInterfaceElementFlex.exitMode(flexExitModeData)
+        let flexConvertibleData = getConvertibleFlex(orientation: orientation,
+                                                     scheme: ExitModeLayout.self,
+                                                     neighborTypeLeft: neighborTypeLeft,
+                                                     neighborTypeRight: neighborTypeRight,
+                                                     iconPackMain: configuration.iconPack,
+                                                     iconPackSecondary: configuration.accentPack,
+                                                     nameLabelWidthLong: configuration.nameLabelWidthLong,
+                                                     nameLabelWidthStackedLarge: configuration.nameLabelWidthStackedLarge,
+                                                     nameLabelWidthStackedMedium: configuration.nameLabelWidthStackedMedium,
+                                                     nameLabelWidthStackedSmall: configuration.nameLabelWidthStackedSmall,
+                                                     numberOfLines: configuration.nameLabelNumberOfLines)
+        return ToolInterfaceElementFlex.exitMode(flexConvertibleData)
     }
 }

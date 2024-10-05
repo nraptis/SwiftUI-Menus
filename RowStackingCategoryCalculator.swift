@@ -32,6 +32,80 @@ class RowStackingCategoryCalculator {
                           width: Int,
                           layoutStackingCategory: ToolInterfaceLayoutStackingCategory) -> Int {
         switch node.flex {
+        case .enterMode(let flexConvertible):
+            if layoutStackingCategory.isModeSwitchLong {
+                return flexConvertible.standardWidthLong
+            } else {
+                if layoutStackingCategory.isSmall {
+                    return flexConvertible.standardWidthStackedSmall
+                } else if layoutStackingCategory.isMedium {
+                    return flexConvertible.standardWidthStackedMedium
+                } else {
+                    return flexConvertible.standardWidthStackedLarge
+                }
+            }
+        case .exitMode(let flexConvertible):
+            if layoutStackingCategory.isModeSwitchLong {
+                return flexConvertible.standardWidthLong
+            } else {
+                if layoutStackingCategory.isSmall {
+                    return flexConvertible.standardWidthStackedSmall
+                } else if layoutStackingCategory.isMedium {
+                    return flexConvertible.standardWidthStackedMedium
+                } else {
+                    return flexConvertible.standardWidthStackedLarge
+                }
+            }
+        case .sexyCheckBox(let flexConvertible):
+            if layoutStackingCategory.isCheckBoxLong {
+                return flexConvertible.standardWidthLong
+            } else {
+                if layoutStackingCategory.isSmall {
+                    return flexConvertible.standardWidthStackedSmall
+                } else if layoutStackingCategory.isMedium {
+                    return flexConvertible.standardWidthStackedMedium
+                } else {
+                    return flexConvertible.standardWidthStackedLarge
+                }
+            }
+        case .checkBox(let flexCheckBoxData):
+            if layoutStackingCategory.isCheckBoxLong {
+                return flexCheckBoxData.standardWidthLong
+            } else {
+                if layoutStackingCategory.isSmall {
+                    return flexCheckBoxData.standardWidthStackedSmall
+                } else if layoutStackingCategory.isMedium {
+                    return flexCheckBoxData.standardWidthStackedMedium
+                } else {
+                    return flexCheckBoxData.standardWidthStackedLarge
+                }
+            }
+            
+        case .textIconButton(let flexConvertible):
+            if layoutStackingCategory.isButtonLong {
+                return flexConvertible.standardWidthLong
+            } else {
+                if layoutStackingCategory.isSmall {
+                    return flexConvertible.standardWidthStackedSmall
+                } else if layoutStackingCategory.isMedium {
+                    return flexConvertible.standardWidthStackedMedium
+                } else {
+                    return flexConvertible.standardWidthStackedLarge
+                }
+            }
+        case .sexyButton(let flexConvertible):
+            if layoutStackingCategory.isButtonLong {
+                return flexConvertible.standardWidthLong
+            } else {
+                if layoutStackingCategory.isSmall {
+                    return flexConvertible.standardWidthStackedSmall
+                } else if layoutStackingCategory.isMedium {
+                    return flexConvertible.standardWidthStackedMedium
+                } else {
+                    return flexConvertible.standardWidthStackedLarge
+                }
+            }
+            
         case .sexyStepper(let flexSexyStepperData):
             if layoutStackingCategory.isSmall {
                 return flexSexyStepperData.standardWidthSmall
@@ -40,30 +114,9 @@ class RowStackingCategoryCalculator {
             } else {
                 return flexSexyStepperData.standardWidthLarge
             }
-        case .enterMode(let flexEnterModeData):
-            if layoutStackingCategory.isSmall {
-                return flexEnterModeData.standardWidthSmall
-            } else if layoutStackingCategory.isMedium {
-                return flexEnterModeData.standardWidthMedium
-            } else {
-                return flexEnterModeData.standardWidthLarge
-            }
-        case .exitMode(let flexExitModeData):
-            if layoutStackingCategory.isSmall {
-                return flexExitModeData.standardWidthSmall
-            } else if layoutStackingCategory.isMedium {
-                return flexExitModeData.standardWidthMedium
-            } else {
-                return flexExitModeData.standardWidthLarge
-            }
-        case .sexyCheckBox(let flexSexyCheckBoxData):
-            if layoutStackingCategory.isSmall {
-                return flexSexyCheckBoxData.standardWidthSmall
-            } else if layoutStackingCategory.isMedium {
-                return flexSexyCheckBoxData.standardWidthMedium
-            } else {
-                return flexSexyCheckBoxData.standardWidthLarge
-            }
+        
+        
+        
         case .favoringOneLineLabel(let flexFavoringOneLineLabelData):
             return flexFavoringOneLineLabelData.oneLineWidthPadded
         case .fixed(let fixedWidth):
@@ -74,26 +127,7 @@ class RowStackingCategoryCalculator {
             return flexDividerSpacerDividerData.standardWidth
         case .iconButton(let flexIconButtonData):
             return flexIconButtonData.standardWidth
-        case .textIconButton(let flexTextIconButtonData):
-            if layoutStackingCategory.isTextIconButtonLong {
-                return flexTextIconButtonData.standardWidthLong
-            } else {
-                if layoutStackingCategory.isSmall {
-                    return flexTextIconButtonData.standardWidthStackedSmall
-                } else if layoutStackingCategory.isMedium {
-                    return flexTextIconButtonData.standardWidthStackedMedium
-                } else {
-                    return flexTextIconButtonData.standardWidthStackedLarge
-                }
-            }
-        case .sexyButton(let flexSexyButtonData):
-            if layoutStackingCategory.isSmall {
-                return flexSexyButtonData.standardWidthSmall
-            } else if layoutStackingCategory.isMedium {
-                return flexSexyButtonData.standardWidthMedium
-            } else {
-                return flexSexyButtonData.standardWidthLarge
-            }
+        
         case .greenButton(let flexGreenButtonData):
             return flexGreenButtonData.standardWidth
         case .segment(let flexSegmentData):
@@ -141,18 +175,7 @@ class RowStackingCategoryCalculator {
             case .halfWidthRight:
                 return (width - (width / 2))
             }
-        case .checkBox(let flexCheckBoxData):
-            if layoutStackingCategory.isCheckBoxLong {
-                return flexCheckBoxData.standardWidthLong
-            } else {
-                if layoutStackingCategory.isSmall {
-                    return flexCheckBoxData.standardWidthStackedSmall
-                } else if layoutStackingCategory.isMedium {
-                    return flexCheckBoxData.standardWidthStackedMedium
-                } else {
-                    return flexCheckBoxData.standardWidthStackedLarge
-                }
-            }
+        
         }
     }
      

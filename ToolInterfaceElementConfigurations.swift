@@ -8,56 +8,140 @@
 import Foundation
 import UIKit
 
-struct ToolInterfaceElementSexyCheckBoxConfiguration {
-    
-    let iconPack: MainTabIconPack
+struct ToolInterfaceElementChangeModeConfiguration {
+    let iconPack: FramedConvertibleIconPack
+    let accentPack: FramedLongIconPack
     
     let nameLabelLine1: String?
     let nameLabelLine2: String?
     let nameLabelNumberOfLines: Int
-
-    let nameLabelWidthLarge: Int
-    let nameLabelWidthMedium: Int
-    let nameLabelWidthSmall: Int
-    
-    init(iconPack: MainTabIconPack,
+    let nameLabelWidthLong: Int
+    let nameLabelWidthStackedLarge: Int
+    let nameLabelWidthStackedMedium: Int
+    let nameLabelWidthStackedSmall: Int
+    init(iconPack: FramedConvertibleIconPack,
+         accentPack: FramedLongIconPack,
          orientation: Orientation,
          nameLabelLine1: String?,
          nameLabelLine2: String?) {
+        self.iconPack = iconPack
+        self.accentPack = accentPack
+        self.nameLabelLine1 = nameLabelLine1
+        self.nameLabelLine2 = nameLabelLine2
         
+        let _nameLabelNumberOfLines = ToolInterfaceTheme.getNumberOfLines(line1: nameLabelLine1,
+                                                                          line2: nameLabelLine2)
+        nameLabelWidthLong = ButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+                                                                line2: nameLabelLine2,
+                                                                orientation: orientation,
+                                                                flavor: .long) + 2
+        nameLabelWidthStackedLarge = ButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+                                                                        line2: nameLabelLine2,
+                                                                        orientation: orientation,
+                                                                        flavor: .stackedLarge) + 2
+        nameLabelWidthStackedMedium = ButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+                                                                         line2: nameLabelLine2,
+                                                                         orientation: orientation,
+                                                                         flavor: .stackedMedium) + 2
+        nameLabelWidthStackedSmall = ButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+                                                                        line2: nameLabelLine2,
+                                                                        orientation: orientation,
+                                                                        flavor: .stackedSmall) + 2
+        self.nameLabelNumberOfLines = _nameLabelNumberOfLines
+    }
+
+}
+
+struct ToolInterfaceElementSexyCheckBoxConfiguration {
+    let iconPack: FramedConvertibleIconPack
+    let nameLabelLine1: String?
+    let nameLabelLine2: String?
+    let nameLabelNumberOfLines: Int
+    let nameLabelWidthLong: Int
+    let nameLabelWidthStackedLarge: Int
+    let nameLabelWidthStackedMedium: Int
+    let nameLabelWidthStackedSmall: Int
+    init(iconPack: FramedConvertibleIconPack,
+         orientation: Orientation,
+         nameLabelLine1: String?,
+         nameLabelLine2: String?) {
         self.iconPack = iconPack
         self.nameLabelLine1 = nameLabelLine1
         self.nameLabelLine2 = nameLabelLine2
+        
         let _nameLabelNumberOfLines = ToolInterfaceTheme.getNumberOfLines(line1: nameLabelLine1,
                                                                           line2: nameLabelLine2)
-        
-        nameLabelWidthLarge = ExitModeLayout.getNameLabelTextWidth(line1: nameLabelLine1,
-                                                                                 line2: nameLabelLine2,
-                                                                                 orientation: orientation,
-                                                                                 flavor: .stackedLarge) + 2
-        nameLabelWidthMedium = ExitModeLayout.getNameLabelTextWidth(line1: nameLabelLine1,
-                                                                                  line2: nameLabelLine2,
-                                                                                  orientation: orientation,
-                                                                                  flavor: .stackedMedium) + 2
-        nameLabelWidthSmall = ExitModeLayout.getNameLabelTextWidth(line1: nameLabelLine1,
-                                                                                 line2: nameLabelLine2,
-                                                                                 orientation: orientation,
-                                                                                 flavor: .stackedSmall) + 2
-        
+        nameLabelWidthLong = ButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+                                                                line2: nameLabelLine2,
+                                                                orientation: orientation,
+                                                                flavor: .long) + 2
+        nameLabelWidthStackedLarge = ButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+                                                                        line2: nameLabelLine2,
+                                                                        orientation: orientation,
+                                                                        flavor: .stackedLarge) + 2
+        nameLabelWidthStackedMedium = ButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+                                                                         line2: nameLabelLine2,
+                                                                         orientation: orientation,
+                                                                         flavor: .stackedMedium) + 2
+        nameLabelWidthStackedSmall = ButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+                                                                        line2: nameLabelLine2,
+                                                                        orientation: orientation,
+                                                                        flavor: .stackedSmall) + 2
         self.nameLabelNumberOfLines = _nameLabelNumberOfLines
     }
-    
-    func getTextIcon(orientation: Orientation,
-                     layoutSchemeFlavor: LayoutSchemeFlavor,
-                     isDarkMode: Bool,
-                     isEnabled: Bool) -> TextIconable {
-        return iconPack.getTextIcon(orientation: orientation,
-                                    layoutSchemeFlavor: layoutSchemeFlavor,
-                                    numberOfLines: nameLabelNumberOfLines,
-                                    isDarkMode: isDarkMode,
-                                    isEnabled: isEnabled)
-    }
+
 }
+//
+//struct  {
+//    
+//    let iconPack: MainTabIconPack
+//    
+//    let nameLabelLine1: String?
+//    let nameLabelLine2: String?
+//    let nameLabelNumberOfLines: Int
+//
+//    let nameLabelWidthLarge: Int
+//    let nameLabelWidthMedium: Int
+//    let nameLabelWidthSmall: Int
+//    
+//    init(iconPack: MainTabIconPack,
+//         orientation: Orientation,
+//         nameLabelLine1: String?,
+//         nameLabelLine2: String?) {
+//        
+//        self.iconPack = iconPack
+//        self.nameLabelLine1 = nameLabelLine1
+//        self.nameLabelLine2 = nameLabelLine2
+//        let _nameLabelNumberOfLines = ToolInterfaceTheme.getNumberOfLines(line1: nameLabelLine1,
+//                                                                          line2: nameLabelLine2)
+//        
+//        nameLabelWidthLarge = ExitModeLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+//                                                                                 line2: nameLabelLine2,
+//                                                                                 orientation: orientation,
+//                                                                                 flavor: .stackedLarge) + 2
+//        nameLabelWidthMedium = ExitModeLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+//                                                                                  line2: nameLabelLine2,
+//                                                                                  orientation: orientation,
+//                                                                                  flavor: .stackedMedium) + 2
+//        nameLabelWidthSmall = ExitModeLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+//                                                                                 line2: nameLabelLine2,
+//                                                                                 orientation: orientation,
+//                                                                                 flavor: .stackedSmall) + 2
+//        
+//        self.nameLabelNumberOfLines = _nameLabelNumberOfLines
+//    }
+//    
+//    func getTextIcon(orientation: Orientation,
+//                     layoutSchemeFlavor: LayoutSchemeFlavor,
+//                     isDarkMode: Bool,
+//                     isEnabled: Bool) -> TextIconable {
+//        return iconPack.getTextIcon(orientation: orientation,
+//                                    layoutSchemeFlavor: layoutSchemeFlavor,
+//                                    numberOfLines: nameLabelNumberOfLines,
+//                                    isDarkMode: isDarkMode,
+//                                    isEnabled: isEnabled)
+//    }
+//}
 
 struct ToolInterfaceElementSexyStepperConfiguration {
     let iconPack: MainTabIconPack
@@ -158,61 +242,9 @@ struct ToolInterfaceElementSexyStepperConfiguration {
     }
 }
 
-struct ToolInterfaceElementEnterModeConfiguration {
-    
-    let iconPack: MainTabIconPack
-    let accentPack: MainTabIconPack
-    
-    let nameLabelLine1: String?
-    let nameLabelLine2: String?
-    let nameLabelNumberOfLines: Int
 
-    let nameLabelWidthLarge: Int
-    let nameLabelWidthMedium: Int
-    let nameLabelWidthSmall: Int
-    
-    init(iconPack: MainTabIconPack,
-         accentPack: MainTabIconPack,
-         orientation: Orientation,
-         nameLabelLine1: String?,
-         nameLabelLine2: String?) {
-        
-        self.iconPack = iconPack
-        self.accentPack = accentPack
-        self.nameLabelLine1 = nameLabelLine1
-        self.nameLabelLine2 = nameLabelLine2
-        let _nameLabelNumberOfLines = ToolInterfaceTheme.getNumberOfLines(line1: nameLabelLine1,
-                                                                          line2: nameLabelLine2)
-        
-        nameLabelWidthLarge = EnterModeLayout.getNameLabelTextWidth(line1: nameLabelLine1,
-                                                                                 line2: nameLabelLine2,
-                                                                                 orientation: orientation,
-                                                                                 flavor: .stackedLarge) + 2
-        nameLabelWidthMedium = EnterModeLayout.getNameLabelTextWidth(line1: nameLabelLine1,
-                                                                                  line2: nameLabelLine2,
-                                                                                  orientation: orientation,
-                                                                                  flavor: .stackedMedium) + 2
-        nameLabelWidthSmall = EnterModeLayout.getNameLabelTextWidth(line1: nameLabelLine1,
-                                                                                 line2: nameLabelLine2,
-                                                                                 orientation: orientation,
-                                                                                 flavor: .stackedSmall) + 2
-        
-        self.nameLabelNumberOfLines = _nameLabelNumberOfLines
-    }
-    
-    func getTextIcon(orientation: Orientation,
-                     layoutSchemeFlavor: LayoutSchemeFlavor,
-                     isDarkMode: Bool,
-                     isEnabled: Bool) -> TextIconable {
-        return iconPack.getTextIcon(orientation: orientation,
-                                    layoutSchemeFlavor: layoutSchemeFlavor,
-                                    numberOfLines: nameLabelNumberOfLines,
-                                    isDarkMode: isDarkMode,
-                                    isEnabled: isEnabled)
-    }
-}
-
-struct ToolInterfaceElementExitModeConfiguration {
+/*
+struct ToolInterfaceElementChangeModeConfiguration {
     
     let iconPack: MainTabIconPack
     let accentPack: MainTabIconPack
@@ -265,6 +297,7 @@ struct ToolInterfaceElementExitModeConfiguration {
                                     isEnabled: isEnabled)
     }
 }
+*/
 
 struct ToolInterfaceElementCheckBoxConfiguration {
     let iconPack: CheckBoxIconPack
@@ -290,19 +323,19 @@ struct ToolInterfaceElementCheckBoxConfiguration {
         
         let _nameLabelNumberOfLines = ToolInterfaceTheme.getNumberOfLines(line1: nameLabelLine1,
                                                                           line2: nameLabelLine2)
-        nameLabelWidthLong = CheckBoxLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+        nameLabelWidthLong = OLDOLDCheckBoxLayout.getNameLabelTextWidth(line1: nameLabelLine1,
                                                                   line2: nameLabelLine2,
                                                                   orientation: orientation,
                                                                   flavor: .long) + 2
-        nameLabelWidthStackedLarge = CheckBoxLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+        nameLabelWidthStackedLarge = OLDOLDCheckBoxLayout.getNameLabelTextWidth(line1: nameLabelLine1,
                                                                           line2: nameLabelLine2,
                                                                           orientation: orientation,
                                                                           flavor: .stackedLarge) + 2
-        nameLabelWidthStackedMedium = CheckBoxLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+        nameLabelWidthStackedMedium = OLDOLDCheckBoxLayout.getNameLabelTextWidth(line1: nameLabelLine1,
                                                                            line2: nameLabelLine2,
                                                                            orientation: orientation,
                                                                            flavor: .stackedMedium) + 2
-        nameLabelWidthStackedSmall = CheckBoxLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+        nameLabelWidthStackedSmall = OLDOLDCheckBoxLayout.getNameLabelTextWidth(line1: nameLabelLine1,
                                                                           line2: nameLabelLine2,
                                                                           orientation: orientation,
                                                                           flavor: .stackedSmall) + 2
@@ -487,9 +520,8 @@ struct ToolInterfaceElementSliderConfiguration {
     }
 }
 
-struct ToolInterfaceElementTextIconButtonConfiguration {
-    
-    let iconPack: TextIconButtonIconPack
+struct ToolInterfaceElementButtonConfiguration {
+    let iconPack: LooseConvertibleIconPack
     let nameLabelLine1: String?
     let nameLabelLine2: String?
     let nameLabelNumberOfLines: Int
@@ -497,55 +529,6 @@ struct ToolInterfaceElementTextIconButtonConfiguration {
     let nameLabelWidthStackedLarge: Int
     let nameLabelWidthStackedMedium: Int
     let nameLabelWidthStackedSmall: Int
-    init(iconPack: TextIconButtonIconPack,
-         orientation: Orientation,
-         nameLabelLine1: String?,
-         nameLabelLine2: String?) {
-        self.iconPack = iconPack
-        self.nameLabelLine1 = nameLabelLine1
-        self.nameLabelLine2 = nameLabelLine2
-        
-        let _nameLabelNumberOfLines = ToolInterfaceTheme.getNumberOfLines(line1: nameLabelLine1,
-                                                                          line2: nameLabelLine2)
-        nameLabelWidthLong = TextIconButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
-                                                                        line2: nameLabelLine2,
-                                                                        orientation: orientation,
-                                                                        flavor: .long) + 2
-        nameLabelWidthStackedLarge = TextIconButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
-                                                                                line2: nameLabelLine2,
-                                                                                orientation: orientation,
-                                                                                flavor: .stackedLarge) + 2
-        nameLabelWidthStackedMedium = TextIconButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
-                                                                                 line2: nameLabelLine2,
-                                                                                 orientation: orientation,
-                                                                                 flavor: .stackedMedium) + 2
-        nameLabelWidthStackedSmall = TextIconButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
-                                                                                line2: nameLabelLine2,
-                                                                                orientation: orientation,
-                                                                                flavor: .stackedSmall) + 2
-        self.nameLabelNumberOfLines = _nameLabelNumberOfLines
-    }
-    
-    func getTextIcon(orientation: Orientation,
-                     layoutSchemeFlavor: LayoutSchemeFlavor,
-                     isDarkMode: Bool,
-                     isEnabled: Bool) -> TextIconable {
-        return iconPack.getTextIcon(orientation: orientation,
-                                    layoutSchemeFlavor: layoutSchemeFlavor,
-                                    numberOfLines: nameLabelNumberOfLines,
-                                    isDarkMode: isDarkMode, isEnabled: isEnabled)
-    }
-}
-
-struct ToolInterfaceElementSexyButtonConfiguration {
-    
-    let iconPack: LooseConvertibleIconPack
-    let nameLabelLine1: String?
-    let nameLabelLine2: String?
-    let nameLabelNumberOfLines: Int
-    let nameLabelWidthLarge: Int
-    let nameLabelWidthMedium: Int
-    let nameLabelWidthSmall: Int
     init(iconPack: LooseConvertibleIconPack,
          orientation: Orientation,
          nameLabelLine1: String?,
@@ -556,31 +539,25 @@ struct ToolInterfaceElementSexyButtonConfiguration {
         
         let _nameLabelNumberOfLines = ToolInterfaceTheme.getNumberOfLines(line1: nameLabelLine1,
                                                                           line2: nameLabelLine2)
-        
-        nameLabelWidthLarge = SexyButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
-                                                                     line2: nameLabelLine2,
-                                                                     orientation: orientation,
-                                                                     flavor: .stackedLarge) + 2
-        nameLabelWidthMedium = SexyButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
-                                                                      line2: nameLabelLine2,
-                                                                      orientation: orientation,
-                                                                      flavor: .stackedMedium) + 2
-        nameLabelWidthSmall = SexyButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
-                                                                     line2: nameLabelLine2,
-                                                                     orientation: orientation,
-                                                                     flavor: .stackedSmall) + 2
+        nameLabelWidthLong = ButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+                                                                line2: nameLabelLine2,
+                                                                orientation: orientation,
+                                                                flavor: .long) + 2
+        nameLabelWidthStackedLarge = ButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+                                                                        line2: nameLabelLine2,
+                                                                        orientation: orientation,
+                                                                        flavor: .stackedLarge) + 2
+        nameLabelWidthStackedMedium = ButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+                                                                         line2: nameLabelLine2,
+                                                                         orientation: orientation,
+                                                                         flavor: .stackedMedium) + 2
+        nameLabelWidthStackedSmall = ButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+                                                                        line2: nameLabelLine2,
+                                                                        orientation: orientation,
+                                                                        flavor: .stackedSmall) + 2
         self.nameLabelNumberOfLines = _nameLabelNumberOfLines
     }
-    
-    func getTextIcon(orientation: Orientation,
-                     layoutSchemeFlavor: LayoutSchemeFlavor,
-                     isDarkMode: Bool,
-                     isEnabled: Bool) -> TextIconable {
-        return iconPack.getTextIcon(orientation: orientation,
-                                    layoutSchemeFlavor: layoutSchemeFlavor,
-                                    numberOfLines: nameLabelNumberOfLines,
-                                    isDarkMode: isDarkMode, isEnabled: isEnabled)
-    }
+
 }
 
 struct ToolInterfaceElementSegmentedPickerButtonConfiguration {

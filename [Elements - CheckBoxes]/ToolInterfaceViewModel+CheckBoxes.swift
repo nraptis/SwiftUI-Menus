@@ -16,7 +16,7 @@ extension ToolInterfaceViewModel {
         
         let iconPack = configuration.iconPack
         
-        var minimumWidthLong = CheckBoxLayout.getTextIconAndNameLabelWidthWithUniversalPadding(nameLabelWidth: configuration.nameLabelWidthLong,
+        var minimumWidthLong = OLDOLDCheckBoxLayout.getTextIconAndNameLabelWidthWithUniversalPadding(nameLabelWidth: configuration.nameLabelWidthLong,
                                                                                                nameLabelNumberOfLines: configuration.nameLabelNumberOfLines,
                                                                                                iconPack: iconPack,
                                                                                                orientation: orientation,
@@ -25,7 +25,7 @@ extension ToolInterfaceViewModel {
                                                                                                neighborTypeLeft: neighborTypeLeft,
                                                                                                neighborTypeRight: neighborTypeRight)
         
-        var standardWidthLong = CheckBoxLayout.getTextIconAndNameLabelWidthWithUniversalPadding(nameLabelWidth: configuration.nameLabelWidthLong,
+        var standardWidthLong = OLDOLDCheckBoxLayout.getTextIconAndNameLabelWidthWithUniversalPadding(nameLabelWidth: configuration.nameLabelWidthLong,
                                                                                                 nameLabelNumberOfLines: configuration.nameLabelNumberOfLines,
                                                                                                 iconPack: iconPack,
                                                                                                 orientation: orientation,
@@ -33,7 +33,7 @@ extension ToolInterfaceViewModel {
                                                                                                 squeeze: .standard,
                                                                                                 neighborTypeLeft: neighborTypeLeft,
                                                                                                 neighborTypeRight: neighborTypeRight)
-        var minimumWidthStackedLarge = CheckBoxLayout.getTextIconAndNameLabelWidthWithUniversalPadding(nameLabelWidth: configuration.nameLabelWidthStackedLarge,
+        var minimumWidthStackedLarge = OLDOLDCheckBoxLayout.getTextIconAndNameLabelWidthWithUniversalPadding(nameLabelWidth: configuration.nameLabelWidthStackedLarge,
                                                                                                        nameLabelNumberOfLines: configuration.nameLabelNumberOfLines,
                                                                                                        iconPack: iconPack,
                                                                                                        orientation: orientation,
@@ -41,7 +41,7 @@ extension ToolInterfaceViewModel {
                                                                                                        squeeze: .squeezed,
                                                                                                        neighborTypeLeft: neighborTypeLeft,
                                                                                                        neighborTypeRight: neighborTypeRight)
-        var standardWidthStackedLarge = CheckBoxLayout.getTextIconAndNameLabelWidthWithUniversalPadding(nameLabelWidth: configuration.nameLabelWidthStackedLarge,
+        var standardWidthStackedLarge = OLDOLDCheckBoxLayout.getTextIconAndNameLabelWidthWithUniversalPadding(nameLabelWidth: configuration.nameLabelWidthStackedLarge,
                                                                                                         nameLabelNumberOfLines: configuration.nameLabelNumberOfLines,
                                                                                                         iconPack: iconPack,
                                                                                                         orientation: orientation,
@@ -50,7 +50,7 @@ extension ToolInterfaceViewModel {
                                                                                                         neighborTypeLeft: neighborTypeLeft,
                                                                                                         neighborTypeRight: neighborTypeRight)
         
-        var minimumWidthStackedMedium = CheckBoxLayout.getTextIconAndNameLabelWidthWithUniversalPadding(nameLabelWidth: configuration.nameLabelWidthStackedMedium,
+        var minimumWidthStackedMedium = OLDOLDCheckBoxLayout.getTextIconAndNameLabelWidthWithUniversalPadding(nameLabelWidth: configuration.nameLabelWidthStackedMedium,
                                                                                                         nameLabelNumberOfLines: configuration.nameLabelNumberOfLines,
                                                                                                         iconPack: iconPack,
                                                                                                         orientation: orientation,
@@ -58,7 +58,7 @@ extension ToolInterfaceViewModel {
                                                                                                         squeeze: .squeezed,
                                                                                                         neighborTypeLeft: neighborTypeLeft,
                                                                                                         neighborTypeRight: neighborTypeRight)
-        var standardWidthStackedMedium = CheckBoxLayout.getTextIconAndNameLabelWidthWithUniversalPadding(nameLabelWidth: configuration.nameLabelWidthStackedMedium,
+        var standardWidthStackedMedium = OLDOLDCheckBoxLayout.getTextIconAndNameLabelWidthWithUniversalPadding(nameLabelWidth: configuration.nameLabelWidthStackedMedium,
                                                                                                          nameLabelNumberOfLines: configuration.nameLabelNumberOfLines,
                                                                                                          iconPack: iconPack,
                                                                                                          orientation: orientation,
@@ -67,7 +67,7 @@ extension ToolInterfaceViewModel {
                                                                                                          neighborTypeLeft: neighborTypeLeft,
                                                                                                          neighborTypeRight: neighborTypeRight)
         
-        var minimumWidthStackedSmall = CheckBoxLayout.getTextIconAndNameLabelWidthWithUniversalPadding(nameLabelWidth: configuration.nameLabelWidthStackedSmall,
+        var minimumWidthStackedSmall = OLDOLDCheckBoxLayout.getTextIconAndNameLabelWidthWithUniversalPadding(nameLabelWidth: configuration.nameLabelWidthStackedSmall,
                                                                                                        nameLabelNumberOfLines: configuration.nameLabelNumberOfLines,
                                                                                                        iconPack: iconPack,
                                                                                                        orientation: orientation,
@@ -75,7 +75,7 @@ extension ToolInterfaceViewModel {
                                                                                                        squeeze: .squeezed,
                                                                                                        neighborTypeLeft: neighborTypeLeft,
                                                                                                        neighborTypeRight: neighborTypeRight)
-        var standardWidthStackedSmall = CheckBoxLayout.getTextIconAndNameLabelWidthWithUniversalPadding(nameLabelWidth: configuration.nameLabelWidthStackedSmall,
+        var standardWidthStackedSmall = OLDOLDCheckBoxLayout.getTextIconAndNameLabelWidthWithUniversalPadding(nameLabelWidth: configuration.nameLabelWidthStackedSmall,
                                                                                                         nameLabelNumberOfLines: configuration.nameLabelNumberOfLines,
                                                                                                         iconPack: iconPack,
                                                                                                         orientation: orientation,
@@ -84,59 +84,59 @@ extension ToolInterfaceViewModel {
                                                                                                         neighborTypeLeft: neighborTypeLeft,
                                                                                                         neighborTypeRight: neighborTypeRight)
         
-        let checkBoxPaddingLeftLongSqueezed = CheckBoxLayout.getCheckBoxPaddingLeft(orientation: orientation,
+        let checkBoxPaddingLeftLongSqueezed = OLDOLDCheckBoxLayout.getCheckBoxPaddingLeft(orientation: orientation,
                                                                                     flavor: .long,
                                                                                     squeeze: .squeezed)
-        let checkBoxPaddingLeftLongStandard = CheckBoxLayout.getCheckBoxPaddingLeft(orientation: orientation,
+        let checkBoxPaddingLeftLongStandard = OLDOLDCheckBoxLayout.getCheckBoxPaddingLeft(orientation: orientation,
                                                                                     flavor: .long,
                                                                                     squeeze: .standard)
         
-        let checkBoxPaddingRightLongSqueezed = CheckBoxLayout.getCheckBoxPaddingRight(orientation: orientation,
+        let checkBoxPaddingRightLongSqueezed = OLDOLDCheckBoxLayout.getCheckBoxPaddingRight(orientation: orientation,
                                                                                       flavor: .long,
                                                                                       squeeze: .squeezed)
-        let checkBoxPaddingRightLongStandard = CheckBoxLayout.getCheckBoxPaddingRight(orientation: orientation,
+        let checkBoxPaddingRightLongStandard = OLDOLDCheckBoxLayout.getCheckBoxPaddingRight(orientation: orientation,
                                                                                       flavor: .long,
                                                                                       squeeze: .standard)
         
-        let checkBoxPaddingLeftStackedLargeSqueezed = CheckBoxLayout.getCheckBoxPaddingLeft(orientation: orientation,
+        let checkBoxPaddingLeftStackedLargeSqueezed = OLDOLDCheckBoxLayout.getCheckBoxPaddingLeft(orientation: orientation,
                                                                                             flavor: .stackedLarge,
                                                                                             squeeze: .squeezed)
-        let checkBoxPaddingLeftStackedLargeStandard = CheckBoxLayout.getCheckBoxPaddingLeft(orientation: orientation,
+        let checkBoxPaddingLeftStackedLargeStandard = OLDOLDCheckBoxLayout.getCheckBoxPaddingLeft(orientation: orientation,
                                                                                             flavor: .stackedLarge,
                                                                                             squeeze: .standard)
         
-        let checkBoxPaddingRightStackedLargeSqueezed = CheckBoxLayout.getCheckBoxPaddingRight(orientation: orientation,
+        let checkBoxPaddingRightStackedLargeSqueezed = OLDOLDCheckBoxLayout.getCheckBoxPaddingRight(orientation: orientation,
                                                                                               flavor: .stackedLarge,
                                                                                               squeeze: .squeezed)
-        let checkBoxPaddingRightStackedLargeStandard = CheckBoxLayout.getCheckBoxPaddingRight(orientation: orientation,
+        let checkBoxPaddingRightStackedLargeStandard = OLDOLDCheckBoxLayout.getCheckBoxPaddingRight(orientation: orientation,
                                                                                               flavor: .stackedLarge,
                                                                                               squeeze: .standard)
         
-        let checkBoxPaddingLeftStackedMediumSqueezed = CheckBoxLayout.getCheckBoxPaddingLeft(orientation: orientation,
+        let checkBoxPaddingLeftStackedMediumSqueezed = OLDOLDCheckBoxLayout.getCheckBoxPaddingLeft(orientation: orientation,
                                                                                              flavor: .stackedMedium,
                                                                                              squeeze: .squeezed)
-        let checkBoxPaddingLeftStackedMediumStandard = CheckBoxLayout.getCheckBoxPaddingLeft(orientation: orientation,
+        let checkBoxPaddingLeftStackedMediumStandard = OLDOLDCheckBoxLayout.getCheckBoxPaddingLeft(orientation: orientation,
                                                                                              flavor: .stackedMedium,
                                                                                              squeeze: .standard)
         
-        let checkBoxPaddingRightStackedMediumSqueezed = CheckBoxLayout.getCheckBoxPaddingRight(orientation: orientation,
+        let checkBoxPaddingRightStackedMediumSqueezed = OLDOLDCheckBoxLayout.getCheckBoxPaddingRight(orientation: orientation,
                                                                                                flavor: .stackedMedium,
                                                                                                squeeze: .squeezed)
-        let checkBoxPaddingRightStackedMediumStandard = CheckBoxLayout.getCheckBoxPaddingRight(orientation: orientation,
+        let checkBoxPaddingRightStackedMediumStandard = OLDOLDCheckBoxLayout.getCheckBoxPaddingRight(orientation: orientation,
                                                                                                flavor: .stackedMedium,
                                                                                                squeeze: .standard)
         
-        let checkBoxPaddingLeftStackedSmallSqueezed = CheckBoxLayout.getCheckBoxPaddingLeft(orientation: orientation,
+        let checkBoxPaddingLeftStackedSmallSqueezed = OLDOLDCheckBoxLayout.getCheckBoxPaddingLeft(orientation: orientation,
                                                                                             flavor: .stackedSmall,
                                                                                             squeeze: .squeezed)
-        let checkBoxPaddingLeftStackedSmallStandard = CheckBoxLayout.getCheckBoxPaddingLeft(orientation: orientation,
+        let checkBoxPaddingLeftStackedSmallStandard = OLDOLDCheckBoxLayout.getCheckBoxPaddingLeft(orientation: orientation,
                                                                                             flavor: .stackedSmall,
                                                                                             squeeze: .standard)
         
-        let checkBoxPaddingRightStackedSmallSqueezed = CheckBoxLayout.getCheckBoxPaddingRight(orientation: orientation,
+        let checkBoxPaddingRightStackedSmallSqueezed = OLDOLDCheckBoxLayout.getCheckBoxPaddingRight(orientation: orientation,
                                                                                               flavor: .stackedSmall,
                                                                                               squeeze: .squeezed)
-        let checkBoxPaddingRightStackedSmallStandard = CheckBoxLayout.getCheckBoxPaddingRight(orientation: orientation,
+        let checkBoxPaddingRightStackedSmallStandard = OLDOLDCheckBoxLayout.getCheckBoxPaddingRight(orientation: orientation,
                                                                                               flavor: .stackedSmall,
                                                                                               squeeze: .standard)
         
@@ -160,31 +160,31 @@ extension ToolInterfaceViewModel {
         standardWidthStackedSmall += checkBoxPaddingLeftStackedSmallStandard
         standardWidthStackedSmall += checkBoxPaddingRightStackedSmallStandard
         
-        let checkBoxWidthLongSqueezed = CheckBoxLayout.getCheckBoxWidth(orientation: orientation,
+        let checkBoxWidthLongSqueezed = OLDOLDCheckBoxLayout.getCheckBoxWidth(orientation: orientation,
                                                                         flavor: .long,
                                                                         squeeze: .squeezed)
-        let checkBoxWidthLongStandard = CheckBoxLayout.getCheckBoxWidth(orientation: orientation,
+        let checkBoxWidthLongStandard = OLDOLDCheckBoxLayout.getCheckBoxWidth(orientation: orientation,
                                                                         flavor: .long,
                                                                         squeeze: .standard)
         
-        let checkBoxWidthStackedLargeSqueezed = CheckBoxLayout.getCheckBoxWidth(orientation: orientation,
+        let checkBoxWidthStackedLargeSqueezed = OLDOLDCheckBoxLayout.getCheckBoxWidth(orientation: orientation,
                                                                                 flavor: .stackedLarge,
                                                                                 squeeze: .squeezed)
-        let checkBoxWidthStackedLargeStandard = CheckBoxLayout.getCheckBoxWidth(orientation: orientation,
+        let checkBoxWidthStackedLargeStandard = OLDOLDCheckBoxLayout.getCheckBoxWidth(orientation: orientation,
                                                                                 flavor: .stackedLarge,
                                                                                 squeeze: .standard)
         
-        let checkBoxWidthStackedMediumSqueezed = CheckBoxLayout.getCheckBoxWidth(orientation: orientation,
+        let checkBoxWidthStackedMediumSqueezed = OLDOLDCheckBoxLayout.getCheckBoxWidth(orientation: orientation,
                                                                                  flavor: .stackedMedium,
                                                                                  squeeze: .squeezed)
-        let checkBoxWidthStackedMediumStandard = CheckBoxLayout.getCheckBoxWidth(orientation: orientation,
+        let checkBoxWidthStackedMediumStandard = OLDOLDCheckBoxLayout.getCheckBoxWidth(orientation: orientation,
                                                                                  flavor: .stackedMedium,
                                                                                  squeeze: .standard)
         
-        let checkBoxWidthStackedSmallSqueezed = CheckBoxLayout.getCheckBoxWidth(orientation: orientation,
+        let checkBoxWidthStackedSmallSqueezed = OLDOLDCheckBoxLayout.getCheckBoxWidth(orientation: orientation,
                                                                                 flavor: .stackedSmall,
                                                                                 squeeze: .squeezed)
-        let checkBoxWidthStackedSmallStandard = CheckBoxLayout.getCheckBoxWidth(orientation: orientation,
+        let checkBoxWidthStackedSmallStandard = OLDOLDCheckBoxLayout.getCheckBoxWidth(orientation: orientation,
                                                                                 flavor: .stackedSmall,
                                                                                 squeeze: .standard)
         
@@ -202,16 +202,16 @@ extension ToolInterfaceViewModel {
         
         let flexCheckBoxData = FlexCheckBoxData(minimumWidthLong: minimumWidthLong,
                                                 standardWidthLong: standardWidthLong,
-                                                maximumWidthLong: standardWidthLong,
+                                                relaxedWidthLong: standardWidthLong,
                                                 minimumWidthStackedLarge: minimumWidthStackedLarge,
                                                 standardWidthStackedLarge: standardWidthStackedLarge,
-                                                maximumWidthStackedLarge: standardWidthStackedLarge,
+                                                relaxedWidthStackedLarge: standardWidthStackedLarge,
                                                 minimumWidthStackedMedium: minimumWidthStackedMedium,
                                                 standardWidthStackedMedium: standardWidthStackedMedium,
-                                                maximumWidthStackedMedium: standardWidthStackedMedium,
+                                                relaxedWidthStackedMedium: standardWidthStackedMedium,
                                                 minimumWidthStackedSmall: minimumWidthStackedSmall,
                                                 standardWidthStackedSmall: standardWidthStackedSmall,
-                                                maximumWidthStackedSmall: standardWidthStackedSmall)
+                                                relaxedWidthStackedSmall: standardWidthStackedSmall)
         
         return ToolInterfaceElementFlex.checkBox(flexCheckBoxData)
     }

@@ -15,10 +15,10 @@ extension ToolInterfaceViewModel {
         let orientation = jiggleViewModel.orientation
         let textLine1 = ToolInterfaceStringLibraryModeChange.modeTextZoomExitLine1()
         let textLine2 = ToolInterfaceStringLibraryModeChange.modeTextZoomExitLine2()
-        let iconPack = MainTabIconLibrary.polygon
-        let accentPack = MainTabIconLibrary.arrowTinyBwLeft
+       let iconPack = FramedConvertibleIconLibrary.menuC
+       let accentPack = FramedLongIconLibrary.menuA
         
-        let configuration = ToolInterfaceElementExitModeConfiguration(iconPack: iconPack,
+        let configuration = ToolInterfaceElementChangeModeConfiguration(iconPack: iconPack,
                                                                       accentPack: accentPack,
                                                                       orientation: orientation,
                                                                       nameLabelLine1: textLine1,
@@ -30,7 +30,7 @@ extension ToolInterfaceViewModel {
                                         neighborTypeRight: neighborTypeRight)
         
         let viewModelZoomExit = MagicalExitModeViewModelZoomExit(orientation: jiggleViewModel.orientation,
-                                                                 exitModeConfiguration: configuration)
+                                                                 modeChangeConfiguration: configuration)
         let exitZoomToolNode = ToolNode(id: getToolNodeID(),
                                         element: .exitModeZoomExit,
                                         flex: flex,

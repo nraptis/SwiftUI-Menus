@@ -15,8 +15,7 @@ extension ToolInterfaceViewModel {
         let orientation = jiggleViewModel.orientation
         let textLine1 = ToolInterfaceStringLibraryCheckBoxes.checkBoxTextDarkModeEnabledLine1()
         let textLine2 = ToolInterfaceStringLibraryCheckBoxes.checkBoxTextDarkModeEnabledLine2()
-        let iconPack = MainTabIconLibrary.drawGuide
-        
+       let iconPack = FramedConvertibleIconLibrary.menuB
         
         let configuration = ToolInterfaceElementSexyCheckBoxConfiguration(iconPack: iconPack,
                                                                           orientation: orientation,

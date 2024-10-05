@@ -17,7 +17,7 @@ extension ToolInterfaceViewModel {
         let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextUndoLine2()
         let iconPack = LooseConvertibleIconLibrary.menuB
         
-        let configuration = ToolInterfaceElementSexyButtonConfiguration(iconPack: iconPack,
+        let configuration = ToolInterfaceElementButtonConfiguration(iconPack: iconPack,
                                                                         orientation: orientation,
                                                                         nameLabelLine1: textLine1,
                                                                         nameLabelLine2: textLine2)

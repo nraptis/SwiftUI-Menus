@@ -292,7 +292,7 @@ extension ToolInterfaceViewModel {
         universalPaddingLeftLongStandard + 
         universalPaddingRightLongStandard
         
-        let maximumWidthLong = sumAllEqualLongStandard +
+        let relaxedWidthLong = sumAllEqualLongStandard +
         buttonUniversalPaddingLeftLongStandard +
         buttonUniversalPaddingRightLongStandard +
         universalPaddingLeftLongStandard + 
@@ -311,7 +311,7 @@ extension ToolInterfaceViewModel {
         universalPaddingLeftStackedLargeStandard +
         universalPaddingRightStackedLargeStandard
         
-        let maximumWidthStackedLarge = sumAllEqualStackedLargeStandard +
+        let relaxedWidthStackedLarge = sumAllEqualStackedLargeStandard +
         buttonUniversalPaddingLeftStackedLargeStandard +
         buttonUniversalPaddingRightStackedLargeStandard +
         universalPaddingLeftStackedLargeStandard + 
@@ -330,7 +330,7 @@ extension ToolInterfaceViewModel {
         universalPaddingLeftStackedMediumStandard +
         universalPaddingRightStackedMediumStandard
         
-        let maximumWidthStackedMedium = sumAllEqualStackedMediumStandard +
+        let relaxedWidthStackedMedium = sumAllEqualStackedMediumStandard +
         buttonUniversalPaddingLeftStackedMediumStandard +
         buttonUniversalPaddingRightStackedMediumStandard +
         universalPaddingLeftStackedMediumStandard +
@@ -349,7 +349,7 @@ extension ToolInterfaceViewModel {
         universalPaddingLeftStackedSmallStandard +
         universalPaddingRightStackedSmallStandard
         
-        let maximumWidthStackedSmall = sumAllEqualStackedSmallStandard +
+        let relaxedWidthStackedSmall = sumAllEqualStackedSmallStandard +
         buttonUniversalPaddingLeftStackedSmallStandard +
         buttonUniversalPaddingRightStackedSmallStandard + 
         universalPaddingLeftStackedSmallStandard +
@@ -358,19 +358,19 @@ extension ToolInterfaceViewModel {
         
         let flexSegmentData = FlexSegmentData(minimumWidthLong: minimumWidthLong,
                                               standardWidthLong: standardWidthLong,
-                                              maximumWidthLong: maximumWidthLong,
+                                              relaxedWidthLong: relaxedWidthLong,
                                               
                                               minimumWidthStackedLarge: minimumWidthStackedLarge,
                                               standardWidthStackedLarge: standardWidthStackedLarge,
-                                              maximumWidthStackedLarge: maximumWidthStackedLarge,
+                                              relaxedWidthStackedLarge: relaxedWidthStackedLarge,
                                               
                                               minimumWidthStackedMedium: minimumWidthStackedMedium,
                                               standardWidthStackedMedium: standardWidthStackedMedium,
-                                              maximumWidthStackedMedium: maximumWidthStackedMedium,
+                                              relaxedWidthStackedMedium: relaxedWidthStackedMedium,
                                               
                                               minimumWidthStackedSmall: minimumWidthStackedSmall,
                                               standardWidthStackedSmall: standardWidthStackedSmall,
-                                              maximumWidthStackedSmall: maximumWidthStackedSmall)
+                                              relaxedWidthStackedSmall: relaxedWidthStackedSmall)
         
         return ToolInterfaceElementFlex.segment(flexSegmentData)
     }

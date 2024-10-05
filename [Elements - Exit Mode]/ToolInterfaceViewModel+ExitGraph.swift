@@ -15,11 +15,11 @@ extension ToolInterfaceViewModel {
         let orientation = jiggleViewModel.orientation
         let textLine1 = ToolInterfaceStringLibraryModeChange.modeTextGraphExitLine1()
         let textLine2 = ToolInterfaceStringLibraryModeChange.modeTextGraphExitLine2()
-        let iconPack = MainTabIconLibrary.jelly
-        let accentPack = MainTabIconLibrary.arrowTinyBwLeft
+       let iconPack = FramedConvertibleIconLibrary.menuC
+       let accentPack = FramedLongIconLibrary.menuA
         
         
-        let configuration = ToolInterfaceElementExitModeConfiguration(iconPack: iconPack,
+        let configuration = ToolInterfaceElementChangeModeConfiguration(iconPack: iconPack,
                                                                       accentPack: accentPack,
                                                                       orientation: orientation,
                                                                       nameLabelLine1: textLine1,
@@ -31,7 +31,7 @@ extension ToolInterfaceViewModel {
                                         neighborTypeRight: neighborTypeRight)
         
         let viewModelGraphExit = MagicalExitModeViewModelGraphExit(orientation: jiggleViewModel.orientation,
-                                                                 exitModeConfiguration: configuration)
+                                                                   modeChangeConfiguration: configuration)
         let exitGraphToolNode = ToolNode(id: getToolNodeID(),
                                         element: .exitModeGraphExit,
                                         flex: flex,
