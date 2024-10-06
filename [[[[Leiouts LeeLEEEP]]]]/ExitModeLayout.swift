@@ -1,13 +1,24 @@
 //
-//  EnterModeLayout.swift
+//  ExitModeLayout.swift
 //  Jiggle3
 //
-//  Created by Nicky Taylor on 8/25/24.
+//  Created by Nicky Taylor on 8/26/24.
 //
 
 import UIKit
 
-struct EnterModeLayout: LayoutScheme {
+struct ExitModeLayout: LayoutScheme {
+    
+    static func getSlavePaddingLeftStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int { 0 }
+    static func getSlavePaddingLeftLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int { 0 }
+    
+    static func getHeroPaddingTopStacked(orientation: Orientation) -> Int {
+        if Device.isPad {
+            return 2 + 3
+        } else {
+            return 1 + 3
+        }
+    }
     
     static func getNameLabelFont(orientation: Orientation, flavor: LayoutSchemeFlavor) -> UIFont {
         if Device.isPad {

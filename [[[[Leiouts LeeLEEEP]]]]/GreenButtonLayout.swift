@@ -10,11 +10,16 @@ import UIKit
 
 struct GreenButtonLayout: LayoutScheme {
     
+    static func getSlavePaddingLeftStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int { 0 }
+    static func getSlavePaddingLeftLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int { 0 }
+    static func getSlavePaddingRightStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int { 0 }
+    static func getSlavePaddingRightLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int { 0 }
+    
     static func getNameLabelFont(orientation: Orientation, flavor: LayoutSchemeFlavor) -> UIFont {
         if Device.isPad {
-            return UIFont.systemFont(ofSize: 14.0, weight: .bold)
+            return UIFont.systemFont(ofSize: 15.0, weight: .bold)
         } else {
-            return UIFont.systemFont(ofSize: 11.0, weight: .bold)
+            return UIFont.systemFont(ofSize: 12.0, weight: .bold)
         }
     }
     

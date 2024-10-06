@@ -35,8 +35,8 @@ struct MagicalExitMode: View {
     
     func bodyContent() -> some View {
         let layoutSchemeFlavor = magicalViewModel.getLayoutSchemeFlavor()
-        let outsideBoxPaddingTop = ButtonLayout.getOutsideBoxPaddingTop(orientation: magicalViewModel.orientation)
-        let outsideBoxPaddingBottom = ButtonLayout.getOutsideBoxPaddingTop(orientation: magicalViewModel.orientation)
+        let outsideBoxPaddingTop = ExitModeLayout.getOutsideBoxPaddingTop(orientation: magicalViewModel.orientation)
+        let outsideBoxPaddingBottom = ExitModeLayout.getOutsideBoxPaddingTop(orientation: magicalViewModel.orientation)
         return MagicalExitModeButton(layoutSchemeFlavor: layoutSchemeFlavor,
                                          outsideBoxPaddingTop: outsideBoxPaddingTop,
                                          outsideBoxPaddingBottom: outsideBoxPaddingBottom)

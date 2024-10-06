@@ -59,8 +59,8 @@ struct MagicalEnterModeButtonStyle: ButtonStyle {
         
         let orientation = magicalViewModel.orientation
         let isEnabled = magicalViewModel.isEnabled
-        let cornerRadius = CheckBoxLayout.getCornerRadius(orientation: orientation)
-        let lineThickness = CheckBoxLayout.getLineThickness(orientation: orientation)
+        let cornerRadius = EnterModeLayout.getCornerRadius(orientation: orientation)
+        let lineThickness = EnterModeLayout.getLineThickness(orientation: orientation)
         let color: Color
         if isPressed {
             if isEnabled {
@@ -92,7 +92,7 @@ struct MagicalEnterModeButtonStyle: ButtonStyle {
     func getFillRect(isPressed: Bool) -> some View {
         let orientation = magicalViewModel.orientation
         let isEnabled = magicalViewModel.isEnabled
-        let cornerRadius = CheckBoxLayout.getCornerRadius(orientation: orientation)
+        let cornerRadius = EnterModeLayout.getCornerRadius(orientation: orientation)
         let color: Color
         if magicalViewModel.isDarkModeEnabled {
             if isEnabled {

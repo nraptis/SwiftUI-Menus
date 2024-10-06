@@ -13,30 +13,15 @@ extension ToolInterfaceViewModel {
                                    configuration: ToolInterfaceElementGreenButtonConfiguration,
                                    neighborTypeLeft: ToolInterfaceElementType?,
                                    neighborTypeRight: ToolInterfaceElementType?) -> ToolInterfaceElementFlex {
-        let iconPack = configuration.iconPack
-        let minimumWidth = GreenButtonLayout.getTextIconAndNameLabelWidthWithUniversalPadding(nameLabelWidth: configuration.nameLabelWidth,
-                                                                                              nameLabelNumberOfLines: configuration.nameLabelNumberOfLines,
-                                                                                              iconPack: iconPack,
-                                                                                              orientation: orientation,
-                                                                                              flavor: .long,
-                                                                                              squeeze: .squeezed,
-                                                                                              neighborTypeLeft: neighborTypeLeft,
-                                                                                              neighborTypeRight: neighborTypeRight)
-        
-        let standardWidth = GreenButtonLayout.getTextIconAndNameLabelWidthWithUniversalPadding(nameLabelWidth: configuration.nameLabelWidth,
-                                                                                               nameLabelNumberOfLines: configuration.nameLabelNumberOfLines,
-                                                                                               iconPack: iconPack,
-                                                                                               orientation: orientation,
-                                                                                               flavor: .long,
-                                                                                               squeeze: .standard,
-                                                                                               neighborTypeLeft: neighborTypeLeft,
-                                                                                               neighborTypeRight: neighborTypeRight)
-        
-        let flexGreenButtonData = FlexGreenButtonData(minimumWidth: minimumWidth,
-                                                      standardWidth: standardWidth,
-                                                      relaxedWidth: standardWidth)
-        
-        return ToolInterfaceElementFlex.greenButton(flexGreenButtonData)
+        let flexLongData = getLongFlex(orientation: orientation,
+                                       scheme: GreenButtonLayout.self,
+                                       neighborTypeLeft: neighborTypeLeft,
+                                       neighborTypeRight: neighborTypeRight,
+                                       iconPackMain: configuration.iconPack,
+                                       iconPackSecondary: nil,
+                                       nameLabelWidth: configuration.nameLabelWidth,
+                                       numberOfLines: configuration.nameLabelNumberOfLines)
+        return ToolInterfaceElementFlex.greenButton(flexLongData)
     }
     
 }

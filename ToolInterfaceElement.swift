@@ -130,6 +130,8 @@ enum ToolInterfaceElement: UInt16 {
     case exitModeAnimationContinuous
     
     case greenButtonCreateScene
+    case greenButtonDone
+    
     
     case mainTabDocumentMode
     
@@ -504,6 +506,8 @@ enum ToolInterfaceElement: UInt16 {
         case .favoringOneLineLabel:
             return .favoringOneLineLabel
         case .greenButtonCreateScene:
+            return .greenButton
+        case .greenButtonDone:
             return .greenButton
         case .sliderBouncePower:
             return .slider

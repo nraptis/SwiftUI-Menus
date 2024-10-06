@@ -46,9 +46,9 @@ struct MagicalEnterModeContent: View {
         let line1 = configuration.nameLabelLine1
         let line2 = configuration.nameLabelLine2
         
-        let nameLabelFont = CheckBoxLayout.getNameLabelFont(orientation: orientation,
+        let nameLabelFont = EnterModeLayout.getNameLabelFont(orientation: orientation,
                                                             flavor: layoutSchemeFlavor)
-        let nameLabelVerticalSpacing = CheckBoxLayout.getNameLabelVerticalSpacing(orientation: orientation,
+        let nameLabelVerticalSpacing = EnterModeLayout.getNameLabelVerticalSpacing(orientation: orientation,
                                                                                   flavor: layoutSchemeFlavor)
         
         let nameLabelWidth: Int
@@ -89,8 +89,8 @@ struct MagicalEnterModeContent: View {
             }
         }
         
-        let heroPaddingTopStacked = CheckBoxLayout.getHeroPaddingTopStacked(orientation: orientation)
-        let heroPaddingBottomStacked = CheckBoxLayout.getHeroPaddingBottomStacked(orientation: orientation)
+        let heroPaddingTopStacked = EnterModeLayout.getHeroPaddingTopStacked(orientation: orientation)
+        let heroPaddingBottomStacked = EnterModeLayout.getHeroPaddingBottomStacked(orientation: orientation)
         
         let slaveWidth = accentIcon.width
         let slaveHeight = accentIcon.height

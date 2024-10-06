@@ -9,8 +9,25 @@ import Foundation
 
 struct FramedLongIconLibrary {
     
+    
+    static var checkBoxSquare: FramedLongIconPack {
+        Self.build(prefix: "framed",
+                   name: "check_box_square",
+                   widthPad_0: 43, heightPad_0: 42,
+                   widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
+                   widthPhonePortrait_0: 33, heightPhonePortrait_0: 32)
+    }
+    
+    static var checkBoxCheck: FramedLongIconPack {
+        Self.build(prefix: "framed",
+                   name: "check_box_check",
+                   widthPad_0: 43, heightPad_0: 42,
+                   widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
+                   widthPhonePortrait_0: 33, heightPhonePortrait_0: 32)
+    }
+                   
     static var menuA: FramedLongIconPack {
-        Self.build(prefix: "loose",
+        Self.build(prefix: "framed",
                    name: "menu_a",
                    widthPad_0: 43, heightPad_0: 42,
                    widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,

@@ -38,8 +38,6 @@ enum ToolRowConfiguration {
     case top_Primary_View_LoopsPage2
     case top_Primary_View_LoopsPage3
     
-    
-    
     case top_Primary_Guides
     case top_Primary_Zoom
     

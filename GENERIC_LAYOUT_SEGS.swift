@@ -7,6 +7,49 @@
 
 import Foundation
 
+struct SEGMENT_FLEX_INFO_CONVERTIBLE {
+    let iconPackMain: (any TextIconPackable)
+    let iconPackSecondary: (any TextIconPackable)?
+    let nameLabelWidthLong: Int
+    let nameLabelWidthStackedLarge: Int
+    let nameLabelWidthStackedMedium: Int
+    let nameLabelWidthStackedSmall: Int
+    let numberOfLines: Int
+    
+    init(iconPackMain: (any TextIconPackable),
+         iconPackSecondary: (any TextIconPackable)?,
+         nameLabelWidthLong: Int,
+         nameLabelWidthStackedLarge: Int,
+         nameLabelWidthStackedMedium: Int,
+         nameLabelWidthStackedSmall: Int,
+         numberOfLines: Int) {
+        self.iconPackMain = iconPackMain
+        self.iconPackSecondary = iconPackSecondary
+        self.nameLabelWidthLong = nameLabelWidthLong
+        self.nameLabelWidthStackedLarge = nameLabelWidthStackedLarge
+        self.nameLabelWidthStackedMedium = nameLabelWidthStackedMedium
+        self.nameLabelWidthStackedSmall = nameLabelWidthStackedSmall
+        self.numberOfLines = numberOfLines
+    }
+}
+
+struct SEGMENT_LAYOUT_INFO {
+    let iconPackMain: (any TextIconPackable)
+    let iconPackSecondary: (any TextIconPackable)?
+    let nameLabelWidth: Int
+    let numberOfLines: Int
+    init(iconPackMain: (any TextIconPackable),
+         iconPackSecondary: (any TextIconPackable)?,
+         nameLabelWidth: Int,
+         numberOfLines: Int) {
+        self.iconPackMain = iconPackMain
+        self.iconPackSecondary = iconPackSecondary
+        self.nameLabelWidth = nameLabelWidth
+        self.numberOfLines = numberOfLines
+    }
+}
+
+/*
 class HORIZONTAL_LAYOUT_SEGMENT_CHUNK {
     let nameLabelWidth: Int
     let numberOfLines: Int
@@ -26,52 +69,29 @@ class HORIZONTAL_LAYOUT_SEGMENT_CHUNK {
         
     }
 }
-
+*/
 
 struct GENERIC_SEGMENT_LAYOUT {
+
+    struct LongResponse {
+        let globalLayout: HORIZONTAL_LAYOUT
+        let buttonLayouts: [HORIZONTAL_LAYOUT_LONG]
+    }
     
+    struct StackedResponse {
+        let globalLayout: HORIZONTAL_LAYOUT
+        let buttonLayouts: [HORIZONTAL_LAYOUT_STACKED]
+    }
     
-    //static func
-    static func computeLong(layoutSchemeType: LayoutScheme.Type,
+    static func computeStacked(layoutSchemeType: LayoutScheme.Type,
                             layoutWidth: Int,
                             orientation: Orientation,
-                            nameLabelWidthArray: [Int],
-                            numberOfLinesArray: [Int],
-                            iconPackMainArray: [(any TextIconPackable)],
-                            iconPackSecondaryArray: [(any TextIconPackable)?],
+                            infoList: [SEGMENT_LAYOUT_INFO],
+                               attemptEqualWidthsForAllButtons: Bool,
                             neighborTypeLeft: ToolInterfaceElementType?,
-                            neighborTypeRight: ToolInterfaceElementType?) -> [HORIZONTAL_LAYOUT_LONG] {
+                            neighborTypeRight: ToolInterfaceElementType?) -> StackedResponse {
         
-        var chunks = [HORIZONTAL_LAYOUT_SEGMENT_CHUNK]()
-        
-        var count = nameLabelWidthArray.count
-        if nameLabelWidthArray.count < count { count = nameLabelWidthArray.count }
-        if numberOfLinesArray.count < count { count = numberOfLinesArray.count }
-        if iconPackMainArray.count < count { count = iconPackMainArray.count }
-        
-        var index = 0
-        while index < count {
-            let nameLabelWidth = nameLabelWidthArray[index]
-            let numberOfLines = numberOfLinesArray[index]
-            let iconPackMain = iconPackMainArray[index]
-            var iconPackSecondary: (any TextIconPackable)?
-            if index < iconPackSecondaryArray.count {
-                iconPackSecondary = iconPackSecondaryArray[index]
-            }
-            let chunk = HORIZONTAL_LAYOUT_SEGMENT_CHUNK(nameLabelWidth: nameLabelWidth,
-                                                        numberOfLines: numberOfLines,
-                                                        iconPackMain: iconPackMain,
-                                                        iconPackSecondary: iconPackSecondary)
-            chunks.append(chunk)
-        }
-        
-        
-        let heroSpacingSqueezed = layoutSchemeType.getHeroSpacingLong(orientation: orientation,squeeze: .squeezed)
-        let heroSpacingStandard = layoutSchemeType.getHeroSpacingLong(orientation: orientation,squeeze: .standard)
-        let heroSpacingRelaxed = layoutSchemeType.getHeroSpacingLong(orientation: orientation,
-                                                                     
-                                                                     squeeze: .relaxed)
-        
+        let count = infoList.count
         
         let outsideBoxLeftSqueezed = layoutSchemeType.getOutsideBoxPaddingLeftLong(orientation: orientation,
                                                                                    squeeze: .squeezed,
@@ -131,21 +151,225 @@ struct GENERIC_SEGMENT_LAYOUT {
         let slaveRightRelaxed = layoutSchemeType.getSlavePaddingRightLong(orientation: orientation,
                                                                           squeeze: .relaxed)
         
-        var consumed = 0
+        let buttonLayouts = infoList.map { _ in
+            HORIZONTAL_LAYOUT_STACKED()
+        }
         
-        for chunk in chunks {
+        var consumed = 0
+        var largestButtonWidth = 0
+        for index in 0..<count {
+            let buttonLayout = buttonLayouts[index]
+            let info = infoList[index]
             
-            let nameLabelWidth = chunk.nameLabelWidth
-            let numberOfLines = chunk.numberOfLines
-            let iconMain = chunk.iconPackMain.getTextIcon(orientation: orientation,
-                                                          layoutSchemeFlavor: .long,
-                                                          numberOfLines: numberOfLines,
-                                                          isDarkMode: false,
-                                                          isEnabled: true)
-            
+            let nameLabelWidth = info.nameLabelWidth
+            let numberOfLines = info.numberOfLines
+            let iconMain = info.iconPackMain.getTextIcon(orientation: orientation,
+                                                         layoutSchemeFlavor: .stackedLarge,
+                                                             numberOfLines: numberOfLines,
+                                                             isDarkMode: false,
+                                                             isEnabled: true)
             let iconMainWidth = iconMain.width
+            
             let iconSecondaryWidth: Int
-            if let iconPackSecondary = chunk.iconPackSecondary {
+            if let iconPackSecondary = info.iconPackSecondary {
+                let iconSecondary = iconPackSecondary.getTextIcon(orientation: orientation,
+                                                                  layoutSchemeFlavor: .long,
+                                                                  numberOfLines: 0,
+                                                                  isDarkMode: false,
+                                                                  isEnabled: true)
+                iconSecondaryWidth = iconSecondary.width
+            } else {
+                iconSecondaryWidth = 0
+            }
+            
+            let heroWidth = max(nameLabelWidth, iconMainWidth)
+            let buttonWidth = heroWidth + iconSecondaryWidth
+            consumed += buttonWidth
+            
+            buttonLayout.__computedWidth = buttonWidth
+            largestButtonWidth = max(largestButtonWidth, buttonWidth)
+        }
+        
+        for index in 0..<count {
+            let buttonLayout = buttonLayouts[index]
+            let __extraWidthForAllEqual = (largestButtonWidth - buttonLayout.__computedWidth)
+            buttonLayout.__extraLeftForAllEqual = (__extraWidthForAllEqual >> 1)
+            buttonLayout.__extraRightForAllEqual = (__extraWidthForAllEqual - buttonLayout.__extraRightForAllEqual)
+        }
+        
+        
+        let globalLayout = HORIZONTAL_LAYOUT()
+        
+        _ = globalLayout.expandOutsideBoxFilling(consumed: &consumed, layoutWidth: layoutWidth,
+                                           left: outsideBoxLeftSqueezed, right: outsideBoxRightSqueezed)
+        for index in 0..<count {
+            let buttonLayout = buttonLayouts[index]
+            _ = buttonLayout.expandHeroFilling(consumed: &consumed, layoutWidth: layoutWidth,
+                                         left: heroLeftSqueezed, right: heroRightSqueezed)
+            _ = buttonLayout.expandSlaveFilling(consumed: &consumed, layoutWidth: layoutWidth,
+                                          left: slaveLeftSqueezed, right: slaveRightSqueezed)
+        }
+        
+        var isLooping = true
+        
+        while isLooping {
+            isLooping = false
+            if globalLayout.expandOutsideBoxOnce(consumed: &consumed, layoutWidth: layoutWidth,
+                                              left: outsideBoxLeftStandard, right: outsideBoxRightStandard) {
+                isLooping = true
+            }
+            for index in 0..<count {
+                let buttonLayout = buttonLayouts[index]
+                if buttonLayout.expandHeroOnce(consumed: &consumed, layoutWidth: layoutWidth,
+                                            left: heroLeftStandard, right: heroRightStandard) {
+                    isLooping = true
+                }
+                if buttonLayout.expandSlaveOnce(consumed: &consumed, layoutWidth: layoutWidth,
+                                             left: slaveLeftStandard, right: slaveRightStandard) {
+                    isLooping = true
+                }
+            }
+        }
+        
+        isLooping = true
+        
+        while isLooping {
+            isLooping = false
+            if globalLayout.expandOutsideBoxOnce(consumed: &consumed, layoutWidth: layoutWidth,
+                                           left: outsideBoxLeftRelaxed, right: outsideBoxRightRelaxed) {
+                isLooping = true
+            }
+            
+            for index in 0..<count {
+                let buttonLayout = buttonLayouts[index]
+                
+                if buttonLayout.expandHeroOnce(consumed: &consumed, layoutWidth: layoutWidth,
+                                         left: heroLeftRelaxed, right: heroRightRelaxed) {
+                    isLooping = true
+                }
+                if buttonLayout.expandSlaveOnce(consumed: &consumed, layoutWidth: layoutWidth,
+                                          left: slaveLeftRelaxed, right: slaveRightRelaxed) {
+                    isLooping = true
+                }
+            }
+        }
+        
+        if attemptEqualWidthsForAllButtons {
+            isLooping = true
+            while isLooping {
+                isLooping = false
+                for index in 0..<count {
+                    let buttonLayout = buttonLayouts[index]
+                    if buttonLayout.expandHeroOnce(consumed: &consumed,
+                                                   layoutWidth: layoutWidth,
+                                                   left: heroLeftRelaxed + buttonLayout.__extraLeftForAllEqual,
+                                                   right: heroRightRelaxed + buttonLayout.__extraRightForAllEqual) {
+                        isLooping = true
+                    }
+                }
+            }
+        }
+        
+        return StackedResponse(globalLayout: globalLayout, buttonLayouts: buttonLayouts)
+    }
+    
+    static func computeLong(layoutSchemeType: LayoutScheme.Type,
+                            layoutWidth: Int,
+                            orientation: Orientation,
+                            infoList: [SEGMENT_LAYOUT_INFO],
+                            attemptEqualWidthsForAllButtons: Bool,
+                            neighborTypeLeft: ToolInterfaceElementType?,
+                            neighborTypeRight: ToolInterfaceElementType?) -> LongResponse {
+        
+        let count = infoList.count
+        
+        let heroSpacingSqueezed = layoutSchemeType.getHeroSpacingLong(orientation: orientation,
+                                                                      squeeze: .squeezed)
+        let heroSpacingStandard = layoutSchemeType.getHeroSpacingLong(orientation: orientation,
+                                                                      squeeze: .standard)
+        let heroSpacingRelaxed = layoutSchemeType.getHeroSpacingLong(orientation: orientation,
+                                                                     squeeze: .relaxed)
+        
+        let outsideBoxLeftSqueezed = layoutSchemeType.getOutsideBoxPaddingLeftLong(orientation: orientation,
+                                                                                   squeeze: .squeezed,
+                                                                                   neighborTypeLeft: neighborTypeLeft,
+                                                                                   neighborTypeRight: neighborTypeRight)
+        let outsideBoxLeftStandard = layoutSchemeType.getOutsideBoxPaddingLeftLong(orientation: orientation,
+                                                                                   squeeze: .standard,
+                                                                                   neighborTypeLeft: neighborTypeLeft,
+                                                                                   neighborTypeRight: neighborTypeRight)
+        let outsideBoxLeftRelaxed = layoutSchemeType.getOutsideBoxPaddingLeftLong(orientation: orientation,
+                                                                                  squeeze: .relaxed,
+                                                                                  neighborTypeLeft: neighborTypeLeft,
+                                                                                  neighborTypeRight: neighborTypeRight)
+        
+        let outsideBoxRightSqueezed = layoutSchemeType.getOutsideBoxPaddingRightLong(orientation: orientation,
+                                                                                     squeeze: .squeezed,
+                                                                                     neighborTypeLeft: neighborTypeLeft,
+                                                                                     neighborTypeRight: neighborTypeRight)
+        let outsideBoxRightStandard = layoutSchemeType.getOutsideBoxPaddingRightLong(orientation: orientation,
+                                                                                     squeeze: .standard,
+                                                                                     neighborTypeLeft: neighborTypeLeft,
+                                                                                     neighborTypeRight: neighborTypeRight)
+        let outsideBoxRightRelaxed = layoutSchemeType.getOutsideBoxPaddingRightLong(orientation: orientation,
+                                                                                    squeeze: .relaxed,
+                                                                                    neighborTypeLeft: neighborTypeLeft,
+                                                                                    neighborTypeRight: neighborTypeRight)
+        
+        let heroLeftSqueezed = layoutSchemeType.getHeroPaddingLeftLong(orientation: orientation,
+                                                                       squeeze: .squeezed)
+        let heroLeftStandard = layoutSchemeType.getHeroPaddingLeftLong(orientation: orientation,
+                                                                       squeeze: .standard)
+        let heroLeftRelaxed = layoutSchemeType.getHeroPaddingLeftLong(orientation: orientation,
+                                                                      squeeze: .relaxed)
+        
+        
+        let heroRightSqueezed = layoutSchemeType.getHeroPaddingRightLong(orientation: orientation,
+                                                                         squeeze: .squeezed)
+        let heroRightStandard = layoutSchemeType.getHeroPaddingRightLong(orientation: orientation,
+                                                                         squeeze: .standard)
+        let heroRightRelaxed = layoutSchemeType.getHeroPaddingRightLong(orientation: orientation,
+                                                                        squeeze: .relaxed)
+        
+        
+        
+        let slaveLeftSqueezed = layoutSchemeType.getSlavePaddingLeftLong(orientation: orientation,
+                                                                         squeeze: .squeezed)
+        let slaveLeftStandard = layoutSchemeType.getSlavePaddingLeftLong(orientation: orientation,
+                                                                         squeeze: .standard)
+        let slaveLeftRelaxed = layoutSchemeType.getSlavePaddingLeftLong(orientation: orientation,
+                                                                        squeeze: .relaxed)
+        
+        
+        let slaveRightSqueezed = layoutSchemeType.getSlavePaddingRightLong(orientation: orientation,
+                                                                           squeeze: .squeezed)
+        let slaveRightStandard = layoutSchemeType.getSlavePaddingRightLong(orientation: orientation,
+                                                                           squeeze: .standard)
+        let slaveRightRelaxed = layoutSchemeType.getSlavePaddingRightLong(orientation: orientation,
+                                                                          squeeze: .relaxed)
+        
+        let buttonLayouts = infoList.map { _ in
+            HORIZONTAL_LAYOUT_LONG()
+        }
+        
+        
+        var consumed = 0
+        var largestButtonWidth = 0
+        for index in 0..<count {
+            let buttonLayout = buttonLayouts[index]
+            let info = infoList[index]
+            
+            let nameLabelWidth = info.nameLabelWidth
+            let numberOfLines = info.numberOfLines
+            let iconMain = info.iconPackMain.getTextIcon(orientation: orientation,
+                                                             layoutSchemeFlavor: .long,
+                                                             numberOfLines: numberOfLines,
+                                                             isDarkMode: false,
+                                                             isEnabled: true)
+            let iconMainWidth = iconMain.width
+            
+            let iconSecondaryWidth: Int
+            if let iconPackSecondary = info.iconPackSecondary {
                 let iconSecondary = iconPackSecondary.getTextIcon(orientation: orientation,
                                                                   layoutSchemeFlavor: .long,
                                                                   numberOfLines: numberOfLines,
@@ -156,20 +380,33 @@ struct GENERIC_SEGMENT_LAYOUT {
                 iconSecondaryWidth = 0
             }
             
-            consumed += nameLabelWidth
-            consumed += iconMainWidth
-            consumed += iconSecondaryWidth
+            let heroWidth = nameLabelWidth + iconMainWidth
+            let buttonWidth = heroWidth + iconSecondaryWidth
+            consumed += buttonWidth
+            
+            buttonLayout.__computedWidth = buttonWidth
+            largestButtonWidth = max(largestButtonWidth, buttonWidth)
         }
         
-        for chunk in chunks {
-            let layout = chunk.layout
-            _ = layout.expandOutsideBoxFilling(consumed: &consumed, layoutWidth: layoutWidth,
-                                               left: outsideBoxLeftSqueezed, right: outsideBoxRightSqueezed)
-            _ = layout.expandHeroFilling(consumed: &consumed, layoutWidth: layoutWidth,
+        for index in 0..<count {
+            let buttonLayout = buttonLayouts[index]
+            let __extraWidthForAllEqual = (largestButtonWidth - buttonLayout.__computedWidth)
+            buttonLayout.__extraLeftForAllEqual = (__extraWidthForAllEqual >> 1)
+            buttonLayout.__extraRightForAllEqual = (__extraWidthForAllEqual - buttonLayout.__extraRightForAllEqual)
+        }
+        
+        let globalLayout = HORIZONTAL_LAYOUT()
+        
+        _ = globalLayout.expandOutsideBoxFilling(consumed: &consumed, layoutWidth: layoutWidth,
+                                           left: outsideBoxLeftSqueezed, right: outsideBoxRightSqueezed)
+        for index in 0..<count {
+            let buttonLayout = buttonLayouts[index]
+            
+            _ = buttonLayout.expandHeroFilling(consumed: &consumed, layoutWidth: layoutWidth,
                                          left: heroLeftSqueezed, right: heroRightSqueezed)
-            _ = layout.expandSlaveFilling(consumed: &consumed, layoutWidth: layoutWidth,
+            _ = buttonLayout.expandSlaveFilling(consumed: &consumed, layoutWidth: layoutWidth,
                                           left: slaveLeftSqueezed, right: slaveRightSqueezed)
-            _ = layout.expandHeroSpacingFilling(consumed: &consumed, layoutWidth: layoutWidth,
+            _ = buttonLayout.expandHeroSpacingFilling(consumed: &consumed, layoutWidth: layoutWidth,
                                                 space: heroSpacingSqueezed)
         }
         
@@ -177,30 +414,73 @@ struct GENERIC_SEGMENT_LAYOUT {
         
         while isLooping {
             isLooping = false
-            for chunk in chunks {
-                let layout = chunk.layout
-                if layout.expandOutsideBoxOnce(consumed: &consumed, layoutWidth: layoutWidth,
-                                                  left: outsideBoxLeftStandard, right: outsideBoxRightStandard) {
-                    isLooping = true
-                }
-                if layout.expandHeroOnce(consumed: &consumed, layoutWidth: layoutWidth,
+            if globalLayout.expandOutsideBoxOnce(consumed: &consumed, layoutWidth: layoutWidth,
+                                              left: outsideBoxLeftStandard, right: outsideBoxRightStandard) {
+                isLooping = true
+            }
+            for index in 0..<count {
+                let buttonLayout = buttonLayouts[index]
+                if buttonLayout.expandHeroOnce(consumed: &consumed, layoutWidth: layoutWidth,
                                             left: heroLeftStandard, right: heroRightStandard) {
                     isLooping = true
                 }
-                if layout.expandSlaveOnce(consumed: &consumed, layoutWidth: layoutWidth,
+                if buttonLayout.expandSlaveOnce(consumed: &consumed, layoutWidth: layoutWidth,
                                              left: slaveLeftStandard, right: slaveRightStandard) {
+                    isLooping = true
+                }
+                if buttonLayout.expandHeroSpacingOnce(consumed: &consumed,
+                                                      layoutWidth: layoutWidth,
+                                                      space: heroSpacingStandard) {
                     isLooping = true
                 }
             }
         }
         
+        isLooping = true
         
-        
-        var result = [HORIZONTAL_LAYOUT_LONG]()
-        for chunk in chunks {
-            result.append(chunk.layout)
+        while isLooping {
+            isLooping = false
+            if globalLayout.expandOutsideBoxOnce(consumed: &consumed, layoutWidth: layoutWidth,
+                                           left: outsideBoxLeftRelaxed, right: outsideBoxRightRelaxed) {
+                isLooping = true
+            }
+            
+            for index in 0..<count {
+                let buttonLayout = buttonLayouts[index]
+                
+                if buttonLayout.expandHeroOnce(consumed: &consumed, layoutWidth: layoutWidth,
+                                         left: heroLeftRelaxed, right: heroRightRelaxed) {
+                    isLooping = true
+                }
+                if buttonLayout.expandSlaveOnce(consumed: &consumed, layoutWidth: layoutWidth,
+                                          left: slaveLeftRelaxed, right: slaveRightRelaxed) {
+                    isLooping = true
+                }
+                if buttonLayout.expandHeroSpacingOnce(consumed: &consumed,
+                                                      layoutWidth: layoutWidth,
+                                                      space: heroSpacingRelaxed) {
+                    isLooping = true
+                }
+            }
         }
-        return result
+        
+        if attemptEqualWidthsForAllButtons {
+            isLooping = true
+            while isLooping {
+                isLooping = false
+                for index in 0..<count {
+                    let buttonLayout = buttonLayouts[index]
+                    if buttonLayout.expandHeroOnce(consumed: &consumed,
+                                                   layoutWidth: layoutWidth,
+                                                   left: heroLeftRelaxed + buttonLayout.__extraLeftForAllEqual,
+                                                   right: heroRightRelaxed + buttonLayout.__extraRightForAllEqual) {
+                        isLooping = true
+                    }
+                }
+            }
+        }
+        
+        return LongResponse(globalLayout: globalLayout, buttonLayouts: buttonLayouts)
     }
     
 }

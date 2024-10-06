@@ -103,7 +103,7 @@ struct ToolRowViewContent: View {
         }
         
         if toolNode.element.type == .segment {
-            MagicalSegmentedPickerPrimary()
+            MagicalSegmentedPicker()
                 .environment((toolNode.magicalViewModel as! MagicalSegmentedPickerViewModel))
         }
         

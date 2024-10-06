@@ -7,6 +7,40 @@
 
 import Foundation
 
+struct FlexFavoringOneLineLabelData {
+    let squeezedOneLineWidth: Int
+    let standardOneLineWidth: Int
+    let relaxedOneLineWidth: Int
+    
+    let squeezedTwoLineWidth: Int
+    let standardTwoLineWidth: Int
+    let relaxedTwoLineWidth: Int
+}
+
+struct FlexConvertibleData {
+    let squeezedWidthLong: Int
+    let standardWidthLong: Int
+    let relaxedWidthLong: Int
+    
+    let squeezedWidthStackedLarge: Int
+    let standardWidthStackedLarge: Int
+    let relaxedWidthStackedLarge: Int
+    
+    let squeezedWidthStackedMedium: Int
+    let standardWidthStackedMedium: Int
+    let relaxedWidthStackedMedium: Int
+    
+    let squeezedWidthStackedSmall: Int
+    let standardWidthStackedSmall: Int
+    let relaxedWidthStackedSmall: Int
+}
+
+struct FlexLongData {
+    let squeezedWidth: Int
+    let standardWidth: Int
+    let relaxedWidth: Int
+}
+
 struct FlexSexyStepperData {
     let minimumWidthLarge: Int
     let standardWidthLarge: Int
@@ -135,24 +169,6 @@ struct FlexDividerSpacerDividerData {
     let standardWidth: Int
 }
 
-struct FlexConvertibleData {
-    let squeezedWidthLong: Int
-    let standardWidthLong: Int
-    let relaxedWidthLong: Int
-    
-    let squeezedWidthStackedLarge: Int
-    let standardWidthStackedLarge: Int
-    let relaxedWidthStackedLarge: Int
-    
-    let squeezedWidthStackedMedium: Int
-    let standardWidthStackedMedium: Int
-    let relaxedWidthStackedMedium: Int
-    
-    let squeezedWidthStackedSmall: Int
-    let standardWidthStackedSmall: Int
-    let relaxedWidthStackedSmall: Int
-}
-
 struct FlexGreenButtonData {
     let minimumWidth: Int
     let standardWidth: Int
@@ -183,13 +199,6 @@ struct FlexCheckBoxData {
     let relaxedWidthStackedSmall: Int
 }
 
-struct FlexFavoringOneLineLabelData {
-    let minimumWidth: Int
-    let twoLineWidth: Int
-    let oneLineWidth: Int
-    let oneLineWidthPadded: Int
-}
-
 enum ToolInterfaceElementFlex {
     case fixed(Int)
     
@@ -199,15 +208,14 @@ enum ToolInterfaceElementFlex {
     
     case iconButton(FlexIconButtonData)
     
+    case segment(FlexConvertibleData)
+    
     case textIconButton(FlexConvertibleData)
-    
     case sexyButton(FlexConvertibleData)
-    
     case sexyCheckBox(FlexConvertibleData)
     
-    case greenButton(FlexGreenButtonData)
+    case greenButton(FlexLongData)
     
-    case segment(FlexSegmentData)
     case mainTab(FlexMainTabData)
     case createSwatch(FlexCreateSwatchData)
     

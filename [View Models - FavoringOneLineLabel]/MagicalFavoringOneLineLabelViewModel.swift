@@ -14,10 +14,7 @@ import SwiftUI
         FavoringOneLineLabelLayout.self
     }
     
-    var universalPaddingLeft = 0
-    var universalPaddingRight = 0
-    
-    var isTwoLine = false
+    @MainActor var isTwoLine = false
     
     let favoringOneLineLabelConfiguration: ToolInterfaceElementFavoringOneLineLabelConfiguration
     @MainActor init(orientation: Orientation,
@@ -34,59 +31,100 @@ import SwiftUI
         
         let layoutSchemeFlavor = getLayoutSchemeFlavor()
         
+        let outsideBoxLeftSqueezed = FavoringOneLineLabelLayout.getOutsideBoxPaddingLeftLong(orientation: orientation,
+                                                                                             squeeze: .squeezed,
+                                                                                             neighborTypeLeft: neighborTypeLeft,
+                                                                                             neighborTypeRight: neighborTypeRight)
+        let outsideBoxLeftStandard = FavoringOneLineLabelLayout.getOutsideBoxPaddingLeftLong(orientation: orientation,
+                                                                                             squeeze: .standard,
+                                                                                             neighborTypeLeft: neighborTypeLeft,
+                                                                                             neighborTypeRight: neighborTypeRight)
+        let outsideBoxLeftRelaxed = FavoringOneLineLabelLayout.getOutsideBoxPaddingLeftLong(orientation: orientation,
+                                                                                            squeeze: .relaxed,
+                                                                                            neighborTypeLeft: neighborTypeLeft,
+                                                                                            neighborTypeRight: neighborTypeRight)
         
-        let universalPaddingLeftSqueezed = FavoringOneLineLabelLayout.getUniversalPaddingLeft(orientation: orientation,
-                                                                                        flavor: layoutSchemeFlavor,
-                                                                                        squeeze: .squeezed,
-                                                                                        neighborTypeLeft: neighborTypeLeft,
-                                                                                        neighborTypeRight: neighborTypeRight)
-        let universalPaddingLeftStandard = FavoringOneLineLabelLayout.getUniversalPaddingLeft(orientation: orientation,
-                                                                                        flavor: layoutSchemeFlavor,
-                                                                                        squeeze: .standard,
-                                                                                        neighborTypeLeft: neighborTypeLeft,
-                                                                                        neighborTypeRight: neighborTypeRight)
-        let universalPaddingRightSqueezed = FavoringOneLineLabelLayout.getUniversalPaddingRight(orientation: orientation,
-                                                                                          flavor: layoutSchemeFlavor,
-                                                                                          squeeze: .squeezed,
-                                                                                          neighborTypeLeft: neighborTypeLeft,
-                                                                                          neighborTypeRight: neighborTypeRight)
-        let universalPaddingRightStandard = FavoringOneLineLabelLayout.getUniversalPaddingRight(orientation: orientation,
-                                                                                          flavor: layoutSchemeFlavor,
-                                                                                          squeeze: .standard,
-                                                                                          neighborTypeLeft: neighborTypeLeft,
-                                                                                          neighborTypeRight: neighborTypeRight)
+        let outsideBoxRightSqueezed = FavoringOneLineLabelLayout.getOutsideBoxPaddingRightLong(orientation: orientation,
+                                                                                               squeeze: .squeezed,
+                                                                                               neighborTypeLeft: neighborTypeLeft,
+                                                                                               neighborTypeRight: neighborTypeRight)
+        let outsideBoxRightStandard = FavoringOneLineLabelLayout.getOutsideBoxPaddingRightLong(orientation: orientation,
+                                                                                               squeeze: .standard,
+                                                                                               neighborTypeLeft: neighborTypeLeft,
+                                                                                               neighborTypeRight: neighborTypeRight)
+        let outsideBoxRightRelaxed = FavoringOneLineLabelLayout.getOutsideBoxPaddingRightLong(orientation: orientation,
+                                                                                              squeeze: .relaxed,
+                                                                                              neighborTypeLeft: neighborTypeLeft,
+                                                                                              neighborTypeRight: neighborTypeRight)
         
         var _isTwoLine = false
         
-        var _universalPaddingLeft = universalPaddingLeftSqueezed
-        var _universalPaddingRight = universalPaddingRightSqueezed
+        var _outsideBoxLeft = 0
+        var _outsideBoxRight = 0
         
+        let twoLineWidth = favoringOneLineLabelConfiguration.twoLineWidth + (outsideBoxLeftSqueezed + outsideBoxRightSqueezed)
+        let oneLineWidth = favoringOneLineLabelConfiguration.oneLineWidth + (outsideBoxLeftSqueezed + outsideBoxRightSqueezed)
+        let twoLineThreshold = favoringOneLineLabelConfiguration.oneLineWidth + (outsideBoxLeftStandard + outsideBoxRightStandard)
         
-        let twoLineWidth = favoringOneLineLabelConfiguration.twoLineWidth + (universalPaddingLeftSqueezed + universalPaddingRightSqueezed)
-        let oneLineWidth = favoringOneLineLabelConfiguration.oneLineWidth + (universalPaddingLeftSqueezed + universalPaddingRightSqueezed)
-
         var consumedWidth = 0
-        
-        if layoutWidth >= oneLineWidth {
+        if favoringOneLineLabelConfiguration.twoLineText2.count <= 0 {
             consumedWidth = oneLineWidth
         } else {
-            _isTwoLine = true
-            consumedWidth = twoLineWidth
+            if layoutWidth >= twoLineThreshold {
+                consumedWidth = oneLineWidth
+            } else {
+                _isTwoLine = true
+                consumedWidth = twoLineWidth
+            }
         }
         
-        let leftOverWidth = (layoutWidth - consumedWidth)
-        if leftOverWidth > 0 {
-            let leftOverWidth2 = (leftOverWidth >> 1)
-            _universalPaddingLeft = leftOverWidth2
-            _universalPaddingRight = (leftOverWidth - leftOverWidth2)
+        var isLooping = true
+        while (consumedWidth < layoutWidth) && (isLooping == true) {
+            isLooping = false
+            if _outsideBoxLeft < outsideBoxLeftSqueezed {
+                isLooping = true
+                _outsideBoxLeft += 1
+                consumedWidth += 1
+            }
+            if _outsideBoxRight < outsideBoxRightSqueezed {
+                isLooping = true
+                _outsideBoxRight += 1
+                consumedWidth += 1
+            }
         }
         
-        // DOn't vardfvl;sdmg;l
+        isLooping = true
+        while (consumedWidth < layoutWidth) && (isLooping == true) {
+            isLooping = false
+            if _outsideBoxLeft < outsideBoxLeftStandard {
+                isLooping = true
+                _outsideBoxLeft += 1
+                consumedWidth += 1
+            }
+            if _outsideBoxRight < outsideBoxRightStandard {
+                isLooping = true
+                _outsideBoxRight += 1
+                consumedWidth += 1
+            }
+        }
         
+        isLooping = true
+        while (consumedWidth < layoutWidth) && (isLooping == true) {
+            isLooping = false
+            if _outsideBoxLeft < outsideBoxLeftRelaxed {
+                isLooping = true
+                _outsideBoxLeft += 1
+                consumedWidth += 1
+            }
+            if _outsideBoxRight < outsideBoxRightRelaxed {
+                isLooping = true
+                _outsideBoxRight += 1
+                consumedWidth += 1
+            }
+        }
         
-        
-        universalPaddingLeft = _universalPaddingLeft
-        universalPaddingRight = _universalPaddingRight
+        outsideBoxPaddingLeft = _outsideBoxLeft
+        outsideBoxPaddingRight = _outsideBoxRight
         isTwoLine = _isTwoLine
     }
 }

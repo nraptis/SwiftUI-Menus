@@ -473,14 +473,15 @@ func getToolNodeID() -> UInt16 {
                                                                                        neighborTypeLeft: neighborTypeLeft,
                                                                                        neighborTypeRight: neighborTypeRight)
         let oneLineWidthPadded = configuration.oneLineWidth + standardPaddingLeft + standardPaddingRight
-        let flexData = FlexFavoringOneLineLabelData(minimumWidth: minimumWidth,
-                                                    twoLineWidth: configuration.twoLineWidth,
-                                                    oneLineWidth: configuration.oneLineWidth,
-                                                    oneLineWidthPadded: oneLineWidthPadded)
+        let flex = ToolInterfaceViewModel.getFavoringOneLineLabelFlex(orientation: orientation,
+                                                                      configuration: configuration,
+                                                                      minimumWidth: minimumWidth,
+                                                                      neighborTypeLeft: neighborTypeLeft,
+                                                                      neighborTypeRight: neighborTypeRight)
         
         return ToolNode(id: getToolNodeID(),
                         element: .favoringOneLineLabel,
-                        flex: .favoringOneLineLabel(flexData),
+                        flex: flex,
                         magicalViewModel: viewModel,
                         neighborTypeLeft: neighborTypeLeft,
                         neighborTypeRight: neighborTypeRight)

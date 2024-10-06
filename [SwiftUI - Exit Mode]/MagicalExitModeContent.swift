@@ -46,9 +46,9 @@ struct MagicalExitModeContent: View {
         let line1 = configuration.nameLabelLine1
         let line2 = configuration.nameLabelLine2
         
-        let nameLabelFont = CheckBoxLayout.getNameLabelFont(orientation: orientation,
+        let nameLabelFont = ExitModeLayout.getNameLabelFont(orientation: orientation,
                                                             flavor: layoutSchemeFlavor)
-        let nameLabelVerticalSpacing = CheckBoxLayout.getNameLabelVerticalSpacing(orientation: orientation,
+        let nameLabelVerticalSpacing = ExitModeLayout.getNameLabelVerticalSpacing(orientation: orientation,
                                                                                   flavor: layoutSchemeFlavor)
         
         let nameLabelWidth: Int
@@ -89,8 +89,8 @@ struct MagicalExitModeContent: View {
             }
         }
         
-        let heroPaddingTopStacked = CheckBoxLayout.getHeroPaddingTopStacked(orientation: orientation)
-        let heroPaddingBottomStacked = CheckBoxLayout.getHeroPaddingBottomStacked(orientation: orientation)
+        let heroPaddingTopStacked = ExitModeLayout.getHeroPaddingTopStacked(orientation: orientation)
+        let heroPaddingBottomStacked = ExitModeLayout.getHeroPaddingBottomStacked(orientation: orientation)
         
         let slaveWidth = accentIcon.width
         let slaveHeight = accentIcon.height

@@ -8,10 +8,84 @@
 import Foundation
 import UIKit
 
+
+struct ToolInterfaceElementSegmentedPickerButtonConfiguration {
+    let id: UInt8
+    let iconPack: FramedConvertibleIconPack
+    let nameLabelLine1: String?
+    let nameLabelLine2: String?
+    let nameLabelNumberOfLines: Int
+    let nameLabelWidthLong: Int
+    let nameLabelWidthStackedLarge: Int
+    let nameLabelWidthStackedMedium: Int
+    let nameLabelWidthStackedSmall: Int
+    init(id: UInt8,
+         iconPack: FramedConvertibleIconPack,
+         orientation: Orientation,
+         nameLabelLine1: String?,
+         nameLabelLine2: String?) {
+        
+        self.id = id
+        self.iconPack = iconPack
+        self.nameLabelLine1 = nameLabelLine1
+        self.nameLabelLine2 = nameLabelLine2
+        
+        let _nameLabelNumberOfLines = ToolInterfaceTheme.getNumberOfLines(line1: nameLabelLine1,
+                                                                          line2: nameLabelLine2)
+        nameLabelWidthLong = SegmentedPickerLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+                                                                         line2: nameLabelLine2,
+                                                                         orientation: orientation,
+                                                                         flavor: .long) + 2
+        nameLabelWidthStackedLarge = SegmentedPickerLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+                                                                                 line2: nameLabelLine2,
+                                                                                 orientation: orientation,
+                                                                                 flavor: .stackedLarge) + 2
+        nameLabelWidthStackedMedium = SegmentedPickerLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+                                                                                  line2: nameLabelLine2,
+                                                                                  orientation: orientation,
+                                                                                  flavor: .stackedMedium) + 2
+        nameLabelWidthStackedSmall = SegmentedPickerLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+                                                                                 line2: nameLabelLine2,
+                                                                                 orientation: orientation,
+                                                                                 flavor: .stackedSmall) + 2
+        self.nameLabelNumberOfLines = _nameLabelNumberOfLines
+    }
+}
+
+extension ToolInterfaceElementSegmentedPickerButtonConfiguration: Identifiable {
+    
+}
+
+struct ToolInterfaceElementSegmentedPickerConfiguration {
+    let buttonConfigurations: [ToolInterfaceElementSegmentedPickerButtonConfiguration]
+}
+
+struct ToolInterfaceElementGreenButtonConfiguration {
+    let iconPack: FramedLongIconPack
+    let nameLabelLine1: String?
+    let nameLabelLine2: String?
+    let nameLabelNumberOfLines: Int
+    let nameLabelWidth: Int
+    init(iconPack: FramedLongIconPack,
+         orientation: Orientation,
+         nameLabelLine1: String?,
+         nameLabelLine2: String?) {
+        self.iconPack = iconPack
+        self.nameLabelLine1 = nameLabelLine1
+        self.nameLabelLine2 = nameLabelLine2
+        let _nameLabelNumberOfLines = ToolInterfaceTheme.getNumberOfLines(line1: nameLabelLine1,
+                                                                          line2: nameLabelLine2)
+        nameLabelWidth = GreenButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+                                                                 line2: nameLabelLine2,
+                                                                 orientation: orientation,
+                                                                 flavor: .long) + 2
+        self.nameLabelNumberOfLines = _nameLabelNumberOfLines
+    }
+}
+
 struct ToolInterfaceElementChangeModeConfiguration {
     let iconPack: FramedConvertibleIconPack
     let accentPack: FramedLongIconPack
-    
     let nameLabelLine1: String?
     let nameLabelLine2: String?
     let nameLabelNumberOfLines: Int
@@ -31,19 +105,21 @@ struct ToolInterfaceElementChangeModeConfiguration {
         
         let _nameLabelNumberOfLines = ToolInterfaceTheme.getNumberOfLines(line1: nameLabelLine1,
                                                                           line2: nameLabelLine2)
-        nameLabelWidthLong = ButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+        
+            //TODO: This is both...
+        nameLabelWidthLong = EnterModeLayout.getNameLabelTextWidth(line1: nameLabelLine1,
                                                                 line2: nameLabelLine2,
                                                                 orientation: orientation,
                                                                 flavor: .long) + 2
-        nameLabelWidthStackedLarge = ButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+        nameLabelWidthStackedLarge = EnterModeLayout.getNameLabelTextWidth(line1: nameLabelLine1,
                                                                         line2: nameLabelLine2,
                                                                         orientation: orientation,
                                                                         flavor: .stackedLarge) + 2
-        nameLabelWidthStackedMedium = ButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+        nameLabelWidthStackedMedium = EnterModeLayout.getNameLabelTextWidth(line1: nameLabelLine1,
                                                                          line2: nameLabelLine2,
                                                                          orientation: orientation,
                                                                          flavor: .stackedMedium) + 2
-        nameLabelWidthStackedSmall = ButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+        nameLabelWidthStackedSmall = EnterModeLayout.getNameLabelTextWidth(line1: nameLabelLine1,
                                                                         line2: nameLabelLine2,
                                                                         orientation: orientation,
                                                                         flavor: .stackedSmall) + 2
@@ -71,19 +147,19 @@ struct ToolInterfaceElementSexyCheckBoxConfiguration {
         
         let _nameLabelNumberOfLines = ToolInterfaceTheme.getNumberOfLines(line1: nameLabelLine1,
                                                                           line2: nameLabelLine2)
-        nameLabelWidthLong = ButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+        nameLabelWidthLong = CheckBoxLayout.getNameLabelTextWidth(line1: nameLabelLine1,
                                                                 line2: nameLabelLine2,
                                                                 orientation: orientation,
                                                                 flavor: .long) + 2
-        nameLabelWidthStackedLarge = ButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+        nameLabelWidthStackedLarge = CheckBoxLayout.getNameLabelTextWidth(line1: nameLabelLine1,
                                                                         line2: nameLabelLine2,
                                                                         orientation: orientation,
                                                                         flavor: .stackedLarge) + 2
-        nameLabelWidthStackedMedium = ButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+        nameLabelWidthStackedMedium = CheckBoxLayout.getNameLabelTextWidth(line1: nameLabelLine1,
                                                                          line2: nameLabelLine2,
                                                                          orientation: orientation,
                                                                          flavor: .stackedMedium) + 2
-        nameLabelWidthStackedSmall = ButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+        nameLabelWidthStackedSmall = CheckBoxLayout.getNameLabelTextWidth(line1: nameLabelLine1,
                                                                         line2: nameLabelLine2,
                                                                         orientation: orientation,
                                                                         flavor: .stackedSmall) + 2
@@ -560,66 +636,6 @@ struct ToolInterfaceElementButtonConfiguration {
 
 }
 
-struct ToolInterfaceElementSegmentedPickerButtonConfiguration {
-    let id: UInt8
-    let iconPack: FramedConvertibleIconPack
-    let nameLabelLine1: String?
-    let nameLabelLine2: String?
-    let nameLabelNumberOfLines: Int
-    let nameLabelWidthLong: Int
-    let nameLabelWidthStackedLarge: Int
-    let nameLabelWidthStackedMedium: Int
-    let nameLabelWidthStackedSmall: Int
-    init(id: UInt8,
-         iconPack: FramedConvertibleIconPack,
-         orientation: Orientation,
-         nameLabelLine1: String?,
-         nameLabelLine2: String?) {
-        self.id = id
-        self.iconPack = iconPack
-        self.nameLabelLine1 = nameLabelLine1
-        self.nameLabelLine2 = nameLabelLine2
-        let _nameLabelNumberOfLines = ToolInterfaceTheme.getNumberOfLines(line1: nameLabelLine1,
-                                                                          line2: nameLabelLine2)
-        nameLabelWidthLong = SegmentedPickerLayout.getNameLabelTextWidth(line1: nameLabelLine1,
-                                                                         line2: nameLabelLine2,
-                                                                         orientation: orientation,
-                                                                         flavor: .long) + 2
-        nameLabelWidthStackedLarge = SegmentedPickerLayout.getNameLabelTextWidth(line1: nameLabelLine1,
-                                                                                 line2: nameLabelLine2,
-                                                                                 orientation: orientation,
-                                                                                 flavor: .stackedLarge) + 2
-        nameLabelWidthStackedMedium = SegmentedPickerLayout.getNameLabelTextWidth(line1: nameLabelLine1,
-                                                                                  line2: nameLabelLine2,
-                                                                                  orientation: orientation,
-                                                                                  flavor: .stackedMedium) + 2
-        nameLabelWidthStackedSmall = SegmentedPickerLayout.getNameLabelTextWidth(line1: nameLabelLine1,
-                                                                                 line2: nameLabelLine2,
-                                                                                 orientation: orientation,
-                                                                                 flavor: .stackedSmall) + 2
-        self.nameLabelNumberOfLines = _nameLabelNumberOfLines
-    }
-    
-    func getTextIcon(orientation: Orientation,
-                     layoutSchemeFlavor: LayoutSchemeFlavor,
-                     isDarkMode: Bool,
-                     isEnabled: Bool) -> TextIconable {
-        return iconPack.getTextIcon(orientation: orientation,
-                                    layoutSchemeFlavor: layoutSchemeFlavor,
-                                    numberOfLines: nameLabelNumberOfLines,
-                                    isDarkMode: isDarkMode,
-        isEnabled: isEnabled)
-    }
-}
-
-extension ToolInterfaceElementSegmentedPickerButtonConfiguration: Identifiable {
-    
-}
-
-struct ToolInterfaceElementSegmentedPickerConfiguration {
-    let buttonConfigurations: [ToolInterfaceElementSegmentedPickerButtonConfiguration]
-}
-
 struct ToolInterfaceElementMainTabButtonConfiguration {
     let id: UInt8
     let iconPack: MainTabIconPack
@@ -765,41 +781,6 @@ struct ToolInterfaceElementIconButtonConfiguration {
     
 }
 
-struct ToolInterfaceElementGreenButtonConfiguration {
-    
-    let iconPack: GreenButtonIconPack
-    let nameLabelLine1: String?
-    let nameLabelLine2: String?
-    let nameLabelNumberOfLines: Int
-    let nameLabelWidth: Int
-    init(iconPack: GreenButtonIconPack,
-         orientation: Orientation,
-         nameLabelLine1: String?,
-         nameLabelLine2: String?) {
-        self.iconPack = iconPack
-        self.nameLabelLine1 = nameLabelLine1
-        self.nameLabelLine2 = nameLabelLine2
-        let _nameLabelNumberOfLines = ToolInterfaceTheme.getNumberOfLines(line1: nameLabelLine1,
-                                                                          line2: nameLabelLine2)
-        nameLabelWidth = GreenButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
-                                                                 line2: nameLabelLine2,
-                                                                 orientation: orientation,
-                                                                 flavor: .long) + 2
-        self.nameLabelNumberOfLines = _nameLabelNumberOfLines
-    }
-    
-    func getTextIcon(orientation: Orientation,
-                     layoutSchemeFlavor: LayoutSchemeFlavor,
-                     isDarkMode: Bool,
-                     isEnabled: Bool) -> TextIconable {
-        return iconPack.getTextIcon(orientation: orientation,
-                                    layoutSchemeFlavor: layoutSchemeFlavor,
-                                    numberOfLines: nameLabelNumberOfLines,
-                                    isDarkMode: isDarkMode,
-        isEnabled: isEnabled)
-    }
-}
-
 struct ToolInterfaceElementFavoringOneLineLabelConfiguration {
     
     let oneLineText: String
@@ -835,12 +816,13 @@ struct ToolInterfaceElementFavoringOneLineLabelConfiguration {
             }
             var bestJoined1 = bestFirstLine.joined(separator: " ")
             var bestJoined2 = bestSecondLine.joined(separator: " ")
-            var bestWidth1 = FavoringOneLineLabelLayout.getNameLabelTextWidth(line1: bestJoined1,
+            let bestWidth1 = FavoringOneLineLabelLayout.getNameLabelTextWidth(line1: bestJoined1,
                                                                               orientation: orientation,
                                                                               flavor: .long)
-            var bestWidth2 = FavoringOneLineLabelLayout.getNameLabelTextWidth(line1: bestJoined2,
+            let bestWidth2 = FavoringOneLineLabelLayout.getNameLabelTextWidth(line1: bestJoined2,
                                                                               orientation: orientation,
                                                                               flavor: .long)
+            
             var bestWidth = max(bestWidth1, bestWidth2)
             var possibleSplit = 2
             let ceiling = words.count

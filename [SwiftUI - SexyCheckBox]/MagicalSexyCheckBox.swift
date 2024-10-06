@@ -35,8 +35,8 @@ struct MagicalSexyCheckBox: View {
     
     func bodyContent() -> some View {
         let layoutSchemeFlavor = magicalViewModel.getLayoutSchemeFlavor()
-        let outsideBoxPaddingTop = ButtonLayout.getOutsideBoxPaddingTop(orientation: magicalViewModel.orientation)
-        let outsideBoxPaddingBottom = ButtonLayout.getOutsideBoxPaddingTop(orientation: magicalViewModel.orientation)
+        let outsideBoxPaddingTop = CheckBoxLayout.getOutsideBoxPaddingTop(orientation: magicalViewModel.orientation)
+        let outsideBoxPaddingBottom = CheckBoxLayout.getOutsideBoxPaddingTop(orientation: magicalViewModel.orientation)
         return MagicalSexyCheckBoxButton(layoutSchemeFlavor: layoutSchemeFlavor,
                                          outsideBoxPaddingTop: outsideBoxPaddingTop,
                                          outsideBoxPaddingBottom: outsideBoxPaddingBottom)

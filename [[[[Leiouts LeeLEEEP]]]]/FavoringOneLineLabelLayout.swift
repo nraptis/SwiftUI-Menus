@@ -10,6 +10,36 @@ import UIKit
 
 struct FavoringOneLineLabelLayout: LayoutScheme {
     
+    static func getOutsideBoxPaddingTop(orientation: Orientation) -> Int {
+        7
+    }
+    static func getOutsideBoxPaddingBottom(orientation: Orientation) -> Int {
+        13
+    }
+    
+    static func getOutsideBoxPaddingRightLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
+                                                neighborTypeRight: ToolInterfaceElementType?) -> Int {
+        switch squeeze {
+        case .squeezed:
+            5
+        case .standard:
+            11
+        case .relaxed:
+            17
+        }
+    }
+    static func getOutsideBoxPaddingLeftLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
+                                             neighborTypeRight: ToolInterfaceElementType?) -> Int {
+        switch squeeze {
+        case .squeezed:
+            8
+        case .standard:
+            14
+        case .relaxed:
+            24
+        }
+    }
+    
     static func getNameLabelFont(orientation: Orientation, flavor: LayoutSchemeFlavor) -> UIFont {
         if Device.isPad {
             return UIFont.systemFont(ofSize: 14.0, weight: .bold)

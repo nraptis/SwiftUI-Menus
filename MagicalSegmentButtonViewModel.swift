@@ -13,27 +13,28 @@ import SwiftUI
 
 @Observable class MagicalSegmentButtonViewModel {
     
-    @ObservationIgnored let nameLabelWidth: Int
-    @ObservationIgnored let numberOfLines: Int
-    @ObservationIgnored let iconPackMain: (any TextIconPackable)
-    @ObservationIgnored let iconPackSecondary: (any TextIconPackable)?
-    
-    @MainActor init(nameLabelWidth: Int,
+    //@ObservationIgnored
+    let numberOfLines: Int
+    //@ObservationIgnored
+    let iconPackMain: (any TextIconPackable)
+    //@ObservationIgnored
+    let iconPackSecondary: (any TextIconPackable)?
+    //@ObservationIgnored
+    let orientation: Orientation
+    @MainActor init(orientation: Orientation,
                     numberOfLines: Int,
                     iconPackMain: any TextIconPackable,
                     iconPackSecondary: (any TextIconPackable)?,
                     isDarkModeEnabled: Bool) {
-        self.nameLabelWidth = nameLabelWidth
+        self.orientation = orientation
         self.numberOfLines = numberOfLines
         self.iconPackMain = iconPackMain
         self.iconPackSecondary = iconPackSecondary
         self.isDarkModeEnabled = isDarkModeEnabled
     }
     
-    @MainActor var x = 0
-    @MainActor var y = 0
-    @MainActor var width = 128
-    
+    @MainActor var nameLabelWidth = 32
+
     @MainActor var slavePaddingLeft = 0
     @MainActor var slavePaddingRight = 0
     

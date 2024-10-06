@@ -7,7 +7,7 @@
 
 import Foundation
 
-@Observable class MagicalSegmentedPickerButtonViewModel {
+@Observable class MagicalSegmentedPickerButtonViewModel: MagicalSegmentButtonViewModel {
     
     deinit {
         if ApplicationController.DEBUG_DEALLOCS {
@@ -24,23 +24,17 @@ import Foundation
     var universalPaddingLeft = 0
     var universalPaddingRight = 0
     
-    var x = 0
-    var y = 0
-    var width = 128
-    
-    private(set) var isDarkModeEnabled = false
-    func setDarkModeEnabled(isDarkModeEnabled: Bool) {
-        if isDarkModeEnabled != self.isDarkModeEnabled {
-            self.isDarkModeEnabled = isDarkModeEnabled
-        }
-    }
-    
-    let orientation: Orientation
     let segmentedPickerButtonConfiguration: ToolInterfaceElementSegmentedPickerButtonConfiguration
-    init(orientation: Orientation, segmentedPickerButtonConfiguration: ToolInterfaceElementSegmentedPickerButtonConfiguration) {
-        self.orientation = orientation
+    @MainActor init(orientation: Orientation,
+                    segmentedPickerButtonConfiguration: ToolInterfaceElementSegmentedPickerButtonConfiguration,
+                    isDarkModeEnabled: Bool) {
         self.segmentedPickerButtonConfiguration = segmentedPickerButtonConfiguration
-        isDarkModeEnabled = ApplicationController.isDarkModeEnabled
+        super.init(orientation: orientation,
+                   numberOfLines: segmentedPickerButtonConfiguration.nameLabelNumberOfLines,
+                   iconPackMain: segmentedPickerButtonConfiguration.iconPack,
+                   iconPackSecondary: nil,
+                   isDarkModeEnabled: isDarkModeEnabled)
+        
     }
 }
 

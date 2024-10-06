@@ -9,6 +9,14 @@ import UIKit
 
 struct CheckBoxLayout: LayoutScheme {
     
+    static func getHeroPaddingTopStacked(orientation: Orientation) -> Int {
+        if Device.isPad {
+            return 2 + 3
+        } else {
+            return 1 + 3
+        }
+    }
+    
     static func getSlavePaddingRightStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
         switch squeeze {
         case .squeezed:
@@ -20,13 +28,7 @@ struct CheckBoxLayout: LayoutScheme {
         }
     }
     
-    static func getHeroPaddingTopStacked(orientation: Orientation) -> Int {
-        if Device.isPad {
-            return 2 + 3
-        } else {
-            return 1 + 3
-        }
-    }
+    
     
     static func getNameLabelFont(orientation: Orientation, flavor: LayoutSchemeFlavor) -> UIFont {
         if Device.isPad {
@@ -204,7 +206,7 @@ struct CheckBoxLayout: LayoutScheme {
                                         numberOfLines: nameLabelNumberOfLines,
                                         isDarkMode: false,
                                         isEnabled: true)
-        let checkBox = MagicalSexyCheckBoxViewModel.checkBoxCheck.getTextIcon(orientation: orientation,
+        let checkBox = FramedLongIconLibrary.checkBoxCheck.getTextIcon(orientation: orientation,
                                                                               layoutSchemeFlavor: flavor,
                                                                               numberOfLines: 1,
                                                                               isDarkMode: false,

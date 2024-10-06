@@ -101,8 +101,8 @@ extension ToolInterfaceViewModel {
                      
                      Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
                      
-                     getExitZoomExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getExitTimeLineExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getDoneGreenButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getCreateSceneGreenButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
                      getRotateJiggleLeftSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),

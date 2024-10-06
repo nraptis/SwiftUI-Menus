@@ -1,5 +1,5 @@
 //
-//  MagicalSegmentedPickerPrimarySegmentContent.swift
+//  MagicalSegmentedPickerSegmentContent.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 3/24/24.
@@ -7,7 +7,128 @@
 
 import SwiftUI
 
-struct MagicalSegmentedPickerPrimarySegmentContent: View {
+struct MagicalSegmentedPickerSegmentContent: View {
+    
+    @Environment(MagicalSegmentedPickerViewModel.self) var magicalViewModel
+    @Environment(MagicalSegmentedPickerButtonViewModel.self) var magicalButtonViewModel
+    
+    let layoutSchemeFlavor: LayoutSchemeFlavor
+    let layoutHeight: Int
+    let isSelected: Bool
+    let isPressed: Bool
+    
+    var body: some View {
+        
+        let layoutWidth = magicalButtonViewModel.layoutWidth
+        let orientation = magicalViewModel.orientation
+        let configuration = magicalButtonViewModel.segmentedPickerButtonConfiguration
+        let isDarkMode = magicalViewModel.isDarkModeEnabled
+        let isEnabled = magicalViewModel.isEnabled
+        
+        let isLong: Bool
+        switch layoutSchemeFlavor {
+        case .long:
+            isLong = true
+        default:
+            isLong = false
+        }
+        
+        let numberOfLines = configuration.nameLabelNumberOfLines
+        let textIcon = configuration.iconPack.getTextIcon(orientation: orientation,
+                                                          layoutSchemeFlavor: layoutSchemeFlavor,
+                                                          numberOfLines: numberOfLines,
+                                                          isDarkMode: isDarkMode,
+                                                          isEnabled: isEnabled)
+        
+        let line1 = configuration.nameLabelLine1
+        let line2 = configuration.nameLabelLine2
+        
+        let nameLabelFont = ButtonLayout.getNameLabelFont(orientation: orientation,
+                                                          flavor: layoutSchemeFlavor)
+        let nameLabelVerticalSpacing = ButtonLayout.getNameLabelVerticalSpacing(orientation: orientation,
+                                                                                flavor: layoutSchemeFlavor)
+        
+        let nameLabelWidth: Int
+        switch layoutSchemeFlavor {
+        case .long:
+            nameLabelWidth = configuration.nameLabelWidthLong
+        case .stackedLarge:
+            nameLabelWidth = configuration.nameLabelWidthStackedLarge
+        case .stackedMedium:
+            nameLabelWidth = configuration.nameLabelWidthStackedMedium
+        case .stackedSmall:
+            nameLabelWidth = configuration.nameLabelWidthStackedSmall
+        }
+        
+        let lineHeight = ToolInterfaceTheme.getLineHeight(font: nameLabelFont)
+        
+        let nameLabelColor: Color
+        if isPressed {
+            if isEnabled {
+                nameLabelColor = ToolInterfaceTheme.primaryDownEnabled
+            } else {
+                nameLabelColor = ToolInterfaceTheme.primaryDownDisabled
+            }
+        } else {
+            
+            if isDarkMode {
+                if isSelected {
+                    if isEnabled {
+                        nameLabelColor = ToolInterfaceTheme.primaryEnabledDark
+                    } else {
+                        nameLabelColor = ToolInterfaceTheme.primaryDisabledDark
+                    }
+                } else {
+                    if isEnabled {
+                        nameLabelColor = ToolInterfaceTheme.primaryUnselectedEnabledDark
+                    } else {
+                        nameLabelColor = ToolInterfaceTheme.primaryUnselectedDisabledDark
+                    }
+                }
+            } else {
+                if isSelected {
+                    if isEnabled {
+                        nameLabelColor = ToolInterfaceTheme.primaryEnabledLight
+                    } else {
+                        nameLabelColor = ToolInterfaceTheme.primaryDisabledLight
+                    }
+                } else {
+                    if isEnabled {
+                        nameLabelColor = ToolInterfaceTheme.primaryUnselectedEnabledLight
+                    } else {
+                        nameLabelColor = ToolInterfaceTheme.primaryUnselectedDisabledLight
+                    }
+                }
+            }
+        }
+        
+        let heroPaddingTopStacked = ButtonLayout.getHeroPaddingTopStacked(orientation: orientation)
+        let heroPaddingBottomStacked = ButtonLayout.getHeroPaddingBottomStacked(orientation: orientation)
+        
+        return HeroSlab(orientation: orientation,
+                        layoutWidth: layoutWidth,
+                        layoutHeight: layoutHeight,
+                        isLong: isLong,
+                        isPressed: isPressed,
+                        textIcon: textIcon,
+                        heroPaddingLeft: magicalViewModel.heroPaddingLeft,
+                        heroPaddingRight: magicalViewModel.heroPaddingRight,
+                        heroPaddingTopStacked: heroPaddingTopStacked,
+                        heroPaddingBottomStacked: heroPaddingBottomStacked,
+                        heroSpacingLong: magicalViewModel.heroSpacing,
+                        line1: line1,
+                        line2: line2,
+                        numberOfLines: numberOfLines,
+                        nameLabelVerticalSpacing: nameLabelVerticalSpacing,
+                        nameLabelFont: nameLabelFont,
+                        nameLabelWidth: nameLabelWidth,
+                        lineHeight: lineHeight,
+                        nameLabelColor: nameLabelColor)
+    }
+}
+
+/*
+struct MagicalSegmentedPickerSegmentContent: View {
     
     @Environment(MagicalSegmentedPickerViewModel.self) var magicalSegmentedPickerViewModel: MagicalSegmentedPickerViewModel
     @Environment(MagicalSegmentedPickerButtonViewModel.self) var magicalSegmentedPickerButtonViewModel: MagicalSegmentedPickerButtonViewModel
@@ -22,11 +143,13 @@ struct MagicalSegmentedPickerPrimarySegmentContent: View {
     let universalPaddingBottom: Int
     var body: some View {
         
+        let numberOfLines = magicalSegmentedPickerButtonViewModel.segmentedPickerButtonConfiguration.nameLabelNumberOfLines
         let configuration = magicalSegmentedPickerButtonViewModel.segmentedPickerButtonConfiguration
-        let textIcon = configuration.getTextIcon(orientation: orientation, 
-                                                 layoutSchemeFlavor: layoutSchemeFlavor,
-                                                 isDarkMode: isDarkMode,
-                                                 isEnabled: isEnabled)
+        let textIcon = configuration.iconPack.getTextIcon(orientation: magicalSegmentedPickerViewModel.orientation,
+                                                          layoutSchemeFlavor: layoutSchemeFlavor,
+                                                          numberOfLines: numberOfLines,
+                                                          isDarkMode: isDarkMode,
+                                                          isEnabled: isEnabled)
         
         let universalPaddingLeft = magicalSegmentedPickerButtonViewModel.universalPaddingLeft
         let universalPaddingRight = magicalSegmentedPickerButtonViewModel.universalPaddingRight
@@ -34,7 +157,7 @@ struct MagicalSegmentedPickerPrimarySegmentContent: View {
         let line1 = configuration.nameLabelLine1
         let line2 = configuration.nameLabelLine2
         
-        let numberOfLines = magicalSegmentedPickerButtonViewModel.segmentedPickerButtonConfiguration.nameLabelNumberOfLines
+        
         
         let iconWidth = textIcon.width
         let iconHeight = textIcon.height
@@ -214,7 +337,9 @@ struct MagicalSegmentedPickerPrimarySegmentContent: View {
 #endif
             
         }
-        .frame(width: CGFloat(magicalSegmentedPickerButtonViewModel.width),
+        .frame(width: CGFloat(magicalSegmentedPickerButtonViewModel.layoutWidth),
                height: CGFloat(magicalSegmentedPickerViewModel.layoutHeight))
     }
 }
+*/
+

@@ -37,13 +37,13 @@ struct MagicalSexyCheckBoxContent: View {
                                                           numberOfLines: numberOfLines,
                                                           isDarkMode: isDarkMode,
                                                           isEnabled: isEnabled)
-        let checkBoxSquare = MagicalSexyCheckBoxViewModel.checkBoxSquare.getTextIcon(orientation: orientation,
+        let checkBoxSquare = FramedLongIconLibrary.checkBoxSquare.getTextIcon(orientation: orientation,
                                                                                      layoutSchemeFlavor: .long,
                                                                                      numberOfLines: 0,
                                                                                      isDarkMode: isDarkMode,
                                                                                      isEnabled: isEnabled)
         
-        let checkBoxCheck = MagicalSexyCheckBoxViewModel.checkBoxCheck.getTextIcon(orientation: orientation,
+        let checkBoxCheck = FramedLongIconLibrary.checkBoxCheck.getTextIcon(orientation: orientation,
                                                                                    layoutSchemeFlavor: .long,
                                                                                    numberOfLines: 0,
                                                                                    isDarkMode: isDarkMode,

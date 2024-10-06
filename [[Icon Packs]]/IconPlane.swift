@@ -63,7 +63,6 @@ class IconPlane {
         }
         
         let partialFileName = namePieces.joined(separator: "_")
-        print("partialFileName = \(partialFileName)")
         
         let iconDark = AnyTextIcon(fileName: partialFileName + "_dark",
                                    device: device,

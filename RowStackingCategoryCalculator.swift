@@ -32,6 +32,20 @@ class RowStackingCategoryCalculator {
                           width: Int,
                           layoutStackingCategory: ToolInterfaceLayoutStackingCategory) -> Int {
         switch node.flex {
+            
+        case .segment(let flexConvertible):
+            if layoutStackingCategory.isSegmentLong {
+                return flexConvertible.standardWidthLong
+            } else {
+                if layoutStackingCategory.isSmall {
+                    return flexConvertible.standardWidthStackedSmall
+                } else if layoutStackingCategory.isMedium {
+                    return flexConvertible.standardWidthStackedMedium
+                } else {
+                    return flexConvertible.standardWidthStackedLarge
+                }
+            }
+            
         case .enterMode(let flexConvertible):
             if layoutStackingCategory.isModeSwitchLong {
                 return flexConvertible.standardWidthLong
@@ -118,7 +132,7 @@ class RowStackingCategoryCalculator {
         
         
         case .favoringOneLineLabel(let flexFavoringOneLineLabelData):
-            return flexFavoringOneLineLabelData.oneLineWidthPadded
+            return flexFavoringOneLineLabelData.standardOneLineWidth
         case .fixed(let fixedWidth):
             return fixedWidth
         case .spacer(let flexSpacerData):
@@ -130,18 +144,7 @@ class RowStackingCategoryCalculator {
         
         case .greenButton(let flexGreenButtonData):
             return flexGreenButtonData.standardWidth
-        case .segment(let flexSegmentData):
-            if layoutStackingCategory.isSegmentLong {
-                return flexSegmentData.standardWidthLong
-            } else {
-                if layoutStackingCategory.isSmall {
-                    return flexSegmentData.standardWidthStackedSmall
-                } else if layoutStackingCategory.isMedium {
-                    return flexSegmentData.standardWidthStackedMedium
-                } else {
-                    return flexSegmentData.standardWidthStackedLarge
-                }
-            }
+        
         case .mainTab(let flexMainTabData):
             if layoutStackingCategory.isSmall {
                 return flexMainTabData.standardWidthSmall

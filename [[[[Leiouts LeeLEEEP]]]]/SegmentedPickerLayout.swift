@@ -22,6 +22,27 @@ enum SegmentedPickerPosition {
 
 struct SegmentedPickerLayout: LayoutScheme {
     
+    static func getOutsideBoxPaddingTop(orientation: Orientation) -> Int {
+        return 8
+    }
+    static func getOutsideBoxPaddingBottom(orientation: Orientation) -> Int {
+        return 22
+    }
+    
+    static func getHeroPaddingTopStacked(orientation: Orientation) -> Int {
+        if Device.isPad {
+            return 2 + 3
+        } else {
+            return 1 + 3
+        }
+    }
+    
+    static func getSlavePaddingLeftStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int { 0 }
+    static func getSlavePaddingLeftLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int { 0 }
+    static func getSlavePaddingRightStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int { 0 }
+    static func getSlavePaddingRightLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int { 0 }
+    
+    
     static func getNameLabelFont(orientation: Orientation, flavor: LayoutSchemeFlavor) -> UIFont {
         if Device.isPad {
             switch flavor {

@@ -57,19 +57,66 @@ extension ToolInterfaceViewModel {
     
     @MainActor func getRowBluePrint_Top_Test() -> RowBluePrint? {
         let nodes = [
-            getDocumentModeMainTabToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            //getDocumentModeSegmentToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
             
-            Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton)
+            
+            getDoneGreenButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            
+            Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
+            //getCreateSceneGreenButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            
+            getAnimationModeSegmentToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            
+            ToolInterfaceViewModel.getFavoringOneLineLabelToolNode(orientation: LoadSceneViewModel.orientation,
+                                                                                          minimumWidth: 0,
+                                                                                          text: "Hello",
+                                                                                          neighborTypeLeft: nil,
+                                                                   neighborTypeRight: nil),
+            
+            getEnterZoomEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            getExitZoomExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            
+            ToolInterfaceViewModel.getFavoringOneLineLabelToolNode(orientation: LoadSceneViewModel.orientation,
+                                                                                          minimumWidth: 0,
+                                                                                          text: "Hello World",
+                                                                                          neighborTypeLeft: nil,
+                                                                                          neighborTypeRight: nil),
+            
+            ToolInterfaceViewModel.getFavoringOneLineLabelToolNode(orientation: LoadSceneViewModel.orientation,
+                                                                                          minimumWidth: 0,
+                                                                                          text: "Hello World World",
+                                                                                          neighborTypeLeft: nil,
+                                                                                          neighborTypeRight: nil)
         ]
         return RowBluePrint(nodes: nodes, configuration: .top_Test)
     }
     
     @MainActor func getRowBluePrint_Bottom_Test() -> RowBluePrint? {
         let nodes = [
+            
+            getEditModeSegmentToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            getWeightModeSegmentToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            
             Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
-            getWeightCurveGraphEnabledCheckBoxNode(neighborTypeLeft: .spacer, neighborTypeRight: .checkBox),
-            getZoomEnabledCheckBoxNode(neighborTypeLeft: .checkBox, neighborTypeRight: nil)
+            
+            ToolInterfaceViewModel.getFavoringOneLineLabelToolNode(orientation: LoadSceneViewModel.orientation,
+                                                                                          minimumWidth: 0,
+                                                                                          text: "Please Purchase, Please Merge",
+                                                                                          neighborTypeLeft: nil,
+                                                                   neighborTypeRight: nil),
+            
+            ToolInterfaceViewModel.getFavoringOneLineLabelToolNode(orientation: LoadSceneViewModel.orientation,
+                                                                                          minimumWidth: 0,
+                                                                                          text: "Please Purchase",
+                                                                                          neighborTypeLeft: nil,
+                                                                   neighborTypeRight: nil),
+            
+            getGuideCentersSexyCheckBoxToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            
+            getExitAnimationLoopsExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            
+            getDoneGreenButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            
+            Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
         ]
         return RowBluePrint(nodes: nodes, configuration: .bottom_Test)
     }

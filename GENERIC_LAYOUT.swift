@@ -9,6 +9,12 @@ import Foundation
 
 class HORIZONTAL_LAYOUT {
     
+    var __computedWidth = 0
+    var __extraLeftForAllEqual = 0
+    var __extraRightForAllEqual = 0
+    
+    
+    
     var outsideBoxPaddingLeft = 0
     var outsideBoxPaddingRight = 0
     
@@ -289,7 +295,7 @@ struct GENERIC_LAYOUT {
         if let iconPackSecondary {
             let iconSecondary = iconPackSecondary.getTextIcon(orientation: orientation,
                                                     layoutSchemeFlavor: .long,
-                                                    numberOfLines: numberOfLines,
+                                                    numberOfLines: 0,
                                                     isDarkMode: false,
                                                     isEnabled: true)
             iconSecondaryWidth = iconSecondary.width
@@ -433,7 +439,7 @@ struct GENERIC_LAYOUT {
         if let iconPackSecondary {
             let iconSecondary = iconPackSecondary.getTextIcon(orientation: orientation,
                                                     layoutSchemeFlavor: .long,
-                                                    numberOfLines: numberOfLines,
+                                                    numberOfLines: 0,
                                                     isDarkMode: false,
                                                     isEnabled: true)
             iconSecondaryWidth = iconSecondary.width
@@ -441,7 +447,8 @@ struct GENERIC_LAYOUT {
             iconSecondaryWidth = 0
         }
         
-        var consumed = (nameLabelWidth + iconMainWidth + iconSecondaryWidth)
+        let heroWidth = nameLabelWidth + iconMainWidth
+        var consumed = (heroWidth + iconSecondaryWidth)
         
         _ = result.expandOutsideBoxFilling(consumed: &consumed, layoutWidth: layoutWidth,
                                            left: outsideBoxLeftSqueezed, right: outsideBoxRightSqueezed)

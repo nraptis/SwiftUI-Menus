@@ -8,23 +8,23 @@
 import SwiftUI
 
 struct MagicalFavoringOneLineLabelContent: View {
-    @Environment(MagicalFavoringOneLineLabelViewModel.self) var magicalFavoringOneLineLabelViewModel: MagicalFavoringOneLineLabelViewModel
     
-    let orientation: Orientation
-    let universalPaddingTop: Int
-    let universalPaddingBottom: Int
+    @Environment(MagicalFavoringOneLineLabelViewModel.self) var magicalViewModel
+    
     let layoutWidth: Int
+    let layoutHeight: Int
+    
     
     var body: some View {
         
-        let configuration = magicalFavoringOneLineLabelViewModel.favoringOneLineLabelConfiguration
-        
+        let orientation = magicalViewModel.orientation
+        let configuration = magicalViewModel.favoringOneLineLabelConfiguration
         
         let line1: String?
         let line2: String?
         let numberOfLines: Int
         let nameLabelTextWidth: Int
-        if magicalFavoringOneLineLabelViewModel.isTwoLine {
+        if magicalViewModel.isTwoLine {
             numberOfLines = 2
             line1 = configuration.twoLineText1
             line2 = configuration.twoLineText2
@@ -37,30 +37,30 @@ struct MagicalFavoringOneLineLabelContent: View {
         }
         
         let nameLabelFont = FavoringOneLineLabelLayout.getNameLabelFont(orientation: orientation,
-                                                               flavor: .long)
+                                                                        flavor: .long)
         
         let nameLabelVerticalSpacing = FavoringOneLineLabelLayout.getNameLabelVerticalSpacing(orientation: orientation,
-                                                                                     flavor: .long)
+                                                                                              flavor: .long)
         
         let lineHeight = ToolInterfaceTheme.getLineHeight(font: nameLabelFont)
         let nameLabelWidth = nameLabelTextWidth
         
-        let contentHeight = magicalFavoringOneLineLabelViewModel.layoutHeight - (universalPaddingTop + universalPaddingBottom)
+        let nameLabelColor: Color
+        if magicalViewModel.isDarkModeEnabled {
+            if magicalViewModel.isEnabled {
+                nameLabelColor = ToolInterfaceTheme.primaryEnabledDark
+            } else {
+                nameLabelColor = ToolInterfaceTheme.primaryDisabledDark
+            }
+        } else {
+            if magicalViewModel.isEnabled {
+                nameLabelColor = ToolInterfaceTheme.primaryEnabledLight
+            } else {
+                nameLabelColor = ToolInterfaceTheme.primaryDisabledLight
+            }
+        }
         
-        let color = Color.white
-        
-        return VStack(spacing: 0.0) {
-            
-#if INTERFACE_HINTS
-            Spacer()
-                .frame(width: 24.0, height: CGFloat(universalPaddingTop))
-                .background(Color(red: 0.85, green: 0.65, blue: 0.55, opacity: 0.40))
-#else
-            Spacer()
-                .frame(height: CGFloat(universalPaddingTop))
-#endif
-            
-            ZStack {
+        return ZStack {
                 LabelBox(line1: line1,
                          line2: line2,
                          numberOfLines: numberOfLines,
@@ -71,22 +71,15 @@ struct MagicalFavoringOneLineLabelContent: View {
                          lineHeight: lineHeight,
                          spacingVertical: nameLabelVerticalSpacing,
                          font: nameLabelFont,
-                         color: color)
+                         color: nameLabelColor)
             }
-            .frame(height: CGFloat(contentHeight))
-            
+        .frame(width: CGFloat(layoutWidth), height: CGFloat(layoutHeight))
 #if INTERFACE_HINTS
-            Spacer()
-                .frame(width: 24.0, height: CGFloat(universalPaddingBottom))
-                .background(Color(red: 0.65, green: 0.85, blue: 0.75, opacity: 0.40))
-#else
-            Spacer()
-                .frame(height: CGFloat(universalPaddingBottom))
+        .overlay(Rectangle().stroke().foregroundStyle(
+            LinearGradient(colors: [Color(red: 0.96, green: 0.55, blue: 0.85, opacity: 0.85),
+                                    Color(red: 0.75, green: 0.98, blue: 0.75, opacity: 0.85)], startPoint: .leading, endPoint: .trailing)))
+        .background(Color(red: 0.96, green: 0.55, blue: 0.85, opacity: 0.45))
 #endif
-            
-        }
-        .frame(width: CGFloat(layoutWidth),
-               height: CGFloat(magicalFavoringOneLineLabelViewModel.layoutHeight))
         
     }
 }

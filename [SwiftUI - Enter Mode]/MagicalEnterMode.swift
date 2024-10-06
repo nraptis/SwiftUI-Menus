@@ -35,8 +35,8 @@ struct MagicalEnterMode: View {
     
     func bodyContent() -> some View {
         let layoutSchemeFlavor = magicalViewModel.getLayoutSchemeFlavor()
-        let outsideBoxPaddingTop = ButtonLayout.getOutsideBoxPaddingTop(orientation: magicalViewModel.orientation)
-        let outsideBoxPaddingBottom = ButtonLayout.getOutsideBoxPaddingTop(orientation: magicalViewModel.orientation)
+        let outsideBoxPaddingTop = EnterModeLayout.getOutsideBoxPaddingTop(orientation: magicalViewModel.orientation)
+        let outsideBoxPaddingBottom = EnterModeLayout.getOutsideBoxPaddingTop(orientation: magicalViewModel.orientation)
         return MagicalEnterModeButton(layoutSchemeFlavor: layoutSchemeFlavor,
                                          outsideBoxPaddingTop: outsideBoxPaddingTop,
                                          outsideBoxPaddingBottom: outsideBoxPaddingBottom)

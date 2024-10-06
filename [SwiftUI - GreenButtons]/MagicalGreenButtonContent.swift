@@ -9,6 +9,88 @@ import SwiftUI
 
 struct MagicalGreenButtonContent: View {
     
+    @Environment(MagicalGreenButtonViewModel.self) var magicalViewModel
+    
+    let layoutSchemeFlavor: LayoutSchemeFlavor
+    let isPressed: Bool
+    let layoutWidth: Int
+    let layoutHeight: Int
+    
+    var body: some View {
+        
+        let orientation = magicalViewModel.orientation
+        let configuration = magicalViewModel.greenButtonConfiguration
+        let isDarkMode = magicalViewModel.isDarkModeEnabled
+        let isEnabled = magicalViewModel.isEnabled
+        
+        let numberOfLines = configuration.nameLabelNumberOfLines
+        let textIcon = configuration.iconPack.getTextIcon(orientation: orientation,
+                                                          layoutSchemeFlavor: layoutSchemeFlavor,
+                                                          numberOfLines: numberOfLines,
+                                                          isDarkMode: isDarkMode,
+                                                          isEnabled: isEnabled)
+        let line1 = configuration.nameLabelLine1
+        let line2 = configuration.nameLabelLine2
+        
+        let nameLabelFont = GreenButtonLayout.getNameLabelFont(orientation: orientation,
+                                                            flavor: layoutSchemeFlavor)
+        let nameLabelVerticalSpacing = GreenButtonLayout.getNameLabelVerticalSpacing(orientation: orientation,
+                                                                                  flavor: layoutSchemeFlavor)
+        
+        let nameLabelWidth = configuration.nameLabelWidth
+        
+        let lineHeight = ToolInterfaceTheme.getLineHeight(font: nameLabelFont)
+        
+        let nameLabelColor: Color
+        if isPressed {
+            if isEnabled {
+                nameLabelColor = ToolInterfaceTheme.primaryDownEnabled
+            } else {
+                nameLabelColor = ToolInterfaceTheme.primaryDownDisabled
+            }
+        } else {
+            
+            if isDarkMode {
+                if isEnabled {
+                    nameLabelColor = ToolInterfaceTheme.primaryEnabledDark
+                } else {
+                    nameLabelColor = ToolInterfaceTheme.primaryDisabledDark
+                }
+            } else {
+                if isEnabled {
+                    nameLabelColor = ToolInterfaceTheme.primaryEnabledLight
+                } else {
+                    nameLabelColor = ToolInterfaceTheme.primaryDisabledLight
+                }
+            }
+        }
+        
+        return HeroSlab(orientation: orientation,
+                        layoutWidth: layoutWidth,
+                        layoutHeight: layoutHeight,
+                        isLong: true,
+                        isPressed: isPressed,
+                        textIcon: textIcon,
+                        heroPaddingLeft: magicalViewModel.heroPaddingLeft,
+                        heroPaddingRight: magicalViewModel.heroPaddingRight,
+                        heroPaddingTopStacked: 0,
+                        heroPaddingBottomStacked: 0,
+                        heroSpacingLong: magicalViewModel.heroSpacing,
+                        line1: line1,
+                        line2: line2,
+                        numberOfLines: numberOfLines,
+                        nameLabelVerticalSpacing: nameLabelVerticalSpacing,
+                        nameLabelFont: nameLabelFont,
+                        nameLabelWidth: nameLabelWidth,
+                        lineHeight: lineHeight,
+                        nameLabelColor: nameLabelColor)
+    }
+}
+
+/*
+
+struct MagicalGreenButtonContent: View {
+    
     @Environment(MagicalGreenButtonViewModel.self) var magicalGreenButtonViewModel: MagicalGreenButtonViewModel
     
     let orientation: Orientation
@@ -23,10 +105,7 @@ struct MagicalGreenButtonContent: View {
         let isDarkMode = magicalGreenButtonViewModel.isDarkModeEnabled
         let isEnabled = magicalGreenButtonViewModel.isEnabled
         
-        let textIcon = configuration.getTextIcon(orientation: orientation,
-                                                 layoutSchemeFlavor: .long,
-                                                 isDarkMode: isDarkMode,
-                                                 isEnabled: isEnabled)
+        let textIcon = configuration.iconPack.getTextIcon(orientation: Orientation.landscape, layoutSchemeFlavor: .long, numberOfLines: 1, isDarkMode: true, isEnabled: false)
         
         let line1 = configuration.nameLabelLine1
         let line2 = configuration.nameLabelLine2
@@ -102,7 +181,10 @@ struct MagicalGreenButtonContent: View {
             .frame(height: CGFloat(contentHeight))
             .background(RoundedRectangle(cornerRadius: CGFloat(cornerRadius)).foregroundStyle(
                 isPressed ?
-                Color("green_button_fill_down") : Color("green_button_fill_up")))
+                ToolInterfaceTheme.greenButtonFill : ToolInterfaceTheme.greenButtonFillDown))
+            
+            
+            
             
 #if INTERFACE_HINTS
             Spacer()
@@ -119,3 +201,4 @@ struct MagicalGreenButtonContent: View {
         
     }
 }
+*/

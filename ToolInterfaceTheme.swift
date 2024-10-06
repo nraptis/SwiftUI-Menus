@@ -424,6 +424,20 @@ struct ToolInterfaceTheme {
         }
     }
     
+    
+    
+    static let _greenButtonFill = UIColor(named: "green_button_fill_up") ?? UIColor()
+    static let _greenButtonFillDisabled = UIColor(named: "green_button_fill_up_disabled") ?? UIColor()
+    
+    static let _greenButtonFillDown = UIColor(named: "green_button_fill_down") ?? UIColor()
+    static let _greenButtonFillDownDisabled = UIColor(named: "green_button_fill_down_disabled") ?? UIColor()
+    
+    
+    
+    
+
+    
+    
     static let _blueBasic = UIColor(red: 0.200, green: 0.630, blue: 1.000, alpha: 1.0)
     static let _orangeBasic = UIColor(red: 1.0, green: 0.556, blue: 0.000, alpha: 1.0)
     
@@ -801,4 +815,10 @@ struct ToolInterfaceTheme {
     static let graphTanLineStrokeThickness = CGFloat(Device.isPad ? 5.0 : 4.0)
     static let graphTanLineFillThickness = CGFloat(Device.isPad ? 3.0 : 2.5)
     
+    
+    static let greenButtonFill = Color(uiColor: _greenButtonFill)
+    static let greenButtonFillDisabled = Color(uiColor: _greenButtonFillDisabled)
+    
+    static let greenButtonFillDown = Color(uiColor: _greenButtonFillDown)
+    static let greenButtonFillDownDisabled = Color(uiColor: _greenButtonFillDownDisabled)
 }

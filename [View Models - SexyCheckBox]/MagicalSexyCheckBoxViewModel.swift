@@ -14,14 +14,6 @@ import SwiftUI
         CheckBoxLayout.self
     }
     
-    static var checkBoxSquare: MainTabIconPack {
-        MainTabIconLibrary.checkBoxSquare
-    }
-    
-    static var checkBoxCheck: MainTabIconPack {
-        MainTabIconLibrary.checkBoxCheck
-    }
-    
     @MainActor var isChecked = false
     
     
@@ -43,22 +35,22 @@ import SwiftUI
             refreshLayoutFrameLong(nameLabelWidth: sexyCheckBoxConfiguration.nameLabelWidthLong,
                                    numberOfLines: sexyCheckBoxConfiguration.nameLabelNumberOfLines,
                                    iconPackMain: sexyCheckBoxConfiguration.iconPack,
-                                   iconPackSecondary: Self.checkBoxSquare)
+                                   iconPackSecondary: FramedLongIconLibrary.checkBoxSquare)
         case .stackedLarge:
             refreshLayoutFrameStacked(nameLabelWidth: sexyCheckBoxConfiguration.nameLabelWidthStackedLarge,
                                       numberOfLines: sexyCheckBoxConfiguration.nameLabelNumberOfLines,
                                       iconPackMain: sexyCheckBoxConfiguration.iconPack,
-                                      iconPackSecondary: Self.checkBoxSquare)
+                                      iconPackSecondary: FramedLongIconLibrary.checkBoxSquare)
         case .stackedMedium:
             refreshLayoutFrameStacked(nameLabelWidth: sexyCheckBoxConfiguration.nameLabelWidthStackedMedium,
                                       numberOfLines: sexyCheckBoxConfiguration.nameLabelNumberOfLines,
                                       iconPackMain: sexyCheckBoxConfiguration.iconPack,
-                                      iconPackSecondary: Self.checkBoxSquare)
+                                      iconPackSecondary: FramedLongIconLibrary.checkBoxSquare)
         case .stackedSmall:
             refreshLayoutFrameStacked(nameLabelWidth: sexyCheckBoxConfiguration.nameLabelWidthStackedSmall,
                                       numberOfLines: sexyCheckBoxConfiguration.nameLabelNumberOfLines,
                                       iconPackMain: sexyCheckBoxConfiguration.iconPack,
-                                      iconPackSecondary: Self.checkBoxSquare)
+                                      iconPackSecondary: FramedLongIconLibrary.checkBoxSquare)
         }
         
         
