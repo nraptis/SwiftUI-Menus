@@ -52,7 +52,5 @@ import SwiftUI
                                       iconPackMain: sexyCheckBoxConfiguration.iconPack,
                                       iconPackSecondary: FramedLongIconLibrary.checkBoxSquare)
         }
-        
-        
     }
 }

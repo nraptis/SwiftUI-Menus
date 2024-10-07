@@ -5,11 +5,17 @@
 //  Created by Nicky Taylor on 9/2/24.
 //
 
-import Foundation
 import UIKit
 
 struct ButtonLayout: LayoutScheme {
     
+    static func getSlavePaddingRightLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        return 32
+    }
+    
+    static func getSlavePaddingRightStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        return 32
+    }
     
     static func getContextPaddingTop(orientation: Orientation) -> Int {
         return 1
@@ -88,10 +94,4 @@ struct ButtonLayout: LayoutScheme {
             return 2 + 1
         }
     }
-    
-    static func getSlavePaddingLeftStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int { 0 }
-    static func getSlavePaddingLeftLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int { 0 }
-    static func getSlavePaddingRightStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int { 0 }
-    static func getSlavePaddingRightLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int { 0 }
-    
 }

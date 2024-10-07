@@ -8,15 +8,39 @@
 import SwiftUI
 
 struct MagicalActiveSwatchButton: View {
-    @Environment(MagicalCreateSwatchViewModel.self) var magicalCreateSwatchViewModel: MagicalCreateSwatchViewModel
-    let orientation: Orientation
+    
+    
+    @Environment(MagicalCreateSwatchViewModel.self) var magicalViewModel
+    let activeButtonViewModel: MagicalSegmentButtonViewModel
+    let activeButtonConfiguration: ToolInterfaceElementCreateSwatchButtonConfiguration
+    let firstButtonViewModel: MagicalSegmentButtonViewModel
+    
     let layoutSchemeFlavor: LayoutSchemeFlavor
-    let buttonViewModel: MagicalCreateSwatchButtonViewModel
-    let universalPaddingTop: Int
-    let universalPaddingBottom: Int
-    let isEnabled: Bool
-    let isDarkMode: Bool
-    let layoutWidth: Int
+    let outsideBoxPaddingTop: Int
+    let outsideBoxPaddingBottom: Int
+    
+    var body: some View {
+        ZStack {
+            Button {
+                magicalViewModel.handleActiveSwatchClicked()
+            } label: {
+                HStack(spacing: 0.0) {
+                    
+                }
+                .frame(width: CGFloat(magicalViewModel.layoutWidth),
+                       height: CGFloat(magicalViewModel.layoutHeight))
+            }
+            .buttonStyle(MagicalCreateSwatchButtonStyle(activeButtonViewModel: activeButtonViewModel,
+                                                        activeButtonConfiguration: activeButtonConfiguration,
+                                                        firstButtonViewModel: firstButtonViewModel,
+                                                        layoutSchemeFlavor: layoutSchemeFlavor,
+                                                        outsideBoxPaddingTop: outsideBoxPaddingTop,
+                                                        outsideBoxPaddingBottom: outsideBoxPaddingBottom))
+        }
+        .frame(width: CGFloat(magicalViewModel.layoutWidth),
+               height: CGFloat(magicalViewModel.layoutHeight))
+    }
+    /*
     var body: some View {
         return ZStack {
             bodyContent()
@@ -44,4 +68,5 @@ struct MagicalActiveSwatchButton: View {
                                                     isDarkMode: isDarkMode,
                                                     layoutWidth: layoutWidth))
     }
+    */
 }

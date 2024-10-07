@@ -27,14 +27,13 @@ struct MagicalSegmentedPicker: View {
 #endif
         .offset(x: CGFloat(magicalViewModel.layoutX),
                 y: CGFloat(magicalViewModel.layoutY))
-        //.disabled(!magicalSegmentedPickerViewModel.isEnabled)
+        .disabled(!magicalViewModel.isEnabled)
         .transaction { transaction in
             transaction.animation = nil
         }
     }
     
     func bodyContent() -> some View {
-        
         let orientation = magicalViewModel.orientation
         let layoutSchemeFlavor = magicalViewModel.getLayoutSchemeFlavor()
         let outsideBoxPaddingTop = SegmentedPickerLayout.getOutsideBoxPaddingTop(orientation: orientation)
@@ -43,7 +42,6 @@ struct MagicalSegmentedPicker: View {
         let outsideBoxPaddingRight = magicalViewModel.outsideBoxPaddingRight
         let contentLayoutWidth = magicalViewModel.layoutWidth - outsideBoxPaddingLeft - outsideBoxPaddingRight
         return HStack(spacing: 0.0) {
-                
 #if INTERFACE_HINTS
             Spacer()
                 .frame(width: CGFloat(outsideBoxPaddingLeft), height: 28.0)
@@ -52,13 +50,10 @@ struct MagicalSegmentedPicker: View {
             Spacer()
                 .frame(width: CGFloat(outsideBoxPaddingLeft))
 #endif
-
-            
             MagicalSegmentedPickerGuts(layoutSchemeFlavor: layoutSchemeFlavor,
                                        layoutWidth: contentLayoutWidth,
                                        outsideBoxPaddingTop: outsideBoxPaddingTop,
                                        outsideBoxPaddingBottom: outsideBoxPaddingBottom)
-            
 #if INTERFACE_HINTS
             Spacer()
                 .frame(width: CGFloat(outsideBoxPaddingRight), height: 28.0)

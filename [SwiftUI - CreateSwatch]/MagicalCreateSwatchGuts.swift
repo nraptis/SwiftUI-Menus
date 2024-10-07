@@ -8,6 +8,60 @@
 import SwiftUI
 
 struct MagicalCreateSwatchGuts: View {
+    @Environment(MagicalCreateSwatchViewModel.self) var magicalViewModel
+    let layoutSchemeFlavor: LayoutSchemeFlavor
+    let layoutWidth: Int
+    let outsideBoxPaddingTop: Int
+    let outsideBoxPaddingBottom: Int
+    var body: some View {
+        let buttonCount = magicalViewModel.segmentButtonViewModels.count
+        let buttonCount1 = (buttonCount - 1)
+        
+        let activeButtonViewModel = magicalViewModel.activeButtonViewModel
+        
+        return ZStack {
+            if let activeButtonViewModel = activeButtonViewModel,
+                let activeButtonConfiguration = magicalViewModel.getButtonConfiguration(buttonViewModel: activeButtonViewModel) {
+                MagicalActiveSwatchButton(activeButtonViewModel: activeButtonViewModel,
+                                          activeButtonConfiguration: activeButtonConfiguration,
+                                          firstButtonViewModel: magicalViewModel.segmentButtonViewModels[0],
+                                          layoutSchemeFlavor: layoutSchemeFlavor,
+                                          outsideBoxPaddingTop: outsideBoxPaddingTop,
+                                          outsideBoxPaddingBottom: outsideBoxPaddingBottom)
+            } else {
+                GeometryReader { _ in
+                    ForEach(magicalViewModel.createSwatchConfiguration.buttonConfigurations) { buttonConfiguration in
+                        let index = Int(buttonConfiguration.id)
+                        let buttonViewModel = magicalViewModel.segmentButtonViewModels[index]
+                        let position: SegmentedPickerPosition
+                        if index == 0 {
+                            position = .bookendLeft
+                        } else if index == buttonCount1 {
+                            position = .bookendRight
+                        } else {
+                            position = .middle
+                        }
+                        return MagicalCreateSwatchSegmentButton(index: index,
+                                                                layoutSchemeFlavor: layoutSchemeFlavor,
+                                                                outsideBoxPaddingTop: outsideBoxPaddingTop,
+                                                                outsideBoxPaddingBottom: outsideBoxPaddingBottom,
+                                                                position: position)
+                        .environment(buttonViewModel as? MagicalCreateSwatchButtonViewModel)
+                        .offset(x: CGFloat(buttonViewModel.layoutX))
+                    }
+                }
+                .frame(width: CGFloat(layoutWidth),
+                       height: CGFloat(magicalViewModel.layoutHeight))
+            }
+        }
+    }
+}
+
+
+/*
+import SwiftUI
+
+struct MagicalCreateSwatchGuts: View {
     
     @Environment(MagicalCreateSwatchViewModel.self) var magicalCreateSwatchViewModel: MagicalCreateSwatchViewModel
     let orientation: Orientation
@@ -94,3 +148,4 @@ struct MagicalCreateSwatchGuts: View {
         }
     }
 }
+*/

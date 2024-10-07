@@ -14,22 +14,22 @@ import SwiftUI
 @Observable class MagicalSegmentButtonViewModel {
     
     //@ObservationIgnored
-    let numberOfLines: Int
+    //let numberOfLines: Int
     //@ObservationIgnored
-    let iconPackMain: (any TextIconPackable)
+    //let iconPackMain: (any TextIconPackable)
     //@ObservationIgnored
-    let iconPackSecondary: (any TextIconPackable)?
+    //let iconPackSecondary: (any TextIconPackable)?
     //@ObservationIgnored
     let orientation: Orientation
     @MainActor init(orientation: Orientation,
-                    numberOfLines: Int,
-                    iconPackMain: any TextIconPackable,
-                    iconPackSecondary: (any TextIconPackable)?,
+                    //numberOfLines: Int,
+                    //iconPackMain: any TextIconPackable,
+                    //iconPackSecondary: (any TextIconPackable)?,
                     isDarkModeEnabled: Bool) {
         self.orientation = orientation
-        self.numberOfLines = numberOfLines
-        self.iconPackMain = iconPackMain
-        self.iconPackSecondary = iconPackSecondary
+        //self.numberOfLines = numberOfLines
+        //self.iconPackMain = iconPackMain
+        //self.iconPackSecondary = iconPackSecondary
         self.isDarkModeEnabled = isDarkModeEnabled
     }
     
@@ -57,6 +57,16 @@ import SwiftUI
         }
     }
     
+    @MainActor func refreshDisabled() {
+        if isEnabled == true {
+            isEnabled = false
+        }
+    }
     
+    @MainActor func refreshEnabled() {
+        if isEnabled == false {
+            isEnabled = true
+        }
+    }
     
 }

@@ -15,7 +15,7 @@ extension ToolInterfaceViewModel {
         let orientation = jiggleViewModel.orientation
         var buttonConfigurations = [ToolInterfaceElementCreateSwatchButtonConfiguration]()
         
-        let addGuidePointTextIconPack = MainTabIconLibrary.handA
+       let addGuidePointTextIconPack = FramedLongIconLibrary.menuA
         let addGuidePointLine1 = ToolInterfaceStringLibraryCreateSwatches.swatchTextAddGuidePointLine1()
         let addGuidePointLine2 = ToolInterfaceStringLibraryCreateSwatches.swatchTextAddGuidePointLine2()
         let addGuidePointConfiguration = ToolInterfaceElementCreateSwatchButtonConfiguration(id: 0,
@@ -25,7 +25,7 @@ extension ToolInterfaceViewModel {
                                                                                nameLabelLine2: addGuidePointLine2)
         buttonConfigurations.append(addGuidePointConfiguration)
         
-        let removeGuidePointIconPack = MainTabIconLibrary.handB
+        let removeGuidePointIconPack = FramedLongIconLibrary.menuB
         let removeGuidePointLine1 = ToolInterfaceStringLibraryCreateSwatches.swatchTextRemoveGuidePointLine1()
         let removeGuidePointLine2 = ToolInterfaceStringLibraryCreateSwatches.swatchTextRemoveGuidePointLine2()
         let removeGuidePointConfiguration = ToolInterfaceElementCreateSwatchButtonConfiguration(id: 1,

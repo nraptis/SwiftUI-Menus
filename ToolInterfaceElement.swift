@@ -134,6 +134,9 @@ enum ToolInterfaceElement: UInt16 {
     
     
     case mainTabDocumentMode
+    case mainTabJainTest
+    case mainTabSkainTest
+    
     
     case sliderBouncePower
     case sliderBounceSpeed
@@ -503,6 +506,12 @@ enum ToolInterfaceElement: UInt16 {
             
         case .mainTabDocumentMode:
             return .mainTab
+        case .mainTabJainTest:
+            return .mainTab
+        case .mainTabSkainTest:
+            return .mainTab
+            
+            
         case .favoringOneLineLabel:
             return .favoringOneLineLabel
         case .greenButtonCreateScene:

@@ -11,6 +11,8 @@ import SwiftUI
 
 @Observable class MagicalViewModelSegmented: MagicalViewModel {
     
+    @MainActor var selectedSegmentIndex = 0
+    
     @MainActor let segmentButtonViewModels: [MagicalSegmentButtonViewModel]
     @MainActor init(orientation: Orientation,
                     segmentButtonViewModels: [MagicalSegmentButtonViewModel]) {
@@ -65,7 +67,6 @@ import SwiftUI
             if buttonViewModel.slavePaddingRight != buttonLayout.slavePaddingRight {
                 buttonViewModel.slavePaddingRight = buttonLayout.slavePaddingRight
             }
-            
             
             let nameLabelWidth = info.nameLabelWidth
             let numberOfLines = info.numberOfLines

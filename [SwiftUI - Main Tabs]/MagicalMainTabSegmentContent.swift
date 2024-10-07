@@ -9,182 +9,110 @@ import SwiftUI
 
 struct MagicalMainTabSegmentContent: View {
     
-    @Environment(MagicalMainTabViewModel.self) var magicalMainTabViewModel: MagicalMainTabViewModel
-    @Environment(MagicalMainTabButtonViewModel.self) var magicalMainTabButtonViewModel: MagicalMainTabButtonViewModel
-    let index: Int
-    let isSelected: Bool
-    let isDarkMode: Bool
-    let isEnabled: Bool
-    let isPressed: Bool
-    let orientation: Orientation
+    @Environment(MagicalMainTabViewModel.self) var magicalViewModel
+    @Environment(MagicalMainTabButtonViewModel.self) var magicalButtonViewModel
+    
     let layoutSchemeFlavor: LayoutSchemeFlavor
-    let universalPaddingTop: Int
-    let universalPaddingBottom: Int
+    let layoutHeight: Int
+    let isSelected: Bool
+    let isPressed: Bool
+    
     var body: some View {
         
-        let configuration = magicalMainTabButtonViewModel.mainTabButtonConfiguration
-        let textIcon = configuration.getTextIcon(orientation: orientation, 
-                                                 layoutSchemeFlavor: layoutSchemeFlavor,
-                                                 isDarkMode: isDarkMode,
-                                                 isEnabled: isEnabled)
+        let layoutWidth = magicalButtonViewModel.layoutWidth
+        let orientation = magicalViewModel.orientation
+        let configuration = magicalButtonViewModel.mainTabButtonConfiguration
+        let isDarkMode = magicalViewModel.isDarkModeEnabled
+        let isEnabled = magicalButtonViewModel.isEnabled && magicalViewModel.isEnabled
         
-        let universalPaddingLeft = magicalMainTabButtonViewModel.universalPaddingLeft
-        let universalPaddingRight = magicalMainTabButtonViewModel.universalPaddingRight
+        let numberOfLines = configuration.nameLabelNumberOfLines
+        let textIcon = configuration.iconPack.getTextIcon(orientation: orientation,
+                                                          layoutSchemeFlavor: layoutSchemeFlavor,
+                                                          numberOfLines: numberOfLines,
+                                                          isDarkMode: isDarkMode,
+                                                          isEnabled: isEnabled)
         
         let line1 = configuration.nameLabelLine1
         let line2 = configuration.nameLabelLine2
         
-        let numberOfLines = magicalMainTabButtonViewModel.mainTabButtonConfiguration.nameLabelNumberOfLines
-        
-        let iconWidth = textIcon.width
-        let iconHeight = textIcon.height
-        
         let nameLabelFont = MainTabLayout.getNameLabelFont(orientation: orientation,
-                                                                  flavor: layoutSchemeFlavor)
-        let nameLabelPaddingBottom = MainTabLayout.getNameLabelPaddingBottom(orientation: orientation,
-                                                                                flavor: layoutSchemeFlavor,
-                                                                                numberOfLines: numberOfLines)
-        let nameLabelPaddingLeft = magicalMainTabButtonViewModel.nameLabelPaddingLeft
-        let nameLabelPaddingRight = magicalMainTabButtonViewModel.nameLabelPaddingRight
-        let nameLabelVerticalSpacing = MainTabLayout.getNameLabelVerticalSpacing(orientation: orientation,        
-                                                                                 flavor: layoutSchemeFlavor)
+                                                          flavor: layoutSchemeFlavor)
+        let nameLabelVerticalSpacing = MainTabLayout.getNameLabelVerticalSpacing(orientation: orientation,
+                                                                                flavor: layoutSchemeFlavor)
         
-        let nameLabelTextWidth: Int
+        let nameLabelWidth: Int
         switch layoutSchemeFlavor {
-        case .long:
-            nameLabelTextWidth = configuration.nameLabelWidthLarge
-        case .stackedLarge:
-            nameLabelTextWidth = configuration.nameLabelWidthLarge
+        case .long, .stackedLarge:
+            nameLabelWidth = configuration.nameLabelWidthLarge
         case .stackedMedium:
-            nameLabelTextWidth = configuration.nameLabelWidthMedium
+            nameLabelWidth = configuration.nameLabelWidthMedium
         case .stackedSmall:
-            nameLabelTextWidth = configuration.nameLabelWidthSmall
+            nameLabelWidth = configuration.nameLabelWidthSmall
         }
         
         let lineHeight = ToolInterfaceTheme.getLineHeight(font: nameLabelFont)
-        let nameLabelWidth = nameLabelTextWidth + nameLabelPaddingLeft + nameLabelPaddingRight
         
-        let iconPaddingLeft = magicalMainTabButtonViewModel.iconPaddingLeft
-        let iconPaddingRight = magicalMainTabButtonViewModel.iconPaddingRight
-        let iconPaddingTop = MainTabLayout.getIconPaddingTop(orientation: orientation,
-                                                            flavor: layoutSchemeFlavor,
-                                                            numberOfLines: numberOfLines)
-        
-        let contentHeight = magicalMainTabViewModel.layoutHeight - (universalPaddingTop + universalPaddingBottom)
-        
-        
-        let color: Color
-        
+        let nameLabelColor: Color
         if isPressed {
             if isEnabled {
-                color = ToolInterfaceTheme.primaryDownEnabled
+                nameLabelColor = ToolInterfaceTheme.primaryDownEnabled
             } else {
-                color = ToolInterfaceTheme.primaryDownDisabled
+                nameLabelColor = ToolInterfaceTheme.primaryDownDisabled
             }
         } else {
             
             if isDarkMode {
                 if isSelected {
                     if isEnabled {
-                        color = ToolInterfaceTheme.primaryEnabledDark
+                        nameLabelColor = ToolInterfaceTheme.primaryEnabledDark
                     } else {
-                        color = ToolInterfaceTheme.primaryDisabledDark
+                        nameLabelColor = ToolInterfaceTheme.primaryDisabledDark
                     }
                 } else {
                     if isEnabled {
-                        color = ToolInterfaceTheme.primaryUnselectedEnabledDark
+                        nameLabelColor = ToolInterfaceTheme.primaryUnselectedEnabledDark
                     } else {
-                        color = ToolInterfaceTheme.primaryUnselectedDisabledDark
+                        nameLabelColor = ToolInterfaceTheme.primaryUnselectedDisabledDark
                     }
                 }
             } else {
                 if isSelected {
                     if isEnabled {
-                        color = ToolInterfaceTheme.primaryEnabledLight
+                        nameLabelColor = ToolInterfaceTheme.primaryEnabledLight
                     } else {
-                        color = ToolInterfaceTheme.primaryDisabledLight
+                        nameLabelColor = ToolInterfaceTheme.primaryDisabledLight
                     }
                 } else {
                     if isEnabled {
-                        color = ToolInterfaceTheme.primaryUnselectedEnabledLight
+                        nameLabelColor = ToolInterfaceTheme.primaryUnselectedEnabledLight
                     } else {
-                        color = ToolInterfaceTheme.primaryUnselectedDisabledLight
+                        nameLabelColor = ToolInterfaceTheme.primaryUnselectedDisabledLight
                     }
                 }
             }
         }
         
-        return VStack(spacing: 0.0) {
-
-#if INTERFACE_HINTS
-            Spacer()
-                .frame(width: 24.0, height: CGFloat(universalPaddingTop))
-                .background(Color(red: 0.85, green: 0.65, blue: 0.55, opacity: 0.40))
-#else
-            Spacer()
-                .frame(height: CGFloat(universalPaddingTop))
-#endif
-            
-            ZStack {
-                HStack(spacing: 0.0) {
-                
-#if INTERFACE_HINTS
-                    Spacer()
-                        .frame(width: CGFloat(universalPaddingLeft), height: 28.0)
-                        .background(Color(red: 0.85, green: 0.45, blue: 0.65, opacity: 0.40))
-#else
-                    Spacer()
-                        .frame(width: CGFloat(universalPaddingLeft))
-#endif
-                
-                    ZStack {
-                        HStack(spacing: 0.0) {
-                            LabelBox(line1: line1,
-                                     line2: line2,
-                                     numberOfLines: numberOfLines,
-                                     width: nameLabelWidth,
-                                     paddingLeft: nameLabelPaddingLeft,
-                                     paddingRight: nameLabelPaddingRight,
-                                     paddingBottom: 0,
-                                     lineHeight: lineHeight,
-                                     spacingVertical: nameLabelVerticalSpacing,
-                                     font: nameLabelFont,
-                                     color: color)
-                            IconBoxMainTab(icon: textIcon,
-                                           iconWidth: iconWidth,
-                                           iconHeight: iconHeight,
-                                           iconPaddingLeft: iconPaddingLeft,
-                                           iconPaddingRight: iconPaddingRight,
-                                           iconPaddingTop: iconPaddingTop)
-                        }
-                    }
-                    .frame(height: CGFloat(contentHeight))
-                
-#if INTERFACE_HINTS
-                    Spacer()
-                        .frame(width: CGFloat(universalPaddingRight), height: 28.0)
-                        .background(Color(red: 1.0, green: 0.25, blue: 0.75, opacity: 0.40))
-#else
-                    Spacer()
-                        .frame(width: CGFloat(universalPaddingRight))
-#endif
-                
-                }
-                
-            }
-            .frame(height: CGFloat(contentHeight))
-
-#if INTERFACE_HINTS
-            Spacer()
-                .frame(width: 24.0, height: CGFloat(universalPaddingBottom))
-                .background(Color(red: 0.65, green: 0.85, blue: 0.75, opacity: 0.40))
-#else
-            Spacer()
-                .frame(height: CGFloat(universalPaddingBottom))
-#endif
-            
-        }
-        .frame(width: CGFloat(magicalMainTabButtonViewModel.width),
-               height: CGFloat(magicalMainTabViewModel.layoutHeight))
+        let heroPaddingTopStacked = MainTabLayout.getHeroPaddingTopStacked(orientation: orientation)
+        let heroPaddingBottomStacked = MainTabLayout.getHeroPaddingBottomStacked(orientation: orientation)
+        
+        return HeroSlab(orientation: orientation,
+                        layoutWidth: layoutWidth,
+                        layoutHeight: layoutHeight,
+                        isLong: true,
+                        isPressed: isPressed,
+                        textIcon: textIcon,
+                        heroPaddingLeft: magicalButtonViewModel.heroPaddingLeft,
+                        heroPaddingRight: magicalButtonViewModel.heroPaddingRight,
+                        heroPaddingTopStacked: heroPaddingTopStacked,
+                        heroPaddingBottomStacked: heroPaddingBottomStacked,
+                        heroSpacingLong: magicalButtonViewModel.heroSpacing,
+                        line1: line1,
+                        line2: line2,
+                        numberOfLines: numberOfLines,
+                        nameLabelVerticalSpacing: nameLabelVerticalSpacing,
+                        nameLabelFont: nameLabelFont,
+                        nameLabelWidth: nameLabelWidth,
+                        lineHeight: lineHeight,
+                        nameLabelColor: nameLabelColor)
     }
 }

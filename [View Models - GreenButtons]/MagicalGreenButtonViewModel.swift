@@ -14,18 +14,18 @@ import SwiftUI
         GreenButtonLayout.self
     }
     
-    var nameLabelPaddingLeft = 0
-    var nameLabelPaddingRight = 0
+    //var nameLabelPaddingLeft = 0
+    //var nameLabelPaddingRight = 0
     
-    var iconPaddingLeft = 0
-    var iconPaddingRight = 0
+    //var iconPaddingLeft = 0
+    //var iconPaddingRight = 0
     
-    var universalPaddingLeft = 0
-    var universalPaddingRight = 0
+    //var universalPaddingLeft = 0
+    //var universalPaddingRight = 0
     
     let greenButtonConfiguration: ToolInterfaceElementGreenButtonConfiguration
     @MainActor init(orientation: Orientation,
-         greenButtonConfiguration: ToolInterfaceElementGreenButtonConfiguration) {
+                    greenButtonConfiguration: ToolInterfaceElementGreenButtonConfiguration) {
         self.greenButtonConfiguration = greenButtonConfiguration
         super.init(orientation: orientation)
     }
@@ -35,9 +35,23 @@ import SwiftUI
     }
     
     override func refreshLayoutFrame() {
-        refreshLayoutFrameLong(nameLabelWidth: greenButtonConfiguration.nameLabelWidth,
-                               numberOfLines: greenButtonConfiguration.nameLabelNumberOfLines,
-                               iconPackMain: greenButtonConfiguration.iconPack,
-                               iconPackSecondary: nil)
+        let layoutSchemeFlavor = getLayoutSchemeFlavor()
+        switch layoutSchemeFlavor {
+        case .long, .stackedLarge:
+            refreshLayoutFrameLong(nameLabelWidth: greenButtonConfiguration.nameLabelWidthLarge,
+                                   numberOfLines: greenButtonConfiguration.nameLabelNumberOfLines,
+                                   iconPackMain: greenButtonConfiguration.iconPack,
+                                   iconPackSecondary: nil)
+        case .stackedMedium:
+            refreshLayoutFrameLong(nameLabelWidth: greenButtonConfiguration.nameLabelWidthMedium,
+                                   numberOfLines: greenButtonConfiguration.nameLabelNumberOfLines,
+                                   iconPackMain: greenButtonConfiguration.iconPack,
+                                   iconPackSecondary: nil)
+        case .stackedSmall:
+            refreshLayoutFrameLong(nameLabelWidth: greenButtonConfiguration.nameLabelWidthSmall,
+                                   numberOfLines: greenButtonConfiguration.nameLabelNumberOfLines,
+                                   iconPackMain: greenButtonConfiguration.iconPack,
+                                   iconPackSecondary: nil)
+        }
     }
 }

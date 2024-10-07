@@ -11,34 +11,30 @@ import Foundation
     
     override func refresh() {
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
-            if buttonViewModels.count > 0 {
+            if segmentButtonViewModels.count > 0 {
                 if jiggleViewModel.jiggleDocument.isAddJigglePointsPossible() {
-                    buttonViewModels[0].isEnabled = true
-                    print("isAddJigglePointsPossible => TRUE")
+                    segmentButtonViewModels[0].isEnabled = true
                 } else {
-                    buttonViewModels[0].isEnabled = false
-                    print("isAddJigglePointsPossible => FALSE")
+                    segmentButtonViewModels[0].isEnabled = false
                 }
             }
             
-            if buttonViewModels.count > 1 {
+            if segmentButtonViewModels.count > 1 {
                 if jiggleViewModel.jiggleDocument.isRemoveJigglePointsPossible() {
-                    buttonViewModels[1].isEnabled = true
-                    print("isRemoveJigglePointsPossible => TRUE")
+                    segmentButtonViewModels[1].isEnabled = true
                 } else {
-                    buttonViewModels[1].isEnabled = false
-                    print("isRemoveJigglePointsPossible => FALSE")
+                    segmentButtonViewModels[1].isEnabled = false
                 }
             }
             
             switch jiggleViewModel.jiggleDocument.creatorMode {
             case .addJigglePoint:
-                if buttonViewModels.count > 0 {
-                    activeButtonViewModel = buttonViewModels[0]
+                if segmentButtonViewModels.count > 0 {
+                    activeButtonViewModel = segmentButtonViewModels[0]
                 }
             case .removeJigglePoint:
-                if buttonViewModels.count > 1 {
-                    activeButtonViewModel = buttonViewModels[1]
+                if segmentButtonViewModels.count > 1 {
+                    activeButtonViewModel = segmentButtonViewModels[1]
                 }
             case .none:
                 activeButtonViewModel = nil

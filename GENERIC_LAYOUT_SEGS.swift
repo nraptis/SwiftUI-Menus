@@ -33,6 +33,29 @@ struct SEGMENT_FLEX_INFO_CONVERTIBLE {
     }
 }
 
+struct SEGMENT_FLEX_INFO_LONG {
+    let iconPackMain: (any TextIconPackable)
+    let iconPackSecondary: (any TextIconPackable)?
+    let nameLabelWidthLarge: Int
+    let nameLabelWidthMedium: Int
+    let nameLabelWidthSmall: Int
+    let numberOfLines: Int
+    
+    init(iconPackMain: (any TextIconPackable),
+         iconPackSecondary: (any TextIconPackable)?,
+         nameLabelWidthLarge: Int,
+         nameLabelWidthMedium: Int,
+         nameLabelWidthSmall: Int,
+         numberOfLines: Int) {
+        self.iconPackMain = iconPackMain
+        self.iconPackSecondary = iconPackSecondary
+        self.nameLabelWidthLarge = nameLabelWidthLarge
+        self.nameLabelWidthMedium = nameLabelWidthMedium
+        self.nameLabelWidthSmall = nameLabelWidthSmall
+        self.numberOfLines = numberOfLines
+    }
+}
+
 struct SEGMENT_LAYOUT_INFO {
     let iconPackMain: (any TextIconPackable)
     let iconPackSecondary: (any TextIconPackable)?

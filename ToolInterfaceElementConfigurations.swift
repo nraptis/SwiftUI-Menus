@@ -5,11 +5,97 @@
 //  Created by Nicky Taylor on 3/19/24.
 //
 
-import Foundation
 import UIKit
 
+struct ToolInterfaceElementCreateSwatchButtonConfiguration: Identifiable {
+    let id: UInt8
+    let iconPack: FramedLongIconPack
+    let nameLabelLine1: String?
+    let nameLabelLine2: String?
+    let nameLabelNumberOfLines: Int
+    let nameLabelWidthLarge: Int
+    let nameLabelWidthMedium: Int
+    let nameLabelWidthSmall: Int
+    init(id: UInt8,
+         iconPack: FramedLongIconPack,
+         orientation: Orientation,
+         nameLabelLine1: String?,
+         nameLabelLine2: String?) {
+        
+        self.id = id
+        self.iconPack = iconPack
+        self.nameLabelLine1 = nameLabelLine1
+        self.nameLabelLine2 = nameLabelLine2
+        
+        let _nameLabelNumberOfLines = ToolInterfaceTheme.getNumberOfLines(line1: nameLabelLine1,
+                                                                          line2: nameLabelLine2)
+        
+        nameLabelWidthLarge = CreateSwatchLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+                                                                  line2: nameLabelLine2,
+                                                                  orientation: orientation,
+                                                                  flavor: .stackedLarge) + 2
+        nameLabelWidthMedium = CreateSwatchLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+                                                                   line2: nameLabelLine2,
+                                                                   orientation: orientation,
+                                                                   flavor: .stackedMedium) + 2
+        nameLabelWidthSmall = CreateSwatchLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+                                                                  line2: nameLabelLine2,
+                                                                  orientation: orientation,
+                                                                  flavor: .stackedSmall) + 2
+        self.nameLabelNumberOfLines = _nameLabelNumberOfLines
+    }
+}
 
-struct ToolInterfaceElementSegmentedPickerButtonConfiguration {
+struct ToolInterfaceElementCreateSwatchConfiguration {
+    let buttonConfigurations: [ToolInterfaceElementCreateSwatchButtonConfiguration]
+}
+
+struct ToolInterfaceElementMainTabButtonConfiguration: Identifiable {
+    let id: UInt8
+    let iconPack: FramedLongIconPack
+    let nameLabelLine1: String?
+    let nameLabelLine2: String?
+    let nameLabelNumberOfLines: Int
+    let nameLabelWidthLarge: Int
+    let nameLabelWidthMedium: Int
+    let nameLabelWidthSmall: Int
+    init(id: UInt8,
+         iconPack: FramedLongIconPack,
+         orientation: Orientation,
+         nameLabelLine1: String?,
+         nameLabelLine2: String?) {
+        
+        self.id = id
+        self.iconPack = iconPack
+        self.nameLabelLine1 = nameLabelLine1
+        self.nameLabelLine2 = nameLabelLine2
+        
+        let _nameLabelNumberOfLines = ToolInterfaceTheme.getNumberOfLines(line1: nameLabelLine1,
+                                                                          line2: nameLabelLine2)
+        
+        nameLabelWidthLarge = MainTabLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+                                                                  line2: nameLabelLine2,
+                                                                  orientation: orientation,
+                                                                  flavor: .stackedLarge) + 2
+        nameLabelWidthMedium = MainTabLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+                                                                   line2: nameLabelLine2,
+                                                                   orientation: orientation,
+                                                                   flavor: .stackedMedium) + 2
+        nameLabelWidthSmall = MainTabLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+                                                                  line2: nameLabelLine2,
+                                                                  orientation: orientation,
+                                                                  flavor: .stackedSmall) + 2
+        self.nameLabelNumberOfLines = _nameLabelNumberOfLines
+    }
+}
+
+struct ToolInterfaceElementMainTabConfiguration {
+    let buttonConfigurations: [ToolInterfaceElementMainTabButtonConfiguration]
+}
+
+
+
+struct ToolInterfaceElementSegmentedPickerButtonConfiguration: Identifiable {
     let id: UInt8
     let iconPack: FramedConvertibleIconPack
     let nameLabelLine1: String?
@@ -52,20 +138,20 @@ struct ToolInterfaceElementSegmentedPickerButtonConfiguration {
     }
 }
 
-extension ToolInterfaceElementSegmentedPickerButtonConfiguration: Identifiable {
-    
-}
-
 struct ToolInterfaceElementSegmentedPickerConfiguration {
     let buttonConfigurations: [ToolInterfaceElementSegmentedPickerButtonConfiguration]
 }
+
+
 
 struct ToolInterfaceElementGreenButtonConfiguration {
     let iconPack: FramedLongIconPack
     let nameLabelLine1: String?
     let nameLabelLine2: String?
     let nameLabelNumberOfLines: Int
-    let nameLabelWidth: Int
+    let nameLabelWidthLarge: Int
+    let nameLabelWidthMedium: Int
+    let nameLabelWidthSmall: Int
     init(iconPack: FramedLongIconPack,
          orientation: Orientation,
          nameLabelLine1: String?,
@@ -75,10 +161,18 @@ struct ToolInterfaceElementGreenButtonConfiguration {
         self.nameLabelLine2 = nameLabelLine2
         let _nameLabelNumberOfLines = ToolInterfaceTheme.getNumberOfLines(line1: nameLabelLine1,
                                                                           line2: nameLabelLine2)
-        nameLabelWidth = GreenButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
-                                                                 line2: nameLabelLine2,
-                                                                 orientation: orientation,
-                                                                 flavor: .long) + 2
+        nameLabelWidthLarge = GreenButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+                                                                      line2: nameLabelLine2,
+                                                                      orientation: orientation,
+                                                                      flavor: .stackedLarge) + 2
+        nameLabelWidthMedium = GreenButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+                                                                       line2: nameLabelLine2,
+                                                                       orientation: orientation,
+                                                                       flavor: .stackedMedium) + 2
+        nameLabelWidthSmall = GreenButtonLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+                                                                      line2: nameLabelLine2,
+                                                                      orientation: orientation,
+                                                                      flavor: .stackedSmall) + 2
         self.nameLabelNumberOfLines = _nameLabelNumberOfLines
     }
 }
@@ -636,124 +730,7 @@ struct ToolInterfaceElementButtonConfiguration {
 
 }
 
-struct ToolInterfaceElementMainTabButtonConfiguration {
-    let id: UInt8
-    let iconPack: MainTabIconPack
-    let nameLabelLine1: String?
-    let nameLabelLine2: String?
-    let nameLabelNumberOfLines: Int
-    
-    let nameLabelWidthLarge: Int
-    let nameLabelWidthMedium: Int
-    let nameLabelWidthSmall: Int
-    
-    init(id: UInt8,
-         iconPack: MainTabIconPack,
-         orientation: Orientation,
-         nameLabelLine1: String?,
-         nameLabelLine2: String?) {
-        self.id = id
-        self.iconPack = iconPack
-        self.nameLabelLine1 = nameLabelLine1
-        self.nameLabelLine2 = nameLabelLine2
-        let _nameLabelNumberOfLines = ToolInterfaceTheme.getNumberOfLines(line1: nameLabelLine1,
-                                                                          line2: nameLabelLine2)
-        
-        nameLabelWidthLarge = MainTabLayout.getNameLabelTextWidth(line1: nameLabelLine1,
-                                                                  line2: nameLabelLine2,
-                                                                  orientation: orientation,
-                                                                  flavor: .stackedLarge) + 2
-        nameLabelWidthMedium = MainTabLayout.getNameLabelTextWidth(line1: nameLabelLine1,
-                                                                   line2: nameLabelLine2,
-                                                                   orientation: orientation,
-                                                                   flavor: .stackedMedium) + 2
-        nameLabelWidthSmall = MainTabLayout.getNameLabelTextWidth(line1: nameLabelLine1,
-                                                                  line2: nameLabelLine2,
-                                                                  orientation: orientation,
-                                                                  flavor: .stackedSmall) + 2
-        
-        self.nameLabelNumberOfLines = _nameLabelNumberOfLines
-    }
-    
-    
-    func getTextIcon(orientation: Orientation,
-                     layoutSchemeFlavor: LayoutSchemeFlavor,
-                     isDarkMode: Bool,
-                     isEnabled: Bool) -> TextIconable {
-        return iconPack.getTextIcon(orientation: orientation,
-                                    layoutSchemeFlavor: layoutSchemeFlavor,
-                                    numberOfLines: nameLabelNumberOfLines,
-                                    isDarkMode: isDarkMode,
-                                    isEnabled: isEnabled)
-    }
-}
 
-extension ToolInterfaceElementMainTabButtonConfiguration: Identifiable {
-    
-}
-
-struct ToolInterfaceElementMainTabConfiguration {
-    let buttonConfigurations: [ToolInterfaceElementMainTabButtonConfiguration]
-}
-
-struct ToolInterfaceElementCreateSwatchButtonConfiguration {
-    let id: UInt8
-    let iconPack: MainTabIconPack
-    let nameLabelLine1: String?
-    let nameLabelLine2: String?
-    let nameLabelNumberOfLines: Int
-    
-    let nameLabelWidthLarge: Int
-    let nameLabelWidthMedium: Int
-    let nameLabelWidthSmall: Int
-    
-    init(id: UInt8,
-         iconPack: MainTabIconPack,
-         orientation: Orientation,
-         nameLabelLine1: String?,
-         nameLabelLine2: String?) {
-        self.id = id
-        self.iconPack = iconPack
-        self.nameLabelLine1 = nameLabelLine1
-        self.nameLabelLine2 = nameLabelLine2
-        let _nameLabelNumberOfLines = ToolInterfaceTheme.getNumberOfLines(line1: nameLabelLine1,
-                                                                          line2: nameLabelLine2)
-        
-        nameLabelWidthLarge = CreateSwatchLayout.getNameLabelTextWidth(line1: nameLabelLine1,
-                                                                  line2: nameLabelLine2,
-                                                                  orientation: orientation,
-                                                                  flavor: .stackedLarge) + 2
-        nameLabelWidthMedium = CreateSwatchLayout.getNameLabelTextWidth(line1: nameLabelLine1,
-                                                                   line2: nameLabelLine2,
-                                                                   orientation: orientation,
-                                                                   flavor: .stackedMedium) + 2
-        nameLabelWidthSmall = CreateSwatchLayout.getNameLabelTextWidth(line1: nameLabelLine1,
-                                                                  line2: nameLabelLine2,
-                                                                  orientation: orientation,
-                                                                  flavor: .stackedSmall) + 2
-        
-        self.nameLabelNumberOfLines = _nameLabelNumberOfLines
-    }
-    
-    func getTextIcon(orientation: Orientation,
-                     layoutSchemeFlavor: LayoutSchemeFlavor,
-                     isDarkMode: Bool,
-                     isEnabled: Bool) -> TextIconable {
-        return iconPack.getTextIcon(orientation: orientation,
-                                    layoutSchemeFlavor: layoutSchemeFlavor,
-                                    numberOfLines: nameLabelNumberOfLines,
-                                    isDarkMode: isDarkMode,
-                                    isEnabled: isEnabled)
-    }
-}
-
-extension ToolInterfaceElementCreateSwatchButtonConfiguration: Identifiable {
-    
-}
-
-struct ToolInterfaceElementCreateSwatchConfiguration {
-    let buttonConfigurations: [ToolInterfaceElementCreateSwatchButtonConfiguration]
-}
 
 struct ToolInterfaceElementIconButtonConfiguration {
     let iconPack: TextIconButtonIconPack

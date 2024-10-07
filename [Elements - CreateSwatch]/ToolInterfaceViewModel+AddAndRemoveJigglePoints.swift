@@ -15,7 +15,7 @@ extension ToolInterfaceViewModel {
         let orientation = jiggleViewModel.orientation
         var buttonConfigurations = [ToolInterfaceElementCreateSwatchButtonConfiguration]()
         
-        let addJigglePointTextIconPack = MainTabIconLibrary.handA
+        let addJigglePointTextIconPack = FramedLongIconLibrary.menuB
         let addJigglePointLine1 = ToolInterfaceStringLibraryCreateSwatches.swatchTextAddJigglePointLine1()
         let addJigglePointLine2 = ToolInterfaceStringLibraryCreateSwatches.swatchTextAddJigglePointLine2()
         let addJigglePointConfiguration = ToolInterfaceElementCreateSwatchButtonConfiguration(id: 0,
@@ -25,7 +25,7 @@ extension ToolInterfaceViewModel {
                                                                                nameLabelLine2: addJigglePointLine2)
         buttonConfigurations.append(addJigglePointConfiguration)
         
-        let removeJigglePointIconPack = MainTabIconLibrary.handB
+        let removeJigglePointIconPack = FramedLongIconLibrary.menuA
         let removeJigglePointLine1 = ToolInterfaceStringLibraryCreateSwatches.swatchTextRemoveJigglePointLine1()
         let removeJigglePointLine2 = ToolInterfaceStringLibraryCreateSwatches.swatchTextRemoveJigglePointLine2()
         let removeJigglePointConfiguration = ToolInterfaceElementCreateSwatchButtonConfiguration(id: 1,

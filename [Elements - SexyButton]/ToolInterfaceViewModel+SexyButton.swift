@@ -18,7 +18,7 @@ extension ToolInterfaceViewModel {
                                                     neighborTypeLeft: neighborTypeLeft,
                                                     neighborTypeRight: neighborTypeRight,
                                                     iconPackMain: configuration.iconPack,
-                                                    iconPackSecondary: nil,
+                                                    iconPackSecondary: FramedLongIconLibrary.checkBoxSquare,
                                                     nameLabelWidthLong: configuration.nameLabelWidthLong,
                                                     nameLabelWidthStackedLarge: configuration.nameLabelWidthStackedLarge,
                                                     nameLabelWidthStackedMedium: configuration.nameLabelWidthStackedMedium,

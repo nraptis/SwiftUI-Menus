@@ -26,6 +26,8 @@ extension ToolInterfaceViewModel {
                                               neighborTypeLeft: neighborTypeLeft,
                                               neighborTypeRight: neighborTypeRight)
         
+        print("Menu Flex: \(flex)")
+        
         let viewModelMenu = MagicalSexyButtonViewModelMenu(orientation: jiggleViewModel.orientation,
                                                            sexyButtonConfiguration: configuration)
         let menuToolNode = ToolNode(id: getToolNodeID(),

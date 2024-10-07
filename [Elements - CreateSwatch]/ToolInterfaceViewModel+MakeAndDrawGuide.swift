@@ -15,7 +15,7 @@ extension ToolInterfaceViewModel {
         let orientation = jiggleViewModel.orientation
         var buttonConfigurations = [ToolInterfaceElementCreateSwatchButtonConfiguration]()
         
-        let makeGuideTextIconPack = MainTabIconLibrary.makeGuide
+       let makeGuideTextIconPack = FramedLongIconLibrary.menuA
         let makeGuideLine1 = ToolInterfaceStringLibraryCreateSwatches.swatchTextMakeGuideLine1()
         let makeGuideLine2 = ToolInterfaceStringLibraryCreateSwatches.swatchTextMakeGuideLine2()
         let makeGuideConfiguration = ToolInterfaceElementCreateSwatchButtonConfiguration(id: 0,
@@ -25,7 +25,7 @@ extension ToolInterfaceViewModel {
                                                                                nameLabelLine2: makeGuideLine2)
         buttonConfigurations.append(makeGuideConfiguration)
         
-        let drawGuideIconPack = MainTabIconLibrary.drawGuide
+        let drawGuideIconPack = FramedLongIconLibrary.menuB
         let drawGuideLine1 = ToolInterfaceStringLibraryCreateSwatches.swatchTextDrawGuideLine1()
         let drawGuideLine2 = ToolInterfaceStringLibraryCreateSwatches.swatchTextDrawGuideLine2()
         let drawGuideConfiguration = ToolInterfaceElementCreateSwatchButtonConfiguration(id: 1,

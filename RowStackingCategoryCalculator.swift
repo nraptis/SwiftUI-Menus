@@ -142,9 +142,14 @@ class RowStackingCategoryCalculator {
         case .iconButton(let flexIconButtonData):
             return flexIconButtonData.standardWidth
         
-        case .greenButton(let flexGreenButtonData):
-            return flexGreenButtonData.standardWidth
-        
+        case .greenButton(let flexLong):
+            if layoutStackingCategory.isSmall {
+                return flexLong.standardWidthSmall
+            } else if layoutStackingCategory.isMedium {
+                return flexLong.standardWidthMedium
+            } else {
+                return flexLong.standardWidthLarge
+            }
         case .mainTab(let flexMainTabData):
             if layoutStackingCategory.isSmall {
                 return flexMainTabData.standardWidthSmall

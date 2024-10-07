@@ -13,8 +13,6 @@ class HORIZONTAL_LAYOUT {
     var __extraLeftForAllEqual = 0
     var __extraRightForAllEqual = 0
     
-    
-    
     var outsideBoxPaddingLeft = 0
     var outsideBoxPaddingRight = 0
     
@@ -285,7 +283,7 @@ struct GENERIC_LAYOUT {
         
         
         let iconMain = iconPackMain.getTextIcon(orientation: orientation,
-                                                layoutSchemeFlavor: .long,
+                                                layoutSchemeFlavor: .stackedLarge,
                                                 numberOfLines: numberOfLines,
                                                 isDarkMode: false,
                                                 isEnabled: true)
@@ -312,6 +310,10 @@ struct GENERIC_LAYOUT {
                                      left: heroLeftSqueezed, right: heroRightSqueezed)
         _ = result.expandSlaveFilling(consumed: &consumed, layoutWidth: layoutWidth,
                                       left: slaveLeftSqueezed, right: slaveRightSqueezed)
+        
+        if result.slavePaddingRight < slaveRightSqueezed {
+            print("something fishu....")
+        }
         
         var isLooping = true
         
@@ -366,7 +368,6 @@ struct GENERIC_LAYOUT {
         let heroSpacingSqueezed = layoutSchemeType.getHeroSpacingLong(orientation: orientation,squeeze: .squeezed)
         let heroSpacingStandard = layoutSchemeType.getHeroSpacingLong(orientation: orientation,squeeze: .standard)
         let heroSpacingRelaxed = layoutSchemeType.getHeroSpacingLong(orientation: orientation,
-                                                                     
                                                                      squeeze: .relaxed)
         
         

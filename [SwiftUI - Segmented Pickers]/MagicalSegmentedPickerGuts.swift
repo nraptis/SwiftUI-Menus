@@ -8,18 +8,14 @@
 import SwiftUI
 
 struct MagicalSegmentedPickerGuts: View {
-    
     @Environment(MagicalSegmentedPickerViewModel.self) var magicalViewModel
     let layoutSchemeFlavor: LayoutSchemeFlavor
     let layoutWidth: Int
     let outsideBoxPaddingTop: Int
     let outsideBoxPaddingBottom: Int
-    
     var body: some View {
-        
         let buttonCount = magicalViewModel.segmentButtonViewModels.count
         let buttonCount1 = (buttonCount - 1)
-        
         return GeometryReader { _ in
             ForEach(magicalViewModel.segmentedPickerConfiguration.buttonConfigurations) { buttonConfiguration in
                 let index = Int(buttonConfiguration.id)
@@ -32,9 +28,7 @@ struct MagicalSegmentedPickerGuts: View {
                 } else {
                     position = .middle
                 }
-                
                 let isSelected = magicalViewModel.selectedSegmentIndex == index
-                
                 return MagicalSegmentedPickerSegmentButton(index: index,
                                                     layoutSchemeFlavor: layoutSchemeFlavor,
                                                     outsideBoxPaddingTop: outsideBoxPaddingTop,

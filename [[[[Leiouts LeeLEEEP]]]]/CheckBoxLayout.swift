@@ -9,6 +9,69 @@ import UIKit
 
 struct CheckBoxLayout: LayoutScheme {
     
+    static func getSlavePaddingRightLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        if Device.isPad {
+            return 11
+        } else {
+            return 0
+        }
+    }
+    
+    static func getSlavePaddingRightStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        if Device.isPad {
+            return 11
+        } else {
+            return 0
+        }
+    }
+    
+    static func getHeroPaddingLeftStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        if Device.isPad {
+            return 6
+        } else {
+            return 0
+        }
+    }
+    
+    static func getHeroPaddingLeftLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        if Device.isPad {
+            return 6
+        } else {
+            return 0
+        }
+    }
+    
+    static func getHeroPaddingRightStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        if Device.isPad {
+            return 6
+        } else {
+            return 0
+        }
+    }
+    
+    static func getHeroPaddingRightLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        if Device.isPad {
+            return 6
+        } else {
+            return 0
+        }
+    }
+    
+    static func getOutsideBoxPaddingTop(orientation: Orientation) -> Int {
+        if Device.isPad {
+            return 3
+        } else {
+            return 2
+        }
+    }
+    static func getOutsideBoxPaddingBottom(orientation: Orientation) -> Int {
+        if Device.isPad {
+            return 3
+        } else {
+            return 2
+        }
+    }
+    
     static func getHeroPaddingTopStacked(orientation: Orientation) -> Int {
         if Device.isPad {
             return 2 + 3
@@ -17,16 +80,7 @@ struct CheckBoxLayout: LayoutScheme {
         }
     }
     
-    static func getSlavePaddingRightStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
-        switch squeeze {
-        case .squeezed:
-            return 30
-        case .standard:
-            return 32
-        case .relaxed:
-            return 40
-        }
-    }
+    
     
     
     

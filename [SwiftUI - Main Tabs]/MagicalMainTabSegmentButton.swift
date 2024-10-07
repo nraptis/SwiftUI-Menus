@@ -8,47 +8,32 @@
 import SwiftUI
 
 struct MagicalMainTabSegmentButton: View {
-    
-    @Environment(MagicalMainTabViewModel.self) var magicalMainTabViewModel: MagicalMainTabViewModel
-    @Environment(MagicalMainTabButtonViewModel.self) var magicalMainTabButtonViewModel: MagicalMainTabButtonViewModel
+    @Environment(MagicalMainTabViewModel.self) var magicalViewModel
+    @Environment(MagicalMainTabButtonViewModel.self) var magicalButtonViewModel
     let index: Int
-    let isSelected: Bool
-    let isDarkMode: Bool
-    let isEnabled: Bool
-    let orientation: Orientation
     let layoutSchemeFlavor: LayoutSchemeFlavor
-    let segmentedPickerPosition: SegmentedPickerPosition
-    let universalPaddingTop: Int
-    let universalPaddingBottom: Int
-    
+    let outsideBoxPaddingTop: Int
+    let outsideBoxPaddingBottom: Int
+    let position: SegmentedPickerPosition
+    let isSelected: Bool
     var body: some View {
-        return ZStack {
-            bodyContent()
-        }
-        .frame(width: CGFloat(magicalMainTabButtonViewModel.width),
-               height: CGFloat(magicalMainTabViewModel.layoutHeight))
-        .offset(x: CGFloat(magicalMainTabButtonViewModel.x),
-                y: CGFloat(magicalMainTabButtonViewModel.y))
-    }
-    
-    func bodyContent() -> some View {
-        Button {
-            magicalMainTabViewModel.handleSelectedIndex(index)
-        } label: {
-            HStack(spacing: 0.0) {
-                
+        ZStack {
+            Button {
+                magicalViewModel.handleSelectedIndex(index)
+            } label: {
+                HStack(spacing: 0.0) {
+                    
+                }
+                .frame(width: CGFloat(magicalButtonViewModel.layoutWidth),
+                       height: CGFloat(magicalViewModel.layoutHeight))
             }
-            .frame(width: CGFloat(magicalMainTabButtonViewModel.width),
-                   height: CGFloat(magicalMainTabViewModel.layoutHeight))
+            .buttonStyle(MagicalMainTabSegmentButtonButtonStyle(layoutSchemeFlavor: layoutSchemeFlavor,
+                                                                        outsideBoxPaddingTop: outsideBoxPaddingTop,
+                                                                        outsideBoxPaddingBottom: outsideBoxPaddingBottom,
+                                                                        position: position,
+                                                                        isSelected: isSelected))
         }
-        .buttonStyle(MagicalMainTabSegmentButtonButtonStyle(index: index,
-                                                            isSelected: isSelected,
-                                                            isDarkMode: isDarkMode,
-                                                            isEnabled: isEnabled,
-                                                            orientation: orientation,
-                                                            layoutSchemeFlavor: layoutSchemeFlavor,
-                                                            segmentedPickerPosition: segmentedPickerPosition,
-                                                            universalPaddingTop: universalPaddingTop,
-                                                            universalPaddingBottom: universalPaddingBottom))
+        .frame(width: CGFloat(magicalButtonViewModel.layoutWidth),
+               height: CGFloat(magicalViewModel.layoutHeight))
     }
 }

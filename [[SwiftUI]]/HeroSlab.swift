@@ -33,9 +33,16 @@ struct HeroSlab: View {
         let iconWidth = textIcon.width
         let iconHeight = textIcon.height
         
-        let heroWidth = layoutWidth - heroPaddingLeft - heroPaddingRight
+        let heroWidth: Int
+        if isLong {
+            heroWidth = nameLabelWidth + iconWidth + heroSpacingLong
+        } else {
+            let textAndIconWidth = max(iconWidth, nameLabelWidth)
+            heroWidth = textAndIconWidth
+        }
         
         return HStack(spacing: 0.0) {
+            
             
 #if INTERFACE_HINTS
             Spacer()
@@ -48,6 +55,8 @@ struct HeroSlab: View {
             
             if isLong {
                 HStack(spacing: 0.0) {
+                    
+                    
                     IconBoxMainTab(icon: textIcon,
                                    iconWidth: iconWidth,
                                    iconHeight: iconHeight,
@@ -76,6 +85,7 @@ struct HeroSlab: View {
                              spacingVertical: nameLabelVerticalSpacing,
                              font: nameLabelFont,
                              color: nameLabelColor)
+                    
                 }
                 .frame(width: CGFloat(heroWidth),
                        height: CGFloat(layoutHeight))
@@ -118,16 +128,19 @@ struct HeroSlab: View {
             Spacer()
                 .frame(width: CGFloat(heroPaddingRight))
 #endif
+
+             
+            Spacer(minLength: 0.0)
+            
         }
         .frame(width: CGFloat(layoutWidth),
                height: CGFloat(layoutHeight))
-#if INTERFACE_HINTS
+//#if INTERFACE_HINTS
         .overlay(Rectangle().stroke().foregroundStyle(
             LinearGradient(colors: [Color(red: 1.0, green: 0.15, blue: 0.75, opacity: 0.85),
                                     Color(red: 1.0, green: 0.32, blue: 0.55, opacity: 0.85)], startPoint: .leading, endPoint: .trailing)))
-        .background(Rectangle().foregroundStyle(
-            LinearGradient(colors: [Color(red: 0.25, green: 0.76, blue: 0.35, opacity: 0.25),
-                                    Color(red: 0.45, green: 0.23, blue: 0.74, opacity: 0.25)], startPoint: .leading, endPoint: .trailing)))
-#endif
+        .background(RoundedRectangle(cornerRadius: 12.0).foregroundStyle(Color.orange.opacity(0.25)))
+        //#endif
+        
     }
 }

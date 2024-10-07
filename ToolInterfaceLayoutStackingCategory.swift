@@ -29,7 +29,6 @@ extension ToolInterfaceLayoutStackingCategory {
         case .allVerticalMedium:
             return .stackedMedium
         case .large(let stackingLargeData):
-            
             switch toolInterfaceElementType {
             case .checkBox, .sexyCheckBox:
                 if stackingLargeData.isCheckBoxLong {
@@ -37,7 +36,6 @@ extension ToolInterfaceLayoutStackingCategory {
                 } else {
                     return .stackedLarge
                 }
-                
             case .textIconButton, .sexyButton:
                 if stackingLargeData.isButtonLong {
                     return .long
@@ -56,7 +54,6 @@ extension ToolInterfaceLayoutStackingCategory {
                 } else {
                     return .stackedLarge
                 }
-            
             default:
                 return .long
             }

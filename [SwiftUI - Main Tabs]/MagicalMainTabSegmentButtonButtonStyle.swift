@@ -9,155 +9,172 @@ import SwiftUI
 
 struct MagicalMainTabSegmentButtonButtonStyle: ButtonStyle {
     
-    @Environment(MagicalMainTabViewModel.self) var magicalMainTabViewModel: MagicalMainTabViewModel
-    @Environment(MagicalMainTabButtonViewModel.self) var magicalMainTabButtonViewModel: MagicalMainTabButtonViewModel
-    let index: Int
-    let isSelected: Bool
-    let isDarkMode: Bool
-    let isEnabled: Bool
-    let orientation: Orientation
+    @Environment(MagicalMainTabViewModel.self) var magicalViewModel
+    @Environment(MagicalMainTabButtonViewModel.self) var magicalButtonViewModel
     let layoutSchemeFlavor: LayoutSchemeFlavor
-    let segmentedPickerPosition: SegmentedPickerPosition
-    let universalPaddingTop: Int
-    let universalPaddingBottom: Int
+    let outsideBoxPaddingTop: Int
+    let outsideBoxPaddingBottom: Int
+    let position: SegmentedPickerPosition
+    let isSelected: Bool
     
     func makeBody(configuration: Configuration) -> some View {
         return ZStack {
+            
+            getBox(isPressed: configuration.isPressed)
             bodyContent(isPressed: configuration.isPressed)
-                .transaction { transaction in
-                    transaction.animation = nil
-                }
-        }
-        .frame(width: CGFloat(magicalMainTabButtonViewModel.width),
-               height: CGFloat(magicalMainTabViewModel.layoutHeight))
-    }
-    
-    func bodyContent(isPressed: Bool) -> some View {
-        return HStack(spacing: 0.0) {
-            MagicalMainTabSegmentContent(index: index,
-                                                        isSelected: isSelected,
-                                                        isDarkMode: isDarkMode,
-                                                        isEnabled: isEnabled,
-                                                        isPressed: isPressed,
-                                                        orientation: orientation,
-                                                        layoutSchemeFlavor: layoutSchemeFlavor,
-                                                        universalPaddingTop: universalPaddingTop,
-                                                        universalPaddingBottom: universalPaddingBottom)
             
         }
-        .frame(width: CGFloat(magicalMainTabButtonViewModel.width),
-               height: CGFloat(magicalMainTabViewModel.layoutHeight))
-        .background(getFillRect(isPressed: isPressed))
-        .background(getStrokeRect(isPressed: isPressed))
+        .frame(width: CGFloat(magicalButtonViewModel.layoutWidth),
+               height: CGFloat(magicalViewModel.layoutHeight))
+        .transaction { transaction in
+            transaction.animation = nil
+        }
+    }
+    
+    func getBox(isPressed: Bool) -> some View {
+        let boxWidth = magicalButtonViewModel.layoutWidth
+        let boxHeight = magicalViewModel.layoutHeight - outsideBoxPaddingTop - outsideBoxPaddingBottom
+        return HStack(spacing: 0.0) {
+            Spacer()
+                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingLeft))
+            
+            VStack(spacing: 0.0) {
+                Spacer()
+                    .frame(height: CGFloat(outsideBoxPaddingTop))
+                ZStack {
+                    
+                }
+                    .frame(width: CGFloat(boxWidth),
+                           height: CGFloat(boxHeight))
+                    .background(getStrokeRect(isPressed: isPressed))
+                    .background(getFillRect(isPressed: isPressed))
+                
+                Spacer()
+                    .frame(height: CGFloat(outsideBoxPaddingBottom))
+            }
+            
+            Spacer()
+            .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight))
+        }
+    }
+    
+    func getShape() -> some Shape {
+        let cornerRadius = MainTabLayout.getCornerRadius(orientation: magicalViewModel.orientation)
+        switch position {
+        case .bookendLeft:
+            let radii = RectangleCornerRadii(topLeading: CGFloat(cornerRadius),
+                                             bottomLeading: CGFloat(cornerRadius),
+                                             bottomTrailing: 0.0,
+                                             topTrailing: 0.0)
+            return UnevenRoundedRectangle(cornerRadii: radii)
+        case .middle:
+            let radii = RectangleCornerRadii(topLeading: 0.0,
+                                             bottomLeading: 0.0,
+                                             bottomTrailing: 0.0,
+                                             topTrailing: 0.0)
+            return UnevenRoundedRectangle(cornerRadii: radii)
+        case .bookendRight:
+            let radii = RectangleCornerRadii(topLeading: 0.0,
+                                             bottomLeading: 0.0,
+                                             bottomTrailing: CGFloat(cornerRadius),
+                                             topTrailing: CGFloat(cornerRadius))
+            return UnevenRoundedRectangle(cornerRadii: radii)
+        }
     }
     
     func getStrokeRect(isPressed: Bool) -> some View {
-        
-        let cornerRadius = MainTabLayout.getCornerRadius(orientation: orientation)
-        let lineThickness = MainTabLayout.getLineThickness(orientation: orientation)
-        
+        let lineThickness = MainTabLayout.getLineThickness(orientation: magicalViewModel.orientation)
         let color: Color
-        if isDarkMode {
-            color = ToolInterfaceTheme.primaryEnabledDark
+        if magicalViewModel.isDarkModeEnabled {
+            if magicalButtonViewModel.isEnabled {
+                color = ToolInterfaceTheme.primaryUnselectedEnabledDark
+            } else {
+                color = ToolInterfaceTheme.primaryUnselectedDisabledDark
+            }
         } else {
-            color = ToolInterfaceTheme.primaryEnabledLight
+            if magicalButtonViewModel.isEnabled {
+                color = ToolInterfaceTheme.primaryUnselectedEnabledLight
+            } else {
+                color = ToolInterfaceTheme.primaryUnselectedDisabledLight
+            }
         }
-        
-        let unevenRoundedRectangle: UnevenRoundedRectangle
-        switch segmentedPickerPosition {
-        case .bookendLeft:
-            let radii = RectangleCornerRadii(topLeading: CGFloat(cornerRadius),
-                                             bottomLeading: CGFloat(cornerRadius),
-                                             bottomTrailing: 0.0,
-                                             topTrailing: 0.0)
-            unevenRoundedRectangle = UnevenRoundedRectangle(cornerRadii: radii)
-        case .middle:
-            let radii = RectangleCornerRadii(topLeading: 0.0,
-                                             bottomLeading: 0.0,
-                                             bottomTrailing: 0.0,
-                                             topTrailing: 0.0)
-            unevenRoundedRectangle = UnevenRoundedRectangle(cornerRadii: radii)
-        case .bookendRight:
-            let radii = RectangleCornerRadii(topLeading: 0.0,
-                                             bottomLeading: 0.0,
-                                             bottomTrailing: CGFloat(cornerRadius),
-                                             topTrailing: CGFloat(cornerRadius))
-            unevenRoundedRectangle = UnevenRoundedRectangle(cornerRadii: radii)
-        }
-        
-        let height = magicalMainTabViewModel.layoutHeight - (universalPaddingTop + universalPaddingBottom)
-        
-        return HStack(spacing: 0.0) {
-            unevenRoundedRectangle
-                .stroke(style: StrokeStyle(lineWidth: CGFloat(lineThickness)))
-        }
-        .frame(width: CGFloat(magicalMainTabButtonViewModel.width),
-               height: CGFloat(height))
-        .foregroundStyle(color)
+        return getShape()
+            .stroke(style: StrokeStyle(lineWidth: CGFloat(lineThickness)))
+            .foregroundStyle(color)
     }
     
     func getFillRect(isPressed: Bool) -> some View {
-        
-        let cornerRadius = MainTabLayout.getCornerRadius(orientation: orientation)
-        let unevenRoundedRectangle: UnevenRoundedRectangle
-        switch segmentedPickerPosition {
-        case .bookendLeft:
-            let radii = RectangleCornerRadii(topLeading: CGFloat(cornerRadius),
-                                             bottomLeading: CGFloat(cornerRadius),
-                                             bottomTrailing: 0.0,
-                                             topTrailing: 0.0)
-            unevenRoundedRectangle = UnevenRoundedRectangle(cornerRadii: radii)
-        case .middle:
-            let radii = RectangleCornerRadii(topLeading: 0.0,
-                                             bottomLeading: 0.0,
-                                             bottomTrailing: 0.0,
-                                             topTrailing: 0.0)
-            unevenRoundedRectangle = UnevenRoundedRectangle(cornerRadii: radii)
-        case .bookendRight:
-            let radii = RectangleCornerRadii(topLeading: 0.0,
-                                             bottomLeading: 0.0,
-                                             bottomTrailing: CGFloat(cornerRadius),
-                                             topTrailing: CGFloat(cornerRadius))
-            unevenRoundedRectangle = UnevenRoundedRectangle(cornerRadii: radii)
-        }
-        
-        var height = magicalMainTabViewModel.layoutHeight
-        height -= universalPaddingTop
-        height -= universalPaddingBottom
-        
         let color: Color
-        if isDarkMode {
-            
-                if isPressed {
-                    color = ToolInterfaceTheme.contextUnderlayDownDisabledDark
+        if magicalViewModel.isDarkModeEnabled {
+            if magicalButtonViewModel.isEnabled {
+                if isSelected {
+                    color = ToolInterfaceTheme.contextUnderlayHighlightedEnabledDark
                 } else {
-                    if isSelected {
-                        color = ToolInterfaceTheme.contextUnderlayHighlightedDisabledDark
-                    } else {
-                        color = ToolInterfaceTheme.contextUnderlayDisabledDark
-                    }
+                    color = ToolInterfaceTheme.contextUnderlayEnabledDark
                 }
-            
+            } else {
+                color = ToolInterfaceTheme.contextUnderlayDisabledDark
+            }
         } else {
-            
-                if isPressed {
-                    color = ToolInterfaceTheme.contextUnderlayDownDisabledLight
+            if magicalButtonViewModel.isEnabled {
+                if isSelected {
+                    color = ToolInterfaceTheme.contextUnderlayHighlightedEnabledLight
                 } else {
-                    if isSelected {
-                        color = ToolInterfaceTheme.contextUnderlayHighlightedDisabledLight
-                    } else {
-                        color = ToolInterfaceTheme.contextUnderlayDisabledLight
-                    }
+                    color = ToolInterfaceTheme.contextUnderlayEnabledLight
                 }
-            
+            } else {
+                color = ToolInterfaceTheme.contextUnderlayDisabledLight
+            }
         }
         
-        return HStack(spacing: 0.0) {
-            unevenRoundedRectangle
-        }
-        .frame(width: CGFloat(magicalMainTabButtonViewModel.width),
-               height: CGFloat(height))
-        .foregroundStyle(color)
+        return getShape()
+            .foregroundStyle(color)
     }
     
+    func bodyContent(isPressed: Bool) -> some View {
+        let contentLayoutHeight = magicalViewModel.layoutHeight - outsideBoxPaddingTop - outsideBoxPaddingBottom
+        return HStack(spacing: 0.0) {
+#if INTERFACE_HINTS
+            Spacer()
+                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingLeft), height: 24.0)
+                .background(Color(red: 0.99, green: 0.03, blue: 0.98, opacity: 0.40))
+#else
+            Spacer()
+                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingLeft))
+#endif
+            
+            VStack(spacing: 0.0) {
+                
+#if INTERFACE_HINTS
+                Spacer()
+                    .frame(width: 24.0, height: CGFloat(outsideBoxPaddingTop))
+                    .background(Color(red: 0.74, green: 0.39, blue: 0.19, opacity: 0.40))
+#else
+                Spacer()
+                    .frame(height: CGFloat(outsideBoxPaddingTop))
+#endif
+                MagicalMainTabSegmentContent(layoutSchemeFlavor: layoutSchemeFlavor,
+                                                     layoutHeight: contentLayoutHeight,
+                                                     isSelected: isSelected,
+                                                     isPressed: isPressed)
+#if INTERFACE_HINTS
+                Spacer()
+                    .frame(width: 24.0, height: CGFloat(outsideBoxPaddingBottom))
+                    .background(Color(red: 0.88, green: 0.88, blue: 0.67, opacity: 0.40))
+#else
+                Spacer()
+                    .frame(height: CGFloat(outsideBoxPaddingBottom))
+#endif
+                
+            }
+#if INTERFACE_HINTS
+            Spacer()
+                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight), height: 24.0)
+                .background(Color(red: 0.86, green: 0.00, blue: 0.63, opacity: 0.40))
+#else
+            Spacer()
+            .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight))
+#endif
+        }
+    }
 }

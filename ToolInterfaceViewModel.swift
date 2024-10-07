@@ -205,13 +205,20 @@ func getToolNodeID() -> UInt16 {
             rowsDraggable.append(generateRow(slot: .bottom_Secondary1))
             rowsDraggable.append(generateRow(slot: .bottom_Primary))
             
-            if ApplicationController.TEST_ROW_TOP {
-                rowsDraggable.append(generateRow(slot: .top_Test))
+            if ApplicationController.TEST_ROW_TOP_1 {
+                rowsDraggable.append(generateRow(slot: .top_Test_1))
+            }
+            if ApplicationController.TEST_ROW_TOP_2 {
+                rowsDraggable.append(generateRow(slot: .top_Test_2))
             }
             
-            if ApplicationController.TEST_ROW_BOTTOM {
-                rowsDraggable.append(generateRow(slot: .bottom_Test))
+            if ApplicationController.TEST_ROW_BOTTOM_1 {
+                rowsDraggable.append(generateRow(slot: .bottom_Test_1))
             }
+            if ApplicationController.TEST_ROW_BOTTOM_2 {
+                rowsDraggable.append(generateRow(slot: .bottom_Test_2))
+            }
+            
         } else {
             
             let topMenuStandardRowCount = ToolInterfaceTheme.getTopMenuStandardRowCount(orientation: orientation)
@@ -220,13 +227,21 @@ func getToolNodeID() -> UInt16 {
             if topMenuStandardRowCount > 0 { rowsTop.append(generateRow(slot: .top_Primary)) }
             if topMenuStandardRowCount > 1 { rowsTop.append(generateRow(slot: .top_Secondary1)) }
             if topMenuStandardRowCount > 2 { rowsTop.append(generateRow(slot: .top_Secondary2)) }
-            if ApplicationController.TEST_ROW_TOP {
-                rowsTop.append(generateRow(slot: .top_Test))
+            if ApplicationController.TEST_ROW_TOP_1 {
+                rowsTop.append(generateRow(slot: .top_Test_1))
+            }
+            if ApplicationController.TEST_ROW_TOP_2 {
+                rowsTop.append(generateRow(slot: .top_Test_2))
             }
             
-            if ApplicationController.TEST_ROW_BOTTOM {
-                rowsBottom.append(generateRow(slot: .bottom_Test))
+            
+            if ApplicationController.TEST_ROW_BOTTOM_1 {
+                rowsBottom.append(generateRow(slot: .bottom_Test_1))
             }
+            if ApplicationController.TEST_ROW_BOTTOM_2 {
+                rowsBottom.append(generateRow(slot: .bottom_Test_2))
+            }
+            
             if bottomMenuStandardRowCount > 2 { rowsBottom.append(generateRow(slot: .bottom_Secondary2)) }
             if bottomMenuStandardRowCount > 1 { rowsBottom.append(generateRow(slot: .bottom_Secondary1)) }
             if bottomMenuStandardRowCount > 0 { rowsBottom.append(generateRow(slot: .bottom_Primary)) }
@@ -236,72 +251,120 @@ func getToolNodeID() -> UInt16 {
         if Device.isPad {
             rowsVideoRecord.append(generateRow(slot: .video_record_1))
             rowsVideoRecord.append(generateRow(slot: .video_record_2))
-            if ApplicationController.TEST_ROW_TOP {
-                rowsVideoRecord.append(generateRow(slot: .top_Test))
+            if ApplicationController.TEST_ROW_TOP_1 {
+                rowsVideoRecord.append(generateRow(slot: .top_Test_1))
             }
-            if ApplicationController.TEST_ROW_BOTTOM {
-                rowsVideoRecord.append(generateRow(slot: .bottom_Test))
+            if ApplicationController.TEST_ROW_TOP_2 {
+                rowsVideoRecord.append(generateRow(slot: .top_Test_2))
             }
+            
+            if ApplicationController.TEST_ROW_BOTTOM_1 {
+                rowsVideoRecord.append(generateRow(slot: .bottom_Test_1))
+            }
+            if ApplicationController.TEST_ROW_BOTTOM_2 {
+                rowsVideoRecord.append(generateRow(slot: .bottom_Test_2))
+            }
+            
         } else {
             rowsVideoRecord.append(generateRow(slot: .video_record_1))
             rowsVideoRecord.append(generateRow(slot: .video_record_2))
-            if ApplicationController.TEST_ROW_TOP {
-                rowsVideoRecord.append(generateRow(slot: .top_Test))
+            if ApplicationController.TEST_ROW_TOP_1 {
+                rowsVideoRecord.append(generateRow(slot: .top_Test_1))
+            }
+            if ApplicationController.TEST_ROW_TOP_2 {
+                rowsVideoRecord.append(generateRow(slot: .top_Test_2))
             }
             
-            if ApplicationController.TEST_ROW_BOTTOM {
-                rowsVideoRecord.append(generateRow(slot: .bottom_Test))
+            
+            if ApplicationController.TEST_ROW_BOTTOM_1 {
+                rowsVideoRecord.append(generateRow(slot: .bottom_Test_1))
             }
+            if ApplicationController.TEST_ROW_BOTTOM_2 {
+                rowsVideoRecord.append(generateRow(slot: .bottom_Test_2))
+            }
+            
         }
         
         if Device.isPad {
             rowsVideoExport.append(generateRow(slot: .video_export_1))
             rowsVideoExport.append(generateRow(slot: .video_export_2))
             rowsVideoExport.append(generateRow(slot: .video_export_3))
-            if ApplicationController.TEST_ROW_TOP {
-                rowsVideoExport.append(generateRow(slot: .top_Test))
+            if ApplicationController.TEST_ROW_TOP_1 {
+                rowsVideoExport.append(generateRow(slot: .top_Test_1))
+            }
+            if ApplicationController.TEST_ROW_TOP_2 {
+                rowsVideoExport.append(generateRow(slot: .top_Test_2))
             }
             
-            if ApplicationController.TEST_ROW_BOTTOM {
-                rowsVideoExport.append(generateRow(slot: .bottom_Test))
+            
+            if ApplicationController.TEST_ROW_BOTTOM_1 {
+                rowsVideoExport.append(generateRow(slot: .bottom_Test_1))
             }
+            if ApplicationController.TEST_ROW_BOTTOM_2 {
+                rowsVideoExport.append(generateRow(slot: .bottom_Test_2))
+            }
+            
         } else {
             rowsVideoExport.append(generateRow(slot: .video_export_1))
             rowsVideoExport.append(generateRow(slot: .video_export_2))
             rowsVideoExport.append(generateRow(slot: .video_export_3))
             rowsVideoExport.append(generateRow(slot: .video_export_4))
-            if ApplicationController.TEST_ROW_TOP {
-                rowsVideoExport.append(generateRow(slot: .top_Test))
+            if ApplicationController.TEST_ROW_TOP_1 {
+                rowsVideoExport.append(generateRow(slot: .top_Test_1))
+            }
+            if ApplicationController.TEST_ROW_TOP_2 {
+                rowsVideoExport.append(generateRow(slot: .top_Test_2))
             }
             
-            if ApplicationController.TEST_ROW_BOTTOM {
-                rowsVideoExport.append(generateRow(slot: .bottom_Test))
+            
+            if ApplicationController.TEST_ROW_BOTTOM_1 {
+                rowsVideoExport.append(generateRow(slot: .bottom_Test_1))
             }
+            if ApplicationController.TEST_ROW_BOTTOM_2 {
+                rowsVideoExport.append(generateRow(slot: .bottom_Test_2))
+            }
+            
         }
         
         if Device.isPad {
             rowsZoom.append(generateRow(slot: .zoom_1))
             rowsZoom.append(generateRow(slot: .zoom_2))
             rowsZoom.append(generateRow(slot: .zoom_3))
-            if ApplicationController.TEST_ROW_TOP {
-                rowsZoom.append(generateRow(slot: .top_Test))
+            if ApplicationController.TEST_ROW_TOP_1 {
+                rowsZoom.append(generateRow(slot: .top_Test_1))
+            }
+            if ApplicationController.TEST_ROW_TOP_2 {
+                rowsZoom.append(generateRow(slot: .top_Test_2))
             }
             
-            if ApplicationController.TEST_ROW_BOTTOM {
-                rowsZoom.append(generateRow(slot: .bottom_Test))
+            
+            if ApplicationController.TEST_ROW_BOTTOM_1 {
+                rowsZoom.append(generateRow(slot: .bottom_Test_1))
             }
+            if ApplicationController.TEST_ROW_BOTTOM_2 {
+                rowsZoom.append(generateRow(slot: .bottom_Test_2))
+            }
+            
         } else {
             rowsZoom.append(generateRow(slot: .zoom_1))
             rowsZoom.append(generateRow(slot: .zoom_2))
             rowsZoom.append(generateRow(slot: .zoom_3))
             rowsZoom.append(generateRow(slot: .zoom_4))
-            if ApplicationController.TEST_ROW_TOP {
-                rowsZoom.append(generateRow(slot: .top_Test))
+            if ApplicationController.TEST_ROW_TOP_1 {
+                rowsZoom.append(generateRow(slot: .top_Test_1))
+            }
+            if ApplicationController.TEST_ROW_TOP_2 {
+                rowsZoom.append(generateRow(slot: .top_Test_2))
             }
             
-            if ApplicationController.TEST_ROW_BOTTOM {
-                rowsZoom.append(generateRow(slot: .bottom_Test))
+            
+            if ApplicationController.TEST_ROW_BOTTOM_1 {
+                rowsZoom.append(generateRow(slot: .bottom_Test_1))
             }
+            if ApplicationController.TEST_ROW_BOTTOM_2 {
+                rowsZoom.append(generateRow(slot: .bottom_Test_2))
+            }
+            
         }
         
         // So many of the rows... Video Record, Video Export, Zoom, Graph...

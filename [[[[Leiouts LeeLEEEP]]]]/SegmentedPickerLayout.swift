@@ -22,11 +22,41 @@ enum SegmentedPickerPosition {
 
 struct SegmentedPickerLayout: LayoutScheme {
     
-    static func getOutsideBoxPaddingTop(orientation: Orientation) -> Int {
-        return 8
+    static func getSlavePaddingRightLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        return 16
     }
+    
+    static func getSlavePaddingRightStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        return 16
+    }
+    
+    static func getHeroPaddingLeftStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        return 4
+    }
+    static func getHeroPaddingLeftLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        return 4
+    }
+    static func getHeroPaddingRightStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        return 12
+    }
+    static func getHeroPaddingRightLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        return 12
+    }
+    
+    static func getOutsideBoxPaddingTop(orientation: Orientation) -> Int {
+        if Device.isPad {
+            return 3
+        } else {
+            return 2
+        }
+    }
+    
     static func getOutsideBoxPaddingBottom(orientation: Orientation) -> Int {
-        return 22
+        if Device.isPad {
+            return 3
+        } else {
+            return 2
+        }
     }
     
     static func getHeroPaddingTopStacked(orientation: Orientation) -> Int {
@@ -36,12 +66,6 @@ struct SegmentedPickerLayout: LayoutScheme {
             return 1 + 3
         }
     }
-    
-    static func getSlavePaddingLeftStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int { 0 }
-    static func getSlavePaddingLeftLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int { 0 }
-    static func getSlavePaddingRightStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int { 0 }
-    static func getSlavePaddingRightLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int { 0 }
-    
     
     static func getNameLabelFont(orientation: Orientation, flavor: LayoutSchemeFlavor) -> UIFont {
         if Device.isPad {

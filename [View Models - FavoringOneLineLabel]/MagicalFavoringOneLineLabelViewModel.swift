@@ -29,8 +29,6 @@ import SwiftUI
     
     override func refreshLayoutFrame() {
         
-        let layoutSchemeFlavor = getLayoutSchemeFlavor()
-        
         let outsideBoxLeftSqueezed = FavoringOneLineLabelLayout.getOutsideBoxPaddingLeftLong(orientation: orientation,
                                                                                              squeeze: .squeezed,
                                                                                              neighborTypeLeft: neighborTypeLeft,

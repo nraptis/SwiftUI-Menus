@@ -19,7 +19,9 @@ extension ToolInterfaceViewModel {
                                        neighborTypeRight: neighborTypeRight,
                                        iconPackMain: configuration.iconPack,
                                        iconPackSecondary: nil,
-                                       nameLabelWidth: configuration.nameLabelWidth,
+                                       nameLabelWidthLarge: configuration.nameLabelWidthLarge,
+                                       nameLabelWidthMedium: configuration.nameLabelWidthMedium,
+                                       nameLabelWidthSmall: configuration.nameLabelWidthSmall,
                                        numberOfLines: configuration.nameLabelNumberOfLines)
         return ToolInterfaceElementFlex.greenButton(flexLongData)
     }

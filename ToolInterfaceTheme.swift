@@ -74,21 +74,36 @@ struct ToolInterfaceTheme {
     
     static func getDraggableMenuVideoRecordRowCount() -> Int {
         var result = 2
-        if ApplicationController.TEST_ROW_TOP {
+        if ApplicationController.TEST_ROW_TOP_1 {
             result += 1
         }
-        if ApplicationController.TEST_ROW_BOTTOM {
+        if ApplicationController.TEST_ROW_TOP_2 {
             result += 1
         }
+        
+        if ApplicationController.TEST_ROW_BOTTOM_1 {
+            result += 1
+        }
+        if ApplicationController.TEST_ROW_BOTTOM_2 {
+            result += 1
+        }
+        
         return result
     }
     
     static func getDraggableMenuVideoExportRowCount() -> Int {
         var result = 3
-        if ApplicationController.TEST_ROW_TOP {
+        if ApplicationController.TEST_ROW_TOP_1 {
             result += 1
         }
-        if ApplicationController.TEST_ROW_BOTTOM {
+        if ApplicationController.TEST_ROW_TOP_2 {
+            result += 1
+        }
+        
+        if ApplicationController.TEST_ROW_BOTTOM_1 {
+            result += 1
+        }
+        if ApplicationController.TEST_ROW_BOTTOM_2 {
             result += 1
         }
         return result
@@ -96,10 +111,17 @@ struct ToolInterfaceTheme {
     
     static func getDraggableMenuZoomRowCount() -> Int {
         var result = 3
-        if ApplicationController.TEST_ROW_TOP {
+        if ApplicationController.TEST_ROW_TOP_1 {
             result += 1
         }
-        if ApplicationController.TEST_ROW_BOTTOM {
+        if ApplicationController.TEST_ROW_TOP_2 {
+            result += 1
+        }
+        
+        if ApplicationController.TEST_ROW_BOTTOM_1 {
+            result += 1
+        }
+        if ApplicationController.TEST_ROW_BOTTOM_2 {
             result += 1
         }
         return result
@@ -111,7 +133,10 @@ struct ToolInterfaceTheme {
     
     static func getDraggableMenuStandardTopHalfRowCount() -> Int {
         var result = 3
-        if ApplicationController.TEST_ROW_TOP {
+        if ApplicationController.TEST_ROW_TOP_1 {
+            result += 1
+        }
+        if ApplicationController.TEST_ROW_TOP_2 {
             result += 1
         }
         return result
@@ -119,7 +144,10 @@ struct ToolInterfaceTheme {
     
     static func getDraggableMenuStandardBottomHalfRowCount() -> Int {
         var result = 3
-        if ApplicationController.TEST_ROW_BOTTOM {
+        if ApplicationController.TEST_ROW_BOTTOM_1 {
+            result += 1
+        }
+        if ApplicationController.TEST_ROW_BOTTOM_2 {
             result += 1
         }
         return result
@@ -271,13 +299,13 @@ struct ToolInterfaceTheme {
         switch orientation {
         case .landscape:
             var result = 3
-            if ApplicationController.TEST_ROW_TOP {
+            if ApplicationController.TEST_ROW_TOP_1 {
                 result += 1
             }
             return result
         case .portrait:
             var result = 3
-            if ApplicationController.TEST_ROW_TOP {
+            if ApplicationController.TEST_ROW_TOP_1 {
                 result += 1
             }
             return result
@@ -286,7 +314,7 @@ struct ToolInterfaceTheme {
     
     static func getTopMenuVideoExportRowCount(orientation: Orientation) -> Int {
         var result = 1
-        if ApplicationController.TEST_ROW_TOP {
+        if ApplicationController.TEST_ROW_TOP_1 {
             result += 1
         }
         return result
@@ -294,7 +322,7 @@ struct ToolInterfaceTheme {
     
     static func getTopMenuVideoRecordRowCount(orientation: Orientation) -> Int {
         var result = 1
-        if ApplicationController.TEST_ROW_TOP {
+        if ApplicationController.TEST_ROW_TOP_1 {
             result += 1
         }
         return result
@@ -302,7 +330,7 @@ struct ToolInterfaceTheme {
     
     static func getTopMenuZoomRowCount(orientation: Orientation) -> Int {
         var result = 2
-        if ApplicationController.TEST_ROW_TOP {
+        if ApplicationController.TEST_ROW_TOP_1 {
             result += 1
         }
         return result
@@ -313,13 +341,13 @@ struct ToolInterfaceTheme {
         switch orientation {
         case .landscape:
             var result = 3
-            if ApplicationController.TEST_ROW_TOP {
+            if ApplicationController.TEST_ROW_TOP_1 {
                 result += 1
             }
             return result
         case .portrait:
             var result = 4
-            if ApplicationController.TEST_ROW_TOP {
+            if ApplicationController.TEST_ROW_TOP_1 {
                 result += 1
             }
             return result
@@ -330,13 +358,13 @@ struct ToolInterfaceTheme {
         switch orientation {
         case .landscape:
             var result = 4
-            if ApplicationController.TEST_ROW_TOP {
+            if ApplicationController.TEST_ROW_TOP_1 {
                 result += 1
             }
             return result
         case .portrait:
             var result = 5
-            if ApplicationController.TEST_ROW_TOP {
+            if ApplicationController.TEST_ROW_TOP_1 {
                 result += 1
             }
             return result
@@ -359,13 +387,19 @@ struct ToolInterfaceTheme {
         switch orientation {
         case .landscape:
             var result = 3
-            if ApplicationController.TEST_ROW_BOTTOM {
+            if ApplicationController.TEST_ROW_BOTTOM_1 {
+                result += 1
+            }
+            if ApplicationController.TEST_ROW_BOTTOM_2 {
                 result += 1
             }
             return result
         case .portrait:
             var result = 3
-            if ApplicationController.TEST_ROW_BOTTOM {
+            if ApplicationController.TEST_ROW_BOTTOM_1 {
+                result += 1
+            }
+            if ApplicationController.TEST_ROW_BOTTOM_2 {
                 result += 1
             }
             return result
@@ -374,7 +408,10 @@ struct ToolInterfaceTheme {
     
     static func getBottomMenuVideoExportRowCount(orientation: Orientation) -> Int {
         var result = 3
-        if ApplicationController.TEST_ROW_BOTTOM {
+        if ApplicationController.TEST_ROW_BOTTOM_1 {
+            result += 1
+        }
+        if ApplicationController.TEST_ROW_BOTTOM_2 {
             result += 1
         }
         return result
@@ -382,7 +419,10 @@ struct ToolInterfaceTheme {
     
     static func getBottomMenuVideoRecordRowCount(orientation: Orientation) -> Int {
         var result = 1
-        if ApplicationController.TEST_ROW_BOTTOM {
+        if ApplicationController.TEST_ROW_BOTTOM_1 {
+            result += 1
+        }
+        if ApplicationController.TEST_ROW_BOTTOM_2 {
             result += 1
         }
         return result
@@ -390,7 +430,10 @@ struct ToolInterfaceTheme {
     
     static func getBottomMenuZoomRowCount(orientation: Orientation) -> Int {
         var result = 2
-        if ApplicationController.TEST_ROW_BOTTOM {
+        if ApplicationController.TEST_ROW_BOTTOM_1 {
+            result += 1
+        }
+        if ApplicationController.TEST_ROW_BOTTOM_2 {
             result += 1
         }
         return result

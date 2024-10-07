@@ -8,71 +8,46 @@
 import SwiftUI
 
 struct MagicalMainTabGuts: View {
-    
-    @Environment(MagicalMainTabViewModel.self) var magicalMainTabViewModel: MagicalMainTabViewModel
-    let orientation: Orientation
+    @Environment(MagicalMainTabViewModel.self) var magicalViewModel
     let layoutSchemeFlavor: LayoutSchemeFlavor
     let layoutWidth: Int
+    let outsideBoxPaddingTop: Int
+    let outsideBoxPaddingBottom: Int
     var body: some View {
-        return ZStack {
-            bodyContent()
-        }
-        .frame(width: CGFloat(layoutWidth),
-               height: CGFloat(magicalMainTabViewModel.layoutHeight))
-    }
-    
-    func bodyContent() -> some View {
-        
-        let layoutSchemeFlavor = magicalMainTabViewModel.getLayoutSchemeFlavor()
-        let buttonCount = magicalMainTabViewModel.mainTabConfiguration.buttonConfigurations.count
+        let buttonCount = magicalViewModel.segmentButtonViewModels.count
         let buttonCount1 = (buttonCount - 1)
-        
-        var greatestNumberOfLines = 0
-        for buttonConfiguration in magicalMainTabViewModel.mainTabConfiguration.buttonConfigurations {
-            let line1 = buttonConfiguration.nameLabelLine1
-            let line2 = buttonConfiguration.nameLabelLine2
-            let _numberOfLines = ToolInterfaceTheme.getNumberOfLines(line1: line1, line2: line2)
-            greatestNumberOfLines = max(greatestNumberOfLines, _numberOfLines)
-        }
-        
-        let universalPaddingTop = MainTabLayout.getUniversalPaddingTop(orientation: orientation,
-                                                                               flavor: layoutSchemeFlavor,
-                                                                               numberOfLines: greatestNumberOfLines)
-        let universalPaddingBottom = MainTabLayout.getUniversalPaddingBottom(orientation: orientation,
-                                                                                     flavor: layoutSchemeFlavor,
-                                                                                     numberOfLines: greatestNumberOfLines)
-        
-        let isDarkMode = magicalMainTabViewModel.isDarkModeEnabled
-        let isEnabled = magicalMainTabViewModel.isEnabled
         return GeometryReader { _ in
-            ForEach(magicalMainTabViewModel.mainTabConfiguration.buttonConfigurations) { buttonConfiguration in
+            ForEach(magicalViewModel.mainTabConfiguration.buttonConfigurations) { buttonConfiguration in
                 let index = Int(buttonConfiguration.id)
-                let buttonViewModel = magicalMainTabViewModel.buttonViewModels[index]
-                let segmentedPickerPosition = getPosition(index: index, count1: buttonCount1)
-                let isSelected = magicalMainTabViewModel.selectedSegmentIndex == index
-                MagicalMainTabSegmentButton(index: index,
-                                                           isSelected: isSelected,
-                                                           isDarkMode: isDarkMode,
-                                                           isEnabled: isEnabled,
-                                                           orientation: orientation,
-                                                           layoutSchemeFlavor: layoutSchemeFlavor,
-                                                           segmentedPickerPosition: segmentedPickerPosition,
-                                                           universalPaddingTop: universalPaddingTop,
-                                                           universalPaddingBottom: universalPaddingBottom)
-                .environment(buttonViewModel)
+                let buttonViewModel = magicalViewModel.segmentButtonViewModels[index]
+                let position: SegmentedPickerPosition
+                if index == 0 {
+                    position = .bookendLeft
+                } else if index == buttonCount1 {
+                    position = .bookendRight
+                } else {
+                    position = .middle
+                }
+                let isSelected = magicalViewModel.selectedSegmentIndex == index
+                return MagicalMainTabSegmentButton(index: index,
+                                                    layoutSchemeFlavor: layoutSchemeFlavor,
+                                                    outsideBoxPaddingTop: outsideBoxPaddingTop,
+                                                    outsideBoxPaddingBottom: outsideBoxPaddingBottom,
+                                                    position: position,
+                                                    isSelected: isSelected)
+                .environment(buttonViewModel as? MagicalMainTabButtonViewModel)
+                .offset(x: CGFloat(buttonViewModel.layoutX))
             }
         }
         .frame(width: CGFloat(layoutWidth),
-               height: CGFloat(magicalMainTabViewModel.layoutHeight))
-    }
-    
-    func getPosition(index: Int, count1: Int) -> SegmentedPickerPosition {
-        if index == 0 {
-            return .bookendLeft
-        } else if index == count1 {
-            return .bookendRight
-        } else {
-            return .middle
-        }
+               height: CGFloat(magicalViewModel.layoutHeight))
+#if INTERFACE_HINTS
+        .overlay(Rectangle().stroke().foregroundStyle(
+            LinearGradient(colors: [Color(red: 0.66, green: 0.75, blue: 0.465, opacity: 0.75),
+                                    Color(red: 0.65, green: 0.78, blue: 0.85, opacity: 0.75)], startPoint: .leading, endPoint: .trailing)))
+        .background(Rectangle().foregroundStyle(
+            LinearGradient(colors: [Color(red: 0.65, green: 0.78, blue: 0.65, opacity: 0.25),
+                                    Color(red: 0.65, green: 0.75, blue: 0.68, opacity: 0.25)], startPoint: .leading, endPoint: .trailing)))
+#endif
     }
 }

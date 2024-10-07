@@ -38,6 +38,12 @@ struct MagicalSexyButtonContent: View {
                                                           isDarkMode: isDarkMode,
                                                           isEnabled: isEnabled)
         
+        let checkBoxSquare = FramedLongIconLibrary.checkBoxSquare.getTextIcon(orientation: orientation,
+                                                                              layoutSchemeFlavor: .long,
+                                                                              numberOfLines: 0,
+                                                                              isDarkMode: isDarkMode,
+                                                                              isEnabled: isEnabled)
+        
         let line1 = configuration.nameLabelLine1
         let line2 = configuration.nameLabelLine2
         
@@ -87,24 +93,65 @@ struct MagicalSexyButtonContent: View {
         let heroPaddingTopStacked = ButtonLayout.getHeroPaddingTopStacked(orientation: orientation)
         let heroPaddingBottomStacked = ButtonLayout.getHeroPaddingBottomStacked(orientation: orientation)
         
-        return HeroSlab(orientation: orientation,
-                        layoutWidth: layoutWidth,
-                        layoutHeight: layoutHeight,
-                        isLong: isLong,
-                        isPressed: isPressed,
-                        textIcon: textIcon,
-                        heroPaddingLeft: magicalViewModel.heroPaddingLeft,
-                        heroPaddingRight: magicalViewModel.heroPaddingRight,
-                        heroPaddingTopStacked: heroPaddingTopStacked,
-                        heroPaddingBottomStacked: heroPaddingBottomStacked,
-                        heroSpacingLong: magicalViewModel.heroSpacing,
-                        line1: line1,
-                        line2: line2,
-                        numberOfLines: numberOfLines,
-                        nameLabelVerticalSpacing: nameLabelVerticalSpacing,
-                        nameLabelFont: nameLabelFont,
-                        nameLabelWidth: nameLabelWidth,
-                        lineHeight: lineHeight,
-                        nameLabelColor: nameLabelColor)
+        let slaveWidth = checkBoxSquare.width
+        let slaveHeight = checkBoxSquare.height
+        let slaveContentWidth = checkBoxSquare.width + magicalViewModel.slavePaddingLeft + magicalViewModel.slavePaddingRight
+        
+        return HStack(spacing: 0.0) {
+            HeroSlab(orientation: orientation,
+                     layoutWidth: layoutWidth - slaveContentWidth,
+                     layoutHeight: layoutHeight,
+                     isLong: isLong,
+                     isPressed: isPressed,
+                     textIcon: textIcon,
+                     heroPaddingLeft: magicalViewModel.heroPaddingLeft,
+                     heroPaddingRight: magicalViewModel.heroPaddingRight,
+                     heroPaddingTopStacked: heroPaddingTopStacked,
+                     heroPaddingBottomStacked: heroPaddingBottomStacked,
+                     heroSpacingLong: magicalViewModel.heroSpacing,
+                     line1: line1,
+                     line2: line2,
+                     numberOfLines: numberOfLines,
+                     nameLabelVerticalSpacing: nameLabelVerticalSpacing,
+                     nameLabelFont: nameLabelFont,
+                     nameLabelWidth: nameLabelWidth,
+                     lineHeight: lineHeight,
+                     nameLabelColor: nameLabelColor)
+            
+#if INTERFACE_HINTS
+            Spacer()
+                .frame(width: CGFloat(magicalViewModel.slavePaddingLeft), height: 24.0)
+                .background(Color(red: 0.35, green: 0.61, blue: 0.81, opacity: 0.40))
+#else
+            Spacer()
+                .frame(width: CGFloat(magicalViewModel.slavePaddingLeft))
+#endif
+            
+            IconBoxMainTab(icon: checkBoxSquare,
+                           iconWidth: slaveWidth,
+                           iconHeight: slaveHeight,
+                           iconPaddingLeft: 0,
+                           iconPaddingRight: 0,
+                           iconPaddingTop: 0)
+
+#if INTERFACE_HINTS
+            Spacer()
+                .frame(width: CGFloat(magicalViewModel.slavePaddingRight), height: 24.0)
+                .background(Color(red: 0.47, green: 0.87, blue: 0.16, opacity: 0.70))
+#else
+            Spacer()
+                .frame(width: CGFloat(magicalViewModel.slavePaddingRight))
+#endif
+            
+        }
+#if INTERFACE_HINTS
+        .overlay(Rectangle().stroke().foregroundStyle(
+            LinearGradient(colors: [Color(red: 0.57, green: 0.28, blue: 0.61, opacity: 0.65),
+                                    Color(red: 0.65, green: 0.89, blue: 0.91, opacity: 0.65)], startPoint: .leading, endPoint: .trailing)))
+        .background(Rectangle().foregroundStyle(
+            LinearGradient(colors: [Color(red: 0.45, green: 0.48, blue: 0.52, opacity: 0.25),
+                                    Color(red: 0.05, green: 0.99, blue: 0.70, opacity: 0.25)], startPoint: .leading, endPoint: .trailing)))
+#endif
+        
     }
 }

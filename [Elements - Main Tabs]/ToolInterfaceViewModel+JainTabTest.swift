@@ -1,15 +1,15 @@
 //
-//  ToolInterfaceViewModel+DocumentModeMT.swift
+//  ToolInterfaceViewModel+JainTabTest.swift
 //  Jiggle3
 //
-//  Created by Nicky Taylor on 8/24/24.
+//  Created by Nicky Taylor on 10/6/24.
 //
 
 import Foundation
 
 extension ToolInterfaceViewModel {
     
-   @MainActor func getDocumentModeMainTabToolNode(neighborTypeLeft: ToolInterfaceElementType?,
+   @MainActor func getJainTabTestMainTabToolNode(neighborTypeLeft: ToolInterfaceElementType?,
                                         neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
         let orientation = jiggleViewModel.orientation
@@ -19,9 +19,9 @@ extension ToolInterfaceViewModel {
         
         
         
-        let viewTextIconPackable = MainTabIconLibrary.glass
-        let viewLine1 = ToolInterfaceStringLibraryMainTabs.buttonTextViewLine1()
-        let viewLine2 = ToolInterfaceStringLibraryMainTabs.buttonTextViewLine2()
+       let viewTextIconPackable = FramedLongIconLibrary.menuA
+        let viewLine1 = "Line One"
+        let viewLine2 = "Two"
         let viewConfiguration = ToolInterfaceElementMainTabButtonConfiguration(id: 0,
                                                                                iconPack: viewTextIconPackable,
                                                                                orientation: orientation,
@@ -29,15 +29,25 @@ extension ToolInterfaceViewModel {
                                                                                nameLabelLine2: viewLine2)
         buttonConfigurations.append(viewConfiguration)
         
-        let editTextIconPackable = MainTabIconLibrary.zoom
-        let editLine1 = ToolInterfaceStringLibraryMainTabs.buttonTextEditLine1()
-        let editLine2 = ToolInterfaceStringLibraryMainTabs.buttonTextEditLine2()
-        let editConfiguration = ToolInterfaceElementMainTabButtonConfiguration(id: 1,
-                                                                               iconPack: editTextIconPackable,
-                                                                               orientation: orientation,
-                                                                               nameLabelLine1: editLine1,
-                                                                               nameLabelLine2: editLine2)
-        buttonConfigurations.append(editConfiguration)
+       let editTextIconPackable = FramedLongIconLibrary.menuB
+      let editLine1: String? = nil
+       let editLine2 = "L2"
+       let editConfiguration = ToolInterfaceElementMainTabButtonConfiguration(id: 1,
+                                                                              iconPack: editTextIconPackable,
+                                                                              orientation: orientation,
+                                                                              nameLabelLine1: editLine1,
+                                                                              nameLabelLine2: editLine2)
+       buttonConfigurations.append(editConfiguration)
+       
+       let thirdTextIconPackable = FramedLongIconLibrary.menuC
+      let thirdLine1 = "Harvey"
+       let thirdLine2 = "Nash X"
+       let thirdConfiguration = ToolInterfaceElementMainTabButtonConfiguration(id: 2,
+                                                                              iconPack: editTextIconPackable,
+                                                                              orientation: orientation,
+                                                                              nameLabelLine1: thirdLine1,
+                                                                              nameLabelLine2: thirdLine2)
+       buttonConfigurations.append(thirdConfiguration)
         
         let configuration = ToolInterfaceElementMainTabConfiguration(buttonConfigurations: buttonConfigurations)
         
@@ -50,7 +60,7 @@ extension ToolInterfaceViewModel {
                                                                         mainTabConfiguration: configuration)
         
         let result = ToolNode(id: getToolNodeID(),
-                              element: .mainTabDocumentMode,
+                              element: .mainTabJainTest,
                               flex: flex,
                               magicalViewModel: viewModelDocumentMode,
                               neighborTypeLeft: neighborTypeLeft,

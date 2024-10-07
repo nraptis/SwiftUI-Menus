@@ -21,10 +21,16 @@ extension ToolInterfaceViewModel {
             return getRowBluePrint_Top_Secondary1(configuration: configuration, orientation: orientation)
         case .top_Secondary2:
             return getRowBluePrint_Top_Secondary2(configuration: configuration, orientation: orientation)
-        case .top_Test:
-            return getRowBluePrint_Top_Test()
-        case .bottom_Test:
-            return getRowBluePrint_Bottom_Test()
+        case .top_Test_1:
+            return getRowBluePrint_Top_Test_1()
+        case .top_Test_2:
+            return getRowBluePrint_Top_Test_2()
+            
+        case .bottom_Test_1:
+            return getRowBluePrint_Bottom_Test_1()
+        case .bottom_Test_2:
+            return getRowBluePrint_Bottom_Test_2()
+            
         case .bottom_Secondary2:
             return getRowBluePrint_Bottom_Secondary2(configuration: configuration, orientation: orientation)
         case .bottom_Secondary1:
@@ -55,7 +61,7 @@ extension ToolInterfaceViewModel {
         return nil
     }
     
-    @MainActor func getRowBluePrint_Top_Test() -> RowBluePrint? {
+    @MainActor func getRowBluePrint_Top_Test_1() -> RowBluePrint? {
         let nodes = [
             
             
@@ -87,10 +93,32 @@ extension ToolInterfaceViewModel {
                                                                                           neighborTypeLeft: nil,
                                                                                           neighborTypeRight: nil)
         ]
-        return RowBluePrint(nodes: nodes, configuration: .top_Test)
+        return RowBluePrint(nodes: nodes, configuration: .top_Test_1)
     }
     
-    @MainActor func getRowBluePrint_Bottom_Test() -> RowBluePrint? {
+    @MainActor func getRowBluePrint_Top_Test_2() -> RowBluePrint? {
+        let nodes = [
+            
+            Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
+            
+            getJainTabTestMainTabToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            getDocumentModeMainTabToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            
+            ToolInterfaceViewModel.getFavoringOneLineLabelToolNode(orientation: LoadSceneViewModel.orientation,
+                                                                                          minimumWidth: 0,
+                                                                                          text: "Hello",
+                                                                                          neighborTypeLeft: nil,
+                                                                   neighborTypeRight: nil),
+            
+            getEnterZoomEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            
+            getSkainTabTestMainTabToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            
+        ]
+        return RowBluePrint(nodes: nodes, configuration: .top_Test_2)
+    }
+    
+    @MainActor func getRowBluePrint_Bottom_Test_1() -> RowBluePrint? {
         let nodes = [
             
             getEditModeSegmentToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
@@ -118,7 +146,33 @@ extension ToolInterfaceViewModel {
             
             Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
         ]
-        return RowBluePrint(nodes: nodes, configuration: .bottom_Test)
+        return RowBluePrint(nodes: nodes, configuration: .bottom_Test_1)
+    }
+    
+    @MainActor func getRowBluePrint_Bottom_Test_2() -> RowBluePrint? {
+        let nodes = [
+            
+
+            getJainTabTestMainTabToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
+            getSkainTabTestMainTabToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
+            
+            
+            ToolInterfaceViewModel.getFavoringOneLineLabelToolNode(orientation: LoadSceneViewModel.orientation,
+                                                                                          minimumWidth: 0,
+                                                                                          text: "Please Purchase, Please Merge",
+                                                                                          neighborTypeLeft: nil,
+                                                                   neighborTypeRight: nil),
+        
+            Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
+        
+            getDocumentModeMainTabToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            
+            Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
+        
+        ]
+        return RowBluePrint(nodes: nodes, configuration: .bottom_Test_2)
     }
     
     @MainActor func getRowBluePrint_Top_Primary(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowBluePrint? {

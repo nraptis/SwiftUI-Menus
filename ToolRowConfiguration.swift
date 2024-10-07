@@ -41,7 +41,8 @@ enum ToolRowConfiguration {
     case top_Primary_Guides
     case top_Primary_Zoom
     
-    case top_Test
+    case top_Test_1
+    case top_Test_2
     
     case top_Secondary1_Jiggles
     case top_Secondary1_Points
@@ -111,7 +112,8 @@ enum ToolRowConfiguration {
     case bottom_Primary_View_Loops
     case bottom_Primary_View_TimeLine
     
-    case bottom_Test
+    case bottom_Test_1
+    case bottom_Test_2
     
    
 }

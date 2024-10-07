@@ -13,13 +13,13 @@ import Foundation
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
             switch jiggleViewModel.jiggleDocument.creatorMode {
             case .addGuidePoint:
-                if buttonViewModels.count > 0 {
-                    activeButtonViewModel = buttonViewModels[0]
+                if segmentButtonViewModels.count > 0 {
+                    activeButtonViewModel = segmentButtonViewModels[0]
                     refreshEnabled()
                 }
             case .removeGuidePoint:
-                if buttonViewModels.count > 1 {
-                    activeButtonViewModel = buttonViewModels[1]
+                if segmentButtonViewModels.count > 1 {
+                    activeButtonViewModel = segmentButtonViewModels[1]
                     refreshEnabled()
                 }
             case .none:

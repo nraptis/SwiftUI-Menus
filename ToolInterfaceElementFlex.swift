@@ -36,9 +36,17 @@ struct FlexConvertibleData {
 }
 
 struct FlexLongData {
-    let squeezedWidth: Int
-    let standardWidth: Int
-    let relaxedWidth: Int
+    let squeezedWidthLarge: Int
+    let standardWidthLarge: Int
+    let relaxedWidthLarge: Int
+    
+    let squeezedWidthMedium: Int
+    let standardWidthMedium: Int
+    let relaxedWidthMedium: Int
+    
+    let squeezedWidthSmall: Int
+    let standardWidthSmall: Int
+    let relaxedWidthSmall: Int
 }
 
 struct FlexSexyStepperData {
@@ -55,6 +63,7 @@ struct FlexSexyStepperData {
     let relaxedWidthSmall: Int
 }
 
+/*
 struct FlexSegmentData {
     let minimumWidthLong: Int
     let standardWidthLong: Int
@@ -72,6 +81,7 @@ struct FlexSegmentData {
     let standardWidthStackedSmall: Int
     let relaxedWidthStackedSmall: Int
 }
+
 
 struct FlexMainTabData {
     let minimumWidthLarge: Int
@@ -115,6 +125,7 @@ struct FlexEnterModeData {
     let relaxedWidthSmall: Int
 }
 
+
 struct FlexSexyCheckBoxData {
     let minimumWidthLarge: Int
     let standardWidthLarge: Int
@@ -142,6 +153,7 @@ struct FlexExitModeData {
     let standardWidthSmall: Int
     let relaxedWidthSmall: Int
 }
+ */
 
 struct FlexSliderData {
     
@@ -216,8 +228,9 @@ enum ToolInterfaceElementFlex {
     
     case greenButton(FlexLongData)
     
-    case mainTab(FlexMainTabData)
-    case createSwatch(FlexCreateSwatchData)
+    case mainTab(FlexLongData)
+    
+    case createSwatch(FlexLongData)
     
     case slider(FlexSliderData)
     

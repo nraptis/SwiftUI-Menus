@@ -16,7 +16,7 @@ extension ToolInterfaceViewModel {
         
         let infoList = configuration.buttonConfigurations.map {
             SEGMENT_FLEX_INFO_CONVERTIBLE(iconPackMain: $0.iconPack,
-                                            iconPackSecondary: nil,
+                                            iconPackSecondary: FramedLongIconLibrary.checkBoxSquare,
                                             nameLabelWidthLong: $0.nameLabelWidthLong,
                                             nameLabelWidthStackedLarge: $0.nameLabelWidthStackedLarge,
                                             nameLabelWidthStackedMedium: $0.nameLabelWidthStackedMedium,
