@@ -99,8 +99,6 @@ struct MagicalCreateSwatchContent: View {
         let checkBoxPadding = CheckBoxLayout.getSlavePaddingRightLong(orientation: orientation,
                                                                       squeeze: .relaxed)
         
-        //let heroWidth = 
-        
         return ZStack {
             HeroSlab(orientation: orientation,
                      layoutWidth: layoutWidth,
@@ -121,8 +119,7 @@ struct MagicalCreateSwatchContent: View {
                      nameLabelWidth: nameLabelWidth,
                      lineHeight: lineHeight,
                      nameLabelColor: nameLabelColor)
-            .background(Color.red)
-
+            
             HStack(spacing: 0.0) {
                 Spacer(minLength: 0.0)
                 ZStack {

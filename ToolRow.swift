@@ -1146,30 +1146,6 @@ class ToolRow {
                         layoutNode.layoutWidthLow = flexConvertibleData.relaxedWidthStackedLarge
                     }
                 }
-            case .textIconButton(let flexConvertibleData):
-                if isButtonLong {
-                    layoutNode.width = flexConvertibleData.squeezedWidthLong
-                    layoutNode.layoutWidthHigh = flexConvertibleData.standardWidthLong
-                    layoutNode.layoutWidthMedium = flexConvertibleData.relaxedWidthLong
-                    layoutNode.layoutWidthLow = flexConvertibleData.relaxedWidthLong
-                } else {
-                    if isSmall {
-                        layoutNode.width = flexConvertibleData.squeezedWidthStackedSmall
-                        layoutNode.layoutWidthHigh = flexConvertibleData.standardWidthStackedSmall
-                        layoutNode.layoutWidthMedium = flexConvertibleData.relaxedWidthStackedSmall
-                        layoutNode.layoutWidthLow = flexConvertibleData.relaxedWidthStackedSmall
-                    } else if isMedium {
-                        layoutNode.width = flexConvertibleData.squeezedWidthStackedMedium
-                        layoutNode.layoutWidthHigh = flexConvertibleData.standardWidthStackedMedium
-                        layoutNode.layoutWidthMedium = flexConvertibleData.relaxedWidthStackedMedium
-                        layoutNode.layoutWidthLow = flexConvertibleData.relaxedWidthStackedMedium
-                    } else {
-                        layoutNode.width = flexConvertibleData.squeezedWidthStackedLarge
-                        layoutNode.layoutWidthHigh = flexConvertibleData.standardWidthStackedLarge
-                        layoutNode.layoutWidthMedium = flexConvertibleData.relaxedWidthStackedLarge
-                        layoutNode.layoutWidthLow = flexConvertibleData.relaxedWidthStackedLarge
-                    }
-                }
             case .sexyButton(let flexConvertibleData):
                 if isButtonLong {
                     layoutNode.width = flexConvertibleData.squeezedWidthLong
@@ -1263,35 +1239,6 @@ class ToolRow {
                 layoutNode.layoutWidthHigh = flexIconButtonData.standardWidth
                 layoutNode.layoutWidthMedium = flexIconButtonData.standardWidth
                 layoutNode.layoutWidthLow = flexIconButtonData.relaxedWidth
-                
-            case .checkBox(let flexCheckBoxData):
-                if isCheckBoxLong {
-                    layoutNode.width = flexCheckBoxData.minimumWidthLong
-                    layoutNode.layoutWidthHigh = flexCheckBoxData.standardWidthLong
-                    layoutNode.layoutWidthMedium = flexCheckBoxData.standardWidthLong
-                    layoutNode.layoutWidthLow = flexCheckBoxData.relaxedWidthLong
-                } else {
-                    if isSmall {
-                        layoutNode.width = flexCheckBoxData.minimumWidthStackedSmall
-                        layoutNode.layoutWidthHigh = flexCheckBoxData.standardWidthStackedSmall
-                        layoutNode.layoutWidthMedium = flexCheckBoxData.standardWidthStackedSmall
-                        layoutNode.layoutWidthLow = flexCheckBoxData.relaxedWidthStackedSmall
-                    } else if isMedium {
-                        layoutNode.width = flexCheckBoxData.minimumWidthStackedMedium
-                        layoutNode.layoutWidthHigh = flexCheckBoxData.standardWidthStackedMedium
-                        layoutNode.layoutWidthMedium = flexCheckBoxData.standardWidthStackedMedium
-                        layoutNode.layoutWidthLow = flexCheckBoxData.relaxedWidthStackedMedium
-                    } else {
-                        layoutNode.width = flexCheckBoxData.minimumWidthStackedLarge
-                        layoutNode.layoutWidthHigh = flexCheckBoxData.standardWidthStackedLarge
-                        layoutNode.layoutWidthMedium = flexCheckBoxData.standardWidthStackedLarge
-                        layoutNode.layoutWidthLow = flexCheckBoxData.relaxedWidthStackedLarge
-                    }
-                }
-                
-                
-                
-            
             case .fixed(let fixedWidth):
                 layoutNode.width = fixedWidth
                 layoutNode.layoutWidthHigh = fixedWidth

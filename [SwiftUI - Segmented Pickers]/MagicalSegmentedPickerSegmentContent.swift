@@ -155,7 +155,6 @@ struct MagicalSegmentedPickerSegmentContent: View {
                      nameLabelWidth: nameLabelWidth,
                      lineHeight: lineHeight,
                      nameLabelColor: nameLabelColor)
-            .overlay (RoundedRectangle(cornerRadius: 20).foregroundStyle(Color.white.opacity(0.5)))
             
             HStack(spacing: 0.0) {
 #if INTERFACE_HINTS
@@ -183,8 +182,6 @@ struct MagicalSegmentedPickerSegmentContent: View {
                     .frame(width: CGFloat(magicalButtonViewModel.slavePaddingRight))
 #endif
             }
-            .background(Color.orange.opacity(0.5))
-            
         }
 #if INTERFACE_HINTS
         .overlay(Rectangle().stroke().foregroundStyle(
@@ -194,7 +191,6 @@ struct MagicalSegmentedPickerSegmentContent: View {
             LinearGradient(colors: [Color(red: 0.45, green: 0.48, blue: 0.52, opacity: 0.25),
                                     Color(red: 0.05, green: 0.99, blue: 0.70, opacity: 0.25)], startPoint: .leading, endPoint: .trailing)))
 #endif
-        .overlay (RoundedRectangle(cornerRadius: 16).foregroundStyle(Color.blue.opacity(0.5)))
         
     }
 }

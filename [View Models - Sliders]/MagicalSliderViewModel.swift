@@ -19,20 +19,17 @@ import SwiftUI
     @MainActor var thumbMaximumX: CGFloat = 100.0
     @MainActor var thumbOffsetX = CGFloat(0.0)
     
-    @MainActor var nameLabelPaddingLeft = 0
-    @MainActor var nameLabelPaddingRight = 0
+    //@MainActor var valueLabelPaddingLeft = 0
+    //@MainActor var valueLabelPaddingRight = 0
     
-    @MainActor var valueLabelPaddingLeft = 0
-    @MainActor var valueLabelPaddingRight = 0
-    
-    @MainActor var universalPaddingLeft = 0
-    @MainActor var universalPaddingRight = 0
+    //@MainActor var universalPaddingLeft = 0
+    //@MainActor var universalPaddingRight = 0
     
     @MainActor var sliderBoxWidth = 0
     
     let sliderConfiguration: ToolInterfaceElementSliderConfiguration
     @MainActor init(orientation: Orientation,
-         sliderConfiguration: ToolInterfaceElementSliderConfiguration) {
+                    sliderConfiguration: ToolInterfaceElementSliderConfiguration) {
         
         self.sliderConfiguration = sliderConfiguration
         super.init(orientation: orientation)
@@ -88,174 +85,181 @@ import SwiftUI
             valueLabelTextWidth = sliderConfiguration.valueLabelWidthSmall
         }
         
-        let universalPaddingLeftSqueezed = SliderLayout.getUniversalPaddingLeft(orientation: orientation,
-                                                                                flavor: layoutSchemeFlavor,
-                                                                                squeeze: .squeezed,
-                                                                                neighborTypeLeft: neighborTypeLeft,
-                                                                                neighborTypeRight: neighborTypeRight)
-        let universalPaddingLeftStandard = SliderLayout.getUniversalPaddingLeft(orientation: orientation,
-                                                                                flavor: layoutSchemeFlavor,
-                                                                                squeeze: .standard,
-                                                                                neighborTypeLeft: neighborTypeLeft,
-                                                                                neighborTypeRight: neighborTypeRight)
-        let universalPaddingRightSqueezed = SliderLayout.getUniversalPaddingRight(orientation: orientation,
-                                                                                  flavor: layoutSchemeFlavor,
-                                                                                  squeeze: .squeezed,
-                                                                                  neighborTypeLeft: neighborTypeLeft,
-                                                                                  neighborTypeRight: neighborTypeRight)
-        let universalPaddingRightStandard = SliderLayout.getUniversalPaddingRight(orientation: orientation,
-                                                                                  flavor: layoutSchemeFlavor,
-                                                                                  squeeze: .standard,
-                                                                                  neighborTypeLeft: neighborTypeLeft,
-                                                                                  neighborTypeRight: neighborTypeRight)
-        var _universalPaddingLeft = universalPaddingLeftSqueezed
-        var _universalPaddingRight = universalPaddingRightSqueezed
+        let outsideBoxPaddingLeftSqueezed = SliderLayout.getOutsideBoxPaddingLeftLong(orientation: orientation,
+                                                                                      squeeze: .squeezed,
+                                                                                      neighborTypeLeft: neighborTypeLeft,
+                                                                                      neighborTypeRight: neighborTypeRight)
+        let outsideBoxPaddingLeftStandard = SliderLayout.getOutsideBoxPaddingLeftLong(orientation: orientation,
+                                                                                      squeeze: .standard,
+                                                                                      neighborTypeLeft: neighborTypeLeft,
+                                                                                      neighborTypeRight: neighborTypeRight)
+        let outsideBoxPaddingLeftRelaxed = SliderLayout.getOutsideBoxPaddingLeftLong(orientation: orientation,
+                                                                                     squeeze: .relaxed,
+                                                                                     neighborTypeLeft: neighborTypeLeft,
+                                                                                     neighborTypeRight: neighborTypeRight)
         
-        let nameLabelPaddingLeftSqueezed = SliderLayout.getNameLabelPaddingLeft(orientation: orientation,
-                                                                                flavor: layoutSchemeFlavor,
-                                                                                squeeze: .squeezed)
-        let nameLabelPaddingLeftStandard = SliderLayout.getNameLabelPaddingLeft(orientation: orientation,
-                                                                                flavor: layoutSchemeFlavor,
-                                                                                squeeze: .standard)
-        let nameLabelPaddingRightSqueezed = SliderLayout.getNameLabelPaddingRight(orientation: orientation,
-                                                                                  flavor: layoutSchemeFlavor,
-                                                                                  squeeze: .squeezed)
-        let nameLabelPaddingRightStandard = SliderLayout.getNameLabelPaddingRight(orientation: orientation,
-                                                                                  flavor: layoutSchemeFlavor,
-                                                                                  squeeze: .standard)
-        var _nameLabelPaddingLeft = nameLabelPaddingLeftSqueezed
-        var _nameLabelPaddingRight = nameLabelPaddingRightSqueezed
+        let outsideBoxPaddingRightSqueezed = SliderLayout.getOutsideBoxPaddingRightLong(orientation: orientation,
+                                                                                        squeeze: .squeezed,
+                                                                                        neighborTypeLeft: neighborTypeLeft,
+                                                                                        neighborTypeRight: neighborTypeRight)
+        let outsideBoxPaddingRightStandard = SliderLayout.getOutsideBoxPaddingRightLong(orientation: orientation,
+                                                                                        squeeze: .standard,
+                                                                                        neighborTypeLeft: neighborTypeLeft,
+                                                                                        neighborTypeRight: neighborTypeRight)
+        let outsideBoxPaddingRightRelaxed = SliderLayout.getOutsideBoxPaddingRightLong(orientation: orientation,
+                                                                                       squeeze: .relaxed,
+                                                                                       neighborTypeLeft: neighborTypeLeft,
+                                                                                       neighborTypeRight: neighborTypeRight)
         
-        let valueLabelPaddingLeftSqueezed = SliderLayout.getValueLabelPaddingLeft(orientation: orientation,
-                                                                                  flavor: layoutSchemeFlavor,
-                                                                                  squeeze: .squeezed)
-        let valueLabelPaddingLeftStandard = SliderLayout.getValueLabelPaddingLeft(orientation: orientation,
-                                                                                  flavor: layoutSchemeFlavor,
-                                                                                  squeeze: .standard)
-        let valueLabelPaddingRightSqueezed = SliderLayout.getValueLabelPaddingRight(orientation: orientation,
-                                                                                    flavor: layoutSchemeFlavor,
-                                                                                    squeeze: .squeezed)
-        let valueLabelPaddingRightStandard = SliderLayout.getValueLabelPaddingRight(orientation: orientation,
-                                                                                    flavor: layoutSchemeFlavor,
-                                                                                    squeeze: .standard)
+        var _outsideBoxPaddingLeft = outsideBoxPaddingLeftSqueezed
+        var _outsideBoxPaddingRight = outsideBoxPaddingRightSqueezed
         
-        var _valueLabelPaddingLeft = valueLabelPaddingLeftSqueezed
-        var _valueLabelPaddingRight = valueLabelPaddingRightSqueezed
+        let heroPaddingLeftSqueezed = SliderLayout.getHeroPaddingLeftLong(orientation: orientation,
+                                                                          squeeze: .squeezed)
+        let heroPaddingLeftStandard = SliderLayout.getHeroPaddingLeftLong(orientation: orientation,
+                                                                          squeeze: .standard)
+        let heroPaddingLeftRelaxed = SliderLayout.getHeroPaddingLeftLong(orientation: orientation,
+                                                                         squeeze: .relaxed)
+        
+        let heroPaddingRightSqueezed = SliderLayout.getHeroPaddingRightLong(orientation: orientation,
+                                                                            squeeze: .squeezed)
+        let heroPaddingRightStandard = SliderLayout.getHeroPaddingRightLong(orientation: orientation,
+                                                                            squeeze: .standard)
+        let heroPaddingRightRelaxed = SliderLayout.getHeroPaddingRightLong(orientation: orientation,
+                                                                           squeeze: .relaxed)
+        
+        var _heroPaddingLeft = heroPaddingLeftSqueezed
+        var _heroPaddingRight = heroPaddingRightSqueezed
+        
+        let slavePaddingLeftSqueezed = SliderLayout.getSlavePaddingLeftLong(orientation: orientation,
+                                                                            squeeze: .squeezed)
+        let slavePaddingLeftStandard = SliderLayout.getSlavePaddingLeftLong(orientation: orientation,
+                                                                            squeeze: .standard)
+        let slavePaddingLeftRelaxed = SliderLayout.getSlavePaddingLeftLong(orientation: orientation,
+                                                                           squeeze: .relaxed)
+        
+        let slavePaddingRightSqueezed = SliderLayout.getSlavePaddingRightLong(orientation: orientation,
+                                                                              squeeze: .squeezed)
+        let slavePaddingRightStandard = SliderLayout.getSlavePaddingRightLong(orientation: orientation,
+                                                                              squeeze: .standard)
+        let slavePaddingRightRelaxed = SliderLayout.getSlavePaddingRightLong(orientation: orientation,
+                                                                             squeeze: .relaxed)
+        
+        var _slavePaddingLeft = slavePaddingLeftSqueezed
+        var _slavePaddingRight = slavePaddingRightSqueezed
+        
         
         var _sliderBoxWidth = 0
         
         let totalWidth = layoutWidth
         
-        var howMuchSpaceWeAreUsingSoFar = 0
-        howMuchSpaceWeAreUsingSoFar += universalPaddingLeftSqueezed
-        howMuchSpaceWeAreUsingSoFar += universalPaddingRightSqueezed
+        var consumed = 0
+        consumed += outsideBoxPaddingLeftSqueezed
+        consumed += outsideBoxPaddingRightSqueezed
         
-        howMuchSpaceWeAreUsingSoFar += nameLabelTextWidth
-        howMuchSpaceWeAreUsingSoFar += nameLabelPaddingLeftSqueezed
-        howMuchSpaceWeAreUsingSoFar += nameLabelPaddingRightSqueezed
+        consumed += nameLabelTextWidth
+        consumed += heroPaddingLeftSqueezed
+        consumed += heroPaddingRightSqueezed
         
-        howMuchSpaceWeAreUsingSoFar += valueLabelTextWidth
-        howMuchSpaceWeAreUsingSoFar += valueLabelPaddingLeftSqueezed
-        howMuchSpaceWeAreUsingSoFar += valueLabelPaddingRightSqueezed
+        consumed += valueLabelTextWidth
+        consumed += slavePaddingLeftSqueezed
+        consumed += slavePaddingRightSqueezed
         
         let preferredMinimumBarWidth = SliderLayout.getPreferredMinimumBarWidth(orientation: orientation,
                                                                                 widthCategory: sliderConfiguration.widthCategory)
         
-        // Grow bar to at least the mininum width
-        while howMuchSpaceWeAreUsingSoFar < totalWidth && _sliderBoxWidth < preferredMinimumBarWidth {
-            howMuchSpaceWeAreUsingSoFar += 1
-            _sliderBoxWidth += 1
-        }
+        var howMuchCanSliderBarGrowForMinimumWidth = min(preferredMinimumBarWidth, (totalWidth - consumed))
         
-        // Grow all paddings to "standard" size...
-        var consumedWidth = Int(0)
-        consumedWidth += universalPaddingRightSqueezed
-        consumedWidth += universalPaddingLeftSqueezed
-        
-        consumedWidth += nameLabelTextWidth
-        consumedWidth += nameLabelPaddingLeftSqueezed
-        consumedWidth += nameLabelPaddingRightSqueezed
-        
-        consumedWidth += valueLabelTextWidth
-        consumedWidth += valueLabelPaddingLeftSqueezed
-        consumedWidth += valueLabelPaddingRightSqueezed
-        
-        consumedWidth += preferredMinimumBarWidth
+        consumed += howMuchCanSliderBarGrowForMinimumWidth
+        _sliderBoxWidth += howMuchCanSliderBarGrowForMinimumWidth
         
         
-        while consumedWidth < totalWidth {
+        var isLooping = true
+        while isLooping {
+            isLooping = false
             
-            var didModify = false
-            
-            if _nameLabelPaddingLeft < nameLabelPaddingLeftStandard && consumedWidth < totalWidth {
-                _nameLabelPaddingLeft += 1
-                consumedWidth += 1
-                didModify = true
+            if (consumed < totalWidth) && (_outsideBoxPaddingLeft < outsideBoxPaddingLeftStandard) {
+                consumed += 1
+                _outsideBoxPaddingLeft += 1
+                isLooping = true
             }
-            
-            if _nameLabelPaddingRight < nameLabelPaddingRightStandard && consumedWidth < totalWidth {
-                _nameLabelPaddingRight += 1
-                consumedWidth += 1
-                didModify = true
+            if (consumed < totalWidth) && (_outsideBoxPaddingRight < outsideBoxPaddingRightStandard) {
+                consumed += 1
+                _outsideBoxPaddingRight += 1
+                isLooping = true
             }
-            
-            if _valueLabelPaddingLeft < valueLabelPaddingLeftStandard && consumedWidth < totalWidth {
-                _valueLabelPaddingLeft += 1
-                consumedWidth += 1
-                didModify = true
+            if (consumed < totalWidth) && (_heroPaddingLeft < heroPaddingLeftStandard) {
+                consumed += 1
+                _heroPaddingLeft += 1
+                isLooping = true
             }
-            
-            if _valueLabelPaddingRight < valueLabelPaddingRightStandard && consumedWidth < totalWidth {
-                _valueLabelPaddingRight += 1
-                consumedWidth += 1
-                didModify = true
+            if (consumed < totalWidth) && (_heroPaddingRight < heroPaddingRightStandard) {
+                consumed += 1
+                _heroPaddingRight += 1
+                isLooping = true
             }
-            
-            if _universalPaddingLeft < universalPaddingLeftStandard && consumedWidth < totalWidth {
-                _universalPaddingLeft += 1
-                consumedWidth += 1
-                didModify = true
+            if (consumed < totalWidth) && (_slavePaddingLeft < slavePaddingLeftStandard) {
+                consumed += 1
+                _slavePaddingLeft += 1
+                isLooping = true
             }
-            
-            if _universalPaddingRight < universalPaddingRightStandard && consumedWidth < totalWidth {
-                _universalPaddingRight += 1
-                consumedWidth += 1
-                didModify = true
-            }
-            
-            if didModify == false {
-                break
+            if (consumed < totalWidth) && (_slavePaddingRight < slavePaddingRightStandard) {
+                consumed += 1
+                _slavePaddingRight += 1
+                isLooping = true
             }
         }
         
-        howMuchSpaceWeAreUsingSoFar = 0
-        
-        howMuchSpaceWeAreUsingSoFar += _universalPaddingLeft
-        howMuchSpaceWeAreUsingSoFar += _universalPaddingRight
-        
-        howMuchSpaceWeAreUsingSoFar += nameLabelTextWidth
-        howMuchSpaceWeAreUsingSoFar += _nameLabelPaddingLeft
-        howMuchSpaceWeAreUsingSoFar += _nameLabelPaddingRight
-        
-        howMuchSpaceWeAreUsingSoFar += valueLabelTextWidth
-        howMuchSpaceWeAreUsingSoFar += _valueLabelPaddingLeft
-        howMuchSpaceWeAreUsingSoFar += _valueLabelPaddingRight
-        howMuchSpaceWeAreUsingSoFar += _sliderBoxWidth
-        
-        if howMuchSpaceWeAreUsingSoFar < totalWidth {
-            _sliderBoxWidth += (totalWidth - howMuchSpaceWeAreUsingSoFar)
+        isLooping = true
+        while isLooping {
+            isLooping = false
+            
+            if (consumed < totalWidth) && (_outsideBoxPaddingLeft < outsideBoxPaddingLeftRelaxed) {
+                consumed += 1
+                _outsideBoxPaddingLeft += 1
+                isLooping = true
+            }
+            if (consumed < totalWidth) && (_outsideBoxPaddingRight < outsideBoxPaddingRightRelaxed) {
+                consumed += 1
+                _outsideBoxPaddingRight += 1
+                isLooping = true
+            }
+            if (consumed < totalWidth) && (_heroPaddingLeft < heroPaddingLeftRelaxed) {
+                consumed += 1
+                _heroPaddingLeft += 1
+                isLooping = true
+            }
+            if (consumed < totalWidth) && (_heroPaddingRight < heroPaddingRightRelaxed) {
+                consumed += 1
+                _heroPaddingRight += 1
+                isLooping = true
+            }
+            if (consumed < totalWidth) && (_slavePaddingLeft < slavePaddingLeftRelaxed) {
+                consumed += 1
+                _slavePaddingLeft += 1
+                isLooping = true
+            }
+            if (consumed < totalWidth) && (_slavePaddingRight < slavePaddingRightRelaxed) {
+                consumed += 1
+                _slavePaddingRight += 1
+                isLooping = true
+            }
         }
         
-        nameLabelPaddingLeft = _nameLabelPaddingLeft
-        nameLabelPaddingRight = _nameLabelPaddingRight
-        
-        valueLabelPaddingLeft = _valueLabelPaddingLeft
-        valueLabelPaddingRight = _valueLabelPaddingRight
+        if consumed < totalWidth {
+            _sliderBoxWidth += (totalWidth - consumed)
+        }
         
         sliderBoxWidth = _sliderBoxWidth
         
-        universalPaddingLeft = _universalPaddingLeft
-        universalPaddingRight = _universalPaddingRight
+        outsideBoxPaddingLeft = _outsideBoxPaddingLeft
+        outsideBoxPaddingRight = _outsideBoxPaddingRight
+        
+        heroPaddingLeft = _heroPaddingLeft
+        heroPaddingRight = _heroPaddingRight
+        
+        slavePaddingLeft = _slavePaddingLeft
+        slavePaddingRight = _slavePaddingRight
         
         let thumbDiameter = SliderLayout.getThumbDiameterStroke(orientation: orientation)
         

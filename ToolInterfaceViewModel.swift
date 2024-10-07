@@ -211,12 +211,18 @@ func getToolNodeID() -> UInt16 {
             if ApplicationController.TEST_ROW_TOP_2 {
                 rowsDraggable.append(generateRow(slot: .top_Test_2))
             }
+            if ApplicationController.TEST_ROW_TOP_3 {
+                rowsDraggable.append(generateRow(slot: .top_Test_3))
+            }
             
             if ApplicationController.TEST_ROW_BOTTOM_1 {
                 rowsDraggable.append(generateRow(slot: .bottom_Test_1))
             }
             if ApplicationController.TEST_ROW_BOTTOM_2 {
                 rowsDraggable.append(generateRow(slot: .bottom_Test_2))
+            }
+            if ApplicationController.TEST_ROW_BOTTOM_3 {
+                rowsDraggable.append(generateRow(slot: .bottom_Test_3))
             }
             
         } else {
@@ -233,6 +239,9 @@ func getToolNodeID() -> UInt16 {
             if ApplicationController.TEST_ROW_TOP_2 {
                 rowsTop.append(generateRow(slot: .top_Test_2))
             }
+            if ApplicationController.TEST_ROW_TOP_3 {
+                rowsTop.append(generateRow(slot: .top_Test_3))
+            }
             
             
             if ApplicationController.TEST_ROW_BOTTOM_1 {
@@ -240,6 +249,9 @@ func getToolNodeID() -> UInt16 {
             }
             if ApplicationController.TEST_ROW_BOTTOM_2 {
                 rowsBottom.append(generateRow(slot: .bottom_Test_2))
+            }
+            if ApplicationController.TEST_ROW_BOTTOM_3 {
+                rowsBottom.append(generateRow(slot: .bottom_Test_3))
             }
             
             if bottomMenuStandardRowCount > 2 { rowsBottom.append(generateRow(slot: .bottom_Secondary2)) }
@@ -257,12 +269,18 @@ func getToolNodeID() -> UInt16 {
             if ApplicationController.TEST_ROW_TOP_2 {
                 rowsVideoRecord.append(generateRow(slot: .top_Test_2))
             }
+            if ApplicationController.TEST_ROW_TOP_3 {
+                rowsVideoRecord.append(generateRow(slot: .top_Test_3))
+            }
             
             if ApplicationController.TEST_ROW_BOTTOM_1 {
                 rowsVideoRecord.append(generateRow(slot: .bottom_Test_1))
             }
             if ApplicationController.TEST_ROW_BOTTOM_2 {
                 rowsVideoRecord.append(generateRow(slot: .bottom_Test_2))
+            }
+            if ApplicationController.TEST_ROW_BOTTOM_3 {
+                rowsVideoRecord.append(generateRow(slot: .bottom_Test_3))
             }
             
         } else {
@@ -274,6 +292,9 @@ func getToolNodeID() -> UInt16 {
             if ApplicationController.TEST_ROW_TOP_2 {
                 rowsVideoRecord.append(generateRow(slot: .top_Test_2))
             }
+            if ApplicationController.TEST_ROW_TOP_3 {
+                rowsVideoRecord.append(generateRow(slot: .top_Test_3))
+            }
             
             
             if ApplicationController.TEST_ROW_BOTTOM_1 {
@@ -281,6 +302,9 @@ func getToolNodeID() -> UInt16 {
             }
             if ApplicationController.TEST_ROW_BOTTOM_2 {
                 rowsVideoRecord.append(generateRow(slot: .bottom_Test_2))
+            }
+            if ApplicationController.TEST_ROW_BOTTOM_3 {
+                rowsVideoRecord.append(generateRow(slot: .bottom_Test_3))
             }
             
         }
@@ -295,6 +319,9 @@ func getToolNodeID() -> UInt16 {
             if ApplicationController.TEST_ROW_TOP_2 {
                 rowsVideoExport.append(generateRow(slot: .top_Test_2))
             }
+            if ApplicationController.TEST_ROW_TOP_3 {
+                rowsVideoExport.append(generateRow(slot: .top_Test_3))
+            }
             
             
             if ApplicationController.TEST_ROW_BOTTOM_1 {
@@ -302,6 +329,9 @@ func getToolNodeID() -> UInt16 {
             }
             if ApplicationController.TEST_ROW_BOTTOM_2 {
                 rowsVideoExport.append(generateRow(slot: .bottom_Test_2))
+            }
+            if ApplicationController.TEST_ROW_BOTTOM_3 {
+                rowsVideoExport.append(generateRow(slot: .bottom_Test_3))
             }
             
         } else {
@@ -315,6 +345,9 @@ func getToolNodeID() -> UInt16 {
             if ApplicationController.TEST_ROW_TOP_2 {
                 rowsVideoExport.append(generateRow(slot: .top_Test_2))
             }
+            if ApplicationController.TEST_ROW_TOP_3 {
+                rowsVideoExport.append(generateRow(slot: .top_Test_3))
+            }
             
             
             if ApplicationController.TEST_ROW_BOTTOM_1 {
@@ -322,6 +355,9 @@ func getToolNodeID() -> UInt16 {
             }
             if ApplicationController.TEST_ROW_BOTTOM_2 {
                 rowsVideoExport.append(generateRow(slot: .bottom_Test_2))
+            }
+            if ApplicationController.TEST_ROW_BOTTOM_3 {
+                rowsVideoExport.append(generateRow(slot: .bottom_Test_3))
             }
             
         }
@@ -336,6 +372,9 @@ func getToolNodeID() -> UInt16 {
             if ApplicationController.TEST_ROW_TOP_2 {
                 rowsZoom.append(generateRow(slot: .top_Test_2))
             }
+            if ApplicationController.TEST_ROW_TOP_3 {
+                rowsZoom.append(generateRow(slot: .top_Test_3))
+            }
             
             
             if ApplicationController.TEST_ROW_BOTTOM_1 {
@@ -343,6 +382,9 @@ func getToolNodeID() -> UInt16 {
             }
             if ApplicationController.TEST_ROW_BOTTOM_2 {
                 rowsZoom.append(generateRow(slot: .bottom_Test_2))
+            }
+            if ApplicationController.TEST_ROW_BOTTOM_3 {
+                rowsZoom.append(generateRow(slot: .bottom_Test_3))
             }
             
         } else {
@@ -356,6 +398,9 @@ func getToolNodeID() -> UInt16 {
             if ApplicationController.TEST_ROW_TOP_2 {
                 rowsZoom.append(generateRow(slot: .top_Test_2))
             }
+            if ApplicationController.TEST_ROW_TOP_3 {
+                rowsZoom.append(generateRow(slot: .top_Test_3))
+            }
             
             
             if ApplicationController.TEST_ROW_BOTTOM_1 {
@@ -363,6 +408,9 @@ func getToolNodeID() -> UInt16 {
             }
             if ApplicationController.TEST_ROW_BOTTOM_2 {
                 rowsZoom.append(generateRow(slot: .bottom_Test_2))
+            }
+            if ApplicationController.TEST_ROW_BOTTOM_3 {
+                rowsZoom.append(generateRow(slot: .bottom_Test_3))
             }
             
         }
@@ -681,7 +729,7 @@ func getToolNodeID() -> UInt16 {
     @MainActor func getRowBluePrintVideoRecord() -> RowBluePrint {
         let nodes = [
             getExitVideoRecordExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            Self.getSpacerToolNode(neighborTypeLeft: .textIconButton, neighborTypeRight: .textIconButton),
+            Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
         
             getEnterVideoExportEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
         ]
@@ -693,7 +741,7 @@ func getToolNodeID() -> UInt16 {
         let nodes = [
             getExitVideoExportExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
             getEnterVideoRecordEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            Self.getSpacerToolNode(neighborTypeLeft: .textIconButton, neighborTypeRight: .textIconButton),
+            Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
             getMainMenuTextIconButtonToolNode(neighborTypeLeft: .spacer, neighborTypeRight: nil)
         ]
         return RowBluePrint(nodes: nodes, configuration: .video_export_1, centerPinnedElement: nil)
@@ -702,8 +750,7 @@ func getToolNodeID() -> UInt16 {
     
     @MainActor func getRowBluePrintVideoExport2() -> RowBluePrint {
         let nodes = [
-            getTwistEnabledCheckBoxNode(neighborTypeLeft: nil, neighborTypeRight: .spacer),
-            Self.getSpacerToolNode(neighborTypeLeft: .checkBox, neighborTypeRight: .textIconButton),
+            Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
             getMenuSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
         ]
         return RowBluePrint(nodes: nodes, configuration: .video_export_2, centerPinnedElement: nil)
@@ -714,7 +761,7 @@ func getToolNodeID() -> UInt16 {
         let nodes = [
             getExitZoomExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
             
-            Self.getSpacerToolNode(neighborTypeLeft: .textIconButton, neighborTypeRight: .textIconButton),
+            Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
         ]
     
         return RowBluePrint(nodes: nodes, configuration: .zoom_1, centerPinnedElement: nil)
@@ -732,7 +779,7 @@ func getToolNodeID() -> UInt16 {
         let nodes = [
             getExitZoomExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
             
-            Self.getSpacerToolNode(neighborTypeLeft: .textIconButton, neighborTypeRight: .textIconButton),
+            Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
             getExitZoomExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
             
             getZoomResetSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),

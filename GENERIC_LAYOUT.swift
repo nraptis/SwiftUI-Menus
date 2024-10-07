@@ -311,10 +311,6 @@ struct GENERIC_LAYOUT {
         _ = result.expandSlaveFilling(consumed: &consumed, layoutWidth: layoutWidth,
                                       left: slaveLeftSqueezed, right: slaveRightSqueezed)
         
-        if result.slavePaddingRight < slaveRightSqueezed {
-            print("something fishu....")
-        }
-        
         var isLooping = true
         
         while isLooping {

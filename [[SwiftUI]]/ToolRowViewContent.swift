@@ -52,87 +52,53 @@ struct ToolRowViewContent: View {
     @ViewBuilder
     func getItemForElement(_ toolNode: ToolNode, _ toolInterfaceElement: ToolInterfaceElement) -> some View {
         
-        if toolNode.element.type == .sexyCheckBox {
-            MagicalSexyCheckBox()
-                .environment((toolNode.magicalViewModel as! MagicalSexyCheckBoxViewModel))
-        }
-        
-        if toolNode.element.type == .sexyStepper {
-            MagicalSexyStepper()
-                .environment((toolNode.magicalViewModel as! MagicalSexyStepperViewModel))
-        }
-        
-        if toolNode.element.type == .sexyButton {
+        switch toolNode.element.type {
+        case .sexyButton:
             MagicalSexyButton()
                 .environment((toolNode.magicalViewModel as! MagicalSexyButtonViewModel))
-        }
-        
-        if toolInterfaceElement == .dividerTiny {
+        case .spacer:
+            Color.clear
+        case .dividerTiny:
             MagicalDividerTiny()
                 .environment(toolNode.magicalViewModel)
-        }
-        
-        if toolInterfaceElement == .dividerHuge {
+        case .dividerHuge:
             MagicalDividerHuge()
                 .environment(toolNode.magicalViewModel)
-        }
-        
-        if toolNode.element == .dividerSpacerDivider {
+        case .dividerSpacerDivider:
             MagicalDividerSpacerDivider()
                 .environment(toolNode.magicalViewModel)
-        }
-        
-        if toolNode.element.type == .slider {
-            MagicalSlider()
-                .environment((toolNode.magicalViewModel as! MagicalSliderViewModel))
-        }
-        
-        if toolNode.element.type == .textIconButton {
-            MagicalTextIconButton()
-                .environment((toolNode.magicalViewModel as! MagicalTextIconButtonViewModel))
-        }
-        
-        if toolNode.element.type == .iconButton {
-            MagicalIconButton()
-                .environment((toolNode.magicalViewModel as! MagicalIconButtonViewModel))
-        }
-        
-        if toolNode.element.type == .checkBox {
-            MagicalCheckBox()
-                .environment((toolNode.magicalViewModel as! MagicalCheckBoxViewModel))
-        }
-        
-        if toolNode.element.type == .segment {
-            MagicalSegmentedPicker()
-                .environment((toolNode.magicalViewModel as! MagicalSegmentedPickerViewModel))
-        }
-        
-        if toolNode.element.type == .mainTab {
-            MagicalMainTab()
-                .environment((toolNode.magicalViewModel as! MagicalMainTabViewModel))
-        }
-        
-        if toolNode.element.type == .createSwatch {
+            
+        case .createSwatch:
             MagicalCreateSwatch()
                 .environment((toolNode.magicalViewModel as! MagicalCreateSwatchViewModel))
-        }
-        
-        if toolNode.element.type == .enterMode {
+        case .sexyCheckBox:
+            MagicalSexyCheckBox()
+                .environment((toolNode.magicalViewModel as! MagicalSexyCheckBoxViewModel))
+        case .enterMode:
             MagicalEnterMode()
                 .environment((toolNode.magicalViewModel as! MagicalModeChangeViewModel))
-        }
-        
-        if toolNode.element.type == .exitMode {
+        case .exitMode:
             MagicalExitMode()
                 .environment((toolNode.magicalViewModel as! MagicalModeChangeViewModel))
-        }
-        
-        if toolNode.element.type == .greenButton {
+        case .mainTab:
+            MagicalMainTab()
+                .environment((toolNode.magicalViewModel as! MagicalMainTabViewModel))
+        case .segment:
+            MagicalSegmentedPicker()
+                .environment((toolNode.magicalViewModel as! MagicalSegmentedPickerViewModel))
+        case .sexyStepper:
+            MagicalSexyStepper()
+                .environment((toolNode.magicalViewModel as! MagicalSexyStepperViewModel))
+        case .iconButton:
+            MagicalIconButton()
+                .environment((toolNode.magicalViewModel as! MagicalIconButtonViewModel))
+        case .greenButton:
             MagicalGreenButton()
                 .environment((toolNode.magicalViewModel as! MagicalGreenButtonViewModel))
-        }
-        
-        if toolNode.element.type == .favoringOneLineLabel {
+        case .slider:
+            MagicalSlider()
+                .environment((toolNode.magicalViewModel as! MagicalSliderViewModel))
+        case .favoringOneLineLabel:
             MagicalFavoringOneLineLabel()
                 .environment((toolNode.magicalViewModel as! MagicalFavoringOneLineLabelViewModel))
         }

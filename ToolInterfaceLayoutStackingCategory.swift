@@ -30,13 +30,13 @@ extension ToolInterfaceLayoutStackingCategory {
             return .stackedMedium
         case .large(let stackingLargeData):
             switch toolInterfaceElementType {
-            case .checkBox, .sexyCheckBox:
+            case .sexyCheckBox:
                 if stackingLargeData.isCheckBoxLong {
                     return .long
                 } else {
                     return .stackedLarge
                 }
-            case .textIconButton, .sexyButton:
+            case .sexyButton:
                 if stackingLargeData.isButtonLong {
                     return .long
                 } else {

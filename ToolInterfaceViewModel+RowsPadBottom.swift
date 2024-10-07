@@ -157,7 +157,7 @@ extension ToolInterfaceViewModel {
                      Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      getRedoSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      centerPinnedNode,
-                     
+                     getStereoscopicEnabledSexyCheckBoxToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      getZoomResetSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      getEnterVideoRecordEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
         ]
@@ -173,6 +173,7 @@ extension ToolInterfaceViewModel {
                      centerPinnedNode,
                      Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      getZoomResetSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getStereoscopicEnabledSexyCheckBoxToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      getEnterVideoRecordEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
         ]
         return RowBluePrint(nodes: nodes, configuration: .bottom_Primary_View_Continuous)
@@ -187,6 +188,7 @@ extension ToolInterfaceViewModel {
                      centerPinnedNode,
                      Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      getZoomResetSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getStereoscopicEnabledSexyCheckBoxToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      getEnterVideoRecordEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
         ]
         return RowBluePrint(nodes: nodes, configuration: .bottom_Primary_View_Loops)
@@ -202,6 +204,7 @@ extension ToolInterfaceViewModel {
                      centerPinnedNode,
                      Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      getZoomResetSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getStereoscopicEnabledSexyCheckBoxToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      getEnterVideoRecordEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
         ]
         return RowBluePrint(nodes: nodes, configuration: .bottom_Primary_View_TimeLine)
@@ -260,8 +263,8 @@ extension ToolInterfaceViewModel {
     @MainActor func getRowBluePrint_Bottom_Secondary1_View_Grab_Pad() -> RowBluePrint {
         let nodes = [getEnterVideoRecordEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
-                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
-                     getAnimationJiggleApplyToAllCheckBoxNode(neighborTypeLeft: .spacer, neighborTypeRight: .checkBox),
+                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getAnimationJiggleApplyToAllSexyCheckBoxToolNode(neighborTypeLeft: .spacer, neighborTypeRight: nil),
                      
                      getEnterAnimationLoopsEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      getEnterAnimationContinuousEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
@@ -276,8 +279,8 @@ extension ToolInterfaceViewModel {
     @MainActor func getRowBluePrint_Bottom_Secondary1_View_Continuous_Pad() -> RowBluePrint {
         let nodes = [getEnterVideoRecordEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
-                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
-                     getAnimationJiggleApplyToAllCheckBoxNode(neighborTypeLeft: .spacer, neighborTypeRight: .checkBox),
+                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getAnimationJiggleApplyToAllSexyCheckBoxToolNode(neighborTypeLeft: .spacer, neighborTypeRight: nil),
                      
                      getEnterAnimationLoopsEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      getEnterAnimationContinuousEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
@@ -293,8 +296,8 @@ extension ToolInterfaceViewModel {
         let nodes = [getExitAnimationLoopsExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      getEnterTimeLineEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
-                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
-                     getAnimationJiggleApplyToAllCheckBoxNode(neighborTypeLeft: .spacer, neighborTypeRight: .checkBox),
+                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getAnimationJiggleApplyToAllSexyCheckBoxToolNode(neighborTypeLeft: .spacer, neighborTypeRight: nil),
                      
                      
         ]
@@ -305,8 +308,8 @@ extension ToolInterfaceViewModel {
         let nodes = [getExitAnimationLoopsExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                     getEnterTimeLineEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
-                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
-                     getAnimationJiggleApplyToAllCheckBoxNode(neighborTypeLeft: .spacer, neighborTypeRight: .checkBox),
+                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getAnimationJiggleApplyToAllSexyCheckBoxToolNode(neighborTypeLeft: .spacer, neighborTypeRight: nil),
 
         ]
         return RowBluePrint(nodes: nodes, configuration: .bottom_Secondary1_View_LoopsPage2)
@@ -316,8 +319,8 @@ extension ToolInterfaceViewModel {
         let nodes = [getExitAnimationLoopsExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      getEnterTimeLineEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
-                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
-                     getAnimationJiggleApplyToAllCheckBoxNode(neighborTypeLeft: .spacer, neighborTypeRight: .checkBox),
+                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getAnimationJiggleApplyToAllSexyCheckBoxToolNode(neighborTypeLeft: .spacer, neighborTypeRight: nil),
                      
                      getEnterAnimationLoopsEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      getEnterAnimationContinuousEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
@@ -336,15 +339,15 @@ extension ToolInterfaceViewModel {
                      
                      getTimeLineResetGraphSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
-                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
+                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
                      getTimeLineDurationSliderToolNode(widthCategory: .stretch, neighborTypeLeft: nil, neighborTypeRight: nil),
                      
-                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
+                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
-                     getAnimationBounceApplyToAllCheckBoxNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getAnimationBounceApplyToAllSexyCheckBoxToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
-                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
+                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
                      getExitAnimationLoopsExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
         ]
@@ -406,8 +409,13 @@ extension ToolInterfaceViewModel {
         let nodes = [getExitGuidesExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
                      
-                     getBreakManualWeightGraphTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getResetWeightGraphTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
+                     getBreakTangentWeightGraphSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     
+                     getResetWeightGraphLinearSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getResetWeightGraphLinearDampenedSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     
+                     
+                     
         ]
         return RowBluePrint(nodes: nodes, configuration: .bottom_Secondary1_Graph)
     }
@@ -440,7 +448,7 @@ extension ToolInterfaceViewModel {
     
     @MainActor func getRowBluePrint_Bottom_Secondary2_Graph_Pad() -> RowBluePrint {
         let nodes = [getExitGraphExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getDarkModeEnabledCheckBoxNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getDarkModeSexyCheckBoxToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
                      getZoomJiggleSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
@@ -450,8 +458,8 @@ extension ToolInterfaceViewModel {
     }
     
     @MainActor func getRowBluePrint_Bottom_Secondary2_View_Grab_Pad() -> RowBluePrint {
-        let nodes = [Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
-                     getAnimationJiggleApplyToAllCheckBoxNode(neighborTypeLeft: .spacer, neighborTypeRight: .checkBox),
+        let nodes = [Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getAnimationJiggleApplyToAllSexyCheckBoxToolNode(neighborTypeLeft: .spacer, neighborTypeRight: nil),
                      
                      getEnterAnimationLoopsEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      getEnterAnimationContinuousEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
@@ -463,8 +471,8 @@ extension ToolInterfaceViewModel {
         let nodes = [getExitAnimationLoopsExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      getEnterAnimationLoopsEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
-                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
-                     getAnimationJiggleApplyToAllCheckBoxNode(neighborTypeLeft: .spacer, neighborTypeRight: .checkBox),
+                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getAnimationJiggleApplyToAllSexyCheckBoxToolNode(neighborTypeLeft: .spacer, neighborTypeRight: nil),
         ]
         return RowBluePrint(nodes: nodes, configuration: .bottom_Secondary2_View_Continuous)
     }
@@ -473,8 +481,8 @@ extension ToolInterfaceViewModel {
         let nodes = [getExitAnimationLoopsExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      getEnterTimeLineEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
-                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
-                     getAnimationJiggleApplyToAllCheckBoxNode(neighborTypeLeft: .spacer, neighborTypeRight: .checkBox),
+                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getAnimationJiggleApplyToAllSexyCheckBoxToolNode(neighborTypeLeft: .spacer, neighborTypeRight: nil),
                      getEnterLoopsPage2EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
         ]
         return RowBluePrint(nodes: nodes, configuration: .bottom_Secondary2_View_LoopsPage1)
@@ -484,8 +492,8 @@ extension ToolInterfaceViewModel {
         let nodes = [getExitAnimationLoopsExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      getEnterTimeLineEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
-                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
-                     getAnimationJiggleApplyToAllCheckBoxNode(neighborTypeLeft: .spacer, neighborTypeRight: .checkBox),
+                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getAnimationJiggleApplyToAllSexyCheckBoxToolNode(neighborTypeLeft: .spacer, neighborTypeRight: nil),
                      getEnterLoopsPage3EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
         ]
         return RowBluePrint(nodes: nodes, configuration: .bottom_Secondary2_View_LoopsPage2)
@@ -495,8 +503,8 @@ extension ToolInterfaceViewModel {
         let nodes = [getExitAnimationLoopsExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      getEnterTimeLineEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
-                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
-                     getAnimationJiggleApplyToAllCheckBoxNode(neighborTypeLeft: .spacer, neighborTypeRight: .checkBox),
+                     Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getAnimationJiggleApplyToAllSexyCheckBoxToolNode(neighborTypeLeft: .spacer, neighborTypeRight: nil),
                      getEnterLoopsPage1EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
         ]
         return RowBluePrint(nodes: nodes, configuration: .bottom_Secondary2_View_LoopsPage3)
@@ -522,8 +530,7 @@ extension ToolInterfaceViewModel {
                      
                      getTimeLineOffsetSliderToolNode(widthCategory: .stretch, neighborTypeLeft: nil, neighborTypeRight: nil),
                      
-                     getDarkModeEnabledCheckBoxNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     
+                     getDarkModeSexyCheckBoxToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
                      
         ]
         return RowBluePrint(nodes: nodes, configuration: .bottom_Secondary2_View_TimeLine, centerPinnedNode: centerPinnedNode)

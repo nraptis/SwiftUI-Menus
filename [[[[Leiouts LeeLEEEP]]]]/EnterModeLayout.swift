@@ -9,9 +9,6 @@ import UIKit
 
 struct EnterModeLayout: LayoutScheme {
     
-    static func getSlavePaddingRightStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int { 0 }
-    static func getSlavePaddingRightLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int { 0 }
-    
     static func getHeroPaddingTopStacked(orientation: Orientation) -> Int {
         if Device.isPad {
             return 2 + 3

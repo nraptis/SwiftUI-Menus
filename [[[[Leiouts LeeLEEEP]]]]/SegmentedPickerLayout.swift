@@ -23,24 +23,11 @@ enum SegmentedPickerPosition {
 struct SegmentedPickerLayout: LayoutScheme {
     
     static func getSlavePaddingRightLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
-        return 16
+        return 11
     }
     
     static func getSlavePaddingRightStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
-        return 16
-    }
-    
-    static func getHeroPaddingLeftStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
-        return 4
-    }
-    static func getHeroPaddingLeftLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
-        return 4
-    }
-    static func getHeroPaddingRightStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
-        return 12
-    }
-    static func getHeroPaddingRightLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
-        return 12
+        return 11
     }
     
     static func getOutsideBoxPaddingTop(orientation: Orientation) -> Int {

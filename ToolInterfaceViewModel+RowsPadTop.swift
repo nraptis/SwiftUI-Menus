@@ -130,20 +130,20 @@ extension ToolInterfaceViewModel {
     }
     
     @MainActor func getRowBluePrint_Top_Secondary2_Jiggles_Pad() -> RowBluePrint {
-        let nodes = [getSelectPreviousJiggleSexyButtonToolNode(neighborTypeLeft: .textIconButton, neighborTypeRight: nil),
+        let nodes = [getSelectPreviousJiggleSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
                      Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
-                     getSelectNextJiggleSexyButtonToolNode(neighborTypeLeft: .textIconButton, neighborTypeRight: nil),
+                     getSelectNextJiggleSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
                      Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
                      
                      getExitVideoExportExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      getEnterLoopsPage1EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
-                     getUnfreezeAllJigglesSexyButtonToolNode(neighborTypeLeft: .textIconButton, neighborTypeRight: nil),
+                     getUnfreezeAllJigglesSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getFreezeSelectedJiggleSexyButtonToolNode(neighborTypeLeft: .textIconButton, neighborTypeRight: nil),
+                     getFreezeSelectedJiggleSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
                      getDarkModeSexyCheckBoxToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
                      
@@ -213,13 +213,13 @@ extension ToolInterfaceViewModel {
     
     @MainActor func getRowBluePrint_Top_Secondary2_Points_Pad() -> RowBluePrint {
         let nodes = [
-            getSelectPreviousJigglePointSexyButtonToolNode(neighborTypeLeft: .textIconButton, neighborTypeRight: nil),
+            getSelectPreviousJigglePointSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
             Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getSelectNextJigglePointSexyButtonToolNode(neighborTypeLeft: .textIconButton, neighborTypeRight: nil),
+            getSelectNextJigglePointSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
             Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
-            getUnfreezeAllJigglesSexyButtonToolNode(neighborTypeLeft: .textIconButton, neighborTypeRight: nil),
+            getUnfreezeAllJigglesSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
             Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getFreezeSelectedJiggleSexyButtonToolNode(neighborTypeLeft: .textIconButton, neighborTypeRight: nil),
+            getFreezeSelectedJiggleSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
         ]
         return RowBluePrint(nodes: nodes, configuration: .top_Secondary2_Points)
     }
@@ -335,9 +335,9 @@ extension ToolInterfaceViewModel {
                      
                      Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
                      
-                     getUnfreezeAllJigglesSexyButtonToolNode(neighborTypeLeft: .textIconButton, neighborTypeRight: nil),
+                     getUnfreezeAllJigglesSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getFreezeSelectedJiggleSexyButtonToolNode(neighborTypeLeft: .textIconButton, neighborTypeRight: nil),
+                     getFreezeSelectedJiggleSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
                      Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
                      
@@ -371,23 +371,19 @@ extension ToolInterfaceViewModel {
                      
                      Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
                      
-                     
-                     
-                     
-                     
-                     getGenerateTopographyTextIconButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+                     getGenerateTopographySexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
                      Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
                      
-                     getUnfreezeAllJigglesSexyButtonToolNode(neighborTypeLeft: .textIconButton, neighborTypeRight: nil), //DELETE
+                     getUnfreezeAllJigglesSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil), //DELETE
                      Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil), //DELETE
-                     getFreezeSelectedJiggleSexyButtonToolNode(neighborTypeLeft: .textIconButton, neighborTypeRight: nil), //DELETE
+                     getFreezeSelectedJiggleSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil), //DELETE
                      
                      Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
                      
-                     getUnfreezeAllGuidesSexyButtonToolNode(neighborTypeLeft: .textIconButton, neighborTypeRight: nil),
+                     getUnfreezeAllGuidesSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getFreezeSelectedGuideSexyButtonToolNode(neighborTypeLeft: .textIconButton, neighborTypeRight: nil),
+                     getFreezeSelectedGuideSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
         ]
         return RowBluePrint(nodes: nodes, configuration: .top_Secondary2_Guides_Affine)
     }
@@ -399,9 +395,9 @@ extension ToolInterfaceViewModel {
                      
                      Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
                      
-                     getUnfreezeAllJigglesSexyButtonToolNode(neighborTypeLeft: .textIconButton, neighborTypeRight: nil),
+                     getUnfreezeAllJigglesSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getFreezeSelectedJiggleSexyButtonToolNode(neighborTypeLeft: .textIconButton, neighborTypeRight: nil),
+                     getFreezeSelectedJiggleSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      
                      Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
                      
@@ -411,9 +407,9 @@ extension ToolInterfaceViewModel {
                      
                      Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
                      
-                     getUnfreezeAllGuidesSexyButtonToolNode(neighborTypeLeft: .textIconButton, neighborTypeRight: nil),
+                     getUnfreezeAllGuidesSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
                      Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getFreezeSelectedGuideSexyButtonToolNode(neighborTypeLeft: .textIconButton, neighborTypeRight: nil),
+                     getFreezeSelectedGuideSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
         ]
         return RowBluePrint(nodes: nodes, configuration: .top_Secondary2_Guides_Points)
     }

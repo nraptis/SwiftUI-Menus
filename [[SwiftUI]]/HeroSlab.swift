@@ -43,7 +43,6 @@ struct HeroSlab: View {
         
         return HStack(spacing: 0.0) {
             
-            
 #if INTERFACE_HINTS
             Spacer()
                 .frame(width: CGFloat(heroPaddingLeft), height: 24.0)
@@ -55,8 +54,6 @@ struct HeroSlab: View {
             
             if isLong {
                 HStack(spacing: 0.0) {
-                    
-                    
                     IconBoxMainTab(icon: textIcon,
                                    iconWidth: iconWidth,
                                    iconHeight: iconHeight,
@@ -135,12 +132,5 @@ struct HeroSlab: View {
         }
         .frame(width: CGFloat(layoutWidth),
                height: CGFloat(layoutHeight))
-//#if INTERFACE_HINTS
-        .overlay(Rectangle().stroke().foregroundStyle(
-            LinearGradient(colors: [Color(red: 1.0, green: 0.15, blue: 0.75, opacity: 0.85),
-                                    Color(red: 1.0, green: 0.32, blue: 0.55, opacity: 0.85)], startPoint: .leading, endPoint: .trailing)))
-        .background(RoundedRectangle(cornerRadius: 12.0).foregroundStyle(Color.orange.opacity(0.25)))
-        //#endif
-        
     }
 }

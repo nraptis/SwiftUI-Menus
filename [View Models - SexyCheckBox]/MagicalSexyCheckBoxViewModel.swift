@@ -16,7 +16,6 @@ import SwiftUI
     
     @MainActor var isChecked = false
     
-    
     let sexyCheckBoxConfiguration: ToolInterfaceElementSexyCheckBoxConfiguration
     @MainActor init(orientation: Orientation,
          sexyCheckBoxConfiguration: ToolInterfaceElementSexyCheckBoxConfiguration) {
@@ -24,7 +23,7 @@ import SwiftUI
         super.init(orientation: orientation)
     }
     
-    func handleClicked() {
+    @MainActor func handleClicked() {
         print("MagicalExitModeViewModel => handleClicked()")
     }
     

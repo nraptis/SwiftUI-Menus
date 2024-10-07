@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MagicalSliderBar: View {
     
-    @Environment(MagicalSliderViewModel.self) var magicalSliderViewModel: MagicalSliderViewModel
+    @Environment(MagicalSliderViewModel.self) var magicalViewModel
     
     enum DragState {
         case idle
@@ -29,9 +29,9 @@ struct MagicalSliderBar: View {
     
     var body: some View {
         
-        let orientation = magicalSliderViewModel.orientation
+        let orientation = magicalViewModel.orientation
         
-        let sliderBoxWidth = magicalSliderViewModel.sliderBoxWidth
+        let sliderBoxWidth = magicalViewModel.sliderBoxWidth
         
         let thumbDiameterStroke = SliderLayout.getThumbDiameterStroke(orientation: orientation)
         let thumbDiameterFill = SliderLayout.getThumbDiameterFill(orientation: orientation)
@@ -42,8 +42,8 @@ struct MagicalSliderBar: View {
         let barColorFillOff: Color
         let barColorFillOn: Color
         
-        if magicalSliderViewModel.isDarkModeEnabled {
-            if magicalSliderViewModel.isEnabled {
+        if magicalViewModel.isDarkModeEnabled {
+            if magicalViewModel.isEnabled {
                 thumbColorStroke = ToolInterfaceTheme.primaryEnabledDark
                 thumbColorFill = ToolInterfaceTheme.sliderFillOffEnabledDark
                 barColorStroke = ToolInterfaceTheme.primaryEnabledDark
@@ -57,7 +57,7 @@ struct MagicalSliderBar: View {
                 barColorFillOn = ToolInterfaceTheme.sliderFillOnDisabledDark
             }
         } else {
-            if magicalSliderViewModel.isEnabled {
+            if magicalViewModel.isEnabled {
                 thumbColorStroke = ToolInterfaceTheme.primaryEnabledLight
                 thumbColorFill = ToolInterfaceTheme.sliderFillOffEnabledLight
                 barColorStroke = ToolInterfaceTheme.primaryEnabledLight
@@ -71,9 +71,6 @@ struct MagicalSliderBar: View {
                 barColorFillOn = ToolInterfaceTheme.sliderFillOnDisabledLight
             }
         }
-        
-        let isDarkMode = magicalSliderViewModel.isDarkModeEnabled
-        let isEnabled = magicalSliderViewModel.isEnabled
         
         let thumbHitBoxWidth = SliderLayout.getThumbHitBoxWidth(orientation: orientation)
         
@@ -89,10 +86,10 @@ struct MagicalSliderBar: View {
         let barStrokeWidth = (sliderBoxWidth - (barInset + barInset))
         let barFillWidth = barStrokeWidth - (barFillInset + barFillInset)
         
-        let thumbOffsetX = magicalSliderViewModel.thumbOffsetX + dragGestureState.x
+        let thumbOffsetX = magicalViewModel.thumbOffsetX + dragGestureState.x
         
         var thumbPercent = CGFloat(0.5)
-        let thumbRange = (magicalSliderViewModel.thumbMaximumX - magicalSliderViewModel.thumbMinimumX)
+        let thumbRange = (magicalViewModel.thumbMaximumX - magicalViewModel.thumbMinimumX)
         if thumbRange > 1 {
             thumbPercent = CGFloat(thumbOffsetX) / thumbRange
         }
@@ -160,21 +157,6 @@ struct MagicalSliderBar: View {
                         Circle()
                             .frame(width: CGFloat(thumbDiameterFill), height: CGFloat(thumbDiameterFill))
                             .foregroundStyle(thumbColorFill)
-                        
-                        /*
-                        IconBox(icon: textIcon,
-                                imageWidth: imageWidth,
-                                imageHeight: imageHeight,
-                                iconX: iconX,
-                                iconY: iconY,
-                                iconWidth: iconWidth,
-                                iconHeight: iconHeight,
-                                iconPaddingLeft: 0,
-                                iconPaddingRight: 0,
-                                iconPaddingTop: 0,
-                                color: iconColor)
-                        */
-                        
                     }
                     .frame(width: CGFloat(thumbDiameterStroke),
                            height: CGFloat(thumbDiameterStroke))
@@ -184,12 +166,12 @@ struct MagicalSliderBar: View {
 #endif
                 }
                 .frame(width: CGFloat(thumbHitBoxWidth), 
-                       height: CGFloat(magicalSliderViewModel.layoutHeight))
+                       height: CGFloat(magicalViewModel.layoutHeight))
 #if INTERFACE_HINTS
                 .overlay(Rectangle().stroke().foregroundStyle(Color(red: 1.0, green: 0.65, blue: 0.45, opacity: 0.65)))
 #endif
                 .offset(x: CGFloat(-sizeDifferential2), y: 0.0)
-                .offset(CGSize(width: magicalSliderViewModel.thumbOffsetX + dragGestureState.x, height: 0.0))
+                .offset(CGSize(width: magicalViewModel.thumbOffsetX + dragGestureState.x, height: 0.0))
                 .gesture(
                     DragGesture(minimumDistance: 2.0, coordinateSpace: .local)
                         .updating($dragGestureState, body: dragUpdating)
@@ -206,11 +188,11 @@ struct MagicalSliderBar: View {
 #endif
             }
             .frame(width: CGFloat(sliderBoxWidth),
-                   height: CGFloat(magicalSliderViewModel.layoutHeight))
+                   height: CGFloat(magicalViewModel.layoutHeight))
             
         }
         .frame(width: CGFloat(sliderBoxWidth),
-               height: CGFloat(magicalSliderViewModel.layoutHeight))
+               height: CGFloat(magicalViewModel.layoutHeight))
 #if INTERFACE_HINTS
         .background(Rectangle().foregroundStyle(Color(red: 1.0, green: 0.25, blue: 0.65, opacity: 0.15)))
 #endif
@@ -219,86 +201,86 @@ struct MagicalSliderBar: View {
     
     private func dragUpdating(dragValue: DragGesture.Value, dragGestureState: inout DragState, transaction: inout Transaction) {
         
-        if magicalSliderViewModel.thumbMaximumX <= magicalSliderViewModel.thumbMinimumX { return }
+        if magicalViewModel.thumbMaximumX <= magicalViewModel.thumbMinimumX { return }
         
         var translation = dragValue.translation.width
         
-        let proposedX = magicalSliderViewModel.thumbOffsetX + dragValue.translation.width
-        if proposedX > magicalSliderViewModel.thumbMaximumX {
-            translation = (magicalSliderViewModel.thumbMaximumX - magicalSliderViewModel.thumbOffsetX)
+        let proposedX = magicalViewModel.thumbOffsetX + dragValue.translation.width
+        if proposedX > magicalViewModel.thumbMaximumX {
+            translation = (magicalViewModel.thumbMaximumX - magicalViewModel.thumbOffsetX)
         }
-        if proposedX < magicalSliderViewModel.thumbMinimumX {
-            translation = magicalSliderViewModel.thumbMinimumX - magicalSliderViewModel.thumbOffsetX
+        if proposedX < magicalViewModel.thumbMinimumX {
+            translation = magicalViewModel.thumbMinimumX - magicalViewModel.thumbOffsetX
         }
         dragGestureState = .dragging(x: translation)
     }
     
     private func dragChanged(dragValue: DragGesture.Value) {
         
-        if magicalSliderViewModel.thumbMaximumX <= magicalSliderViewModel.thumbMinimumX { return }
+        if magicalViewModel.thumbMaximumX <= magicalViewModel.thumbMinimumX { return }
         
-        var position = magicalSliderViewModel.thumbOffsetX + dragValue.translation.width
+        var position = magicalViewModel.thumbOffsetX + dragValue.translation.width
         
-        if position > magicalSliderViewModel.thumbMaximumX {
-            position = magicalSliderViewModel.thumbMaximumX
+        if position > magicalViewModel.thumbMaximumX {
+            position = magicalViewModel.thumbMaximumX
         }
-        if position < magicalSliderViewModel.thumbMinimumX {
-            position = magicalSliderViewModel.thumbMinimumX
+        if position < magicalViewModel.thumbMinimumX {
+            position = magicalViewModel.thumbMinimumX
         }
         
         var percent = CGFloat(0.0)
-        let range = Float(magicalSliderViewModel.thumbMaximumX - magicalSliderViewModel.thumbMinimumX)
+        let range = Float(magicalViewModel.thumbMaximumX - magicalViewModel.thumbMinimumX)
         if range > Math.epsilon {
-            percent = (position - magicalSliderViewModel.thumbMinimumX) / CGFloat(range)
+            percent = (position - magicalViewModel.thumbMinimumX) / CGFloat(range)
         }
         if percent < 0.0 { percent = 0.0 }
         if percent > 1.0 { percent = 1.0 }
         
-        if (position >= magicalSliderViewModel.thumbMaximumX) {
+        if (position >= magicalViewModel.thumbMaximumX) {
             percent = 1.0
         }
-        if (position <= magicalSliderViewModel.thumbMinimumX) {
+        if (position <= magicalViewModel.thumbMinimumX) {
             percent = 0.0
         }
         
         if isDragging == false {
             isDragging = true
-            magicalSliderViewModel.handleSlideStarted(percent: magicalSliderViewModel.percent)
+            magicalViewModel.handleSlideStarted(percent: magicalViewModel.percent)
         }
-        magicalSliderViewModel.handleSlideUpdated(percent: percent)
+        magicalViewModel.handleSlideUpdated(percent: percent)
     }
     
     private func dragEnded(dragValue: DragGesture.Value) {
         isDragging = false
         
-        if magicalSliderViewModel.thumbMaximumX <= magicalSliderViewModel.thumbMinimumX { return }
+        if magicalViewModel.thumbMaximumX <= magicalViewModel.thumbMinimumX { return }
         
-        var thumbOffsetX = magicalSliderViewModel.thumbOffsetX
+        var thumbOffsetX = magicalViewModel.thumbOffsetX
         thumbOffsetX += dragValue.translation.width
         
-        if thumbOffsetX > magicalSliderViewModel.thumbMaximumX {
-            thumbOffsetX = magicalSliderViewModel.thumbMaximumX
+        if thumbOffsetX > magicalViewModel.thumbMaximumX {
+            thumbOffsetX = magicalViewModel.thumbMaximumX
         }
-        if thumbOffsetX < magicalSliderViewModel.thumbMinimumX {
-            thumbOffsetX = magicalSliderViewModel.thumbMinimumX
+        if thumbOffsetX < magicalViewModel.thumbMinimumX {
+            thumbOffsetX = magicalViewModel.thumbMinimumX
         }
         
         var percent = CGFloat(0.0)
-        let range = Float(magicalSliderViewModel.thumbMaximumX - magicalSliderViewModel.thumbMinimumX)
+        let range = Float(magicalViewModel.thumbMaximumX - magicalViewModel.thumbMinimumX)
         if range > Math.epsilon {
-            percent = (thumbOffsetX - magicalSliderViewModel.thumbMinimumX) / CGFloat(range)
+            percent = (thumbOffsetX - magicalViewModel.thumbMinimumX) / CGFloat(range)
         }
         if percent < 0.0 { percent = 0.0 }
         if percent > 1.0 { percent = 1.0 }
         
-        if (thumbOffsetX >= magicalSliderViewModel.thumbMaximumX) {
+        if (thumbOffsetX >= magicalViewModel.thumbMaximumX) {
             percent = 1.0
         }
-        if (thumbOffsetX <= magicalSliderViewModel.thumbMinimumX) {
+        if (thumbOffsetX <= magicalViewModel.thumbMinimumX) {
             percent = 0.0
         }
         
-        magicalSliderViewModel.handleSlideFinished(percent: percent)
-        magicalSliderViewModel.thumbOffsetX = thumbOffsetX
+        magicalViewModel.handleSlideFinished(percent: percent)
+        magicalViewModel.thumbOffsetX = thumbOffsetX
     }
 }

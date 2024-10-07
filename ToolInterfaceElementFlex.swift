@@ -222,7 +222,6 @@ enum ToolInterfaceElementFlex {
     
     case segment(FlexConvertibleData)
     
-    case textIconButton(FlexConvertibleData)
     case sexyButton(FlexConvertibleData)
     case sexyCheckBox(FlexConvertibleData)
     
@@ -233,8 +232,6 @@ enum ToolInterfaceElementFlex {
     case createSwatch(FlexLongData)
     
     case slider(FlexSliderData)
-    
-    case checkBox(FlexCheckBoxData)
     
     case favoringOneLineLabel(FlexFavoringOneLineLabelData)
     

@@ -9,9 +9,6 @@ import UIKit
 
 struct ExitModeLayout: LayoutScheme {
     
-    static func getSlavePaddingLeftStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int { 0 }
-    static func getSlavePaddingLeftLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int { 0 }
-    
     static func getHeroPaddingTopStacked(orientation: Orientation) -> Int {
         if Device.isPad {
             return 2 + 3

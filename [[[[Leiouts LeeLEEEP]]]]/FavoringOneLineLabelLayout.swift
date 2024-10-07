@@ -10,33 +10,26 @@ import UIKit
 
 struct FavoringOneLineLabelLayout: LayoutScheme {
     
-    static func getOutsideBoxPaddingTop(orientation: Orientation) -> Int {
-        7
-    }
-    static func getOutsideBoxPaddingBottom(orientation: Orientation) -> Int {
-        13
-    }
-    
     static func getOutsideBoxPaddingRightLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
                                                 neighborTypeRight: ToolInterfaceElementType?) -> Int {
         switch squeeze {
         case .squeezed:
-            5
+            2
         case .standard:
-            11
+            4
         case .relaxed:
-            17
+            6
         }
     }
     static func getOutsideBoxPaddingLeftLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
                                              neighborTypeRight: ToolInterfaceElementType?) -> Int {
         switch squeeze {
         case .squeezed:
-            8
+            2
         case .standard:
-            14
+            4
         case .relaxed:
-            24
+            6
         }
     }
     

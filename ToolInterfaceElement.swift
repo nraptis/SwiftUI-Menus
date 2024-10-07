@@ -12,7 +12,6 @@ enum ToolInterfaceElementType: UInt16 {
     case enterMode
     case exitMode
     case mainTab
-    case textIconButton
     case sexyButton
     case iconButton
     case greenButton
@@ -22,7 +21,6 @@ enum ToolInterfaceElementType: UInt16 {
     case dividerTiny
     case dividerHuge
     case dividerSpacerDivider
-    case checkBox
     case favoringOneLineLabel
     case createSwatch
     case sexyCheckBox
@@ -34,6 +32,19 @@ enum ToolInterfaceElement: UInt16 {
     case sexyCheckBoxGuideCenters
     case sexyCheckBoxJiggleCenters
     case sexyCheckBoxDarkMode
+    case sexyCheckBoxGyroscopeEnabled
+    case sexyCheckBoxAutoLoopEnabled
+    case sexyCheckBoxRecordAudioEnabled
+    case sexyCheckBoxStereoscopicEnabled
+    case sexyCheckBoxAnimationJiggleApplyToAll
+    case sexyCheckBoxAnimationBounceApplyToAll
+    case sexyCheckBoxAnimationTwistApplyToAll
+    
+    
+    case sexyCheckBoxAnimationWobbleApplyToAll
+    case sexyCheckBoxImageImporterRotationEnabled
+    case sexyCheckBoxImageImporterEdgesEnabled
+    
     
     
     case sexyStepperTimelinePointCount
@@ -46,7 +57,7 @@ enum ToolInterfaceElement: UInt16 {
     case sexyButtonRotateJiggleLeft
     case sexyButtonRotateGuideLeft
     case sexyButtonRotateGuideRight
-
+    
     case sexyButtonFlipJiggleH
     case sexyButtonFlipJiggleV
     case sexyButtonFlipGuideH
@@ -70,29 +81,18 @@ enum ToolInterfaceElement: UInt16 {
     case sexyButtonTimeLineDupeCurrentChannel
     case sexyButtonTimeLineFlattenCurrentChannel
     case sexyButtonTimeLineResetDefaultCurrentChannel
-    //case sexyButtonTimeLineBreakTangents
-    //case sexyButtonTimeLineBreakX
-    //case sexyButtonTimeLineBreakY
     case sexyButtonTimeLineResetGraph
-    
     case sexyButtonTimeLineBreakPoint
-    
     case sexyButtonTimeLineInvertH
     case sexyButtonTimeLineInvertV
     case sexyButtonTimeLineResetCurve
-    
-    
     case sexyButtonTimeLineAmplify
     case sexyButtonTimeLineDampen
     case sexyButtonTimeLineFlipAll
-    
-    
     case sexyButtonSelectNextJigglePoint
     case sexyButtonSelectPreviousJigglePoint
     case sexyButtonSelectNextGuidePoint
     case sexyButtonSelectPreviousGuidePoint
-    
-    
     case sexyButtonSelectNextJiggle
     case sexyButtonSelectPreviousJiggle
     case sexyButtonSelectNextGuide
@@ -100,6 +100,38 @@ enum ToolInterfaceElement: UInt16 {
     
     case sexyButtonZoomReset
     case sexyButtonZoomJiggle
+    
+    case sexyButtonBreakTangentWeightGraph
+    case sexyButtonGenerateTopography
+    case sexyButtonResetWeightGraphInverse
+    case sexyButtonResetWeightGraphInverseDampened
+    case sexyButtonResetWeightGraphLinear
+    case sexyButtonResetWeightGraphLinearDampened
+    case sexyButtonResetWeightGraphStandard
+    case sexyButtonResetWeightGraphStandardDampened
+    case sexyButtonSwivelPanLeft
+    case sexyButtonSwivelPanReset
+    case sexyButtonSwivelPanRight
+    case sexyButtonSwivelRotateLeft
+    case sexyButtonSwivelRotateReset
+    case sexyButtonSwivelRotateRight
+    case sexyButtonSwivelTiltDown
+    case sexyButtonSwivelTiltReset
+    case sexyButtonSwivelTiltUp
+    case sexyButtonSwivelZoomIn
+    case sexyButtonSwivelZoomOut
+    case sexyButtonSwivelZoomReset
+    case sexyButtonZoomIn
+    case sexyButtonZoomOut
+    
+    
+    case sexyButtonImageImporterRotateRight
+    case sexyButtonImageImporterRotateLeft
+    case sexyButtonImageImporterResetAspectFit
+    case sexyButtonImageImporterResetAspectFill
+    case sexyButtonImageImporterButtonBack
+    
+    case sexyButtonLoadScreenButtonBack
     
     case createSwatchMakeAndDrawJiggle
     case createSwatchMakeAndDrawGuide
@@ -164,156 +196,15 @@ enum ToolInterfaceElement: UInt16 {
     case sliderTimeLineDuration
     case sliderTimeLineOffset
     
-    //case buttonPhoneCollapseTop
-    //case buttonPhoneCollapseBottom
+
     
-    //case textIconButtonGenerateGuides
-    //case textIconButtonBreakTangentGuidePoint
-    case textIconButtonBreakManualWeightGraph
-    //case textIconButtonCloneJiggle
-    //case textIconButtonCloneGuide
-    //case textIconButtonCloseWeightGraph
-    //case textIconButtonCreateJiggle
-    //case textIconButtonCreatePoint
-    //case textIconButtonCreateGuide
-    //case textIconButtonCreateGuidePoint
-    //case textIconButtonDrawJiggles
-    //case textIconButtonRotateJiggleRight
-    //case textIconButtonRotateGuideRight
-    //case textIconButtonRotateJiggleLeft
-    //case textIconButtonRotateGuideLeft
-    //case textIconButtonDrawGuide
-    //case textIconButtonFlipHorizontalJiggle
-    //case textIconButtonFlipHorizontalGuide
-    //case textIconButtonFlipVerticalJiggle
-    //case textIconButtonFlipVerticalGuide
-    //case textIconButtonFreezeOffAllJiggle
-    //case textIconButtonFreezeOffAllGuide
-    //case textIconButtonFreezeOnAllJiggle
-    //case textIconButtonFreezeOnAllGuide
-    //case textIconButtonFreezeOnSelectedJiggle
-    //case textIconButtonFreezeOnSelectedGuide
-    //case textIconButtonMainMenu
-    case textIconButtonRandomizeWeightGraph
-    case textIconButtonRecordCancel
-    //case textIconButtonRecordMovie
-    //case textIconButtonRedo
-    //case textIconButtonRemoveJiggle
-    //case textIconButtonRemovePoint
-    //case textIconButtonDeleteGuide
-    //case textIconButtonDeleteGuidePoint
-    case textIconButtonResetSwivelCamera
-    case textIconButtonResetToDefault
-    case textIconButtonResetWeightGraph
-    //case textIconButtonResetZoom
-    //case textIconButtonResetZoomSelectedJiggle
-    //case textIconButtonSelectNextJiggle
-    //case textIconButtonSelectNextPoint
-    //case textIconButtonSelectNextGuide
-    //case textIconButtonSelectNextGuidePoint
-    //case textIconButtonSelectPreviousJiggle
-    //case textIconButtonSelectPreviousPoint
-    //case textIconButtonSelectPreviousGuide
-    //case textIconButtonSelectPreviousGuidePoint
-    //case textIconButtonSendBackJiggle
-    //case textIconButtonSendBackGuide
-    //case textIconButtonSendBackwardJiggle
-    //case textIconButtonSendBackwardGuide
-    //case textIconButtonSendForwardJiggle
-    //case textIconButtonSendForwardGuide
-    //case textIconButtonSendFrontGuide
-    //case textIconButtonUndo
     
-    //case textIconButtonResetCenterJiggle
-    //case textIconButtonResetCenterGuide
+
     
-    //case textIconButtonPhoneExpandTopMenu
-    //case textIconButtonPhoneExpandBottomMenu
-    //case textIconButtonPhoneCollapseTopMenu
-    //case textIconButtonPhoneCollapseBottomMenu
-    //case textIconButtonPadCollapseMenu
-    //case textIconButtonPadExpandMenu
-    
-    //case textIconButtonFreezeOnAllUnselectedJiggle
-    //case textIconButtonFreezeOnAllUnselectedGuide
-    
-    //case textIconButtonSendFrontJiggle
-    
-    //case textIconButtonExitZoomMode
-    
-    //case textIconButtonExitViewMode
-    //case textIconButtonExitWeightMode
-    
-    case textIconButtonGenerateTopography
-    
-    //case textIconButtonExitRecordMode
-    //case textIconButtonResetCenterWeightGeometry
-    case textIconButtonResetSwivelFront
-    case textIconButtonResetSwivelBack
-    case textIconButtonResetSwivelLeft
-    case textIconButtonResetSwivelRight
-    case textIconButtonResetSwivelTilt
-    case textIconButtonIncreaseJigglePoints
-    case textIconButtonIncreaseGuidePoints
-    
-    case textIconButtonRotateRight
-    case textIconButtonRotateLeft
-    case textIconButtonResetAspectFit
-    case textIconButtonResetAspectFill
-    case textIconButtonBack
-    
-    case textIconButtonTest1
-    case textIconButtonTest2
-    case textIconButtonTest3
-    
-    //case segmentDisplayMode
-    //case segmentDocumentMode
     
     case segmentEditMode
     case segmentWeightMode
     case segmentAnimationMode
-    
-    
-    case checkBoxAlternateMotionEnabled
-    case checkBoxAutoLoopEnabled
-    case checkBoxBulgeEnabled
-    
-    case checkBoxGyroscopeEnabled
-    case checkBoxHorizontalEnabled
-    case checkBoxInvertHorizontalEnabled
-    case checkBoxInvertMotionEnabled
-    case checkBoxInvertMotionEvenEnabled
-    case checkBoxInvertMotionOddEnabled
-    case checkBoxInvertVerticalEnabled
-    case checkBoxOvershootEnabled
-    case checkBoxRecordAudioEnabled
-    case checkBoxRelaxEnabled
-    
-    case checkBoxReverseMotionEnabled
-    case checkBoxReverseMotionEvenEnabled
-    case checkBoxReverseMotionOddEnabled
-    case checkBoxSineEnabled
-    case checkBoxStaggerEnabled
-    case checkBoxStereoscopicEnabled
-    case checkBoxTwistEnabled
-    case checkBoxUndershootEnabled
-    case checkBoxVerticalEnabled
-    case checkBoxWeightCurveGraphEnabled
-    case checkBoxZoomEnabled
-    case checkBoxDarkModeEnabled
-    case checkBoxSwivelOrbitEnabled
-    
-    case checkBoxAnimationJiggleApplyToAll
-    case checkBoxAnimationBounceApplyToAll
-    case checkBoxAnimationTwistApplyToAll
-    case checkBoxAnimationWobbleApplyToAll
-    
-    case checkBoxJiggleCentersEnabled
-    case checkBoxGuideCentersEnabled
-    
-    
-    case checkBoxSnapRotationEnabled
-    case checkBoxSnapEdgesEnabled
     
     case spacer
     
@@ -323,9 +214,6 @@ enum ToolInterfaceElement: UInt16 {
     
     case favoringOneLineLabel
     
-    case buttonTest1
-    case buttonTest2
-    case buttonTest3
     
     var type: ToolInterfaceElementType {
         switch self {
@@ -337,6 +225,30 @@ enum ToolInterfaceElement: UInt16 {
         case .sexyCheckBoxDarkMode:
             return .sexyCheckBox
             
+            
+        case .sexyCheckBoxGyroscopeEnabled:
+            return .sexyCheckBox
+        case .sexyCheckBoxAutoLoopEnabled:
+            return .sexyCheckBox
+        case .sexyCheckBoxRecordAudioEnabled:
+            return .sexyCheckBox
+        case .sexyCheckBoxStereoscopicEnabled:
+            return .sexyCheckBox
+        case .sexyCheckBoxAnimationJiggleApplyToAll:
+            return .sexyCheckBox
+        case .sexyCheckBoxAnimationBounceApplyToAll:
+            return .sexyCheckBox
+            
+        case .sexyCheckBoxAnimationTwistApplyToAll:
+            return .sexyCheckBox
+        case .sexyCheckBoxAnimationWobbleApplyToAll:
+            return .sexyCheckBox
+            
+            
+        case .sexyCheckBoxImageImporterRotationEnabled:
+            return .sexyCheckBox
+        case .sexyCheckBoxImageImporterEdgesEnabled:
+            return .sexyCheckBox
             
             
         case .sexyStepperTimelinePointCount:
@@ -449,8 +361,90 @@ enum ToolInterfaceElement: UInt16 {
         case .sexyButtonZoomJiggle:
             return .sexyButton
             
+        case .sexyButtonBreakTangentWeightGraph:
+            return .sexyButton
+            
+        case .sexyButtonGenerateTopography:
+            return .sexyButton
+            
+        case .sexyButtonResetWeightGraphInverse:
+            return .sexyButton
+            
+        case .sexyButtonResetWeightGraphInverseDampened:
+            return .sexyButton
+            
+        case .sexyButtonResetWeightGraphLinear:
+            return .sexyButton
+            
+        case .sexyButtonResetWeightGraphLinearDampened:
+            return .sexyButton
+            
+        case .sexyButtonResetWeightGraphStandard:
+            return .sexyButton
+            
+        case .sexyButtonResetWeightGraphStandardDampened:
+            return .sexyButton
+            
+        case .sexyButtonSwivelPanLeft:
+            return .sexyButton
+            
+        case .sexyButtonSwivelPanReset:
+            return .sexyButton
+            
+        case .sexyButtonSwivelPanRight:
+            return .sexyButton
+            
+        case .sexyButtonSwivelRotateLeft:
+            return .sexyButton
+            
+        case .sexyButtonSwivelRotateReset:
+            return .sexyButton
+            
+        case .sexyButtonSwivelRotateRight:
+            return .sexyButton
+            
+        case .sexyButtonSwivelTiltDown:
+            return .sexyButton
+            
+        case .sexyButtonSwivelTiltReset:
+            return .sexyButton
+            
+        case .sexyButtonSwivelTiltUp:
+            return .sexyButton
+            
+        case .sexyButtonSwivelZoomIn:
+            return .sexyButton
+            
+        case .sexyButtonSwivelZoomOut:
+            return .sexyButton
+            
+        case .sexyButtonSwivelZoomReset:
+            return .sexyButton
+            
+        case .sexyButtonZoomIn:
+            return .sexyButton
+            
+        case .sexyButtonZoomOut:
+            return .sexyButton
             
             
+        case .sexyButtonImageImporterRotateRight:
+            return .sexyButton
+        case .sexyButtonImageImporterRotateLeft:
+            return .sexyButton
+        case .sexyButtonImageImporterResetAspectFit:
+            return .sexyButton
+        case .sexyButtonImageImporterResetAspectFill:
+            return .sexyButton
+        case .sexyButtonImageImporterButtonBack:
+            return .sexyButton
+            
+            
+        case .sexyButtonLoadScreenButtonBack:
+            return .sexyButton
+            
+            
+
             
         case .createSwatchMakeAndDrawJiggle:
             return .createSwatch
@@ -460,7 +454,7 @@ enum ToolInterfaceElement: UInt16 {
             return .createSwatch
         case .createSwatchAddAndRemoveGuidePoints:
             return .createSwatch
-        
+            
         case .enterModeZoomEnter:
             return .enterMode
         case .enterModeGuidesEnter:
@@ -577,146 +571,17 @@ enum ToolInterfaceElement: UInt16 {
         case .segmentAnimationMode:
             return .segment
 
-        case .checkBoxAlternateMotionEnabled:
-            return .checkBox
-        case .checkBoxAutoLoopEnabled:
-            return .checkBox
-        case .checkBoxBulgeEnabled:
-            return .checkBox
-            
-        case .checkBoxGyroscopeEnabled:
-            return .checkBox
-        case .checkBoxHorizontalEnabled:
-            return .checkBox
-        case .checkBoxInvertHorizontalEnabled:
-            return .checkBox
-        case .checkBoxInvertMotionEnabled:
-            return .checkBox
-        case .checkBoxInvertMotionEvenEnabled:
-            return .checkBox
-        case .checkBoxInvertMotionOddEnabled:
-            return .checkBox
-        case .checkBoxInvertVerticalEnabled:
-            return .checkBox
-        case .checkBoxOvershootEnabled:
-            return .checkBox
-        case .checkBoxRecordAudioEnabled:
-            return .checkBox
-        case .checkBoxRelaxEnabled:
-            return .checkBox
-            
-        case .checkBoxReverseMotionEnabled:
-            return .checkBox
-        case .checkBoxReverseMotionEvenEnabled:
-            return .checkBox
-        case .checkBoxReverseMotionOddEnabled:
-            return .checkBox
-        case .checkBoxSineEnabled:
-            return .checkBox
-        case .checkBoxStaggerEnabled:
-            return .checkBox
-        case .checkBoxStereoscopicEnabled:
-            return .checkBox
-        case .checkBoxTwistEnabled:
-            return .checkBox
-        case .checkBoxUndershootEnabled:
-            return .checkBox
-        case .checkBoxVerticalEnabled:
-            return .checkBox
-        case .checkBoxWeightCurveGraphEnabled:
-            return .checkBox
-        case .checkBoxZoomEnabled:
-            return .checkBox
-        case .checkBoxDarkModeEnabled:
-            return .checkBox
-        case .checkBoxSwivelOrbitEnabled:
-            return .checkBox
-            
-        case .checkBoxAnimationJiggleApplyToAll:
-            return .checkBox
-        case .checkBoxAnimationBounceApplyToAll:
-            return .checkBox
-        case .checkBoxAnimationTwistApplyToAll:
-            return .checkBox
-        case .checkBoxAnimationWobbleApplyToAll:
-            return .checkBox
-        case .checkBoxJiggleCentersEnabled:
-            return .checkBox
-        case .checkBoxGuideCentersEnabled:
-            return .checkBox
-            
-        case .checkBoxSnapRotationEnabled:
-            return .checkBox
-        case .checkBoxSnapEdgesEnabled:
-            return .checkBox
             
         case .spacer:
             return .spacer
-        
+            
         case .dividerTiny:
             return .dividerTiny
         case .dividerHuge:
             return .dividerHuge
         case .dividerSpacerDivider:
             return .dividerSpacerDivider
-            
-        case .buttonTest1:
-            return .textIconButton
-        case .buttonTest2:
-            return .textIconButton
-        case .buttonTest3:
-            return .textIconButton
-            
-        case .textIconButtonBreakManualWeightGraph:
-            return .textIconButton
 
-            
-        case .textIconButtonRandomizeWeightGraph:
-            return .textIconButton
-        case .textIconButtonRecordCancel:
-            return .textIconButton
-            
-        case .textIconButtonResetSwivelCamera:
-            return .textIconButton
-        case .textIconButtonResetToDefault:
-            return .textIconButton
-        case .textIconButtonResetWeightGraph:
-            return .textIconButton
-            
-        case .textIconButtonResetSwivelFront:
-            return .textIconButton
-        case .textIconButtonResetSwivelBack:
-            return .textIconButton
-        case .textIconButtonResetSwivelLeft:
-            return .textIconButton
-        case .textIconButtonResetSwivelRight:
-            return .textIconButton
-        case .textIconButtonResetSwivelTilt:
-            return .textIconButton
-        case .textIconButtonIncreaseJigglePoints:
-            return .textIconButton
-        case .textIconButtonIncreaseGuidePoints:
-            return .textIconButton
-
-            
-        case .textIconButtonGenerateTopography:
-            return .textIconButton
-        case .textIconButtonRotateRight:
-            return .textIconButton
-        case .textIconButtonRotateLeft:
-            return .textIconButton
-        case .textIconButtonResetAspectFit:
-            return .textIconButton
-        case .textIconButtonResetAspectFill:
-            return .textIconButton
-        case .textIconButtonBack:
-            return .textIconButton
-        case .textIconButtonTest1:
-            return .textIconButton
-        case .textIconButtonTest2:
-            return .textIconButton
-        case .textIconButtonTest3:
-            return .textIconButton
             
         }
     }

@@ -9,34 +9,31 @@ import SwiftUI
 
 struct MagicalSliderGuts: View {
     
-    @Environment(MagicalSliderViewModel.self) var magicalSliderViewModel: MagicalSliderViewModel
-    let orientation: Orientation
+    @Environment(MagicalSliderViewModel.self) var magicalViewModel: MagicalSliderViewModel
     let layoutSchemeFlavor: LayoutSchemeFlavor
-    let line1: String?
-    let line2: String?
-    let numberOfLines: Int
     let layoutWidth: Int
     let layoutHeight: Int
     
     var body: some View {
         
-        let orientation = magicalSliderViewModel.orientation
-        let configuration = magicalSliderViewModel.sliderConfiguration
+        let orientation = magicalViewModel.orientation
+        let configuration = magicalViewModel.sliderConfiguration
         
         let line1 = configuration.nameLabelLine1
         let line2 = configuration.nameLabelLine2
         
         let nameLabelFont = SliderLayout.getNameLabelFont(orientation: orientation,
                                                           flavor: layoutSchemeFlavor)
-        let nameLabelPaddingLeft = magicalSliderViewModel.nameLabelPaddingLeft
-        let nameLabelPaddingRight = magicalSliderViewModel.nameLabelPaddingRight
+        let heroPaddingLeft = magicalViewModel.heroPaddingLeft
+        let heroPaddingRight = magicalViewModel.heroPaddingRight
         let nameLabelVerticalSpacing = SliderLayout.getNameLabelVerticalSpacing(orientation: orientation,
                                                                                 flavor: layoutSchemeFlavor)
+        let numberOfLines = configuration.nameLabelNumberOfLines
         
         let valueLabelFont = SliderLayout.getValueLabelFont(orientation: orientation, flavor: layoutSchemeFlavor)
         
-        let valueLabelPaddingLeft = magicalSliderViewModel.valueLabelPaddingLeft
-        let valueLabelPaddingRight = magicalSliderViewModel.valueLabelPaddingRight
+        let slavePaddingLeft = magicalViewModel.slavePaddingLeft
+        let slavePaddingRight = magicalViewModel.slavePaddingRight
         
         let realNameLabelTextWidth: Int
         let layoutNameLabelTextWidth: Int
@@ -57,11 +54,11 @@ struct MagicalSliderGuts: View {
         }
         
         let lineHeight = ToolInterfaceTheme.getLineHeight(font: nameLabelFont)
-        let nameLabelWidth = realNameLabelTextWidth + nameLabelPaddingLeft + nameLabelPaddingRight
+        let nameLabelWidth = realNameLabelTextWidth + heroPaddingLeft + heroPaddingRight
         
-        let valueLabelWidth = valueLabelPaddingLeft + valueLabelTextWidth + valueLabelPaddingRight
+        let valueLabelWidth = slavePaddingLeft + valueLabelTextWidth + slavePaddingRight
         
-        let nameLabelSpace = layoutNameLabelTextWidth + nameLabelPaddingLeft + nameLabelPaddingRight
+        let nameLabelSpace = layoutNameLabelTextWidth + heroPaddingLeft + heroPaddingRight
         
         var extraPaddingLeft = (layoutNameLabelTextWidth - realNameLabelTextWidth)
         if extraPaddingLeft < 0 {
@@ -69,14 +66,14 @@ struct MagicalSliderGuts: View {
         }
         
         let textColor: Color
-        if magicalSliderViewModel.isDarkModeEnabled {
-            if magicalSliderViewModel.isEnabled {
+        if magicalViewModel.isDarkModeEnabled {
+            if magicalViewModel.isEnabled {
                 textColor = ToolInterfaceTheme.primaryEnabledDark
             } else {
                 textColor = ToolInterfaceTheme.primaryDisabledDark
             }
         } else {
-            if magicalSliderViewModel.isEnabled {
+            if magicalViewModel.isEnabled {
                 textColor = ToolInterfaceTheme.primaryEnabledLight
             } else {
                 textColor = ToolInterfaceTheme.primaryDisabledLight
@@ -100,8 +97,8 @@ struct MagicalSliderGuts: View {
                          line2: line2,
                          numberOfLines: numberOfLines,
                          width: nameLabelWidth,
-                         paddingLeft: nameLabelPaddingLeft,
-                         paddingRight: nameLabelPaddingRight,
+                         paddingLeft: heroPaddingLeft,
+                         paddingRight: heroPaddingRight,
                          paddingBottom: 0,
                          lineHeight: lineHeight,
                          spacingVertical: nameLabelVerticalSpacing,
@@ -122,15 +119,15 @@ struct MagicalSliderGuts: View {
                 
 #if INTERFACE_HINTS
                 Spacer()
-                    .frame(width: CGFloat(valueLabelPaddingLeft), height: 12.0)
+                    .frame(width: CGFloat(slavePaddingLeft), height: 12.0)
                     .background(Color(red: 0.98, green: 0.65, blue: 0.125, opacity: 0.5))
 #else
                 Spacer()
-                    .frame(width: CGFloat(valueLabelPaddingLeft))
+                    .frame(width: CGFloat(slavePaddingLeft))
 #endif
                 
                 
-                Text(magicalSliderViewModel.getValueString())
+                Text(magicalViewModel.getValueString())
                         .font(Font(valueLabelFont))
                         .fixedSize(horizontal: true, vertical: false)
                         .foregroundColor(textColor)
@@ -146,11 +143,11 @@ struct MagicalSliderGuts: View {
                 
 #if INTERFACE_HINTS
                 Spacer()
-                    .frame(width: CGFloat(valueLabelPaddingRight), height: 12.0)
+                    .frame(width: CGFloat(slavePaddingRight), height: 12.0)
                     .background(Color(red: 0.98, green: 0.65, blue: 0.125, opacity: 0.5))
 #else
                 Spacer()
-                    .frame(width: CGFloat(valueLabelPaddingRight))
+                    .frame(width: CGFloat(slavePaddingRight))
 #endif
                 
             }

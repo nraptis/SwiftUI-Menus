@@ -11,12 +11,10 @@ extension ToolInterfaceViewModel {
     
    @MainActor func getZoomResetSexyButtonToolNode(neighborTypeLeft: ToolInterfaceElementType?,
                                       neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
-        
         let orientation = jiggleViewModel.orientation
         let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextZoomResetLine1()
         let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextZoomResetLine2()
         let iconPack = LooseConvertibleIconLibrary.menuB
-        
         let configuration = ToolInterfaceElementButtonConfiguration(iconPack: iconPack,
                                                                         orientation: orientation,
                                                                         nameLabelLine1: textLine1,

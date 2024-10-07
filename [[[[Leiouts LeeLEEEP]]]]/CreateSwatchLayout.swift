@@ -10,14 +10,6 @@ import UIKit
 
 struct CreateSwatchLayout: LayoutScheme {
     
-    static func getHeroPaddingLeftStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
-        return 16
-    }
-    
-    static func getHeroPaddingLeftLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
-        return 16
-    }
-    
     static func getNameLabelFont(orientation: Orientation, flavor: LayoutSchemeFlavor) -> UIFont {
         if Device.isPad {
             switch flavor {

@@ -32,7 +32,6 @@ class RowStackingCategoryCalculator {
                           width: Int,
                           layoutStackingCategory: ToolInterfaceLayoutStackingCategory) -> Int {
         switch node.flex {
-            
         case .segment(let flexConvertible):
             if layoutStackingCategory.isSegmentLong {
                 return flexConvertible.standardWidthLong
@@ -72,31 +71,6 @@ class RowStackingCategoryCalculator {
             }
         case .sexyCheckBox(let flexConvertible):
             if layoutStackingCategory.isCheckBoxLong {
-                return flexConvertible.standardWidthLong
-            } else {
-                if layoutStackingCategory.isSmall {
-                    return flexConvertible.standardWidthStackedSmall
-                } else if layoutStackingCategory.isMedium {
-                    return flexConvertible.standardWidthStackedMedium
-                } else {
-                    return flexConvertible.standardWidthStackedLarge
-                }
-            }
-        case .checkBox(let flexCheckBoxData):
-            if layoutStackingCategory.isCheckBoxLong {
-                return flexCheckBoxData.standardWidthLong
-            } else {
-                if layoutStackingCategory.isSmall {
-                    return flexCheckBoxData.standardWidthStackedSmall
-                } else if layoutStackingCategory.isMedium {
-                    return flexCheckBoxData.standardWidthStackedMedium
-                } else {
-                    return flexCheckBoxData.standardWidthStackedLarge
-                }
-            }
-            
-        case .textIconButton(let flexConvertible):
-            if layoutStackingCategory.isButtonLong {
                 return flexConvertible.standardWidthLong
             } else {
                 if layoutStackingCategory.isSmall {

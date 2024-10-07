@@ -10,19 +10,47 @@ import UIKit
 struct ButtonLayout: LayoutScheme {
     
     static func getSlavePaddingRightLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
-        return 32
+        if Device.isPad {
+            switch squeeze {
+            case .squeezed:
+                return 4
+            case .standard:
+                return 6
+            case .relaxed:
+                return 8
+            }
+        } else {
+            switch squeeze {
+            case .squeezed:
+                return 3
+            case .standard:
+                return 4
+            case .relaxed:
+                return 6
+            }
+        }
     }
     
     static func getSlavePaddingRightStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
-        return 32
-    }
-    
-    static func getContextPaddingTop(orientation: Orientation) -> Int {
-        return 1
-    }
-    
-    static func getContextPaddingBottom(orientation: Orientation) -> Int {
-        return 1
+        if Device.isPad {
+            switch squeeze {
+            case .squeezed:
+                return 4
+            case .standard:
+                return 6
+            case .relaxed:
+                return 8
+            }
+        } else {
+            switch squeeze {
+            case .squeezed:
+                return 3
+            case .standard:
+                return 4
+            case .relaxed:
+                return 6
+            }
+        }
     }
     
     static func getContextCornerRadius(orientation: Orientation) -> Int {

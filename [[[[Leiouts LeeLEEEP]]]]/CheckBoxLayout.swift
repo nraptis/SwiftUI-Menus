@@ -13,7 +13,7 @@ struct CheckBoxLayout: LayoutScheme {
         if Device.isPad {
             return 11
         } else {
-            return 0
+            return 8
         }
     }
     
@@ -21,39 +21,7 @@ struct CheckBoxLayout: LayoutScheme {
         if Device.isPad {
             return 11
         } else {
-            return 0
-        }
-    }
-    
-    static func getHeroPaddingLeftStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
-        if Device.isPad {
-            return 6
-        } else {
-            return 0
-        }
-    }
-    
-    static func getHeroPaddingLeftLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
-        if Device.isPad {
-            return 6
-        } else {
-            return 0
-        }
-    }
-    
-    static func getHeroPaddingRightStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
-        if Device.isPad {
-            return 6
-        } else {
-            return 0
-        }
-    }
-    
-    static func getHeroPaddingRightLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
-        if Device.isPad {
-            return 6
-        } else {
-            return 0
+            return 8
         }
     }
     

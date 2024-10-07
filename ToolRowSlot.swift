@@ -17,9 +17,11 @@ enum ToolRowSlot {
     case top_Secondary2
     case top_Test_1
     case top_Test_2
+    case top_Test_3
     
     case bottom_Test_1
     case bottom_Test_2
+    case bottom_Test_3
     
     case bottom_Secondary2
     case bottom_Secondary1

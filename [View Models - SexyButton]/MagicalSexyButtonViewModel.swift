@@ -30,7 +30,7 @@ import SwiftUI
         super.init(orientation: orientation)
     }
     
-    func handleClicked() {
+    @MainActor func handleClicked() {
         print("MagicalSexyButtonViewModel => handleClicked()")
     }
     

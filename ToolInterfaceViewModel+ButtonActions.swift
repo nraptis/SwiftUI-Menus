@@ -10,6 +10,150 @@ import UIKit
 
 extension ToolInterfaceViewModel {
     
+    
+    func toolActionSwivelRotateRight() {
+        print("[IMB] Action - toolActionSwivelRotateRight")
+        if isBlocked { return }
+        
+    }
+    
+    func toolActionSwivelTiltDown() {
+        print("[IMB] Action - toolActionSwivelTiltDown")
+        if isBlocked { return }
+        
+    }
+    
+    func toolActionSwivelTiltReset() {
+        print("[IMB] Action - toolActionSwivelTiltReset")
+        if isBlocked { return }
+        
+    }
+    
+    
+    
+    
+    func toolActionSwivelTiltUp() {
+        print("[IMB] Action - toolActionSwivelTiltUp")
+        if isBlocked { return }
+        
+    }
+    
+    func toolActionSwivelZoomIn() {
+        print("[IMB] Action - toolActionSwivelZoomIn")
+        if isBlocked { return }
+        
+    }
+    
+    func toolActionSwivelZoomOut() {
+        print("[IMB] Action - toolActionSwivelZoomOut")
+        if isBlocked { return }
+        
+    }
+    
+    
+    
+    func toolActionSwivelZoomReset() {
+        print("[IMB] Action - toolActionSwivelZoomReset")
+        if isBlocked { return }
+        
+    }
+    
+    func toolActionZoomIn() {
+        print("[IMB] Action - toolActionZoomIn")
+        if isBlocked { return }
+        
+    }
+    
+    func toolActionZoomOut() {
+        print("[IMB] Action - toolActionZoomOut")
+        if isBlocked { return }
+        
+    }
+
+    func toolActionResetWeightGraphStandard() {
+        print("[IMB] Action - toolActionResetWeightGraphStandard")
+        if isBlocked { return }
+        
+    }
+    
+    func toolActionResetWeightGraphStandardDampened() {
+        print("[IMB] Action - toolActionResetWeightGraphStandardDampened")
+        if isBlocked { return }
+        
+    }
+    
+    func toolActionSwivelPanLeft() {
+        print("[IMB] Action - toolActionSwivelPanLeft")
+        if isBlocked { return }
+        
+    }
+    
+    func toolActionSwivelPanReset() {
+        print("[IMB] Action - toolActionSwivelPanReset")
+        if isBlocked { return }
+        
+    }
+    
+    
+    
+    func toolActionSwivelPanRight() {
+        print("[IMB] Action - toolActionSwivelPanRight")
+        if isBlocked { return }
+        
+    }
+    
+    func toolActionSwivelRotateLeft() {
+        print("[IMB] Action - toolActionSwivelRotateLeft")
+        if isBlocked { return }
+        
+    }
+    
+    func toolActionSwivelRotateReset() {
+        print("[IMB] Action - toolActionSwivelRotateReset")
+        if isBlocked { return }
+        
+    }
+    
+    
+    
+    
+    
+    
+    func toolActionResetWeightGraphInverse() {
+        print("[IMB] Action - toolActionResetWeightGraphInverse")
+        if isBlocked { return }
+        
+    }
+    
+    func toolActionResetWeightGraphInverseDampened() {
+        print("[IMB] Action - toolActionResetWeightGraphInverseDampened")
+        if isBlocked { return }
+        
+    }
+    
+    func toolActionResetWeightGraphLinear() {
+        print("[IMB] Action - toolActionResetWeightGraphLinear")
+        if isBlocked { return }
+        
+    }
+    
+    func toolActionResetWeightGraphLinearDampened() {
+        print("[IMB] Action - toolActionResetWeightGraphLinearDampened")
+        if isBlocked { return }
+        
+    }
+    
+    
+    
+    
+    
+    func toolActionBreakTangentWeightGraph() {
+        print("[IMB] Action - toolActionBreakTangentWeightGraph")
+        if isBlocked { return }
+        
+    }
+    
+    
     func toolActionCloneJiggle() {
         print("[IMB] Action - CloneJiggle")
         if isBlocked { return }

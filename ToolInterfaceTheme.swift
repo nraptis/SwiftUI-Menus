@@ -80,11 +80,17 @@ struct ToolInterfaceTheme {
         if ApplicationController.TEST_ROW_TOP_2 {
             result += 1
         }
+        if ApplicationController.TEST_ROW_TOP_3 {
+            result += 1
+        }
         
         if ApplicationController.TEST_ROW_BOTTOM_1 {
             result += 1
         }
         if ApplicationController.TEST_ROW_BOTTOM_2 {
+            result += 1
+        }
+        if ApplicationController.TEST_ROW_BOTTOM_3 {
             result += 1
         }
         
@@ -99,11 +105,17 @@ struct ToolInterfaceTheme {
         if ApplicationController.TEST_ROW_TOP_2 {
             result += 1
         }
+        if ApplicationController.TEST_ROW_TOP_3 {
+            result += 1
+        }
         
         if ApplicationController.TEST_ROW_BOTTOM_1 {
             result += 1
         }
         if ApplicationController.TEST_ROW_BOTTOM_2 {
+            result += 1
+        }
+        if ApplicationController.TEST_ROW_BOTTOM_3 {
             result += 1
         }
         return result
@@ -117,11 +129,17 @@ struct ToolInterfaceTheme {
         if ApplicationController.TEST_ROW_TOP_2 {
             result += 1
         }
+        if ApplicationController.TEST_ROW_TOP_3 {
+            result += 1
+        }
         
         if ApplicationController.TEST_ROW_BOTTOM_1 {
             result += 1
         }
         if ApplicationController.TEST_ROW_BOTTOM_2 {
+            result += 1
+        }
+        if ApplicationController.TEST_ROW_BOTTOM_3 {
             result += 1
         }
         return result
@@ -139,6 +157,9 @@ struct ToolInterfaceTheme {
         if ApplicationController.TEST_ROW_TOP_2 {
             result += 1
         }
+        if ApplicationController.TEST_ROW_TOP_3 {
+            result += 1
+        }
         return result
     }
     
@@ -148,6 +169,9 @@ struct ToolInterfaceTheme {
             result += 1
         }
         if ApplicationController.TEST_ROW_BOTTOM_2 {
+            result += 1
+        }
+        if ApplicationController.TEST_ROW_BOTTOM_3 {
             result += 1
         }
         return result
@@ -302,10 +326,22 @@ struct ToolInterfaceTheme {
             if ApplicationController.TEST_ROW_TOP_1 {
                 result += 1
             }
+            if ApplicationController.TEST_ROW_TOP_2 {
+                result += 1
+            }
+            if ApplicationController.TEST_ROW_TOP_3 {
+                result += 1
+            }
             return result
         case .portrait:
             var result = 3
             if ApplicationController.TEST_ROW_TOP_1 {
+                result += 1
+            }
+            if ApplicationController.TEST_ROW_TOP_2 {
+                result += 1
+            }
+            if ApplicationController.TEST_ROW_TOP_3 {
                 result += 1
             }
             return result
@@ -317,12 +353,24 @@ struct ToolInterfaceTheme {
         if ApplicationController.TEST_ROW_TOP_1 {
             result += 1
         }
+        if ApplicationController.TEST_ROW_TOP_2 {
+            result += 1
+        }
+        if ApplicationController.TEST_ROW_TOP_3 {
+            result += 1
+        }
         return result
     }
     
     static func getTopMenuVideoRecordRowCount(orientation: Orientation) -> Int {
         var result = 1
         if ApplicationController.TEST_ROW_TOP_1 {
+            result += 1
+        }
+        if ApplicationController.TEST_ROW_TOP_2 {
+            result += 1
+        }
+        if ApplicationController.TEST_ROW_TOP_3 {
             result += 1
         }
         return result
@@ -333,6 +381,12 @@ struct ToolInterfaceTheme {
         if ApplicationController.TEST_ROW_TOP_1 {
             result += 1
         }
+        if ApplicationController.TEST_ROW_TOP_2 {
+            result += 1
+        }
+        if ApplicationController.TEST_ROW_TOP_3 {
+            result += 1
+        }
         return result
     }
     
@@ -341,15 +395,11 @@ struct ToolInterfaceTheme {
         switch orientation {
         case .landscape:
             var result = 3
-            if ApplicationController.TEST_ROW_TOP_1 {
-                result += 1
-            }
+           
             return result
         case .portrait:
             var result = 4
-            if ApplicationController.TEST_ROW_TOP_1 {
-                result += 1
-            }
+
             return result
         }
     }
@@ -358,15 +408,9 @@ struct ToolInterfaceTheme {
         switch orientation {
         case .landscape:
             var result = 4
-            if ApplicationController.TEST_ROW_TOP_1 {
-                result += 1
-            }
             return result
         case .portrait:
             var result = 5
-            if ApplicationController.TEST_ROW_TOP_1 {
-                result += 1
-            }
             return result
         }
     }
@@ -393,6 +437,9 @@ struct ToolInterfaceTheme {
             if ApplicationController.TEST_ROW_BOTTOM_2 {
                 result += 1
             }
+            if ApplicationController.TEST_ROW_BOTTOM_3 {
+                result += 1
+            }
             return result
         case .portrait:
             var result = 3
@@ -400,6 +447,9 @@ struct ToolInterfaceTheme {
                 result += 1
             }
             if ApplicationController.TEST_ROW_BOTTOM_2 {
+                result += 1
+            }
+            if ApplicationController.TEST_ROW_BOTTOM_3 {
                 result += 1
             }
             return result
@@ -414,6 +464,9 @@ struct ToolInterfaceTheme {
         if ApplicationController.TEST_ROW_BOTTOM_2 {
             result += 1
         }
+        if ApplicationController.TEST_ROW_BOTTOM_3 {
+            result += 1
+        }
         return result
     }
     
@@ -425,6 +478,9 @@ struct ToolInterfaceTheme {
         if ApplicationController.TEST_ROW_BOTTOM_2 {
             result += 1
         }
+        if ApplicationController.TEST_ROW_BOTTOM_3 {
+            result += 1
+        }
         return result
     }
     
@@ -434,6 +490,9 @@ struct ToolInterfaceTheme {
             result += 1
         }
         if ApplicationController.TEST_ROW_BOTTOM_2 {
+            result += 1
+        }
+        if ApplicationController.TEST_ROW_BOTTOM_3 {
             result += 1
         }
         return result

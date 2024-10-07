@@ -206,7 +206,7 @@ extension ToolInterfaceViewModel {
     }
     
     func handleZoomEnabledDidChange() {
-        refreshAllRowsMatching(elements: [.checkBoxZoomEnabled
+        refreshAllRowsMatching(elements: [
                                           
         ])
         /*
@@ -263,7 +263,7 @@ extension ToolInterfaceViewModel {
     }
     
     func handleWeightCurveGraphEnabledDidChange() {
-        refreshAllRowsMatching(elements: [.checkBoxWeightCurveGraphEnabled
+        refreshAllRowsMatching(elements: [
             
                                           
         ])
@@ -296,7 +296,7 @@ extension ToolInterfaceViewModel {
     }
     
     func handleAnimationLoopsEnabledDidChange() {
-        refreshAllRowsMatching(elements: [.checkBoxAutoLoopEnabled,
+        refreshAllRowsMatching(elements: [.sexyCheckBoxAutoLoopEnabled,
                                           
                                           
         ])
@@ -333,7 +333,7 @@ extension ToolInterfaceViewModel {
     }
     
     func handleAnimationLoopsPageDidChange() {
-        refreshAllRowsMatching(elements: [.checkBoxAutoLoopEnabled
+        refreshAllRowsMatching(elements: [.sexyCheckBoxAutoLoopEnabled
                                           
         ])
         /*
@@ -567,7 +567,7 @@ extension ToolInterfaceViewModel {
     
     func handleAnimationJiggleAppliedToAllDidChange() {
         
-        refreshAllRowsMatching(elements: [.checkBoxAnimationJiggleApplyToAll])
+        refreshAllRowsMatching(elements: [.sexyCheckBoxAnimationJiggleApplyToAll])
         /*
         @MainActor func handleAnimationJiggleAppliedToAllDidChange(row: ToolRow) {
             for node in row.nodes {
@@ -584,7 +584,7 @@ extension ToolInterfaceViewModel {
     }
     
     func handleAnimationBounceAppliedToAllDidChange() {
-        refreshAllRowsMatching(elements: [.checkBoxAnimationBounceApplyToAll])
+        refreshAllRowsMatching(elements: [.sexyCheckBoxAnimationBounceApplyToAll])
         /*
         @MainActor func handleAnimationBounceAppliedToAllDidChange(row: ToolRow) {
             for node in row.nodes {
@@ -601,7 +601,7 @@ extension ToolInterfaceViewModel {
     }
     
     func handleAnimationWobbleAppliedToAllDidChange() {
-        refreshAllRowsMatching(elements: [.checkBoxAnimationWobbleApplyToAll])
+        refreshAllRowsMatching(elements: [.sexyCheckBoxAnimationWobbleApplyToAll])
         /*
         @MainActor func handleAnimationWobbleAppliedToAllDidChange(row: ToolRow) {
             for node in row.nodes {
@@ -618,7 +618,7 @@ extension ToolInterfaceViewModel {
     }
     
     func handleAnimationTwistAppliedToAllDidChange() {
-        refreshAllRowsMatching(elements: [.checkBoxAnimationTwistApplyToAll])
+        refreshAllRowsMatching(elements: [.sexyCheckBoxAnimationTwistApplyToAll])
         /*
         @MainActor func handleAnimationTwistAppliedToAllDidChange(row: ToolRow) {
             for node in row.nodes {

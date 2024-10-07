@@ -191,16 +191,88 @@ extension LayoutScheme {
     }
     
     static func getHeroPaddingLeftStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
-        0
+        if Device.isPad {
+            switch squeeze {
+            case .squeezed:
+                return 4
+            case .standard:
+                return 6
+            case .relaxed:
+                return 8
+            }
+        } else {
+            switch squeeze {
+            case .squeezed:
+                return 3
+            case .standard:
+                return 4
+            case .relaxed:
+                return 6
+            }
+        }
     }
     static func getHeroPaddingLeftLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
-        0
+        if Device.isPad {
+            switch squeeze {
+            case .squeezed:
+                return 4
+            case .standard:
+                return 6
+            case .relaxed:
+                return 8
+            }
+        } else {
+            switch squeeze {
+            case .squeezed:
+                return 3
+            case .standard:
+                return 4
+            case .relaxed:
+                return 6
+            }
+        }
     }
     static func getHeroPaddingRightStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
-        0
+        if Device.isPad {
+            switch squeeze {
+            case .squeezed:
+                return 4
+            case .standard:
+                return 6
+            case .relaxed:
+                return 8
+            }
+        } else {
+            switch squeeze {
+            case .squeezed:
+                return 3
+            case .standard:
+                return 4
+            case .relaxed:
+                return 6
+            }
+        }
     }
     static func getHeroPaddingRightLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
-        0
+        if Device.isPad {
+            switch squeeze {
+            case .squeezed:
+                return 4
+            case .standard:
+                return 6
+            case .relaxed:
+                return 8
+            }
+        } else {
+            switch squeeze {
+            case .squeezed:
+                return 3
+            case .standard:
+                return 4
+            case .relaxed:
+                return 6
+            }
+        }
     }
     
     static func getSlavePaddingLeftStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int { 0 }
@@ -208,7 +280,27 @@ extension LayoutScheme {
     static func getSlavePaddingRightStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int { 0 }
     static func getSlavePaddingRightLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int { 0 }
     
-    static func getHeroSpacingLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int { 0 }
+    static func getHeroSpacingLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        if Device.isPad {
+            switch squeeze {
+            case .squeezed:
+                return 4
+            case .standard:
+                return 6
+            case .relaxed:
+                return 8
+            }
+        } else {
+            switch squeeze {
+            case .squeezed:
+                return 3
+            case .standard:
+                return 4
+            case .relaxed:
+                return 6
+            }
+        }
+    }
     
 }
 

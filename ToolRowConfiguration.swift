@@ -43,6 +43,7 @@ enum ToolRowConfiguration {
     
     case top_Test_1
     case top_Test_2
+    case top_Test_3
     
     case top_Secondary1_Jiggles
     case top_Secondary1_Points
@@ -114,6 +115,7 @@ enum ToolRowConfiguration {
     
     case bottom_Test_1
     case bottom_Test_2
+    case bottom_Test_3
     
    
 }

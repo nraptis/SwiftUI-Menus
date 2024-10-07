@@ -12,8 +12,8 @@ extension ToolInterfaceViewModel {
    @MainActor func getRowBluePrint_VideoExport1_Pad() -> RowBluePrint {
         let nodes = [
             getMenuSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
-            getTwistEnabledCheckBoxNode(neighborTypeLeft: .spacer, neighborTypeRight: nil)
+            Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+
         ]
         return RowBluePrint(nodes: nodes, configuration: .video_export_1)
     }
@@ -30,7 +30,7 @@ extension ToolInterfaceViewModel {
             getExitVideoExportExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
             getExitVideoRecordExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
             
-            Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: .textIconButton),
+            Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
             getEnterVideoRecordEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
         ]
         return RowBluePrint(nodes: nodes, configuration: .video_export_3)

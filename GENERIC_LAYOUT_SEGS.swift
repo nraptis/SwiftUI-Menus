@@ -72,28 +72,6 @@ struct SEGMENT_LAYOUT_INFO {
     }
 }
 
-/*
-class HORIZONTAL_LAYOUT_SEGMENT_CHUNK {
-    let nameLabelWidth: Int
-    let numberOfLines: Int
-    let iconPackMain: (any TextIconPackable)
-    let iconPackSecondary: (any TextIconPackable)?
-    let layout = HORIZONTAL_LAYOUT_LONG()
-    
-    init(nameLabelWidth: Int,
-         numberOfLines: Int,
-         iconPackMain: any TextIconPackable,
-         iconPackSecondary: (any TextIconPackable)?) {
-        
-        self.nameLabelWidth = nameLabelWidth
-        self.numberOfLines = numberOfLines
-        self.iconPackMain = iconPackMain
-        self.iconPackSecondary = iconPackSecondary
-        
-    }
-}
-*/
-
 struct GENERIC_SEGMENT_LAYOUT {
 
     struct LongResponse {
