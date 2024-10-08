@@ -32,13 +32,25 @@ struct MagicalMainTabSegmentContent: View {
                                                           isDarkMode: isDarkMode,
                                                           isEnabled: isEnabled)
         
+        let testArrowLeft = FramedLongIconLibrary.testArrowLeft.getTextIcon(orientation: orientation,
+                                                                            layoutSchemeFlavor: .long,
+                                                                            numberOfLines: 0,
+                                                                            isDarkMode: isDarkMode,
+                                                                            isEnabled: isEnabled)
+        
+        let testArrowRight = FramedLongIconLibrary.testArrowRight.getTextIcon(orientation: orientation,
+                                                                              layoutSchemeFlavor: .long,
+                                                                              numberOfLines: 0,
+                                                                              isDarkMode: isDarkMode,
+                                                                              isEnabled: isEnabled)
+        
         let line1 = configuration.nameLabelLine1
         let line2 = configuration.nameLabelLine2
         
         let nameLabelFont = MainTabLayout.getNameLabelFont(orientation: orientation,
-                                                          flavor: layoutSchemeFlavor)
+                                                           flavor: layoutSchemeFlavor)
         let nameLabelVerticalSpacing = MainTabLayout.getNameLabelVerticalSpacing(orientation: orientation,
-                                                                                flavor: layoutSchemeFlavor)
+                                                                                 flavor: layoutSchemeFlavor)
         
         let nameLabelWidth: Int
         switch layoutSchemeFlavor {
@@ -92,27 +104,91 @@ struct MagicalMainTabSegmentContent: View {
             }
         }
         
+        let slaveWidth = testArrowLeft.width
+        let slaveHeight = testArrowLeft.height
+        let slaveContentWidth = testArrowLeft.width + magicalButtonViewModel.slavePaddingLeft + magicalButtonViewModel.slavePaddingRight
+        
+        
+        let accentWidth = testArrowRight.width
+        let accentHeight = testArrowRight.height
+        let accentContentWidth = testArrowRight.width + magicalButtonViewModel.accentPaddingLeft + magicalButtonViewModel.accentPaddingRight
+        
         let heroPaddingTopStacked = MainTabLayout.getHeroPaddingTopStacked(orientation: orientation)
         let heroPaddingBottomStacked = MainTabLayout.getHeroPaddingBottomStacked(orientation: orientation)
         
-        return HeroSlab(orientation: orientation,
-                        layoutWidth: layoutWidth,
-                        layoutHeight: layoutHeight,
-                        isLong: true,
-                        isPressed: isPressed,
-                        textIcon: textIcon,
-                        heroPaddingLeft: magicalButtonViewModel.heroPaddingLeft,
-                        heroPaddingRight: magicalButtonViewModel.heroPaddingRight,
-                        heroPaddingTopStacked: heroPaddingTopStacked,
-                        heroPaddingBottomStacked: heroPaddingBottomStacked,
-                        heroSpacingLong: magicalButtonViewModel.heroSpacing,
-                        line1: line1,
-                        line2: line2,
-                        numberOfLines: numberOfLines,
-                        nameLabelVerticalSpacing: nameLabelVerticalSpacing,
-                        nameLabelFont: nameLabelFont,
-                        nameLabelWidth: nameLabelWidth,
-                        lineHeight: lineHeight,
-                        nameLabelColor: nameLabelColor)
+        return HStack(spacing: 0.0) {
+            HeroSlab(orientation: orientation,
+                     layoutWidth: layoutWidth - slaveContentWidth - accentContentWidth,
+                     layoutHeight: layoutHeight,
+                     isLong: true,
+                     isPressed: isPressed,
+                     textIcon: textIcon,
+                     heroPaddingLeft: magicalButtonViewModel.heroPaddingLeft,
+                     heroPaddingRight: magicalButtonViewModel.heroPaddingRight,
+                     heroPaddingTopStacked: heroPaddingTopStacked,
+                     heroPaddingBottomStacked: heroPaddingBottomStacked,
+                     heroSpacingLong: magicalButtonViewModel.heroSpacing,
+                     line1: line1,
+                     line2: line2,
+                     numberOfLines: numberOfLines,
+                     nameLabelVerticalSpacing: nameLabelVerticalSpacing,
+                     nameLabelFont: nameLabelFont,
+                     nameLabelWidth: nameLabelWidth,
+                     lineHeight: lineHeight,
+                     nameLabelColor: nameLabelColor)
+            
+            
+#if INTERFACE_HINTS
+            Spacer()
+                .frame(width: CGFloat(magicalButtonViewModel.slavePaddingLeft), height: 24.0)
+                .background(Color(red: 0.35, green: 0.61, blue: 0.81, opacity: 0.40))
+#else
+            Spacer()
+                .frame(width: CGFloat(magicalButtonViewModel.slavePaddingLeft))
+#endif
+            
+            IconBoxMainTab(icon: testArrowLeft,
+                           iconWidth: slaveWidth,
+                           iconHeight: slaveHeight,
+                           iconPaddingLeft: 0,
+                           iconPaddingRight: 0,
+                           iconPaddingTop: 0)
+            
+#if INTERFACE_HINTS
+            Spacer()
+                .frame(width: CGFloat(magicalButtonViewModel.slavePaddingRight), height: 24.0)
+                .background(Color(red: 0.47, green: 0.87, blue: 0.16, opacity: 0.70))
+#else
+            Spacer()
+                .frame(width: CGFloat(magicalButtonViewModel.slavePaddingRight))
+#endif
+            
+            
+#if INTERFACE_HINTS
+            Spacer()
+                .frame(width: CGFloat(magicalButtonViewModel.accentPaddingLeft), height: 24.0)
+                .background(Color(red: 0.35, green: 0.61, blue: 0.81, opacity: 0.40))
+#else
+            Spacer()
+                .frame(width: CGFloat(magicalButtonViewModel.accentPaddingLeft))
+#endif
+            
+            IconBoxMainTab(icon: testArrowRight,
+                           iconWidth: accentWidth,
+                           iconHeight: accentHeight,
+                           iconPaddingLeft: 0,
+                           iconPaddingRight: 0,
+                           iconPaddingTop: 0)
+            
+#if INTERFACE_HINTS
+            Spacer()
+                .frame(width: CGFloat(magicalButtonViewModel.accentPaddingRight), height: 24.0)
+                .background(Color(red: 0.47, green: 0.87, blue: 0.16, opacity: 0.70))
+#else
+            Spacer()
+                .frame(width: CGFloat(magicalButtonViewModel.accentPaddingRight))
+#endif
+            
+        }
     }
 }

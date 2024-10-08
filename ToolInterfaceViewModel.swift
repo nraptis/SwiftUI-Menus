@@ -92,9 +92,9 @@ func getToolNodeID() -> UInt16 {
         let categories = ToolInterfaceLayoutStackingCategory.getAllInPriorityOrderExceptLeast()
         
         if ApplicationController.FORCE_LONG_ALL {
-            return .large(.init(isButtonLong: true, isModeSwitchLong: true, isCheckBoxLong: true, isSegmentLong: true))
+            return .large(.init(isButtonLong: true, isModeSwitchLong: true, isCheckBoxLong: true, isSegmentLong: true, isStepperLong: true))
         } else if ApplicationController.FORCE_STACKED_ALL {
-                return .large(.init(isButtonLong: false, isModeSwitchLong: false, isCheckBoxLong: false, isSegmentLong: false))
+            return .large(.init(isButtonLong: false, isModeSwitchLong: false, isCheckBoxLong: false, isSegmentLong: false, isStepperLong: false))
         }
         
         return calculateLayoutStackingCategory(orientation: orientation,
@@ -224,6 +224,9 @@ func getToolNodeID() -> UInt16 {
             if ApplicationController.TEST_ROW_BOTTOM_3 {
                 rowsDraggable.append(generateRow(slot: .bottom_Test_3))
             }
+            if ApplicationController.TEST_ROW_BOTTOM_4 {
+                rowsDraggable.append(generateRow(slot: .bottom_Test_4))
+            }
             
         } else {
             
@@ -252,6 +255,9 @@ func getToolNodeID() -> UInt16 {
             }
             if ApplicationController.TEST_ROW_BOTTOM_3 {
                 rowsBottom.append(generateRow(slot: .bottom_Test_3))
+            }
+            if ApplicationController.TEST_ROW_BOTTOM_4 {
+                rowsDraggable.append(generateRow(slot: .bottom_Test_4))
             }
             
             if bottomMenuStandardRowCount > 2 { rowsBottom.append(generateRow(slot: .bottom_Secondary2)) }
@@ -282,6 +288,9 @@ func getToolNodeID() -> UInt16 {
             if ApplicationController.TEST_ROW_BOTTOM_3 {
                 rowsVideoRecord.append(generateRow(slot: .bottom_Test_3))
             }
+            if ApplicationController.TEST_ROW_BOTTOM_4 {
+                rowsDraggable.append(generateRow(slot: .bottom_Test_4))
+            }
             
         } else {
             rowsVideoRecord.append(generateRow(slot: .video_record_1))
@@ -306,7 +315,9 @@ func getToolNodeID() -> UInt16 {
             if ApplicationController.TEST_ROW_BOTTOM_3 {
                 rowsVideoRecord.append(generateRow(slot: .bottom_Test_3))
             }
-            
+            if ApplicationController.TEST_ROW_BOTTOM_4 {
+                rowsDraggable.append(generateRow(slot: .bottom_Test_4))
+            }
         }
         
         if Device.isPad {
@@ -332,6 +343,9 @@ func getToolNodeID() -> UInt16 {
             }
             if ApplicationController.TEST_ROW_BOTTOM_3 {
                 rowsVideoExport.append(generateRow(slot: .bottom_Test_3))
+            }
+            if ApplicationController.TEST_ROW_BOTTOM_4 {
+                rowsDraggable.append(generateRow(slot: .bottom_Test_4))
             }
             
         } else {
@@ -359,7 +373,9 @@ func getToolNodeID() -> UInt16 {
             if ApplicationController.TEST_ROW_BOTTOM_3 {
                 rowsVideoExport.append(generateRow(slot: .bottom_Test_3))
             }
-            
+            if ApplicationController.TEST_ROW_BOTTOM_4 {
+                rowsDraggable.append(generateRow(slot: .bottom_Test_4))
+            }
         }
         
         if Device.isPad {
@@ -385,6 +401,9 @@ func getToolNodeID() -> UInt16 {
             }
             if ApplicationController.TEST_ROW_BOTTOM_3 {
                 rowsZoom.append(generateRow(slot: .bottom_Test_3))
+            }
+            if ApplicationController.TEST_ROW_BOTTOM_4 {
+                rowsDraggable.append(generateRow(slot: .bottom_Test_4))
             }
             
         } else {
@@ -412,7 +431,9 @@ func getToolNodeID() -> UInt16 {
             if ApplicationController.TEST_ROW_BOTTOM_3 {
                 rowsZoom.append(generateRow(slot: .bottom_Test_3))
             }
-            
+            if ApplicationController.TEST_ROW_BOTTOM_4 {
+                rowsDraggable.append(generateRow(slot: .bottom_Test_4))
+            }
         }
         
         // So many of the rows... Video Record, Video Export, Zoom, Graph...

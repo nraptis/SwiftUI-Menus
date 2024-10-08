@@ -63,115 +63,6 @@ struct FlexSexyStepperData {
     let relaxedWidthSmall: Int
 }
 
-/*
-struct FlexSegmentData {
-    let minimumWidthLong: Int
-    let standardWidthLong: Int
-    let relaxedWidthLong: Int
-    
-    let minimumWidthStackedLarge: Int
-    let standardWidthStackedLarge: Int
-    let relaxedWidthStackedLarge: Int
-    
-    let minimumWidthStackedMedium: Int
-    let standardWidthStackedMedium: Int
-    let relaxedWidthStackedMedium: Int
-    
-    let minimumWidthStackedSmall: Int
-    let standardWidthStackedSmall: Int
-    let relaxedWidthStackedSmall: Int
-}
-
-
-struct FlexMainTabData {
-    let minimumWidthLarge: Int
-    let standardWidthLarge: Int
-    let relaxedWidthLarge: Int
-    
-    let minimumWidthMedium: Int
-    let standardWidthMedium: Int
-    let relaxedWidthMedium: Int
-    
-    let minimumWidthSmall: Int
-    let standardWidthSmall: Int
-    let relaxedWidthSmall: Int
-}
-
-struct FlexCreateSwatchData {
-    let minimumWidthLarge: Int
-    let standardWidthLarge: Int
-    let relaxedWidthLarge: Int
-    
-    let minimumWidthMedium: Int
-    let standardWidthMedium: Int
-    let relaxedWidthMedium: Int
-    
-    let minimumWidthSmall: Int
-    let standardWidthSmall: Int
-    let relaxedWidthSmall: Int
-}
-
-struct FlexEnterModeData {
-    let minimumWidthLarge: Int
-    let standardWidthLarge: Int
-    let relaxedWidthLarge: Int
-    
-    let minimumWidthMedium: Int
-    let standardWidthMedium: Int
-    let relaxedWidthMedium: Int
-    
-    let minimumWidthSmall: Int
-    let standardWidthSmall: Int
-    let relaxedWidthSmall: Int
-}
-
-
-struct FlexSexyCheckBoxData {
-    let minimumWidthLarge: Int
-    let standardWidthLarge: Int
-    let relaxedWidthLarge: Int
-    
-    let minimumWidthMedium: Int
-    let standardWidthMedium: Int
-    let relaxedWidthMedium: Int
-    
-    let minimumWidthSmall: Int
-    let standardWidthSmall: Int
-    let relaxedWidthSmall: Int
-}
-
-struct FlexExitModeData {
-    let minimumWidthLarge: Int
-    let standardWidthLarge: Int
-    let relaxedWidthLarge: Int
-    
-    let minimumWidthMedium: Int
-    let standardWidthMedium: Int
-    let relaxedWidthMedium: Int
-    
-    let minimumWidthSmall: Int
-    let standardWidthSmall: Int
-    let relaxedWidthSmall: Int
-}
- */
-
-struct FlexSliderData {
-    
-    let widthCategory: ToolInterfaceElementSliderWidthCategory
-    
-    let minimumWidthLarge: Int
-    let standardWidthLarge: Int
-    let relaxedWidthLarge: Int
-    
-    let minimumWidthMedium: Int
-    let standardWidthMedium: Int
-    let relaxedWidthMedium: Int
-    
-    let minimumWidthSmall: Int
-    let standardWidthSmall: Int
-    let relaxedWidthSmall: Int
-}
-
 struct FlexSpacerData {
     let defaultWidth: Int
 }
@@ -181,36 +72,6 @@ struct FlexDividerSpacerDividerData {
     let standardWidth: Int
 }
 
-struct FlexGreenButtonData {
-    let minimumWidth: Int
-    let standardWidth: Int
-    let relaxedWidth: Int
-}
-
-struct FlexIconButtonData {
-    let minimumWidth: Int
-    let standardWidth: Int
-    let relaxedWidth: Int
-}
-
-struct FlexCheckBoxData {
-    let minimumWidthLong: Int
-    let standardWidthLong: Int
-    let relaxedWidthLong: Int
-    
-    let minimumWidthStackedLarge: Int
-    let standardWidthStackedLarge: Int
-    let relaxedWidthStackedLarge: Int
-    
-    let minimumWidthStackedMedium: Int
-    let standardWidthStackedMedium: Int
-    let relaxedWidthStackedMedium: Int
-    
-    let minimumWidthStackedSmall: Int
-    let standardWidthStackedSmall: Int
-    let relaxedWidthStackedSmall: Int
-}
-
 enum ToolInterfaceElementFlex {
     case fixed(Int)
     
@@ -218,26 +79,19 @@ enum ToolInterfaceElementFlex {
     
     case dividerSpacerDivider(FlexDividerSpacerDividerData)
     
-    case iconButton(FlexIconButtonData)
-    
     case segment(FlexConvertibleData)
-    
     case sexyButton(FlexConvertibleData)
     case sexyCheckBox(FlexConvertibleData)
     
     case greenButton(FlexLongData)
-    
     case mainTab(FlexLongData)
-    
     case createSwatch(FlexLongData)
     
-    case slider(FlexSliderData)
+    case slider(FlexLongData, ToolInterfaceElementSliderWidthCategory)
     
     case favoringOneLineLabel(FlexFavoringOneLineLabelData)
     
     case enterMode(FlexConvertibleData)
     case exitMode(FlexConvertibleData)
-    
-    case sexyStepper(FlexSexyStepperData)
-    
+    case sexyStepper(FlexConvertibleData)
 }

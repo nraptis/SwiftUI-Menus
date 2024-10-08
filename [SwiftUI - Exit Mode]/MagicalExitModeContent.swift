@@ -143,7 +143,7 @@ struct MagicalExitModeContent: View {
                      nameLabelWidth: nameLabelWidth,
                      lineHeight: lineHeight,
                      nameLabelColor: nameLabelColor)
-                        
+            
         }
 #if INTERFACE_HINTS
         .overlay(Rectangle().stroke().foregroundStyle(

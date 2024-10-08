@@ -30,11 +30,11 @@ struct MagicalSegmentedPickerGuts: View {
                 }
                 let isSelected = magicalViewModel.selectedSegmentIndex == index
                 return MagicalSegmentedPickerSegmentButton(index: index,
-                                                    layoutSchemeFlavor: layoutSchemeFlavor,
-                                                    outsideBoxPaddingTop: outsideBoxPaddingTop,
-                                                    outsideBoxPaddingBottom: outsideBoxPaddingBottom,
-                                                    position: position,
-                                                    isSelected: isSelected)
+                                                           layoutSchemeFlavor: layoutSchemeFlavor,
+                                                           outsideBoxPaddingTop: outsideBoxPaddingTop,
+                                                           outsideBoxPaddingBottom: outsideBoxPaddingBottom,
+                                                           position: position,
+                                                           isSelected: isSelected)
                 .environment(buttonViewModel as? MagicalSegmentedPickerButtonViewModel)
                 .offset(x: CGFloat(buttonViewModel.layoutX))
             }

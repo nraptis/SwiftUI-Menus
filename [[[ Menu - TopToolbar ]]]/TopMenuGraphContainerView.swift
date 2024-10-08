@@ -118,8 +118,6 @@ class TopMenuGraphContainerView: UIView, GraphContainerConforming {
     }
     
     func handleSafeArea(width: Int, safeAreaLeft: Int, safeAreaRight: Int, safeAreaTop: Int) {
-        
-        let orientation = toolInterfaceViewModel.orientation
         let graphContainerLeft = safeAreaLeft
         let graphContainerWidth = (width) - (safeAreaRight + graphContainerLeft)
         graphContainerViewWidthConstraint.constant = CGFloat(graphContainerWidth)

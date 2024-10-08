@@ -51,9 +51,9 @@ struct MagicalMainTab: View {
                 .frame(width: CGFloat(outsideBoxPaddingLeft))
 #endif
             MagicalMainTabGuts(layoutSchemeFlavor: layoutSchemeFlavor,
-                                       layoutWidth: contentLayoutWidth,
-                                       outsideBoxPaddingTop: outsideBoxPaddingTop,
-                                       outsideBoxPaddingBottom: outsideBoxPaddingBottom)
+                               layoutWidth: contentLayoutWidth,
+                               outsideBoxPaddingTop: outsideBoxPaddingTop,
+                               outsideBoxPaddingBottom: outsideBoxPaddingBottom)
 #if INTERFACE_HINTS
             Spacer()
                 .frame(width: CGFloat(outsideBoxPaddingRight), height: 28.0)

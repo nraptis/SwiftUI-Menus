@@ -12,6 +12,7 @@ struct ToolInterfaceLayoutStackingLargeData {
     let isModeSwitchLong: Bool
     let isCheckBoxLong: Bool
     let isSegmentLong: Bool
+    let isStepperLong: Bool
 }
 
 enum ToolInterfaceLayoutStackingCategory {
@@ -54,6 +55,12 @@ extension ToolInterfaceLayoutStackingCategory {
                 } else {
                     return .stackedLarge
                 }
+            case .sexyStepper:
+                if stackingLargeData.isStepperLong {
+                    return .long
+                } else {
+                    return .stackedLarge
+                }
             default:
                 return .long
             }
@@ -88,6 +95,19 @@ extension ToolInterfaceLayoutStackingCategory {
             return stackingLargeData.isSegmentLong
         }
     }
+    
+    var isStepperLong: Bool {
+        switch self {
+        case .allVerticalSmall:
+            return false
+        case .allVerticalMedium:
+            return false
+        case .large(let stackingLargeData):
+            return stackingLargeData.isStepperLong
+        }
+    }
+    
+    
     
     var isCheckBoxLong: Bool {
         switch self {
@@ -130,16 +150,22 @@ extension ToolInterfaceLayoutStackingCategory {
         var result = [ToolInterfaceLayoutStackingCategory]()
         
         // Cases with 4:
-        result.append(.large(.init(isButtonLong: true, isModeSwitchLong: true, isCheckBoxLong: true, isSegmentLong: true)))
+        result.append(.large(.init(isButtonLong: true, isModeSwitchLong: true, isCheckBoxLong: true, isSegmentLong: true, isStepperLong: true)))
         
         for isButtonLong in [true, false] {
             for isModeSwitchLong in [true, false] {
                 for isCheckBoxLong in [true, false] {
                     for isSegmentLong in [true, false] {
-                        result.append(.large(.init(isButtonLong: isButtonLong,
-                                                   isModeSwitchLong: isModeSwitchLong,
-                                                   isCheckBoxLong: isCheckBoxLong,
-                                                   isSegmentLong: isSegmentLong)))
+                        
+                        for isStepperLong in [true, false] {
+                            
+                            
+                            result.append(.large(.init(isButtonLong: isButtonLong,
+                                                       isModeSwitchLong: isModeSwitchLong,
+                                                       isCheckBoxLong: isCheckBoxLong,
+                                                       isSegmentLong: isSegmentLong,
+                                                       isStepperLong: isStepperLong)))
+                        }
                     }
                 }
             }

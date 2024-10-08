@@ -154,9 +154,9 @@ struct MagicalExitModeButtonStyle: ButtonStyle {
 #endif
                 
                 MagicalExitModeContent(layoutSchemeFlavor: layoutSchemeFlavor,
-                                        isPressed: isPressed,
-                                        layoutWidth: contentLayoutWidth,
-                                        layoutHeight: contentLayoutHeight)
+                                       isPressed: isPressed,
+                                       layoutWidth: contentLayoutWidth,
+                                       layoutHeight: contentLayoutHeight)
                 
 #if INTERFACE_HINTS
                 Spacer()

@@ -31,7 +31,7 @@ struct MagicalSliderBar: View {
         
         let orientation = magicalViewModel.orientation
         
-        let sliderBoxWidth = magicalViewModel.sliderBoxWidth
+        let sliderBoxWidth = magicalViewModel.extraGrowingElementWidth
         
         let thumbDiameterStroke = SliderLayout.getThumbDiameterStroke(orientation: orientation)
         let thumbDiameterFill = SliderLayout.getThumbDiameterFill(orientation: orientation)
@@ -181,7 +181,7 @@ struct MagicalSliderBar: View {
 #if INTERFACE_HINTS
                 Spacer()
                     .frame(width: CGFloat(sliderBoxWidthMinusBoxWidth), height: 20.0)
-                    //.background(Color(red: 0.75, green: 1.0, blue: 1.0, opacity: 0.5))
+                //.background(Color(red: 0.75, green: 1.0, blue: 1.0, opacity: 0.5))
 #else
                 Spacer()
                     .frame(width: CGFloat(sliderBoxWidthMinusBoxWidth))

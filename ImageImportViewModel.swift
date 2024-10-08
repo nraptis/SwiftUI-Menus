@@ -22,7 +22,7 @@ import UIKit
     
     //@ObservationIgnored var layoutSchemeFlavorSliders = LayoutSchemeFlavor.stackedSmall
     
-    func calculateLayoutStackingCategories() {
+    @MainActor func calculateLayoutStackingCategories() {
         let contentWidth = layoutRelay.menuWidthWithSafeArea - (layoutRelay.safeAreaLeft + layoutRelay.safeAreaRight)
         layoutStackingCategory = calculateLayoutStackingCategory(width: contentWidth,
                                                                  height: layoutRelay.rowHeight,

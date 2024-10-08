@@ -30,11 +30,11 @@ struct MagicalMainTabGuts: View {
                 }
                 let isSelected = magicalViewModel.selectedSegmentIndex == index
                 return MagicalMainTabSegmentButton(index: index,
-                                                    layoutSchemeFlavor: layoutSchemeFlavor,
-                                                    outsideBoxPaddingTop: outsideBoxPaddingTop,
-                                                    outsideBoxPaddingBottom: outsideBoxPaddingBottom,
-                                                    position: position,
-                                                    isSelected: isSelected)
+                                                   layoutSchemeFlavor: layoutSchemeFlavor,
+                                                   outsideBoxPaddingTop: outsideBoxPaddingTop,
+                                                   outsideBoxPaddingBottom: outsideBoxPaddingBottom,
+                                                   position: position,
+                                                   isSelected: isSelected)
                 .environment(buttonViewModel as? MagicalMainTabButtonViewModel)
                 .offset(x: CGFloat(buttonViewModel.layoutX))
             }

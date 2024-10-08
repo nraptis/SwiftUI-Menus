@@ -23,9 +23,8 @@ struct MagicalExitModeButton: View {
                    height: CGFloat(magicalViewModel.layoutHeight))
         }
         .buttonStyle(MagicalExitModeButtonStyle(layoutSchemeFlavor: layoutSchemeFlavor,
-                                                    outsideBoxPaddingTop: outsideBoxPaddingTop,
-                                                    outsideBoxPaddingBottom: outsideBoxPaddingBottom))
+                                                outsideBoxPaddingTop: outsideBoxPaddingTop,
+                                                outsideBoxPaddingBottom: outsideBoxPaddingBottom))
         
     }
 }
-

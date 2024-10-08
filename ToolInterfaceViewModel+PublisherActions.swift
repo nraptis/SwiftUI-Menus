@@ -126,7 +126,9 @@ extension ToolInterfaceViewModel {
                                           .createSwatchAddAndRemoveJigglePoints,
                                           .createSwatchAddAndRemoveGuidePoints,
                                           
-                                          .sexyStepperTimelinePointCount,
+                                        .sexyStepperTimelinePointCount,
+                                          .sexyStepperGemCount,
+                                          .sexyStepperCoinCount,
                                           
                                           .sexyButtonSelectNextJiggle,
                                           .sexyButtonSelectPreviousJiggle,

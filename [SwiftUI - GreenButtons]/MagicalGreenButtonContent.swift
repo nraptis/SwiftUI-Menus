@@ -33,9 +33,9 @@ struct MagicalGreenButtonContent: View {
         let line2 = configuration.nameLabelLine2
         
         let nameLabelFont = GreenButtonLayout.getNameLabelFont(orientation: orientation,
-                                                            flavor: layoutSchemeFlavor)
+                                                               flavor: layoutSchemeFlavor)
         let nameLabelVerticalSpacing = GreenButtonLayout.getNameLabelVerticalSpacing(orientation: orientation,
-                                                                                  flavor: layoutSchemeFlavor)
+                                                                                     flavor: layoutSchemeFlavor)
         
         let nameLabelWidth: Int
         switch layoutSchemeFlavor {

@@ -30,7 +30,7 @@ struct MagicalSexyCheckBoxButtonStyle: ButtonStyle {
         
         let boxWidth = magicalViewModel.layoutWidth - magicalViewModel.outsideBoxPaddingLeft - magicalViewModel.outsideBoxPaddingRight
         let boxHeight = magicalViewModel.layoutHeight - outsideBoxPaddingTop - outsideBoxPaddingBottom
-
+        
         return HStack(spacing: 0.0) {
             Spacer()
                 .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingLeft))
@@ -41,17 +41,17 @@ struct MagicalSexyCheckBoxButtonStyle: ButtonStyle {
                 ZStack {
                     
                 }
-                    .frame(width: CGFloat(boxWidth),
-                           height: CGFloat(boxHeight))
-                    .background(getStrokeRect(isPressed: isPressed))
-                    .background(getFillRect(isPressed: isPressed))
+                .frame(width: CGFloat(boxWidth),
+                       height: CGFloat(boxHeight))
+                .background(getStrokeRect(isPressed: isPressed))
+                .background(getFillRect(isPressed: isPressed))
                 
                 Spacer()
                     .frame(height: CGFloat(outsideBoxPaddingBottom))
             }
             
             Spacer()
-            .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight))
+                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight))
         }
     }
     
@@ -175,7 +175,7 @@ struct MagicalSexyCheckBoxButtonStyle: ButtonStyle {
                 .background(Color(red: 0.55, green: 0.35, blue: 0.84, opacity: 0.40))
 #else
             Spacer()
-            .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight))
+                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight))
 #endif
         }
     }

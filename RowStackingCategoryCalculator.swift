@@ -32,6 +32,29 @@ class RowStackingCategoryCalculator {
                           width: Int,
                           layoutStackingCategory: ToolInterfaceLayoutStackingCategory) -> Int {
         switch node.flex {
+            
+        case .createSwatch(let flexLongData):
+            if layoutStackingCategory.isSmall {
+                return flexLongData.standardWidthSmall
+            } else if layoutStackingCategory.isMedium {
+                return flexLongData.standardWidthMedium
+            } else {
+                return flexLongData.standardWidthLarge
+            }
+            
+        case .sexyStepper(let flexConvertible):
+            if layoutStackingCategory.isStepperLong {
+                return flexConvertible.standardWidthLong
+            } else {
+                if layoutStackingCategory.isSmall {
+                    return flexConvertible.standardWidthStackedSmall
+                } else if layoutStackingCategory.isMedium {
+                    return flexConvertible.standardWidthStackedMedium
+                } else {
+                    return flexConvertible.standardWidthStackedLarge
+                }
+            }
+            
         case .segment(let flexConvertible):
             if layoutStackingCategory.isSegmentLong {
                 return flexConvertible.standardWidthLong
@@ -94,14 +117,7 @@ class RowStackingCategoryCalculator {
                 }
             }
             
-        case .sexyStepper(let flexSexyStepperData):
-            if layoutStackingCategory.isSmall {
-                return flexSexyStepperData.standardWidthSmall
-            } else if layoutStackingCategory.isMedium {
-                return flexSexyStepperData.standardWidthMedium
-            } else {
-                return flexSexyStepperData.standardWidthLarge
-            }
+        
         
         
         
@@ -113,16 +129,13 @@ class RowStackingCategoryCalculator {
             return flexSpacerData.defaultWidth
         case .dividerSpacerDivider(let flexDividerSpacerDividerData):
             return flexDividerSpacerDividerData.standardWidth
-        case .iconButton(let flexIconButtonData):
-            return flexIconButtonData.standardWidth
-        
-        case .greenButton(let flexLong):
+        case .greenButton(let flexLongData):
             if layoutStackingCategory.isSmall {
-                return flexLong.standardWidthSmall
+                return flexLongData.standardWidthSmall
             } else if layoutStackingCategory.isMedium {
-                return flexLong.standardWidthMedium
+                return flexLongData.standardWidthMedium
             } else {
-                return flexLong.standardWidthLarge
+                return flexLongData.standardWidthLarge
             }
         case .mainTab(let flexMainTabData):
             if layoutStackingCategory.isSmall {
@@ -132,25 +145,18 @@ class RowStackingCategoryCalculator {
             } else {
                 return flexMainTabData.standardWidthLarge
             }
-        case .createSwatch(let flexCreateSwatchData):
-            if layoutStackingCategory.isSmall {
-                return flexCreateSwatchData.standardWidthSmall
-            } else if layoutStackingCategory.isMedium {
-                return flexCreateSwatchData.standardWidthMedium
-            } else {
-                return flexCreateSwatchData.standardWidthLarge
-            }
-        case .slider(let flexSliderData):
-            switch flexSliderData.widthCategory {
+        
+        case .slider(let flexLongData, let widthCategory):
+            switch widthCategory {
             case .fullWidth:
                 return width
             case .stretch:
                 if layoutStackingCategory.isSmall {
-                    return flexSliderData.standardWidthSmall
+                    return flexLongData.standardWidthSmall
                 } else if layoutStackingCategory.isMedium {
-                    return flexSliderData.standardWidthMedium
+                    return flexLongData.standardWidthMedium
                 } else {
-                    return flexSliderData.standardWidthLarge
+                    return flexLongData.standardWidthLarge
                 }
             case .halfWidthLeft:
                 return (width / 2)

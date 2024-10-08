@@ -30,7 +30,7 @@ struct MagicalGreenButtonButtonStyle: ButtonStyle {
         
         let boxWidth = magicalViewModel.layoutWidth - magicalViewModel.outsideBoxPaddingLeft - magicalViewModel.outsideBoxPaddingRight
         let boxHeight = magicalViewModel.layoutHeight - outsideBoxPaddingTop - outsideBoxPaddingBottom
-
+        
         return HStack(spacing: 0.0) {
             Spacer()
                 .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingLeft))
@@ -41,17 +41,17 @@ struct MagicalGreenButtonButtonStyle: ButtonStyle {
                 ZStack {
                     
                 }
-                    .frame(width: CGFloat(boxWidth),
-                           height: CGFloat(boxHeight))
-                    .background(getStrokeRect(isPressed: isPressed))
-                    .background(getFillRect(isPressed: isPressed))
+                .frame(width: CGFloat(boxWidth),
+                       height: CGFloat(boxHeight))
+                .background(getStrokeRect(isPressed: isPressed))
+                .background(getFillRect(isPressed: isPressed))
                 
                 Spacer()
                     .frame(height: CGFloat(outsideBoxPaddingBottom))
             }
             
             Spacer()
-            .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight))
+                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight))
         }
     }
     
@@ -142,9 +142,9 @@ struct MagicalGreenButtonButtonStyle: ButtonStyle {
                 
                 
                 MagicalGreenButtonContent(layoutSchemeFlavor: layoutSchemeFlavor,
-                                           isPressed: isPressed,
-                                           layoutWidth: contentLayoutWidth,
-                                           layoutHeight: contentLayoutHeight)
+                                          isPressed: isPressed,
+                                          layoutWidth: contentLayoutWidth,
+                                          layoutHeight: contentLayoutHeight)
                 
 #if INTERFACE_HINTS
                 Spacer()
@@ -162,47 +162,8 @@ struct MagicalGreenButtonButtonStyle: ButtonStyle {
                 .background(Color(red: 0.86, green: 0.00, blue: 0.63, opacity: 0.40))
 #else
             Spacer()
-            .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight))
+                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight))
 #endif
         }
     }
 }
-
-
-/*
-import SwiftUI
-
-struct MagicalGreenButtonButtonStyle: ButtonStyle {
-    
-    @Environment(MagicalGreenButtonViewModel.self) var magicalGreenButtonViewModel: MagicalGreenButtonViewModel
-    
-    let orientation: Orientation
-    let universalPaddingTop: Int
-    let universalPaddingBottom: Int
-    let layoutWidth: Int
-    
-    func makeBody(configuration: Configuration) -> some View {
-        return ZStack {
-            bodyContent(isPressed: configuration.isPressed)
-                .transaction { transaction in
-                    transaction.animation = nil
-                }
-        }
-        .frame(width: CGFloat(layoutWidth),
-               height: CGFloat(magicalGreenButtonViewModel.layoutHeight))
-        
-    }
-    
-    func bodyContent(isPressed: Bool) -> some View {
-        return HStack(spacing: 0.0) {
-            MagicalGreenButtonContent(orientation: orientation,
-                                         isPressed: isPressed,
-                                         universalPaddingTop: universalPaddingTop,
-                                         universalPaddingBottom: universalPaddingBottom,
-                                         layoutWidth: layoutWidth)
-        }
-        .frame(width: CGFloat(layoutWidth),
-               height: CGFloat(magicalGreenButtonViewModel.layoutHeight))
-    }
-}
-*/

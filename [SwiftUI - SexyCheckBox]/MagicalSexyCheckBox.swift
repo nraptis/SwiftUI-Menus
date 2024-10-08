@@ -41,5 +41,4 @@ struct MagicalSexyCheckBox: View {
                                          outsideBoxPaddingTop: outsideBoxPaddingTop,
                                          outsideBoxPaddingBottom: outsideBoxPaddingBottom)
     }
-    
 }

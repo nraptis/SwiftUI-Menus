@@ -23,8 +23,8 @@ struct MagicalEnterModeButton: View {
                    height: CGFloat(magicalViewModel.layoutHeight))
         }
         .buttonStyle(MagicalEnterModeButtonStyle(layoutSchemeFlavor: layoutSchemeFlavor,
-                                                    outsideBoxPaddingTop: outsideBoxPaddingTop,
-                                                    outsideBoxPaddingBottom: outsideBoxPaddingBottom))
+                                                 outsideBoxPaddingTop: outsideBoxPaddingTop,
+                                                 outsideBoxPaddingBottom: outsideBoxPaddingBottom))
         
     }
 }

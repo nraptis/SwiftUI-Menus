@@ -30,7 +30,6 @@ struct MagicalDividerSpacerDivider: View {
     
     func bodyContent() -> some View {
         
-        
         let isDarkMode = magicalViewModel.isDarkModeEnabled
         let orientation = magicalViewModel.orientation
         let twoDividersThreshold = DividerLayout.getMinimumLengthForSpacerDividerSpacerToHaveTwoDividers(orientation: orientation)

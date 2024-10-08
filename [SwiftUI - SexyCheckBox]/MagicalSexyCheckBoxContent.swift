@@ -38,16 +38,16 @@ struct MagicalSexyCheckBoxContent: View {
                                                           isDarkMode: isDarkMode,
                                                           isEnabled: isEnabled)
         let checkBoxSquare = FramedLongIconLibrary.checkBoxSquare.getTextIcon(orientation: orientation,
-                                                                                     layoutSchemeFlavor: .long,
-                                                                                     numberOfLines: 0,
-                                                                                     isDarkMode: isDarkMode,
-                                                                                     isEnabled: isEnabled)
+                                                                              layoutSchemeFlavor: .long,
+                                                                              numberOfLines: 0,
+                                                                              isDarkMode: isDarkMode,
+                                                                              isEnabled: isEnabled)
         
         let checkBoxCheck = FramedLongIconLibrary.checkBoxCheck.getTextIcon(orientation: orientation,
-                                                                                   layoutSchemeFlavor: .long,
-                                                                                   numberOfLines: 0,
-                                                                                   isDarkMode: isDarkMode,
-                                                                                   isEnabled: isEnabled)
+                                                                            layoutSchemeFlavor: .long,
+                                                                            numberOfLines: 0,
+                                                                            isDarkMode: isDarkMode,
+                                                                            isEnabled: isEnabled)
         
         let line1 = configuration.nameLabelLine1
         let line2 = configuration.nameLabelLine2

@@ -89,9 +89,6 @@ struct ToolRowViewContent: View {
         case .sexyStepper:
             MagicalSexyStepper()
                 .environment((toolNode.magicalViewModel as! MagicalSexyStepperViewModel))
-        case .iconButton:
-            MagicalIconButton()
-                .environment((toolNode.magicalViewModel as! MagicalIconButtonViewModel))
         case .greenButton:
             MagicalGreenButton()
                 .environment((toolNode.magicalViewModel as! MagicalGreenButtonViewModel))

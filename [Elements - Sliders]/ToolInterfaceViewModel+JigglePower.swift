@@ -16,7 +16,8 @@ extension ToolInterfaceViewModel {
         let textLine1 = ToolInterfaceStringLibrarySliders.sliderTextJigglePowerLine1()
         let textLine2 = ToolInterfaceStringLibrarySliders.sliderTextJigglePowerLine2()
         
-        var friendLabel1Line1: String?; var friendLabel1Line2: String?
+        var friendLabel1Line1 = ToolInterfaceStringLibrarySliders.sliderTextJiggleSpeedLine1()
+        var friendLabel1Line2 = ToolInterfaceStringLibrarySliders.sliderTextJiggleSpeedLine2()
         var friendLabel2Line1: String?; var friendLabel2Line2: String?
         var friendLabel3Line1: String?; var friendLabel3Line2: String?
         var friendLabel4Line1: String?; var friendLabel4Line2: String?

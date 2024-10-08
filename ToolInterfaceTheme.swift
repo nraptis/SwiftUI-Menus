@@ -93,6 +93,9 @@ struct ToolInterfaceTheme {
         if ApplicationController.TEST_ROW_BOTTOM_3 {
             result += 1
         }
+        if ApplicationController.TEST_ROW_BOTTOM_4 {
+            result += 1
+        }
         
         return result
     }
@@ -118,6 +121,9 @@ struct ToolInterfaceTheme {
         if ApplicationController.TEST_ROW_BOTTOM_3 {
             result += 1
         }
+        if ApplicationController.TEST_ROW_BOTTOM_4 {
+            result += 1
+        }
         return result
     }
     
@@ -140,6 +146,9 @@ struct ToolInterfaceTheme {
             result += 1
         }
         if ApplicationController.TEST_ROW_BOTTOM_3 {
+            result += 1
+        }
+        if ApplicationController.TEST_ROW_BOTTOM_4 {
             result += 1
         }
         return result
@@ -172,6 +181,9 @@ struct ToolInterfaceTheme {
             result += 1
         }
         if ApplicationController.TEST_ROW_BOTTOM_3 {
+            result += 1
+        }
+        if ApplicationController.TEST_ROW_BOTTOM_4 {
             result += 1
         }
         return result
@@ -440,6 +452,9 @@ struct ToolInterfaceTheme {
             if ApplicationController.TEST_ROW_BOTTOM_3 {
                 result += 1
             }
+            if ApplicationController.TEST_ROW_BOTTOM_4 {
+                result += 1
+            }
             return result
         case .portrait:
             var result = 3
@@ -450,6 +465,9 @@ struct ToolInterfaceTheme {
                 result += 1
             }
             if ApplicationController.TEST_ROW_BOTTOM_3 {
+                result += 1
+            }
+            if ApplicationController.TEST_ROW_BOTTOM_4 {
                 result += 1
             }
             return result
@@ -467,6 +485,9 @@ struct ToolInterfaceTheme {
         if ApplicationController.TEST_ROW_BOTTOM_3 {
             result += 1
         }
+        if ApplicationController.TEST_ROW_BOTTOM_4 {
+            result += 1
+        }
         return result
     }
     
@@ -481,6 +502,9 @@ struct ToolInterfaceTheme {
         if ApplicationController.TEST_ROW_BOTTOM_3 {
             result += 1
         }
+        if ApplicationController.TEST_ROW_BOTTOM_4 {
+            result += 1
+        }
         return result
     }
     
@@ -493,6 +517,9 @@ struct ToolInterfaceTheme {
             result += 1
         }
         if ApplicationController.TEST_ROW_BOTTOM_3 {
+            result += 1
+        }
+        if ApplicationController.TEST_ROW_BOTTOM_4 {
             result += 1
         }
         return result

@@ -31,7 +31,7 @@ class ToolRowView: UIView {
         self.translatesAutoresizingMaskIntoConstraints = false
         
         self.backgroundColor = ToolInterfaceTheme._toolbarBackground
-        
+        self.clipsToBounds = true
         
         let height = ToolInterfaceTheme.getRowHeight(orientation: orientation)
         hostingControllerCurrent = UIHostingController(rootView: ToolRowViewContent(toolRow: toolRow,

@@ -9,6 +9,35 @@ import Foundation
 
 struct FramedConvertibleIconLibrary {
     
+    static var testArrowLeft: FramedConvertibleIconPack {
+        Self.build(prefix: "framed",
+                  name: "test_arrow_left",
+                  widthPad_0: 36, heightPad_0: 42,
+                  widthPhoneLandscape_0: 24, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 28, heightPhonePortrait_0: 32,
+                  widthPad_1: 31, heightPad_1: 35,
+                  widthPhoneLandscape_1: 21, heightPhoneLandscape_1: 24,
+                  widthPhonePortrait_1: 26, heightPhonePortrait_1: 30,
+                  widthPad_2: 20, heightPad_2: 23,
+                  widthPhoneLandscape_2: 14, heightPhoneLandscape_2: 16,
+                  widthPhonePortrait_2: 18, heightPhonePortrait_2: 20)
+    }
+
+
+    static var testArrowRight: FramedConvertibleIconPack {
+        Self.build(prefix: "framed",
+                  name: "test_arrow_right",
+                  widthPad_0: 36, heightPad_0: 42,
+                  widthPhoneLandscape_0: 24, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 28, heightPhonePortrait_0: 32,
+                  widthPad_1: 31, heightPad_1: 35,
+                  widthPhoneLandscape_1: 21, heightPhoneLandscape_1: 24,
+                  widthPhonePortrait_1: 26, heightPhonePortrait_1: 30,
+                  widthPad_2: 20, heightPad_2: 23,
+                  widthPhoneLandscape_2: 14, heightPhoneLandscape_2: 16,
+                  widthPhonePortrait_2: 18, heightPhonePortrait_2: 20)
+    }
+    
     static var menuA: FramedConvertibleIconPack {
         Self.build(prefix: "framed",
                   name: "menu_a",

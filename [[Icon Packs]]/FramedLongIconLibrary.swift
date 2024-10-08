@@ -9,6 +9,22 @@ import Foundation
 
 struct FramedLongIconLibrary {
     
+    static var testArrowLeft: FramedLongIconPack {
+        Self.build(prefix: "framed",
+                   name: "test_arrow_left",
+                   widthPad_0: 36, heightPad_0: 42,
+                   widthPhoneLandscape_0: 24, heightPhoneLandscape_0: 27,
+                   widthPhonePortrait_0: 28, heightPhonePortrait_0: 32)
+    }
+
+
+    static var testArrowRight: FramedLongIconPack {
+        Self.build(prefix: "framed",
+                   name: "test_arrow_right",
+                   widthPad_0: 36, heightPad_0: 42,
+                   widthPhoneLandscape_0: 24, heightPhoneLandscape_0: 27,
+                   widthPhonePortrait_0: 28, heightPhonePortrait_0: 32)
+    }
     
     static var checkBoxSquare: FramedLongIconPack {
         Self.build(prefix: "framed",

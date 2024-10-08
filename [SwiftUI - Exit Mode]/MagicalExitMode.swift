@@ -38,8 +38,8 @@ struct MagicalExitMode: View {
         let outsideBoxPaddingTop = ExitModeLayout.getOutsideBoxPaddingTop(orientation: magicalViewModel.orientation)
         let outsideBoxPaddingBottom = ExitModeLayout.getOutsideBoxPaddingTop(orientation: magicalViewModel.orientation)
         return MagicalExitModeButton(layoutSchemeFlavor: layoutSchemeFlavor,
-                                         outsideBoxPaddingTop: outsideBoxPaddingTop,
-                                         outsideBoxPaddingBottom: outsideBoxPaddingBottom)
+                                     outsideBoxPaddingTop: outsideBoxPaddingTop,
+                                     outsideBoxPaddingBottom: outsideBoxPaddingBottom)
     }
     
 }

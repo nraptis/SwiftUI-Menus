@@ -32,8 +32,8 @@ struct MagicalSliderGuts: View {
         
         let valueLabelFont = SliderLayout.getValueLabelFont(orientation: orientation, flavor: layoutSchemeFlavor)
         
-        let slavePaddingLeft = magicalViewModel.slavePaddingLeft
-        let slavePaddingRight = magicalViewModel.slavePaddingRight
+        let valuePaddingLeft = magicalViewModel.valuePaddingLeft
+        let valuePaddingRight = magicalViewModel.valuePaddingRight
         
         let realNameLabelTextWidth: Int
         let layoutNameLabelTextWidth: Int
@@ -56,7 +56,7 @@ struct MagicalSliderGuts: View {
         let lineHeight = ToolInterfaceTheme.getLineHeight(font: nameLabelFont)
         let nameLabelWidth = realNameLabelTextWidth + heroPaddingLeft + heroPaddingRight
         
-        let valueLabelWidth = slavePaddingLeft + valueLabelTextWidth + slavePaddingRight
+        let valueLabelWidth = valuePaddingLeft + valueLabelTextWidth + valuePaddingRight
         
         let nameLabelSpace = layoutNameLabelTextWidth + heroPaddingLeft + heroPaddingRight
         
@@ -119,35 +119,25 @@ struct MagicalSliderGuts: View {
                 
 #if INTERFACE_HINTS
                 Spacer()
-                    .frame(width: CGFloat(slavePaddingLeft), height: 12.0)
+                    .frame(width: CGFloat(valuePaddingLeft), height: 12.0)
                     .background(Color(red: 0.98, green: 0.65, blue: 0.125, opacity: 0.5))
 #else
                 Spacer()
-                    .frame(width: CGFloat(slavePaddingLeft))
+                    .frame(width: CGFloat(valuePaddingLeft))
 #endif
                 
-                
-                Text(magicalViewModel.getValueString())
+                Text(magicalViewModel.valueString)
                         .font(Font(valueLabelFont))
                         .fixedSize(horizontal: true, vertical: false)
                         .foregroundColor(textColor)
                 
 #if INTERFACE_HINTS
-                Spacer(minLength: 0.0)
-                    .frame(height: 12.0)
-                    .background(Color(red: 0.98, green: 1.0, blue: 0.98, opacity: 0.5))
-#else
-                Spacer(minLength: 0.0)
-#endif
-                
-                
-#if INTERFACE_HINTS
                 Spacer()
-                    .frame(width: CGFloat(slavePaddingRight), height: 12.0)
+                    .frame(width: CGFloat(valuePaddingRight), height: 12.0)
                     .background(Color(red: 0.98, green: 0.65, blue: 0.125, opacity: 0.5))
 #else
                 Spacer()
-                    .frame(width: CGFloat(slavePaddingRight))
+                    .frame(width: CGFloat(valuePaddingRight))
 #endif
                 
             }

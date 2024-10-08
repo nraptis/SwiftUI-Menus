@@ -44,17 +44,17 @@ struct MagicalSegmentedPickerSegmentButtonButtonStyle: ButtonStyle {
                 ZStack {
                     
                 }
-                    .frame(width: CGFloat(boxWidth),
-                           height: CGFloat(boxHeight))
-                    .background(getStrokeRect(isPressed: isPressed))
-                    .background(getFillRect(isPressed: isPressed))
+                .frame(width: CGFloat(boxWidth),
+                       height: CGFloat(boxHeight))
+                .background(getStrokeRect(isPressed: isPressed))
+                .background(getFillRect(isPressed: isPressed))
                 
                 Spacer()
                     .frame(height: CGFloat(outsideBoxPaddingBottom))
             }
             
             Spacer()
-            .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight))
+                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight))
         }
     }
     
@@ -173,7 +173,7 @@ struct MagicalSegmentedPickerSegmentButtonButtonStyle: ButtonStyle {
                 .background(Color(red: 0.86, green: 0.00, blue: 0.63, opacity: 0.40))
 #else
             Spacer()
-            .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight))
+                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight))
 #endif
         }
     }

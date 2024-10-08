@@ -946,7 +946,6 @@ class ToolRow {
                            safeAreaLeft: Int,
                            safeAreaRight: Int) {
         
-        
         let width = (menuWidthWithSafeArea - safeAreaLeft - safeAreaRight)
         
         let layoutStackingCategory = ToolInterfaceViewModel.calculateLayoutStackingCategory(orientation: orientation,
@@ -966,13 +965,40 @@ class ToolRow {
         let isModeSwitchLong = layoutStackingCategory.isModeSwitchLong
         let isCheckBoxLong = layoutStackingCategory.isCheckBoxLong
         let isSegmentLong = layoutStackingCategory.isSegmentLong
+        let isStepperLong = layoutStackingCategory.isStepperLong
         
         var layoutNodes = [LayoutNode]()
         let rowContentWidth = (menuWidthWithSafeArea - (safeAreaLeft + safeAreaRight))
         for node in nodes {
             let layoutNode = LayoutNode()
             switch node.flex {
-                
+            case .sexyStepper(let flexConvertibleData):
+                if isStepperLong {
+                    layoutNode.width = flexConvertibleData.squeezedWidthLong
+                    layoutNode.layoutWidthHigh = flexConvertibleData.standardWidthLong
+                    layoutNode.layoutWidthMedium = flexConvertibleData.relaxedWidthLong
+                    layoutNode.layoutWidthLow = flexConvertibleData.relaxedWidthLong
+                    
+                } else {
+                    if isSmall {
+                        layoutNode.width = flexConvertibleData.squeezedWidthStackedSmall
+                        layoutNode.layoutWidthHigh = flexConvertibleData.standardWidthStackedSmall
+                        layoutNode.layoutWidthMedium = flexConvertibleData.relaxedWidthStackedSmall
+                        layoutNode.layoutWidthLow = flexConvertibleData.relaxedWidthStackedSmall
+                        
+                    } else if isMedium {
+                        layoutNode.width = flexConvertibleData.squeezedWidthStackedMedium
+                        layoutNode.layoutWidthHigh = flexConvertibleData.standardWidthStackedMedium
+                        layoutNode.layoutWidthMedium = flexConvertibleData.relaxedWidthStackedMedium
+                        layoutNode.layoutWidthLow = flexConvertibleData.relaxedWidthStackedMedium
+                        
+                    } else {
+                        layoutNode.width = flexConvertibleData.squeezedWidthStackedLarge
+                        layoutNode.layoutWidthHigh = flexConvertibleData.standardWidthStackedLarge
+                        layoutNode.layoutWidthMedium = flexConvertibleData.relaxedWidthStackedLarge
+                        layoutNode.layoutWidthLow = flexConvertibleData.relaxedWidthStackedLarge
+                    }
+                }
             case .createSwatch(let flexLongData):
                 
                 if isSmall {
@@ -1170,26 +1196,9 @@ class ToolRow {
                         layoutNode.layoutWidthLow = flexConvertibleData.relaxedWidthStackedLarge
                     }
                 }
-            case .sexyStepper(let flexSexyStepperData):
-                if isSmall {
-                    layoutNode.width = flexSexyStepperData.minimumWidthSmall
-                    layoutNode.layoutWidthHigh = flexSexyStepperData.standardWidthSmall
-                    layoutNode.layoutWidthMedium = flexSexyStepperData.standardWidthSmall
-                    layoutNode.layoutWidthLow = flexSexyStepperData.relaxedWidthSmall
-                } else if isMedium {
-                    layoutNode.width = flexSexyStepperData.minimumWidthMedium
-                    layoutNode.layoutWidthHigh = flexSexyStepperData.standardWidthMedium
-                    layoutNode.layoutWidthMedium = flexSexyStepperData.standardWidthMedium
-                    layoutNode.layoutWidthLow = flexSexyStepperData.relaxedWidthMedium
-                } else {
-                    layoutNode.width = flexSexyStepperData.minimumWidthLarge
-                    layoutNode.layoutWidthHigh = flexSexyStepperData.standardWidthLarge
-                    layoutNode.layoutWidthMedium = flexSexyStepperData.standardWidthLarge
-                    layoutNode.layoutWidthLow = flexSexyStepperData.relaxedWidthLarge
-                }
-            case .slider(let flexSliderData):
+            case .slider(let flexLongData, let widthCategory):
                 let width: Int
-                switch flexSliderData.widthCategory {
+                switch widthCategory {
                 case .fullWidth:
                     width = rowContentWidth
                     layoutNode.width = width
@@ -1199,19 +1208,19 @@ class ToolRow {
                     layoutNode.minimumWidth = width
                 case .stretch:
                     if isSmall {
-                        layoutNode.width = flexSliderData.minimumWidthSmall
-                        layoutNode.layoutWidthHigh = flexSliderData.standardWidthSmall
-                        layoutNode.layoutWidthMedium = max(flexSliderData.standardWidthSmall, rowContentWidth / 2)
+                        layoutNode.width = flexLongData.squeezedWidthSmall
+                        layoutNode.layoutWidthHigh = flexLongData.standardWidthSmall
+                        layoutNode.layoutWidthMedium = flexLongData.relaxedWidthSmall
                         layoutNode.layoutWidthLow = 100_000_000
                     } else if isMedium {
-                        layoutNode.width = flexSliderData.minimumWidthMedium
-                        layoutNode.layoutWidthHigh = flexSliderData.standardWidthMedium
-                        layoutNode.layoutWidthMedium = max(flexSliderData.standardWidthSmall, rowContentWidth / 2)
+                        layoutNode.width = flexLongData.squeezedWidthMedium
+                        layoutNode.layoutWidthHigh = flexLongData.standardWidthMedium
+                        layoutNode.layoutWidthMedium = flexLongData.relaxedWidthMedium
                         layoutNode.layoutWidthLow = 100_000_000
                     } else {
-                        layoutNode.width = flexSliderData.minimumWidthLarge
-                        layoutNode.layoutWidthHigh = flexSliderData.standardWidthLarge
-                        layoutNode.layoutWidthMedium = max(flexSliderData.standardWidthSmall, rowContentWidth / 2)
+                        layoutNode.width = flexLongData.squeezedWidthLarge
+                        layoutNode.layoutWidthHigh = flexLongData.standardWidthLarge
+                        layoutNode.layoutWidthMedium = flexLongData.relaxedWidthLarge
                         layoutNode.layoutWidthLow = 100_000_000
                     }
                 case .halfWidthLeft:
@@ -1234,11 +1243,7 @@ class ToolRow {
                 layoutNode.layoutWidthHigh = flexDividerSpacerDividerData.minimumWidth
                 layoutNode.layoutWidthMedium = flexDividerSpacerDividerData.standardWidth
                 layoutNode.layoutWidthLow = 100_000_000
-            case .iconButton(let flexIconButtonData):
-                layoutNode.width = flexIconButtonData.minimumWidth
-                layoutNode.layoutWidthHigh = flexIconButtonData.standardWidth
-                layoutNode.layoutWidthMedium = flexIconButtonData.standardWidth
-                layoutNode.layoutWidthLow = flexIconButtonData.relaxedWidth
+            
             case .fixed(let fixedWidth):
                 layoutNode.width = fixedWidth
                 layoutNode.layoutWidthHigh = fixedWidth

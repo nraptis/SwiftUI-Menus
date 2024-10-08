@@ -7,281 +7,247 @@
 
 import SwiftUI
 
-//struct MagicalSexyStepperContents: View {
-
 struct MagicalSexyStepperContent: View {
     
-    @Environment(MagicalSexyStepperViewModel.self) var magicalSexyStepperViewModel: MagicalSexyStepperViewModel
+    @Environment(MagicalSexyStepperViewModel.self) var magicalViewModel
     
-    let orientation: Orientation
     let layoutSchemeFlavor: LayoutSchemeFlavor
-    let isDarkMode: Bool
-    let isEnabled: Bool
-    let isIncrementEnabled: Bool
-    let isDecrementEnabled: Bool
-    
-    let universalPaddingLeft: Int
-    let universalPaddingRight: Int
-    let universalPaddingTop: Int
-    let universalPaddingBottom: Int
     let layoutWidth: Int
-    let valueString: String
+    let layoutHeight: Int
     
     var body: some View {
         
-        let configuration = magicalSexyStepperViewModel.sexyStepperConfiguration
+        let orientation = magicalViewModel.orientation
+        let configuration = magicalViewModel.sexyStepperConfiguration
+        let isDarkMode = magicalViewModel.isDarkModeEnabled
+        let isEnabled = magicalViewModel.isEnabled
         
-        let icon = configuration.iconPack.getTextIcon(orientation: orientation,
-                                                      layoutSchemeFlavor: layoutSchemeFlavor,
-                                                      numberOfLines: configuration.nameLabelNumberOfLines,
-                                                      isDarkMode: isDarkMode,
-                                                      isEnabled: isEnabled)
+        let valueLabelFont = SexyStepperLayout.getValueLabelFont(orientation: orientation, flavor: layoutSchemeFlavor)
         
-        let increment = configuration.incrementPack.getTextIcon(orientation: orientation,
-                                                                layoutSchemeFlavor: layoutSchemeFlavor,
-                                                                numberOfLines: configuration.nameLabelNumberOfLines,
-                                                                isDarkMode: isDarkMode,
-                                                                isEnabled: isEnabled && isIncrementEnabled)
+        let isLong: Bool
+        switch layoutSchemeFlavor {
+        case .long:
+            isLong = true
+        default:
+            isLong = false
+        }
         
-        let decrement = configuration.decrementPack.getTextIcon(orientation: orientation,
-                                                                layoutSchemeFlavor: layoutSchemeFlavor,
-                                                                numberOfLines: configuration.nameLabelNumberOfLines,
-                                                                isDarkMode: isDarkMode,
-                                                                isEnabled: isEnabled && isDecrementEnabled)
+        let numberOfLines = configuration.nameLabelNumberOfLines
+        let textIcon = configuration.iconPack.getTextIcon(orientation: orientation,
+                                                          layoutSchemeFlavor: layoutSchemeFlavor,
+                                                          numberOfLines: numberOfLines,
+                                                          isDarkMode: isDarkMode,
+                                                          isEnabled: isEnabled)
         
+        let incrementIcon = configuration.incrementPack.getTextIcon(orientation: orientation,
+                                                                    layoutSchemeFlavor: .long,
+                                                                    numberOfLines: 0,
+                                                                    isDarkMode: isDarkMode,
+                                                                    isEnabled: (isEnabled && magicalViewModel.isIncrementEnabled))
+        
+        let decrementIcon = FramedLongIconLibrary.testArrowLeft.getTextIcon(orientation: orientation,
+                                                                            layoutSchemeFlavor: .long,
+                                                                            numberOfLines: 0,
+                                                                            isDarkMode: isDarkMode,
+                                                                            isEnabled: (isEnabled && magicalViewModel.isDecrementEnabled))
         
         let line1 = configuration.nameLabelLine1
         let line2 = configuration.nameLabelLine2
         
-        let nameLabelNumberOfLines = configuration.nameLabelNumberOfLines
-        
         let nameLabelFont = SexyStepperLayout.getNameLabelFont(orientation: orientation,
-                                                               flavor: layoutSchemeFlavor)
-        
-        let nameLabelPaddingLeft = magicalSexyStepperViewModel.nameLabelPaddingLeft
-        let nameLabelPaddingRight = magicalSexyStepperViewModel.nameLabelPaddingRight
+                                                          flavor: layoutSchemeFlavor)
         let nameLabelVerticalSpacing = SexyStepperLayout.getNameLabelVerticalSpacing(orientation: orientation,
-                                                                                     flavor: layoutSchemeFlavor)
+                                                                                flavor: layoutSchemeFlavor)
         
-        let nameLabelTextWidth: Int
+        let nameLabelWidth: Int
+        let valueLabelWidth: Int
         switch layoutSchemeFlavor {
         case .long:
-            nameLabelTextWidth = configuration.nameLabelWidthLarge
+            nameLabelWidth = configuration.nameLabelWidthLong
+            valueLabelWidth = configuration.valueLabelWidthLarge
         case .stackedLarge:
-            nameLabelTextWidth = configuration.nameLabelWidthLarge
+            nameLabelWidth = configuration.nameLabelWidthStackedLarge
+            valueLabelWidth = configuration.valueLabelWidthLarge
         case .stackedMedium:
-            nameLabelTextWidth = configuration.nameLabelWidthMedium
+            nameLabelWidth = configuration.nameLabelWidthStackedMedium
+            valueLabelWidth = configuration.valueLabelWidthMedium
         case .stackedSmall:
-            nameLabelTextWidth = configuration.nameLabelWidthSmall
+            nameLabelWidth = configuration.nameLabelWidthStackedSmall
+            valueLabelWidth = configuration.valueLabelWidthSmall
         }
         
-        let nameLabelLineHeight = ToolInterfaceTheme.getLineHeight(font: nameLabelFont)
-        let nameLabelWidth = nameLabelTextWidth + nameLabelPaddingLeft + nameLabelPaddingRight
+        let lineHeight = ToolInterfaceTheme.getLineHeight(font: nameLabelFont)
         
-        
-        let valueLabelNumberOfLines = 1
-        
-        let valueLabelFont = SexyStepperLayout.getValueLabelFont(orientation: orientation,
-                                                                 flavor: layoutSchemeFlavor)
-        
-        
-        
-        
-        let valueLabelPaddingLeft = magicalSexyStepperViewModel.valueLabelPaddingLeft
-        let valueLabelPaddingRight = magicalSexyStepperViewModel.valueLabelPaddingRight
-        let valueLabelVerticalSpacing = 0
-        
-        let valueLabelTextWidth: Int
-        switch layoutSchemeFlavor {
-        case .long:
-            valueLabelTextWidth = configuration.valueLabelWidthLarge
-        case .stackedLarge:
-            valueLabelTextWidth = configuration.valueLabelWidthLarge
-        case .stackedMedium:
-            valueLabelTextWidth = configuration.valueLabelWidthMedium
-        case .stackedSmall:
-            valueLabelTextWidth = configuration.valueLabelWidthSmall
-        }
-        
-        let valueLabelLineHeight = ToolInterfaceTheme.getLineHeight(font: valueLabelFont)
-        let valueLabelWidth = valueLabelTextWidth + valueLabelPaddingLeft + valueLabelPaddingRight
-        
-        
-        let iconWidth = icon.width
-        let iconHeight = icon.height
-        
-        let iconPaddingLeft = magicalSexyStepperViewModel.iconPaddingLeft
-        let iconPaddingRight = magicalSexyStepperViewModel.iconPaddingRight
-        let iconPaddingTop = SexyStepperLayout.getIconPaddingTop(orientation: orientation,
-                                                                 flavor: layoutSchemeFlavor,
-                                                                 numberOfLines: nameLabelNumberOfLines)
-        
-        let incrementWidth = increment.width
-        let incrementHeight = increment.height
-        
-        let incrementPaddingLeft = magicalSexyStepperViewModel.incrementPaddingLeft
-        let incrementPaddingRight = magicalSexyStepperViewModel.incrementPaddingRight
-        let incrementPaddingTop = 0
-        
-        let decrementWidth = decrement.width
-        let decrementHeight = decrement.height
-        
-        let decrementPaddingLeft = magicalSexyStepperViewModel.decrementPaddingLeft
-        let decrementPaddingRight = magicalSexyStepperViewModel.decrementPaddingRight
-        let decrementPaddingTop = 0
-        
-        let contentHeight = magicalSexyStepperViewModel.layoutHeight - (universalPaddingTop + universalPaddingBottom)
-        
-        let color: Color
-        
-        if isDarkMode {
-            if isEnabled {
-                color = ToolInterfaceTheme.primaryEnabledDark
+        let textColor: Color
+        if magicalViewModel.isDarkModeEnabled {
+            if magicalViewModel.isEnabled {
+                textColor = ToolInterfaceTheme.primaryEnabledDark
             } else {
-                color = ToolInterfaceTheme.primaryDisabledDark
+                textColor = ToolInterfaceTheme.primaryDisabledDark
             }
         } else {
-            if isEnabled {
-                color = ToolInterfaceTheme.primaryEnabledLight
+            if magicalViewModel.isEnabled {
+                textColor = ToolInterfaceTheme.primaryEnabledLight
             } else {
-                color = ToolInterfaceTheme.primaryDisabledLight
+                textColor = ToolInterfaceTheme.primaryDisabledLight
             }
         }
         
+        let heroPaddingTopStacked = SexyStepperLayout.getHeroPaddingTopStacked(orientation: orientation)
+        let heroPaddingBottomStacked = SexyStepperLayout.getHeroPaddingBottomStacked(orientation: orientation)
         
-        let buttonUniversalPaddingLeft = magicalSexyStepperViewModel.buttonUniversalPaddingLeft
-        let buttonUniversalPaddingRight = magicalSexyStepperViewModel.buttonUniversalPaddingRight
+        let incrementWidth = incrementIcon.width
+        let incrementHeight = incrementIcon.height
+        let incrementContentWidth = incrementIcon.width + magicalViewModel.slavePaddingLeft + magicalViewModel.slavePaddingRight
         
-        return ZStack {
+        let decrementWidth = decrementIcon.width
+        let decrementHeight = decrementIcon.height
+        let decrementContentWidth = decrementIcon.width + magicalViewModel.accentPaddingLeft + magicalViewModel.accentPaddingRight
+        
+        let valueContentWith = valueLabelWidth + magicalViewModel.valuePaddingLeft + magicalViewModel.valuePaddingRight
+        
+        return HStack(spacing: 0.0) {
+            HeroSlab(orientation: orientation,
+                     layoutWidth: layoutWidth - incrementContentWidth - decrementContentWidth - valueContentWith,
+                     layoutHeight: layoutHeight,
+                     isLong: isLong,
+                     isPressed: false,
+                     textIcon: textIcon,
+                     heroPaddingLeft: magicalViewModel.heroPaddingLeft,
+                     heroPaddingRight: magicalViewModel.heroPaddingRight,
+                     heroPaddingTopStacked: heroPaddingTopStacked,
+                     heroPaddingBottomStacked: heroPaddingBottomStacked,
+                     heroSpacingLong: magicalViewModel.heroSpacing,
+                     line1: line1,
+                     line2: line2,
+                     numberOfLines: numberOfLines,
+                     nameLabelVerticalSpacing: nameLabelVerticalSpacing,
+                     nameLabelFont: nameLabelFont,
+                     nameLabelWidth: nameLabelWidth,
+                     lineHeight: lineHeight,
+                     nameLabelColor: textColor)
             
-            VStack(spacing: 0.0) {
+#if INTERFACE_HINTS
+            Spacer()
+                .frame(width: CGFloat(magicalViewModel.slavePaddingLeft), height: 24.0)
+                .background(Color(red: 0.35, green: 0.61, blue: 0.81, opacity: 0.40))
+#else
+            Spacer()
+                .frame(width: CGFloat(magicalViewModel.slavePaddingLeft))
+#endif
+            
+            Button {
+                magicalViewModel.handleDecrement()
+            } label: {
+                IconBoxMainTab(icon: decrementIcon,
+                               iconWidth: decrementWidth,
+                               iconHeight: decrementHeight,
+                               iconPaddingLeft: 0,
+                               iconPaddingRight: 0,
+                               iconPaddingTop: 0)
+            }
+            .disabled(!isEnabled || !magicalViewModel.isDecrementEnabled)
+            
+#if INTERFACE_HINTS
+            Spacer()
+                .frame(width: CGFloat(magicalViewModel.slavePaddingRight), height: 24.0)
+                .background(Color(red: 0.47, green: 0.87, blue: 0.16, opacity: 0.70))
+#else
+            Spacer()
+                .frame(width: CGFloat(magicalViewModel.slavePaddingRight))
+#endif
+            
+            
+            HStack(spacing: 0.0) {
+                
                 
 #if INTERFACE_HINTS
                 Spacer()
-                    .frame(width: 24.0, height: CGFloat(universalPaddingTop))
-                    .background(Color(red: 0.85, green: 0.65, blue: 0.55, opacity: 0.40))
+                    .frame(width: CGFloat(magicalViewModel.valuePaddingLeft), height: 12.0)
+                    .background(Color(red: 0.98, green: 0.65, blue: 0.125, opacity: 0.5))
 #else
                 Spacer()
-                    .frame(height: CGFloat(universalPaddingTop))
+                    .frame(width: CGFloat(magicalViewModel.valuePaddingLeft))
 #endif
                 
-                HStack(spacing: 0.0) {
-#if INTERFACE_HINTS
-                    Spacer()
-                        .frame(width: CGFloat(universalPaddingLeft), height: 28.0)
-                        .background(Color(red: 1.0, green: 0.0, blue: 1.0, opacity: 0.7))
-#else
-                    Spacer()
-                        .frame(width: CGFloat(universalPaddingLeft))
+                ZStack() {
+                    Text(magicalViewModel.valueString)
+                        .font(Font(valueLabelFont))
+                        .fixedSize(horizontal: true, vertical: false)
+                        .foregroundColor(textColor)
                     
-#endif
-                    
-#if INTERFACE_HINTS
-                    Spacer()
-                        .frame(width: CGFloat(buttonUniversalPaddingLeft), height: 28.0)
-                        .background(Color(red: 0.0, green: 1.0, blue: 0.0, opacity: 0.7))
-#else
-                    Spacer()
-                        .frame(width: CGFloat(buttonUniversalPaddingLeft))
-                    
-#endif
-                    
-                    ZStack {
-                        HStack(spacing: 0.0) {
-                            IconBoxMainTab(icon: icon,
-                                           iconWidth: iconWidth,
-                                           iconHeight: iconHeight,
-                                           iconPaddingLeft: iconPaddingLeft,
-                                           iconPaddingRight: iconPaddingRight,
-                                           iconPaddingTop: iconPaddingTop)
-                            LabelBox(line1: line1,
-                                     line2: line2,
-                                     numberOfLines: nameLabelNumberOfLines,
-                                     width: nameLabelWidth,
-                                     paddingLeft: nameLabelPaddingLeft,
-                                     paddingRight: nameLabelPaddingRight,
-                                     paddingBottom: 0,
-                                     lineHeight: nameLabelLineHeight,
-                                     spacingVertical: nameLabelVerticalSpacing,
-                                     font: nameLabelFont,
-                                     color: color)
-                            
-                            Button {
-                                magicalSexyStepperViewModel.handleDecrement()
-                            } label: {
-                                IconBoxMainTab(icon: decrement,
-                                               iconWidth: decrementWidth,
-                                               iconHeight: decrementHeight,
-                                               iconPaddingLeft: decrementPaddingLeft,
-                                               iconPaddingRight: decrementPaddingRight,
-                                               iconPaddingTop: decrementPaddingTop)
-                            }
-                            .disabled(!isEnabled || !isDecrementEnabled)
-                            
-                            
-                            
-                            LabelBox(line1: valueString,
-                                     line2: nil,
-                                     numberOfLines: valueLabelNumberOfLines,
-                                     width: valueLabelWidth,
-                                     paddingLeft: valueLabelPaddingLeft,
-                                     paddingRight: valueLabelPaddingRight,
-                                     paddingBottom: 0,
-                                     lineHeight: valueLabelLineHeight,
-                                     spacingVertical: valueLabelVerticalSpacing,
-                                     font: valueLabelFont,
-                                     color: color)
-                            
-                            Button {
-                                magicalSexyStepperViewModel.handleIncrement()
-                            } label: {
-                                IconBoxMainTab(icon: increment,
-                                               iconWidth: incrementWidth,
-                                               iconHeight: incrementHeight,
-                                               iconPaddingLeft: incrementPaddingLeft,
-                                               iconPaddingRight: incrementPaddingRight,
-                                               iconPaddingTop: incrementPaddingTop)
-                            }
-                            .disabled(!isEnabled || !isIncrementEnabled)
-                            
-                        }
-                    }
-                    .frame(height: CGFloat(contentHeight))
-                    
-#if INTERFACE_HINTS
-                    Spacer()
-                        .frame(width: CGFloat(buttonUniversalPaddingRight), height: 28.0)
-                        .background(Color(red: 0.6, green: 0.76, blue: 0.25, opacity: 0.7))
-#else
-                    Spacer()
-                        .frame(width: CGFloat(buttonUniversalPaddingRight))
-                    
-#endif
-                    
-#if INTERFACE_HINTS
-                    Spacer()
-                        .frame(width: CGFloat(universalPaddingRight), height: 28.0)
-                        .background(Color(red: 1.0, green: 0.75, blue: 0.25, opacity: 0.40))
-#else
-                    Spacer()
-                        .frame(width: CGFloat(universalPaddingRight))
-#endif
                 }
-                
-                
+                .frame(width: CGFloat(valueLabelWidth),
+                      height: CGFloat(layoutHeight))
+#if INTERFACE_HINTS
+                .overlay(Rectangle().stroke().foregroundStyle(
+                    LinearGradient(colors: [Color(red: 0.96, green: 0.45, blue: 0.45, opacity: 0.85),
+                                            Color(red: 0.96, green: 0.78, blue: 0.45, opacity: 0.85)], startPoint: .leading, endPoint: .trailing)))
+                .background(Rectangle().foregroundStyle(Color(red: 0.85, green: 0.45, blue: 0.85, opacity: 0.65)))
+#endif
                 
 #if INTERFACE_HINTS
                 Spacer()
-                    .frame(width: 24.0, height: CGFloat(universalPaddingBottom))
-                    .background(Color(red: 0.65, green: 0.85, blue: 0.75, opacity: 0.40))
+                    .frame(width: CGFloat(magicalViewModel.valuePaddingRight), height: 12.0)
+                    .background(Color(red: 0.98, green: 0.65, blue: 0.125, opacity: 0.5))
 #else
                 Spacer()
-                    .frame(height: CGFloat(universalPaddingBottom))
+                    .frame(width: CGFloat(magicalViewModel.valuePaddingRight))
 #endif
+                
                 
             }
+            .frame(width: CGFloat(valueContentWith),
+                   height: CGFloat(layoutHeight))
+#if INTERFACE_HINTS
+            .overlay(Rectangle().stroke().foregroundStyle(
+                LinearGradient(colors: [Color(red: 0.96, green: 0.45, blue: 0.45, opacity: 0.85),
+                                        Color(red: 0.96, green: 0.78, blue: 0.45, opacity: 0.85)], startPoint: .leading, endPoint: .trailing)))
+            .background(Rectangle().foregroundStyle(
+                LinearGradient(colors: [Color(red: 0.55, green: 0.98, blue: 0.25, opacity: 0.15),
+                                        Color(red: 0.45, green: 0.45, blue: 0.98, opacity: 0.15)], startPoint: .leading, endPoint: .trailing)))
+#endif
+            
+#if INTERFACE_HINTS
+            Spacer()
+                .frame(width: CGFloat(magicalViewModel.accentPaddingLeft), height: 24.0)
+                .background(Color(red: 0.35, green: 0.61, blue: 0.81, opacity: 0.40))
+#else
+            Spacer()
+                .frame(width: CGFloat(magicalViewModel.accentPaddingLeft))
+#endif
+            
+            Button {
+                magicalViewModel.handleIncrement()
+            } label: {
+                IconBoxMainTab(icon: incrementIcon,
+                               iconWidth: incrementWidth,
+                               iconHeight: incrementHeight,
+                               iconPaddingLeft: 0,
+                               iconPaddingRight: 0,
+                               iconPaddingTop: 0)
+            }
+            .disabled(!isEnabled || !magicalViewModel.isIncrementEnabled)
+            
+#if INTERFACE_HINTS
+            Spacer()
+                .frame(width: CGFloat(magicalViewModel.accentPaddingRight), height: 24.0)
+                .background(Color(red: 0.47, green: 0.87, blue: 0.16, opacity: 0.70))
+#else
+            Spacer()
+                .frame(width: CGFloat(magicalViewModel.accentPaddingRight))
+#endif
+            
         }
-        .frame(width: CGFloat(layoutWidth),
-               height: CGFloat(magicalSexyStepperViewModel.layoutHeight))
+#if INTERFACE_HINTS
+        .overlay(Rectangle().stroke().foregroundStyle(
+            LinearGradient(colors: [Color(red: 0.57, green: 0.28, blue: 0.61, opacity: 0.65),
+                                    Color(red: 0.65, green: 0.89, blue: 0.91, opacity: 0.65)], startPoint: .leading, endPoint: .trailing)))
+        .background(Rectangle().foregroundStyle(
+            LinearGradient(colors: [Color(red: 0.45, green: 0.48, blue: 0.52, opacity: 0.25),
+                                    Color(red: 0.05, green: 0.99, blue: 0.70, opacity: 0.25)], startPoint: .leading, endPoint: .trailing)))
+#endif
+        
     }
 }
+

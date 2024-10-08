@@ -44,6 +44,12 @@ struct MagicalSexyButtonContent: View {
                                                                               isDarkMode: isDarkMode,
                                                                               isEnabled: isEnabled)
         
+        let testArrowLeft = FramedLongIconLibrary.testArrowLeft.getTextIcon(orientation: orientation,
+                                                                            layoutSchemeFlavor: .long,
+                                                                            numberOfLines: 0,
+                                                                            isDarkMode: isDarkMode,
+                                                                            isEnabled: isEnabled)
+        
         let line1 = configuration.nameLabelLine1
         let line2 = configuration.nameLabelLine2
         
@@ -97,9 +103,14 @@ struct MagicalSexyButtonContent: View {
         let slaveHeight = checkBoxSquare.height
         let slaveContentWidth = checkBoxSquare.width + magicalViewModel.slavePaddingLeft + magicalViewModel.slavePaddingRight
         
+        
+        let accentWidth = testArrowLeft.width
+        let accentHeight = testArrowLeft.height
+        let accentContentWidth = testArrowLeft.width + magicalViewModel.accentPaddingLeft + magicalViewModel.accentPaddingRight
+        
         return HStack(spacing: 0.0) {
             HeroSlab(orientation: orientation,
-                     layoutWidth: layoutWidth - slaveContentWidth,
+                     layoutWidth: layoutWidth - slaveContentWidth - accentContentWidth,
                      layoutHeight: layoutHeight,
                      isLong: isLong,
                      isPressed: isPressed,
@@ -133,7 +144,7 @@ struct MagicalSexyButtonContent: View {
                            iconPaddingLeft: 0,
                            iconPaddingRight: 0,
                            iconPaddingTop: 0)
-
+            
 #if INTERFACE_HINTS
             Spacer()
                 .frame(width: CGFloat(magicalViewModel.slavePaddingRight), height: 24.0)
@@ -141,6 +152,32 @@ struct MagicalSexyButtonContent: View {
 #else
             Spacer()
                 .frame(width: CGFloat(magicalViewModel.slavePaddingRight))
+#endif
+            
+            
+#if INTERFACE_HINTS
+            Spacer()
+                .frame(width: CGFloat(magicalViewModel.accentPaddingLeft), height: 24.0)
+                .background(Color(red: 0.35, green: 0.61, blue: 0.81, opacity: 0.40))
+#else
+            Spacer()
+                .frame(width: CGFloat(magicalViewModel.accentPaddingLeft))
+#endif
+            
+            IconBoxMainTab(icon: testArrowLeft,
+                           iconWidth: accentWidth,
+                           iconHeight: accentHeight,
+                           iconPaddingLeft: 0,
+                           iconPaddingRight: 0,
+                           iconPaddingTop: 0)
+            
+#if INTERFACE_HINTS
+            Spacer()
+                .frame(width: CGFloat(magicalViewModel.accentPaddingRight), height: 24.0)
+                .background(Color(red: 0.47, green: 0.87, blue: 0.16, opacity: 0.70))
+#else
+            Spacer()
+                .frame(width: CGFloat(magicalViewModel.accentPaddingRight))
 #endif
             
         }

@@ -19,3 +19,10 @@ protocol TextIconPackable {
                      isDarkMode: Bool,
                      isEnabled: Bool) -> (any TextIconable)
 }
+
+struct BlankTextIconPack: TextIconPackable {
+    let icon = BlankTextIcon()
+    func getTextIcon(orientation: Orientation, layoutSchemeFlavor: LayoutSchemeFlavor, numberOfLines: Int, isDarkMode: Bool, isEnabled: Bool) -> (any TextIconable) {
+        return icon
+    }
+}

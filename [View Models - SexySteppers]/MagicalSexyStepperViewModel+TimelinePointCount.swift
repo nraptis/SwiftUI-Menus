@@ -14,9 +14,7 @@ import Foundation
         print("MagicalSexyStepperViewModel => handleIncrement()")
         if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel {
             toolInterfaceViewModel.toolActionTimelinePointCountIncrement()
-            Task { @MainActor in
-                refresh()
-            }
+            refresh()
         }
     }
     
@@ -24,9 +22,7 @@ import Foundation
         print("MagicalSexyStepperViewModel => handleDecrement()")
         if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel {
             toolInterfaceViewModel.toolActionTimelinePointCountDecrement()
-            Task { @MainActor in
-                refresh()
-            }
+            refresh()
         }
     }
     

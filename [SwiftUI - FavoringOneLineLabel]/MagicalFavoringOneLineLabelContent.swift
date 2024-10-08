@@ -14,7 +14,6 @@ struct MagicalFavoringOneLineLabelContent: View {
     let layoutWidth: Int
     let layoutHeight: Int
     
-    
     var body: some View {
         
         let orientation = magicalViewModel.orientation
@@ -61,18 +60,18 @@ struct MagicalFavoringOneLineLabelContent: View {
         }
         
         return ZStack {
-                LabelBox(line1: line1,
-                         line2: line2,
-                         numberOfLines: numberOfLines,
-                         width: nameLabelWidth,
-                         paddingLeft: 0,
-                         paddingRight: 0,
-                         paddingBottom: 0,
-                         lineHeight: lineHeight,
-                         spacingVertical: nameLabelVerticalSpacing,
-                         font: nameLabelFont,
-                         color: nameLabelColor)
-            }
+            LabelBox(line1: line1,
+                     line2: line2,
+                     numberOfLines: numberOfLines,
+                     width: nameLabelWidth,
+                     paddingLeft: 0,
+                     paddingRight: 0,
+                     paddingBottom: 0,
+                     lineHeight: lineHeight,
+                     spacingVertical: nameLabelVerticalSpacing,
+                     font: nameLabelFont,
+                     color: nameLabelColor)
+        }
         .frame(width: CGFloat(layoutWidth), height: CGFloat(layoutHeight))
 #if INTERFACE_HINTS
         .overlay(Rectangle().stroke().foregroundStyle(

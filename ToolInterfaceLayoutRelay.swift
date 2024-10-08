@@ -13,10 +13,10 @@ import Combine
     
     @ObservationIgnored var orientation = Orientation.portrait
     
-    var menuWidthWithSafeArea = 320
-    var rowHeight = 44
-    var safeAreaLeft: Int = 0
-    var safeAreaRight: Int = 0
-    var safeAreaTop: Int = 0
-    var safeAreaBottom: Int = 0
+    @MainActor var menuWidthWithSafeArea = 320
+    @MainActor var rowHeight = 44
+    @MainActor var safeAreaLeft: Int = 0
+    @MainActor var safeAreaRight: Int = 0
+    @MainActor var safeAreaTop: Int = 0
+    @MainActor var safeAreaBottom: Int = 0
 }

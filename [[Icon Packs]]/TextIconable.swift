@@ -15,3 +15,13 @@ protocol TextIconable {
     var orientation: Orientation? { get }
     func getImage() -> UIImage
 }
+
+struct BlankTextIcon: TextIconable {
+    let fileName = ""
+    let width = 0
+    let height = 0
+    let device = TextIconDevice.phone
+    let orientation: Orientation? = nil
+    let image = UIImage()
+    func getImage() -> UIImage { return image }
+}

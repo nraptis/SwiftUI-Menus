@@ -40,33 +40,4 @@ struct MagicalActiveSwatchButton: View {
         .frame(width: CGFloat(magicalViewModel.layoutWidth),
                height: CGFloat(magicalViewModel.layoutHeight))
     }
-    /*
-    var body: some View {
-        return ZStack {
-            bodyContent()
-        }
-        .frame(width: CGFloat(layoutWidth),
-               height: CGFloat(magicalCreateSwatchViewModel.layoutHeight))
-    }
-    
-    func bodyContent() -> some View {
-        Button {
-            magicalCreateSwatchViewModel.handleActiveSwatchClicked()
-        } label: {
-            HStack(spacing: 0.0) {
-                
-            }
-            .frame(width: CGFloat(layoutWidth),
-                   height: CGFloat(magicalCreateSwatchViewModel.layoutHeight))
-        }
-        .buttonStyle(MagicalActiveSwatchButtonStyle(orientation: orientation,
-                                                    layoutSchemeFlavor: layoutSchemeFlavor,
-                                                    buttonViewModel: buttonViewModel,
-                                                    universalPaddingTop: universalPaddingTop,
-                                                    universalPaddingBottom: universalPaddingBottom,
-                                                    isEnabled: isEnabled,
-                                                    isDarkMode: isDarkMode,
-                                                    layoutWidth: layoutWidth))
-    }
-    */
 }

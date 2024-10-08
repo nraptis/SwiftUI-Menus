@@ -9,6 +9,35 @@ import Foundation
 
 struct LooseConvertibleIconLibrary {
     
+    static var testArrowLeft: LooseConvertibleIconPack {
+        Self.build(prefix: "loose",
+                  name: "test_arrow_left",
+                  widthPad_0: 36, heightPad_0: 42,
+                  widthPhoneLandscape_0: 24, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 28, heightPhonePortrait_0: 32,
+                  widthPad_1: 32, heightPad_1: 37,
+                  widthPhoneLandscape_1: 23, heightPhoneLandscape_1: 26,
+                  widthPhonePortrait_1: 27, heightPhonePortrait_1: 31,
+                  widthPad_2: 22, heightPad_2: 25,
+                  widthPhoneLandscape_2: 15, heightPhoneLandscape_2: 17,
+                  widthPhonePortrait_2: 19, heightPhonePortrait_2: 21)
+    }
+
+
+    static var testArrowRight: LooseConvertibleIconPack {
+        Self.build(prefix: "loose",
+                  name: "test_arrow_right",
+                  widthPad_0: 36, heightPad_0: 42,
+                  widthPhoneLandscape_0: 24, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 28, heightPhonePortrait_0: 32,
+                  widthPad_1: 32, heightPad_1: 37,
+                  widthPhoneLandscape_1: 23, heightPhoneLandscape_1: 26,
+                  widthPhonePortrait_1: 27, heightPhonePortrait_1: 31,
+                  widthPad_2: 22, heightPad_2: 25,
+                  widthPhoneLandscape_2: 15, heightPhoneLandscape_2: 17,
+                  widthPhonePortrait_2: 19, heightPhonePortrait_2: 21)
+    }
+    
     static var menuA: LooseConvertibleIconPack {
         Self.build(prefix: "loose",
                   name: "menu_a",

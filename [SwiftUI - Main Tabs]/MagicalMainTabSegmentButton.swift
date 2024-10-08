@@ -28,10 +28,10 @@ struct MagicalMainTabSegmentButton: View {
                        height: CGFloat(magicalViewModel.layoutHeight))
             }
             .buttonStyle(MagicalMainTabSegmentButtonButtonStyle(layoutSchemeFlavor: layoutSchemeFlavor,
-                                                                        outsideBoxPaddingTop: outsideBoxPaddingTop,
-                                                                        outsideBoxPaddingBottom: outsideBoxPaddingBottom,
-                                                                        position: position,
-                                                                        isSelected: isSelected))
+                                                                outsideBoxPaddingTop: outsideBoxPaddingTop,
+                                                                outsideBoxPaddingBottom: outsideBoxPaddingBottom,
+                                                                position: position,
+                                                                isSelected: isSelected))
         }
         .frame(width: CGFloat(magicalButtonViewModel.layoutWidth),
                height: CGFloat(magicalViewModel.layoutHeight))

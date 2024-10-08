@@ -44,7 +44,7 @@ struct MagicalSexyButtonButtonStyle: ButtonStyle {
                 .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingLeft))
             
             VStack(spacing: 0.0) {
-
+                
                 Spacer()
                     .frame(height: CGFloat(outsideBoxPaddingTop))
                 
@@ -52,15 +52,15 @@ struct MagicalSexyButtonButtonStyle: ButtonStyle {
                     .frame(width: CGFloat(boxWidth),
                            height: CGFloat(boxHeight))
                     .foregroundStyle(contextColor)
-
+                
                 Spacer()
                     .frame(height: CGFloat(outsideBoxPaddingBottom))
-
+                
                 
             }
-
+            
             Spacer()
-            .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight))
+                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight))
         }
     }
     
@@ -91,9 +91,9 @@ struct MagicalSexyButtonButtonStyle: ButtonStyle {
 #endif
                 
                 MagicalSexyButtonContent(layoutSchemeFlavor: layoutSchemeFlavor,
-                                                isPressed: isPressed,
-                                                layoutWidth: contentLayoutWidth,
-                                                layoutHeight: contentLayoutHeight)
+                                         isPressed: isPressed,
+                                         layoutWidth: contentLayoutWidth,
+                                         layoutHeight: contentLayoutHeight)
                 
 #if INTERFACE_HINTS
                 Spacer()
@@ -111,7 +111,7 @@ struct MagicalSexyButtonButtonStyle: ButtonStyle {
                 .background(Color(red: 0.81, green: 0.96, blue: 0.57, opacity: 0.40))
 #else
             Spacer()
-            .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight))
+                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight))
 #endif
         }
     }

@@ -46,14 +46,19 @@ struct MagicalSegmentedPickerSegmentContent: View {
                                                                               isDarkMode: isDarkMode,
                                                                               isEnabled: isEnabled)
         
+        let testArrowLeft = FramedLongIconLibrary.testArrowRight.getTextIcon(orientation: orientation,
+                                                                             layoutSchemeFlavor: .long,
+                                                                             numberOfLines: 0,
+                                                                             isDarkMode: isDarkMode,
+                                                                             isEnabled: isEnabled)
         
         let line1 = configuration.nameLabelLine1
         let line2 = configuration.nameLabelLine2
         
         let nameLabelFont = SegmentedPickerLayout.getNameLabelFont(orientation: orientation,
-                                                          flavor: layoutSchemeFlavor)
+                                                                   flavor: layoutSchemeFlavor)
         let nameLabelVerticalSpacing = SegmentedPickerLayout.getNameLabelVerticalSpacing(orientation: orientation,
-                                                                                flavor: layoutSchemeFlavor)
+                                                                                         flavor: layoutSchemeFlavor)
         
         let nameLabelWidth: Int
         switch layoutSchemeFlavor {
@@ -116,7 +121,9 @@ struct MagicalSegmentedPickerSegmentContent: View {
         let slaveHeight = checkBoxSquare.height
         let slaveContentWidth = checkBoxSquare.width + magicalButtonViewModel.slavePaddingLeft + magicalButtonViewModel.slavePaddingRight
         
-        print("[eots] layoutWidth = \(layoutWidth)")
+        let accentWidth = testArrowLeft.width
+        let accentHeight = testArrowLeft.height
+        let accentContentWidth = testArrowLeft.width + magicalButtonViewModel.accentPaddingLeft + magicalButtonViewModel.accentPaddingRight
         
         var computedHeroWidth = 0
         switch layoutSchemeFlavor {
@@ -130,14 +137,10 @@ struct MagicalSegmentedPickerSegmentContent: View {
         computedHeroWidth += magicalButtonViewModel.heroPaddingLeft
         computedHeroWidth += magicalButtonViewModel.heroPaddingRight
         
-        print("[eots] computedHeroWidth: \(computedHeroWidth)")
-        print("[eots] computedSlaveWidth: \(slaveContentWidth)")
-        print("[eots] computedTotalWidth: \(computedHeroWidth + slaveContentWidth) =?= \(layoutWidth)")
-        
         
         return HStack(spacing: 0.0) {
             HeroSlab(orientation: orientation,
-                     layoutWidth: layoutWidth - slaveContentWidth,
+                     layoutWidth: layoutWidth - slaveContentWidth - accentContentWidth,
                      layoutHeight: layoutHeight,
                      isLong: isLong,
                      isPressed: isPressed,
@@ -156,32 +159,58 @@ struct MagicalSegmentedPickerSegmentContent: View {
                      lineHeight: lineHeight,
                      nameLabelColor: nameLabelColor)
             
-            HStack(spacing: 0.0) {
 #if INTERFACE_HINTS
-                Spacer()
-                    .frame(width: CGFloat(magicalButtonViewModel.slavePaddingLeft), height: 24.0)
-                    .background(Color(red: 0.35, green: 0.61, blue: 0.81, opacity: 0.40))
+            Spacer()
+                .frame(width: CGFloat(magicalButtonViewModel.slavePaddingLeft), height: 24.0)
+                .background(Color(red: 0.35, green: 0.61, blue: 0.81, opacity: 0.40))
 #else
-                Spacer()
-                    .frame(width: CGFloat(magicalButtonViewModel.slavePaddingLeft))
+            Spacer()
+                .frame(width: CGFloat(magicalButtonViewModel.slavePaddingLeft))
 #endif
-                
-                IconBoxMainTab(icon: checkBoxSquare,
-                               iconWidth: slaveWidth,
-                               iconHeight: slaveHeight,
-                               iconPaddingLeft: 0,
-                               iconPaddingRight: 0,
-                               iconPaddingTop: 0)
-                
+            
+            IconBoxMainTab(icon: checkBoxSquare,
+                           iconWidth: slaveWidth,
+                           iconHeight: slaveHeight,
+                           iconPaddingLeft: 0,
+                           iconPaddingRight: 0,
+                           iconPaddingTop: 0)
+            
 #if INTERFACE_HINTS
-                Spacer()
-                    .frame(width: CGFloat(magicalButtonViewModel.slavePaddingRight), height: 24.0)
-                    .background(Color(red: 0.47, green: 0.87, blue: 0.16, opacity: 0.70))
+            Spacer()
+                .frame(width: CGFloat(magicalButtonViewModel.slavePaddingRight), height: 24.0)
+                .background(Color(red: 0.47, green: 0.87, blue: 0.16, opacity: 0.70))
 #else
-                Spacer()
-                    .frame(width: CGFloat(magicalButtonViewModel.slavePaddingRight))
+            Spacer()
+                .frame(width: CGFloat(magicalButtonViewModel.slavePaddingRight))
 #endif
-            }
+            
+            
+#if INTERFACE_HINTS
+            Spacer()
+                .frame(width: CGFloat(magicalButtonViewModel.accentPaddingLeft), height: 24.0)
+                .background(Color(red: 0.35, green: 0.61, blue: 0.81, opacity: 0.40))
+#else
+            Spacer()
+                .frame(width: CGFloat(magicalButtonViewModel.accentPaddingLeft))
+#endif
+            
+            IconBoxMainTab(icon: testArrowLeft,
+                           iconWidth: accentWidth,
+                           iconHeight: accentHeight,
+                           iconPaddingLeft: 0,
+                           iconPaddingRight: 0,
+                           iconPaddingTop: 0)
+            
+#if INTERFACE_HINTS
+            Spacer()
+                .frame(width: CGFloat(magicalButtonViewModel.accentPaddingRight), height: 24.0)
+                .background(Color(red: 0.47, green: 0.87, blue: 0.16, opacity: 0.70))
+#else
+            Spacer()
+                .frame(width: CGFloat(magicalButtonViewModel.accentPaddingRight))
+#endif
+            
+            
         }
 #if INTERFACE_HINTS
         .overlay(Rectangle().stroke().foregroundStyle(

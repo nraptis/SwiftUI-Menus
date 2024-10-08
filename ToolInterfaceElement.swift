@@ -13,7 +13,6 @@ enum ToolInterfaceElementType: UInt16 {
     case exitMode
     case mainTab
     case sexyButton
-    case iconButton
     case greenButton
     case slider
     case segment
@@ -48,6 +47,9 @@ enum ToolInterfaceElement: UInt16 {
     
     
     case sexyStepperTimelinePointCount
+    case sexyStepperGemCount
+    case sexyStepperCoinCount
+    
     
     case sexyButtonUndo
     case sexyButtonRedo
@@ -253,6 +255,11 @@ enum ToolInterfaceElement: UInt16 {
             
         case .sexyStepperTimelinePointCount:
             return .sexyStepper
+        case .sexyStepperGemCount:
+            return .sexyStepper
+        case .sexyStepperCoinCount:
+            return .sexyStepper
+            
             
         case .sexyButtonUndo:
             return .sexyButton

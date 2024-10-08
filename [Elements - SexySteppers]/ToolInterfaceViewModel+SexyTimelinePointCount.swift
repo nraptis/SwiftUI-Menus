@@ -9,15 +9,15 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-   @MainActor func getTimelinePointCountSexyStepperToolNode(neighborTypeLeft: ToolInterfaceElementType?,
-                                       neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+    @MainActor func getTimelinePointCountSexyStepperToolNode(neighborTypeLeft: ToolInterfaceElementType?,
+                                                             neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
         let orientation = jiggleViewModel.orientation
         let textLine1 = ToolInterfaceStringLibrarySteppers.swatchTextTimelinePointCountLine1()
         let textLine2 = ToolInterfaceStringLibrarySteppers.swatchTextTimelinePointCountLine2()
-        let iconPack = MainTabIconLibrary.graph
-        let decrementPack = MainTabIconLibrary.arrowTinyBwLeft
-        let incrementPack = MainTabIconLibrary.arrowTinyBwRight
+        let iconPack = FramedConvertibleIconLibrary.menuA
+        let decrementPack = FramedLongIconLibrary.testArrowLeft
+        let incrementPack = FramedLongIconLibrary.testArrowRight
         let configuration = ToolInterfaceElementSexyStepperConfiguration(iconPack: iconPack,
                                                                          incrementPack: incrementPack,
                                                                          decrementPack: decrementPack,
