@@ -15,6 +15,7 @@ struct MagicalCreateSwatchSegmentContent: View {
     let layoutSchemeFlavor: LayoutSchemeFlavor
     let layoutHeight: Int
     let isPressed: Bool
+    let isEnabled: Bool
     
     var body: some View {
         
@@ -22,11 +23,10 @@ struct MagicalCreateSwatchSegmentContent: View {
         let orientation = magicalViewModel.orientation
         let configuration = magicalButtonViewModel.createSwatchButtonConfiguration
         let isDarkMode = magicalViewModel.isDarkModeEnabled
-        let isEnabled = magicalViewModel.isEnabled
         
         let numberOfLines = configuration.nameLabelNumberOfLines
         let textIcon = configuration.iconPack.getTextIcon(orientation: orientation,
-                                                          layoutSchemeFlavor: layoutSchemeFlavor,
+                                                          layoutSchemeFlavor: .long,
                                                           numberOfLines: numberOfLines,
                                                           isDarkMode: isDarkMode,
                                                           isEnabled: isEnabled)
@@ -78,8 +78,10 @@ struct MagicalCreateSwatchSegmentContent: View {
             }
         }
         
-        let heroPaddingTopStacked = CreateSwatchLayout.getHeroPaddingTopStacked(orientation: orientation)
-        let heroPaddingBottomStacked = CreateSwatchLayout.getHeroPaddingBottomStacked(orientation: orientation)
+        let heroPaddingTopStacked = CreateSwatchLayout.getHeroPaddingTopStacked(orientation: orientation,
+                                                                                numberOfLines: numberOfLines)
+        let heroPaddingBottomStacked = CreateSwatchLayout.getHeroPaddingBottomStacked(orientation: orientation,
+                                                                                      numberOfLines: numberOfLines)
         
         return HeroSlab(orientation: orientation,
                         layoutWidth: layoutWidth,

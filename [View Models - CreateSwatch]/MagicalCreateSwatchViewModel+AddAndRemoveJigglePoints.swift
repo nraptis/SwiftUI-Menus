@@ -11,47 +11,58 @@ import Foundation
     
     override func refresh() {
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
-            if segmentButtonViewModels.count > 0 {
-                if jiggleViewModel.jiggleDocument.isAddJigglePointsPossible() {
-                    segmentButtonViewModels[0].isEnabled = true
-                } else {
-                    segmentButtonViewModels[0].isEnabled = false
-                }
-            }
-            
-            if segmentButtonViewModels.count > 1 {
-                if jiggleViewModel.jiggleDocument.isRemoveJigglePointsPossible() {
-                    segmentButtonViewModels[1].isEnabled = true
-                } else {
-                    segmentButtonViewModels[1].isEnabled = false
-                }
-            }
-            
+
             switch jiggleViewModel.jiggleDocument.creatorMode {
             case .addJigglePoint:
-                if segmentButtonViewModels.count > 0 {
-                    activeButtonViewModel = segmentButtonViewModels[0]
-                }
+                setActiveButton(0)
+                refreshEnabledAllButtons()
             case .removeJigglePoint:
-                if segmentButtonViewModels.count > 1 {
-                    activeButtonViewModel = segmentButtonViewModels[1]
-                }
+                setActiveButton(1)
+                refreshEnabledAllButtons()
+            case .moveJiggleCenter:
+                setActiveButton(2)
+                refreshEnabledAllButtons()
             case .none:
                 activeButtonViewModel = nil
+                let jiggleDocument = jiggleViewModel.jiggleDocument
+                let unfrozenJiggleCount = jiggleDocument.countUnfrozenJiggles()
+                if unfrozenJiggleCount > 0 {
+                    if jiggleDocument.getSelectedJiggle() !== nil {
+                        refreshEnabledButton(at: 0)
+                    } else {
+                        refreshDisabledButton(at: 0)
+                    }
+                    refreshEnabledButton(at: 1)
+                    refreshEnabledButton(at: 2)
+                } else {
+                    refreshDisabledButton(at: 0)
+                    refreshDisabledButton(at: 1)
+                    refreshDisabledButton(at: 2)
+                }
+                
             default:
                 activeButtonViewModel = nil
+                refreshDisabled()
+                refreshDisabledAllButtons()
             }
         }
         
     }
     
     override func handleSelectedIndex(_ index: Int) {
-        if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
-            if index == 0 {
-                jiggleViewModel.setCreatorMode(.addJigglePoint)
+        if index == 0 {
+            if let jiggleViewController = ApplicationController.shared.jiggleViewController {
+                jiggleViewController.setCreatorModeUpdatingMesh(.addJigglePoint)
             }
-            if index == 1 {
-                jiggleViewModel.setCreatorMode(.removeJigglePoint)
+        }
+        if index == 1 {
+            if let jiggleViewController = ApplicationController.shared.jiggleViewController {
+                jiggleViewController.setCreatorModeUpdatingMesh(.removeJigglePoint)
+            }
+        }
+        if index == 2 {
+            if let jiggleViewController = ApplicationController.shared.jiggleViewController {
+                jiggleViewController.setCreatorModeUpdatingMesh(.moveJiggleCenter)
             }
         }
     }

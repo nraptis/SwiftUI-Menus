@@ -36,7 +36,7 @@ import Foundation
     override func handleSlideUpdated(percent: CGFloat) {
         let value = sliderConfiguration.minimumValue + (sliderConfiguration.maximumValue - sliderConfiguration.minimumValue) * Float(percent)
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
-            if jiggleViewModel.isAnimationJiggleAppliedToAll {
+            if jiggleViewModel.isAnimationGrabAppliedToAll {
                 let jiggleDocument = jiggleViewModel.jiggleDocument
                 for jiggleIndex in 0..<jiggleDocument.jiggleCount {
                     let jiggle = jiggleDocument.jiggles[jiggleIndex]
@@ -56,7 +56,7 @@ import Foundation
         let value = sliderConfiguration.minimumValue + (sliderConfiguration.maximumValue - sliderConfiguration.minimumValue) * Float(percent)
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
             if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
-                if jiggleViewModel.isAnimationJiggleAppliedToAll {
+                if jiggleViewModel.isAnimationGrabAppliedToAll {
                     let jiggleDocument = jiggleViewModel.jiggleDocument
                     for jiggleIndex in 0..<jiggleDocument.jiggleCount {
                         let jiggle = jiggleDocument.jiggles[jiggleIndex]

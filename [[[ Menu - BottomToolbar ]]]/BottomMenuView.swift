@@ -141,7 +141,12 @@ class BottomMenuView: UIView, SecondaryMenuConforming {
         videoRecordView.handleDarkModeDidChange()
     }
     
+    func handlePurchasedDidChange() {
+     print("BOTTOM MENU, HANDLED PURTCHASDEF")
+    }
+    
     private var darkModeDidChangeCancellable: AnyCancellable?
+    private var purchasedDidChangeCancellable: AnyCancellable?
     func setup(width: Int,
                safeAreaLeft: Int,
                safeAreaRight: Int,
@@ -149,6 +154,14 @@ class BottomMenuView: UIView, SecondaryMenuConforming {
         
         darkModeDidChangeCancellable = toolInterfaceViewModel
             .darkModeDidChangePublisher
+            .sink { [weak self] in
+                if let self = self {
+                    self.handleDarkModeDidChange()
+                }
+            }
+        
+        purchasedDidChangeCancellable = toolInterfaceViewModel
+            .purchasedDidChangePublisher
             .sink { [weak self] in
                 if let self = self {
                     self.handleDarkModeDidChange()

@@ -17,14 +17,7 @@ import Foundation
     }
     
     override func refresh() {
-        if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
-            switch jiggleViewModel.jiggleDocument.creatorMode {
-            case .none:
-                refreshEnabled()
-            default:
-                refreshDisabled()
-            }
-        }
+        refreshEnabled()
     }
     
     deinit {

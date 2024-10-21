@@ -30,6 +30,15 @@ extension ToolInterfaceViewModel {
         return getRowBluePrint_Top_Primary_Standard_Pad()
     }
     
+    @MainActor func getRowBluePrint_Top_Primary_Standard_Pad() -> RowBluePrint {
+        let nodes = generateNodes([
+            .button(.menu),
+            .checkBox(.darkMode),
+            .slider(.init(widthCategory: .stretch, slider: .jiggleOpacity))
+        ])
+        return RowBluePrint(nodes: nodes, configuration: .top_Primary_Standard, centerPinnedElement: nil)
+    }
+    
     @MainActor func getRowBluePrint_Top_Secondary1_Pad(_ configuration: any InterfaceConfigurationConforming) -> RowBluePrint? {
         
         if configuration.isView {
@@ -93,324 +102,242 @@ extension ToolInterfaceViewModel {
     }
     
     @MainActor func getRowBluePrint_Top_Secondary1_Jiggles_Pad() -> RowBluePrint {
-        let nodes = [getFlipJiggleHSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     
-                     Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     
-                     getFlipJiggleVSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     
-                     Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
-                     
-                     getDoneGreenButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getCreateSceneGreenButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     
-                     getRotateJiggleLeftSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getRotateJiggleRightSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-        ]
+        let nodes = generateNodes([
+            .button_pair(.flipJiggleHorizontal, .flipJiggleVertical),
+            .dividerSpacerDivider,
+            .button_pair(.rotateJiggleLeft, .rotateJiggleRight),
+            
+        ])
         return RowBluePrint(nodes: nodes, configuration: .top_Secondary1_Jiggles)
     }
     
     @MainActor func getRowBluePrint_Top_Secondary1_Points_Pad() -> RowBluePrint {
-        let nodes = [getFlipJiggleHSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     
-                     Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     
-                     getFlipJiggleVSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     
-                     Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
-                     
-                     
-                     getRotateJiggleLeftSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getRotateJiggleRightSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     
-        ]
+        
+        let nodes = generateNodes([
+            .button_pair(.flipJiggleHorizontal, .flipJiggleVertical),
+            .dividerSpacerDivider,
+            .button_pair(.rotateJiggleLeft, .rotateJiggleRight),
+            
+        ])
         return RowBluePrint(nodes: nodes, configuration: .top_Secondary1_Points)
     }
     
     @MainActor func getRowBluePrint_Top_Secondary2_Jiggles_Pad() -> RowBluePrint {
-        let nodes = [getSelectPreviousJiggleSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     
-                     Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     
-                     getSelectNextJiggleSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     
-                     Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
-                     
-                     getExitVideoExportExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getEnterLoopsPage1EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     
-                     getUnfreezeAllJigglesSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getFreezeSelectedJiggleSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     
-                     getDarkModeSexyCheckBoxToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
-                     
-        ]
+        let nodes = generateNodes([
+            .button_triplet(.selectPreviousJiggle, .selectNextJiggle, .rotateJiggleLeft),
+            .dividerSpacerDivider,
+            .button_pair(.freezeJiggle, .unfreezeJiggles)
+        ])
         return RowBluePrint(nodes: nodes, configuration: .top_Secondary2_Jiggles)
     }
     
     @MainActor func getRowBluePrint_Top_Secondary1_View_Grab_Pad() -> RowBluePrint {
-        let nodes = [
-            getJiggleDampenSliderToolNode(widthCategory: .stretch, neighborTypeLeft: nil, neighborTypeRight: nil),
-            getEnterLoopsPage1EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getEnterLoopsPage2EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getEnterLoopsPage3EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            
-        ]
+        let nodes = generateNodes([
+            .button(.menu),
+            .slider(.init(widthCategory: .stretch, slider: .jiggleDampen)),
+            .checkBox(.animationGrabApplyToAll)
+        ])
         return RowBluePrint(nodes: nodes, configuration: .top_Secondary1_View_Grab)
     }
     
     @MainActor func getRowBluePrint_Top_Secondary1_View_Continuous_Pad() -> RowBluePrint {
-        let nodes = [
-            getJiggleDampenSliderToolNode(widthCategory: .stretch, neighborTypeLeft: nil, neighborTypeRight: nil),
-            getEnterLoopsPage1EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getEnterLoopsPage2EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getEnterLoopsPage3EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            
-        ]
+        let nodes = generateNodes([
+            .button(.menu),
+            .slider(.init(widthCategory: .stretch, slider: .jiggleDampen)),
+            .checkBox(.animationGrabApplyToAll)
+        ])
         return RowBluePrint(nodes: nodes, configuration: .top_Secondary1_View_Continuous)
     }
     
     @MainActor func getRowBluePrint_Top_Secondary1_View_LoopsPage1_Pad() -> RowBluePrint {
-        let nodes = [
-            getJiggleDampenSliderToolNode(widthCategory: .stretch, neighborTypeLeft: nil, neighborTypeRight: nil),
-            getEnterLoopsPage1EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getEnterLoopsPage2EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getEnterLoopsPage3EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            
-        ]
+        
+        let nodes = generateNodes([
+            .button(.menu),
+            .slider(.init(widthCategory: .stretch, slider: .jiggleDampen)),
+            .enterMode(.loopsPage2)
+        ])
         return RowBluePrint(nodes: nodes, configuration: .top_Secondary1_View_LoopsPage1)
     }
     
     @MainActor func getRowBluePrint_Top_Secondary1_View_LoopsPage2_Pad() -> RowBluePrint {
-        let nodes = [
-            getJiggleDampenSliderToolNode(widthCategory: .stretch, neighborTypeLeft: nil, neighborTypeRight: nil),
-            
-            getEnterLoopsPage2EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getEnterLoopsPage3EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getEnterLoopsPage1EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            
-        ]
+        
+        let nodes = generateNodes([
+            .button(.menu),
+            .slider(.init(widthCategory: .stretch, slider: .jiggleDampen)),
+            .enterMode(.loopsPage3)
+        ])
         return RowBluePrint(nodes: nodes, configuration: .top_Secondary1_View_LoopsPage2)
     }
     
     @MainActor func getRowBluePrint_Top_Secondary1_View_LoopsPage3_Pad() -> RowBluePrint {
-        let nodes = [
-            getJiggleDampenSliderToolNode(widthCategory: .stretch, neighborTypeLeft: nil, neighborTypeRight: nil),
-            
-            
-            getEnterLoopsPage3EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getEnterLoopsPage1EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getEnterLoopsPage2EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            
-        ]
+        
+        let nodes = generateNodes([
+            .button(.menu),
+            .slider(.init(widthCategory: .stretch, slider: .jiggleDampen)),
+            .enterMode(.loopsPage1)
+        ])
         return RowBluePrint(nodes: nodes, configuration: .top_Secondary1_View_LoopsPage3)
     }
     
-    
-    
     @MainActor func getRowBluePrint_Top_Secondary2_Points_Pad() -> RowBluePrint {
-        let nodes = [
-            getSelectPreviousJigglePointSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getSelectNextJigglePointSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
-            getUnfreezeAllJigglesSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getFreezeSelectedJiggleSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-        ]
+        let nodes = generateNodes([
+            .button_pair(.selectPreviousJigglePoint, .selectNextJigglePoint),
+            .dividerSpacerDivider,
+            .button_pair(.unfreezeJiggles, .freezeJiggle),
+            
+        ])
         return RowBluePrint(nodes: nodes, configuration: .top_Secondary2_Points)
     }
     
     @MainActor func getRowBluePrint_Top_Secondary2_View_Grab_Pad() -> RowBluePrint {
-        let nodes = [
-            getJiggleDampenSliderToolNode(widthCategory: .stretch, neighborTypeLeft: nil, neighborTypeRight: nil),
-            getEnterLoopsPage2EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getEnterAnimationContinuousEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
-        ]
+        let nodes = generateNodes([
+            .slider(.init(widthCategory: .halfWidthLeft, slider: .jiggleSpeed)),
+            .slider(.init(widthCategory: .halfWidthRight, slider: .jigglePower))
+        ])
         return RowBluePrint(nodes: nodes, configuration: .top_Secondary2_View_Grab)
     }
     
     @MainActor func getRowBluePrint_Top_Secondary2_View_Continuous_Pad() -> RowBluePrint {
-        let nodes = [
-            getJiggleDampenSliderToolNode(widthCategory: .stretch, neighborTypeLeft: nil, neighborTypeRight: nil),
-            getEnterLoopsPage2EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getEnterAnimationContinuousEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
-        ]
+        let nodes = generateNodes([
+            .slider(.init(widthCategory: .halfWidthLeft, slider: .jigglePower)),
+            .slider(.init(widthCategory: .halfWidthRight, slider: .jiggleSpeed))
+        ])
         return RowBluePrint(nodes: nodes, configuration: .top_Secondary2_View_Continuous)
     }
     
     @MainActor func getRowBluePrint_Top_Secondary2_View_LoopsPage1_Pad() -> RowBluePrint {
-        let nodes = [
-            getJiggleDampenSliderToolNode(widthCategory: .stretch, neighborTypeLeft: nil, neighborTypeRight: nil),
-            getEnterLoopsPage1EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getEnterLoopsPage2EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getEnterLoopsPage3EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-        ]
+        let nodes = generateNodes([
+            .greenButton(.createScene),
+            .spacer,
+            .checkBox(.buy),
+            .checkBox(.darkMode),
+            .checkBox(.stereoscopic),
+        ])
         return RowBluePrint(nodes: nodes, configuration: .top_Secondary2_View_LoopsPage1)
     }
     
     @MainActor func getRowBluePrint_Top_Secondary2_View_LoopsPage2_Pad() -> RowBluePrint {
-        let nodes = [
-            getJiggleDampenSliderToolNode(widthCategory: .stretch, neighborTypeLeft: nil, neighborTypeRight: nil),
-            getEnterLoopsPage2EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getEnterLoopsPage3EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getEnterLoopsPage1EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-        ]
+        let nodes = generateNodes([
+            .exitMode(.loopsPage2),
+            .spacer,
+            .checkBox(.buy),
+            .checkBox(.darkMode),
+            .checkBox(.stereoscopic),
+        ])
         return RowBluePrint(nodes: nodes, configuration: .top_Secondary2_View_LoopsPage2)
     }
     
     @MainActor func getRowBluePrint_Top_Secondary2_View_LoopsPage3_Pad() -> RowBluePrint {
-        let nodes = [
-            getJiggleDampenSliderToolNode(widthCategory: .stretch, neighborTypeLeft: nil, neighborTypeRight: nil),
-            getEnterLoopsPage3EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getEnterLoopsPage1EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getEnterLoopsPage2EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-        ]
+        let nodes = generateNodes([
+            .exitMode(.loopsPage3),
+            .spacer,
+            .checkBox(.buy),
+            .checkBox(.darkMode),
+            .checkBox(.stereoscopic),
+        ])
         return RowBluePrint(nodes: nodes, configuration: .top_Secondary2_View_LoopsPage3)
     }
     
-    @MainActor func getRowBluePrint_Top_Primary_Standard_Pad() -> RowBluePrint {
-        let nodes = [getMenuSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getDarkModeSexyCheckBoxToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getJiggleOpacitySliderToolNode(widthCategory: .stretch, neighborTypeLeft: nil, neighborTypeRight: nil),
-        ]
-        return RowBluePrint(nodes: nodes, configuration: .top_Primary_Standard, centerPinnedElement: nil)
-    }
-    
     @MainActor func getRowBluePrint_Top_Primary_View_Grab_Pad() -> RowBluePrint {
-        let nodes = [getMenuSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getJiggleDampenSliderToolNode(widthCategory: .stretch, neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getEnterLoopsPage2EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getEnterAnimationContinuousEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
-        ]
+        
+        let nodes = generateNodes([
+            .button(.menu),
+            .checkBox(.buy),
+            .spacer,
+            .enterMode(.animationLoops),
+            .enterMode(.animationContinuous)
+        ])
         return RowBluePrint(nodes: nodes, configuration: .top_Primary_View_Grab)
     }
     
     @MainActor func getRowBluePrint_Top_Primary_View_Continuous_Pad() -> RowBluePrint {
-        let nodes = [getMenuSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getJiggleDampenSliderToolNode(widthCategory: .stretch, neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getEnterLoopsPage2EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getEnterAnimationContinuousEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
-        ]
+        let nodes = generateNodes([
+            .button(.menu),
+            .checkBox(.buy),
+            .spacer,
+            .enterMode(.animationLoops),
+            .enterMode(.animationContinuous)
+        ])
         return RowBluePrint(nodes: nodes, configuration: .top_Primary_View_Continuous)
     }
     
     @MainActor func getRowBluePrint_Top_Primary_View_LoopsPage1_Pad() -> RowBluePrint {
-        let nodes = [getMenuSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getJiggleDampenSliderToolNode(widthCategory: .stretch, neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getEnterLoopsPage2EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getEnterAnimationContinuousEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
-        ]
+        
+        let nodes = generateNodes([
+            .button(.menu),
+            .checkBox(.buy),
+            .spacer,
+            .enterMode(.animationContinuous),
+            .favoringOneLineLabel(.init(minimumWidth: 0, text: "Loops Page 1")),
+            .enterMode(.animationLoops)
+        ])
         return RowBluePrint(nodes: nodes, configuration: .top_Primary_View_LoopsPage1)
     }
     
     @MainActor func getRowBluePrint_Top_Primary_View_LoopsPage2_Pad() -> RowBluePrint {
-        let nodes = [getMenuSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getJiggleDampenSliderToolNode(widthCategory: .stretch, neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getEnterLoopsPage3EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getEnterAnimationContinuousEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
-        ]
+        
+        let nodes = generateNodes([
+            .button(.menu),
+            .checkBox(.buy),
+            .spacer,
+            .enterMode(.animationContinuous),
+            .favoringOneLineLabel(.init(minimumWidth: 0, text: "Loops Page 2")),
+            .enterMode(.animationLoops)
+        ])
         return RowBluePrint(nodes: nodes, configuration: .top_Primary_View_LoopsPage2)
     }
     
     @MainActor func getRowBluePrint_Top_Primary_View_LoopsPage3_Pad() -> RowBluePrint {
-        let nodes = [getMenuSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getJiggleDampenSliderToolNode(widthCategory: .stretch, neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getEnterLoopsPage3EnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getEnterAnimationContinuousEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
-        ]
+        let nodes = generateNodes([
+            .button(.menu),
+            .checkBox(.buy),
+            .spacer,
+            .enterMode(.animationContinuous),
+            .favoringOneLineLabel(.init(minimumWidth: 0, text: "Loops Page 3")),
+            .enterMode(.animationLoops)
+        ])
         return RowBluePrint(nodes: nodes, configuration: .top_Primary_View_LoopsPage3)
     }
     
-    
     @MainActor func getRowBluePrint_Top_Secondary1_Guides_Affine_Pad() -> RowBluePrint {
-        let nodes = [getFlipGuideHSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     
-                     Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     
-                     getFlipGuideVSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     
-                     Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
-                     
-                     getUnfreezeAllJigglesSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getFreezeSelectedJiggleSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     
-                     Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
-                     
-                     getRotateGuideLeftSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getRotateGuideRightSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-        ]
+        let nodes = generateNodes([
+            .button_pair(.selectPreviousGuide, .selectNextGuide),
+            .dividerSpacerDivider,
+            .button_pair(.rotateGuideLeft, .rotateGuideRight),
+            .dividerSpacerDivider,
+            .button_triplet(.unfreezeJiggles, .unfreezeGuides, .freezeGuide),
+        ])
         return RowBluePrint(nodes: nodes, configuration: .top_Secondary1_Guides_Affine)
     }
     
     @MainActor func getRowBluePrint_Top_Secondary1_Guides_Points_Pad() -> RowBluePrint {
-        let nodes = [getFlipGuideHSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     
-                     Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     
-                     getFlipGuideVSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     
-                     Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
-                     
-                     getRotateGuideLeftSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getRotateGuideRightSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-        ]
+        let nodes = generateNodes([
+            .button_pair(.flipGuideHorizontal, .flipGuideVertical),
+            .dividerSpacerDivider,
+            .button_pair(.rotateGuideLeft, .rotateGuideRight),
+        ])
         return RowBluePrint(nodes: nodes, configuration: .top_Secondary1_Guides_Points)
     }
     
     @MainActor func getRowBluePrint_Top_Secondary2_Guides_Affine_Pad() -> RowBluePrint {
-        let nodes = [getSelectPreviousGuideSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getSelectNextGuideSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     
-                     Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
-                     
-                     getGenerateTopographySexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     
-                     Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
-                     
-                     getUnfreezeAllJigglesSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil), //DELETE
-                     Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil), //DELETE
-                     getFreezeSelectedJiggleSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil), //DELETE
-                     
-                     Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
-                     
-                     getUnfreezeAllGuidesSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getFreezeSelectedGuideSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-        ]
+        let nodes = generateNodes([
+            .button_pair(.selectPreviousGuide, .selectNextGuide),
+            .dividerSpacerDivider,
+            .button(.generateTopography),
+            .dividerSpacerDivider,
+            .button_triplet(.unfreezeJiggles, .unfreezeGuides, .freezeGuide),
+        ])
         return RowBluePrint(nodes: nodes, configuration: .top_Secondary2_Guides_Affine)
     }
     
     @MainActor func getRowBluePrint_Top_Secondary2_Guides_Points_Pad() -> RowBluePrint {
-        let nodes = [getSelectPreviousGuidePointSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getSelectNextGuidePointSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     
-                     Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
-                     
-                     getUnfreezeAllJigglesSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getFreezeSelectedJiggleSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     
-                     Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
-                     
-                     getRotateGuideLeftSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getRotateGuideRightSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     
-                     Self.getDividerSpacerDividerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil, orientation: orientation),
-                     
-                     getUnfreezeAllGuidesSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     Self.getDividerTinyToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-                     getFreezeSelectedGuideSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-        ]
+        let nodes = generateNodes([
+            .button_pair(.selectPreviousGuidePoint, .selectNextGuidePoint),
+            .dividerSpacerDivider,
+            .button_pair(.rotateGuideLeft, .rotateGuideRight),
+            .dividerSpacerDivider,
+            .button_triplet(.unfreezeJiggles, .unfreezeGuides, .freezeGuide),
+        ])
         return RowBluePrint(nodes: nodes, configuration: .top_Secondary2_Guides_Points)
     }
     

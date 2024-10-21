@@ -143,7 +143,7 @@ import UIKit
                                                                                       neighborTypeLeft: nil,
                                                                                       neighborTypeRight: nil)
         let nodes = [
-            getImageImportBackSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: .favoringOneLineLabel),
+            getImageImportBackButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: .favoringOneLineLabel),
             ToolInterfaceViewModel.getSpacerToolNode(neighborTypeLeft: nil,
                                                      neighborTypeRight: .favoringOneLineLabel,
                                                      orientation: ImageImportViewModel.orientation,
@@ -153,7 +153,7 @@ import UIKit
                                                      neighborTypeRight: nil,
                                                      orientation: ImageImportViewModel.orientation,
                                                      defaultWidth: 0),
-            getResetAspectFitSexyButtonToolNode(neighborTypeLeft: .spacer, neighborTypeRight: nil),
+            getResetAspectFitButtonToolNode(neighborTypeLeft: .spacer, neighborTypeRight: nil),
         ]
         return RowBluePrint(nodes: nodes, configuration: .unknown, centerPinnedElement: centerPinnedNode.element)
     }
@@ -165,15 +165,15 @@ import UIKit
                                                               neighborTypeRight: nil,
                                                               orientation: ImageImportViewModel.orientation,
                                                               defaultWidth: 0),
-                     getResetAspectFillSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: .spacer)
+                     getResetAspectFillButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: .spacer)
         ]
         return RowBluePrint(nodes: nodes, configuration: .unknown, centerPinnedElement: nil)
     }
     
     @MainActor func getRowBluePrint_Bottom_1() -> RowBluePrint {
         let nodes = [
-            getRotateLeftSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getRotateRightSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: .spacer),
+            getRotateLeftButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            getRotateRightButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: .spacer),
             ToolInterfaceViewModel.getSpacerToolNode(neighborTypeLeft: nil,
                                                      neighborTypeRight: .segment,
                                                      orientation: ImageImportViewModel.orientation,

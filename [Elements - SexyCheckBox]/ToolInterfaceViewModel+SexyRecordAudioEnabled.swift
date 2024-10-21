@@ -9,32 +9,32 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-    @MainActor func getRecordAudioEnabledSexyCheckBoxToolNode(neighborTypeLeft: ToolInterfaceElementType?,
-                                                         neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+    @MainActor func getRecordAudioEnabledCheckBoxToolNode(neighborTypeLeft: ToolInterfaceElementType?,
+                                                              neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
         let orientation = jiggleViewModel.orientation
         let textLine1 = ToolInterfaceStringLibraryCheckBoxes.checkBoxTextRecordAudioEnabledLine1()
         let textLine2 = ToolInterfaceStringLibraryCheckBoxes.checkBoxTextRecordAudioEnabledLine2()
-        let iconPack = FramedConvertibleIconLibrary.menuB
+        let iconPack = FramedConvertibleIconLibrary.menuC
         
-        let configuration = ToolInterfaceElementSexyCheckBoxConfiguration(iconPack: iconPack,
+        let configuration = ToolInterfaceElementCheckBoxConfiguration(iconPack: iconPack,
                                                                           orientation: orientation,
                                                                           nameLabelLine1: textLine1,
                                                                           nameLabelLine2: textLine2)
         
-        let flex = Self.getSexyCheckBoxFlex(orientation: orientation,
+        let flex = Self.getCheckBoxFlex(orientation: orientation,
                                             configuration: configuration,
                                             neighborTypeLeft: neighborTypeLeft,
                                             neighborTypeRight: neighborTypeRight)
         
-        let viewModelRecordAudioEnabled = MagicalSexyCheckBoxViewModelRecordAudioEnabled(orientation: orientation,
-                                                                               sexyCheckBoxConfiguration: configuration)
+        let viewModelRecordAudioEnabled = MagicalCheckBoxViewModelRecordAudioEnabled(orientation: orientation,
+                                                                                         checkBoxConfiguration: configuration)
         let recordAudioEnabledToolNode = ToolNode(id: getToolNodeID(),
-                                             element: .sexyCheckBoxRecordAudioEnabled,
-                                             flex: flex,
-                                             magicalViewModel: viewModelRecordAudioEnabled,
-                                             neighborTypeLeft: neighborTypeLeft,
-                                             neighborTypeRight: neighborTypeRight)
+                                                  element: .checkBoxRecordAudioEnabled,
+                                                  flex: flex,
+                                                  magicalViewModel: viewModelRecordAudioEnabled,
+                                                  neighborTypeLeft: neighborTypeLeft,
+                                                  neighborTypeRight: neighborTypeRight)
         viewModelRecordAudioEnabled.refresh()
         return recordAudioEnabledToolNode
     }

@@ -43,8 +43,8 @@ import SwiftUI
         case .long, .stackedLarge:
             let infoList = mainTabConfiguration.buttonConfigurations.map {
                 SEGMENT_LAYOUT_INFO(iconPackMain: $0.iconPack,
-                                    iconPackSecondary: FramedLongIconLibrary.testArrowLeft,
-                                    iconPackTertiary: FramedLongIconLibrary.testArrowRight,
+                                    iconPackSecondary: nil,
+                                    iconPackTertiary: nil,
                                     nameLabelWidth: $0.nameLabelWidthLarge,
                                     numberOfLines: $0.nameLabelNumberOfLines)
             }
@@ -52,8 +52,8 @@ import SwiftUI
         case .stackedMedium:
             let infoList = mainTabConfiguration.buttonConfigurations.map {
                 SEGMENT_LAYOUT_INFO(iconPackMain: $0.iconPack,
-                                    iconPackSecondary: FramedLongIconLibrary.testArrowLeft,
-                                    iconPackTertiary: FramedLongIconLibrary.testArrowRight,
+                                    iconPackSecondary: nil,
+                                    iconPackTertiary: nil,
                                     nameLabelWidth: $0.nameLabelWidthMedium,
                                     numberOfLines: $0.nameLabelNumberOfLines)
             }
@@ -61,8 +61,8 @@ import SwiftUI
         case .stackedSmall:
             let infoList = mainTabConfiguration.buttonConfigurations.map {
                 SEGMENT_LAYOUT_INFO(iconPackMain: $0.iconPack,
-                                    iconPackSecondary: FramedLongIconLibrary.testArrowLeft,
-                                    iconPackTertiary: FramedLongIconLibrary.testArrowRight,
+                                    iconPackSecondary: nil,
+                                    iconPackTertiary: nil,
                                     nameLabelWidth: $0.nameLabelWidthSmall,
                                     numberOfLines: $0.nameLabelNumberOfLines)
             }

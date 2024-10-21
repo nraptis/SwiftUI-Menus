@@ -8,11 +8,11 @@
 import Foundation
 
 enum ToolInterfaceElementType: UInt16 {
-    case sexyStepper
+    case stepper
     case enterMode
     case exitMode
     case mainTab
-    case sexyButton
+    case button
     case greenButton
     case slider
     case segment
@@ -22,131 +22,129 @@ enum ToolInterfaceElementType: UInt16 {
     case dividerSpacerDivider
     case favoringOneLineLabel
     case createSwatch
-    case sexyCheckBox
+    case checkBox
     
 }
 
 enum ToolInterfaceElement: UInt16 {
     
-    case sexyCheckBoxGuideCenters
-    case sexyCheckBoxJiggleCenters
-    case sexyCheckBoxDarkMode
-    case sexyCheckBoxGyroscopeEnabled
-    case sexyCheckBoxAutoLoopEnabled
-    case sexyCheckBoxRecordAudioEnabled
-    case sexyCheckBoxStereoscopicEnabled
-    case sexyCheckBoxAnimationJiggleApplyToAll
-    case sexyCheckBoxAnimationBounceApplyToAll
-    case sexyCheckBoxAnimationTwistApplyToAll
-    
-    
-    case sexyCheckBoxAnimationWobbleApplyToAll
-    case sexyCheckBoxImageImporterRotationEnabled
-    case sexyCheckBoxImageImporterEdgesEnabled
+    case checkBoxDarkMode
+    case checkBoxGyroscopeEnabled
+    //case checkBoxAutoLoopEnabled
+    case checkBoxRecordAudioEnabled
+    case checkBoxStereoscopicEnabled
+    case checkBoxAnimationGrabApplyToAll
+    case checkBoxAnimationLoopApplyToAll
+    //case checkBoxAnimationTwistApplyToAll
+    case checkBoxPurchasedEnabled
+    //case checkBoxAnimationWobbleApplyToAll
+    case checkBoxImageImporterRotationEnabled
+    case checkBoxImageImporterEdgesEnabled
     
     
     
-    case sexyStepperTimelinePointCount
-    case sexyStepperGemCount
-    case sexyStepperCoinCount
+    case stepperTimelinePointCount
+    case stepperGemCount
+    case stepperCoinCount
     
     
-    case sexyButtonUndo
-    case sexyButtonRedo
+    case buttonUndo
+    case buttonRedo
     
-    case sexyButtonMenu
-    case sexyButtonRotateJiggleRight
-    case sexyButtonRotateJiggleLeft
-    case sexyButtonRotateGuideLeft
-    case sexyButtonRotateGuideRight
+    case buttonMenu
+    case buttonRotateJiggleRight
+    case buttonRotateJiggleLeft
+    case buttonRotateGuideLeft
+    case buttonRotateGuideRight
     
-    case sexyButtonFlipJiggleH
-    case sexyButtonFlipJiggleV
-    case sexyButtonFlipGuideH
-    case sexyButtonFlipGuideV
+    case buttonFlipJiggleH
+    case buttonFlipJiggleV
+    case buttonFlipGuideH
+    case buttonFlipGuideV
     
-    case sexyButtonFreezeSelectedJiggle
-    case sexyButtonFreezeSelectedGuide
-    case sexyButtonUnfreezeAllJiggles
-    case sexyButtonUnfreezeAllGuides
+    case buttonFreezeSelectedJiggle
+    case buttonFreezeSelectedGuide
+    case buttonUnfreezeAllJiggles
+    case buttonUnfreezeAllGuides
     
-    case sexyButtonCloneJiggle
-    case sexyButtonCloneGuide
-    case sexyButtonDeleteJiggle
-    case sexyButtonDeleteGuide
-    case sexyButtonDeleteJigglePoint
-    case sexyButtonDeleteGuidePoint
-    
-    
-    case sexyButtonTimeLineDupeAll
-    case sexyButtonTimeLineDupeDuration
-    case sexyButtonTimeLineDupeCurrentChannel
-    case sexyButtonTimeLineFlattenCurrentChannel
-    case sexyButtonTimeLineResetDefaultCurrentChannel
-    case sexyButtonTimeLineResetGraph
-    case sexyButtonTimeLineBreakPoint
-    case sexyButtonTimeLineInvertH
-    case sexyButtonTimeLineInvertV
-    case sexyButtonTimeLineResetCurve
-    case sexyButtonTimeLineAmplify
-    case sexyButtonTimeLineDampen
-    case sexyButtonTimeLineFlipAll
-    case sexyButtonSelectNextJigglePoint
-    case sexyButtonSelectPreviousJigglePoint
-    case sexyButtonSelectNextGuidePoint
-    case sexyButtonSelectPreviousGuidePoint
-    case sexyButtonSelectNextJiggle
-    case sexyButtonSelectPreviousJiggle
-    case sexyButtonSelectNextGuide
-    case sexyButtonSelectPreviousGuide
-    
-    case sexyButtonZoomReset
-    case sexyButtonZoomJiggle
-    
-    case sexyButtonBreakTangentWeightGraph
-    case sexyButtonGenerateTopography
-    case sexyButtonResetWeightGraphInverse
-    case sexyButtonResetWeightGraphInverseDampened
-    case sexyButtonResetWeightGraphLinear
-    case sexyButtonResetWeightGraphLinearDampened
-    case sexyButtonResetWeightGraphStandard
-    case sexyButtonResetWeightGraphStandardDampened
-    case sexyButtonSwivelPanLeft
-    case sexyButtonSwivelPanReset
-    case sexyButtonSwivelPanRight
-    case sexyButtonSwivelRotateLeft
-    case sexyButtonSwivelRotateReset
-    case sexyButtonSwivelRotateRight
-    case sexyButtonSwivelTiltDown
-    case sexyButtonSwivelTiltReset
-    case sexyButtonSwivelTiltUp
-    case sexyButtonSwivelZoomIn
-    case sexyButtonSwivelZoomOut
-    case sexyButtonSwivelZoomReset
-    case sexyButtonZoomIn
-    case sexyButtonZoomOut
+    case buttonCloneJiggle
+    case buttonCloneGuide
+    case buttonDeleteJiggle
+    case buttonDeleteGuide
+    case buttonDeleteJigglePoint
+    case buttonDeleteGuidePoint
     
     
-    case sexyButtonImageImporterRotateRight
-    case sexyButtonImageImporterRotateLeft
-    case sexyButtonImageImporterResetAspectFit
-    case sexyButtonImageImporterResetAspectFill
-    case sexyButtonImageImporterButtonBack
+    case buttonTimeLineDupeAll
+    case buttonTimeLineDupeDuration
+    case buttonTimeLineDupeCurrentChannel
+    case buttonTimeLineResetFlatCurrentChannel
+    case buttonTimeLineResetDefaultCurrentChannel
+    case buttonTimeLineBreakPoint
+    case buttonTimeLineInvertH
+    case buttonTimeLineInvertV
+    case buttonTimeLineResetCurve
+    case buttonTimeLineAmplify
+    case buttonTimeLineDampen
+    case buttonTimeLineFlipAll
+    case buttonSelectNextJigglePoint
+    case buttonSelectPreviousJigglePoint
+    case buttonSelectNextGuidePoint
+    case buttonSelectPreviousGuidePoint
+    case buttonSelectNextJiggle
+    case buttonSelectPreviousJiggle
+    case buttonSelectNextGuide
+    case buttonSelectPreviousGuide
     
-    case sexyButtonLoadScreenButtonBack
+    case buttonZoomReset
+    case buttonZoomJiggle
+    
+    case buttonBreakTangentWeightGraph
+    case buttonGenerateTopography
+    case buttonResetWeightGraphInverse
+    case buttonResetWeightGraphInverseDampened
+    case buttonResetWeightGraphLinear
+    case buttonResetWeightGraphLinearDampened
+    case buttonResetWeightGraphStandard
+    case buttonResetWeightGraphStandardDampened
+    case buttonSwivelPanLeft
+    case buttonSwivelPanReset
+    case buttonSwivelPanRight
+    case buttonSwivelRotateLeft
+    case buttonSwivelRotateReset
+    case buttonSwivelRotateRight
+    case buttonSwivelTiltDown
+    case buttonSwivelTiltReset
+    case buttonSwivelTiltUp
+    case buttonSwivelZoomIn
+    case buttonSwivelZoomOut
+    case buttonSwivelZoomReset
+    case buttonZoomIn
+    case buttonZoomOut
+    
+    
+    case buttonImageImporterRotateRight
+    case buttonImageImporterRotateLeft
+    case buttonImageImporterResetAspectFit
+    case buttonImageImporterResetAspectFill
+    case buttonImageImporterButtonBack
+    
+    case buttonLoadScreenButtonBack
     
     case createSwatchMakeAndDrawJiggle
     case createSwatchMakeAndDrawGuide
     case createSwatchAddAndRemoveJigglePoints
     case createSwatchAddAndRemoveGuidePoints
     
-    case enterModeZoomEnter
-    case enterModeGuidesEnter
-    case enterModeGraphEnter
-    case enterModeAnimationLoopsEnter
-    case enterModeVideoRecordEnter
-    case enterModeVideoExportEnter
-    case enterModeTimeLineEnter
+    case enterModeZoom
+    case enterModeGuides
+    case enterModeGraph
+    case enterModeAnimationLoops
+    case enterModeVideoRecord
+    case enterModeVideoExport
+    case enterModeTimeLine
+    case enterModeTimeLinePage2
+    
     
     case enterModeLoopsPage1
     case enterModeLoopsPage2
@@ -154,14 +152,17 @@ enum ToolInterfaceElement: UInt16 {
     case enterModeAnimationContinuous
     
     
-    case exitModeZoomExit
-    case exitModeGuidesExit
-    case exitModeGraphExit
-    case exitModeAnimationLoopsExit
-    case exitModeVideoRecordExit
-    case exitModeVideoExportExit
-    case exitModeTimeLineExit
+    case exitModeZoom
+    case exitModeGuides
+    case exitModeGraph
+    case exitModeAnimationLoops
+    case exitModeVideoRecord
+    case exitModeVideoExport
+    case exitModeTimeLine
     case exitModeAnimationContinuous
+    case exitModeTimeLinePage2
+    case exitModeLoopsPage2
+    case exitModeLoopsPage3
     
     case greenButtonCreateScene
     case greenButtonDone
@@ -174,24 +175,9 @@ enum ToolInterfaceElement: UInt16 {
     
     case sliderBouncePower
     case sliderBounceSpeed
-    case sliderCircleFactor
-    case sliderInflateAmount
-    case sliderInflateAmountEnd
-    case sliderInflateAmountStart
     case sliderJigglePower
     case sliderJiggleSpeed
     case sliderLoopSpeed
-    case sliderMovementHorizontal
-    case sliderMovementVertical
-    case sliderSwivelCameraPan
-    case sliderSwivelCameraTilt
-    case sliderSwivelCameraTwist
-    case sliderSwivelCameraZoom
-    case sliderSwivelLightAmbient
-    case sliderSwivelLightDiffuse
-    case sliderSwivelLightSpecular
-    case sliderTwistPower
-    case sliderTwistSpeed
     case sliderZoomAmount
     case sliderJiggleOpacity
     case sliderJiggleDampen
@@ -220,235 +206,221 @@ enum ToolInterfaceElement: UInt16 {
     var type: ToolInterfaceElementType {
         switch self {
             
-        case .sexyCheckBoxGuideCenters:
-            return .sexyCheckBox
-        case .sexyCheckBoxJiggleCenters:
-            return .sexyCheckBox
-        case .sexyCheckBoxDarkMode:
-            return .sexyCheckBox
+        case .checkBoxDarkMode:
+            return .checkBox
+            
+        case .checkBoxGyroscopeEnabled:
+            return .checkBox
+            
+        case .checkBoxRecordAudioEnabled:
+            return .checkBox
+        case .checkBoxStereoscopicEnabled:
+            return .checkBox
+        case .checkBoxAnimationGrabApplyToAll:
+            return .checkBox
+        case .checkBoxAnimationLoopApplyToAll:
+            return .checkBox
             
             
-        case .sexyCheckBoxGyroscopeEnabled:
-            return .sexyCheckBox
-        case .sexyCheckBoxAutoLoopEnabled:
-            return .sexyCheckBox
-        case .sexyCheckBoxRecordAudioEnabled:
-            return .sexyCheckBox
-        case .sexyCheckBoxStereoscopicEnabled:
-            return .sexyCheckBox
-        case .sexyCheckBoxAnimationJiggleApplyToAll:
-            return .sexyCheckBox
-        case .sexyCheckBoxAnimationBounceApplyToAll:
-            return .sexyCheckBox
+        case .checkBoxImageImporterRotationEnabled:
+            return .checkBox
+        case .checkBoxImageImporterEdgesEnabled:
+            return .checkBox
+        case .checkBoxPurchasedEnabled:
+            return .checkBox
             
-        case .sexyCheckBoxAnimationTwistApplyToAll:
-            return .sexyCheckBox
-        case .sexyCheckBoxAnimationWobbleApplyToAll:
-            return .sexyCheckBox
+        case .stepperTimelinePointCount:
+            return .stepper
+        case .stepperGemCount:
+            return .stepper
+        case .stepperCoinCount:
+            return .stepper
             
             
-        case .sexyCheckBoxImageImporterRotationEnabled:
-            return .sexyCheckBox
-        case .sexyCheckBoxImageImporterEdgesEnabled:
-            return .sexyCheckBox
+        case .buttonUndo:
+            return .button
+        case .buttonRedo:
+            return .button
+            
+        case .buttonMenu:
+            return .button
+        case .buttonRotateJiggleRight:
+            return .button
+        case .buttonRotateJiggleLeft:
+            return .button
+            
+        case .buttonRotateGuideLeft:
+            return .button
+        case .buttonRotateGuideRight:
+            return .button
+        case .buttonFlipJiggleH:
+            return .button
+        case .buttonFlipJiggleV:
+            return .button
+        case .buttonFlipGuideH:
+            return .button
+        case .buttonFlipGuideV:
+            return .button
             
             
-        case .sexyStepperTimelinePointCount:
-            return .sexyStepper
-        case .sexyStepperGemCount:
-            return .sexyStepper
-        case .sexyStepperCoinCount:
-            return .sexyStepper
-            
-            
-        case .sexyButtonUndo:
-            return .sexyButton
-        case .sexyButtonRedo:
-            return .sexyButton
-            
-        case .sexyButtonMenu:
-            return .sexyButton
-        case .sexyButtonRotateJiggleRight:
-            return .sexyButton
-        case .sexyButtonRotateJiggleLeft:
-            return .sexyButton
-            
-        case .sexyButtonRotateGuideLeft:
-            return .sexyButton
-        case .sexyButtonRotateGuideRight:
-            return .sexyButton
-        case .sexyButtonFlipJiggleH:
-            return .sexyButton
-        case .sexyButtonFlipJiggleV:
-            return .sexyButton
-        case .sexyButtonFlipGuideH:
-            return .sexyButton
-        case .sexyButtonFlipGuideV:
-            return .sexyButton
-            
-            
-        case .sexyButtonFreezeSelectedJiggle:
-            return .sexyButton
-        case .sexyButtonFreezeSelectedGuide:
-            return .sexyButton
-        case .sexyButtonUnfreezeAllJiggles:
-            return .sexyButton
-        case .sexyButtonUnfreezeAllGuides:
-            return .sexyButton
+        case .buttonFreezeSelectedJiggle:
+            return .button
+        case .buttonFreezeSelectedGuide:
+            return .button
+        case .buttonUnfreezeAllJiggles:
+            return .button
+        case .buttonUnfreezeAllGuides:
+            return .button
             
             
             
             
-        case .sexyButtonCloneJiggle:
-            return .sexyButton
-        case .sexyButtonCloneGuide:
-            return .sexyButton
-        case .sexyButtonDeleteJiggle:
-            return .sexyButton
-        case .sexyButtonDeleteGuide:
-            return .sexyButton
-        case .sexyButtonDeleteJigglePoint:
-            return .sexyButton
-        case .sexyButtonDeleteGuidePoint:
-            return .sexyButton
+        case .buttonCloneJiggle:
+            return .button
+        case .buttonCloneGuide:
+            return .button
+        case .buttonDeleteJiggle:
+            return .button
+        case .buttonDeleteGuide:
+            return .button
+        case .buttonDeleteJigglePoint:
+            return .button
+        case .buttonDeleteGuidePoint:
+            return .button
             
             
-        case .sexyButtonTimeLineDupeAll:
-            return .sexyButton
-        case .sexyButtonTimeLineDupeDuration:
-            return .sexyButton
-        case .sexyButtonTimeLineDupeCurrentChannel:
-            return .sexyButton
-        case .sexyButtonTimeLineFlattenCurrentChannel:
-            return .sexyButton
-        case .sexyButtonTimeLineResetDefaultCurrentChannel:
-            return .sexyButton
+        case .buttonTimeLineDupeAll:
+            return .button
+        case .buttonTimeLineDupeDuration:
+            return .button
+        case .buttonTimeLineDupeCurrentChannel:
+            return .button
+        case .buttonTimeLineResetFlatCurrentChannel:
+            return .button
+        case .buttonTimeLineResetDefaultCurrentChannel:
+            return .button
             
-        case .sexyButtonTimeLineResetGraph:
-            return .sexyButton
-        case .sexyButtonTimeLineBreakPoint:
-            return .sexyButton
+        case .buttonTimeLineBreakPoint:
+            return .button
             
-        case .sexyButtonTimeLineInvertH:
-            return .sexyButton
-        case .sexyButtonTimeLineInvertV:
-            return .sexyButton
-        case .sexyButtonTimeLineResetCurve:
-            return .sexyButton
+        case .buttonTimeLineInvertH:
+            return .button
+        case .buttonTimeLineInvertV:
+            return .button
+        case .buttonTimeLineResetCurve:
+            return .button
             
-        case .sexyButtonTimeLineAmplify:
-            return .sexyButton
-        case .sexyButtonTimeLineDampen:
-            return .sexyButton
+        case .buttonTimeLineAmplify:
+            return .button
+        case .buttonTimeLineDampen:
+            return .button
             
-        case .sexyButtonTimeLineFlipAll:
-            return .sexyButton
+        case .buttonTimeLineFlipAll:
+            return .button
             
             
             
-        case .sexyButtonSelectNextJigglePoint:
-            return .sexyButton
-        case .sexyButtonSelectPreviousJigglePoint:
-            return .sexyButton
-        case .sexyButtonSelectNextGuidePoint:
-            return .sexyButton
-        case .sexyButtonSelectPreviousGuidePoint:
-            return .sexyButton
+        case .buttonSelectNextJigglePoint:
+            return .button
+        case .buttonSelectPreviousJigglePoint:
+            return .button
+        case .buttonSelectNextGuidePoint:
+            return .button
+        case .buttonSelectPreviousGuidePoint:
+            return .button
             
-        case .sexyButtonSelectNextJiggle:
-            return .sexyButton
-        case .sexyButtonSelectPreviousJiggle:
-            return .sexyButton
-        case .sexyButtonSelectNextGuide:
-            return .sexyButton
-        case .sexyButtonSelectPreviousGuide:
-            return .sexyButton
-        case .sexyButtonZoomReset:
-            return .sexyButton
-        case .sexyButtonZoomJiggle:
-            return .sexyButton
+        case .buttonSelectNextJiggle:
+            return .button
+        case .buttonSelectPreviousJiggle:
+            return .button
+        case .buttonSelectNextGuide:
+            return .button
+        case .buttonSelectPreviousGuide:
+            return .button
+        case .buttonZoomReset:
+            return .button
+        case .buttonZoomJiggle:
+            return .button
             
-        case .sexyButtonBreakTangentWeightGraph:
-            return .sexyButton
+        case .buttonBreakTangentWeightGraph:
+            return .button
             
-        case .sexyButtonGenerateTopography:
-            return .sexyButton
+        case .buttonGenerateTopography:
+            return .button
             
-        case .sexyButtonResetWeightGraphInverse:
-            return .sexyButton
+        case .buttonResetWeightGraphInverse:
+            return .button
             
-        case .sexyButtonResetWeightGraphInverseDampened:
-            return .sexyButton
+        case .buttonResetWeightGraphInverseDampened:
+            return .button
             
-        case .sexyButtonResetWeightGraphLinear:
-            return .sexyButton
+        case .buttonResetWeightGraphLinear:
+            return .button
             
-        case .sexyButtonResetWeightGraphLinearDampened:
-            return .sexyButton
+        case .buttonResetWeightGraphLinearDampened:
+            return .button
             
-        case .sexyButtonResetWeightGraphStandard:
-            return .sexyButton
+        case .buttonResetWeightGraphStandard:
+            return .button
             
-        case .sexyButtonResetWeightGraphStandardDampened:
-            return .sexyButton
+        case .buttonResetWeightGraphStandardDampened:
+            return .button
             
-        case .sexyButtonSwivelPanLeft:
-            return .sexyButton
+        case .buttonSwivelPanLeft:
+            return .button
             
-        case .sexyButtonSwivelPanReset:
-            return .sexyButton
+        case .buttonSwivelPanReset:
+            return .button
             
-        case .sexyButtonSwivelPanRight:
-            return .sexyButton
+        case .buttonSwivelPanRight:
+            return .button
             
-        case .sexyButtonSwivelRotateLeft:
-            return .sexyButton
+        case .buttonSwivelRotateLeft:
+            return .button
             
-        case .sexyButtonSwivelRotateReset:
-            return .sexyButton
+        case .buttonSwivelRotateReset:
+            return .button
             
-        case .sexyButtonSwivelRotateRight:
-            return .sexyButton
+        case .buttonSwivelRotateRight:
+            return .button
             
-        case .sexyButtonSwivelTiltDown:
-            return .sexyButton
+        case .buttonSwivelTiltDown:
+            return .button
             
-        case .sexyButtonSwivelTiltReset:
-            return .sexyButton
+        case .buttonSwivelTiltReset:
+            return .button
             
-        case .sexyButtonSwivelTiltUp:
-            return .sexyButton
+        case .buttonSwivelTiltUp:
+            return .button
             
-        case .sexyButtonSwivelZoomIn:
-            return .sexyButton
+        case .buttonSwivelZoomIn:
+            return .button
             
-        case .sexyButtonSwivelZoomOut:
-            return .sexyButton
+        case .buttonSwivelZoomOut:
+            return .button
             
-        case .sexyButtonSwivelZoomReset:
-            return .sexyButton
+        case .buttonSwivelZoomReset:
+            return .button
             
-        case .sexyButtonZoomIn:
-            return .sexyButton
+        case .buttonZoomIn:
+            return .button
             
-        case .sexyButtonZoomOut:
-            return .sexyButton
-            
-            
-        case .sexyButtonImageImporterRotateRight:
-            return .sexyButton
-        case .sexyButtonImageImporterRotateLeft:
-            return .sexyButton
-        case .sexyButtonImageImporterResetAspectFit:
-            return .sexyButton
-        case .sexyButtonImageImporterResetAspectFill:
-            return .sexyButton
-        case .sexyButtonImageImporterButtonBack:
-            return .sexyButton
+        case .buttonZoomOut:
+            return .button
             
             
-        case .sexyButtonLoadScreenButtonBack:
-            return .sexyButton
+        case .buttonImageImporterRotateRight:
+            return .button
+        case .buttonImageImporterRotateLeft:
+            return .button
+        case .buttonImageImporterResetAspectFit:
+            return .button
+        case .buttonImageImporterResetAspectFill:
+            return .button
+        case .buttonImageImporterButtonBack:
+            return .button
+        case .buttonLoadScreenButtonBack:
+            return .button
             
             
 
@@ -462,22 +434,21 @@ enum ToolInterfaceElement: UInt16 {
         case .createSwatchAddAndRemoveGuidePoints:
             return .createSwatch
             
-        case .enterModeZoomEnter:
-            return .enterMode
-        case .enterModeGuidesEnter:
-            return .enterMode
-        case .enterModeGraphEnter:
-            return .enterMode
-        case .enterModeAnimationLoopsEnter:
-            return .enterMode
-        case .enterModeVideoRecordEnter:
-            return .enterMode
-        case .enterModeVideoExportEnter:
-            return .enterMode
-        case .enterModeTimeLineEnter:
-            return .enterMode
             
-            
+        case .enterModeZoom:
+            return .enterMode
+        case .enterModeGuides:
+            return .enterMode
+        case .enterModeGraph:
+            return .enterMode
+        case .enterModeAnimationLoops:
+            return .enterMode
+        case .enterModeVideoRecord:
+            return .enterMode
+        case .enterModeVideoExport:
+            return .enterMode
+        case .enterModeTimeLine:
+            return .enterMode
         case .enterModeLoopsPage1:
             return .enterMode
         case .enterModeLoopsPage2:
@@ -486,24 +457,34 @@ enum ToolInterfaceElement: UInt16 {
             return .enterMode
         case .enterModeAnimationContinuous:
             return .enterMode
+        case .enterModeTimeLinePage2:
+            return .enterMode
             
             
-        case .exitModeZoomExit:
+        case .exitModeZoom:
             return .exitMode
-        case .exitModeGuidesExit:
+        case .exitModeGuides:
             return .exitMode
-        case .exitModeGraphExit:
+        case .exitModeGraph:
             return .exitMode
-        case .exitModeAnimationLoopsExit:
+        case .exitModeAnimationLoops:
             return .exitMode
-        case .exitModeVideoRecordExit:
+        case .exitModeVideoRecord:
             return .exitMode
-        case .exitModeVideoExportExit:
+        case .exitModeVideoExport:
             return .exitMode
-        case .exitModeTimeLineExit:
+        case .exitModeTimeLine:
             return .exitMode
         case .exitModeAnimationContinuous:
             return .exitMode
+        case .exitModeTimeLinePage2:
+            return .exitMode
+            
+        case .exitModeLoopsPage2:
+            return .exitMode
+        case .exitModeLoopsPage3:
+            return .exitMode
+            
             
         case .mainTabDocumentMode:
             return .mainTab
@@ -523,41 +504,11 @@ enum ToolInterfaceElement: UInt16 {
             return .slider
         case .sliderBounceSpeed:
             return .slider
-        case .sliderCircleFactor:
-            return .slider
-        case .sliderInflateAmount:
-            return .slider
-        case .sliderInflateAmountEnd:
-            return .slider
-        case .sliderInflateAmountStart:
-            return .slider
         case .sliderJigglePower:
             return .slider
         case .sliderJiggleSpeed:
             return .slider
         case .sliderLoopSpeed:
-            return .slider
-        case .sliderMovementHorizontal:
-            return .slider
-        case .sliderMovementVertical:
-            return .slider
-        case .sliderSwivelCameraPan:
-            return .slider
-        case .sliderSwivelCameraTilt:
-            return .slider
-        case .sliderSwivelCameraTwist:
-            return .slider
-        case .sliderSwivelCameraZoom:
-            return .slider
-        case .sliderSwivelLightAmbient:
-            return .slider
-        case .sliderSwivelLightDiffuse:
-            return .slider
-        case .sliderSwivelLightSpecular:
-            return .slider
-        case .sliderTwistPower:
-            return .slider
-        case .sliderTwistSpeed:
             return .slider
         case .sliderZoomAmount:
             return .slider

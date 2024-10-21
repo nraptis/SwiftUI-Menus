@@ -148,7 +148,13 @@ class TopMenuView: UIView, PrimaryMenuConforming {
         zoomView.handleDarkModeDidChange()
     }
     
+    func handlePurchasedDidChange() {
+     print("TOPPPPYYYY MENU, HANDLED PURTCHASDEF")
+    }
+    
     private var darkModeDidChangeCancellable: AnyCancellable?
+    private var purchasedDidChangeCancellable: AnyCancellable?
+    
     private var selectedJiggleDidChangeCancellable: AnyCancellable?
     private var selectedTimeLineSwatchChangeCancellable: AnyCancellable?
     
@@ -163,6 +169,13 @@ class TopMenuView: UIView, PrimaryMenuConforming {
             .sink { [weak self] in
                 if let self = self {
                     self.handleDarkModeDidChange()
+                }
+            }
+        purchasedDidChangeCancellable = toolInterfaceViewModel
+            .purchasedDidChangePublisher
+            .sink { [weak self] in
+                if let self = self {
+                    self.handlePurchasedDidChange()
                 }
             }
         

@@ -1,5 +1,5 @@
 //
-//  MagicalSexyButtonViewModel+TimeLineDampen.swift
+//  MagicalButtonViewModel+TimeLineDampen.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 9/24/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-@Observable class MagicalSexyButtonViewModelTimeLineDampen: MagicalSexyButtonViewModel {
+@Observable class MagicalButtonViewModelTimeLineDampen: MagicalButtonViewModel {
     
     override func handleClicked() {
         if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel {

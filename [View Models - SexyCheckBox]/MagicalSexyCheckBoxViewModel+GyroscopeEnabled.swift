@@ -1,5 +1,5 @@
 //
-//  MagicalSexyCheckBoxViewModel+GyroscopeEnabled.swift
+//  MagicalCheckBoxViewModel+GyroscopeEnabled.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 10/7/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-@Observable class MagicalSexyCheckBoxViewModelGyroscopeEnabled: MagicalSexyCheckBoxViewModel {
+@Observable class MagicalCheckBoxViewModelGyroscopeEnabled: MagicalCheckBoxViewModel {
     
     override func refresh() {
         
@@ -46,19 +46,12 @@ import Foundation
             if toolInterfaceViewModel.isBlocked {
                 return
             }
-            /*
-            if jiggleViewModel.jiggleDocument.creatorMode == .moveJiggleCenter {
-                jiggleViewModel.setCreatorMode(.none)
-            } else {
-                jiggleViewModel.setCreatorMode(.moveJiggleCenter)
-            }
-            */
         }
     }
     
     deinit {
         if ApplicationController.DEBUG_DEALLOCS {
-            print("MagicalSexyCheckBoxViewModelGyroscopeEnabled - Dealloc")
+            print("MagicalCheckBoxViewModelGyroscopeEnabled - Dealloc")
         }
     }
 }

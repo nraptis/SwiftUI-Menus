@@ -14,28 +14,28 @@ extension ToolInterfaceViewModel {
                                    neighborTypeLeft: ToolInterfaceElementType?,
                                    neighborTypeRight: ToolInterfaceElementType?) -> ToolInterfaceElementFlex {
         
-        let outsideBoxLeftSqueezed = FavoringOneLineLabelLayout.getOutsideBoxPaddingLeftLong(orientation: orientation,
+        let outsideBoxLeftSqueezed = FavoringOneLineLabelLayout.getOutsideBoxPaddingLeft(orientation: orientation,
                                                                                              squeeze: .squeezed,
                                                                                              neighborTypeLeft: neighborTypeLeft,
                                                                                              neighborTypeRight: neighborTypeRight)
-        let outsideBoxLeftStandard = FavoringOneLineLabelLayout.getOutsideBoxPaddingLeftLong(orientation: orientation,
+        let outsideBoxLeftStandard = FavoringOneLineLabelLayout.getOutsideBoxPaddingLeft(orientation: orientation,
                                                                                              squeeze: .standard,
                                                                                              neighborTypeLeft: neighborTypeLeft,
                                                                                              neighborTypeRight: neighborTypeRight)
-        let outsideBoxLeftRelaxed = FavoringOneLineLabelLayout.getOutsideBoxPaddingLeftLong(orientation: orientation,
+        let outsideBoxLeftRelaxed = FavoringOneLineLabelLayout.getOutsideBoxPaddingLeft(orientation: orientation,
                                                                                             squeeze: .relaxed,
                                                                                             neighborTypeLeft: neighborTypeLeft,
                                                                                             neighborTypeRight: neighborTypeRight)
         
-        let outsideBoxRightSqueezed = FavoringOneLineLabelLayout.getOutsideBoxPaddingRightLong(orientation: orientation,
+        let outsideBoxRightSqueezed = FavoringOneLineLabelLayout.getOutsideBoxPaddingRight(orientation: orientation,
                                                                                                squeeze: .squeezed,
                                                                                                neighborTypeLeft: neighborTypeLeft,
                                                                                                neighborTypeRight: neighborTypeRight)
-        let outsideBoxRightStandard = FavoringOneLineLabelLayout.getOutsideBoxPaddingRightLong(orientation: orientation,
+        let outsideBoxRightStandard = FavoringOneLineLabelLayout.getOutsideBoxPaddingRight(orientation: orientation,
                                                                                                squeeze: .standard,
                                                                                                neighborTypeLeft: neighborTypeLeft,
                                                                                                neighborTypeRight: neighborTypeRight)
-        let outsideBoxRightRelaxed = FavoringOneLineLabelLayout.getOutsideBoxPaddingRightLong(orientation: orientation,
+        let outsideBoxRightRelaxed = FavoringOneLineLabelLayout.getOutsideBoxPaddingRight(orientation: orientation,
                                                                                               squeeze: .relaxed,
                                                                                               neighborTypeLeft: neighborTypeLeft,
                                                                                               neighborTypeRight: neighborTypeRight)

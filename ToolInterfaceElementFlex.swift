@@ -49,7 +49,7 @@ struct FlexLongData {
     let relaxedWidthSmall: Int
 }
 
-struct FlexSexyStepperData {
+struct FlexStepperData {
     let minimumWidthLarge: Int
     let standardWidthLarge: Int
     let relaxedWidthLarge: Int
@@ -80,8 +80,8 @@ enum ToolInterfaceElementFlex {
     case dividerSpacerDivider(FlexDividerSpacerDividerData)
     
     case segment(FlexConvertibleData)
-    case sexyButton(FlexConvertibleData)
-    case sexyCheckBox(FlexConvertibleData)
+    case button(FlexConvertibleData)
+    case checkBox(FlexConvertibleData)
     
     case greenButton(FlexLongData)
     case mainTab(FlexLongData)
@@ -93,5 +93,5 @@ enum ToolInterfaceElementFlex {
     
     case enterMode(FlexConvertibleData)
     case exitMode(FlexConvertibleData)
-    case sexyStepper(FlexConvertibleData)
+    case stepper(FlexConvertibleData)
 }

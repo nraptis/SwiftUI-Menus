@@ -1,5 +1,5 @@
 //
-//  MagicalSexyButtonViewModel+SwivelRotateReset.swift
+//  MagicalButtonViewModel+SwivelRotateReset.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 10/7/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-@Observable class MagicalSexyButtonViewModelSwivelRotateReset: MagicalSexyButtonViewModel {
+@Observable class MagicalButtonViewModelSwivelRotateReset: MagicalButtonViewModel {
     
     override func handleClicked() {
         if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel {

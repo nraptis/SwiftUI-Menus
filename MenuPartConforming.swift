@@ -677,8 +677,15 @@ extension PrimaryMenuConforming {
         }
         
         switch actionPrimary.mainAction {
-            
         case .none:
+            switch actionSecondary.mainAction {
+            case .standardUpdateRows:
+                if let secondaryMenu = standardContainerView.getSecondaryMenu() {
+                    secondaryMenu.animateRowContent_Step1(configuration: configuration, reversed: reversed)
+                }
+            default:
+                break
+            }
             break
         case .standard(let standardType):
             switch standardType {
@@ -785,6 +792,16 @@ extension PrimaryMenuConforming {
         switch actionPrimary.mainAction {
             
         case .none:
+            switch actionSecondary.mainAction {
+            case .standardUpdateRows:
+                if let secondaryMenu = standardContainerView.getSecondaryMenu() {
+                    secondaryMenu.animateRowContent_Step2(configuration: configuration,
+                                                          reversed: reversed,
+                                                          time: time)
+                }
+            default:
+                break
+            }
             break
         case .standard(let standardType):
             switch standardType {

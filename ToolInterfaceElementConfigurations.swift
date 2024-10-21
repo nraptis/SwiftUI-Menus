@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct ToolInterfaceElementSexyStepperConfiguration {
+struct ToolInterfaceElementStepperConfiguration {
     let iconPack: FramedConvertibleIconPack
     let incrementPack: FramedLongIconPack
     let decrementPack: FramedLongIconPack
@@ -45,19 +45,19 @@ struct ToolInterfaceElementSexyStepperConfiguration {
         
         let _nameLabelNumberOfLines = ToolInterfaceTheme.getNumberOfLines(line1: nameLabelLine1,
                                                                           line2: nameLabelLine2)
-        nameLabelWidthLong = SexyStepperLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+        nameLabelWidthLong = StepperLayout.getNameLabelTextWidth(line1: nameLabelLine1,
                                                                 line2: nameLabelLine2,
                                                                 orientation: orientation,
                                                                 flavor: .long) + 2
-        nameLabelWidthStackedLarge = SexyStepperLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+        nameLabelWidthStackedLarge = StepperLayout.getNameLabelTextWidth(line1: nameLabelLine1,
                                                                         line2: nameLabelLine2,
                                                                         orientation: orientation,
                                                                         flavor: .stackedLarge) + 2
-        nameLabelWidthStackedMedium = SexyStepperLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+        nameLabelWidthStackedMedium = StepperLayout.getNameLabelTextWidth(line1: nameLabelLine1,
                                                                          line2: nameLabelLine2,
                                                                          orientation: orientation,
                                                                          flavor: .stackedMedium) + 2
-        nameLabelWidthStackedSmall = SexyStepperLayout.getNameLabelTextWidth(line1: nameLabelLine1,
+        nameLabelWidthStackedSmall = StepperLayout.getNameLabelTextWidth(line1: nameLabelLine1,
                                                                         line2: nameLabelLine2,
                                                                         orientation: orientation,
                                                                         flavor: .stackedSmall) + 2
@@ -83,13 +83,13 @@ struct ToolInterfaceElementSexyStepperConfiguration {
         }
         let exampleString = String(exampleStringArray)
         
-        valueLabelWidthLarge = SexyStepperLayout.getValueLabelTextWidth(line1: exampleString,
+        valueLabelWidthLarge = StepperLayout.getValueLabelTextWidth(line1: exampleString,
                                                                    orientation: orientation,
                                                                    flavor: .stackedLarge) + 2
-        valueLabelWidthMedium = SexyStepperLayout.getValueLabelTextWidth(line1: exampleString,
+        valueLabelWidthMedium = StepperLayout.getValueLabelTextWidth(line1: exampleString,
                                                                     orientation: orientation,
                                                                     flavor: .stackedMedium) + 2
-        valueLabelWidthSmall = SexyStepperLayout.getValueLabelTextWidth(line1: exampleString,
+        valueLabelWidthSmall = StepperLayout.getValueLabelTextWidth(line1: exampleString,
                                                                    orientation: orientation,
                                                                    flavor: .stackedSmall) + 2
         
@@ -314,7 +314,7 @@ struct ToolInterfaceElementChangeModeConfiguration {
 
 }
 
-struct ToolInterfaceElementSexyCheckBoxConfiguration {
+struct ToolInterfaceElementCheckBoxConfiguration {
     let iconPack: FramedConvertibleIconPack
     let nameLabelLine1: String?
     let nameLabelLine2: String?

@@ -1,5 +1,5 @@
 //
-//  MagicalSexyButtonContent.swift
+//  MagicalButtonContent.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 9/3/24.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct MagicalSexyButtonContent: View {
+struct MagicalButtonContent: View {
     
-    @Environment(MagicalSexyButtonViewModel.self) var magicalViewModel
+    @Environment(MagicalButtonViewModel.self) var magicalViewModel
     
     let layoutSchemeFlavor: LayoutSchemeFlavor
     let isPressed: Bool
@@ -19,7 +19,7 @@ struct MagicalSexyButtonContent: View {
     var body: some View {
         
         let orientation = magicalViewModel.orientation
-        let configuration = magicalViewModel.sexyButtonConfiguration
+        let configuration = magicalViewModel.buttonConfiguration
         let isDarkMode = magicalViewModel.isDarkModeEnabled
         let isEnabled = magicalViewModel.isEnabled
         
@@ -38,17 +38,16 @@ struct MagicalSexyButtonContent: View {
                                                           isDarkMode: isDarkMode,
                                                           isEnabled: isEnabled)
         
-        let checkBoxSquare = FramedLongIconLibrary.checkBoxSquare.getTextIcon(orientation: orientation,
-                                                                              layoutSchemeFlavor: .long,
-                                                                              numberOfLines: 0,
-                                                                              isDarkMode: isDarkMode,
-                                                                              isEnabled: isEnabled)
+        var testArrowLeft: (any TextIconable)?
+        if ApplicationController.isPurchased {
+            testArrowLeft = FramedLongIconLibrary.uncoloredLock.getTextIcon(orientation: orientation,
+                                                                   layoutSchemeFlavor: .long,
+                                                                   numberOfLines: 0,
+                                                                   isDarkMode: isDarkMode,
+                                                                   isEnabled: isEnabled)
+        }
         
-        let testArrowLeft = FramedLongIconLibrary.testArrowLeft.getTextIcon(orientation: orientation,
-                                                                            layoutSchemeFlavor: .long,
-                                                                            numberOfLines: 0,
-                                                                            isDarkMode: isDarkMode,
-                                                                            isEnabled: isEnabled)
+        
         
         let line1 = configuration.nameLabelLine1
         let line2 = configuration.nameLabelLine2
@@ -96,21 +95,23 @@ struct MagicalSexyButtonContent: View {
             }
         }
         
-        let heroPaddingTopStacked = ButtonLayout.getHeroPaddingTopStacked(orientation: orientation)
-        let heroPaddingBottomStacked = ButtonLayout.getHeroPaddingBottomStacked(orientation: orientation)
+        let heroPaddingTopStacked = ButtonLayout.getHeroPaddingTopStacked(orientation: orientation, numberOfLines: numberOfLines)
+        let heroPaddingBottomStacked = ButtonLayout.getHeroPaddingBottomStacked(orientation: orientation, numberOfLines: numberOfLines)
         
-        let slaveWidth = checkBoxSquare.width
-        let slaveHeight = checkBoxSquare.height
-        let slaveContentWidth = checkBoxSquare.width + magicalViewModel.slavePaddingLeft + magicalViewModel.slavePaddingRight
+        var accentWidth = 0
+        var accentHeight = 0
+        var accentContentWidth = 0
         
-        
-        let accentWidth = testArrowLeft.width
-        let accentHeight = testArrowLeft.height
-        let accentContentWidth = testArrowLeft.width + magicalViewModel.accentPaddingLeft + magicalViewModel.accentPaddingRight
+        if let testArrowLeft = testArrowLeft {
+            accentWidth = testArrowLeft.width
+            accentHeight = testArrowLeft.height
+            accentContentWidth = testArrowLeft.width + magicalViewModel.accentPaddingLeft + magicalViewModel.accentPaddingRight
+            
+        }
         
         return HStack(spacing: 0.0) {
             HeroSlab(orientation: orientation,
-                     layoutWidth: layoutWidth - slaveContentWidth - accentContentWidth,
+                     layoutWidth: layoutWidth - accentContentWidth,
                      layoutHeight: layoutHeight,
                      isLong: isLong,
                      isPressed: isPressed,
@@ -129,56 +130,33 @@ struct MagicalSexyButtonContent: View {
                      lineHeight: lineHeight,
                      nameLabelColor: nameLabelColor)
             
+            if let testArrowLeft = testArrowLeft {
 #if INTERFACE_HINTS
-            Spacer()
-                .frame(width: CGFloat(magicalViewModel.slavePaddingLeft), height: 24.0)
-                .background(Color(red: 0.35, green: 0.61, blue: 0.81, opacity: 0.40))
+                Spacer()
+                    .frame(width: CGFloat(magicalViewModel.accentPaddingLeft), height: 24.0)
+                    .background(Color(red: 0.35, green: 0.61, blue: 0.81, opacity: 0.40))
 #else
-            Spacer()
-                .frame(width: CGFloat(magicalViewModel.slavePaddingLeft))
+                Spacer()
+                    .frame(width: CGFloat(magicalViewModel.accentPaddingLeft))
 #endif
-            
-            IconBoxMainTab(icon: checkBoxSquare,
-                           iconWidth: slaveWidth,
-                           iconHeight: slaveHeight,
-                           iconPaddingLeft: 0,
-                           iconPaddingRight: 0,
-                           iconPaddingTop: 0)
-            
+                
+                IconBoxMainTab(icon: testArrowLeft,
+                               iconWidth: accentWidth,
+                               iconHeight: accentHeight,
+                               iconPaddingLeft: 0,
+                               iconPaddingRight: 0,
+                               iconPaddingTop: 0)
+                
 #if INTERFACE_HINTS
-            Spacer()
-                .frame(width: CGFloat(magicalViewModel.slavePaddingRight), height: 24.0)
-                .background(Color(red: 0.47, green: 0.87, blue: 0.16, opacity: 0.70))
+                Spacer()
+                    .frame(width: CGFloat(magicalViewModel.accentPaddingRight), height: 24.0)
+                    .background(Color(red: 0.47, green: 0.87, blue: 0.16, opacity: 0.70))
 #else
-            Spacer()
-                .frame(width: CGFloat(magicalViewModel.slavePaddingRight))
+                Spacer()
+                    .frame(width: CGFloat(magicalViewModel.accentPaddingRight))
 #endif
-            
-            
-#if INTERFACE_HINTS
-            Spacer()
-                .frame(width: CGFloat(magicalViewModel.accentPaddingLeft), height: 24.0)
-                .background(Color(red: 0.35, green: 0.61, blue: 0.81, opacity: 0.40))
-#else
-            Spacer()
-                .frame(width: CGFloat(magicalViewModel.accentPaddingLeft))
-#endif
-            
-            IconBoxMainTab(icon: testArrowLeft,
-                           iconWidth: accentWidth,
-                           iconHeight: accentHeight,
-                           iconPaddingLeft: 0,
-                           iconPaddingRight: 0,
-                           iconPaddingTop: 0)
-            
-#if INTERFACE_HINTS
-            Spacer()
-                .frame(width: CGFloat(magicalViewModel.accentPaddingRight), height: 24.0)
-                .background(Color(red: 0.47, green: 0.87, blue: 0.16, opacity: 0.70))
-#else
-            Spacer()
-                .frame(width: CGFloat(magicalViewModel.accentPaddingRight))
-#endif
+                
+            }
             
         }
 #if INTERFACE_HINTS

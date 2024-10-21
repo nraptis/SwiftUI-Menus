@@ -15,6 +15,7 @@ struct MagicalCreateSwatchSegmentButtonButtonStyle: ButtonStyle {
     let outsideBoxPaddingTop: Int
     let outsideBoxPaddingBottom: Int
     let position: SegmentedPickerPosition
+    let isEnabled: Bool
     
     func makeBody(configuration: Configuration) -> some View {
         return ZStack {
@@ -85,13 +86,13 @@ struct MagicalCreateSwatchSegmentButtonButtonStyle: ButtonStyle {
         let lineThickness = CreateSwatchLayout.getLineThickness(orientation: magicalViewModel.orientation)
         let color: Color
         if magicalViewModel.isDarkModeEnabled {
-            if magicalButtonViewModel.isEnabled {
+            if isEnabled {
                 color = ToolInterfaceTheme.primaryUnselectedEnabledDark
             } else {
                 color = ToolInterfaceTheme.primaryUnselectedDisabledDark
             }
         } else {
-            if magicalButtonViewModel.isEnabled {
+            if isEnabled {
                 color = ToolInterfaceTheme.primaryUnselectedEnabledLight
             } else {
                 color = ToolInterfaceTheme.primaryUnselectedDisabledLight
@@ -105,13 +106,13 @@ struct MagicalCreateSwatchSegmentButtonButtonStyle: ButtonStyle {
     func getFillRect(isPressed: Bool) -> some View {
         let color: Color
         if magicalViewModel.isDarkModeEnabled {
-            if magicalButtonViewModel.isEnabled {
+            if isEnabled {
                 color = ToolInterfaceTheme.contextUnderlayHighlightedEnabledDark
             } else {
                 color = ToolInterfaceTheme.contextUnderlayDisabledDark
             }
         } else {
-            if magicalButtonViewModel.isEnabled {
+            if isEnabled {
                 color = ToolInterfaceTheme.contextUnderlayHighlightedEnabledLight
             } else {
                 color = ToolInterfaceTheme.contextUnderlayDisabledLight
@@ -146,7 +147,8 @@ struct MagicalCreateSwatchSegmentButtonButtonStyle: ButtonStyle {
 #endif
                 MagicalCreateSwatchSegmentContent(layoutSchemeFlavor: layoutSchemeFlavor,
                                                   layoutHeight: contentLayoutHeight,
-                                                  isPressed: isPressed)
+                                                  isPressed: isPressed,
+                                                  isEnabled: isEnabled)
 #if INTERFACE_HINTS
                 Spacer()
                     .frame(width: 24.0, height: CGFloat(outsideBoxPaddingBottom))

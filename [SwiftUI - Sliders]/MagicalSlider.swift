@@ -43,7 +43,7 @@ struct MagicalSlider: View {
         let boxWidth = magicalViewModel.layoutWidth - magicalViewModel.outsideBoxPaddingLeft - magicalViewModel.outsideBoxPaddingRight
         let boxHeight = magicalViewModel.layoutHeight - outsideBoxPaddingTop - outsideBoxPaddingBottom
         
-        let contextCornerRadius = SliderLayout.getContextCornerRadius(orientation: orientation)
+        let contextCornerRadius = SliderLayout.getCornerRadius(orientation: orientation)
         let contextColor: Color
         if magicalViewModel.isDarkModeEnabled {
             if magicalViewModel.isEnabled {

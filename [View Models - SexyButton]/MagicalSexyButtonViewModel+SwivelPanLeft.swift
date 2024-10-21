@@ -1,5 +1,5 @@
 //
-//  MagicalSexyButtonViewModel+SwivelPanLeft.swift
+//  MagicalButtonViewModel+SwivelPanLeft.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 10/7/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-@Observable class MagicalSexyButtonViewModelSwivelPanLeft: MagicalSexyButtonViewModel {
+@Observable class MagicalButtonViewModelSwivelPanLeft: MagicalButtonViewModel {
     
     override func handleClicked() {
         if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel {

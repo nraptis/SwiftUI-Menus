@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 class AnyTextIcon: TextIconable, CustomStringConvertible {
+    
     let fileName: String
     private var _image: UIImage?
     func getImage() -> UIImage {
@@ -48,4 +49,5 @@ class AnyTextIcon: TextIconable, CustomStringConvertible {
         let result = "TextIcon {\(fileName)} V: \(isValid), SIZE: [\(width) x \(height)]"
         return result
     }
+    
 }

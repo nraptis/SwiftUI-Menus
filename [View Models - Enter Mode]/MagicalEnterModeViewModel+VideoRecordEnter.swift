@@ -16,6 +16,9 @@ import Foundation
     }
     
     override func refresh() {
+        
+        //TODO: If we're recording, or not recorded... disable...
+        
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
             switch jiggleViewModel.jiggleDocument.creatorMode {
             case .none:

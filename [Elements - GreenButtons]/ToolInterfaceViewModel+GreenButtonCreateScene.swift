@@ -16,7 +16,7 @@ extension ToolInterfaceViewModel {
         
         let textLine1 = ImageImportStringLibrary.buttonTextCreateSceneLine1()
         let textLine2 = ImageImportStringLibrary.buttonTextCreateSceneLine2()
-        let iconPack = FramedLongIconLibrary.menuB
+        let iconPack = FramedLongIconLibrary.menuC
         
         let configuration = ToolInterfaceElementGreenButtonConfiguration(iconPack: iconPack,
                                                                          orientation: orientation,

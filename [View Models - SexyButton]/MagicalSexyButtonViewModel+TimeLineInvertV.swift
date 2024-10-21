@@ -1,5 +1,5 @@
 //
-//  MagicalSexyButtonViewModel+TimeLineInvertV.swift
+//  MagicalButtonViewModel+TimeLineInvertV.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 9/22/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-@Observable class MagicalSexyButtonViewModelTimeLineInvertV: MagicalSexyButtonViewModel {
+@Observable class MagicalButtonViewModelTimeLineInvertV: MagicalButtonViewModel {
     
     
     override func handleClicked() {

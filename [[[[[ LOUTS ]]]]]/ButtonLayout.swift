@@ -9,6 +9,8 @@ import UIKit
 
 struct ButtonLayout: LayoutScheme {
     
+    
+    
     static func getAccentPaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
         switch squeeze {
         case .squeezed:
@@ -19,6 +21,7 @@ struct ButtonLayout: LayoutScheme {
             return 8
         }
     }
+    
     static func getAccentPaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
         switch squeeze {
         case .squeezed:
@@ -51,70 +54,178 @@ struct ButtonLayout: LayoutScheme {
             }
         }
     }
-
     
-    static func getContextCornerRadius(orientation: Orientation) -> Int {
+    static func getCornerRadius(orientation: Orientation) -> Int {
         if Device.isPad {
             return 6
         } else {
             return 4
         }
     }
-    
-    static func getUniversalPaddingLeft(orientation: Orientation,
-                                        flavor: LayoutSchemeFlavor,
-                                        squeeze: LayoutSchemeSqueeze,
-                                        neighborTypeLeft: ToolInterfaceElementType?,
-                                        neighborTypeRight: ToolInterfaceElementType?) -> Int {
+
+    // [++] Final
+    static func getOutsideBoxPaddingTop(orientation: Orientation) -> Int {
         if Device.isPad {
-            return 4
-        } else {
+            // [++] Final
             return 2
+        } else {
+            // [++] Final
+            return 1
         }
     }
     
-    static func getUniversalPaddingRight(orientation: Orientation,
-                                         flavor: LayoutSchemeFlavor,
-                                         squeeze: LayoutSchemeSqueeze,
-                                         neighborTypeLeft: ToolInterfaceElementType?,
-                                         neighborTypeRight: ToolInterfaceElementType?) -> Int {
+    // [++] Final
+    static func getOutsideBoxPaddingBottom(orientation: Orientation) -> Int {
         if Device.isPad {
-            return 4
-        } else {
+            // [++] Final
             return 2
+        } else {
+            // [++] Final
+            return 1
         }
     }
     
-    static func getUniversalPaddingBottom(orientation: Orientation, flavor: LayoutSchemeFlavor, numberOfLines: Int) -> Int {
-        // FINAL
-        Device.isPad ? 2 : 1 // FINAL Device.isPad ? 2 : 1
+    // [++] Final
+    static func getValueLabelFont(orientation: Orientation, flavor: LayoutSchemeFlavor) -> UIFont {
+        UIFont()
     }
     
-    static func getNameLabelPaddingLeft(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
-        return 0
-    }
-    
-    static func getNameLabelPaddingRight(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
-        return 0
-    }
-    
-    static func getNameLabelPaddingBottom(orientation: Orientation, flavor: LayoutSchemeFlavor, numberOfLines: Int) -> Int {
-        return 0
-    }
-    
-    static func getIconPaddingLeft(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
-        return 0
-    }
-    
-    static func getIconPaddingRight(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
-        return 0
-    }
-    
-    static func getIconPaddingTop(orientation: Orientation, flavor: LayoutSchemeFlavor, numberOfLines: Int) -> Int {
+    // [++] Final
+    static func getNameLabelFont(orientation: Orientation, flavor: LayoutSchemeFlavor) -> UIFont {
         if Device.isPad {
-            return 2 + 2
+            switch flavor {
+            case .long:
+                return UIFont.systemFont(ofSize: 14.0, weight: .semibold)
+            case .stackedLarge:
+                return UIFont.systemFont(ofSize: 14.0, weight: .semibold)
+            case .stackedMedium:
+                return UIFont.systemFont(ofSize: 14.0, weight: .semibold, width: .condensed)
+            case .stackedSmall:
+                return UIFont.systemFont(ofSize: 14.0, weight: .semibold, width: .compressed)
+            }
         } else {
-            return 2 + 1
+            switch orientation {
+            case .landscape:
+                switch flavor {
+                case .long:
+                    return UIFont.systemFont(ofSize: 10.0, weight: .semibold)
+                case .stackedLarge:
+                    return UIFont.systemFont(ofSize: 10.0, weight: .semibold)
+                case .stackedMedium:
+                    return UIFont.systemFont(ofSize: 10.0, weight: .semibold, width: .condensed)
+                case .stackedSmall:
+                    return UIFont.systemFont(ofSize: 10.0, weight: .semibold, width: .compressed)
+                }
+            case .portrait:
+                switch flavor {
+                case .long:
+                    return UIFont.systemFont(ofSize: 11.0, weight: .semibold)
+                case .stackedLarge:
+                    return UIFont.systemFont(ofSize: 11.0, weight: .semibold)
+                case .stackedMedium:
+                    return UIFont.systemFont(ofSize: 11.0, weight: .semibold, width: .condensed)
+                case .stackedSmall:
+                    return UIFont.systemFont(ofSize: 11.0, weight: .semibold, width: .compressed)
+                }
+            }
+        }
+    }
+    
+    // [++] Final
+    static func getNameLabelVerticalSpacing(orientation: Orientation, flavor: LayoutSchemeFlavor) -> Int {
+        if flavor.isLong {
+            if Device.isPad {
+                // [Cool]
+                return -3
+            } else {
+                switch orientation {
+                case .landscape:
+                    // [Cool]
+                    return -2
+                case .portrait:
+                    // [Cool]
+                    return -2
+                }
+            }
+        } else {
+            if Device.isPad {
+                // [Cool]
+                return -4
+            } else {
+                switch orientation {
+                case .landscape:
+                    // [Cool]
+                    return -3
+                case .portrait:
+                    // [Cool]
+                    return -3
+                }
+            }
+        }
+    }
+    
+    // [++] Final
+    static func getHeroPaddingTopStacked(orientation: Orientation, numberOfLines: Int) -> Int {
+        if Device.isPad {
+            if numberOfLines == 2 {
+                // [++] Final
+                return 3
+            } else {
+                // [++] Final
+                return 4
+            }
+        } else {
+            switch orientation {
+            case .landscape:
+                if numberOfLines == 2 {
+                    // [++] Final
+                    return 2
+                } else {
+                    // [++] Final
+                    return 2
+                }
+            case .portrait:
+                if numberOfLines == 2 {
+                    // [++] Final
+                    return 2
+                } else {
+                    // [++] Final
+                    return 2
+                }
+            }
+        }
+    }
+     
+    // [++] Final
+    static func getHeroPaddingBottomStacked(orientation: Orientation, numberOfLines: Int) -> Int {
+        if Device.isPad {
+            if numberOfLines == 2 {
+                // [++] Final
+                return 0
+            } else {
+                // [++] Final
+                return 0
+            }
+        } else {
+            
+            switch orientation {
+            case .landscape:
+                if numberOfLines == 2 {
+                    // [++] Final
+                    return 0
+                } else {
+                    // [++] Final
+                    return 0
+                }
+            case .portrait:
+                if numberOfLines == 2 {
+                    // [++] Final
+                    return 0
+                } else {
+                    // [++] Final
+                    return 0
+                }
+            }
         }
     }
 }

@@ -162,7 +162,13 @@ class DraggableMenuView: UIView, PrimaryMenuConforming {
         standardContainerView.handleDarkModeDidChange()
     }
     
+    func handlePurchasedDidChange() {
+        print("DRABBABLELELE MENU, HANDLED PURTCHASDEF")
+        
+    }
+    
     private var darkModeDidChangeCancellable: AnyCancellable?
+    private var purchasedDidChangeCancellable: AnyCancellable?
     private var selectedJiggleDidChangeCancellable: AnyCancellable?
     private var selectedTimeLineSwatchChangeCancellable: AnyCancellable?
     
@@ -174,6 +180,13 @@ class DraggableMenuView: UIView, PrimaryMenuConforming {
             .sink { [weak self] in
                 if let self = self {
                     self.handleDarkModeDidChange()
+                }
+            }
+        purchasedDidChangeCancellable = toolInterfaceViewModel
+            .purchasedDidChangePublisher
+            .sink { [weak self] in
+                if let self = self {
+                    self.handlePurchasedDidChange()
                 }
             }
         

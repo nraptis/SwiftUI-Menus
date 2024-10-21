@@ -1,5 +1,5 @@
 //
-//  MagicalSexyButtonViewModel+DeleteJiggle.swift
+//  MagicalButtonViewModel+DeleteJiggle.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 10/3/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-@Observable class MagicalSexyButtonViewModelDeleteJiggle: MagicalSexyButtonViewModel {
+@Observable class MagicalButtonViewModelDeleteJiggle: MagicalButtonViewModel {
     
     override func handleClicked() {
         if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel {

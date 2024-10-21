@@ -73,30 +73,21 @@ protocol LayoutScheme {
     static func getNameLabelFont(orientation: Orientation, flavor: LayoutSchemeFlavor) -> UIFont
     static func getNameLabelVerticalSpacing(orientation: Orientation, flavor: LayoutSchemeFlavor) -> Int
 
-    
     static func getOutsideBoxPaddingTop(orientation: Orientation) -> Int
     static func getOutsideBoxPaddingBottom(orientation: Orientation) -> Int
     
-    
-    
-    static func getOutsideBoxPaddingLeftStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
+    static func getOutsideBoxPaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
                                                 neighborTypeRight: ToolInterfaceElementType?) -> Int
-    static func getOutsideBoxPaddingLeftLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
-                                             neighborTypeRight: ToolInterfaceElementType?) -> Int
-    
-    
-    static func getOutsideBoxPaddingRightStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
+    static func getOutsideBoxPaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
                                                  neighborTypeRight: ToolInterfaceElementType?) -> Int
-    static func getOutsideBoxPaddingRightLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
-                                              neighborTypeRight: ToolInterfaceElementType?) -> Int
     
     static func getHeroPaddingLeftStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
     static func getHeroPaddingLeftLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
     static func getHeroPaddingRightStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
     static func getHeroPaddingRightLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
     
-    static func getHeroPaddingTopStacked(orientation: Orientation) -> Int
-    static func getHeroPaddingBottomStacked(orientation: Orientation) -> Int
+    static func getHeroPaddingTopStacked(orientation: Orientation, numberOfLines: Int) -> Int
+    static func getHeroPaddingBottomStacked(orientation: Orientation, numberOfLines: Int) -> Int
     
     static func getSlavePaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
     static func getSlavePaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
@@ -109,107 +100,46 @@ protocol LayoutScheme {
 
 extension LayoutScheme {
     
-    static func getValuePaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int { 0 }
-    static func getValuePaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int { 0 }
-    
-    static func getValueLabelFont(orientation: Orientation, flavor: LayoutSchemeFlavor) -> UIFont {
-        if Device.isPad {
-            switch flavor {
-            case .long:
-                return UIFont.systemFont(ofSize: 14.0, weight: .bold)
-            case .stackedLarge:
-                return UIFont.systemFont(ofSize: 14.0, weight: .bold)
-            case .stackedMedium:
-                return UIFont.systemFont(ofSize: 14.0, weight: .bold, width: .condensed)
-            case .stackedSmall:
-                return UIFont.systemFont(ofSize: 14.0, weight: .bold, width: .compressed)
-            }
-        } else {
-            switch orientation {
-            case .landscape:
-                switch flavor {
-                case .long:
-                    return UIFont.systemFont(ofSize: 10.0, weight: .bold)
-                case .stackedLarge:
-                    return UIFont.systemFont(ofSize: 10.0, weight: .bold)
-                case .stackedMedium:
-                    return UIFont.systemFont(ofSize: 10.0, weight: .bold, width: .condensed)
-                case .stackedSmall:
-                    return UIFont.systemFont(ofSize: 10.0, weight: .bold, width: .compressed)
-                }
-            case .portrait:
-                switch flavor {
-                case .long:
-                    return UIFont.systemFont(ofSize: 11.0, weight: .bold)
-                case .stackedLarge:
-                    return UIFont.systemFont(ofSize: 11.0, weight: .bold)
-                case .stackedMedium:
-                    return UIFont.systemFont(ofSize: 11.0, weight: .bold, width: .condensed)
-                case .stackedSmall:
-                    return UIFont.systemFont(ofSize: 11.0, weight: .bold, width: .compressed)
-                }
-            }
-        }
-    }
-    
-    static func getOutsideBoxPaddingTop(orientation: Orientation) -> Int {
-        if Device.isPad {
+    static func getValuePaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        switch squeeze {
+        case .squeezed:
             return 2
-        } else {
-            return 1
+        case .standard:
+            return 6
+        case .relaxed:
+            return 8
         }
     }
-    static func getOutsideBoxPaddingBottom(orientation: Orientation) -> Int {
-        if Device.isPad {
+    static func getValuePaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        switch squeeze {
+        case .squeezed:
             return 2
-        } else {
-            return 1
+        case .standard:
+            return 6
+        case .relaxed:
+            return 8
         }
     }
     
-    static func getHeroPaddingTopStacked(orientation: Orientation) -> Int {
-        if Device.isPad {
-            return 2
-        } else {
-            return 1
-        }
-    }
-    
-    static func getHeroPaddingBottomStacked(orientation: Orientation) -> Int {
-        if Device.isPad {
-            return 2
-        } else {
-            return 1
-        }
-    }
-    
-    
-    static func getOutsideBoxPaddingLeftStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
+    static func getOutsideBoxPaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
                                                 neighborTypeRight: ToolInterfaceElementType?) -> Int {
-        6
+        2
     }
-    static func getOutsideBoxPaddingLeftLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
-                                             neighborTypeRight: ToolInterfaceElementType?) -> Int {
-        6
-    }
-    static func getOutsideBoxPaddingRightStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
+    
+    static func getOutsideBoxPaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
                                                  neighborTypeRight: ToolInterfaceElementType?) -> Int {
-        6
-    }
-    static func getOutsideBoxPaddingRightLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
-                                              neighborTypeRight: ToolInterfaceElementType?) -> Int {
-        6
+        2
     }
     
     static func getHeroPaddingLeftStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
         if Device.isPad {
             switch squeeze {
             case .squeezed:
-                return 4
-            case .standard:
-                return 6
-            case .relaxed:
                 return 8
+            case .standard:
+                return 12
+            case .relaxed:
+                return 14
             }
         } else {
             switch squeeze {
@@ -226,11 +156,11 @@ extension LayoutScheme {
         if Device.isPad {
             switch squeeze {
             case .squeezed:
-                return 4
-            case .standard:
-                return 6
-            case .relaxed:
                 return 8
+            case .standard:
+                return 12
+            case .relaxed:
+                return 14
             }
         } else {
             switch squeeze {
@@ -247,11 +177,11 @@ extension LayoutScheme {
         if Device.isPad {
             switch squeeze {
             case .squeezed:
-                return 4
-            case .standard:
-                return 6
-            case .relaxed:
                 return 8
+            case .standard:
+                return 12
+            case .relaxed:
+                return 14
             }
         } else {
             switch squeeze {
@@ -268,11 +198,11 @@ extension LayoutScheme {
         if Device.isPad {
             switch squeeze {
             case .squeezed:
-                return 4
-            case .standard:
-                return 6
-            case .relaxed:
                 return 8
+            case .standard:
+                return 12
+            case .relaxed:
+                return 14
             }
         } else {
             switch squeeze {
@@ -286,21 +216,57 @@ extension LayoutScheme {
         }
     }
     
-    static func getSlavePaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int { 0 }
-    static func getSlavePaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int { 0 }
+    static func getSlavePaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        switch squeeze {
+        case .squeezed:
+            return 8
+        case .standard:
+            return 12
+        case .relaxed:
+            return 14
+        }
+    }
+    static func getSlavePaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        switch squeeze {
+        case .squeezed:
+            return 8
+        case .standard:
+            return 12
+        case .relaxed:
+            return 14
+        }
+    }
     
-    static func getAccentPaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int { 0 }
-    static func getAccentPaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int { 0 }
+    static func getAccentPaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        switch squeeze {
+        case .squeezed:
+            return 8
+        case .standard:
+            return 12
+        case .relaxed:
+            return 14
+        }
+    }
+    static func getAccentPaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        switch squeeze {
+        case .squeezed:
+            return 8
+        case .standard:
+            return 12
+        case .relaxed:
+            return 14
+        }
+    }
     
     static func getHeroSpacingLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
         if Device.isPad {
             switch squeeze {
             case .squeezed:
-                return 4
-            case .standard:
-                return 6
-            case .relaxed:
                 return 8
+            case .standard:
+                return 12
+            case .relaxed:
+                return 14
             }
         } else {
             switch squeeze {
@@ -332,59 +298,19 @@ extension LayoutScheme {
         let font = Self.getNameLabelFont(orientation: orientation, flavor: flavor)
         return ToolInterfaceTheme.getTextWidth(line1: line1, font: font)
     }
-}
-
-
-extension LayoutScheme {
     
-    static func getNameLabelFont(orientation: Orientation, flavor: LayoutSchemeFlavor) -> UIFont {
-        if Device.isPad {
-            switch flavor {
-            case .long:
-                return UIFont.systemFont(ofSize: 14.0, weight: .semibold)
-            case .stackedLarge:
-                return UIFont.systemFont(ofSize: 14.0, weight: .semibold)
-            case .stackedMedium:
-                return UIFont.systemFont(ofSize: 14.0, weight: .semibold, width: .condensed)
-            case .stackedSmall:
-                return UIFont.systemFont(ofSize: 14.0, weight: .semibold, width: .compressed)
-            }
-        } else {
-            switch orientation {
-            case .landscape:
-                switch flavor {
-                case .long:
-                    return UIFont.systemFont(ofSize: 10.0, weight: .semibold)
-                case .stackedLarge:
-                    return UIFont.systemFont(ofSize: 10.0, weight: .semibold)
-                case .stackedMedium:
-                    return UIFont.systemFont(ofSize: 10.0, weight: .semibold, width: .condensed)
-                case .stackedSmall:
-                    return UIFont.systemFont(ofSize: 10.0, weight: .semibold, width: .compressed)
-                }
-            case .portrait:
-                switch flavor {
-                case .long:
-                    return UIFont.systemFont(ofSize: 11.0, weight: .semibold)
-                case .stackedLarge:
-                    return UIFont.systemFont(ofSize: 11.0, weight: .semibold)
-                case .stackedMedium:
-                    return UIFont.systemFont(ofSize: 11.0, weight: .semibold, width: .condensed)
-                case .stackedSmall:
-                    return UIFont.systemFont(ofSize: 11.0, weight: .semibold, width: .compressed)
-                }
-            }
-        }
+    static func getValueLabelTextWidth(line1: String?,
+                                       line2: String?,
+                                       orientation: Orientation,
+                                       flavor: LayoutSchemeFlavor) -> Int {
+        let font = Self.getValueLabelFont(orientation: orientation, flavor: flavor)
+        return ToolInterfaceTheme.getTextWidth(line1: line1, line2: line2, font: font)
     }
     
-    static func getNameLabelVerticalSpacing(orientation: Orientation, flavor: LayoutSchemeFlavor) -> Int {
-        if Device.isPhone {
-            return -3
-        }
-        if Device.isPad {
-            return -4
-        }
-        return 0
+    static func getValueLabelTextWidth(line1: String?,
+                                       orientation: Orientation,
+                                       flavor: LayoutSchemeFlavor) -> Int {
+        let font = Self.getValueLabelFont(orientation: orientation, flavor: flavor)
+        return ToolInterfaceTheme.getTextWidth(line1: line1, font: font)
     }
-    
 }

@@ -1,5 +1,5 @@
 //
-//  MagicalSexyButtonViewModel+RotateJiggleRight.swift
+//  MagicalButtonViewModel+RotateJiggleRight.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 9/10/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-@Observable class MagicalSexyButtonViewModelRotateJiggleRight: MagicalSexyButtonViewModel {
+@Observable class MagicalButtonViewModelRotateJiggleRight: MagicalButtonViewModel {
     
     override func handleClicked() {
         if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel {

@@ -16,6 +16,7 @@ struct MagicalCreateSwatchSegmentButton: View {
     let outsideBoxPaddingTop: Int
     let outsideBoxPaddingBottom: Int
     let position: SegmentedPickerPosition
+    let isEnabled: Bool
     var body: some View {
         ZStack {
             Button {
@@ -30,7 +31,9 @@ struct MagicalCreateSwatchSegmentButton: View {
             .buttonStyle(MagicalCreateSwatchSegmentButtonButtonStyle(layoutSchemeFlavor: layoutSchemeFlavor,
                                                                      outsideBoxPaddingTop: outsideBoxPaddingTop,
                                                                      outsideBoxPaddingBottom: outsideBoxPaddingBottom,
-                                                                     position: position))
+                                                                     position: position,
+                                                                     isEnabled: isEnabled))
+            .disabled(!isEnabled)
         }
         .frame(width: CGFloat(magicalButtonViewModel.layoutWidth),
                height: CGFloat(magicalViewModel.layoutHeight))

@@ -1,5 +1,5 @@
 //
-//  MagicalSexyCheckBoxViewModel+SexyDarkMode.swift
+//  MagicalCheckBoxViewModel+SexyDarkMode.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 9/25/24.
@@ -7,19 +7,17 @@
 
 import Foundation
 
-@Observable class MagicalSexyCheckBoxViewModelDarkMode: MagicalSexyCheckBoxViewModel {
+@Observable class MagicalCheckBoxViewModelDarkModeEnabled: MagicalCheckBoxViewModel {
     
     override func refresh() {
         
         if ApplicationController.isDarkModeEnabled {
             if isChecked == false {
                 isChecked = true
-                print("Datk Mode Become CHECKED")
             }
         } else {
             if isChecked == true {
                 isChecked = false
-                print("Datk Mode Become NOCHECKED")
             }
         }
         
@@ -38,7 +36,7 @@ import Foundation
     }
     
     override func handleClicked() {
-        print("MagicalSexyCheckBoxViewModelDarkModeEnabled => handleClicked()")
+        print("MagicalCheckBoxViewModelDarkModeEnabledEnabled => handleClicked()")
         
         if let jiggleViewController = ApplicationController.shared.jiggleViewController {
             if ApplicationController.isDarkModeEnabled {
@@ -51,7 +49,7 @@ import Foundation
     
     deinit {
         if ApplicationController.DEBUG_DEALLOCS {
-            print("MagicalSexyCheckBoxViewModelDarkModeEnabled - Dealloc")
+            print("MagicalCheckBoxViewModelDarkModeEnabledEnabled - Dealloc")
         }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  MagicalSexyButtonButtonStyle.swift
+//  MagicalButtonButtonStyle.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 9/3/24.
@@ -7,16 +7,18 @@
 
 import SwiftUI
 
-struct MagicalSexyButtonButtonStyle: ButtonStyle {
+struct MagicalButtonButtonStyle: ButtonStyle {
     
-    @Environment(MagicalSexyButtonViewModel.self) var magicalViewModel
+    @Environment(MagicalButtonViewModel.self) var magicalViewModel
     let layoutSchemeFlavor: LayoutSchemeFlavor
     let outsideBoxPaddingTop: Int
     let outsideBoxPaddingBottom: Int
     func makeBody(configuration: Configuration) -> some View {
         return ZStack {
             
-            getBox()
+            if configuration.isPressed {
+                getBox()
+            }
             bodyContent(isPressed: configuration.isPressed)
         }
         .frame(width: CGFloat(magicalViewModel.layoutWidth),
@@ -31,7 +33,7 @@ struct MagicalSexyButtonButtonStyle: ButtonStyle {
         let boxWidth = magicalViewModel.layoutWidth - magicalViewModel.outsideBoxPaddingLeft - magicalViewModel.outsideBoxPaddingRight
         let boxHeight = magicalViewModel.layoutHeight - outsideBoxPaddingTop - outsideBoxPaddingBottom
         
-        let contextCornerRadius = ButtonLayout.getContextCornerRadius(orientation: magicalViewModel.orientation)
+        let contextCornerRadius = ButtonLayout.getCornerRadius(orientation: magicalViewModel.orientation)
         let contextColor: Color
         if magicalViewModel.isDarkModeEnabled {
             contextColor = ToolInterfaceTheme.contextUnderlayEnabledDark
@@ -90,7 +92,7 @@ struct MagicalSexyButtonButtonStyle: ButtonStyle {
                     .frame(height: CGFloat(outsideBoxPaddingTop))
 #endif
                 
-                MagicalSexyButtonContent(layoutSchemeFlavor: layoutSchemeFlavor,
+                MagicalButtonContent(layoutSchemeFlavor: layoutSchemeFlavor,
                                          isPressed: isPressed,
                                          layoutWidth: contentLayoutWidth,
                                          layoutHeight: contentLayoutHeight)

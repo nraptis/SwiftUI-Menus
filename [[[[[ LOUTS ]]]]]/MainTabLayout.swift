@@ -30,21 +30,85 @@ struct MainTabLayout: LayoutScheme {
         }
     }
     
+    static func getCornerRadius(orientation: Orientation) -> Int {
+        if Device.isPad {
+            return 12
+        } else {
+            if orientation.isLandscape {
+                return 8
+            } else {
+                return 10
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    // [++] Final
+    static func getLineThickness(orientation: Orientation) -> Int {
+        return 1
+    }
+    
+    // [++] Final
+    static func getOutsideBoxPaddingTop(orientation: Orientation) -> Int {
+        if Device.isPad {
+            // [++] Final
+            return 3
+        } else {
+            // [++] Final
+            return 2
+        }
+    }
+    
+    // [++] Final
+    static func getOutsideBoxPaddingBottom(orientation: Orientation) -> Int {
+        if Device.isPad {
+            // [++] Final
+            return 3
+        } else {
+            // [++] Final
+            return 2
+        }
+    }
+    
+    // [++] Final
+    static func getValueLabelFont(orientation: Orientation, flavor: LayoutSchemeFlavor) -> UIFont { UIFont() }
+    
+    // [++] Final
+    static func getHeroPaddingTopStacked(orientation: Orientation, numberOfLines: Int) -> Int { 0 }
+    
+    // [++] Final
+    static func getHeroPaddingBottomStacked(orientation: Orientation, numberOfLines: Int) -> Int { 0 }
+    
+    // [++] Final
     static func getNameLabelFont(orientation: Orientation, flavor: LayoutSchemeFlavor) -> UIFont {
         if Device.isPad {
             switch flavor {
             case .long:
-                return UIFont.systemFont(ofSize: 15.0, weight: .semibold)
+                return UIFont.systemFont(ofSize: 14.0, weight: .semibold)
             case .stackedLarge:
-                return UIFont.systemFont(ofSize: 15.0, weight: .semibold)
+                return UIFont.systemFont(ofSize: 14.0, weight: .semibold)
             case .stackedMedium:
-                return UIFont.systemFont(ofSize: 15.0, weight: .semibold, width: .condensed)
+                return UIFont.systemFont(ofSize: 14.0, weight: .semibold, width: .condensed)
             case .stackedSmall:
-                return UIFont.systemFont(ofSize: 15.0, weight: .semibold, width: .compressed)
+                return UIFont.systemFont(ofSize: 14.0, weight: .semibold, width: .compressed)
             }
         } else {
             switch orientation {
             case .landscape:
+                switch flavor {
+                case .long:
+                    return UIFont.systemFont(ofSize: 10.0, weight: .semibold)
+                case .stackedLarge:
+                    return UIFont.systemFont(ofSize: 10.0, weight: .semibold)
+                case .stackedMedium:
+                    return UIFont.systemFont(ofSize: 10.0, weight: .semibold, width: .condensed)
+                case .stackedSmall:
+                    return UIFont.systemFont(ofSize: 10.0, weight: .semibold, width: .compressed)
+                }
+            case .portrait:
                 switch flavor {
                 case .long:
                     return UIFont.systemFont(ofSize: 11.0, weight: .semibold)
@@ -55,144 +119,26 @@ struct MainTabLayout: LayoutScheme {
                 case .stackedSmall:
                     return UIFont.systemFont(ofSize: 11.0, weight: .semibold, width: .compressed)
                 }
-            case .portrait:
-                switch flavor {
-                case .long:
-                    return UIFont.systemFont(ofSize: 12.0, weight: .semibold)
-                case .stackedLarge:
-                    return UIFont.systemFont(ofSize: 12.0, weight: .semibold)
-                case .stackedMedium:
-                    return UIFont.systemFont(ofSize: 12.0, weight: .semibold, width: .condensed)
-                case .stackedSmall:
-                    return UIFont.systemFont(ofSize: 12.0, weight: .semibold, width: .compressed)
-                }
             }
         }
     }
     
-    static func getUniversalPaddingLeft(orientation: Orientation,
-                                        flavor: LayoutSchemeFlavor,
-                                        squeeze: LayoutSchemeSqueeze,
-                                        neighborTypeLeft: ToolInterfaceElementType?,
-                                        neighborTypeRight: ToolInterfaceElementType?) -> Int {
-        if Device.isPad {
-            switch squeeze {
-            case .squeezed:
-                return 2
-            case .standard, .relaxed:
-                return 6
-            }
-        } else {
-            switch squeeze {
-            case .squeezed:
-                return 2
-            case .standard, .relaxed:
-                return 4
-            }
-        }
-    }
-    
-    static func getUniversalPaddingRight(orientation: Orientation,
-                                         flavor: LayoutSchemeFlavor,
-                                         squeeze: LayoutSchemeSqueeze,
-                                         neighborTypeLeft: ToolInterfaceElementType?,
-                                         neighborTypeRight: ToolInterfaceElementType?) -> Int {
-        if Device.isPad {
-            switch squeeze {
-            case .squeezed:
-                return 2
-            case .standard, .relaxed:
-                return 6
-            }
-        } else {
-            switch squeeze {
-            case .squeezed:
-                return 2
-            case .standard, .relaxed:
-                return 4
-            }
-        }
-    }
-    
-    static func getUniversalPaddingBottom(orientation: Orientation, flavor: LayoutSchemeFlavor, numberOfLines: Int) -> Int {
-        2
-    }
-    
-    static func getButtonUniversalPaddingLeft(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
-        if Device.isPad {
-            return 4
-        } else {
-            return 2
-        }
-    }
-    
-    static func getButtonUniversalPaddingRight(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
-        if Device.isPad {
-            return 4
-        } else {
-            return 2
-        }
-    }
-    
-    static func getButtonUniversalPaddingTop(orientation: Orientation, flavor: LayoutSchemeFlavor, numberOfLines: Int) -> Int {
-        0
-    }
-    
-    static func getButtonUniversalPaddingBottom(orientation: Orientation, flavor: LayoutSchemeFlavor, numberOfLines: Int) -> Int {
-        0
-    }
-    
-    static func getNameLabelPaddingLeft(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
-        0
-    }
-    
-    static func getNameLabelPaddingRight(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
-        if Device.isPad {
-            return 6
-        } else {
-            return 4
-        }
-    }
-    
-    static func getNameLabelPaddingBottom(orientation: Orientation, flavor: LayoutSchemeFlavor, numberOfLines: Int) -> Int {
-        0
-    }
-    
-    static func getIconPaddingLeft(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
-        0
-    }
-    
-    static func getIconPaddingRight(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
-        0
-    }
-    
-    static func getIconPaddingTop(orientation: Orientation, flavor: LayoutSchemeFlavor, numberOfLines: Int) -> Int {
-        return 0
-    }
-    
-    static func getCornerRadius(orientation: Orientation) -> Int {
-        if Device.isPad {
-            return 14
-        } else {
-            if orientation.isLandscape {
-                return 10
-            } else {
-                return 12
-            }
-        }
-    }
-    
-    static func getLineThickness(orientation: Orientation) -> Int {
-        return 2
-    }
-    
+    // [++] Final
     static func getNameLabelVerticalSpacing(orientation: Orientation, flavor: LayoutSchemeFlavor) -> Int {
-        if Device.isPhone {
-            return -2
-        }
         if Device.isPad {
+            // [Cool]
             return -3
+        } else {
+            switch orientation {
+            case .landscape:
+                // [Cool]
+                return -2
+            case .portrait:
+                // [Cool]
+                return -2
+            }
         }
-        return 0
     }
+    
 }
+

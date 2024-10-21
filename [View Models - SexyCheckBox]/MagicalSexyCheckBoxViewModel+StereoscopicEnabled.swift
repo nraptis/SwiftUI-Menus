@@ -1,5 +1,5 @@
 //
-//  MagicalSexyCheckBoxViewModel+StereoscopicEnabled.swift
+//  MagicalCheckBoxViewModel+StereoscopicEnabled.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 10/7/24.
@@ -10,13 +10,16 @@ import Foundation
 
 import Foundation
 
-@Observable class MagicalSexyCheckBoxViewModelStereoscopicEnabled: MagicalSexyCheckBoxViewModel {
+@Observable class MagicalCheckBoxViewModelStereoscopicEnabled: MagicalCheckBoxViewModel {
     
     override func refresh() {
         
+        //
+        // See if we should be checked...
+        //
+        
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
-            /*
-            if jiggleViewModel.jiggleDocument.creatorMode == .moveJiggleCenter {
+            if jiggleViewModel.isStereoscopicEnabled {
                 if isChecked == false {
                     isChecked = true
                 }
@@ -25,21 +28,10 @@ import Foundation
                     isChecked = false
                 }
             }
-            */
         }
         
-        //
-        // See if we should be enabled...
-        //
         
-        if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
-            switch jiggleViewModel.jiggleDocument.creatorMode {
-            case .none:
-                refreshEnabled()
-            default:
-                refreshDisabled()
-            }
-        }
+        refreshEnabled()
     }
     
     override func handleClicked() {
@@ -49,19 +41,22 @@ import Foundation
             if toolInterfaceViewModel.isBlocked {
                 return
             }
-            /*
-            if jiggleViewModel.jiggleDocument.creatorMode == .moveJiggleCenter {
-                jiggleViewModel.setCreatorMode(.none)
-            } else {
-                jiggleViewModel.setCreatorMode(.moveJiggleCenter)
+            
+            if let jiggleViewController = ApplicationController.shared.jiggleViewController {
+                if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
+                    if jiggleViewModel.isStereoscopicEnabled {
+                        jiggleViewController.stereoscopicExit()
+                    } else {
+                        jiggleViewController.stereoscopicEnter()
+                    }
+                }
             }
-            */
         }
     }
     
     deinit {
         if ApplicationController.DEBUG_DEALLOCS {
-            print("MagicalSexyCheckBoxViewModelStereoscopicEnabled - Dealloc")
+            print("MagicalCheckBoxViewModelStereoscopicEnabled - Dealloc")
         }
     }
 }

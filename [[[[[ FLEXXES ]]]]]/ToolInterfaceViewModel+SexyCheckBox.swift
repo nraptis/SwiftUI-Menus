@@ -1,5 +1,5 @@
 //
-//  ToolInterfaceViewModel+SexyCheckBox.swift
+//  ToolInterfaceViewModel+CheckBox.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 9/25/24.
@@ -9,8 +9,8 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-    static func getSexyCheckBoxFlex(orientation: Orientation,
-                                    configuration: ToolInterfaceElementSexyCheckBoxConfiguration,
+    static func getCheckBoxFlex(orientation: Orientation,
+                                    configuration: ToolInterfaceElementCheckBoxConfiguration,
                                     neighborTypeLeft: ToolInterfaceElementType?,
                                     neighborTypeRight: ToolInterfaceElementType?) -> ToolInterfaceElementFlex {
         let flexConvertibleData = getConvertibleFlex(orientation: orientation,
@@ -31,6 +31,6 @@ extension ToolInterfaceViewModel {
                                                      extraWidthSqueezed: 0,
                                                      extraWidthStandard: 0,
                                                      extraWidthRelaxed: 0)
-        return ToolInterfaceElementFlex.sexyCheckBox(flexConvertibleData)
+        return ToolInterfaceElementFlex.checkBox(flexConvertibleData)
     }
 }

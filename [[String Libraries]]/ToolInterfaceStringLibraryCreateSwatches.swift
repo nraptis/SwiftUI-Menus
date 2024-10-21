@@ -9,6 +9,25 @@ import Foundation
 
 struct ToolInterfaceStringLibraryCreateSwatches {
     
+    static func swatchTextGuideCentersLine1() -> String? {
+        GeneralStringLibrary.get(localized: "guide_centers_line_1", table: "ToolInterfaceCreateSwatch")
+    }
+    
+    static func swatchTextGuideCentersLine2() -> String? {
+        GeneralStringLibrary.get(localized: "guide_centers_line_2", table: "ToolInterfaceCreateSwatch")
+    }
+    
+    
+    static func swatchTextJiggleCentersLine1() -> String? {
+        GeneralStringLibrary.get(localized: "jiggle_centers_line_1", table: "ToolInterfaceCreateSwatch")
+    }
+    
+    static func swatchTextJiggleCentersLine2() -> String? {
+        GeneralStringLibrary.get(localized: "jiggle_centers_line_2", table: "ToolInterfaceCreateSwatch")
+    }
+    
+
+    
     static func swatchTextMakeJiggleLine1() -> String? {
         GeneralStringLibrary.get(localized: "make_jiggle_line_1", table: "ToolInterfaceCreateSwatch")
     }

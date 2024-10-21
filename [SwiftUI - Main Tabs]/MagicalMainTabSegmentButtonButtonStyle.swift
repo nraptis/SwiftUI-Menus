@@ -16,6 +16,7 @@ struct MagicalMainTabSegmentButtonButtonStyle: ButtonStyle {
     let outsideBoxPaddingBottom: Int
     let position: SegmentedPickerPosition
     let isSelected: Bool
+    let isEnabled: Bool
     
     func makeBody(configuration: Configuration) -> some View {
         return ZStack {
@@ -86,13 +87,13 @@ struct MagicalMainTabSegmentButtonButtonStyle: ButtonStyle {
         let lineThickness = MainTabLayout.getLineThickness(orientation: magicalViewModel.orientation)
         let color: Color
         if magicalViewModel.isDarkModeEnabled {
-            if magicalButtonViewModel.isEnabled {
+            if isEnabled {
                 color = ToolInterfaceTheme.primaryUnselectedEnabledDark
             } else {
                 color = ToolInterfaceTheme.primaryUnselectedDisabledDark
             }
         } else {
-            if magicalButtonViewModel.isEnabled {
+            if isEnabled {
                 color = ToolInterfaceTheme.primaryUnselectedEnabledLight
             } else {
                 color = ToolInterfaceTheme.primaryUnselectedDisabledLight
@@ -156,7 +157,8 @@ struct MagicalMainTabSegmentButtonButtonStyle: ButtonStyle {
                 MagicalMainTabSegmentContent(layoutSchemeFlavor: layoutSchemeFlavor,
                                              layoutHeight: contentLayoutHeight,
                                              isSelected: isSelected,
-                                             isPressed: isPressed)
+                                             isPressed: isPressed,
+                                             isEnabled: isEnabled)
 #if INTERFACE_HINTS
                 Spacer()
                     .frame(width: 24.0, height: CGFloat(outsideBoxPaddingBottom))

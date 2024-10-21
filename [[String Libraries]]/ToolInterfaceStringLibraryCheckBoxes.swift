@@ -27,19 +27,19 @@ struct ToolInterfaceStringLibraryCheckBoxes {
     }
     
     
-    static func checkBoxTextAnimationJiggleApplyToAllLine1() -> String? {
+    static func checkBoxTextAnimationGrabApplyToAllLine1() -> String? {
         GeneralStringLibrary.get(localized: "animation_jiggle_apply_to_all_line_1", table: "ToolInterfaceCheckBoxes")
     }
     
-    static func checkBoxTextAnimationJiggleApplyToAllLine2() -> String? {
+    static func checkBoxTextAnimationGrabApplyToAllLine2() -> String? {
         GeneralStringLibrary.get(localized: "animation_jiggle_apply_to_all_line_2", table: "ToolInterfaceCheckBoxes")
     }
     
-    static func checkBoxTextAnimationBounceApplyToAllLine1() -> String? {
+    static func checkBoxTextAnimationLoopApplyToAllLine1() -> String? {
         GeneralStringLibrary.get(localized: "animation_bounce_apply_to_all_line_1", table: "ToolInterfaceCheckBoxes")
     }
     
-    static func checkBoxTextAnimationBounceApplyToAllLine2() -> String? {
+    static func checkBoxTextAnimationLoopApplyToAllLine2() -> String? {
         GeneralStringLibrary.get(localized: "animation_bounce_apply_to_all_line_2", table: "ToolInterfaceCheckBoxes")
     }
     

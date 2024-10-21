@@ -31,13 +31,13 @@ extension ToolInterfaceLayoutStackingCategory {
             return .stackedMedium
         case .large(let stackingLargeData):
             switch toolInterfaceElementType {
-            case .sexyCheckBox:
+            case .checkBox:
                 if stackingLargeData.isCheckBoxLong {
                     return .long
                 } else {
                     return .stackedLarge
                 }
-            case .sexyButton:
+            case .button:
                 if stackingLargeData.isButtonLong {
                     return .long
                 } else {
@@ -55,7 +55,7 @@ extension ToolInterfaceLayoutStackingCategory {
                 } else {
                     return .stackedLarge
                 }
-            case .sexyStepper:
+            case .stepper:
                 if stackingLargeData.isStepperLong {
                     return .long
                 } else {

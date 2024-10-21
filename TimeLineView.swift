@@ -292,8 +292,7 @@ class TimeLineView: UIView {
         var tanPointPairsIn = [(CGPoint, CGPoint)]()
         var tanPointPairsOut = [(CGPoint, CGPoint)]()
         
-        
-        var MINI_P_PAIR = [(CGPoint, CGPoint)]()
+        //var MINI_P_PAIR = [(CGPoint, CGPoint)]()
         
         var controlPoints = [CGPoint]()
         
@@ -332,59 +331,6 @@ class TimeLineView: UIView {
             }
 
         }
-        
-        
-        var XIXI = Float(36.0)
-        while XIXI <= 4096.0 {
-            
-            let p1 = (XIXI - 36.0) / 4096.9
-            let p2 = (XIXI) / 4096.9
-            
-            let A1 = selectedChannel.smoother.scrape(percent: p1)
-            let A2 = selectedChannel.smoother.scrape(percent: p2)
-            
-            let x1 = (p1) * (frameWidth - paddingH - paddingH) + paddingH
-            let y1 = (A1 / TimeLineSmoother.SCALE) * (frameHeight - paddingV - paddingV) + paddingV
-            let x2 = (p2) * (frameWidth - paddingH - paddingH) + paddingH
-            let y2 = (A2 / TimeLineSmoother.SCALE) * (frameHeight - paddingV - paddingV) + paddingV
-            
-            //if x1 < minX { x1 = minX }
-            //if x1 > maxX { x1 = maxX }
-            //if y1 < minY { y1 = minY }
-            //if y1 > maxY { y1 = maxY }
-            
-            //if x2 < minX { x2 = minX }
-            //if x2 > maxX { x2 = maxX }
-            //if y2 < minY { y2 = minY }
-            //if y2 > maxY { y2 = maxY }
-            
-            MINI_P_PAIR.append((
-            
-                CGPoint(x: x1, y: y1),
-                CGPoint(x: x2, y: y2)
-            ))
-            
-            XIXI += 36.0
-        }
-        
-        /*
-        //TODO: Remove
-        for tempSJHDF in 0..<channel.tempPrecomputedLineSegmentCount {
-            let TCC = channel.tempPrecomputedLineSegments[tempSJHDF]
-            let x1 = (TCC.x1 / TimeLineSmoother.SCALE) * (frameWidth - paddingH - paddingH) + paddingH
-            let y1 = (TCC.y1 / TimeLineSmoother.SCALE) * (frameHeight - paddingV - paddingV) + paddingV
-            let x2 = (TCC.x2 / TimeLineSmoother.SCALE) * (frameWidth - paddingH - paddingH) + paddingH
-            let y2 = (TCC.y2 / TimeLineSmoother.SCALE) * (frameHeight - paddingV - paddingV) + paddingV
-            
-            tanPointPairs.append((
-            
-                CGPoint(x: x1, y: y1),
-                CGPoint(x: x2, y: y2)
-            ))
-            
-            //splinePoints.append(CGPoint(x: x, y: y))
-        }
-        */
         
         for controlPointIndex in 0..<selectedChannel.controlPointCount {
             let controlPoint = selectedChannel.controlPoints[controlPointIndex]
@@ -439,6 +385,7 @@ class TimeLineView: UIView {
         context.strokePath()
         context.restoreGState()
         
+        /*
         for tanPointPair in MINI_P_PAIR {
             let point1 = tanPointPair.0
             let point2 = tanPointPair.1
@@ -451,6 +398,7 @@ class TimeLineView: UIView {
             context.strokePath()
             context.restoreGState()
         }
+        */
         
         
         for tanPointPair in tanPointPairsIn {
@@ -916,9 +864,7 @@ class TimeLineView: UIView {
         } else if bestControlTanIndex != -1 {
             selectTan()
         }
-        
     }
-    
     
     func attemptUpdateTimeLine(touch: UITouch,
                                at point: Point,
@@ -1045,7 +991,7 @@ class TimeLineView: UIView {
             selectedChannel.controlPoints[controlPointCount1].isManualPositionEnabled = true
         }
         
-        if jiggleViewModel.isAnimationBounceAppliedToAll {
+        if jiggleViewModel.isAnimationLoopsAppliedToAll {
             
             jiggleViewModel.timeLineDupeCurrentChannel(jiggle)
             
@@ -1133,7 +1079,7 @@ class TimeLineView: UIView {
                                                                    paddingV: paddingV)
         }
         
-        if jiggleViewModel.isAnimationBounceAppliedToAll {
+        if jiggleViewModel.isAnimationLoopsAppliedToAll {
             
             jiggleViewModel.timeLineDupeCurrentChannel(jiggle)
             
@@ -1161,6 +1107,9 @@ class TimeLineView: UIView {
             return
         }
         jiggle.switchSelectedTimeLineControlIndex(index: controlIndex)
+        if let jiggleDocument = jiggleDocument {
+            jiggleDocument.snapshotTimeLineHistory()
+        }
     }
     
     private func killDragAll() {
@@ -1177,6 +1126,9 @@ class TimeLineView: UIView {
                     }
                     
                 }
+                if let jiggleViewModel = jiggleViewModel {
+                    jiggleViewModel.recordTimeLineHistory()
+                }
             }
         }
         selectedTimeLineControlPointTouch = nil
@@ -1189,6 +1141,9 @@ class TimeLineView: UIView {
                     if _grabTimeLineControlTanHandleData.jiggleIndex == jiggleDocument.getJiggleIndex(jiggle) {
                         grabTimeLineControlTanHandleStopPublisher.send(_grabTimeLineControlTanHandleData)
                     }
+                }
+                if let jiggleViewModel = jiggleViewModel {
+                    jiggleViewModel.recordTimeLineHistory()
                 }
             }
         }

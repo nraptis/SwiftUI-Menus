@@ -8,6 +8,208 @@
 import Foundation
 
 struct FramedConvertibleIconLibrary {
+
+    static var stereoscopic: FramedConvertibleIconPack {
+        Self.build(prefix: "framed",
+                  name: "stereoscopic",
+                  widthPad_0: 71, heightPad_0: 42,
+                  widthPhoneLandscape_0: 46, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 54, heightPhonePortrait_0: 32,
+                  widthPad_1: 61, heightPad_1: 36,
+                  widthPhoneLandscape_1: 41, heightPhoneLandscape_1: 24,
+                  widthPhonePortrait_1: 47, heightPhonePortrait_1: 28,
+                  widthPad_2: 39, heightPad_2: 23,
+                  widthPhoneLandscape_2: 27, heightPhoneLandscape_2: 16,
+                  widthPhonePortrait_2: 34, heightPhonePortrait_2: 20)
+    }
+    
+    static var jiggleCenter: FramedConvertibleIconPack {
+        Self.build(prefix: "framed",
+                  name: "jiggle_center",
+                  widthPad_0: 42, heightPad_0: 42,
+                  widthPhoneLandscape_0: 27, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 32, heightPhonePortrait_0: 32,
+                  widthPad_1: 36, heightPad_1: 36,
+                  widthPhoneLandscape_1: 24, heightPhoneLandscape_1: 24,
+                  widthPhonePortrait_1: 28, heightPhonePortrait_1: 28,
+                  widthPad_2: 23, heightPad_2: 23,
+                  widthPhoneLandscape_2: 16, heightPhoneLandscape_2: 16,
+                  widthPhonePortrait_2: 20, heightPhonePortrait_2: 20)
+    }
+
+
+    static var guideCenter: FramedConvertibleIconPack {
+        Self.build(prefix: "framed",
+                  name: "guide_center",
+                  widthPad_0: 43, heightPad_0: 42,
+                  widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 33, heightPhonePortrait_0: 32,
+                  widthPad_1: 37, heightPad_1: 36,
+                  widthPhoneLandscape_1: 25, heightPhoneLandscape_1: 24,
+                  widthPhonePortrait_1: 29, heightPhonePortrait_1: 28,
+                  widthPad_2: 24, heightPad_2: 23,
+                  widthPhoneLandscape_2: 17, heightPhoneLandscape_2: 16,
+                  widthPhonePortrait_2: 21, heightPhonePortrait_2: 20)
+    }
+    
+    static var magGlass: FramedConvertibleIconPack {
+        Self.build(prefix: "framed",
+                  name: "mag_glass",
+                  widthPad_0: 43, heightPad_0: 42,
+                  widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 33, heightPhonePortrait_0: 32,
+                  widthPad_1: 37, heightPad_1: 36,
+                  widthPhoneLandscape_1: 25, heightPhoneLandscape_1: 24,
+                  widthPhonePortrait_1: 29, heightPhonePortrait_1: 28,
+                  widthPad_2: 24, heightPad_2: 23,
+                  widthPhoneLandscape_2: 17, heightPhoneLandscape_2: 16,
+                  widthPhonePortrait_2: 21, heightPhonePortrait_2: 20)
+    }
+    
+    static var wolfView: FramedConvertibleIconPack {
+        Self.build(prefix: "framed",
+                  name: "wolf_view",
+                  widthPad_0: 50, heightPad_0: 42,
+                  widthPhoneLandscape_0: 32, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 38, heightPhonePortrait_0: 32,
+                  widthPad_1: 43, heightPad_1: 36,
+                  widthPhoneLandscape_1: 29, heightPhoneLandscape_1: 24,
+                  widthPhonePortrait_1: 34, heightPhonePortrait_1: 28,
+                  widthPad_2: 28, heightPad_2: 23,
+                  widthPhoneLandscape_2: 19, heightPhoneLandscape_2: 16,
+                  widthPhonePortrait_2: 24, heightPhonePortrait_2: 20)
+    }
+    
+    static var wolvenStein: FramedConvertibleIconPack {
+        Self.build(prefix: "framed",
+                  name: "wolven_stein",
+                  widthPad_0: 46, heightPad_0: 42,
+                  widthPhoneLandscape_0: 30, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 35, heightPhonePortrait_0: 32,
+                  widthPad_1: 39, heightPad_1: 36,
+                  widthPhoneLandscape_1: 26, heightPhoneLandscape_1: 24,
+                  widthPhonePortrait_1: 31, heightPhonePortrait_1: 28,
+                  widthPad_2: 25, heightPad_2: 23,
+                  widthPhoneLandscape_2: 18, heightPhoneLandscape_2: 16,
+                  widthPhonePortrait_2: 22, heightPhonePortrait_2: 20)
+    }
+    
+    static var drawGuide: FramedConvertibleIconPack {
+        Self.build(prefix: "framed",
+                  name: "draw_guide",
+                  widthPad_0: 47, heightPad_0: 42,
+                  widthPhoneLandscape_0: 30, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 36, heightPhonePortrait_0: 32,
+                  widthPad_1: 40, heightPad_1: 36,
+                  widthPhoneLandscape_1: 27, heightPhoneLandscape_1: 24,
+                  widthPhonePortrait_1: 32, heightPhonePortrait_1: 28,
+                  widthPad_2: 26, heightPad_2: 23,
+                  widthPhoneLandscape_2: 18, heightPhoneLandscape_2: 16,
+                  widthPhonePortrait_2: 23, heightPhonePortrait_2: 20)
+    }
+
+
+    static var makeGuide: FramedConvertibleIconPack {
+        Self.build(prefix: "framed",
+                  name: "make_guide",
+                  widthPad_0: 43, heightPad_0: 42,
+                  widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 33, heightPhonePortrait_0: 32,
+                  widthPad_1: 37, heightPad_1: 36,
+                  widthPhoneLandscape_1: 25, heightPhoneLandscape_1: 24,
+                  widthPhonePortrait_1: 29, heightPhonePortrait_1: 28,
+                  widthPad_2: 24, heightPad_2: 23,
+                  widthPhoneLandscape_2: 17, heightPhoneLandscape_2: 16,
+                  widthPhonePortrait_2: 21, heightPhonePortrait_2: 20)
+    }
+
+
+    static var drawJiggle: FramedConvertibleIconPack {
+        Self.build(prefix: "framed",
+                  name: "draw_jiggle",
+                  widthPad_0: 47, heightPad_0: 42,
+                  widthPhoneLandscape_0: 30, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 36, heightPhonePortrait_0: 32,
+                  widthPad_1: 40, heightPad_1: 36,
+                  widthPhoneLandscape_1: 27, heightPhoneLandscape_1: 24,
+                  widthPhonePortrait_1: 32, heightPhonePortrait_1: 28,
+                  widthPad_2: 26, heightPad_2: 23,
+                  widthPhoneLandscape_2: 18, heightPhoneLandscape_2: 16,
+                  widthPhonePortrait_2: 23, heightPhonePortrait_2: 20)
+    }
+
+
+    static var makeJiggle: FramedConvertibleIconPack {
+        Self.build(prefix: "framed",
+                  name: "make_jiggle",
+                  widthPad_0: 43, heightPad_0: 42,
+                  widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 33, heightPhonePortrait_0: 32,
+                  widthPad_1: 37, heightPad_1: 36,
+                  widthPhoneLandscape_1: 25, heightPhoneLandscape_1: 24,
+                  widthPhonePortrait_1: 29, heightPhonePortrait_1: 28,
+                  widthPad_2: 24, heightPad_2: 23,
+                  widthPhoneLandscape_2: 17, heightPhoneLandscape_2: 16,
+                  widthPhonePortrait_2: 21, heightPhonePortrait_2: 20)
+    }
+    
+    static var jiggleA: FramedConvertibleIconPack {
+        Self.build(prefix: "framed",
+                  name: "jiggle_a",
+                  widthPad_0: 47, heightPad_0: 42,
+                  widthPhoneLandscape_0: 30, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 36, heightPhonePortrait_0: 32,
+                  widthPad_1: 40, heightPad_1: 36,
+                  widthPhoneLandscape_1: 27, heightPhoneLandscape_1: 24,
+                  widthPhonePortrait_1: 31, heightPhonePortrait_1: 28,
+                  widthPad_2: 26, heightPad_2: 23,
+                  widthPhoneLandscape_2: 18, heightPhoneLandscape_2: 16,
+                  widthPhonePortrait_2: 23, heightPhonePortrait_2: 20)
+    }
+
+    static var pointsA: FramedConvertibleIconPack {
+        Self.build(prefix: "framed",
+                  name: "points_a",
+                  widthPad_0: 43, heightPad_0: 42,
+                  widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 33, heightPhonePortrait_0: 32,
+                  widthPad_1: 37, heightPad_1: 36,
+                  widthPhoneLandscape_1: 25, heightPhoneLandscape_1: 24,
+                  widthPhonePortrait_1: 29, heightPhonePortrait_1: 28,
+                  widthPad_2: 24, heightPad_2: 23,
+                  widthPhoneLandscape_2: 17, heightPhoneLandscape_2: 16,
+                  widthPhonePortrait_2: 21, heightPhonePortrait_2: 20)
+    }
+
+
+    static var pointsB: FramedConvertibleIconPack {
+        Self.build(prefix: "framed",
+                  name: "points_b",
+                  widthPad_0: 48, heightPad_0: 42,
+                  widthPhoneLandscape_0: 31, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 37, heightPhonePortrait_0: 32,
+                  widthPad_1: 42, heightPad_1: 36,
+                  widthPhoneLandscape_1: 28, heightPhoneLandscape_1: 24,
+                  widthPhonePortrait_1: 33, heightPhonePortrait_1: 28,
+                  widthPad_2: 27, heightPad_2: 23,
+                  widthPhoneLandscape_2: 19, heightPhoneLandscape_2: 16,
+                  widthPhonePortrait_2: 23, heightPhonePortrait_2: 20)
+    }
+    
+    static var guides: FramedConvertibleIconPack {
+        Self.build(prefix: "framed",
+                  name: "guides",
+                  widthPad_0: 42, heightPad_0: 42,
+                  widthPhoneLandscape_0: 27, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 32, heightPhonePortrait_0: 32,
+                  widthPad_1: 36, heightPad_1: 36,
+                  widthPhoneLandscape_1: 24, heightPhoneLandscape_1: 24,
+                  widthPhonePortrait_1: 28, heightPhonePortrait_1: 28,
+                  widthPad_2: 23, heightPad_2: 23,
+                  widthPhoneLandscape_2: 16, heightPhoneLandscape_2: 16,
+                  widthPhonePortrait_2: 20, heightPhonePortrait_2: 20)
+    }
+
     
     static var testArrowLeft: FramedConvertibleIconPack {
         Self.build(prefix: "framed",
@@ -38,62 +240,18 @@ struct FramedConvertibleIconLibrary {
                   widthPhonePortrait_2: 18, heightPhonePortrait_2: 20)
     }
     
-    static var menuA: FramedConvertibleIconPack {
-        Self.build(prefix: "framed",
-                  name: "menu_a",
-                  widthPad_0: 43, heightPad_0: 42,
-                  widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
-                  widthPhonePortrait_0: 33, heightPhonePortrait_0: 32,
-                  widthPad_1: 36, heightPad_1: 35,
-                  widthPhoneLandscape_1: 25, heightPhoneLandscape_1: 24,
-                  widthPhonePortrait_1: 31, heightPhonePortrait_1: 30,
-                  widthPad_2: 24, heightPad_2: 23,
-                  widthPhoneLandscape_2: 17, heightPhoneLandscape_2: 16,
-                  widthPhonePortrait_2: 21, heightPhonePortrait_2: 20)
-    }
-
-
-    static var menuB: FramedConvertibleIconPack {
-        Self.build(prefix: "framed",
-                  name: "menu_b",
-                  widthPad_0: 43, heightPad_0: 42,
-                  widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
-                  widthPhonePortrait_0: 33, heightPhonePortrait_0: 32,
-                  widthPad_1: 36, heightPad_1: 35,
-                  widthPhoneLandscape_1: 25, heightPhoneLandscape_1: 24,
-                  widthPhonePortrait_1: 31, heightPhonePortrait_1: 30,
-                  widthPad_2: 24, heightPad_2: 23,
-                  widthPhoneLandscape_2: 17, heightPhoneLandscape_2: 16,
-                  widthPhonePortrait_2: 21, heightPhonePortrait_2: 20)
-    }
-
-
     static var menuC: FramedConvertibleIconPack {
         Self.build(prefix: "framed",
                   name: "menu_c",
                   widthPad_0: 43, heightPad_0: 42,
                   widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
                   widthPhonePortrait_0: 33, heightPhonePortrait_0: 32,
-                  widthPad_1: 36, heightPad_1: 35,
+                  widthPad_1: 37, heightPad_1: 36,
                   widthPhoneLandscape_1: 25, heightPhoneLandscape_1: 24,
-                  widthPhonePortrait_1: 31, heightPhonePortrait_1: 30,
+                  widthPhonePortrait_1: 29, heightPhonePortrait_1: 28,
                   widthPad_2: 24, heightPad_2: 23,
                   widthPhoneLandscape_2: 17, heightPhoneLandscape_2: 16,
                   widthPhonePortrait_2: 21, heightPhonePortrait_2: 20)
-    }
-    
-    static var jiggles: FramedConvertibleIconPack {
-        Self.build(prefix: "sexy_check",
-                  name: "jiggles",
-                  widthPad_0: 45, heightPad_0: 42,
-                  widthPhoneLandscape_0: 29, heightPhoneLandscape_0: 27,
-                  widthPhonePortrait_0: 34, heightPhonePortrait_0: 32,
-                  widthPad_1: 36, heightPad_1: 33,
-                  widthPhoneLandscape_1: 24, heightPhoneLandscape_1: 22,
-                  widthPhonePortrait_1: 30, heightPhonePortrait_1: 28,
-                  widthPad_2: 22, heightPad_2: 20,
-                  widthPhoneLandscape_2: 15, heightPhoneLandscape_2: 14,
-                  widthPhonePortrait_2: 20, heightPhonePortrait_2: 18)
     }
     
     static var delete: FramedConvertibleIconPack {

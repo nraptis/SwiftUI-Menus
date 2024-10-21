@@ -1,5 +1,5 @@
 //
-//  MagicalSexyButtonViewModel+SwivelZoomOut.swift
+//  MagicalButtonViewModel+SwivelZoomOut.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 10/7/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-@Observable class MagicalSexyButtonViewModelSwivelZoomOut: MagicalSexyButtonViewModel {
+@Observable class MagicalButtonViewModelSwivelZoomOut: MagicalButtonViewModel {
     
     override func handleClicked() {
         if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel {

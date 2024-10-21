@@ -42,7 +42,7 @@ class RowStackingCategoryCalculator {
                 return flexLongData.standardWidthLarge
             }
             
-        case .sexyStepper(let flexConvertible):
+        case .stepper(let flexConvertible):
             if layoutStackingCategory.isStepperLong {
                 return flexConvertible.standardWidthLong
             } else {
@@ -92,7 +92,7 @@ class RowStackingCategoryCalculator {
                     return flexConvertible.standardWidthStackedLarge
                 }
             }
-        case .sexyCheckBox(let flexConvertible):
+        case .checkBox(let flexConvertible):
             if layoutStackingCategory.isCheckBoxLong {
                 return flexConvertible.standardWidthLong
             } else {
@@ -104,7 +104,7 @@ class RowStackingCategoryCalculator {
                     return flexConvertible.standardWidthStackedLarge
                 }
             }
-        case .sexyButton(let flexConvertible):
+        case .button(let flexConvertible):
             if layoutStackingCategory.isButtonLong {
                 return flexConvertible.standardWidthLong
             } else {

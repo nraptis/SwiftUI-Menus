@@ -1,5 +1,5 @@
 //
-//  MagicalSexyCheckBoxButtonStyle.swift
+//  MagicalCheckBoxButtonStyle.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 9/3/24.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct MagicalSexyCheckBoxButtonStyle: ButtonStyle {
+struct MagicalCheckBoxButtonStyle: ButtonStyle {
     
-    @Environment(MagicalSexyCheckBoxViewModel.self) var magicalViewModel
+    @Environment(MagicalCheckBoxViewModel.self) var magicalViewModel
     let layoutSchemeFlavor: LayoutSchemeFlavor
     let outsideBoxPaddingTop: Int
     let outsideBoxPaddingBottom: Int
@@ -154,7 +154,7 @@ struct MagicalSexyCheckBoxButtonStyle: ButtonStyle {
 #endif
                 
                 
-                MagicalSexyCheckBoxContent(layoutSchemeFlavor: layoutSchemeFlavor,
+                MagicalCheckBoxContent(layoutSchemeFlavor: layoutSchemeFlavor,
                                            isPressed: isPressed,
                                            layoutWidth: contentLayoutWidth,
                                            layoutHeight: contentLayoutHeight)

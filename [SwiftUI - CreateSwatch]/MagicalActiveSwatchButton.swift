@@ -9,7 +9,6 @@ import SwiftUI
 
 struct MagicalActiveSwatchButton: View {
     
-    
     @Environment(MagicalCreateSwatchViewModel.self) var magicalViewModel
     let activeButtonViewModel: MagicalSegmentButtonViewModel
     let activeButtonConfiguration: ToolInterfaceElementCreateSwatchButtonConfiguration
@@ -18,6 +17,7 @@ struct MagicalActiveSwatchButton: View {
     let layoutSchemeFlavor: LayoutSchemeFlavor
     let outsideBoxPaddingTop: Int
     let outsideBoxPaddingBottom: Int
+    let isEnabled: Bool
     
     var body: some View {
         ZStack {
@@ -30,12 +30,14 @@ struct MagicalActiveSwatchButton: View {
                 .frame(width: CGFloat(magicalViewModel.layoutWidth),
                        height: CGFloat(magicalViewModel.layoutHeight))
             }
-            .buttonStyle(MagicalCreateSwatchButtonStyle(activeButtonViewModel: activeButtonViewModel,
+            .buttonStyle(MagicalActiveSwatchButtonStyle(activeButtonViewModel: activeButtonViewModel,
                                                         activeButtonConfiguration: activeButtonConfiguration,
                                                         firstButtonViewModel: firstButtonViewModel,
                                                         layoutSchemeFlavor: layoutSchemeFlavor,
                                                         outsideBoxPaddingTop: outsideBoxPaddingTop,
-                                                        outsideBoxPaddingBottom: outsideBoxPaddingBottom))
+                                                        outsideBoxPaddingBottom: outsideBoxPaddingBottom,
+                                                        isEnabled: isEnabled))
+            .disabled(!isEnabled)
         }
         .frame(width: CGFloat(magicalViewModel.layoutWidth),
                height: CGFloat(magicalViewModel.layoutHeight))

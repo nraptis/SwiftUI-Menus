@@ -1,5 +1,5 @@
 //
-//  MagicalSexyStepperViewModel+TimelinePointCount.swift
+//  MagicalStepperViewModel+TimelinePointCount.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 9/13/24.
@@ -8,10 +8,10 @@
 import Foundation
 
 
-@Observable class MagicalSexyStepperViewModelTimelinePointCount: MagicalSexyStepperViewModel {
+@Observable class MagicalStepperViewModelTimelinePointCount: MagicalStepperViewModel {
     
     override func handleIncrement() {
-        print("MagicalSexyStepperViewModel => handleIncrement()")
+        print("MagicalStepperViewModel => handleIncrement()")
         if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel {
             toolInterfaceViewModel.toolActionTimelinePointCountIncrement()
             refresh()
@@ -19,7 +19,7 @@ import Foundation
     }
     
     override func handleDecrement() {
-        print("MagicalSexyStepperViewModel => handleDecrement()")
+        print("MagicalStepperViewModel => handleDecrement()")
         if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel {
             toolInterfaceViewModel.toolActionTimelinePointCountDecrement()
             refresh()

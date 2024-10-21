@@ -1,5 +1,5 @@
 //
-//  ToolInterfaceViewModel+SexyButton.swift
+//  ToolInterfaceViewModel+Button.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 9/2/24.
@@ -9,17 +9,20 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-    static func getSexyButtonFlex(orientation: Orientation,
+    static func getButtonFlex(orientation: Orientation,
                                   configuration: ToolInterfaceElementButtonConfiguration,
                                   neighborTypeLeft: ToolInterfaceElementType?,
                                   neighborTypeRight: ToolInterfaceElementType?) -> ToolInterfaceElementFlex {
+        
+        let iconPackTertiary = ApplicationController.isPurchased ? FramedLongIconLibrary.uncoloredLock : nil
+        
         let flexConvertibleData = getConvertibleFlex(orientation: orientation,
                                                      scheme: ButtonLayout.self,
                                                      neighborTypeLeft: neighborTypeLeft,
                                                      neighborTypeRight: neighborTypeRight,
                                                      iconPackMain: configuration.iconPack,
-                                                     iconPackSecondary: FramedLongIconLibrary.checkBoxSquare,
-                                                     iconPackTertiary: LooseConvertibleIconLibrary.testArrowLeft,
+                                                     iconPackSecondary: nil,
+                                                     iconPackTertiary: iconPackTertiary,
                                                      nameLabelWidthLong: configuration.nameLabelWidthLong,
                                                      nameLabelWidthStackedLarge: configuration.nameLabelWidthStackedLarge,
                                                      nameLabelWidthStackedMedium: configuration.nameLabelWidthStackedMedium,
@@ -31,7 +34,7 @@ extension ToolInterfaceViewModel {
                                                      extraWidthSqueezed: 0,
                                                      extraWidthStandard: 0,
                                                      extraWidthRelaxed: 0)
-        return ToolInterfaceElementFlex.sexyButton(flexConvertibleData)
+        return ToolInterfaceElementFlex.button(flexConvertibleData)
     }
 }
 

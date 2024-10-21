@@ -1,5 +1,5 @@
 //
-//  MagicalSexyButtonViewModel+UnfreezeAllJiggles.swift
+//  MagicalButtonViewModel+UnfreezeAllJiggles.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 10/2/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-@Observable class MagicalSexyButtonViewModelUnfreezeAllJiggles: MagicalSexyButtonViewModel {
+@Observable class MagicalButtonViewModelUnfreezeAllJiggles: MagicalButtonViewModel {
     
     override func handleClicked() {
         if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel {

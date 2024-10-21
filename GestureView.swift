@@ -556,6 +556,10 @@ extension GestureView: UIGestureRecognizerDelegate {
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, 
                            shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        
+        if gestureRecognizer === doubleTapGestureRecognizer {
+            return false
+        }
         return true
     }
 }

@@ -53,9 +53,9 @@ struct ToolRowViewContent: View {
     func getItemForElement(_ toolNode: ToolNode, _ toolInterfaceElement: ToolInterfaceElement) -> some View {
         
         switch toolNode.element.type {
-        case .sexyButton:
-            MagicalSexyButton()
-                .environment((toolNode.magicalViewModel as! MagicalSexyButtonViewModel))
+        case .button:
+            MagicalButton()
+                .environment((toolNode.magicalViewModel as! MagicalButtonViewModel))
         case .spacer:
             Color.clear
         case .dividerTiny:
@@ -71,9 +71,9 @@ struct ToolRowViewContent: View {
         case .createSwatch:
             MagicalCreateSwatch()
                 .environment((toolNode.magicalViewModel as! MagicalCreateSwatchViewModel))
-        case .sexyCheckBox:
-            MagicalSexyCheckBox()
-                .environment((toolNode.magicalViewModel as! MagicalSexyCheckBoxViewModel))
+        case .checkBox:
+            MagicalCheckBox()
+                .environment((toolNode.magicalViewModel as! MagicalCheckBoxViewModel))
         case .enterMode:
             MagicalEnterMode()
                 .environment((toolNode.magicalViewModel as! MagicalModeChangeViewModel))
@@ -86,9 +86,9 @@ struct ToolRowViewContent: View {
         case .segment:
             MagicalSegmentedPicker()
                 .environment((toolNode.magicalViewModel as! MagicalSegmentedPickerViewModel))
-        case .sexyStepper:
-            MagicalSexyStepper()
-                .environment((toolNode.magicalViewModel as! MagicalSexyStepperViewModel))
+        case .stepper:
+            MagicalStepper()
+                .environment((toolNode.magicalViewModel as! MagicalStepperViewModel))
         case .greenButton:
             MagicalGreenButton()
                 .environment((toolNode.magicalViewModel as! MagicalGreenButtonViewModel))

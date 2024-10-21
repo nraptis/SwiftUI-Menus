@@ -9,28 +9,29 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-   @MainActor func getDarkModeSexyCheckBoxToolNode(neighborTypeLeft: ToolInterfaceElementType?,
-                                         neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+    @MainActor func getDarkModeEnabledCheckBoxToolNode(neighborTypeLeft: ToolInterfaceElementType?,
+                                                           neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
         let orientation = jiggleViewModel.orientation
         let textLine1 = ToolInterfaceStringLibraryCheckBoxes.checkBoxTextDarkModeEnabledLine1()
         let textLine2 = ToolInterfaceStringLibraryCheckBoxes.checkBoxTextDarkModeEnabledLine2()
-       let iconPack = FramedConvertibleIconLibrary.menuB
+        let iconPack = FramedConvertibleIconLibrary.stereoscopic
         
-        let configuration = ToolInterfaceElementSexyCheckBoxConfiguration(iconPack: iconPack,
+        
+        let configuration = ToolInterfaceElementCheckBoxConfiguration(iconPack: iconPack,
                                                                           orientation: orientation,
                                                                           nameLabelLine1: textLine1,
                                                                           nameLabelLine2: textLine2)
         
-        let flex = Self.getSexyCheckBoxFlex(orientation: orientation,
+        let flex = Self.getCheckBoxFlex(orientation: orientation,
                                             configuration: configuration,
                                             neighborTypeLeft: neighborTypeLeft,
                                             neighborTypeRight: neighborTypeRight)
         
-        let viewModelDarkMode = MagicalSexyCheckBoxViewModelDarkMode(orientation: orientation,
-                                                                     sexyCheckBoxConfiguration: configuration)
+        let viewModelDarkMode = MagicalCheckBoxViewModelDarkModeEnabled(orientation: orientation,
+                                                                            checkBoxConfiguration: configuration)
         let darkModeToolNode = ToolNode(id: getToolNodeID(),
-                                        element: .sexyCheckBoxDarkMode,
+                                        element: .checkBoxDarkMode,
                                         flex: flex,
                                         magicalViewModel: viewModelDarkMode,
                                         neighborTypeLeft: neighborTypeLeft,

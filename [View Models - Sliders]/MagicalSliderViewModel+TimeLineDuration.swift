@@ -12,7 +12,7 @@ import Foundation
     override func refresh() {
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
             if let selectedJiggle = jiggleViewModel.getSelectedJiggle() {
-                refreshEnabled(value: selectedJiggle.animationInstructionLoops.time)
+                refreshEnabled(value: selectedJiggle.timeLine.animationDuration)
             } else {
                 refreshDisabled()
             }
@@ -40,15 +40,15 @@ import Foundation
     override func handleSlideUpdated(percent: CGFloat) {
         let value = sliderConfiguration.minimumValue + (sliderConfiguration.maximumValue - sliderConfiguration.minimumValue) * Float(percent)
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
-            if jiggleViewModel.isAnimationBounceAppliedToAll {
+            if jiggleViewModel.isAnimationLoopsAppliedToAll {
                 let jiggleDocument = jiggleViewModel.jiggleDocument
                 for jiggleIndex in 0..<jiggleDocument.jiggleCount {
                     let jiggle = jiggleDocument.jiggles[jiggleIndex]
-                    jiggle.animationInstructionLoops.time = value
+                    jiggle.timeLine.animationDuration = value
                 }
             } else {
                 if let selectedJiggle = jiggleViewModel.getSelectedJiggle() {
-                    selectedJiggle.animationInstructionLoops.time = value
+                    selectedJiggle.timeLine.animationDuration = value
                 }
             }
         }
@@ -60,17 +60,17 @@ import Foundation
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
             let value = sliderConfiguration.minimumValue + (sliderConfiguration.maximumValue - sliderConfiguration.minimumValue) * Float(percent)
             if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
-                if jiggleViewModel.isAnimationBounceAppliedToAll {
+                if jiggleViewModel.isAnimationLoopsAppliedToAll {
                     
                     let jiggleDocument = jiggleViewModel.jiggleDocument
                     for jiggleIndex in 0..<jiggleDocument.jiggleCount {
                         let jiggle = jiggleDocument.jiggles[jiggleIndex]
-                        jiggle.animationInstructionLoops.time = value
+                        jiggle.timeLine.animationDuration = value
                     }
                     
                 } else {
                     if let selectedJiggle = jiggleViewModel.getSelectedJiggle() {
-                        selectedJiggle.animationInstructionLoops.time = value
+                        selectedJiggle.timeLine.animationDuration = value
                     }
                 }
             }

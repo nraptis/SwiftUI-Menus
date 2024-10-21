@@ -1,5 +1,5 @@
 //
-//  MagicalSexyCheckBoxViewModel+AnimationJiggleApplyToAll.swift
+//  MagicalCheckBoxViewModel+AnimationGrabApplyToAll.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 10/7/24.
@@ -7,13 +7,16 @@
 
 import Foundation
 
-@Observable class MagicalSexyCheckBoxViewModelAnimationJiggleApplyToAll: MagicalSexyCheckBoxViewModel {
+@Observable class MagicalCheckBoxViewModelAnimationGrabApplyToAll: MagicalCheckBoxViewModel {
     
     override func refresh() {
         
+        //
+        // See if we should be checked...
+        //
+        
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
-            /*
-            if jiggleViewModel.jiggleDocument.creatorMode == .moveJiggleCenter {
+            if jiggleViewModel.isAnimationGrabAppliedToAll {
                 if isChecked == false {
                     isChecked = true
                 }
@@ -22,43 +25,31 @@ import Foundation
                     isChecked = false
                 }
             }
-            */
         }
         
         //
         // See if we should be enabled...
         //
         
-        if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
-            switch jiggleViewModel.jiggleDocument.creatorMode {
-            case .none:
-                refreshEnabled()
-            default:
-                refreshDisabled()
-            }
+        if isEnabled == false {
+            isEnabled = true
         }
+        
     }
     
     override func handleClicked() {
-        if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel,
-           let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
-            
-            if toolInterfaceViewModel.isBlocked {
-                return
-            }
-            /*
-            if jiggleViewModel.jiggleDocument.creatorMode == .moveJiggleCenter {
-                jiggleViewModel.setCreatorMode(.none)
+        if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
+            if jiggleViewModel.isAnimationGrabAppliedToAll {
+                jiggleViewModel.setAnimationGrabAppliedToAll(false)
             } else {
-                jiggleViewModel.setCreatorMode(.moveJiggleCenter)
+                jiggleViewModel.setAnimationGrabAppliedToAll(true)
             }
-            */
         }
     }
     
     deinit {
         if ApplicationController.DEBUG_DEALLOCS {
-            print("MagicalSexyCheckBoxViewModelAnimationJiggleApplyToAll - Dealloc")
+            print("MagicalCheckBoxViewModelAnimationGrabApplyToAll - Dealloc")
         }
     }
 }

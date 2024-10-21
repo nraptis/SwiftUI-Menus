@@ -22,7 +22,7 @@ enum ToolActionPhaseSliceType {
     case setAnimationLoopsMode
     case setAnimationContinuousMode
     case setAnimationLoopsPage
-    
+    case setTimeLinePage2Mode
     
     
     case setTimeLineMode
@@ -38,6 +38,7 @@ enum ToolActionPhaseSliceType {
     //case setAnimationMode
     
     case setDarkModeEnabled
+    case setPurchasedEnabled
     
     //JiggleViewController+ToolActionPhaseSliceSetVideoRecordMode
     case setRenderingMode
@@ -184,6 +185,19 @@ class ToolActionPhaseSliceSetZoomMode: ToolActionPhaseSlice {
     deinit {
         if ApplicationController.DEBUG_DEALLOCS {
             print("[--] ToolActionPhaseSliceSetVideoExportMode")
+        }
+    }
+}
+
+class ToolActionPhaseSliceSetTimeLinePage2Mode: ToolActionPhaseSlice {
+    let isTimeLinePage2Mode: Bool
+    init(isTimeLinePage2Mode: Bool) {
+        self.isTimeLinePage2Mode = isTimeLinePage2Mode
+        super.init(toolActionPhaseSliceType: .setTimeLinePage2Mode, sleepTicks: 0)
+    }
+    deinit {
+        if ApplicationController.DEBUG_DEALLOCS {
+            print("[--] ToolActionPhaseSliceSetTimeLinePage2Mode")
         }
     }
 }
@@ -422,6 +436,19 @@ class ToolActionPhaseSliceSetDarkModeEnabled: ToolActionPhaseSlice {
     deinit {
         if ApplicationController.DEBUG_DEALLOCS {
             print("[--] ToolActionPhaseSliceSetDarkModeEnabled")
+        }
+    }
+}
+
+class ToolActionPhaseSliceSetPurchasedEnabled: ToolActionPhaseSlice {
+    let isPurchased: Bool
+    init(isPurchased: Bool) {
+        self.isPurchased = isPurchased
+        super.init(toolActionPhaseSliceType: .setPurchasedEnabled, sleepTicks: 0)
+    }
+    deinit {
+        if ApplicationController.DEBUG_DEALLOCS {
+            print("[--] ToolActionPhaseSliceSetPurchasedEnabled")
         }
     }
 }

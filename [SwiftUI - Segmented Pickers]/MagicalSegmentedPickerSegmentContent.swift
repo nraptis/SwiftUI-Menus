@@ -16,6 +16,7 @@ struct MagicalSegmentedPickerSegmentContent: View {
     let layoutHeight: Int
     let isSelected: Bool
     let isPressed: Bool
+    let isEnabled: Bool
     
     var body: some View {
         
@@ -23,7 +24,6 @@ struct MagicalSegmentedPickerSegmentContent: View {
         let orientation = magicalViewModel.orientation
         let configuration = magicalButtonViewModel.segmentedPickerButtonConfiguration
         let isDarkMode = magicalViewModel.isDarkModeEnabled
-        let isEnabled = magicalViewModel.isEnabled
         
         let isLong: Bool
         switch layoutSchemeFlavor {
@@ -114,8 +114,10 @@ struct MagicalSegmentedPickerSegmentContent: View {
             }
         }
         
-        let heroPaddingTopStacked = SegmentedPickerLayout.getHeroPaddingTopStacked(orientation: orientation)
-        let heroPaddingBottomStacked = SegmentedPickerLayout.getHeroPaddingBottomStacked(orientation: orientation)
+        let heroPaddingTopStacked = SegmentedPickerLayout.getHeroPaddingTopStacked(orientation: orientation,
+                                                                                   numberOfLines: numberOfLines)
+        let heroPaddingBottomStacked = SegmentedPickerLayout.getHeroPaddingBottomStacked(orientation: orientation,
+                                                                                         numberOfLines: numberOfLines)
         
         let slaveWidth = checkBoxSquare.width
         let slaveHeight = checkBoxSquare.height

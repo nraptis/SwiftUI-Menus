@@ -1,5 +1,5 @@
 //
-//  MagicalSexyButtonViewModel+SelectNextGuide.swift
+//  MagicalButtonViewModel+SelectNextGuide.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 9/26/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-@Observable class MagicalSexyButtonViewModelSelectNextGuide: MagicalSexyButtonViewModel {
+@Observable class MagicalButtonViewModelSelectNextGuide: MagicalButtonViewModel {
     
     override func handleClicked() {
         if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel {
@@ -41,7 +41,7 @@ import Foundation
     
     deinit {
         if ApplicationController.DEBUG_DEALLOCS {
-            print("[Deinit] MagicalSexyButtonViewModelSelectNextGuide (Dealloc)")
+            print("[Deinit] MagicalButtonViewModelSelectNextGuide (Dealloc)")
         }
     }
 }

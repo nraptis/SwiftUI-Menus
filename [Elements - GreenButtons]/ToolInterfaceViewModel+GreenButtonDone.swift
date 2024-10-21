@@ -16,7 +16,7 @@ extension ToolInterfaceViewModel {
         
         let textLine1 = "U Done"
         let textLine2: String? = nil
-        let iconPack = FramedLongIconLibrary.menuB
+        let iconPack = FramedLongIconLibrary.menuC
         
         let configuration = ToolInterfaceElementGreenButtonConfiguration(iconPack: iconPack,
                                                                          orientation: orientation,

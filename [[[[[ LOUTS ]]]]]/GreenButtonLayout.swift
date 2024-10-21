@@ -8,87 +8,13 @@
 import UIKit
 
 struct GreenButtonLayout: LayoutScheme {
-
-    static func getNameLabelFont(orientation: Orientation, flavor: LayoutSchemeFlavor) -> UIFont {
-        
+    
+    static func getNameLabelVerticalSpacing(orientation: Orientation, flavor: LayoutSchemeFlavor) -> Int {
         if Device.isPad {
-            switch flavor {
-            case .long:
-                return UIFont.systemFont(ofSize: 15.0, weight: .bold)
-            case .stackedLarge:
-                return UIFont.systemFont(ofSize: 15.0, weight: .bold)
-            case .stackedMedium:
-                return UIFont.systemFont(ofSize: 15.0, weight: .bold, width: .condensed)
-            case .stackedSmall:
-                return UIFont.systemFont(ofSize: 15.0, weight: .bold, width: .compressed)
-            }
+            return -3
         } else {
-            switch flavor {
-            case .long:
-                return UIFont.systemFont(ofSize: 12.0, weight: .bold)
-            case .stackedLarge:
-                return UIFont.systemFont(ofSize: 12.0, weight: .bold)
-            case .stackedMedium:
-                return UIFont.systemFont(ofSize: 12.0, weight: .bold, width: .condensed)
-            case .stackedSmall:
-                return UIFont.systemFont(ofSize: 12.0, weight: .bold, width: .compressed)
-            }
+            return -2
         }
-    }
-    
-    static func getUniversalPaddingLeft(orientation: Orientation,
-                                        flavor: LayoutSchemeFlavor,
-                                        squeeze: LayoutSchemeSqueeze,
-                                        neighborTypeLeft: ToolInterfaceElementType?,
-                                        neighborTypeRight: ToolInterfaceElementType?) -> Int {
-        if Device.isPad {
-            return 4
-        } else {
-            return 2
-        }
-    }
-    
-    static func getUniversalPaddingRight(orientation: Orientation,
-                                         flavor: LayoutSchemeFlavor,
-                                         squeeze: LayoutSchemeSqueeze,
-                                         neighborTypeLeft: ToolInterfaceElementType?,
-                                         neighborTypeRight: ToolInterfaceElementType?) -> Int {
-        if Device.isPad {
-            return 4
-        } else {
-            return 2
-        }
-    }
-    
-    static func getUniversalPaddingBottom(orientation: Orientation, flavor: LayoutSchemeFlavor, numberOfLines: Int) -> Int {
-        // FINAL
-        Device.isPad ? 3 : 2
-    }
-    
-    static func getNameLabelPaddingLeft(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
-        
-        
-        return 8
-    }
-    
-    static func getNameLabelPaddingRight(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
-        return 8
-    }
-    
-    static func getNameLabelPaddingBottom(orientation: Orientation, flavor: LayoutSchemeFlavor, numberOfLines: Int) -> Int {
-        // FINAL
-        return 0
-    }
-    
-    static func getIconPaddingLeft(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
-        return 0
-    }
-    static func getIconPaddingRight(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
-        return 8
-    }
-    
-    static func getIconPaddingTop(orientation: Orientation, flavor: LayoutSchemeFlavor, numberOfLines: Int) -> Int {
-        return 0
     }
     
     static func getCornerRadiusOuter(orientation: Orientation) -> Int {
@@ -105,18 +31,89 @@ struct GreenButtonLayout: LayoutScheme {
     
     static func getCornerRadius(orientation: Orientation) -> Int {
         if Device.isPad {
-            return 14
+            return 12
         } else {
             if orientation.isLandscape {
-                return 10
+                return 8
             } else {
-                return 12
+                return 10
             }
         }
     }
     
     static func getLineThickness(orientation: Orientation) -> Int {
-        return 2
+        return 1
+    }
+ 
+    // [++] Final
+    static func getOutsideBoxPaddingTop(orientation: Orientation) -> Int {
+        if Device.isPad {
+            // [++] Final
+            return 3
+        } else {
+            // [++] Final
+            return 2
+        }
     }
     
+    // [++] Final
+    static func getOutsideBoxPaddingBottom(orientation: Orientation) -> Int {
+        if Device.isPad {
+            // [++] Final
+            return 3
+        } else {
+            // [++] Final
+            return 2
+        }
+    }
+    
+    // [++] Final
+    static func getValueLabelFont(orientation: Orientation, flavor: LayoutSchemeFlavor) -> UIFont { UIFont() }
+    
+    // [++] Final
+    static func getHeroPaddingTopStacked(orientation: Orientation, numberOfLines: Int) -> Int { 0 }
+    
+    // [++] Final
+    static func getHeroPaddingBottomStacked(orientation: Orientation, numberOfLines: Int) -> Int { 0 }
+    
+    // [++] Final
+    static func getNameLabelFont(orientation: Orientation, flavor: LayoutSchemeFlavor) -> UIFont {
+        if Device.isPad {
+            switch flavor {
+            case .long:
+                return UIFont.systemFont(ofSize: 14.0, weight: .semibold)
+            case .stackedLarge:
+                return UIFont.systemFont(ofSize: 14.0, weight: .semibold)
+            case .stackedMedium:
+                return UIFont.systemFont(ofSize: 14.0, weight: .semibold, width: .condensed)
+            case .stackedSmall:
+                return UIFont.systemFont(ofSize: 14.0, weight: .semibold, width: .compressed)
+            }
+        } else {
+            switch orientation {
+            case .landscape:
+                switch flavor {
+                case .long:
+                    return UIFont.systemFont(ofSize: 10.0, weight: .semibold)
+                case .stackedLarge:
+                    return UIFont.systemFont(ofSize: 10.0, weight: .semibold)
+                case .stackedMedium:
+                    return UIFont.systemFont(ofSize: 10.0, weight: .semibold, width: .condensed)
+                case .stackedSmall:
+                    return UIFont.systemFont(ofSize: 10.0, weight: .semibold, width: .compressed)
+                }
+            case .portrait:
+                switch flavor {
+                case .long:
+                    return UIFont.systemFont(ofSize: 11.0, weight: .semibold)
+                case .stackedLarge:
+                    return UIFont.systemFont(ofSize: 11.0, weight: .semibold)
+                case .stackedMedium:
+                    return UIFont.systemFont(ofSize: 11.0, weight: .semibold, width: .condensed)
+                case .stackedSmall:
+                    return UIFont.systemFont(ofSize: 11.0, weight: .semibold, width: .compressed)
+                }
+            }
+        }
+    }
 }

@@ -1,5 +1,5 @@
 //
-//  MagicalSexyButton.swift
+//  MagicalButton.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 9/3/24.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct MagicalSexyButton: View {
+struct MagicalButton: View {
     
-    @Environment(MagicalSexyButtonViewModel.self) var magicalViewModel
+    @Environment(MagicalButtonViewModel.self) var magicalViewModel
     
     var body: some View {
         return ZStack {
@@ -37,7 +37,7 @@ struct MagicalSexyButton: View {
         let layoutSchemeFlavor = magicalViewModel.getLayoutSchemeFlavor()
         let outsideBoxPaddingTop = ButtonLayout.getOutsideBoxPaddingTop(orientation: magicalViewModel.orientation)
         let outsideBoxPaddingBottom = ButtonLayout.getOutsideBoxPaddingTop(orientation: magicalViewModel.orientation)
-        return MagicalSexyButtonButton(layoutSchemeFlavor: layoutSchemeFlavor,
+        return MagicalButtonButton(layoutSchemeFlavor: layoutSchemeFlavor,
                                        outsideBoxPaddingTop: outsideBoxPaddingTop,
                                        outsideBoxPaddingBottom: outsideBoxPaddingBottom)
     }

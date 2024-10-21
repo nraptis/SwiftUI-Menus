@@ -1,5 +1,5 @@
 //
-//  MagicalSexyButtonViewModel+CloneGuide.swift
+//  MagicalButtonViewModel+CloneGuide.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 10/3/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-@Observable class MagicalSexyButtonViewModelCloneGuide: MagicalSexyButtonViewModel {
+@Observable class MagicalButtonViewModelCloneGuide: MagicalButtonViewModel {
     
     override func handleClicked() {
         if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel {

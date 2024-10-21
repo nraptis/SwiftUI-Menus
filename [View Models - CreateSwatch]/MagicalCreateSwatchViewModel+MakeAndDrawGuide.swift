@@ -18,25 +18,43 @@ import Foundation
             case .drawGuide:
                 setActiveButton(1)
                 refreshEnabledAllButtons()
+            case .moveGuideCenter:
+                setActiveButton(2)
+                refreshEnabledAllButtons()
             case .none:
                 activeButtonViewModel = nil
-                refreshEnabledAllButtons()
+                let jiggleDocument = jiggleViewModel.jiggleDocument
+                let unfrozenJiggleCount = jiggleDocument.countUnfrozenJiggles()
+                if unfrozenJiggleCount > 0 {
+                    refreshEnabledAllButtons()
+                } else {
+                    refreshDisabledAllButtons()
+                }
             default:
                 activeButtonViewModel = nil
+                refreshDisabled()
                 refreshDisabledAllButtons()
             }
         }
     }
     
     override func handleSelectedIndex(_ index: Int) {
-        if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
-            if index == 0 {
-                jiggleViewModel.setCreatorMode(.makeGuide)
-            }
-            if index == 1 {
-                jiggleViewModel.setCreatorMode(.drawGuide)
+        if index == 0 {
+            if let jiggleViewController = ApplicationController.shared.jiggleViewController {
+                jiggleViewController.setCreatorModeUpdatingMesh(.makeGuide)
             }
         }
+        if index == 1 {
+            if let jiggleViewController = ApplicationController.shared.jiggleViewController {
+                jiggleViewController.setCreatorModeUpdatingMesh(.drawGuide)
+            }
+        }
+        if index == 2 {
+            if let jiggleViewController = ApplicationController.shared.jiggleViewController {
+                jiggleViewController.setCreatorModeUpdatingMesh(.moveGuideCenter)
+            }
+        }
+        
     }
     
     deinit {

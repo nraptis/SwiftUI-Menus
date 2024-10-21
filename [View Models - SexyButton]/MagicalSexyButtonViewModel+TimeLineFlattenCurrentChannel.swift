@@ -1,5 +1,5 @@
 //
-//  MagicalSexyButtonViewModel+TimeLineFlattenCurrentChannel.swift
+//  MagicalButtonViewModel+TimeLineResetFlatCurrentChannel.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 9/17/24.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-@Observable class MagicalSexyButtonViewModelTimeLineFlattenCurrentChannel: MagicalSexyButtonViewModel {
+@Observable class MagicalButtonViewModelTimeLineResetFlatCurrentChannel: MagicalButtonViewModel {
     
     override func handleClicked() {
         if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel {
-            toolInterfaceViewModel.toolActionTimeLineFlattenCurrentChannel()
+            toolInterfaceViewModel.toolActionTimeLineResetFlatCurrentChannel()
         }
     }
     
@@ -34,7 +34,7 @@ import Foundation
     
     deinit {
         if ApplicationController.DEBUG_DEALLOCS {
-            print("[Deinit] MagicalTextIconButtonViewModelTimeLineFlattenCurrentChannel (Dealloc)")
+            print("[Deinit] MagicalTextIconButtonViewModelTimeLineResetFlatCurrentChannel (Dealloc)")
         }
     }
 }

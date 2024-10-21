@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MagicalCreateSwatchButtonStyle: ButtonStyle {
+struct MagicalActiveSwatchButtonStyle: ButtonStyle {
     
     @Environment(MagicalCreateSwatchViewModel.self) var magicalViewModel
     let activeButtonViewModel: MagicalSegmentButtonViewModel
@@ -16,6 +16,7 @@ struct MagicalCreateSwatchButtonStyle: ButtonStyle {
     let layoutSchemeFlavor: LayoutSchemeFlavor
     let outsideBoxPaddingTop: Int
     let outsideBoxPaddingBottom: Int
+    let isEnabled: Bool
     
     func makeBody(configuration: Configuration) -> some View {
         return ZStack {
@@ -62,7 +63,6 @@ struct MagicalCreateSwatchButtonStyle: ButtonStyle {
     func getStrokeRect(isPressed: Bool) -> some View {
         
         let orientation = magicalViewModel.orientation
-        let isEnabled = magicalViewModel.isEnabled
         let cornerRadius = CreateSwatchLayout.getCornerRadius(orientation: orientation)
         let lineThickness = CreateSwatchLayout.getLineThickness(orientation: orientation)
         let color: Color
@@ -87,7 +87,6 @@ struct MagicalCreateSwatchButtonStyle: ButtonStyle {
     
     func getFillRect(isPressed: Bool) -> some View {
         let orientation = magicalViewModel.orientation
-        let isEnabled = magicalViewModel.isEnabled
         let cornerRadius = CreateSwatchLayout.getCornerRadius(orientation: orientation)
         let color: Color
         if magicalViewModel.isDarkModeEnabled {
@@ -133,11 +132,12 @@ struct MagicalCreateSwatchButtonStyle: ButtonStyle {
                     .frame(height: CGFloat(outsideBoxPaddingTop))
 #endif
                 
-                MagicalCreateSwatchContent(activeButtonViewModel: activeButtonViewModel,
+                MagicalActiveSwatchButtonContent(activeButtonViewModel: activeButtonViewModel,
                                            activeButtonConfiguration: activeButtonConfiguration,
                                            firstButtonViewModel: firstButtonViewModel,
                                            layoutSchemeFlavor: layoutSchemeFlavor,
                                            isPressed: isPressed,
+                                           isEnabled: isEnabled,
                                            layoutWidth: contentLayoutWidth,
                                            layoutHeight: contentLayoutHeight)
 #if INTERFACE_HINTS

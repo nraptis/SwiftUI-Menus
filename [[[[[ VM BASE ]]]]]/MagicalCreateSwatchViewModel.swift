@@ -117,8 +117,8 @@ import SwiftUI
     
     @MainActor func handleActiveSwatchClicked() {
         print("MagicalCreateSwatchViewModel -> ActiveSwatchClicked!!!!!!!")
-        if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
-            jiggleViewModel.setCreatorMode(.none)
+        if let jiggleViewController = ApplicationController.shared.jiggleViewController {
+            jiggleViewController.setCreatorModeUpdatingMesh(.none)
         }
     }
     

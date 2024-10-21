@@ -1,5 +1,5 @@
 //
-//  MagicalSexyButtonViewModel+SelectNextGuidePoint.swift
+//  MagicalButtonViewModel+SelectNextGuidePoint.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 9/26/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-@Observable class MagicalSexyButtonViewModelSelectNextGuidePoint: MagicalSexyButtonViewModel {
+@Observable class MagicalButtonViewModelSelectNextGuidePoint: MagicalButtonViewModel {
     
     override func handleClicked() {
         if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel {

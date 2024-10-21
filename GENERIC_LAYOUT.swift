@@ -9,6 +9,9 @@ import Foundation
 
 class HORIZONTAL_LAYOUT {
     
+    var __iconSecondaryWidth = 0
+    var __iconTertiaryWidth = 0
+    
     var __computedWidth = 0
     var __extraLeftForAllEqual = 0
     var __extraRightForAllEqual = 0
@@ -296,30 +299,30 @@ struct GENERIC_LAYOUT {
                                neighborTypeRight: ToolInterfaceElementType?) -> HORIZONTAL_LAYOUT_STACKED {
         let result = HORIZONTAL_LAYOUT_STACKED()
         
-        let outsideBoxLeftSqueezed = layoutSchemeType.getOutsideBoxPaddingLeftStacked(orientation: orientation,
+        let outsideBoxLeftSqueezed = layoutSchemeType.getOutsideBoxPaddingLeft(orientation: orientation,
                                                                                       squeeze: .squeezed,
                                                                                       neighborTypeLeft: neighborTypeLeft,
                                                                                       neighborTypeRight: neighborTypeRight)
-        let outsideBoxLeftStandard = layoutSchemeType.getOutsideBoxPaddingLeftStacked(orientation: orientation,
+        let outsideBoxLeftStandard = layoutSchemeType.getOutsideBoxPaddingLeft(orientation: orientation,
                                                                                       squeeze: .standard,
                                                                                       neighborTypeLeft: neighborTypeLeft,
                                                                                       neighborTypeRight: neighborTypeRight)
-        let outsideBoxLeftRelaxed = layoutSchemeType.getOutsideBoxPaddingLeftStacked(orientation: orientation,
+        let outsideBoxLeftRelaxed = layoutSchemeType.getOutsideBoxPaddingLeft(orientation: orientation,
                                                                                      squeeze: .relaxed,
                                                                                      neighborTypeLeft: neighborTypeLeft,
                                                                                      neighborTypeRight: neighborTypeRight)
         
-        let outsideBoxRightSqueezed = layoutSchemeType.getOutsideBoxPaddingRightStacked(orientation: orientation,
+        let outsideBoxRightSqueezed = layoutSchemeType.getOutsideBoxPaddingRight(orientation: orientation,
                                                                                         squeeze: .squeezed,
                                                                                         neighborTypeLeft: neighborTypeLeft,
                                                                                         neighborTypeRight: neighborTypeRight)
         
-        let outsideBoxRightStandard = layoutSchemeType.getOutsideBoxPaddingRightStacked(orientation: orientation,
+        let outsideBoxRightStandard = layoutSchemeType.getOutsideBoxPaddingRight(orientation: orientation,
                                                                                         squeeze: .standard,
                                                                                         neighborTypeLeft: neighborTypeLeft,
                                                                                         neighborTypeRight: neighborTypeRight)
         
-        let outsideBoxRightRelaxed = layoutSchemeType.getOutsideBoxPaddingRightStacked(orientation: orientation,
+        let outsideBoxRightRelaxed = layoutSchemeType.getOutsideBoxPaddingRight(orientation: orientation,
                                                                                        squeeze: .relaxed,
                                                                                        neighborTypeLeft: neighborTypeLeft,
                                                                                        neighborTypeRight: neighborTypeRight)
@@ -424,12 +427,18 @@ struct GENERIC_LAYOUT {
                                            left: outsideBoxLeftSqueezed, right: outsideBoxRightSqueezed)
         _ = result.expandHeroFilling(consumed: &consumed, layoutWidth: layoutWidth,
                                      left: heroLeftSqueezed, right: heroRightSqueezed)
-        _ = result.expandValueFilling(consumed: &consumed, layoutWidth: layoutWidth,
-                                      left: valueLeftSqueezed, right: valueRightSqueezed)
-        _ = result.expandSlaveFilling(consumed: &consumed, layoutWidth: layoutWidth,
-                                      left: slaveLeftSqueezed, right: slaveRightSqueezed)
-        _ = result.expandAccentFilling(consumed: &consumed, layoutWidth: layoutWidth,
-                                       left: accentLeftSqueezed, right: accentRightSqueezed)
+        if valueLabelWidth > 0 {
+            _ = result.expandValueFilling(consumed: &consumed, layoutWidth: layoutWidth,
+                                          left: valueLeftSqueezed, right: valueRightSqueezed)
+        }
+        if iconSecondaryWidth > 0 {
+            _ = result.expandSlaveFilling(consumed: &consumed, layoutWidth: layoutWidth,
+                                          left: slaveLeftSqueezed, right: slaveRightSqueezed)
+        }
+        if iconTertiaryWidth > 0 {
+            _ = result.expandAccentFilling(consumed: &consumed, layoutWidth: layoutWidth,
+                                           left: accentLeftSqueezed, right: accentRightSqueezed)
+        }
         _ = result.expandExtraGrowingElementFilling(consumed: &consumed,
                                                     layoutWidth: layoutWidth,
                                                     size: extraGrowingElementWidthSqueezed)
@@ -446,17 +455,23 @@ struct GENERIC_LAYOUT {
                                      left: heroLeftStandard, right: heroRightStandard) {
                 isLooping = true
             }
-            if result.expandValueOnce(consumed: &consumed, layoutWidth: layoutWidth,
-                                      left: valueLeftStandard, right: valueRightStandard) {
-                isLooping = true
+            if valueLabelWidth > 0 {
+                if result.expandValueOnce(consumed: &consumed, layoutWidth: layoutWidth,
+                                          left: valueLeftStandard, right: valueRightStandard) {
+                    isLooping = true
+                }
             }
-            if result.expandSlaveOnce(consumed: &consumed, layoutWidth: layoutWidth,
-                                      left: slaveLeftStandard, right: slaveRightStandard) {
-                isLooping = true
+            if iconSecondaryWidth > 0 {
+                if result.expandSlaveOnce(consumed: &consumed, layoutWidth: layoutWidth,
+                                          left: slaveLeftStandard, right: slaveRightStandard) {
+                    isLooping = true
+                }
             }
-            if result.expandAccentOnce(consumed: &consumed, layoutWidth: layoutWidth,
-                                       left: accentLeftStandard, right: accentRightStandard) {
-                isLooping = true
+            if iconTertiaryWidth > 0 {
+                if result.expandAccentOnce(consumed: &consumed, layoutWidth: layoutWidth,
+                                           left: accentLeftStandard, right: accentRightStandard) {
+                    isLooping = true
+                }
             }
         }
         _ = result.expandExtraGrowingElementFilling(consumed: &consumed,
@@ -474,17 +489,23 @@ struct GENERIC_LAYOUT {
                                      left: heroLeftRelaxed, right: heroRightRelaxed) {
                 isLooping = true
             }
-            if result.expandValueOnce(consumed: &consumed, layoutWidth: layoutWidth,
-                                      left: valueLeftRelaxed, right: valueRightRelaxed) {
-                isLooping = true
+            if valueLabelWidth > 0 {
+                if result.expandValueOnce(consumed: &consumed, layoutWidth: layoutWidth,
+                                          left: valueLeftRelaxed, right: valueRightRelaxed) {
+                    isLooping = true
+                }
             }
-            if result.expandSlaveOnce(consumed: &consumed, layoutWidth: layoutWidth,
-                                      left: slaveLeftRelaxed, right: slaveRightRelaxed) {
-                isLooping = true
+            if iconSecondaryWidth > 0 {
+                if result.expandSlaveOnce(consumed: &consumed, layoutWidth: layoutWidth,
+                                          left: slaveLeftRelaxed, right: slaveRightRelaxed) {
+                    isLooping = true
+                }
             }
-            if result.expandAccentOnce(consumed: &consumed, layoutWidth: layoutWidth,
-                                       left: accentLeftRelaxed, right: accentRightRelaxed) {
-                isLooping = true
+            if iconTertiaryWidth > 0 {
+                if result.expandAccentOnce(consumed: &consumed, layoutWidth: layoutWidth,
+                                           left: accentLeftRelaxed, right: accentRightRelaxed) {
+                    isLooping = true
+                }
             }
         }
         _ = result.expandExtraGrowingElementFilling(consumed: &consumed,
@@ -516,29 +537,28 @@ struct GENERIC_LAYOUT {
         let heroSpacingRelaxed = layoutSchemeType.getHeroSpacingLong(orientation: orientation,
                                                                      squeeze: .relaxed)
         
-        
-        let outsideBoxLeftSqueezed = layoutSchemeType.getOutsideBoxPaddingLeftLong(orientation: orientation,
+        let outsideBoxLeftSqueezed = layoutSchemeType.getOutsideBoxPaddingLeft(orientation: orientation,
                                                                                    squeeze: .squeezed,
                                                                                    neighborTypeLeft: neighborTypeLeft,
                                                                                    neighborTypeRight: neighborTypeRight)
-        let outsideBoxLeftStandard = layoutSchemeType.getOutsideBoxPaddingLeftLong(orientation: orientation,
+        let outsideBoxLeftStandard = layoutSchemeType.getOutsideBoxPaddingLeft(orientation: orientation,
                                                                                    squeeze: .standard,
                                                                                    neighborTypeLeft: neighborTypeLeft,
                                                                                    neighborTypeRight: neighborTypeRight)
-        let outsideBoxLeftRelaxed = layoutSchemeType.getOutsideBoxPaddingLeftLong(orientation: orientation,
+        let outsideBoxLeftRelaxed = layoutSchemeType.getOutsideBoxPaddingLeft(orientation: orientation,
                                                                                   squeeze: .relaxed,
                                                                                   neighborTypeLeft: neighborTypeLeft,
                                                                                   neighborTypeRight: neighborTypeRight)
         
-        let outsideBoxRightSqueezed = layoutSchemeType.getOutsideBoxPaddingRightLong(orientation: orientation,
+        let outsideBoxRightSqueezed = layoutSchemeType.getOutsideBoxPaddingRight(orientation: orientation,
                                                                                      squeeze: .squeezed,
                                                                                      neighborTypeLeft: neighborTypeLeft,
                                                                                      neighborTypeRight: neighborTypeRight)
-        let outsideBoxRightStandard = layoutSchemeType.getOutsideBoxPaddingRightLong(orientation: orientation,
+        let outsideBoxRightStandard = layoutSchemeType.getOutsideBoxPaddingRight(orientation: orientation,
                                                                                      squeeze: .standard,
                                                                                      neighborTypeLeft: neighborTypeLeft,
                                                                                      neighborTypeRight: neighborTypeRight)
-        let outsideBoxRightRelaxed = layoutSchemeType.getOutsideBoxPaddingRightLong(orientation: orientation,
+        let outsideBoxRightRelaxed = layoutSchemeType.getOutsideBoxPaddingRight(orientation: orientation,
                                                                                     squeeze: .relaxed,
                                                                                     neighborTypeLeft: neighborTypeLeft,
                                                                                     neighborTypeRight: neighborTypeRight)
@@ -644,12 +664,18 @@ struct GENERIC_LAYOUT {
                                            left: outsideBoxLeftSqueezed, right: outsideBoxRightSqueezed)
         _ = result.expandHeroFilling(consumed: &consumed, layoutWidth: layoutWidth,
                                      left: heroLeftSqueezed, right: heroRightSqueezed)
-        _ = result.expandValueFilling(consumed: &consumed, layoutWidth: layoutWidth,
-                                      left: valueLeftSqueezed, right: valueRightSqueezed)
-        _ = result.expandSlaveFilling(consumed: &consumed, layoutWidth: layoutWidth,
-                                      left: slaveLeftSqueezed, right: slaveRightSqueezed)
-        _ = result.expandAccentFilling(consumed: &consumed, layoutWidth: layoutWidth,
-                                       left: accentLeftSqueezed, right: accentRightSqueezed)
+        if valueLabelWidth > 0 {
+            _ = result.expandValueFilling(consumed: &consumed, layoutWidth: layoutWidth,
+                                          left: valueLeftSqueezed, right: valueRightSqueezed)
+        }
+        if iconSecondaryWidth > 0 {
+            _ = result.expandSlaveFilling(consumed: &consumed, layoutWidth: layoutWidth,
+                                          left: slaveLeftSqueezed, right: slaveRightSqueezed)
+        }
+        if iconTertiaryWidth > 0 {
+            _ = result.expandAccentFilling(consumed: &consumed, layoutWidth: layoutWidth,
+                                           left: accentLeftSqueezed, right: accentRightSqueezed)
+        }
         _ = result.expandHeroSpacingFilling(consumed: &consumed, layoutWidth: layoutWidth,
                                             space: heroSpacingSqueezed)
         _ = result.expandExtraGrowingElementFilling(consumed: &consumed,
@@ -668,17 +694,23 @@ struct GENERIC_LAYOUT {
                                      left: heroLeftStandard, right: heroRightStandard) {
                 isLooping = true
             }
-            if result.expandValueOnce(consumed: &consumed, layoutWidth: layoutWidth,
-                                      left: valueLeftStandard, right: valueRightStandard) {
-                isLooping = true
+            if valueLabelWidth > 0 {
+                if result.expandValueOnce(consumed: &consumed, layoutWidth: layoutWidth,
+                                          left: valueLeftStandard, right: valueRightStandard) {
+                    isLooping = true
+                }
             }
-            if result.expandSlaveOnce(consumed: &consumed, layoutWidth: layoutWidth,
-                                      left: slaveLeftStandard, right: slaveRightStandard) {
-                isLooping = true
+            if iconSecondaryWidth > 0 {
+                if result.expandSlaveOnce(consumed: &consumed, layoutWidth: layoutWidth,
+                                          left: slaveLeftStandard, right: slaveRightStandard) {
+                    isLooping = true
+                }
             }
-            if result.expandAccentOnce(consumed: &consumed, layoutWidth: layoutWidth,
-                                       left: accentLeftStandard, right: accentRightStandard) {
-                isLooping = true
+            if iconTertiaryWidth > 0 {
+                if result.expandAccentOnce(consumed: &consumed, layoutWidth: layoutWidth,
+                                           left: accentLeftStandard, right: accentRightStandard) {
+                    isLooping = true
+                }
             }
             if result.expandHeroSpacingOnce(consumed: &consumed, layoutWidth: layoutWidth,
                                             space: heroSpacingStandard) {
@@ -700,17 +732,23 @@ struct GENERIC_LAYOUT {
                                      left: heroLeftRelaxed, right: heroRightRelaxed) {
                 isLooping = true
             }
-            if result.expandValueOnce(consumed: &consumed, layoutWidth: layoutWidth,
-                                      left: valueLeftRelaxed, right: valueRightRelaxed) {
-                isLooping = true
+            if valueLabelWidth > 0 {
+                if result.expandValueOnce(consumed: &consumed, layoutWidth: layoutWidth,
+                                          left: valueLeftRelaxed, right: valueRightRelaxed) {
+                    isLooping = true
+                }
             }
-            if result.expandSlaveOnce(consumed: &consumed, layoutWidth: layoutWidth,
-                                      left: slaveLeftRelaxed, right: slaveRightRelaxed) {
-                isLooping = true
+            if iconSecondaryWidth > 0 {
+                if result.expandSlaveOnce(consumed: &consumed, layoutWidth: layoutWidth,
+                                          left: slaveLeftRelaxed, right: slaveRightRelaxed) {
+                    isLooping = true
+                }
             }
-            if result.expandAccentOnce(consumed: &consumed, layoutWidth: layoutWidth,
-                                       left: accentLeftRelaxed, right: accentRightRelaxed) {
-                isLooping = true
+            if iconTertiaryWidth > 0 {
+                if result.expandAccentOnce(consumed: &consumed, layoutWidth: layoutWidth,
+                                           left: accentLeftRelaxed, right: accentRightRelaxed) {
+                    isLooping = true
+                }
             }
             if result.expandHeroSpacingOnce(consumed: &consumed, layoutWidth: layoutWidth,
                                             space: heroSpacingRelaxed) {

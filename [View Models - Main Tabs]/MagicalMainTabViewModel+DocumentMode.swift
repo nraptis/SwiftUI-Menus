@@ -13,9 +13,9 @@ import Foundation
         
         if let jiggleDocument = ApplicationController.shared.jiggleDocument {
             switch jiggleDocument.documentMode {
-            case .__VIEW:
+            case .view:
                 selectedSegmentIndex = 0
-            case .__EDIT:
+            case .edit:
                 selectedSegmentIndex = 1
             }
         }
@@ -27,8 +27,8 @@ import Foundation
     
     override func handleSelectedIndex(_ index: Int) {
         if let jiggleViewController = ApplicationController.shared.jiggleViewController {
-            if index == 0 { jiggleViewController.set(documentMode: .__VIEW) }
-            if index == 1 { jiggleViewController.set(documentMode: .__EDIT) }
+            if index == 0 { jiggleViewController.set(documentMode: .view) }
+            if index == 1 { jiggleViewController.set(documentMode: .edit) }
         }
     }
     

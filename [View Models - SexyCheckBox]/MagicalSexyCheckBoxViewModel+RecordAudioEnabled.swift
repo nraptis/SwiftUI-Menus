@@ -1,5 +1,5 @@
 //
-//  MagicalSexyCheckBoxViewModel+RecordAudioEnabled.swift
+//  MagicalCheckBoxViewModel+RecordAudioEnabled.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 10/7/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-@Observable class MagicalSexyCheckBoxViewModelRecordAudioEnabled: MagicalSexyCheckBoxViewModel {
+@Observable class MagicalCheckBoxViewModelRecordAudioEnabled: MagicalCheckBoxViewModel {
     
     override func refresh() {
         
@@ -46,19 +46,12 @@ import Foundation
             if toolInterfaceViewModel.isBlocked {
                 return
             }
-            /*
-            if jiggleViewModel.jiggleDocument.creatorMode == .moveJiggleCenter {
-                jiggleViewModel.setCreatorMode(.none)
-            } else {
-                jiggleViewModel.setCreatorMode(.moveJiggleCenter)
-            }
-            */
         }
     }
     
     deinit {
         if ApplicationController.DEBUG_DEALLOCS {
-            print("MagicalSexyCheckBoxViewModelRecordAudioEnabled - Dealloc")
+            print("MagicalCheckBoxViewModelRecordAudioEnabled - Dealloc")
         }
     }
 }

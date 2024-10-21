@@ -162,10 +162,13 @@ class TopMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
     init(toolInterfaceViewModel: ToolInterfaceViewModel) {
         self.toolInterfaceViewModel = toolInterfaceViewModel
         super.init(frame: .zero)
+        backgroundColor = UIColor.yellow
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+        
+        
     }
     
     func handleSafeArea(width: Int, safeAreaLeft: Int, safeAreaRight: Int, safeAreaTop: Int) {
@@ -242,6 +245,7 @@ class TopMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
                                                             attribute: .height, relatedBy: .equal,
                                                             toItem: nil, attribute: .notAnAttribute,
                                                             multiplier: 1.0, constant: CGFloat(sideMenuHeight)))
+        timeLineContainerView.backgroundColor = UIColor.purple
         
         let timeLineContainerLeft = safeAreaLeft
         let timeLineContainerWidth = (width) - (safeAreaRight + timeLineContainerLeft)
@@ -259,6 +263,7 @@ class TopMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
             
         ])
         dragBlockerView.addConstraint(dragBlockerViewHeightConstraint)
+        dragBlockerView.backgroundColor = UIColor.graph14.withAlphaComponent(0.5)
         
         let insetLeft = ToolInterfaceTheme.getTopTimeLineInsetLeft(orientation: orientation)
         let insetRight = ToolInterfaceTheme.getTopTimeLineInsetRight(orientation: orientation)

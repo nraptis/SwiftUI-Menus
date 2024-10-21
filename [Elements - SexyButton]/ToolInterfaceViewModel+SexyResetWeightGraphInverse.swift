@@ -9,31 +9,30 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-   @MainActor func getResetWeightGraphInverseSexyButtonToolNode(neighborTypeLeft: ToolInterfaceElementType?,
-                                      neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+    @MainActor func getResetWeightGraphInverseButtonToolNode(neighborTypeLeft: ToolInterfaceElementType?,
+                                                                 neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         let orientation = jiggleViewModel.orientation
         let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextResetWeightGraphInverseLine1()
         let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextResetWeightGraphInverseLine2()
-        let iconPack = LooseConvertibleIconLibrary.menuB
+        let iconPack = LooseConvertibleIconLibrary.menuC
         let configuration = ToolInterfaceElementButtonConfiguration(iconPack: iconPack,
-                                                                        orientation: orientation,
-                                                                        nameLabelLine1: textLine1,
-                                                                        nameLabelLine2: textLine2)
-        let flex = Self.getSexyButtonFlex(orientation: orientation,
-                                              configuration: configuration,
-                                              neighborTypeLeft: neighborTypeLeft,
-                                              neighborTypeRight: neighborTypeRight)
+                                                                    orientation: orientation,
+                                                                    nameLabelLine1: textLine1,
+                                                                    nameLabelLine2: textLine2)
+        let flex = Self.getButtonFlex(orientation: orientation,
+                                          configuration: configuration,
+                                          neighborTypeLeft: neighborTypeLeft,
+                                          neighborTypeRight: neighborTypeRight)
         
-        let viewModelResetWeightGraphInverse = MagicalSexyButtonViewModelResetWeightGraphInverse(orientation: jiggleViewModel.orientation,
-                                                           sexyButtonConfiguration: configuration)
+        let viewModelResetWeightGraphInverse = MagicalButtonViewModelResetWeightGraphInverse(orientation: jiggleViewModel.orientation,
+                                                                                                 buttonConfiguration: configuration)
         let resetWeightGraphInverseToolNode = ToolNode(id: getToolNodeID(),
-                                    element: .sexyButtonResetWeightGraphInverse,
-                                    flex: flex,
-                                    magicalViewModel: viewModelResetWeightGraphInverse,
-                                    neighborTypeLeft: neighborTypeLeft,
-                                    neighborTypeRight: neighborTypeRight)
+                                                       element: .buttonResetWeightGraphInverse,
+                                                       flex: flex,
+                                                       magicalViewModel: viewModelResetWeightGraphInverse,
+                                                       neighborTypeLeft: neighborTypeLeft,
+                                                       neighborTypeRight: neighborTypeRight)
         viewModelResetWeightGraphInverse.refresh()
         return resetWeightGraphInverseToolNode
     }
-    
 }

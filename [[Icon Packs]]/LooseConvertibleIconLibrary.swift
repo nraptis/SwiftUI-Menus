@@ -9,6 +9,108 @@ import Foundation
 
 struct LooseConvertibleIconLibrary {
     
+    static var deleteBinA: LooseConvertibleIconPack {
+        Self.build(prefix: "loose",
+                  name: "delete_bin_a",
+                  widthPad_0: 33, heightPad_0: 42,
+                  widthPhoneLandscape_0: 21, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 25, heightPhonePortrait_0: 32,
+                  widthPad_1: 30, heightPad_1: 38,
+                  widthPhoneLandscape_1: 21, heightPhoneLandscape_1: 27,
+                  widthPhonePortrait_1: 25, heightPhonePortrait_1: 32,
+                  widthPad_2: 20, heightPad_2: 25,
+                  widthPhoneLandscape_2: 14, heightPhoneLandscape_2: 17,
+                  widthPhonePortrait_2: 17, heightPhonePortrait_2: 21)
+    }
+    
+    static var rotateRightA: LooseConvertibleIconPack {
+        Self.build(prefix: "loose",
+                  name: "rotate_right_a",
+                  widthPad_0: 43, heightPad_0: 42,
+                  widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 33, heightPhonePortrait_0: 32,
+                  widthPad_1: 39, heightPad_1: 38,
+                  widthPhoneLandscape_1: 28, heightPhoneLandscape_1: 27,
+                  widthPhonePortrait_1: 33, heightPhonePortrait_1: 32,
+                  widthPad_2: 26, heightPad_2: 25,
+                  widthPhoneLandscape_2: 18, heightPhoneLandscape_2: 17,
+                  widthPhonePortrait_2: 22, heightPhonePortrait_2: 21)
+    }
+
+
+    static var rotateRightB: LooseConvertibleIconPack {
+        Self.build(prefix: "loose",
+                  name: "rotate_right_b",
+                  widthPad_0: 43, heightPad_0: 42,
+                  widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 33, heightPhonePortrait_0: 32,
+                  widthPad_1: 39, heightPad_1: 38,
+                  widthPhoneLandscape_1: 28, heightPhoneLandscape_1: 27,
+                  widthPhonePortrait_1: 33, heightPhonePortrait_1: 32,
+                  widthPad_2: 26, heightPad_2: 25,
+                  widthPhoneLandscape_2: 18, heightPhoneLandscape_2: 17,
+                  widthPhonePortrait_2: 22, heightPhonePortrait_2: 21)
+    }
+
+
+    static var rotateLeftA: LooseConvertibleIconPack {
+        Self.build(prefix: "loose",
+                  name: "rotate_left_a",
+                  widthPad_0: 43, heightPad_0: 42,
+                  widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 33, heightPhonePortrait_0: 32,
+                  widthPad_1: 39, heightPad_1: 38,
+                  widthPhoneLandscape_1: 28, heightPhoneLandscape_1: 27,
+                  widthPhonePortrait_1: 33, heightPhonePortrait_1: 32,
+                  widthPad_2: 26, heightPad_2: 25,
+                  widthPhoneLandscape_2: 18, heightPhoneLandscape_2: 17,
+                  widthPhonePortrait_2: 22, heightPhonePortrait_2: 21)
+    }
+
+
+    static var rotateLeftB: LooseConvertibleIconPack {
+        Self.build(prefix: "loose",
+                  name: "rotate_left_b",
+                  widthPad_0: 43, heightPad_0: 42,
+                  widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 33, heightPhonePortrait_0: 32,
+                  widthPad_1: 39, heightPad_1: 38,
+                  widthPhoneLandscape_1: 28, heightPhoneLandscape_1: 27,
+                  widthPhonePortrait_1: 33, heightPhonePortrait_1: 32,
+                  widthPad_2: 26, heightPad_2: 25,
+                  widthPhoneLandscape_2: 18, heightPhoneLandscape_2: 17,
+                  widthPhonePortrait_2: 22, heightPhonePortrait_2: 21)
+    }
+    
+    static var undo: LooseConvertibleIconPack {
+        Self.build(prefix: "loose",
+                  name: "undo",
+                  widthPad_0: 39, heightPad_0: 42,
+                  widthPhoneLandscape_0: 26, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 30, heightPhonePortrait_0: 32,
+                  widthPad_1: 36, heightPad_1: 38,
+                  widthPhoneLandscape_1: 26, heightPhoneLandscape_1: 27,
+                  widthPhonePortrait_1: 30, heightPhonePortrait_1: 32,
+                  widthPad_2: 24, heightPad_2: 25,
+                  widthPhoneLandscape_2: 16, heightPhoneLandscape_2: 17,
+                  widthPhonePortrait_2: 20, heightPhonePortrait_2: 21)
+    }
+
+
+    static var redo: LooseConvertibleIconPack {
+        Self.build(prefix: "loose",
+                  name: "redo",
+                  widthPad_0: 39, heightPad_0: 42,
+                  widthPhoneLandscape_0: 26, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 30, heightPhonePortrait_0: 32,
+                  widthPad_1: 36, heightPad_1: 38,
+                  widthPhoneLandscape_1: 26, heightPhoneLandscape_1: 27,
+                  widthPhonePortrait_1: 30, heightPhonePortrait_1: 32,
+                  widthPad_2: 24, heightPad_2: 25,
+                  widthPhoneLandscape_2: 16, heightPhoneLandscape_2: 17,
+                  widthPhonePortrait_2: 20, heightPhonePortrait_2: 21)
+    }
+    
     static var testArrowLeft: LooseConvertibleIconPack {
         Self.build(prefix: "loose",
                   name: "test_arrow_left",
@@ -37,35 +139,6 @@ struct LooseConvertibleIconLibrary {
                   widthPhoneLandscape_2: 15, heightPhoneLandscape_2: 17,
                   widthPhonePortrait_2: 19, heightPhonePortrait_2: 21)
     }
-    
-    static var menuA: LooseConvertibleIconPack {
-        Self.build(prefix: "loose",
-                  name: "menu_a",
-                  widthPad_0: 43, heightPad_0: 42,
-                  widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
-                  widthPhonePortrait_0: 33, heightPhonePortrait_0: 32,
-                  widthPad_1: 38, heightPad_1: 37,
-                  widthPhoneLandscape_1: 27, heightPhoneLandscape_1: 26,
-                  widthPhonePortrait_1: 32, heightPhonePortrait_1: 31,
-                  widthPad_2: 26, heightPad_2: 25,
-                  widthPhoneLandscape_2: 18, heightPhoneLandscape_2: 17,
-                  widthPhonePortrait_2: 22, heightPhonePortrait_2: 21)
-    }
-
-
-    static var menuB: LooseConvertibleIconPack {
-        Self.build(prefix: "loose",
-                  name: "menu_b",
-                  widthPad_0: 43, heightPad_0: 42,
-                  widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
-                  widthPhonePortrait_0: 33, heightPhonePortrait_0: 32,
-                  widthPad_1: 38, heightPad_1: 37,
-                  widthPhoneLandscape_1: 27, heightPhoneLandscape_1: 26,
-                  widthPhonePortrait_1: 32, heightPhonePortrait_1: 31,
-                  widthPad_2: 26, heightPad_2: 25,
-                  widthPhoneLandscape_2: 18, heightPhoneLandscape_2: 17,
-                  widthPhonePortrait_2: 22, heightPhonePortrait_2: 21)
-    }
 
 
     static var menuC: LooseConvertibleIconPack {
@@ -74,9 +147,9 @@ struct LooseConvertibleIconLibrary {
                   widthPad_0: 43, heightPad_0: 42,
                   widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
                   widthPhonePortrait_0: 33, heightPhonePortrait_0: 32,
-                  widthPad_1: 38, heightPad_1: 37,
-                  widthPhoneLandscape_1: 27, heightPhoneLandscape_1: 26,
-                  widthPhonePortrait_1: 32, heightPhonePortrait_1: 31,
+                  widthPad_1: 39, heightPad_1: 38,
+                  widthPhoneLandscape_1: 28, heightPhoneLandscape_1: 27,
+                  widthPhonePortrait_1: 33, heightPhonePortrait_1: 32,
                   widthPad_2: 26, heightPad_2: 25,
                   widthPhoneLandscape_2: 18, heightPhoneLandscape_2: 17,
                   widthPhonePortrait_2: 22, heightPhonePortrait_2: 21)

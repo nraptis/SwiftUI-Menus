@@ -9,19 +9,11 @@ import UIKit
 
 struct FavoringOneLineLabelLayout: LayoutScheme {
     
-    static func getOutsideBoxPaddingRightLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
-                                                neighborTypeRight: ToolInterfaceElementType?) -> Int {
-        switch squeeze {
-        case .squeezed:
-            2
-        case .standard:
-            4
-        case .relaxed:
-            6
-        }
-    }
-    static func getOutsideBoxPaddingLeftLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
-                                             neighborTypeRight: ToolInterfaceElementType?) -> Int {
+    static func getOutsideBoxPaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
+                                          neighborTypeRight: ToolInterfaceElementType?) -> Int { 0 }
+    
+    static func getOutsideBoxPaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
+                                         neighborTypeRight: ToolInterfaceElementType?) -> Int {
         switch squeeze {
         case .squeezed:
             2
@@ -32,64 +24,50 @@ struct FavoringOneLineLabelLayout: LayoutScheme {
         }
     }
     
+    
+    // [++] Final
+    static func getValueLabelFont(orientation: Orientation, flavor: LayoutSchemeFlavor) -> UIFont { UIFont() }
+    
+    // [++] Final
+    static func getOutsideBoxPaddingTop(orientation: Orientation) -> Int { 0 }
+    
+    // [++] Final
+    static func getOutsideBoxPaddingBottom(orientation: Orientation) -> Int { 0 }
+    
+    // [++] Final
+    static func getHeroPaddingTopStacked(orientation: Orientation, numberOfLines: Int) -> Int { 0 }
+    
+    // [++] Final
+    static func getHeroPaddingBottomStacked(orientation: Orientation, numberOfLines: Int) -> Int { 0 }
+    
+    // [++] Final
     static func getNameLabelFont(orientation: Orientation, flavor: LayoutSchemeFlavor) -> UIFont {
         if Device.isPad {
             return UIFont.systemFont(ofSize: 14.0, weight: .bold)
         } else {
-            return UIFont.systemFont(ofSize: 11.0, weight: .bold)
+            switch orientation {
+            case .landscape:
+                return UIFont.systemFont(ofSize: 10.0, weight: .bold)
+            case .portrait:
+                return UIFont.systemFont(ofSize: 11.0, weight: .bold)
+            }
         }
     }
     
-    static func getUniversalPaddingLeft(orientation: Orientation,
-                                        flavor: LayoutSchemeFlavor,
-                                        squeeze: LayoutSchemeSqueeze,
-                                        neighborTypeLeft: ToolInterfaceElementType?,
-                                        neighborTypeRight: ToolInterfaceElementType?) -> Int {
-        switch squeeze {
-        case .squeezed:
-            return 4
-        case .standard, .relaxed:
-            return 8
+    // [++] Final
+    static func getNameLabelVerticalSpacing(orientation: Orientation, flavor: LayoutSchemeFlavor) -> Int {
+        if Device.isPad {
+            // [Cool]
+            return -3
+        } else {
+            switch orientation {
+            case .landscape:
+                // [Cool]
+                return -2
+            case .portrait:
+                // [Cool]
+                return -2
+            }
         }
-    }
-    
-    static func getUniversalPaddingRight(orientation: Orientation,
-                                         flavor: LayoutSchemeFlavor,
-                                         squeeze: LayoutSchemeSqueeze,
-                                         neighborTypeLeft: ToolInterfaceElementType?,
-                                         neighborTypeRight: ToolInterfaceElementType?) -> Int {
-        switch squeeze {
-        case .squeezed:
-            return 4
-        case .standard, .relaxed:
-            return 8
-        }
-    }
-    
-    static func getUniversalPaddingBottom(orientation: Orientation, flavor: LayoutSchemeFlavor, numberOfLines: Int) -> Int {
-        4
-    }
-    
-    static func getNameLabelPaddingLeft(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
-        return 0
-    }
-    
-    static func getNameLabelPaddingRight(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
-        return 0
-    }
-    
-    static func getNameLabelPaddingBottom(orientation: Orientation, flavor: LayoutSchemeFlavor, numberOfLines: Int) -> Int {
-        return 0
-    }
-    
-    static func getIconPaddingLeft(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
-        return 0
-    }
-    static func getIconPaddingRight(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
-        return 0
-    }
-    
-    static func getIconPaddingTop(orientation: Orientation, flavor: LayoutSchemeFlavor, numberOfLines: Int) -> Int {
-        return 0
     }
 }

@@ -89,8 +89,10 @@ struct MagicalExitModeContent: View {
             }
         }
         
-        let heroPaddingTopStacked = ExitModeLayout.getHeroPaddingTopStacked(orientation: orientation)
-        let heroPaddingBottomStacked = ExitModeLayout.getHeroPaddingBottomStacked(orientation: orientation)
+        let heroPaddingTopStacked = ExitModeLayout.getHeroPaddingTopStacked(orientation: orientation,
+                                                                            numberOfLines: numberOfLines)
+        let heroPaddingBottomStacked = ExitModeLayout.getHeroPaddingBottomStacked(orientation: orientation,
+                                                                                  numberOfLines: numberOfLines)
         
         let slaveWidth = accentIcon.width
         let slaveHeight = accentIcon.height

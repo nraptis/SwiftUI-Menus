@@ -57,15 +57,15 @@ extension ToolInterfaceViewModel {
     func handleTimeLineUpdate() {
         refreshAllRowsMatching(elements: [.sliderTimeLineOffset,
                                           .sliderTimeLineDuration,
-                                          .sexyButtonTimeLineDampen,
-                                          .sexyButtonTimeLineAmplify,
-                                          .sexyButtonTimeLineInvertH,
-                                          .sexyButtonTimeLineInvertV,
-                                          .sexyButtonTimeLineBreakPoint,
-                                          .sexyButtonTimeLineResetCurve,
-                                          .sexyButtonTimeLineFlattenCurrentChannel,
-                                          .sexyButtonTimeLineResetDefaultCurrentChannel,
-                                          .sexyStepperTimelinePointCount,
+                                          .buttonTimeLineDampen,
+                                          .buttonTimeLineAmplify,
+                                          .buttonTimeLineInvertH,
+                                          .buttonTimeLineInvertV,
+                                          .buttonTimeLineBreakPoint,
+                                          .buttonTimeLineResetCurve,
+                                          .buttonTimeLineResetFlatCurrentChannel,
+                                          .buttonTimeLineResetDefaultCurrentChannel,
+                                          .stepperTimelinePointCount,
         
         ])
         /*
@@ -73,15 +73,15 @@ extension ToolInterfaceViewModel {
             for node in row.nodes {
                 if .sliderTimeLineOffset,
                     .sliderTimeLineDuration,
-                    .sexyButtonTimeLineDampen,
-                    .sexyButtonTimeLineAmplify,
-                    .sexyButtonTimeLineInvertH,
-                    .sexyButtonTimeLineInvertV,
-                    .sexyButtonTimeLineBreakPoint,
-                    .sexyButtonTimeLineResetCurve,
-                    .sexyButtonTimeLineFlattenCurrentChannel,
-                    .sexyButtonTimeLineResetDefaultCurrentChannel,
-                    .sexyStepperTimelinePointCount {
+                    .buttonTimeLineDampen,
+                    .buttonTimeLineAmplify,
+                    .buttonTimeLineInvertH,
+                    .buttonTimeLineInvertV,
+                    .buttonTimeLineBreakPoint,
+                    .buttonTimeLineResetCurve,
+                    .buttonTimeLineResetFlatCurrentChannel,
+                    .buttonTimeLineResetDefaultCurrentChannel,
+                    .stepperTimelinePointCount {
                     node.magicalViewModel.refresh()
                 }
             }
@@ -112,118 +112,68 @@ extension ToolInterfaceViewModel {
     }
     
     func handleSelectedJiggleDidChange() {
-        refreshAllRowsMatching(elements: [.sliderJigglePower,
-                                          .sliderJiggleSpeed,
-                                          .sliderJiggleDampen,
-                                          
-                                          .enterModeZoomEnter,
-                                          .enterModeGraphEnter,
-                                          .enterModeGuidesEnter,
-                                          
-                                          .createSwatchMakeAndDrawJiggle,
-                                          .createSwatchMakeAndDrawGuide,
-                                          
-                                          .createSwatchAddAndRemoveJigglePoints,
-                                          .createSwatchAddAndRemoveGuidePoints,
-                                          
-                                        .sexyStepperTimelinePointCount,
-                                          .sexyStepperGemCount,
-                                          .sexyStepperCoinCount,
-                                          
-                                          .sexyButtonSelectNextJiggle,
-                                          .sexyButtonSelectPreviousJiggle,
-                                          .sexyButtonSelectNextGuide,
-                                          .sexyButtonSelectPreviousGuide,
-                                          
-                                        .sexyButtonFlipJiggleH,
-                                        .sexyButtonFlipJiggleV,
-                                        .sexyButtonRotateJiggleLeft,
-                                        .sexyButtonRotateJiggleRight,
-                                                                      
-                                        .sexyButtonFlipGuideH,
-                                        .sexyButtonFlipGuideV,
-                                        .sexyButtonRotateGuideLeft,
-                                        .sexyButtonRotateGuideRight,
-                                          
-                                            .sexyButtonFreezeSelectedJiggle,
-                                          .sexyButtonFreezeSelectedGuide,
-                                          .sexyButtonUnfreezeAllJiggles,
-                                          .sexyButtonUnfreezeAllGuides,
-                                          
-                                                                        
-                                          
-            .sexyButtonZoomJiggle
         
+        refreshAllRowsMatching(elements: [
+            .sliderJigglePower,
+            .sliderJiggleSpeed,
+            .sliderJiggleDampen,
+            
+                
+            .enterModeZoom,
+            .enterModeGraph,
+            .enterModeGuides,
+            
+            .createSwatchMakeAndDrawJiggle,
+            .createSwatchMakeAndDrawGuide,
+            .createSwatchAddAndRemoveJigglePoints,
+            .createSwatchAddAndRemoveGuidePoints,
+            
+            .stepperTimelinePointCount,
+            .stepperGemCount,
+            .stepperCoinCount,
+            
+            .buttonSelectNextJiggle,
+            .buttonSelectPreviousJiggle,
+            .buttonSelectNextGuide,
+            .buttonSelectPreviousGuide,
+            
+            .buttonFlipJiggleH,
+            .buttonFlipJiggleV,
+            .buttonRotateJiggleLeft,
+            .buttonRotateJiggleRight,
+            
+            .buttonFlipGuideH,
+            .buttonFlipGuideV,
+            .buttonRotateGuideLeft,
+            .buttonRotateGuideRight,
+            
+            .buttonFreezeSelectedJiggle,
+            .buttonFreezeSelectedGuide,
+            .buttonUnfreezeAllJiggles,
+            .buttonUnfreezeAllGuides,
+            
+            .buttonCloneJiggle,
+            .buttonDeleteJiggle,
+            .buttonCloneGuide,
+            .buttonDeleteGuide,
+            
+            .buttonDeleteJigglePoint,
+            .buttonDeleteJigglePoint,
+            
+            .buttonZoomJiggle
         ])
-        /*
-        @MainActor func handleSelectedJiggleDidChange(row: ToolRow) {
-            for node in row.nodes {
-                if .sliderJigglePower,
-                    .sliderJiggleSpeed,
-                    .sliderJiggleDampen,
-                    .textIconButtonFreezeOnSelectedJiggle,
-                    .enterModeZoomEnter,
-                    .enterModeGraphEnter,
-                    .enterModeGuidesEnter,
-                    
-                    .createSwatchMakeAndDrawJiggle,
-                    .createSwatchMakeAndDrawGuide,
-                    
-                    .createSwatchAddAndRemoveJigglePoints,
-                    .createSwatchAddAndRemoveGuidePoints,
-                    
-                    .sexyStepperTimelinePointCount,
-                    
-                    .sexyButtonSelectNextJiggle,
-                    .sexyButtonSelectPreviousJiggle,
-                    .sexyButtonSelectNextGuide,
-                    .sexyButtonSelectPreviousGuide
-                {
-                    node.magicalViewModel.refresh()
-                }
-            }
-        }
-        Task { @MainActor in
-            for row in getAllRows() { handleSelectedJiggleDidChange(row: row) }
-        }
-        */
     }
     
     func handleTimelinePointCountDidChange() {
-        refreshAllRowsMatching(elements: [.sexyStepperTimelinePointCount,
+        refreshAllRowsMatching(elements: [.stepperTimelinePointCount,
                                           
         ])
-        /*
-        @MainActor func handleTimelinePointCountDidChange(row: ToolRow) {
-            for node in row.nodes {
-                if .sexyStepperTimelinePointCount {
-                    node.magicalViewModel.refresh()
-                }
-            }
-        }
-        Task { @MainActor in
-            for row in getAllRows() { handleTimelinePointCountDidChange(row: row) }
-        }
-        */
     }
     
     func handleZoomEnabledDidChange() {
         refreshAllRowsMatching(elements: [
                                           
         ])
-        /*
-        @MainActor func handleZoomEnabledDidChange(row: ToolRow) {
-            for node in row.nodes {
-                if .checkBoxZoomEnabled {
-                    node.magicalViewModel.refresh()
-                }
-            }
-        }
-        
-        Task { @MainActor in
-            for row in getAllRows() { handleZoomEnabledDidChange(row: row) }
-        }
-        */
     }
     
     func handleRecordingEnabledDidChange() {
@@ -231,18 +181,6 @@ extension ToolInterfaceViewModel {
             
                                           
         ])
-        /*
-        @MainActor func handleRecordingEnabledDidChange(row: ToolRow) {
-            for node in row.nodes {
-                node.magicalViewModel.refresh()
-                
-            }
-        }
-        
-        Task { @MainActor in
-            for row in getAllRows() { handleRecordingEnabledDidChange(row: row) }
-        }
-        */
     }
     
     func handleResetZoomActiveDidChange() {
@@ -297,8 +235,12 @@ extension ToolInterfaceViewModel {
         */
     }
     
+    
+    
+    
     func handleAnimationLoopsEnabledDidChange() {
-        refreshAllRowsMatching(elements: [.sexyCheckBoxAutoLoopEnabled,
+        refreshAllRowsMatching(elements: [
+            //.checkBoxAutoLoopEnabled,
                                           
                                           
         ])
@@ -335,7 +277,8 @@ extension ToolInterfaceViewModel {
     }
     
     func handleAnimationLoopsPageDidChange() {
-        refreshAllRowsMatching(elements: [.sexyCheckBoxAutoLoopEnabled
+        refreshAllRowsMatching(elements: [
+            //.checkBoxAutoLoopEnabled
                                           
         ])
         /*
@@ -350,6 +293,11 @@ extension ToolInterfaceViewModel {
             for row in getAllRows() { handleAnimationLoopsPageDidChange(row: row) }
         }
         */
+    }
+    
+    func handleTimeLinePage2DidChange() {
+        print("handleTimeLinePage2DidChange()...")
+        
     }
     
     
@@ -371,25 +319,28 @@ extension ToolInterfaceViewModel {
     func handleCreatorModesDidChange() {
         
         //TODO: More, More
-        refreshAllRowsMatching(elements: [.sexyButtonRedo,
-                                          .sexyButtonRedo,
+        refreshAllRowsMatching(elements: [.buttonRedo,
+                                          .buttonRedo,
                                           
-                                          .sexyButtonRotateJiggleLeft,
-                                          .sexyButtonRotateJiggleRight,
+                                          .buttonRotateJiggleLeft,
+                                          .buttonRotateJiggleRight,
                                           
                                           .createSwatchMakeAndDrawJiggle,
                                           .createSwatchMakeAndDrawGuide,
                                           .createSwatchAddAndRemoveJigglePoints,
                                           .createSwatchAddAndRemoveGuidePoints,
                                           
-                                          .sexyCheckBoxDarkMode,
-                                          .sexyCheckBoxGuideCenters,
-                                          .sexyCheckBoxJiggleCenters,
+                                          .checkBoxDarkMode,
                                           
-                                          .sexyButtonSelectNextJiggle,
-                                          .sexyButtonSelectPreviousJiggle,
-                                          .sexyButtonSelectNextGuide,
-                                          .sexyButtonSelectPreviousGuide
+                                          .buttonSelectNextJiggle,
+                                          .buttonSelectPreviousJiggle,
+                                          .buttonSelectNextGuide,
+                                          .buttonSelectPreviousGuide,
+                                          
+                                        .enterModeGuides,
+                                          .enterModeGraph,
+                                          .exitModeGuides,
+                                          .exitModeGraph,
         ])
         /*
         @MainActor func handleCreatorModesDidChange(row: ToolRow) {
@@ -414,224 +365,100 @@ extension ToolInterfaceViewModel {
         refreshAllRowsMatching(elements: [
             
         ])
-        /*
-        @MainActor func handleJigglesDidChange(row: ToolRow) {
-            for node in row.nodes {
-                node.magicalViewModel.refresh()
-            }
-        }
-        Task { @MainActor in
-            
-            for row in getAllRows() { handleJigglesDidChange(row: row) }
-        }
-        */
     }
     
     func handleControlPointsDidChange() {
-        
-        refreshAllRowsMatching(elements: [.createSwatchAddAndRemoveJigglePoints
-            
+        refreshAllRowsMatching(elements: [
+            .createSwatchAddAndRemoveJigglePoints
         ])
-        
-        /*
-        @MainActor func handleControlPointsDidChange(row: ToolRow) {
-            for node in row.nodes {
-                if .createSwatchAddAndRemoveJigglePoints {
-                    node.magicalViewModel.refresh()
-                }
-            }
-        }
-        Task { @MainActor in
-            
-            for row in getAllRows() { handleControlPointsDidChange(row: row) }
-        }
-        */
     }
     
     func handleDocumentModeDidChange() {
-        refreshAllRowsMatching(elements: [.mainTabDocumentMode
-            
+        refreshAllRowsMatching(elements: [
+            .mainTabDocumentMode
         ])
-        
-        /*
-        @MainActor func handleDocumentModeDidChange(row: ToolRow) {
-            for node in row.nodes {
-                if .mainTabDocumentMode {
-                    node.magicalViewModel.refresh()
-                }
-            }
-        }
-        Task { @MainActor in
-            
-            for row in getAllRows() { handleDocumentModeDidChange(row: row) }
-        }
-        */
     }
     
     func handleEditModeDidChange() {
-        refreshAllRowsMatching(elements: [.segmentEditMode
-            
+        refreshAllRowsMatching(elements: [
+            .segmentEditMode
         ])
-        /*
-        @MainActor func handleEditModeDidChange(row: ToolRow) {
-            for node in row.nodes {
-                if .segmentEditMode {
-                    node.magicalViewModel.refresh()
-                }
-            }
-        }
-        Task { @MainActor in
-            
-            for row in getAllRows() { handleEditModeDidChange(row: row) }
-        }
-        */
     }
     
     func handleWeightModeDidChange() {
-        refreshAllRowsMatching(elements: [.segmentWeightMode
-            
+        refreshAllRowsMatching(elements: [
+            .segmentWeightMode
         ])
-        /*
-        @MainActor func handleWeightModeDidChange(row: ToolRow) {
-            for node in row.nodes {
-                if .segmentWeightMode {
-                    node.magicalViewModel.refresh()
-                }
-            }
-        }
-        Task { @MainActor in
-            
-            for row in getAllRows() { handleWeightModeDidChange(row: row) }
-        }
-        */
     }
     
     func handleUndoRedoDidChange() {
         // DONE!
-        refreshAllRowsMatching(elements: [.sexyButtonRedo,
-                                          .sexyButtonUndo])
+        refreshAllRowsMatching(elements: [.buttonRedo,
+                                          .buttonUndo])
     }
     
     func handleDarkModeDidChange() {
-        refreshAllRowsMatching(elements: [.sexyCheckBoxDarkMode])
+        refreshAllRowsMatching(elements: [.checkBoxDarkMode])
     }
     
     func handleFrozenJigglesDidChange() {
-        refreshAllRowsMatching(elements: [.sexyButtonFreezeSelectedJiggle,
-                                          .sexyButtonFreezeSelectedGuide,
-                                          .sexyButtonUnfreezeAllJiggles,
-                                          .sexyButtonUnfreezeAllGuides,
-                                          .sexyButtonSelectNextJiggle,
-                                          .sexyButtonSelectPreviousJiggle,
-                                          .sexyButtonSelectNextGuide,
-                                          .sexyButtonSelectPreviousGuide])
+        refreshAllRowsMatching(elements: [.buttonFreezeSelectedJiggle,
+                                          .buttonFreezeSelectedGuide,
+                                          .buttonUnfreezeAllJiggles,
+                                          .buttonUnfreezeAllGuides,
+                                          .buttonSelectNextJiggle,
+                                          .buttonSelectPreviousJiggle,
+                                          .buttonSelectNextGuide,
+                                          .buttonSelectPreviousGuide,
+                                          
+                                            .createSwatchMakeAndDrawJiggle,
+                                            .createSwatchMakeAndDrawGuide,
+                                            .createSwatchAddAndRemoveJigglePoints,
+                                            .createSwatchAddAndRemoveGuidePoints,
+        
+        ])
     }
     
     func handleFrozenGuidesDidChange() {
-        refreshAllRowsMatching(elements: [.sexyButtonFreezeSelectedGuide,
-                                          .sexyButtonUnfreezeAllGuides,
-                                          .sexyButtonSelectNextGuide,
-                                          .sexyButtonSelectPreviousGuide])
-    }
-    
-    func handleSwivelOrbitDidChange() {
-        /*
-        @MainActor func handleSwivelOrbitDidChange(row: ToolRow) {
-            for node in row.nodes {
-                if .checkBoxSwivelOrbitEnabled {
-                    node.magicalViewModel.refresh()
-                }
-            }
-        }
-        Task { @MainActor in
+        refreshAllRowsMatching(elements: [
+            .buttonFreezeSelectedGuide,
+            .buttonUnfreezeAllGuides,
+            .buttonSelectNextGuide,
+            .buttonSelectPreviousGuide,
+            .createSwatchMakeAndDrawGuide,
+            .createSwatchAddAndRemoveGuidePoints,
             
-            for row in getAllRows() { handleSwivelOrbitDidChange(row: row) }
-            
-        }
-        */
+        ])
     }
     
     func handleStereoscopicDidChange() {
-        /*
-        @MainActor func handleStereoscopicDidChange(row: ToolRow) {
-            for node in row.nodes {
-                if .checkBoxStereoscopicEnabled {
-                    node.magicalViewModel.refresh()
-                }
-            }
-        }
-        Task { @MainActor in
-            
-            for row in getAllRows() { handleStereoscopicDidChange(row: row) }
-        }
-        */
+        refreshAllRowsMatching(elements: [
+            .checkBoxStereoscopicEnabled
+        ])
     }
     
-    func handleAnimationJiggleAppliedToAllDidChange() {
+    func handleAnimationGrabAppliedToAllDidChange() {
         
-        refreshAllRowsMatching(elements: [.sexyCheckBoxAnimationJiggleApplyToAll])
-        /*
-        @MainActor func handleAnimationJiggleAppliedToAllDidChange(row: ToolRow) {
-            for node in row.nodes {
-                if .checkBoxAnimationJiggleApplyToAll {
-                    node.magicalViewModel.refresh()
-                }
-            }
-        }
-        Task { @MainActor in
-            
-            for row in getAllRows() { handleAnimationJiggleAppliedToAllDidChange(row: row) }
-        }
-        */
+        refreshAllRowsMatching(elements: [
+            .checkBoxAnimationGrabApplyToAll
+        ])
     }
     
-    func handleAnimationBounceAppliedToAllDidChange() {
-        refreshAllRowsMatching(elements: [.sexyCheckBoxAnimationBounceApplyToAll])
+    func handleAnimationLoopsAppliedToAllDidChange() {
+        refreshAllRowsMatching(elements: [
+            .checkBoxAnimationLoopApplyToAll
+        ])
         /*
-        @MainActor func handleAnimationBounceAppliedToAllDidChange(row: ToolRow) {
+        @MainActor func handleAnimationLoopsAppliedToAllDidChange(row: ToolRow) {
             for node in row.nodes {
-                if .checkBoxAnimationBounceApplyToAll {
+                if .checkBoxAnimationLoopApplyToAll {
                     node.magicalViewModel.refresh()
                 }
             }
         }
         Task { @MainActor in
             
-            for row in getAllRows() { handleAnimationBounceAppliedToAllDidChange(row: row) }
-        }
-        */
-    }
-    
-    func handleAnimationWobbleAppliedToAllDidChange() {
-        refreshAllRowsMatching(elements: [.sexyCheckBoxAnimationWobbleApplyToAll])
-        /*
-        @MainActor func handleAnimationWobbleAppliedToAllDidChange(row: ToolRow) {
-            for node in row.nodes {
-                if .checkBoxAnimationWobbleApplyToAll {
-                    node.magicalViewModel.refresh()
-                }
-            }
-        }
-        Task { @MainActor in
-            
-            for row in getAllRows() { handleAnimationWobbleAppliedToAllDidChange(row: row) }
-        }
-        */
-    }
-    
-    func handleAnimationTwistAppliedToAllDidChange() {
-        refreshAllRowsMatching(elements: [.sexyCheckBoxAnimationTwistApplyToAll])
-        /*
-        @MainActor func handleAnimationTwistAppliedToAllDidChange(row: ToolRow) {
-            for node in row.nodes {
-                if . {
-                    node.magicalViewModel.refresh()
-                }
-            }
-        }
-        Task { @MainActor in
-            
-            for row in getAllRows() { handleAnimationTwistAppliedToAllDidChange(row: row) }
+            for row in getAllRows() { handleAnimationLoopsAppliedToAllDidChange(row: row) }
         }
         */
     }
@@ -643,4 +470,9 @@ extension ToolInterfaceViewModel {
     func handleJigglePowerDidChange() {
         refreshAllRowsMatching(elements: [.sliderJigglePower])
     }
+    
+    func handleJiggleDampenDidChange() {
+        refreshAllRowsMatching(elements: [.sliderJiggleDampen])
+    }
+    
 }

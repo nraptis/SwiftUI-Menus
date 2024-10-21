@@ -84,7 +84,7 @@ struct SEGMENT_LAYOUT_INFO {
 }
 
 struct GENERIC_SEGMENT_LAYOUT {
-
+    
     struct LongResponse {
         let globalLayout: HORIZONTAL_LAYOUT
         let buttonLayouts: [HORIZONTAL_LAYOUT_LONG]
@@ -96,40 +96,40 @@ struct GENERIC_SEGMENT_LAYOUT {
     }
     
     static func computeStacked(layoutSchemeType: LayoutScheme.Type,
-                            layoutWidth: Int,
-                            orientation: Orientation,
-                            infoList: [SEGMENT_LAYOUT_INFO],
+                               layoutWidth: Int,
+                               orientation: Orientation,
+                               infoList: [SEGMENT_LAYOUT_INFO],
                                attemptEqualWidthsForAllButtons: Bool,
-                            neighborTypeLeft: ToolInterfaceElementType?,
-                            neighborTypeRight: ToolInterfaceElementType?) -> StackedResponse {
+                               neighborTypeLeft: ToolInterfaceElementType?,
+                               neighborTypeRight: ToolInterfaceElementType?) -> StackedResponse {
         
         let count = infoList.count
         
-        let outsideBoxLeftSqueezed = layoutSchemeType.getOutsideBoxPaddingLeftLong(orientation: orientation,
-                                                                                   squeeze: .squeezed,
-                                                                                   neighborTypeLeft: neighborTypeLeft,
-                                                                                   neighborTypeRight: neighborTypeRight)
-        let outsideBoxLeftStandard = layoutSchemeType.getOutsideBoxPaddingLeftLong(orientation: orientation,
-                                                                                   squeeze: .standard,
-                                                                                   neighborTypeLeft: neighborTypeLeft,
-                                                                                   neighborTypeRight: neighborTypeRight)
-        let outsideBoxLeftRelaxed = layoutSchemeType.getOutsideBoxPaddingLeftLong(orientation: orientation,
-                                                                                  squeeze: .relaxed,
-                                                                                  neighborTypeLeft: neighborTypeLeft,
-                                                                                  neighborTypeRight: neighborTypeRight)
+        let outsideBoxLeftSqueezed = layoutSchemeType.getOutsideBoxPaddingLeft(orientation: orientation,
+                                                                               squeeze: .squeezed,
+                                                                               neighborTypeLeft: neighborTypeLeft,
+                                                                               neighborTypeRight: neighborTypeRight)
+        let outsideBoxLeftStandard = layoutSchemeType.getOutsideBoxPaddingLeft(orientation: orientation,
+                                                                               squeeze: .standard,
+                                                                               neighborTypeLeft: neighborTypeLeft,
+                                                                               neighborTypeRight: neighborTypeRight)
+        let outsideBoxLeftRelaxed = layoutSchemeType.getOutsideBoxPaddingLeft(orientation: orientation,
+                                                                              squeeze: .relaxed,
+                                                                              neighborTypeLeft: neighborTypeLeft,
+                                                                              neighborTypeRight: neighborTypeRight)
         
-        let outsideBoxRightSqueezed = layoutSchemeType.getOutsideBoxPaddingRightLong(orientation: orientation,
-                                                                                     squeeze: .squeezed,
-                                                                                     neighborTypeLeft: neighborTypeLeft,
-                                                                                     neighborTypeRight: neighborTypeRight)
-        let outsideBoxRightStandard = layoutSchemeType.getOutsideBoxPaddingRightLong(orientation: orientation,
-                                                                                     squeeze: .standard,
-                                                                                     neighborTypeLeft: neighborTypeLeft,
-                                                                                     neighborTypeRight: neighborTypeRight)
-        let outsideBoxRightRelaxed = layoutSchemeType.getOutsideBoxPaddingRightLong(orientation: orientation,
-                                                                                    squeeze: .relaxed,
-                                                                                    neighborTypeLeft: neighborTypeLeft,
-                                                                                    neighborTypeRight: neighborTypeRight)
+        let outsideBoxRightSqueezed = layoutSchemeType.getOutsideBoxPaddingRight(orientation: orientation,
+                                                                                 squeeze: .squeezed,
+                                                                                 neighborTypeLeft: neighborTypeLeft,
+                                                                                 neighborTypeRight: neighborTypeRight)
+        let outsideBoxRightStandard = layoutSchemeType.getOutsideBoxPaddingRight(orientation: orientation,
+                                                                                 squeeze: .standard,
+                                                                                 neighborTypeLeft: neighborTypeLeft,
+                                                                                 neighborTypeRight: neighborTypeRight)
+        let outsideBoxRightRelaxed = layoutSchemeType.getOutsideBoxPaddingRight(orientation: orientation,
+                                                                                squeeze: .relaxed,
+                                                                                neighborTypeLeft: neighborTypeLeft,
+                                                                                neighborTypeRight: neighborTypeRight)
         
         let heroLeftSqueezed = layoutSchemeType.getHeroPaddingLeftLong(orientation: orientation,
                                                                        squeeze: .squeezed)
@@ -148,35 +148,35 @@ struct GENERIC_SEGMENT_LAYOUT {
         
         
         let slaveLeftSqueezed = layoutSchemeType.getSlavePaddingLeft(orientation: orientation,
-                                                                         squeeze: .squeezed)
+                                                                     squeeze: .squeezed)
         let slaveLeftStandard = layoutSchemeType.getSlavePaddingLeft(orientation: orientation,
-                                                                         squeeze: .standard)
+                                                                     squeeze: .standard)
         let slaveLeftRelaxed = layoutSchemeType.getSlavePaddingLeft(orientation: orientation,
-                                                                        squeeze: .relaxed)
+                                                                    squeeze: .relaxed)
         
         
         let slaveRightSqueezed = layoutSchemeType.getSlavePaddingRight(orientation: orientation,
-                                                                           squeeze: .squeezed)
+                                                                       squeeze: .squeezed)
         let slaveRightStandard = layoutSchemeType.getSlavePaddingRight(orientation: orientation,
-                                                                           squeeze: .standard)
+                                                                       squeeze: .standard)
         let slaveRightRelaxed = layoutSchemeType.getSlavePaddingRight(orientation: orientation,
-                                                                          squeeze: .relaxed)
+                                                                      squeeze: .relaxed)
         
         
         let accentLeftSqueezed = layoutSchemeType.getAccentPaddingLeft(orientation: orientation,
-                                                                                    squeeze: .squeezed)
-                let accentLeftStandard = layoutSchemeType.getAccentPaddingLeft(orientation: orientation,
-                                                                                    squeeze: .standard)
-                let accentLeftRelaxed = layoutSchemeType.getAccentPaddingLeft(orientation: orientation,
-                                                                                   squeeze: .relaxed)
-                
-                
-                let accentRightSqueezed = layoutSchemeType.getAccentPaddingRight(orientation: orientation,
-                                                                                      squeeze: .squeezed)
-                let accentRightStandard = layoutSchemeType.getAccentPaddingRight(orientation: orientation,
-                                                                                      squeeze: .standard)
-                let accentRightRelaxed = layoutSchemeType.getAccentPaddingRight(orientation: orientation,
-                                                                                     squeeze: .relaxed)
+                                                                       squeeze: .squeezed)
+        let accentLeftStandard = layoutSchemeType.getAccentPaddingLeft(orientation: orientation,
+                                                                       squeeze: .standard)
+        let accentLeftRelaxed = layoutSchemeType.getAccentPaddingLeft(orientation: orientation,
+                                                                      squeeze: .relaxed)
+        
+        
+        let accentRightSqueezed = layoutSchemeType.getAccentPaddingRight(orientation: orientation,
+                                                                         squeeze: .squeezed)
+        let accentRightStandard = layoutSchemeType.getAccentPaddingRight(orientation: orientation,
+                                                                         squeeze: .standard)
+        let accentRightRelaxed = layoutSchemeType.getAccentPaddingRight(orientation: orientation,
+                                                                        squeeze: .relaxed)
         
         let buttonLayouts = infoList.map { _ in
             HORIZONTAL_LAYOUT_STACKED()
@@ -192,9 +192,9 @@ struct GENERIC_SEGMENT_LAYOUT {
             let numberOfLines = info.numberOfLines
             let iconMain = info.iconPackMain.getTextIcon(orientation: orientation,
                                                          layoutSchemeFlavor: .stackedLarge,
-                                                             numberOfLines: numberOfLines,
-                                                             isDarkMode: false,
-                                                             isEnabled: true)
+                                                         numberOfLines: numberOfLines,
+                                                         isDarkMode: false,
+                                                         isEnabled: true)
             let iconMainWidth = iconMain.width
             
             let iconSecondaryWidth: Int
@@ -208,18 +208,20 @@ struct GENERIC_SEGMENT_LAYOUT {
             } else {
                 iconSecondaryWidth = 0
             }
+            buttonLayout.__iconSecondaryWidth = iconSecondaryWidth
             
             let iconTertiaryWidth: Int
             if let iconPackTertiary = info.iconPackTertiary {
-                        let iconTertiary = iconPackTertiary.getTextIcon(orientation: orientation,
+                let iconTertiary = iconPackTertiary.getTextIcon(orientation: orientation,
                                                                 layoutSchemeFlavor: .long,
                                                                 numberOfLines: 0,
                                                                 isDarkMode: false,
                                                                 isEnabled: true)
-                        iconTertiaryWidth = iconTertiary.width
-                    } else {
-                        iconTertiaryWidth = 0
-                    }
+                iconTertiaryWidth = iconTertiary.width
+            } else {
+                iconTertiaryWidth = 0
+            }
+            buttonLayout.__iconTertiaryWidth = iconTertiaryWidth
             
             let heroWidth = max(nameLabelWidth, iconMainWidth)
             let buttonWidth = heroWidth + iconSecondaryWidth + iconTertiaryWidth
@@ -240,15 +242,21 @@ struct GENERIC_SEGMENT_LAYOUT {
         let globalLayout = HORIZONTAL_LAYOUT()
         
         _ = globalLayout.expandOutsideBoxFilling(consumed: &consumed, layoutWidth: layoutWidth,
-                                           left: outsideBoxLeftSqueezed, right: outsideBoxRightSqueezed)
+                                                 left: outsideBoxLeftSqueezed, right: outsideBoxRightSqueezed)
         for index in 0..<count {
             let buttonLayout = buttonLayouts[index]
             _ = buttonLayout.expandHeroFilling(consumed: &consumed, layoutWidth: layoutWidth,
-                                         left: heroLeftSqueezed, right: heroRightSqueezed)
-            _ = buttonLayout.expandSlaveFilling(consumed: &consumed, layoutWidth: layoutWidth,
-                                          left: slaveLeftSqueezed, right: slaveRightSqueezed)
-            _ = buttonLayout.expandAccentFilling(consumed: &consumed, layoutWidth: layoutWidth,
-                                          left: accentLeftSqueezed, right: accentRightSqueezed)
+                                               left: heroLeftSqueezed, right: heroRightSqueezed)
+            if buttonLayout.__iconSecondaryWidth > 0 {
+                _ = buttonLayout.expandSlaveFilling(consumed: &consumed, layoutWidth: layoutWidth,
+                                                    left: slaveLeftSqueezed, right: slaveRightSqueezed)
+            }
+            if buttonLayout.__iconTertiaryWidth > 0 {
+                if buttonLayout.__iconTertiaryWidth > 0 {
+                    _ = buttonLayout.expandAccentFilling(consumed: &consumed, layoutWidth: layoutWidth,
+                                                         left: accentLeftSqueezed, right: accentRightSqueezed)
+                }
+            }
             
         }
         
@@ -257,22 +265,26 @@ struct GENERIC_SEGMENT_LAYOUT {
         while isLooping {
             isLooping = false
             if globalLayout.expandOutsideBoxOnce(consumed: &consumed, layoutWidth: layoutWidth,
-                                              left: outsideBoxLeftStandard, right: outsideBoxRightStandard) {
+                                                 left: outsideBoxLeftStandard, right: outsideBoxRightStandard) {
                 isLooping = true
             }
             for index in 0..<count {
                 let buttonLayout = buttonLayouts[index]
                 if buttonLayout.expandHeroOnce(consumed: &consumed, layoutWidth: layoutWidth,
-                                            left: heroLeftStandard, right: heroRightStandard) {
+                                               left: heroLeftStandard, right: heroRightStandard) {
                     isLooping = true
                 }
-                if buttonLayout.expandSlaveOnce(consumed: &consumed, layoutWidth: layoutWidth,
-                                             left: slaveLeftStandard, right: slaveRightStandard) {
-                    isLooping = true
+                if buttonLayout.__iconSecondaryWidth > 0 {
+                    if buttonLayout.expandSlaveOnce(consumed: &consumed, layoutWidth: layoutWidth,
+                                                    left: slaveLeftStandard, right: slaveRightStandard) {
+                        isLooping = true
+                    }
                 }
-                if buttonLayout.expandAccentOnce(consumed: &consumed, layoutWidth: layoutWidth,
-                                             left: accentLeftStandard, right: accentRightStandard) {
-                    isLooping = true
+                if buttonLayout.__iconTertiaryWidth > 0 {
+                    if buttonLayout.expandAccentOnce(consumed: &consumed, layoutWidth: layoutWidth,
+                                                     left: accentLeftStandard, right: accentRightStandard) {
+                        isLooping = true
+                    }
                 }
             }
         }
@@ -282,7 +294,7 @@ struct GENERIC_SEGMENT_LAYOUT {
         while isLooping {
             isLooping = false
             if globalLayout.expandOutsideBoxOnce(consumed: &consumed, layoutWidth: layoutWidth,
-                                           left: outsideBoxLeftRelaxed, right: outsideBoxRightRelaxed) {
+                                                 left: outsideBoxLeftRelaxed, right: outsideBoxRightRelaxed) {
                 isLooping = true
             }
             
@@ -290,16 +302,20 @@ struct GENERIC_SEGMENT_LAYOUT {
                 let buttonLayout = buttonLayouts[index]
                 
                 if buttonLayout.expandHeroOnce(consumed: &consumed, layoutWidth: layoutWidth,
-                                         left: heroLeftRelaxed, right: heroRightRelaxed) {
+                                               left: heroLeftRelaxed, right: heroRightRelaxed) {
                     isLooping = true
                 }
-                if buttonLayout.expandSlaveOnce(consumed: &consumed, layoutWidth: layoutWidth,
-                                          left: slaveLeftRelaxed, right: slaveRightRelaxed) {
-                    isLooping = true
+                if buttonLayout.__iconSecondaryWidth > 0 {
+                    if buttonLayout.expandSlaveOnce(consumed: &consumed, layoutWidth: layoutWidth,
+                                                    left: slaveLeftRelaxed, right: slaveRightRelaxed) {
+                        isLooping = true
+                    }
                 }
-                if buttonLayout.expandAccentOnce(consumed: &consumed, layoutWidth: layoutWidth,
-                                                 left: accentLeftRelaxed, right: accentRightRelaxed) {
-                    isLooping = true
+                if buttonLayout.__iconTertiaryWidth > 0 {
+                    if buttonLayout.expandAccentOnce(consumed: &consumed, layoutWidth: layoutWidth,
+                                                     left: accentLeftRelaxed, right: accentRightRelaxed) {
+                        isLooping = true
+                    }
                 }
             }
         }
@@ -340,31 +356,31 @@ struct GENERIC_SEGMENT_LAYOUT {
         let heroSpacingRelaxed = layoutSchemeType.getHeroSpacingLong(orientation: orientation,
                                                                      squeeze: .relaxed)
         
-        let outsideBoxLeftSqueezed = layoutSchemeType.getOutsideBoxPaddingLeftLong(orientation: orientation,
-                                                                                   squeeze: .squeezed,
-                                                                                   neighborTypeLeft: neighborTypeLeft,
-                                                                                   neighborTypeRight: neighborTypeRight)
-        let outsideBoxLeftStandard = layoutSchemeType.getOutsideBoxPaddingLeftLong(orientation: orientation,
-                                                                                   squeeze: .standard,
-                                                                                   neighborTypeLeft: neighborTypeLeft,
-                                                                                   neighborTypeRight: neighborTypeRight)
-        let outsideBoxLeftRelaxed = layoutSchemeType.getOutsideBoxPaddingLeftLong(orientation: orientation,
-                                                                                  squeeze: .relaxed,
-                                                                                  neighborTypeLeft: neighborTypeLeft,
-                                                                                  neighborTypeRight: neighborTypeRight)
+        let outsideBoxLeftSqueezed = layoutSchemeType.getOutsideBoxPaddingLeft(orientation: orientation,
+                                                                               squeeze: .squeezed,
+                                                                               neighborTypeLeft: neighborTypeLeft,
+                                                                               neighborTypeRight: neighborTypeRight)
+        let outsideBoxLeftStandard = layoutSchemeType.getOutsideBoxPaddingLeft(orientation: orientation,
+                                                                               squeeze: .standard,
+                                                                               neighborTypeLeft: neighborTypeLeft,
+                                                                               neighborTypeRight: neighborTypeRight)
+        let outsideBoxLeftRelaxed = layoutSchemeType.getOutsideBoxPaddingLeft(orientation: orientation,
+                                                                              squeeze: .relaxed,
+                                                                              neighborTypeLeft: neighborTypeLeft,
+                                                                              neighborTypeRight: neighborTypeRight)
         
-        let outsideBoxRightSqueezed = layoutSchemeType.getOutsideBoxPaddingRightLong(orientation: orientation,
-                                                                                     squeeze: .squeezed,
-                                                                                     neighborTypeLeft: neighborTypeLeft,
-                                                                                     neighborTypeRight: neighborTypeRight)
-        let outsideBoxRightStandard = layoutSchemeType.getOutsideBoxPaddingRightLong(orientation: orientation,
-                                                                                     squeeze: .standard,
-                                                                                     neighborTypeLeft: neighborTypeLeft,
-                                                                                     neighborTypeRight: neighborTypeRight)
-        let outsideBoxRightRelaxed = layoutSchemeType.getOutsideBoxPaddingRightLong(orientation: orientation,
-                                                                                    squeeze: .relaxed,
-                                                                                    neighborTypeLeft: neighborTypeLeft,
-                                                                                    neighborTypeRight: neighborTypeRight)
+        let outsideBoxRightSqueezed = layoutSchemeType.getOutsideBoxPaddingRight(orientation: orientation,
+                                                                                 squeeze: .squeezed,
+                                                                                 neighborTypeLeft: neighborTypeLeft,
+                                                                                 neighborTypeRight: neighborTypeRight)
+        let outsideBoxRightStandard = layoutSchemeType.getOutsideBoxPaddingRight(orientation: orientation,
+                                                                                 squeeze: .standard,
+                                                                                 neighborTypeLeft: neighborTypeLeft,
+                                                                                 neighborTypeRight: neighborTypeRight)
+        let outsideBoxRightRelaxed = layoutSchemeType.getOutsideBoxPaddingRight(orientation: orientation,
+                                                                                squeeze: .relaxed,
+                                                                                neighborTypeLeft: neighborTypeLeft,
+                                                                                neighborTypeRight: neighborTypeRight)
         
         let heroLeftSqueezed = layoutSchemeType.getHeroPaddingLeftLong(orientation: orientation,
                                                                        squeeze: .squeezed)
@@ -384,34 +400,34 @@ struct GENERIC_SEGMENT_LAYOUT {
         
         
         let slaveLeftSqueezed = layoutSchemeType.getSlavePaddingLeft(orientation: orientation,
-                                                                         squeeze: .squeezed)
+                                                                     squeeze: .squeezed)
         let slaveLeftStandard = layoutSchemeType.getSlavePaddingLeft(orientation: orientation,
-                                                                         squeeze: .standard)
+                                                                     squeeze: .standard)
         let slaveLeftRelaxed = layoutSchemeType.getSlavePaddingLeft(orientation: orientation,
-                                                                        squeeze: .relaxed)
+                                                                    squeeze: .relaxed)
         
         
         let slaveRightSqueezed = layoutSchemeType.getSlavePaddingRight(orientation: orientation,
-                                                                           squeeze: .squeezed)
+                                                                       squeeze: .squeezed)
         let slaveRightStandard = layoutSchemeType.getSlavePaddingRight(orientation: orientation,
-                                                                           squeeze: .standard)
+                                                                       squeeze: .standard)
         let slaveRightRelaxed = layoutSchemeType.getSlavePaddingRight(orientation: orientation,
-                                                                          squeeze: .relaxed)
+                                                                      squeeze: .relaxed)
         
         let accentLeftSqueezed = layoutSchemeType.getAccentPaddingLeft(orientation: orientation,
-                                                                                    squeeze: .squeezed)
-                let accentLeftStandard = layoutSchemeType.getAccentPaddingLeft(orientation: orientation,
-                                                                                    squeeze: .standard)
-                let accentLeftRelaxed = layoutSchemeType.getAccentPaddingLeft(orientation: orientation,
-                                                                                   squeeze: .relaxed)
-                
-                
-                let accentRightSqueezed = layoutSchemeType.getAccentPaddingRight(orientation: orientation,
-                                                                                      squeeze: .squeezed)
-                let accentRightStandard = layoutSchemeType.getAccentPaddingRight(orientation: orientation,
-                                                                                      squeeze: .standard)
-                let accentRightRelaxed = layoutSchemeType.getAccentPaddingRight(orientation: orientation,
-                                                                                     squeeze: .relaxed)
+                                                                       squeeze: .squeezed)
+        let accentLeftStandard = layoutSchemeType.getAccentPaddingLeft(orientation: orientation,
+                                                                       squeeze: .standard)
+        let accentLeftRelaxed = layoutSchemeType.getAccentPaddingLeft(orientation: orientation,
+                                                                      squeeze: .relaxed)
+        
+        
+        let accentRightSqueezed = layoutSchemeType.getAccentPaddingRight(orientation: orientation,
+                                                                         squeeze: .squeezed)
+        let accentRightStandard = layoutSchemeType.getAccentPaddingRight(orientation: orientation,
+                                                                         squeeze: .standard)
+        let accentRightRelaxed = layoutSchemeType.getAccentPaddingRight(orientation: orientation,
+                                                                        squeeze: .relaxed)
         
         let buttonLayouts = infoList.map { _ in
             HORIZONTAL_LAYOUT_LONG()
@@ -427,10 +443,10 @@ struct GENERIC_SEGMENT_LAYOUT {
             let nameLabelWidth = info.nameLabelWidth
             let numberOfLines = info.numberOfLines
             let iconMain = info.iconPackMain.getTextIcon(orientation: orientation,
-                                                             layoutSchemeFlavor: .long,
-                                                             numberOfLines: numberOfLines,
-                                                             isDarkMode: false,
-                                                             isEnabled: true)
+                                                         layoutSchemeFlavor: .long,
+                                                         numberOfLines: numberOfLines,
+                                                         isDarkMode: false,
+                                                         isEnabled: true)
             let iconMainWidth = iconMain.width
             
             let iconSecondaryWidth: Int
@@ -444,18 +460,20 @@ struct GENERIC_SEGMENT_LAYOUT {
             } else {
                 iconSecondaryWidth = 0
             }
+            buttonLayout.__iconSecondaryWidth = iconSecondaryWidth
             
             let iconTertiaryWidth: Int
             if let iconPackTertiary = info.iconPackTertiary {
-                        let iconTertiary = iconPackTertiary.getTextIcon(orientation: orientation,
+                let iconTertiary = iconPackTertiary.getTextIcon(orientation: orientation,
                                                                 layoutSchemeFlavor: .long,
                                                                 numberOfLines: 0,
                                                                 isDarkMode: false,
                                                                 isEnabled: true)
-                        iconTertiaryWidth = iconTertiary.width
-                    } else {
-                        iconTertiaryWidth = 0
-                    }
+                iconTertiaryWidth = iconTertiary.width
+            } else {
+                iconTertiaryWidth = 0
+            }
+            buttonLayout.__iconTertiaryWidth = iconTertiaryWidth
             
             let heroWidth = nameLabelWidth + iconMainWidth
             let buttonWidth = heroWidth + iconSecondaryWidth + iconTertiaryWidth
@@ -475,18 +493,22 @@ struct GENERIC_SEGMENT_LAYOUT {
         let globalLayout = HORIZONTAL_LAYOUT()
         
         _ = globalLayout.expandOutsideBoxFilling(consumed: &consumed, layoutWidth: layoutWidth,
-                                           left: outsideBoxLeftSqueezed, right: outsideBoxRightSqueezed)
+                                                 left: outsideBoxLeftSqueezed, right: outsideBoxRightSqueezed)
         for index in 0..<count {
             let buttonLayout = buttonLayouts[index]
             
             _ = buttonLayout.expandHeroFilling(consumed: &consumed, layoutWidth: layoutWidth,
-                                         left: heroLeftSqueezed, right: heroRightSqueezed)
-            _ = buttonLayout.expandSlaveFilling(consumed: &consumed, layoutWidth: layoutWidth,
-                                          left: slaveLeftSqueezed, right: slaveRightSqueezed)
-            _ = buttonLayout.expandAccentFilling(consumed: &consumed, layoutWidth: layoutWidth,
-                                          left: accentLeftSqueezed, right: accentRightSqueezed)
+                                               left: heroLeftSqueezed, right: heroRightSqueezed)
+            if buttonLayout.__iconSecondaryWidth > 0 {
+                _ = buttonLayout.expandSlaveFilling(consumed: &consumed, layoutWidth: layoutWidth,
+                                                    left: slaveLeftSqueezed, right: slaveRightSqueezed)
+            }
+            if buttonLayout.__iconTertiaryWidth > 0 {
+                _ = buttonLayout.expandAccentFilling(consumed: &consumed, layoutWidth: layoutWidth,
+                                                     left: accentLeftSqueezed, right: accentRightSqueezed)
+            }
             _ = buttonLayout.expandHeroSpacingFilling(consumed: &consumed, layoutWidth: layoutWidth,
-                                                space: heroSpacingSqueezed)
+                                                      space: heroSpacingSqueezed)
         }
         
         var isLooping = true
@@ -494,22 +516,26 @@ struct GENERIC_SEGMENT_LAYOUT {
         while isLooping {
             isLooping = false
             if globalLayout.expandOutsideBoxOnce(consumed: &consumed, layoutWidth: layoutWidth,
-                                              left: outsideBoxLeftStandard, right: outsideBoxRightStandard) {
+                                                 left: outsideBoxLeftStandard, right: outsideBoxRightStandard) {
                 isLooping = true
             }
             for index in 0..<count {
                 let buttonLayout = buttonLayouts[index]
                 if buttonLayout.expandHeroOnce(consumed: &consumed, layoutWidth: layoutWidth,
-                                            left: heroLeftStandard, right: heroRightStandard) {
+                                               left: heroLeftStandard, right: heroRightStandard) {
                     isLooping = true
                 }
-                if buttonLayout.expandSlaveOnce(consumed: &consumed, layoutWidth: layoutWidth,
-                                             left: slaveLeftStandard, right: slaveRightStandard) {
-                    isLooping = true
+                if buttonLayout.__iconSecondaryWidth > 0 {
+                    if buttonLayout.expandSlaveOnce(consumed: &consumed, layoutWidth: layoutWidth,
+                                                    left: slaveLeftStandard, right: slaveRightStandard) {
+                        isLooping = true
+                    }
                 }
-                if buttonLayout.expandAccentOnce(consumed: &consumed, layoutWidth: layoutWidth,
-                                             left: accentLeftStandard, right: accentRightStandard) {
-                    isLooping = true
+                if buttonLayout.__iconTertiaryWidth > 0 {
+                    if buttonLayout.expandAccentOnce(consumed: &consumed, layoutWidth: layoutWidth,
+                                                     left: accentLeftStandard, right: accentRightStandard) {
+                        isLooping = true
+                    }
                 }
                 if buttonLayout.expandHeroSpacingOnce(consumed: &consumed,
                                                       layoutWidth: layoutWidth,
@@ -524,7 +550,7 @@ struct GENERIC_SEGMENT_LAYOUT {
         while isLooping {
             isLooping = false
             if globalLayout.expandOutsideBoxOnce(consumed: &consumed, layoutWidth: layoutWidth,
-                                           left: outsideBoxLeftRelaxed, right: outsideBoxRightRelaxed) {
+                                                 left: outsideBoxLeftRelaxed, right: outsideBoxRightRelaxed) {
                 isLooping = true
             }
             
@@ -532,16 +558,20 @@ struct GENERIC_SEGMENT_LAYOUT {
                 let buttonLayout = buttonLayouts[index]
                 
                 if buttonLayout.expandHeroOnce(consumed: &consumed, layoutWidth: layoutWidth,
-                                         left: heroLeftRelaxed, right: heroRightRelaxed) {
+                                               left: heroLeftRelaxed, right: heroRightRelaxed) {
                     isLooping = true
                 }
-                if buttonLayout.expandSlaveOnce(consumed: &consumed, layoutWidth: layoutWidth,
-                                          left: slaveLeftRelaxed, right: slaveRightRelaxed) {
-                    isLooping = true
+                if buttonLayout.__iconSecondaryWidth > 0 {
+                    if buttonLayout.expandSlaveOnce(consumed: &consumed, layoutWidth: layoutWidth,
+                                                    left: slaveLeftRelaxed, right: slaveRightRelaxed) {
+                        isLooping = true
+                    }
                 }
-                if buttonLayout.expandAccentOnce(consumed: &consumed, layoutWidth: layoutWidth,
-                                                 left: accentLeftRelaxed, right: accentRightRelaxed) {
-                    isLooping = true
+                if buttonLayout.__iconTertiaryWidth > 0 {
+                    if buttonLayout.expandAccentOnce(consumed: &consumed, layoutWidth: layoutWidth,
+                                                     left: accentLeftRelaxed, right: accentRightRelaxed) {
+                        isLooping = true
+                    }
                 }
                 if buttonLayout.expandHeroSpacingOnce(consumed: &consumed,
                                                       layoutWidth: layoutWidth,

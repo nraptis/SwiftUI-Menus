@@ -1,5 +1,5 @@
 //
-//  MagicalSexyStepper.swift
+//  MagicalStepper.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 9/13/24.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct MagicalSexyStepper: View {
+struct MagicalStepper: View {
     
-    @Environment(MagicalSexyStepperViewModel.self) var magicalViewModel
+    @Environment(MagicalStepperViewModel.self) var magicalViewModel
     
     var body: some View {
         return ZStack {
@@ -38,12 +38,12 @@ struct MagicalSexyStepper: View {
         
         let orientation = magicalViewModel.orientation
         
-        let outsideBoxPaddingTop = SexyStepperLayout.getOutsideBoxPaddingTop(orientation: orientation)
-        let outsideBoxPaddingBottom = SexyStepperLayout.getOutsideBoxPaddingBottom(orientation: orientation)
+        let outsideBoxPaddingTop = StepperLayout.getOutsideBoxPaddingTop(orientation: orientation)
+        let outsideBoxPaddingBottom = StepperLayout.getOutsideBoxPaddingBottom(orientation: orientation)
         let boxWidth = magicalViewModel.layoutWidth - magicalViewModel.outsideBoxPaddingLeft - magicalViewModel.outsideBoxPaddingRight
         let boxHeight = magicalViewModel.layoutHeight - outsideBoxPaddingTop - outsideBoxPaddingBottom
         
-        let contextCornerRadius = SexyStepperLayout.getContextCornerRadius(orientation: orientation)
+        let contextCornerRadius = StepperLayout.getCornerRadius(orientation: orientation)
         let contextColor: Color
         if magicalViewModel.isDarkModeEnabled {
             if magicalViewModel.isEnabled {
@@ -84,8 +84,8 @@ struct MagicalSexyStepper: View {
         
         let orientation = magicalViewModel.orientation
         let layoutSchemeFlavor = magicalViewModel.getLayoutSchemeFlavor()
-        let outsideBoxPaddingTop = SexyStepperLayout.getOutsideBoxPaddingTop(orientation: orientation)
-        let outsideBoxPaddingBottom = SexyStepperLayout.getOutsideBoxPaddingBottom(orientation: orientation)
+        let outsideBoxPaddingTop = StepperLayout.getOutsideBoxPaddingTop(orientation: orientation)
+        let outsideBoxPaddingBottom = StepperLayout.getOutsideBoxPaddingBottom(orientation: orientation)
         let contentLayoutWidth = magicalViewModel.layoutWidth - magicalViewModel.outsideBoxPaddingLeft - magicalViewModel.outsideBoxPaddingRight
         let contentLayoutHeight = magicalViewModel.layoutHeight - outsideBoxPaddingTop - outsideBoxPaddingBottom
         
@@ -111,7 +111,7 @@ struct MagicalSexyStepper: View {
 #endif
                 
                 
-                MagicalSexyStepperContent(layoutSchemeFlavor: layoutSchemeFlavor,
+                MagicalStepperContent(layoutSchemeFlavor: layoutSchemeFlavor,
                                           layoutWidth: contentLayoutWidth,
                                           layoutHeight: contentLayoutHeight)
                 

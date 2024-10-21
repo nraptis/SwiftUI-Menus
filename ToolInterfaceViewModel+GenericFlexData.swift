@@ -27,63 +27,60 @@ extension ToolInterfaceViewModel {
         return heroWidth + paddingLeft + paddingRight
     }
     
-    
     static func getFullSpaceValue(valueLabelWidth: Int,
                                   orientation: Orientation,
                                   squeeze: LayoutSchemeSqueeze,
                                   scheme: LayoutScheme.Type) -> Int {
-        let paddingLeft = scheme.getValuePaddingLeft(orientation: orientation, squeeze: squeeze)
-        let paddingRight = scheme.getValuePaddingRight(orientation: orientation, squeeze: squeeze)
-        return valueLabelWidth + paddingLeft + paddingRight
+        if valueLabelWidth <= 0 {
+            return 0
+        } else {
+            let paddingLeft = scheme.getValuePaddingLeft(orientation: orientation, squeeze: squeeze)
+            let paddingRight = scheme.getValuePaddingRight(orientation: orientation, squeeze: squeeze)
+            return valueLabelWidth + paddingLeft + paddingRight
+        }
     }
     
     static func getFullSpaceSlave(slaveWidth: Int,
                                   orientation: Orientation,
                                   squeeze: LayoutSchemeSqueeze,
                                   scheme: LayoutScheme.Type) -> Int {
-        let paddingLeft = scheme.getSlavePaddingLeft(orientation: orientation, squeeze: squeeze)
-        let paddingRight = scheme.getSlavePaddingRight(orientation: orientation, squeeze: squeeze)
-        return slaveWidth + paddingLeft + paddingRight
+        if slaveWidth <= 0 {
+            return 0
+        } else {
+            
+            let paddingLeft = scheme.getSlavePaddingLeft(orientation: orientation, squeeze: squeeze)
+            let paddingRight = scheme.getSlavePaddingRight(orientation: orientation, squeeze: squeeze)
+            return slaveWidth + paddingLeft + paddingRight
+        }
     }
     
     static func getFullSpaceAccent(accentWidth: Int,
                                    orientation: Orientation,
                                    squeeze: LayoutSchemeSqueeze,
                                    scheme: LayoutScheme.Type) -> Int {
+        if accentWidth <= 0 {
+            return 0
+        } else {
             let paddingLeft = scheme.getAccentPaddingLeft(orientation: orientation, squeeze: squeeze)
             let paddingRight = scheme.getAccentPaddingRight(orientation: orientation, squeeze: squeeze)
             return accentWidth + paddingLeft + paddingRight
         }
-    
-    static func getFullSpaceOutsideBoxLong(orientation: Orientation,
-                                           squeeze: LayoutSchemeSqueeze,
-                                           scheme: LayoutScheme.Type,
-                                           neighborTypeLeft: ToolInterfaceElementType?,
-                                           neighborTypeRight: ToolInterfaceElementType?) -> Int {
-        let paddingLeft = scheme.getOutsideBoxPaddingLeftLong(orientation: orientation,
-                                                              squeeze: squeeze,
-                                                              neighborTypeLeft: neighborTypeLeft,
-                                                              neighborTypeRight: neighborTypeRight)
-        let paddingRight = scheme.getOutsideBoxPaddingRightLong(orientation: orientation,
-                                                                squeeze: squeeze,
-                                                                neighborTypeLeft: neighborTypeLeft,
-                                                                neighborTypeRight: neighborTypeRight)
-        return paddingLeft + paddingRight
     }
     
-    static func getFullSpaceOutsideBoxStacked(orientation: Orientation,
-                                              squeeze: LayoutSchemeSqueeze,
-                                              scheme: LayoutScheme.Type,
-                                              neighborTypeLeft: ToolInterfaceElementType?,
-                                              neighborTypeRight: ToolInterfaceElementType?) -> Int {
-        let paddingLeft = scheme.getOutsideBoxPaddingLeftStacked(orientation: orientation,
-                                                                 squeeze: squeeze,
-                                                                 neighborTypeLeft: neighborTypeLeft,
-                                                                 neighborTypeRight: neighborTypeRight)
-        let paddingRight = scheme.getOutsideBoxPaddingRightStacked(orientation: orientation,
-                                                                   squeeze: squeeze,
-                                                                   neighborTypeLeft: neighborTypeLeft,
-                                                                   neighborTypeRight: neighborTypeRight)
+    
+    static func getFullSpaceOutsideBox(orientation: Orientation,
+                                       squeeze: LayoutSchemeSqueeze,
+                                       scheme: LayoutScheme.Type,
+                                       neighborTypeLeft: ToolInterfaceElementType?,
+                                       neighborTypeRight: ToolInterfaceElementType?) -> Int {
+        let paddingLeft = scheme.getOutsideBoxPaddingLeft(orientation: orientation,
+                                                          squeeze: squeeze,
+                                                          neighborTypeLeft: neighborTypeLeft,
+                                                          neighborTypeRight: neighborTypeRight)
+        let paddingRight = scheme.getOutsideBoxPaddingRight(orientation: orientation,
+                                                            squeeze: squeeze,
+                                                            neighborTypeLeft: neighborTypeLeft,
+                                                            neighborTypeRight: neighborTypeRight)
         return paddingLeft + paddingRight
     }
     
@@ -103,9 +100,9 @@ extension ToolInterfaceViewModel {
     }
     
     static func getHeroWidthStacked(orientation: Orientation,
-                                         nameLabelWidth: Int,
-                                         numberOfLines: Int,
-                                         iconPack: (any TextIconPackable)?) -> Int {
+                                    nameLabelWidth: Int,
+                                    numberOfLines: Int,
+                                    iconPack: (any TextIconPackable)?) -> Int {
         if let iconPack {
             let icon = iconPack.getTextIcon(orientation: orientation,
                                             layoutSchemeFlavor: .stackedLarge,
@@ -133,7 +130,7 @@ extension ToolInterfaceViewModel {
     }
     
     static func getAccentWidth(orientation: Orientation,
-                              iconPack: (any TextIconPackable)?) -> Int {
+                               iconPack: (any TextIconPackable)?) -> Int {
         if let iconPack {
             let icon = iconPack.getTextIcon(orientation: orientation,
                                             layoutSchemeFlavor: .long,
@@ -165,53 +162,38 @@ extension ToolInterfaceViewModel {
                                    extraWidthStandard: Int,
                                    extraWidthRelaxed: Int) -> FlexConvertibleData {
         
-        let fullSpaceOutsideBoxLongSqueezed = getFullSpaceOutsideBoxLong(orientation: orientation,
-                                                                         squeeze: .squeezed,
-                                                                         scheme: scheme,
-                                                                         neighborTypeLeft: neighborTypeLeft,
-                                                                         neighborTypeRight: neighborTypeRight)
-        let fullSpaceOutsideBoxLongStandard = getFullSpaceOutsideBoxLong(orientation: orientation,
-                                                                         squeeze: .standard,
-                                                                         scheme: scheme,
-                                                                         neighborTypeLeft: neighborTypeLeft,
-                                                                         neighborTypeRight: neighborTypeRight)
-        let fullSpaceOutsideBoxLongRelaxed = getFullSpaceOutsideBoxLong(orientation: orientation,
-                                                                        squeeze: .relaxed,
-                                                                        scheme: scheme,
-                                                                        neighborTypeLeft: neighborTypeLeft,
-                                                                        neighborTypeRight: neighborTypeRight)
         
-        let fullSpaceOutsideBoxStackedSqueezed = getFullSpaceOutsideBoxStacked(orientation: orientation,
-                                                                               squeeze: .squeezed,
-                                                                               scheme: scheme,
-                                                                               neighborTypeLeft: neighborTypeLeft,
-                                                                               neighborTypeRight: neighborTypeRight)
-        let fullSpaceOutsideBoxStackedStandard = getFullSpaceOutsideBoxStacked(orientation: orientation,
-                                                                               squeeze: .standard,
-                                                                               scheme: scheme,
-                                                                               neighborTypeLeft: neighborTypeLeft,
-                                                                               neighborTypeRight: neighborTypeRight)
-        let fullSpaceOutsideBoxStackedRelaxed = getFullSpaceOutsideBoxStacked(orientation: orientation,
-                                                                              squeeze: .relaxed,
-                                                                              scheme: scheme,
-                                                                              neighborTypeLeft: neighborTypeLeft,
-                                                                              neighborTypeRight: neighborTypeRight)
+        let fullSpaceOutsideBoxSqueezed = getFullSpaceOutsideBox(orientation: orientation,
+                                                                 squeeze: .squeezed,
+                                                                 scheme: scheme,
+                                                                 neighborTypeLeft: neighborTypeLeft,
+                                                                 neighborTypeRight: neighborTypeRight)
+        let fullSpaceOutsideBoxStandard = getFullSpaceOutsideBox(orientation: orientation,
+                                                                 squeeze: .standard,
+                                                                 scheme: scheme,
+                                                                 neighborTypeLeft: neighborTypeLeft,
+                                                                 neighborTypeRight: neighborTypeRight)
+        let fullSpaceOutsideBoxRelaxed = getFullSpaceOutsideBox(orientation: orientation,
+                                                                squeeze: .relaxed,
+                                                                scheme: scheme,
+                                                                neighborTypeLeft: neighborTypeLeft,
+                                                                neighborTypeRight: neighborTypeRight)
         
         let heroWidthLong = getHeroWidthLong(orientation: orientation,
                                              nameLabelWidth: nameLabelWidthLong,
                                              iconPack: iconPackMain)
         let heroWidthStackedLarge = getHeroWidthStacked(orientation: orientation,
-                                                             nameLabelWidth: nameLabelWidthStackedLarge,
-                                                             numberOfLines: numberOfLines,
-                                                             iconPack: iconPackMain)
+                                                        nameLabelWidth: nameLabelWidthStackedLarge,
+                                                        numberOfLines: numberOfLines,
+                                                        iconPack: iconPackMain)
         let heroWidthStackedMedium = getHeroWidthStacked(orientation: orientation,
-                                                               nameLabelWidth: nameLabelWidthStackedMedium,
-                                                               numberOfLines: numberOfLines,
-                                                               iconPack: iconPackMain)
+                                                         nameLabelWidth: nameLabelWidthStackedMedium,
+                                                         numberOfLines: numberOfLines,
+                                                         iconPack: iconPackMain)
         let heroWidthStackedSmall = getHeroWidthStacked(orientation: orientation,
-                                                             nameLabelWidth: nameLabelWidthStackedSmall,
-                                                             numberOfLines: numberOfLines,
-                                                             iconPack: iconPackMain)
+                                                        nameLabelWidth: nameLabelWidthStackedSmall,
+                                                        numberOfLines: numberOfLines,
+                                                        iconPack: iconPackMain)
         
         let fullSpaceHeroLongSqueezed = getFullSpaceHeroLong(heroWidth: heroWidthLong, orientation: orientation, squeeze: .squeezed, scheme: scheme)
         let fullSpaceHeroLongStandard = getFullSpaceHeroLong(heroWidth: heroWidthLong, orientation: orientation, squeeze: .standard, scheme: scheme)
@@ -236,42 +218,42 @@ extension ToolInterfaceViewModel {
         
         
         let fullSpaceValueMediumSqueezed = getFullSpaceValue(valueLabelWidth: valueLabelWidthMedium, orientation: orientation, squeeze: .squeezed, scheme: scheme)
-                let fullSpaceValueMediumStandard = getFullSpaceValue(valueLabelWidth: valueLabelWidthMedium, orientation: orientation, squeeze: .standard, scheme: scheme)
-                let fullSpaceValueMediumRelaxed = getFullSpaceValue(valueLabelWidth: valueLabelWidthMedium, orientation: orientation, squeeze: .relaxed, scheme: scheme)
+        let fullSpaceValueMediumStandard = getFullSpaceValue(valueLabelWidth: valueLabelWidthMedium, orientation: orientation, squeeze: .standard, scheme: scheme)
+        let fullSpaceValueMediumRelaxed = getFullSpaceValue(valueLabelWidth: valueLabelWidthMedium, orientation: orientation, squeeze: .relaxed, scheme: scheme)
         
         
         let fullSpaceValueSmallSqueezed = getFullSpaceValue(valueLabelWidth: valueLabelWidthSmall, orientation: orientation, squeeze: .squeezed, scheme: scheme)
-                let fullSpaceValueSmallStandard = getFullSpaceValue(valueLabelWidth: valueLabelWidthSmall, orientation: orientation, squeeze: .standard, scheme: scheme)
-                let fullSpaceValueSmallRelaxed = getFullSpaceValue(valueLabelWidth: valueLabelWidthSmall, orientation: orientation, squeeze: .relaxed, scheme: scheme)
-
+        let fullSpaceValueSmallStandard = getFullSpaceValue(valueLabelWidth: valueLabelWidthSmall, orientation: orientation, squeeze: .standard, scheme: scheme)
+        let fullSpaceValueSmallRelaxed = getFullSpaceValue(valueLabelWidth: valueLabelWidthSmall, orientation: orientation, squeeze: .relaxed, scheme: scheme)
+        
         let slaveWidth = getSlaveWidth(orientation: orientation,
                                        iconPack: iconPackSecondary)
-
+        
         let fullSpaceSlaveSqueezed = getFullSpaceSlave(slaveWidth: slaveWidth, orientation: orientation, squeeze: .squeezed, scheme: scheme)
         let fullSpaceSlaveStandard = getFullSpaceSlave(slaveWidth: slaveWidth, orientation: orientation, squeeze: .standard, scheme: scheme)
         let fullSpaceSlaveRelaxed = getFullSpaceSlave(slaveWidth: slaveWidth, orientation: orientation, squeeze: .relaxed, scheme: scheme)
         
         let accentWidth = getAccentWidth(orientation: orientation,
-                                       iconPack: iconPackTertiary)
-
+                                         iconPack: iconPackTertiary)
+        
         let fullSpaceAccentSqueezed = getFullSpaceAccent(accentWidth: accentWidth, orientation: orientation, squeeze: .squeezed, scheme: scheme)
         let fullSpaceAccentStandard = getFullSpaceAccent(accentWidth: accentWidth, orientation: orientation, squeeze: .standard, scheme: scheme)
         let fullSpaceAccentRelaxed = getFullSpaceAccent(accentWidth: accentWidth, orientation: orientation, squeeze: .relaxed, scheme: scheme)
         
-        let squeezedWidthLong = fullSpaceOutsideBoxLongSqueezed + fullSpaceHeroLongSqueezed + fullSpaceValueLargeSqueezed + fullSpaceSlaveSqueezed + fullSpaceAccentSqueezed
-        let squeezedWidthStackedLarge = fullSpaceOutsideBoxStackedSqueezed + fullSpaceHeroStackedLargeSqueezed + fullSpaceValueLargeSqueezed + fullSpaceSlaveSqueezed + fullSpaceAccentSqueezed
-        let squeezedWidthStackedMedium = fullSpaceOutsideBoxStackedSqueezed + fullSpaceHeroStackedMediumSqueezed + fullSpaceValueMediumSqueezed + fullSpaceSlaveSqueezed + fullSpaceAccentSqueezed
-        let squeezedWidthStackedSmall = fullSpaceOutsideBoxStackedSqueezed + fullSpaceHeroStackedSmallSqueezed + fullSpaceValueSmallSqueezed + fullSpaceSlaveSqueezed + fullSpaceAccentSqueezed
+        let squeezedWidthLong = fullSpaceOutsideBoxSqueezed + fullSpaceHeroLongSqueezed + fullSpaceValueLargeSqueezed + fullSpaceSlaveSqueezed + fullSpaceAccentSqueezed
+        let squeezedWidthStackedLarge = fullSpaceOutsideBoxSqueezed + fullSpaceHeroStackedLargeSqueezed + fullSpaceValueLargeSqueezed + fullSpaceSlaveSqueezed + fullSpaceAccentSqueezed
+        let squeezedWidthStackedMedium = fullSpaceOutsideBoxSqueezed + fullSpaceHeroStackedMediumSqueezed + fullSpaceValueMediumSqueezed + fullSpaceSlaveSqueezed + fullSpaceAccentSqueezed
+        let squeezedWidthStackedSmall = fullSpaceOutsideBoxSqueezed + fullSpaceHeroStackedSmallSqueezed + fullSpaceValueSmallSqueezed + fullSpaceSlaveSqueezed + fullSpaceAccentSqueezed
         
-        let standardWidthLong = fullSpaceOutsideBoxLongStandard + fullSpaceHeroLongStandard + fullSpaceValueLargeStandard + fullSpaceSlaveStandard + fullSpaceAccentStandard
-        let standardWidthStackedLarge = fullSpaceOutsideBoxStackedStandard + fullSpaceHeroStackedLargeStandard + fullSpaceValueLargeStandard + fullSpaceSlaveStandard + fullSpaceAccentStandard
-        let standardWidthStackedMedium = fullSpaceOutsideBoxStackedStandard + fullSpaceHeroStackedMediumStandard + fullSpaceValueMediumStandard + fullSpaceSlaveStandard + fullSpaceAccentStandard
-        let standardWidthStackedSmall = fullSpaceOutsideBoxStackedStandard + fullSpaceHeroStackedSmallStandard + fullSpaceValueSmallStandard + fullSpaceSlaveStandard + fullSpaceAccentStandard
+        let standardWidthLong = fullSpaceOutsideBoxStandard + fullSpaceHeroLongStandard + fullSpaceValueLargeStandard + fullSpaceSlaveStandard + fullSpaceAccentStandard
+        let standardWidthStackedLarge = fullSpaceOutsideBoxStandard + fullSpaceHeroStackedLargeStandard + fullSpaceValueLargeStandard + fullSpaceSlaveStandard + fullSpaceAccentStandard
+        let standardWidthStackedMedium = fullSpaceOutsideBoxStandard + fullSpaceHeroStackedMediumStandard + fullSpaceValueMediumStandard + fullSpaceSlaveStandard + fullSpaceAccentStandard
+        let standardWidthStackedSmall = fullSpaceOutsideBoxStandard + fullSpaceHeroStackedSmallStandard + fullSpaceValueSmallStandard + fullSpaceSlaveStandard + fullSpaceAccentStandard
         
-        let relaxedWidthLong = fullSpaceOutsideBoxLongRelaxed + fullSpaceHeroLongRelaxed + fullSpaceValueLargeRelaxed + fullSpaceSlaveRelaxed + fullSpaceAccentRelaxed
-        let relaxedWidthStackedLarge = fullSpaceOutsideBoxStackedRelaxed + fullSpaceHeroStackedLargeRelaxed + fullSpaceValueLargeRelaxed + fullSpaceSlaveRelaxed + fullSpaceAccentRelaxed
-        let relaxedWidthStackedMedium = fullSpaceOutsideBoxStackedRelaxed + fullSpaceHeroStackedMediumRelaxed + fullSpaceValueMediumRelaxed + fullSpaceSlaveRelaxed + fullSpaceAccentRelaxed
-        let relaxedWidthStackedSmall = fullSpaceOutsideBoxStackedRelaxed + fullSpaceHeroStackedSmallRelaxed + fullSpaceValueSmallRelaxed + fullSpaceSlaveRelaxed + fullSpaceAccentRelaxed
+        let relaxedWidthLong = fullSpaceOutsideBoxRelaxed + fullSpaceHeroLongRelaxed + fullSpaceValueLargeRelaxed + fullSpaceSlaveRelaxed + fullSpaceAccentRelaxed
+        let relaxedWidthStackedLarge = fullSpaceOutsideBoxRelaxed + fullSpaceHeroStackedLargeRelaxed + fullSpaceValueLargeRelaxed + fullSpaceSlaveRelaxed + fullSpaceAccentRelaxed
+        let relaxedWidthStackedMedium = fullSpaceOutsideBoxRelaxed + fullSpaceHeroStackedMediumRelaxed + fullSpaceValueMediumRelaxed + fullSpaceSlaveRelaxed + fullSpaceAccentRelaxed
+        let relaxedWidthStackedSmall = fullSpaceOutsideBoxRelaxed + fullSpaceHeroStackedSmallRelaxed + fullSpaceValueSmallRelaxed + fullSpaceSlaveRelaxed + fullSpaceAccentRelaxed
         
         return FlexConvertibleData(squeezedWidthLong: squeezedWidthLong + extraWidthSqueezed,
                                    standardWidthLong: standardWidthLong + extraWidthStandard,
@@ -285,7 +267,7 @@ extension ToolInterfaceViewModel {
                                    squeezedWidthStackedSmall: squeezedWidthStackedSmall + extraWidthSqueezed,
                                    standardWidthStackedSmall: standardWidthStackedSmall + extraWidthStandard,
                                    relaxedWidthStackedSmall: relaxedWidthStackedSmall + extraWidthRelaxed)
-    
+        
     }
     
     static func getLongFlex(orientation: Orientation,
@@ -306,21 +288,21 @@ extension ToolInterfaceViewModel {
                             extraWidthStandard: Int,
                             extraWidthRelaxed: Int) -> FlexLongData {
         
-        let fullSpaceOutsideBoxSqueezed = getFullSpaceOutsideBoxLong(orientation: orientation,
-                                                                     squeeze: .squeezed,
-                                                                     scheme: scheme,
-                                                                     neighborTypeLeft: neighborTypeLeft,
-                                                                     neighborTypeRight: neighborTypeRight)
-        let fullSpaceOutsideBoxStandard = getFullSpaceOutsideBoxLong(orientation: orientation,
-                                                                     squeeze: .standard,
-                                                                     scheme: scheme,
-                                                                     neighborTypeLeft: neighborTypeLeft,
-                                                                     neighborTypeRight: neighborTypeRight)
-        let fullSpaceOutsideBoxRelaxed = getFullSpaceOutsideBoxLong(orientation: orientation,
-                                                                    squeeze: .relaxed,
-                                                                    scheme: scheme,
-                                                                    neighborTypeLeft: neighborTypeLeft,
-                                                                    neighborTypeRight: neighborTypeRight)
+        let fullSpaceOutsideBoxSqueezed = getFullSpaceOutsideBox(orientation: orientation,
+                                                                 squeeze: .squeezed,
+                                                                 scheme: scheme,
+                                                                 neighborTypeLeft: neighborTypeLeft,
+                                                                 neighborTypeRight: neighborTypeRight)
+        let fullSpaceOutsideBoxStandard = getFullSpaceOutsideBox(orientation: orientation,
+                                                                 squeeze: .standard,
+                                                                 scheme: scheme,
+                                                                 neighborTypeLeft: neighborTypeLeft,
+                                                                 neighborTypeRight: neighborTypeRight)
+        let fullSpaceOutsideBoxRelaxed = getFullSpaceOutsideBox(orientation: orientation,
+                                                                squeeze: .relaxed,
+                                                                scheme: scheme,
+                                                                neighborTypeLeft: neighborTypeLeft,
+                                                                neighborTypeRight: neighborTypeRight)
         
         
         let heroWidthLarge = getHeroWidthLong(orientation: orientation,
@@ -347,14 +329,14 @@ extension ToolInterfaceViewModel {
         
         let slaveWidth = getSlaveWidth(orientation: orientation,
                                        iconPack: iconPackSecondary)
-
+        
         let fullSpaceSlaveSqueezed = getFullSpaceSlave(slaveWidth: slaveWidth, orientation: orientation, squeeze: .squeezed, scheme: scheme)
         let fullSpaceSlaveStandard = getFullSpaceSlave(slaveWidth: slaveWidth, orientation: orientation, squeeze: .standard, scheme: scheme)
         let fullSpaceSlaveRelaxed = getFullSpaceSlave(slaveWidth: slaveWidth, orientation: orientation, squeeze: .relaxed, scheme: scheme)
         
         let accentWidth = getAccentWidth(orientation: orientation,
-                                       iconPack: iconPackTertiary)
-
+                                         iconPack: iconPackTertiary)
+        
         let fullSpaceAccentSqueezed = getFullSpaceAccent(accentWidth: accentWidth, orientation: orientation, squeeze: .squeezed, scheme: scheme)
         let fullSpaceAccentStandard = getFullSpaceAccent(accentWidth: accentWidth, orientation: orientation, squeeze: .standard, scheme: scheme)
         let fullSpaceAccentRelaxed = getFullSpaceAccent(accentWidth: accentWidth, orientation: orientation, squeeze: .relaxed, scheme: scheme)
@@ -398,37 +380,21 @@ extension ToolInterfaceViewModel {
                                           attemptEqualWidthsForAllButtons: Bool,
                                           infoList: [SEGMENT_FLEX_INFO_CONVERTIBLE]) -> FlexConvertibleData {
         
-        let fullSpaceOutsideBoxLongSqueezed = getFullSpaceOutsideBoxLong(orientation: orientation,
-                                                                         squeeze: .squeezed,
-                                                                         scheme: scheme,
-                                                                         neighborTypeLeft: neighborTypeLeft,
-                                                                         neighborTypeRight: neighborTypeRight)
-        let fullSpaceOutsideBoxLongStandard = getFullSpaceOutsideBoxLong(orientation: orientation,
-                                                                         squeeze: .standard,
-                                                                         scheme: scheme,
-                                                                         neighborTypeLeft: neighborTypeLeft,
-                                                                         neighborTypeRight: neighborTypeRight)
-        let fullSpaceOutsideBoxLongRelaxed = getFullSpaceOutsideBoxLong(orientation: orientation,
-                                                                        squeeze: .relaxed,
-                                                                        scheme: scheme,
-                                                                        neighborTypeLeft: neighborTypeLeft,
-                                                                        neighborTypeRight: neighborTypeRight)
-        
-        let fullSpaceOutsideBoxStackedSqueezed = getFullSpaceOutsideBoxStacked(orientation: orientation,
-                                                                               squeeze: .squeezed,
-                                                                               scheme: scheme,
-                                                                               neighborTypeLeft: neighborTypeLeft,
-                                                                               neighborTypeRight: neighborTypeRight)
-        let fullSpaceOutsideBoxStackedStandard = getFullSpaceOutsideBoxStacked(orientation: orientation,
-                                                                               squeeze: .standard,
-                                                                               scheme: scheme,
-                                                                               neighborTypeLeft: neighborTypeLeft,
-                                                                               neighborTypeRight: neighborTypeRight)
-        let fullSpaceOutsideBoxStackedRelaxed = getFullSpaceOutsideBoxStacked(orientation: orientation,
-                                                                              squeeze: .relaxed,
-                                                                              scheme: scheme,
-                                                                              neighborTypeLeft: neighborTypeLeft,
-                                                                              neighborTypeRight: neighborTypeRight)
+        let fullSpaceOutsideBoxSqueezed = getFullSpaceOutsideBox(orientation: orientation,
+                                                                 squeeze: .squeezed,
+                                                                 scheme: scheme,
+                                                                 neighborTypeLeft: neighborTypeLeft,
+                                                                 neighborTypeRight: neighborTypeRight)
+        let fullSpaceOutsideBoxStandard = getFullSpaceOutsideBox(orientation: orientation,
+                                                                 squeeze: .standard,
+                                                                 scheme: scheme,
+                                                                 neighborTypeLeft: neighborTypeLeft,
+                                                                 neighborTypeRight: neighborTypeRight)
+        let fullSpaceOutsideBoxRelaxed = getFullSpaceOutsideBox(orientation: orientation,
+                                                                squeeze: .relaxed,
+                                                                scheme: scheme,
+                                                                neighborTypeLeft: neighborTypeLeft,
+                                                                neighborTypeRight: neighborTypeRight)
         
         var infoWidthListLongSqueezed = [Int](repeating: 0, count: infoList.count)
         var infoWidthListStackedLargeSqueezed = [Int](repeating: 0, count: infoList.count)
@@ -452,17 +418,17 @@ extension ToolInterfaceViewModel {
                                                  nameLabelWidth: info.nameLabelWidthLong,
                                                  iconPack: info.iconPackMain)
             let heroWidthStackedLarge = getHeroWidthStacked(orientation: orientation,
-                                                                 nameLabelWidth: info.nameLabelWidthStackedLarge,
-                                                                 numberOfLines: info.numberOfLines,
-                                                                 iconPack: info.iconPackMain)
+                                                            nameLabelWidth: info.nameLabelWidthStackedLarge,
+                                                            numberOfLines: info.numberOfLines,
+                                                            iconPack: info.iconPackMain)
             let heroWidthStackedMedium = getHeroWidthStacked(orientation: orientation,
-                                                                   nameLabelWidth: info.nameLabelWidthStackedMedium,
-                                                                   numberOfLines: info.numberOfLines,
-                                                                   iconPack: info.iconPackMain)
+                                                             nameLabelWidth: info.nameLabelWidthStackedMedium,
+                                                             numberOfLines: info.numberOfLines,
+                                                             iconPack: info.iconPackMain)
             let heroWidthStackedSmall = getHeroWidthStacked(orientation: orientation,
-                                                                 nameLabelWidth: info.nameLabelWidthStackedSmall,
-                                                                 numberOfLines: info.numberOfLines,
-                                                                 iconPack: info.iconPackMain) + 10 // TODO: Don't forget this
+                                                            nameLabelWidth: info.nameLabelWidthStackedSmall,
+                                                            numberOfLines: info.numberOfLines,
+                                                            iconPack: info.iconPackMain) + 10 // TODO: Don't forget this
             
             let fullSpaceHeroLongSqueezed = getFullSpaceHeroLong(heroWidth: heroWidthLong, orientation: orientation, squeeze: .squeezed, scheme: scheme)
             let fullSpaceHeroLongStandard = getFullSpaceHeroLong(heroWidth: heroWidthLong, orientation: orientation, squeeze: .standard, scheme: scheme)
@@ -482,15 +448,15 @@ extension ToolInterfaceViewModel {
             
             let slaveWidth = getSlaveWidth(orientation: orientation,
                                            iconPack: info.iconPackSecondary)
-
+            
             let fullSpaceSlaveSqueezed = getFullSpaceSlave(slaveWidth: slaveWidth, orientation: orientation, squeeze: .squeezed, scheme: scheme)
             let fullSpaceSlaveStandard = getFullSpaceSlave(slaveWidth: slaveWidth, orientation: orientation, squeeze: .standard, scheme: scheme)
             let fullSpaceSlaveRelaxed = getFullSpaceSlave(slaveWidth: slaveWidth, orientation: orientation, squeeze: .relaxed, scheme: scheme)
             
             
             let accentWidth = getAccentWidth(orientation: orientation,
-                                           iconPack: info.iconPackTertiary)
-
+                                             iconPack: info.iconPackTertiary)
+            
             let fullSpaceAccentSqueezed = getFullSpaceAccent(accentWidth: accentWidth, orientation: orientation, squeeze: .squeezed, scheme: scheme)
             let fullSpaceAccentStandard = getFullSpaceAccent(accentWidth: accentWidth, orientation: orientation, squeeze: .standard, scheme: scheme)
             let fullSpaceAccentRelaxed = getFullSpaceAccent(accentWidth: accentWidth, orientation: orientation, squeeze: .relaxed, scheme: scheme)
@@ -512,20 +478,20 @@ extension ToolInterfaceViewModel {
             
         }
         
-        var totalSqueezedWidthLong = fullSpaceOutsideBoxLongSqueezed
-        var totalSqueezedWidthStackedLarge = fullSpaceOutsideBoxStackedSqueezed
-        var totalSqueezedWidthStackedMedium = fullSpaceOutsideBoxStackedSqueezed
-        var totalSqueezedWidthStackedSmall = fullSpaceOutsideBoxStackedSqueezed
+        var totalSqueezedWidthLong = fullSpaceOutsideBoxSqueezed
+        var totalSqueezedWidthStackedLarge = fullSpaceOutsideBoxSqueezed
+        var totalSqueezedWidthStackedMedium = fullSpaceOutsideBoxSqueezed
+        var totalSqueezedWidthStackedSmall = fullSpaceOutsideBoxSqueezed
         
-        var totalStandardWidthLong = fullSpaceOutsideBoxLongStandard
-        var totalStandardWidthStackedLarge = fullSpaceOutsideBoxStackedStandard
-        var totalStandardWidthStackedMedium = fullSpaceOutsideBoxStackedStandard
-        var totalStandardWidthStackedSmall = fullSpaceOutsideBoxStackedStandard
+        var totalStandardWidthLong = fullSpaceOutsideBoxStandard
+        var totalStandardWidthStackedLarge = fullSpaceOutsideBoxStandard
+        var totalStandardWidthStackedMedium = fullSpaceOutsideBoxStandard
+        var totalStandardWidthStackedSmall = fullSpaceOutsideBoxStandard
         
-        var totalRelaxedWidthLong = fullSpaceOutsideBoxLongRelaxed
-        var totalRelaxedWidthStackedLarge = fullSpaceOutsideBoxStackedRelaxed
-        var totalRelaxedWidthStackedMedium = fullSpaceOutsideBoxStackedRelaxed
-        var totalRelaxedWidthStackedSmall = fullSpaceOutsideBoxStackedRelaxed
+        var totalRelaxedWidthLong = fullSpaceOutsideBoxRelaxed
+        var totalRelaxedWidthStackedLarge = fullSpaceOutsideBoxRelaxed
+        var totalRelaxedWidthStackedMedium = fullSpaceOutsideBoxRelaxed
+        var totalRelaxedWidthStackedSmall = fullSpaceOutsideBoxRelaxed
         
         if attemptEqualWidthsForAllButtons {
             
@@ -599,21 +565,21 @@ extension ToolInterfaceViewModel {
                                    attemptEqualWidthsForAllButtons: Bool,
                                    infoList: [SEGMENT_FLEX_INFO_LONG]) -> FlexLongData {
         
-        let fullSpaceOutsideBoxSqueezed = getFullSpaceOutsideBoxLong(orientation: orientation,
-                                                                     squeeze: .squeezed,
-                                                                     scheme: scheme,
-                                                                     neighborTypeLeft: neighborTypeLeft,
-                                                                     neighborTypeRight: neighborTypeRight)
-        let fullSpaceOutsideBoxStandard = getFullSpaceOutsideBoxLong(orientation: orientation,
-                                                                     squeeze: .standard,
-                                                                     scheme: scheme,
-                                                                     neighborTypeLeft: neighborTypeLeft,
-                                                                     neighborTypeRight: neighborTypeRight)
-        let fullSpaceOutsideBoxRelaxed = getFullSpaceOutsideBoxLong(orientation: orientation,
-                                                                    squeeze: .relaxed,
-                                                                    scheme: scheme,
-                                                                    neighborTypeLeft: neighborTypeLeft,
-                                                                    neighborTypeRight: neighborTypeRight)
+        let fullSpaceOutsideBoxSqueezed = getFullSpaceOutsideBox(orientation: orientation,
+                                                                 squeeze: .squeezed,
+                                                                 scheme: scheme,
+                                                                 neighborTypeLeft: neighborTypeLeft,
+                                                                 neighborTypeRight: neighborTypeRight)
+        let fullSpaceOutsideBoxStandard = getFullSpaceOutsideBox(orientation: orientation,
+                                                                 squeeze: .standard,
+                                                                 scheme: scheme,
+                                                                 neighborTypeLeft: neighborTypeLeft,
+                                                                 neighborTypeRight: neighborTypeRight)
+        let fullSpaceOutsideBoxRelaxed = getFullSpaceOutsideBox(orientation: orientation,
+                                                                squeeze: .relaxed,
+                                                                scheme: scheme,
+                                                                neighborTypeLeft: neighborTypeLeft,
+                                                                neighborTypeRight: neighborTypeRight)
         
         var infoWidthListLargeSqueezed = [Int](repeating: 0, count: infoList.count)
         var infoWidthListMediumSqueezed = [Int](repeating: 0, count: infoList.count)
@@ -654,14 +620,14 @@ extension ToolInterfaceViewModel {
             
             let slaveWidth = getSlaveWidth(orientation: orientation,
                                            iconPack: info.iconPackSecondary)
-
+            
             let fullSpaceSlaveSqueezed = getFullSpaceSlave(slaveWidth: slaveWidth, orientation: orientation, squeeze: .squeezed, scheme: scheme)
             let fullSpaceSlaveStandard = getFullSpaceSlave(slaveWidth: slaveWidth, orientation: orientation, squeeze: .standard, scheme: scheme)
             let fullSpaceSlaveRelaxed = getFullSpaceSlave(slaveWidth: slaveWidth, orientation: orientation, squeeze: .relaxed, scheme: scheme)
             
             let accentWidth = getAccentWidth(orientation: orientation,
-                                           iconPack: info.iconPackTertiary)
-
+                                             iconPack: info.iconPackTertiary)
+            
             let fullSpaceAccentSqueezed = getFullSpaceAccent(accentWidth: accentWidth, orientation: orientation, squeeze: .squeezed, scheme: scheme)
             let fullSpaceAccentStandard = getFullSpaceAccent(accentWidth: accentWidth, orientation: orientation, squeeze: .standard, scheme: scheme)
             let fullSpaceAccentRelaxed = getFullSpaceAccent(accentWidth: accentWidth, orientation: orientation, squeeze: .relaxed, scheme: scheme)

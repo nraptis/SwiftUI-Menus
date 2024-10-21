@@ -9,9 +9,9 @@ import Foundation
 import UIKit
 import Combine
 
-//[View Models - SexyButton]
+//[View Models - Button]
 //[SwiftUI - CreateSwatch]
-//[Elements - SexyButton]
+//[Elements - Button]
 
 class ToolRow {
     
@@ -972,7 +972,7 @@ class ToolRow {
         for node in nodes {
             let layoutNode = LayoutNode()
             switch node.flex {
-            case .sexyStepper(let flexConvertibleData):
+            case .stepper(let flexConvertibleData):
                 if isStepperLong {
                     layoutNode.width = flexConvertibleData.squeezedWidthLong
                     layoutNode.layoutWidthHigh = flexConvertibleData.standardWidthLong
@@ -1145,7 +1145,7 @@ class ToolRow {
                         layoutNode.layoutWidthLow = flexConvertibleData.relaxedWidthStackedLarge
                     }
                 }
-            case .sexyCheckBox(let flexConvertibleData):
+            case .checkBox(let flexConvertibleData):
                 if isCheckBoxLong {
                     layoutNode.width = flexConvertibleData.squeezedWidthLong
                     layoutNode.layoutWidthHigh = flexConvertibleData.standardWidthLong
@@ -1172,7 +1172,7 @@ class ToolRow {
                         layoutNode.layoutWidthLow = flexConvertibleData.relaxedWidthStackedLarge
                     }
                 }
-            case .sexyButton(let flexConvertibleData):
+            case .button(let flexConvertibleData):
                 if isButtonLong {
                     layoutNode.width = flexConvertibleData.squeezedWidthLong
                     layoutNode.layoutWidthHigh = flexConvertibleData.standardWidthLong

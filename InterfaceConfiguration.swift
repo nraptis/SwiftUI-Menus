@@ -91,6 +91,7 @@ protocol InterfaceConfigurationConforming {
     var isAnimationLoopsEnabled: Bool { get set }
     var isAnimationContinuousEnabled: Bool { get set }
     var isTimeLineEnabled: Bool { get set }
+    var isTimeLinePage2Enabled: Bool { get set }
     
     var documentMode: DocumentMode { get set }
     var editMode: EditMode { get set }
@@ -117,7 +118,7 @@ extension InterfaceConfigurationConforming {
     
     var displayMode: DisplayMode {
         switch documentMode {
-        case .__EDIT:
+        case .edit:
             if isGuidesEnabled {
                 if isGraphEnabled {
                     return .swivel
@@ -127,13 +128,55 @@ extension InterfaceConfigurationConforming {
             } else {
                 return .regular
             }
-        case .__VIEW:
+        case .view:
             return .regular
         }
     }
     
     static func getMeshCommandRequired(previousConfiguration: any InterfaceConfigurationConforming,
                                        currentConfiguration: any InterfaceConfigurationConforming) -> Bool {
+        
+        // Switching move-guide-center...
+        switch previousConfiguration.creatorMode {
+        case .moveGuideCenter:
+            switch currentConfiguration.creatorMode {
+            case .moveGuideCenter:
+                break
+            default:
+                return true
+            }
+        default:
+            switch currentConfiguration.creatorMode {
+            case .moveGuideCenter:
+                return true
+            default:
+                break
+            }
+        }
+        
+        // Switching move-jiggle-center...
+        switch previousConfiguration.creatorMode {
+        case .moveJiggleCenter:
+            switch currentConfiguration.creatorMode {
+            case .moveJiggleCenter:
+                break
+            default:
+                return true
+            }
+        default:
+            switch currentConfiguration.creatorMode {
+            case .moveJiggleCenter:
+                return true
+            default:
+                break
+            }
+        }
+        
+        // This is mostly for weight centers-to-not weight centers, which can happen in many ways...
+        // (See Above)
+        //if previousConfiguration.creatorMode != currentConfiguration.creatorMode {
+        //    return true
+        //}
         
         let previousMeshType = JiggleMeshCommand.getMeshTypeForced(documentMode: previousConfiguration.documentMode,
                                                                    
@@ -221,7 +264,7 @@ extension InterfaceConfigurationConforming {
                 } else {
                     
                     switch currentConfiguration.documentMode {
-                    case .__VIEW:
+                    case .view:
                         
                         
                         
@@ -232,7 +275,12 @@ extension InterfaceConfigurationConforming {
                             if currentConfiguration.isAnimationLoopsEnabled {
                                 if currentConfiguration.isTimeLineEnabled != previousConfiguration.isTimeLineEnabled {
                                     isRowsAnimationActive = true
+                                } else if currentConfiguration.isTimeLineEnabled {
+                                    if currentConfiguration.isTimeLinePage2Enabled != previousConfiguration.isTimeLinePage2Enabled {
+                                        isRowsAnimationActive = true
+                                    }
                                 }
+                                
                                 if currentConfiguration.animationLoopsPage != previousConfiguration.animationLoopsPage {
                                     isRowsAnimationActive = true
                                 }
@@ -241,7 +289,7 @@ extension InterfaceConfigurationConforming {
                                 isRowsAnimationActive = true
                             }
                         }
-                    case .__EDIT:
+                    case .edit:
                         if currentConfiguration.editMode != previousConfiguration.editMode {
                             isRowsAnimationActive = true
                         } else {
@@ -782,7 +830,7 @@ extension InterfaceConfigurationConforming {
         }
         
         switch documentMode {
-        case .__VIEW:
+        case .view:
             isGraphEnabled = false
             isGuidesEnabled = false
             if isAnimationLoopsEnabled {
@@ -790,7 +838,7 @@ extension InterfaceConfigurationConforming {
             } else {
                 isTimeLineEnabled = false
             }
-        case .__EDIT:
+        case .edit:
             if isGuidesEnabled == false {
                 isGraphEnabled = false
             }
@@ -865,7 +913,16 @@ extension InterfaceConfigurationConforming {
                 if configuration.isAnimationLoopsEnabled {
                     if isTimeLineEnabled {
                         if configuration.isTimeLineEnabled {
-                            return false
+                            
+                            if isTimeLinePage2Enabled {
+                                if configuration.isTimeLinePage2Enabled {
+                                    return false
+                                } else {
+                                    return true
+                                }
+                            } else {
+                                return false
+                            }
                         } else {
                             return true
                         }
@@ -873,7 +930,10 @@ extension InterfaceConfigurationConforming {
                         return false
                     } else {
                         
-                        if animationLoopsPage > configuration.animationLoopsPage {
+                        if animationLoopsPage >= 3 && configuration.animationLoopsPage <= 1 {
+                            // Loop from 3 to 1...
+                            return false
+                        } else if animationLoopsPage > configuration.animationLoopsPage {
                             return true
                         } else {
                             return false
@@ -944,9 +1004,10 @@ struct InterfaceConfigurationPad: InterfaceConfigurationConforming {
     var isAnimationLoopsEnabled = false
     var isAnimationContinuousEnabled = false
     var isTimeLineEnabled = false
+    var isTimeLinePage2Enabled = false
     var animationLoopsPage = 0
     
-    var documentMode = DocumentMode.__EDIT
+    var documentMode = DocumentMode.edit
     var editMode = EditMode.jiggles
     var weightMode = WeightMode.affine
     var creatorMode = CreatorMode.none
@@ -990,9 +1051,10 @@ struct InterfaceConfigurationPhone: InterfaceConfigurationConforming {
     var isAnimationLoopsEnabled = false
     var isAnimationContinuousEnabled = false
     var isTimeLineEnabled = false
+    var isTimeLinePage2Enabled = false
     var animationLoopsPage = 0
     
-    var documentMode = DocumentMode.__EDIT
+    var documentMode = DocumentMode.edit
     var editMode = EditMode.jiggles
     var weightMode = WeightMode.affine
     var creatorMode = CreatorMode.none
@@ -1025,40 +1087,40 @@ extension InterfaceConfigurationConforming {
     
     var isView: Bool {
         switch documentMode {
-        case .__VIEW:
+        case .view:
             return true
-        case .__EDIT:
+        case .edit:
             return false
         }
     }
     
     var isEdit: Bool {
         switch documentMode {
-        case .__VIEW:
+        case .view:
             return false
-        case .__EDIT:
+        case .edit:
             return true
         }
     }
     
     var isAnimationLoops: Bool {
         switch documentMode {
-        case .__VIEW:
+        case .view:
             if isAnimationLoopsEnabled {
                 return true
             } else {
                 return false
             }
-        case .__EDIT:
+        case .edit:
             return false
         }
     }
     
     var isGraph: Bool {
         switch documentMode {
-        case .__VIEW:
+        case .view:
             return false
-        case .__EDIT:
+        case .edit:
             if isGuidesEnabled {
                 if isGraphEnabled {
                     return true
@@ -1073,7 +1135,7 @@ extension InterfaceConfigurationConforming {
     
     var isContinuous: Bool {
         switch documentMode {
-        case .__VIEW:
+        case .view:
             if isAnimationLoopsEnabled {
                 return false
             } else {
@@ -1083,14 +1145,14 @@ extension InterfaceConfigurationConforming {
                     return false
                 }
             }
-        case .__EDIT:
+        case .edit:
             return false
         }
     }
     
     var isTimeLine: Bool {
         switch documentMode {
-        case .__VIEW:
+        case .view:
             if isAnimationLoopsEnabled {
                 if isTimeLineEnabled {
                     return true
@@ -1100,16 +1162,16 @@ extension InterfaceConfigurationConforming {
             } else {
                 return false
             }
-        case .__EDIT:
+        case .edit:
             return false
         }
     }
     
     var isJiggles: Bool {
         switch documentMode {
-        case .__VIEW:
+        case .view:
             return false
-        case .__EDIT:
+        case .edit:
             if isGuidesEnabled {
                 return false
             } else {
@@ -1125,9 +1187,9 @@ extension InterfaceConfigurationConforming {
     
     var isPoints: Bool {
         switch documentMode {
-        case .__VIEW:
+        case .view:
             return false
-        case .__EDIT:
+        case .edit:
             if isGuidesEnabled {
                 return false
             } else {
@@ -1143,9 +1205,9 @@ extension InterfaceConfigurationConforming {
     
     var isGuides: Bool {
         switch documentMode {
-        case .__VIEW:
+        case .view:
             return false
-        case .__EDIT:
+        case .edit:
             if isGuidesEnabled {
                 return true
             } else {

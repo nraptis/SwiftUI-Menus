@@ -1,5 +1,5 @@
 //
-//  MagicalSexyButtonViewModel+TimeLineDupeCurrentChannel.swift
+//  MagicalButtonViewModel+TimeLineDupeCurrentChannel.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 9/17/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-@Observable class MagicalSexyButtonViewModelTimeLineDupeCurrentChannel: MagicalSexyButtonViewModel {
+@Observable class MagicalButtonViewModelTimeLineDupeCurrentChannel: MagicalButtonViewModel {
     
     override func handleClicked() {
         if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel {

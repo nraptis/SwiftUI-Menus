@@ -402,32 +402,23 @@ struct ToolInterfaceTheme {
         return result
     }
     
-    
     static func getTopMenuGraphRowCount(orientation: Orientation) -> Int {
         switch orientation {
         case .landscape:
-            var result = 3
-           
-            return result
+            return 3
         case .portrait:
-            var result = 4
-
-            return result
+            return 4
         }
     }
     
     static func getTopMenuTimeLineRowCount(orientation: Orientation) -> Int {
         switch orientation {
         case .landscape:
-            var result = 4
-            return result
+            return 3
         case .portrait:
-            var result = 5
-            return result
+            return 4
         }
     }
-    
-    
     
     static func getTopMenuShadowHeight(orientation: Orientation) -> Int {
         switch orientation {
@@ -437,7 +428,6 @@ struct ToolInterfaceTheme {
             return 5
         }
     }
-    
     
     static func getBottomMenuStandardRowCount(orientation: Orientation) -> Int {
         switch orientation {

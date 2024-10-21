@@ -9,6 +9,23 @@ import Foundation
 
 struct ToolInterfaceStringLibraryModeChange {
     
+    static func modeTextTimeLinePage2EnterLine1() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_page_2_enter_line_1", table: "ToolInterfaceModeChange")
+    }
+    
+    static func modeTextTimeLinePage2EnterLine2() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_page_2_enter_line_2", table: "ToolInterfaceModeChange")
+    }
+    
+    static func modeTextTimeLinePage2ExitLine1() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_page_2_exit_line_1", table: "ToolInterfaceModeChange")
+    }
+    
+    static func modeTextTimeLinePage2ExitLine2() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_page_2_exit_line_2", table: "ToolInterfaceModeChange")
+    }
+    
+    
     static func modeTextAnimationContinuousEnterLine1() -> String? {
         GeneralStringLibrary.get(localized: "animation_continuous_enter_line_1", table: "ToolInterfaceModeChange")
     }
@@ -166,4 +183,3 @@ struct ToolInterfaceStringLibraryModeChange {
         GeneralStringLibrary.get(localized: "video_export_exit_line_2", table: "ToolInterfaceModeChange")
     }
 }
-

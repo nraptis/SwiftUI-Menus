@@ -29,7 +29,7 @@ import Foundation
         super.handleSlideStarted(percent: percent)
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
             let value = sliderConfiguration.minimumValue + (sliderConfiguration.maximumValue - sliderConfiguration.minimumValue) * Float(percent)
-            jiggleViewModel.notifySliderStartedTimeLineDuration(value: value)
+            jiggleViewModel.notifySliderStartedTimeLineOffset(value: value)
         }
     }
     
@@ -37,7 +37,7 @@ import Foundation
         let value = sliderConfiguration.minimumValue + (sliderConfiguration.maximumValue - sliderConfiguration.minimumValue) * Float(percent)
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
             if let selectedJiggle = jiggleViewModel.getSelectedJiggle() {
-                if jiggleViewModel.isAnimationBounceAppliedToAll {
+                if jiggleViewModel.isAnimationLoopsAppliedToAll {
                     let jiggleDocument = jiggleViewModel.jiggleDocument
                     switch selectedJiggle.timeLine.selectedSwatch.swatch {
                     case .x:
@@ -74,7 +74,7 @@ import Foundation
         let value = sliderConfiguration.minimumValue + (sliderConfiguration.maximumValue - sliderConfiguration.minimumValue) * Float(percent)
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
             if let selectedJiggle = jiggleViewModel.getSelectedJiggle() {
-                if jiggleViewModel.isAnimationBounceAppliedToAll {
+                if jiggleViewModel.isAnimationLoopsAppliedToAll {
                     let jiggleDocument = jiggleViewModel.jiggleDocument
                     switch selectedJiggle.timeLine.selectedSwatch.swatch {
                     case .x:
@@ -102,7 +102,7 @@ import Foundation
                     selectedJiggle.timeLine.selectedSwatch.timeOffset = value
                 }
             }
-            jiggleViewModel.notifySliderFinishedTimeLineDuration(value: value)
+            jiggleViewModel.notifySliderFinishedTimeLineOffset(value: value)
         }
     }
     

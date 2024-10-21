@@ -13,33 +13,61 @@ import Foundation
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
             switch jiggleViewModel.jiggleDocument.creatorMode {
             case .addGuidePoint:
-                if segmentButtonViewModels.count > 0 {
-                    activeButtonViewModel = segmentButtonViewModels[0]
-                    refreshEnabled()
-                }
+                setActiveButton(0)
+                refreshEnabledAllButtons()
             case .removeGuidePoint:
-                if segmentButtonViewModels.count > 1 {
-                    activeButtonViewModel = segmentButtonViewModels[1]
-                    refreshEnabled()
-                }
+                setActiveButton(1)
+                refreshEnabledAllButtons()
+            case .moveGuideCenter:
+                setActiveButton(2)
+                refreshEnabledAllButtons()
             case .none:
                 activeButtonViewModel = nil
-                refreshDisableIfNoGuideSelectedOtherwiseEnable()
+                
+                let jiggleDocument = jiggleViewModel.jiggleDocument
+                let unfrozenJiggleCount = jiggleDocument.countUnfrozenJiggles()
+                let unfrozenGuideCount = jiggleDocument.countUnfrozenGuides()
+                
+                if jiggleDocument.getSelectedGuide() !== nil {
+                    refreshEnabledButton(at: 0)
+                } else {
+                    refreshDisabledButton(at: 0)
+                }
+                
+                if unfrozenGuideCount > 0 {
+                    refreshEnabledButton(at: 1)
+                } else {
+                    refreshDisabledButton(at: 1)
+                }
+                
+                if unfrozenJiggleCount > 0 {
+                    refreshEnabledButton(at: 2)
+                } else {
+                    refreshDisabledButton(at: 2)
+                }
             default:
                 activeButtonViewModel = nil
                 refreshDisabled()
+                refreshDisabledAllButtons()
             }
         }
         
     }
     
     override func handleSelectedIndex(_ index: Int) {
-        if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
-            if index == 0 {
-                jiggleViewModel.setCreatorMode(.addGuidePoint)
+        if index == 0 {
+            if let jiggleViewController = ApplicationController.shared.jiggleViewController {
+                jiggleViewController.setCreatorModeUpdatingMesh(.addGuidePoint)
             }
-            if index == 1 {
-                jiggleViewModel.setCreatorMode(.removeGuidePoint)
+        }
+        if index == 1 {
+            if let jiggleViewController = ApplicationController.shared.jiggleViewController {
+                jiggleViewController.setCreatorModeUpdatingMesh(.removeGuidePoint)
+            }
+        }
+        if index == 2 {
+            if let jiggleViewController = ApplicationController.shared.jiggleViewController {
+                jiggleViewController.setCreatorModeUpdatingMesh(.moveGuideCenter)
             }
         }
     }

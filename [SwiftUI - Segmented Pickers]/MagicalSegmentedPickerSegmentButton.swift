@@ -16,6 +16,7 @@ struct MagicalSegmentedPickerSegmentButton: View {
     let outsideBoxPaddingBottom: Int
     let position: SegmentedPickerPosition
     let isSelected: Bool
+    let isEnabled: Bool
     var body: some View {
         Button {
             magicalViewModel.handleSelectedIndex(index)
@@ -30,6 +31,8 @@ struct MagicalSegmentedPickerSegmentButton: View {
                                                                     outsideBoxPaddingTop: outsideBoxPaddingTop,
                                                                     outsideBoxPaddingBottom: outsideBoxPaddingBottom,
                                                                     position: position,
-                                                                    isSelected: isSelected))
+                                                                    isSelected: isSelected,
+                                                                    isEnabled: isEnabled))
+        .disabled(!isEnabled)
     }
 }

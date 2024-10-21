@@ -22,12 +22,14 @@ struct MagicalCreateSwatchGuts: View {
         return ZStack {
             if let activeButtonViewModel = activeButtonViewModel,
                let activeButtonConfiguration = magicalViewModel.getButtonConfiguration(buttonViewModel: activeButtonViewModel) {
+                
                 MagicalActiveSwatchButton(activeButtonViewModel: activeButtonViewModel,
                                           activeButtonConfiguration: activeButtonConfiguration,
                                           firstButtonViewModel: magicalViewModel.segmentButtonViewModels[0],
                                           layoutSchemeFlavor: layoutSchemeFlavor,
                                           outsideBoxPaddingTop: outsideBoxPaddingTop,
-                                          outsideBoxPaddingBottom: outsideBoxPaddingBottom)
+                                          outsideBoxPaddingBottom: outsideBoxPaddingBottom,
+                                          isEnabled: magicalViewModel.isEnabled)
             } else {
                 GeometryReader { _ in
                     ForEach(magicalViewModel.createSwatchConfiguration.buttonConfigurations) { buttonConfiguration in
@@ -41,11 +43,13 @@ struct MagicalCreateSwatchGuts: View {
                         } else {
                             position = .middle
                         }
+                        let isEnabled = (buttonViewModel.isEnabled && magicalViewModel.isEnabled)
                         return MagicalCreateSwatchSegmentButton(index: index,
                                                                 layoutSchemeFlavor: layoutSchemeFlavor,
                                                                 outsideBoxPaddingTop: outsideBoxPaddingTop,
                                                                 outsideBoxPaddingBottom: outsideBoxPaddingBottom,
-                                                                position: position)
+                                                                position: position,
+                                                                isEnabled: isEnabled)
                         .environment(buttonViewModel as? MagicalCreateSwatchButtonViewModel)
                         .offset(x: CGFloat(buttonViewModel.layoutX))
                     }

@@ -11,13 +11,7 @@ import Foundation
     
     override func refresh() {
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
-            
-            //TODO: Temp
-            if let selectedJiggle = jiggleViewModel.getSelectedJiggle() {
-                //refreshEnabled()
-            } else {
-                //refreshDisabled()
-            }
+            //
             
             switch jiggleViewModel.jiggleDocument.creatorMode {
             case .makeJiggle:
@@ -26,23 +20,42 @@ import Foundation
             case .drawJiggle:
                 setActiveButton(1)
                 refreshEnabledAllButtons()
+            case .moveJiggleCenter:
+                setActiveButton(2)
+                refreshEnabledAllButtons()
             case .none:
                 activeButtonViewModel = nil
-                refreshEnabledAllButtons()
+                refreshEnabledButton(at: 0)
+                refreshEnabledButton(at: 1)
+                let jiggleDocument = jiggleViewModel.jiggleDocument
+                let unfrozenJiggleCount = jiggleDocument.countUnfrozenJiggles()
+                if unfrozenJiggleCount > 0 {
+                    refreshEnabledButton(at: 2)
+                } else {
+                    refreshDisabledButton(at: 2)
+                }
             default:
                 activeButtonViewModel = nil
+                refreshDisabled()
                 refreshDisabledAllButtons()
             }
         }
     }
     
     override func handleSelectedIndex(_ index: Int) {
-        if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
-            if index == 0 {
-                jiggleViewModel.setCreatorMode(.makeJiggle)
+        if index == 0 {
+            if let jiggleViewController = ApplicationController.shared.jiggleViewController {
+                jiggleViewController.setCreatorModeUpdatingMesh(.makeJiggle)
             }
-            if index == 1 {
-                jiggleViewModel.setCreatorMode(.drawJiggle)
+        }
+        if index == 1 {
+            if let jiggleViewController = ApplicationController.shared.jiggleViewController {
+                jiggleViewController.setCreatorModeUpdatingMesh(.drawJiggle)
+            }
+        }
+        if index == 2 {
+            if let jiggleViewController = ApplicationController.shared.jiggleViewController {
+                jiggleViewController.setCreatorModeUpdatingMesh(.moveJiggleCenter)
             }
         }
     }

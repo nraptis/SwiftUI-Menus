@@ -1,5 +1,5 @@
 //
-//  MagicalSexyStepperViewModel.swift
+//  MagicalStepperViewModel.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 9/13/24.
@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-@Observable class MagicalSexyStepperViewModel: MagicalViewModel {
+@Observable class MagicalStepperViewModel: MagicalViewModel {
     
     override class func getLayoutScheme() -> LayoutScheme.Type {
-        SexyStepperLayout.self
+        StepperLayout.self
     }
     
     @MainActor var valueString = "|"
@@ -18,19 +18,19 @@ import SwiftUI
     @MainActor var isIncrementEnabled = true
     @MainActor var isDecrementEnabled = true
     
-    let sexyStepperConfiguration: ToolInterfaceElementSexyStepperConfiguration
+    let stepperConfiguration: ToolInterfaceElementStepperConfiguration
     @MainActor init(orientation: Orientation,
-         sexyStepperConfiguration: ToolInterfaceElementSexyStepperConfiguration) {
-        self.sexyStepperConfiguration = sexyStepperConfiguration
+         stepperConfiguration: ToolInterfaceElementStepperConfiguration) {
+        self.stepperConfiguration = stepperConfiguration
         super.init(orientation: orientation)
     }
     
     @MainActor func handleIncrement() {
-        print("MagicalSexyStepperViewModel => handleIncrement()")
+        print("MagicalStepperViewModel => handleIncrement()")
     }
     
     @MainActor func handleDecrement() {
-        print("MagicalSexyStepperViewModel => handleDecrement()")
+        print("MagicalStepperViewModel => handleDecrement()")
     }
     
     @MainActor func refreshValueString(_ valueString: String) {
@@ -55,45 +55,45 @@ import SwiftUI
         let layoutSchemeFlavor = getLayoutSchemeFlavor()
         switch layoutSchemeFlavor {
         case .long:
-            refreshLayoutFrameLong(nameLabelWidth: sexyStepperConfiguration.nameLabelWidthLong,
-                                   numberOfLines: sexyStepperConfiguration.nameLabelNumberOfLines,
-                                   valueLabelWidth: sexyStepperConfiguration.valueLabelWidthLarge,
+            refreshLayoutFrameLong(nameLabelWidth: stepperConfiguration.nameLabelWidthLong,
+                                   numberOfLines: stepperConfiguration.nameLabelNumberOfLines,
+                                   valueLabelWidth: stepperConfiguration.valueLabelWidthLarge,
                                    extraGrowingElementWidthSqueezed: 0,
                                    extraGrowingElementWidthStandard: 0,
                                    extraGrowingElementWidthRelaxed: 0,
-                                   iconPackMain: sexyStepperConfiguration.iconPack,
-                                   iconPackSecondary: sexyStepperConfiguration.incrementPack,
-                                   iconPackTertiary: sexyStepperConfiguration.decrementPack)
+                                   iconPackMain: stepperConfiguration.iconPack,
+                                   iconPackSecondary: stepperConfiguration.incrementPack,
+                                   iconPackTertiary: stepperConfiguration.decrementPack)
         case .stackedLarge:
-            refreshLayoutFrameStacked(nameLabelWidth: sexyStepperConfiguration.nameLabelWidthStackedLarge,
-                                      numberOfLines: sexyStepperConfiguration.nameLabelNumberOfLines,
-                                      valueLabelWidth: sexyStepperConfiguration.valueLabelWidthLarge,
+            refreshLayoutFrameStacked(nameLabelWidth: stepperConfiguration.nameLabelWidthStackedLarge,
+                                      numberOfLines: stepperConfiguration.nameLabelNumberOfLines,
+                                      valueLabelWidth: stepperConfiguration.valueLabelWidthLarge,
                                       extraGrowingElementWidthSqueezed: 0,
                                       extraGrowingElementWidthStandard: 0,
                                       extraGrowingElementWidthRelaxed: 0,
-                                      iconPackMain: sexyStepperConfiguration.iconPack,
-                                      iconPackSecondary: sexyStepperConfiguration.incrementPack,
-                                      iconPackTertiary: sexyStepperConfiguration.decrementPack)
+                                      iconPackMain: stepperConfiguration.iconPack,
+                                      iconPackSecondary: stepperConfiguration.incrementPack,
+                                      iconPackTertiary: stepperConfiguration.decrementPack)
         case .stackedMedium:
-            refreshLayoutFrameStacked(nameLabelWidth: sexyStepperConfiguration.nameLabelWidthStackedMedium,
-                                      numberOfLines: sexyStepperConfiguration.nameLabelNumberOfLines,
-                                      valueLabelWidth: sexyStepperConfiguration.valueLabelWidthMedium,
+            refreshLayoutFrameStacked(nameLabelWidth: stepperConfiguration.nameLabelWidthStackedMedium,
+                                      numberOfLines: stepperConfiguration.nameLabelNumberOfLines,
+                                      valueLabelWidth: stepperConfiguration.valueLabelWidthMedium,
                                       extraGrowingElementWidthSqueezed: 0,
                                       extraGrowingElementWidthStandard: 0,
                                       extraGrowingElementWidthRelaxed: 0,
-                                      iconPackMain: sexyStepperConfiguration.iconPack,
-                                      iconPackSecondary: sexyStepperConfiguration.incrementPack,
-                                      iconPackTertiary: sexyStepperConfiguration.decrementPack)
+                                      iconPackMain: stepperConfiguration.iconPack,
+                                      iconPackSecondary: stepperConfiguration.incrementPack,
+                                      iconPackTertiary: stepperConfiguration.decrementPack)
         case .stackedSmall:
-            refreshLayoutFrameStacked(nameLabelWidth: sexyStepperConfiguration.nameLabelWidthStackedSmall,
-                                      numberOfLines: sexyStepperConfiguration.nameLabelNumberOfLines,
-                                      valueLabelWidth: sexyStepperConfiguration.valueLabelWidthSmall,
+            refreshLayoutFrameStacked(nameLabelWidth: stepperConfiguration.nameLabelWidthStackedSmall,
+                                      numberOfLines: stepperConfiguration.nameLabelNumberOfLines,
+                                      valueLabelWidth: stepperConfiguration.valueLabelWidthSmall,
                                       extraGrowingElementWidthSqueezed: 0,
                                       extraGrowingElementWidthStandard: 0,
                                       extraGrowingElementWidthRelaxed: 0,
-                                      iconPackMain: sexyStepperConfiguration.iconPack,
-                                      iconPackSecondary: sexyStepperConfiguration.incrementPack,
-                                      iconPackTertiary: sexyStepperConfiguration.decrementPack)
+                                      iconPackMain: stepperConfiguration.iconPack,
+                                      iconPackSecondary: stepperConfiguration.incrementPack,
+                                      iconPackTertiary: stepperConfiguration.decrementPack)
         }
         
     }

@@ -82,7 +82,8 @@ enum ToolRowConfiguration {
     case bottom_Secondary1_View_LoopsPage1
     case bottom_Secondary1_View_LoopsPage2
     case bottom_Secondary1_View_LoopsPage3
-    case bottom_Secondary1_View_TimeLine
+    case bottom_Secondary1_View_TimeLine_Page1
+    case bottom_Secondary1_View_TimeLine_Page2
     
     case bottom_Secondary1_Guides_Affine
     case bottom_Secondary1_Guides_Points
@@ -97,7 +98,8 @@ enum ToolRowConfiguration {
     case bottom_Secondary2_View_LoopsPage1
     case bottom_Secondary2_View_LoopsPage2
     case bottom_Secondary2_View_LoopsPage3
-    case bottom_Secondary2_View_TimeLine
+    case bottom_Secondary2_View_TimeLine_Page1
+    case bottom_Secondary2_View_TimeLine_Page2
     
     case bottom_Secondary2_Graph
     
@@ -111,7 +113,9 @@ enum ToolRowConfiguration {
     case bottom_Primary_View_Grab
     case bottom_Primary_View_Continuous
     case bottom_Primary_View_Loops
-    case bottom_Primary_View_TimeLine
+    case bottom_Primary_View_TimeLine_Page1
+    case bottom_Primary_View_TimeLine_Page2
+    
     
     case bottom_Test_1
     case bottom_Test_2

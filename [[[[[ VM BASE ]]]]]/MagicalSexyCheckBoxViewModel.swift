@@ -1,5 +1,5 @@
 //
-//  MagicalSexyCheckBoxViewModel.swift
+//  MagicalCheckBoxViewModel.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 9/3/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-@Observable class MagicalSexyCheckBoxViewModel: MagicalViewModel {
+@Observable class MagicalCheckBoxViewModel: MagicalViewModel {
     
     override class func getLayoutScheme() -> LayoutScheme.Type {
         CheckBoxLayout.self
@@ -15,10 +15,10 @@ import SwiftUI
     
     @MainActor var isChecked = false
     
-    let sexyCheckBoxConfiguration: ToolInterfaceElementSexyCheckBoxConfiguration
+    let checkBoxConfiguration: ToolInterfaceElementCheckBoxConfiguration
     @MainActor init(orientation: Orientation,
-         sexyCheckBoxConfiguration: ToolInterfaceElementSexyCheckBoxConfiguration) {
-        self.sexyCheckBoxConfiguration = sexyCheckBoxConfiguration
+         checkBoxConfiguration: ToolInterfaceElementCheckBoxConfiguration) {
+        self.checkBoxConfiguration = checkBoxConfiguration
         super.init(orientation: orientation)
     }
     
@@ -42,43 +42,43 @@ import SwiftUI
         let layoutSchemeFlavor = getLayoutSchemeFlavor()
         switch layoutSchemeFlavor {
         case .long:
-            refreshLayoutFrameLong(nameLabelWidth: sexyCheckBoxConfiguration.nameLabelWidthLong,
-                                   numberOfLines: sexyCheckBoxConfiguration.nameLabelNumberOfLines,
+            refreshLayoutFrameLong(nameLabelWidth: checkBoxConfiguration.nameLabelWidthLong,
+                                   numberOfLines: checkBoxConfiguration.nameLabelNumberOfLines,
                                    valueLabelWidth: 0,
                                    extraGrowingElementWidthSqueezed: 0,
                                    extraGrowingElementWidthStandard: 0,
                                    extraGrowingElementWidthRelaxed: 0,
-                                   iconPackMain: sexyCheckBoxConfiguration.iconPack,
+                                   iconPackMain: checkBoxConfiguration.iconPack,
                                    iconPackSecondary: FramedLongIconLibrary.checkBoxSquare,
                                    iconPackTertiary: nil)
         case .stackedLarge:
-            refreshLayoutFrameStacked(nameLabelWidth: sexyCheckBoxConfiguration.nameLabelWidthStackedLarge,
-                                      numberOfLines: sexyCheckBoxConfiguration.nameLabelNumberOfLines,
+            refreshLayoutFrameStacked(nameLabelWidth: checkBoxConfiguration.nameLabelWidthStackedLarge,
+                                      numberOfLines: checkBoxConfiguration.nameLabelNumberOfLines,
                                       valueLabelWidth: 0,
                                       extraGrowingElementWidthSqueezed: 0,
                                       extraGrowingElementWidthStandard: 0,
                                       extraGrowingElementWidthRelaxed: 0,
-                                      iconPackMain: sexyCheckBoxConfiguration.iconPack,
+                                      iconPackMain: checkBoxConfiguration.iconPack,
                                       iconPackSecondary: FramedLongIconLibrary.checkBoxSquare,
                                       iconPackTertiary: nil)
         case .stackedMedium:
-            refreshLayoutFrameStacked(nameLabelWidth: sexyCheckBoxConfiguration.nameLabelWidthStackedMedium,
-                                      numberOfLines: sexyCheckBoxConfiguration.nameLabelNumberOfLines,
+            refreshLayoutFrameStacked(nameLabelWidth: checkBoxConfiguration.nameLabelWidthStackedMedium,
+                                      numberOfLines: checkBoxConfiguration.nameLabelNumberOfLines,
                                       valueLabelWidth: 0,
                                       extraGrowingElementWidthSqueezed: 0,
                                       extraGrowingElementWidthStandard: 0,
                                       extraGrowingElementWidthRelaxed: 0,
-                                      iconPackMain: sexyCheckBoxConfiguration.iconPack,
+                                      iconPackMain: checkBoxConfiguration.iconPack,
                                       iconPackSecondary: FramedLongIconLibrary.checkBoxSquare,
                                       iconPackTertiary: nil)
         case .stackedSmall:
-            refreshLayoutFrameStacked(nameLabelWidth: sexyCheckBoxConfiguration.nameLabelWidthStackedSmall,
-                                      numberOfLines: sexyCheckBoxConfiguration.nameLabelNumberOfLines,
+            refreshLayoutFrameStacked(nameLabelWidth: checkBoxConfiguration.nameLabelWidthStackedSmall,
+                                      numberOfLines: checkBoxConfiguration.nameLabelNumberOfLines,
                                       valueLabelWidth: 0,
                                       extraGrowingElementWidthSqueezed: 0,
                                       extraGrowingElementWidthStandard: 0,
                                       extraGrowingElementWidthRelaxed: 0,
-                                      iconPackMain: sexyCheckBoxConfiguration.iconPack,
+                                      iconPackMain: checkBoxConfiguration.iconPack,
                                       iconPackSecondary: FramedLongIconLibrary.checkBoxSquare,
                                       iconPackTertiary: nil)
         }

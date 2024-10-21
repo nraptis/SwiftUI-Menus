@@ -8,6 +8,133 @@
 import Foundation
 
 struct FramedLongIconLibrary {
+
+ 
+    static var jiggleCenter: FramedLongIconPack {
+        Self.build(prefix: "framed",
+                  name: "jiggle_center",
+                  widthPad_0: 42, heightPad_0: 42,
+                  widthPhoneLandscape_0: 27, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 32, heightPhonePortrait_0: 32)
+    }
+
+
+    static var guideCenter: FramedLongIconPack {
+        Self.build(prefix: "framed",
+                  name: "guide_center",
+                  widthPad_0: 43, heightPad_0: 42,
+                  widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 33, heightPhonePortrait_0: 32)
+    }
+    
+    static var magGlass: FramedLongIconPack {
+        Self.build(prefix: "framed",
+                  name: "mag_glass",
+                  widthPad_0: 43, heightPad_0: 42,
+                  widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 33, heightPhonePortrait_0: 32)
+    }
+    
+    static var wolfView: FramedLongIconPack {
+        Self.build(prefix: "framed",
+                  name: "wolf_view",
+                  widthPad_0: 50, heightPad_0: 42,
+                  widthPhoneLandscape_0: 32, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 38, heightPhonePortrait_0: 32)
+    }
+    
+    static var wolvenStein: FramedLongIconPack {
+        Self.build(prefix: "framed",
+                  name: "wolven_stein",
+                  widthPad_0: 46, heightPad_0: 42,
+                  widthPhoneLandscape_0: 30, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 35, heightPhonePortrait_0: 32)
+    }
+    
+    static var drawGuide: FramedLongIconPack {
+        Self.build(prefix: "framed",
+                  name: "draw_guide",
+                  widthPad_0: 47, heightPad_0: 42,
+                  widthPhoneLandscape_0: 30, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 36, heightPhonePortrait_0: 32)
+    }
+
+
+    static var makeGuide: FramedLongIconPack {
+        Self.build(prefix: "framed",
+                  name: "make_guide",
+                  widthPad_0: 43, heightPad_0: 42,
+                  widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 33, heightPhonePortrait_0: 32)
+    }
+
+
+    static var drawJiggle: FramedLongIconPack {
+        Self.build(prefix: "framed",
+                  name: "draw_jiggle",
+                  widthPad_0: 47, heightPad_0: 42,
+                  widthPhoneLandscape_0: 30, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 36, heightPhonePortrait_0: 32)
+    }
+
+
+    static var makeJiggle: FramedLongIconPack {
+        Self.build(prefix: "framed",
+                  name: "make_jiggle",
+                  widthPad_0: 43, heightPad_0: 42,
+                  widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 33, heightPhonePortrait_0: 32)
+    }
+    
+    static var jiggleA: FramedLongIconPack {
+        Self.build(prefix: "framed",
+                  name: "jiggle_a",
+                  widthPad_0: 47, heightPad_0: 42,
+                  widthPhoneLandscape_0: 30, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 36, heightPhonePortrait_0: 32)
+    }
+
+    static var pointsA: FramedLongIconPack {
+        Self.build(prefix: "framed",
+                  name: "points_a",
+                  widthPad_0: 43, heightPad_0: 42,
+                  widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 33, heightPhonePortrait_0: 32)
+    }
+
+
+    static var pointsB: FramedLongIconPack {
+        Self.build(prefix: "framed",
+                  name: "points_b",
+                  widthPad_0: 48, heightPad_0: 42,
+                  widthPhoneLandscape_0: 31, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 37, heightPhonePortrait_0: 32)
+    }
+    
+    static var guides: FramedLongIconPack {
+        Self.build(prefix: "framed",
+                  name: "guides",
+                  widthPad_0: 42, heightPad_0: 42,
+                  widthPhoneLandscape_0: 27, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 32, heightPhonePortrait_0: 32)
+    }
+    
+    static var lock: FramedLongIconPack {
+        Self.build(prefix: "accessory",
+                   name: "lock",
+                   widthPad_0: 34, heightPad_0: 35,
+                   widthPhoneLandscape_0: 24, heightPhoneLandscape_0: 24,
+                   widthPhonePortrait_0: 27, heightPhonePortrait_0: 28)
+    }
+
+
+    static var uncoloredLock: FramedLongIconPack {
+        Self.build(prefix: "accessory",
+                   name: "uncolored_lock",
+                   widthPad_0: 34, heightPad_0: 35,
+                   widthPhoneLandscape_0: 24, heightPhoneLandscape_0: 24,
+                   widthPhonePortrait_0: 27, heightPhonePortrait_0: 28)
+    }
     
     static var testArrowLeft: FramedLongIconPack {
         Self.build(prefix: "framed",
@@ -16,7 +143,6 @@ struct FramedLongIconLibrary {
                    widthPhoneLandscape_0: 24, heightPhoneLandscape_0: 27,
                    widthPhonePortrait_0: 28, heightPhonePortrait_0: 32)
     }
-
 
     static var testArrowRight: FramedLongIconPack {
         Self.build(prefix: "framed",
@@ -41,24 +167,6 @@ struct FramedLongIconLibrary {
                    widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
                    widthPhonePortrait_0: 33, heightPhonePortrait_0: 32)
     }
-                   
-    static var menuA: FramedLongIconPack {
-        Self.build(prefix: "framed",
-                   name: "menu_a",
-                   widthPad_0: 43, heightPad_0: 42,
-                   widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
-                   widthPhonePortrait_0: 33, heightPhonePortrait_0: 32)
-    }
-    
-    
-    static var menuB: FramedLongIconPack {
-        Self.build(prefix: "loose",
-                   name: "menu_b",
-                   widthPad_0: 43, heightPad_0: 42,
-                   widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
-                   widthPhonePortrait_0: 33, heightPhonePortrait_0: 32)
-    }
-    
     
     static var menuC: FramedLongIconPack {
         Self.build(prefix: "loose",

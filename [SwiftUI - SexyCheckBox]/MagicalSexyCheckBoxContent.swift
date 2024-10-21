@@ -1,5 +1,5 @@
 //
-//  MagicalSexyCheckBoxContent.swift
+//  MagicalCheckBoxContent.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 9/3/24.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct MagicalSexyCheckBoxContent: View {
+struct MagicalCheckBoxContent: View {
     
-    @Environment(MagicalSexyCheckBoxViewModel.self) var magicalViewModel
+    @Environment(MagicalCheckBoxViewModel.self) var magicalViewModel
     
     let layoutSchemeFlavor: LayoutSchemeFlavor
     let isPressed: Bool
@@ -19,7 +19,7 @@ struct MagicalSexyCheckBoxContent: View {
     var body: some View {
         
         let orientation = magicalViewModel.orientation
-        let configuration = magicalViewModel.sexyCheckBoxConfiguration
+        let configuration = magicalViewModel.checkBoxConfiguration
         let isDarkMode = magicalViewModel.isDarkModeEnabled
         let isEnabled = magicalViewModel.isEnabled
         
@@ -95,8 +95,10 @@ struct MagicalSexyCheckBoxContent: View {
             }
         }
         
-        let heroPaddingTopStacked = CheckBoxLayout.getHeroPaddingTopStacked(orientation: orientation)
-        let heroPaddingBottomStacked = CheckBoxLayout.getHeroPaddingBottomStacked(orientation: orientation)
+        let heroPaddingTopStacked = CheckBoxLayout.getHeroPaddingTopStacked(orientation: orientation,
+                                                                            numberOfLines: numberOfLines)
+        let heroPaddingBottomStacked = CheckBoxLayout.getHeroPaddingBottomStacked(orientation: orientation,
+                                                                                  numberOfLines: numberOfLines)
         
         let slaveWidth = checkBoxSquare.width
         let slaveHeight = checkBoxSquare.height

@@ -1,5 +1,5 @@
 //
-//  MagicalSexyStepperViewModel+GemCount.swift
+//  MagicalStepperViewModel+GemCount.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 10/7/24.
@@ -8,17 +8,17 @@
 import Foundation
 
 
-@Observable class MagicalSexyStepperViewModelGemCount: MagicalSexyStepperViewModel {
+@Observable class MagicalStepperViewModelGemCount: MagicalStepperViewModel {
     
     override func handleIncrement() {
-        print("MagicalSexyStepperViewModel => handleIncrement()")
+        print("MagicalStepperViewModel => handleIncrement()")
         if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel {
             refresh()
         }
     }
     
     override func handleDecrement() {
-        print("MagicalSexyStepperViewModel => handleDecrement()")
+        print("MagicalStepperViewModel => handleDecrement()")
         if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel {
             refresh()
         }

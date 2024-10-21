@@ -1,5 +1,5 @@
 //
-//  MagicalSexyButtonViewModel+ResetWeightGraphLinear.swift
+//  MagicalButtonViewModel+ResetWeightGraphLinear.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 10/7/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-@Observable class MagicalSexyButtonViewModelResetWeightGraphLinear: MagicalSexyButtonViewModel {
+@Observable class MagicalButtonViewModelResetWeightGraphLinear: MagicalButtonViewModel {
     
     override func handleClicked() {
         if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel {

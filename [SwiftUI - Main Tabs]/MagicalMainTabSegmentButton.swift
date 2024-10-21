@@ -16,6 +16,7 @@ struct MagicalMainTabSegmentButton: View {
     let outsideBoxPaddingBottom: Int
     let position: SegmentedPickerPosition
     let isSelected: Bool
+    let isEnabled: Bool
     var body: some View {
         ZStack {
             Button {
@@ -31,7 +32,9 @@ struct MagicalMainTabSegmentButton: View {
                                                                 outsideBoxPaddingTop: outsideBoxPaddingTop,
                                                                 outsideBoxPaddingBottom: outsideBoxPaddingBottom,
                                                                 position: position,
-                                                                isSelected: isSelected))
+                                                                isSelected: isSelected,
+                                                                isEnabled: isEnabled))
+            .disabled(!isEnabled)
         }
         .frame(width: CGFloat(magicalButtonViewModel.layoutWidth),
                height: CGFloat(magicalViewModel.layoutHeight))

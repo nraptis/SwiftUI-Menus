@@ -40,179 +40,6 @@ struct SegmentedPickerLayout: LayoutScheme {
         return 11
     }
     
-    
-    static func getOutsideBoxPaddingTop(orientation: Orientation) -> Int {
-        if Device.isPad {
-            return 3
-        } else {
-            return 2
-        }
-    }
-    
-    static func getOutsideBoxPaddingBottom(orientation: Orientation) -> Int {
-        if Device.isPad {
-            return 3
-        } else {
-            return 2
-        }
-    }
-    
-    static func getHeroPaddingTopStacked(orientation: Orientation) -> Int {
-        if Device.isPad {
-            return 2 + 3
-        } else {
-            return 1 + 3
-        }
-    }
-    
-    static func getNameLabelFont(orientation: Orientation, flavor: LayoutSchemeFlavor) -> UIFont {
-        if Device.isPad {
-            switch flavor {
-            case .long:
-                return UIFont.systemFont(ofSize: 14.0, weight: .semibold)
-            case .stackedLarge:
-                return UIFont.systemFont(ofSize: 13.0, weight: .semibold)
-            case .stackedMedium:
-                return UIFont.systemFont(ofSize: 13.0, weight: .semibold, width: .condensed)
-            case .stackedSmall:
-                return UIFont.systemFont(ofSize: 13.0, weight: .semibold, width: .compressed)
-            }
-        } else {
-            switch orientation {
-            case .landscape:
-                switch flavor {
-                case .long:
-                    return UIFont.systemFont(ofSize: 10.0, weight: .semibold)
-                case .stackedLarge:
-                    return UIFont.systemFont(ofSize: 9.0, weight: .semibold)
-                case .stackedMedium:
-                    return UIFont.systemFont(ofSize: 9.0, weight: .semibold, width: .condensed)
-                case .stackedSmall:
-                    return UIFont.systemFont(ofSize: 9.0, weight: .semibold, width: .compressed)
-                }
-            case .portrait:
-                switch flavor {
-                case .long:
-                    return UIFont.systemFont(ofSize: 11.0, weight: .semibold)
-                case .stackedLarge:
-                    return UIFont.systemFont(ofSize: 10.0, weight: .semibold)
-                case .stackedMedium:
-                    return UIFont.systemFont(ofSize: 10.0, weight: .semibold, width: .condensed)
-                case .stackedSmall:
-                    return UIFont.systemFont(ofSize: 10.0, weight: .semibold, width: .compressed)
-                }
-            }
-        }
-    }
-    
-    static func getUniversalPaddingLeft(orientation: Orientation,
-                                        flavor: LayoutSchemeFlavor,
-                                        squeeze: LayoutSchemeSqueeze,
-                                        neighborTypeLeft: ToolInterfaceElementType?,
-                                        neighborTypeRight: ToolInterfaceElementType?) -> Int {
-        if Device.isPad {
-            return 4
-        } else {
-            return 2
-        }
-    }
-    
-    static func getUniversalPaddingRight(orientation: Orientation,
-                                         flavor: LayoutSchemeFlavor,
-                                         squeeze: LayoutSchemeSqueeze,
-                                         neighborTypeLeft: ToolInterfaceElementType?,
-                                         neighborTypeRight: ToolInterfaceElementType?) -> Int {
-        if Device.isPad {
-            return 4
-        } else {
-            return 2
-        }
-    }
-    
-    static func getUniversalPaddingBottom(orientation: Orientation, flavor: LayoutSchemeFlavor, numberOfLines: Int) -> Int {
-        Device.isPad ? 3 : 2
-    }
-    
-    static func getButtonUniversalPaddingLeft(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
-        if Device.isPad {
-            return 4
-        } else {
-            return 2
-        }
-    }
-    
-    static func getButtonUniversalPaddingRight(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
-        if Device.isPad {
-            return 4
-        } else {
-            return 2
-        }
-    }
-    
-    static func getButtonUniversalPaddingTop(orientation: Orientation, flavor: LayoutSchemeFlavor, numberOfLines: Int) -> Int {
-        0
-    }
-    
-    static func getButtonUniversalPaddingBottom(orientation: Orientation, flavor: LayoutSchemeFlavor, numberOfLines: Int) -> Int {
-        0
-    }
-    
-    static func getNameLabelPaddingLeft(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
-        0
-    }
-    
-    static func getNameLabelPaddingRight(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
-        0
-    }
-    
-    static func getNameLabelPaddingBottom(orientation: Orientation, flavor: LayoutSchemeFlavor, numberOfLines: Int) -> Int {
-        if Device.isPad {
-            return 2
-        } else {
-            return 1
-        }
-    }
-    
-    static func getIconPaddingLeft(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
-        0
-    }
-    
-    static func getIconPaddingRight(orientation: Orientation, flavor: LayoutSchemeFlavor, squeeze: LayoutSchemeSqueeze) -> Int {
-        if Device.isPad {
-            if flavor.isLong {
-                switch squeeze {
-                case .squeezed:
-                    return 6
-                case .standard, .relaxed:
-                    return 8
-                }
-            }
-        } else {
-            if flavor.isLong {
-                switch squeeze {
-                case .squeezed:
-                    return 4
-                case .standard, .relaxed:
-                    return 6
-                }
-            }
-        }
-        return 0
-    }
-    
-    static func getIconPaddingTop(orientation: Orientation, flavor: LayoutSchemeFlavor, numberOfLines: Int) -> Int {
-        if Device.isPad {
-            if flavor.isStacked {
-                return 4
-            }
-        } else {
-            if flavor.isStacked {
-                return 3
-            }
-        }
-        return 0
-    }
-    
     static func getCornerRadius(orientation: Orientation) -> Int {
         if Device.isPad {
             return 12
@@ -225,21 +52,172 @@ struct SegmentedPickerLayout: LayoutScheme {
         }
     }
     
-    /*
-    static func getCornerRadiusInner(orientation: Orientation) -> Int {
+    // [++] Final
+    static func getLineThickness(orientation: Orientation) -> Int {
+        return 1
+    }
+    
+    // [++] Final
+    static func getOutsideBoxPaddingTop(orientation: Orientation) -> Int {
         if Device.isPad {
-            return 12
+            // [++] Final
+            return 3
         } else {
-            if orientation.isLandscape {
-                return 8
-            } else {
-                return 10
+            // [++] Final
+            return 2
+        }
+    }
+    
+    // [++] Final
+    static func getOutsideBoxPaddingBottom(orientation: Orientation) -> Int {
+        if Device.isPad {
+            // [++] Final
+            return 3
+        } else {
+            // [++] Final
+            return 2
+        }
+    }
+    
+    // [++] Final
+    static func getValueLabelFont(orientation: Orientation, flavor: LayoutSchemeFlavor) -> UIFont {
+        UIFont()
+    }
+    
+    // [++] Final
+    static func getNameLabelFont(orientation: Orientation, flavor: LayoutSchemeFlavor) -> UIFont {
+        if Device.isPad {
+            switch flavor {
+            case .long:
+                return UIFont.systemFont(ofSize: 13.0, weight: .semibold)
+            case .stackedLarge:
+                return UIFont.systemFont(ofSize: 13.0, weight: .semibold)
+            case .stackedMedium:
+                return UIFont.systemFont(ofSize: 13.0, weight: .semibold, width: .condensed)
+            case .stackedSmall:
+                return UIFont.systemFont(ofSize: 13.0, weight: .semibold, width: .compressed)
+            }
+        } else {
+            switch orientation {
+            case .landscape:
+                switch flavor {
+                case .long:
+                    return UIFont.systemFont(ofSize: 9.0, weight: .semibold)
+                case .stackedLarge:
+                    return UIFont.systemFont(ofSize: 9.0, weight: .semibold)
+                case .stackedMedium:
+                    return UIFont.systemFont(ofSize: 9.0, weight: .semibold, width: .condensed)
+                case .stackedSmall:
+                    return UIFont.systemFont(ofSize: 9.0, weight: .semibold, width: .compressed)
+                }
+            case .portrait:
+                switch flavor {
+                case .long:
+                    return UIFont.systemFont(ofSize: 10.0, weight: .semibold)
+                case .stackedLarge:
+                    return UIFont.systemFont(ofSize: 10.0, weight: .semibold)
+                case .stackedMedium:
+                    return UIFont.systemFont(ofSize: 10.0, weight: .semibold, width: .condensed)
+                case .stackedSmall:
+                    return UIFont.systemFont(ofSize: 10.0, weight: .semibold, width: .compressed)
+                }
             }
         }
     }
-    */
     
-    static func getLineThickness(orientation: Orientation) -> Int {
-        return 1
+    // [++] Final
+    static func getNameLabelVerticalSpacing(orientation: Orientation, flavor: LayoutSchemeFlavor) -> Int {
+        if flavor.isLong {
+            if Device.isPad {
+                // [Cool]
+                return -3
+            } else {
+                switch orientation {
+                case .landscape:
+                    // [Cool]
+                    return -3
+                case .portrait:
+                    // [Cool]
+                    return -3
+                }
+            }
+        } else {
+            if Device.isPad {
+                return -4
+            } else {
+                switch orientation {
+                case .landscape:
+                    // [Cool]
+                    return -4
+                case .portrait:
+                    // [Cool]
+                    return -4
+                }
+            }
+        }
+    }
+    
+    // [++] Final
+    static func getHeroPaddingTopStacked(orientation: Orientation, numberOfLines: Int) -> Int {
+        if Device.isPad {
+            if numberOfLines == 2 {
+                // [++] Final [iPAD]
+                return 4
+            } else {
+                // [++] Final [iPAD]
+                return 4
+            }
+        } else {
+            switch orientation {
+            case .landscape:
+                if numberOfLines == 2 {
+                    // [++] Final [iPhone Landscape]
+                    return 3
+                } else {
+                    // [++] Final [iPhone Landscape]
+                    return 3
+                }
+            case .portrait:
+                if numberOfLines == 2 {
+                    // [++] Final [iPhone Portrait]
+                    return 3
+                } else {
+                    // [++] Final [iPhone Portrait]
+                    return 3
+                }
+            }
+        }
+    }
+    
+    // [++] Final
+    static func getHeroPaddingBottomStacked(orientation: Orientation, numberOfLines: Int) -> Int {
+        if Device.isPad {
+            if numberOfLines == 2 {
+                // [++] Final [iPAD]
+                return 1
+            } else {
+                // [++] Final [iPAD]
+                return 1
+            }
+        } else {
+            switch orientation {
+            case .landscape:
+                if numberOfLines == 2 {
+                    // [++] Final [iPhone Landscape]
+                    return 1
+                } else {
+                    // [++] Final [iPhone Landscape]
+                    return 1
+                }
+            case .portrait:
+                if numberOfLines == 2 {
+                    // [++] Final [iPhone Portrait]
+                    return 1
+                } else {
+                    // [++] Final [iPhone Portrait]
+                    return 1
+                }
+            }
+        }
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-@Observable class MagicalExitModeViewModelAnimationLoopsExit: MagicalModeChangeViewModel {
+@Observable class MagicalExitModeViewModelAnimationLoops: MagicalModeChangeViewModel {
     
     override func handleClicked() {
         if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel {
@@ -28,7 +28,7 @@ import Foundation
     
     deinit {
         if ApplicationController.DEBUG_DEALLOCS {
-            print("[Deinit] MagicalExitModeViewModelAnimationLoopsExit (Dealloc)")
+            print("[Deinit] MagicalExitModeViewModelAnimationLoops (Dealloc)")
         }
     }
 }

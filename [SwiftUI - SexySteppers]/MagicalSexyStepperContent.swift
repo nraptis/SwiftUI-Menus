@@ -1,5 +1,5 @@
 //
-//  MagicalSexyStepperContents.swift
+//  MagicalStepperContents.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 9/13/24.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct MagicalSexyStepperContent: View {
+struct MagicalStepperContent: View {
     
-    @Environment(MagicalSexyStepperViewModel.self) var magicalViewModel
+    @Environment(MagicalStepperViewModel.self) var magicalViewModel
     
     let layoutSchemeFlavor: LayoutSchemeFlavor
     let layoutWidth: Int
@@ -18,11 +18,11 @@ struct MagicalSexyStepperContent: View {
     var body: some View {
         
         let orientation = magicalViewModel.orientation
-        let configuration = magicalViewModel.sexyStepperConfiguration
+        let configuration = magicalViewModel.stepperConfiguration
         let isDarkMode = magicalViewModel.isDarkModeEnabled
         let isEnabled = magicalViewModel.isEnabled
         
-        let valueLabelFont = SexyStepperLayout.getValueLabelFont(orientation: orientation, flavor: layoutSchemeFlavor)
+        let valueLabelFont = StepperLayout.getValueLabelFont(orientation: orientation, flavor: layoutSchemeFlavor)
         
         let isLong: Bool
         switch layoutSchemeFlavor {
@@ -45,7 +45,7 @@ struct MagicalSexyStepperContent: View {
                                                                     isDarkMode: isDarkMode,
                                                                     isEnabled: (isEnabled && magicalViewModel.isIncrementEnabled))
         
-        let decrementIcon = FramedLongIconLibrary.testArrowLeft.getTextIcon(orientation: orientation,
+        let decrementIcon = FramedLongIconLibrary.lock.getTextIcon(orientation: orientation,
                                                                             layoutSchemeFlavor: .long,
                                                                             numberOfLines: 0,
                                                                             isDarkMode: isDarkMode,
@@ -54,9 +54,9 @@ struct MagicalSexyStepperContent: View {
         let line1 = configuration.nameLabelLine1
         let line2 = configuration.nameLabelLine2
         
-        let nameLabelFont = SexyStepperLayout.getNameLabelFont(orientation: orientation,
+        let nameLabelFont = StepperLayout.getNameLabelFont(orientation: orientation,
                                                           flavor: layoutSchemeFlavor)
-        let nameLabelVerticalSpacing = SexyStepperLayout.getNameLabelVerticalSpacing(orientation: orientation,
+        let nameLabelVerticalSpacing = StepperLayout.getNameLabelVerticalSpacing(orientation: orientation,
                                                                                 flavor: layoutSchemeFlavor)
         
         let nameLabelWidth: Int
@@ -93,8 +93,10 @@ struct MagicalSexyStepperContent: View {
             }
         }
         
-        let heroPaddingTopStacked = SexyStepperLayout.getHeroPaddingTopStacked(orientation: orientation)
-        let heroPaddingBottomStacked = SexyStepperLayout.getHeroPaddingBottomStacked(orientation: orientation)
+        let heroPaddingTopStacked = StepperLayout.getHeroPaddingTopStacked(orientation: orientation,
+                                                                               numberOfLines: numberOfLines)
+        let heroPaddingBottomStacked = StepperLayout.getHeroPaddingBottomStacked(orientation: orientation,
+                                                                                     numberOfLines: numberOfLines)
         
         let incrementWidth = incrementIcon.width
         let incrementHeight = incrementIcon.height

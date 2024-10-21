@@ -16,6 +16,7 @@ struct MagicalSegmentedPickerSegmentButtonButtonStyle: ButtonStyle {
     let outsideBoxPaddingBottom: Int
     let position: SegmentedPickerPosition
     let isSelected: Bool
+    let isEnabled: Bool
     
     func makeBody(configuration: Configuration) -> some View {
         return ZStack {
@@ -86,13 +87,13 @@ struct MagicalSegmentedPickerSegmentButtonButtonStyle: ButtonStyle {
         let lineThickness = SegmentedPickerLayout.getLineThickness(orientation: magicalViewModel.orientation)
         let color: Color
         if magicalViewModel.isDarkModeEnabled {
-            if magicalButtonViewModel.isEnabled {
+            if isEnabled {
                 color = ToolInterfaceTheme.primaryUnselectedEnabledDark
             } else {
                 color = ToolInterfaceTheme.primaryUnselectedDisabledDark
             }
         } else {
-            if magicalButtonViewModel.isEnabled {
+            if isEnabled {
                 color = ToolInterfaceTheme.primaryUnselectedEnabledLight
             } else {
                 color = ToolInterfaceTheme.primaryUnselectedDisabledLight
@@ -106,7 +107,7 @@ struct MagicalSegmentedPickerSegmentButtonButtonStyle: ButtonStyle {
     func getFillRect(isPressed: Bool) -> some View {
         let color: Color
         if magicalViewModel.isDarkModeEnabled {
-            if magicalButtonViewModel.isEnabled {
+            if isEnabled {
                 if isSelected {
                     color = ToolInterfaceTheme.contextUnderlayHighlightedEnabledDark
                 } else {
@@ -116,7 +117,7 @@ struct MagicalSegmentedPickerSegmentButtonButtonStyle: ButtonStyle {
                 color = ToolInterfaceTheme.contextUnderlayDisabledDark
             }
         } else {
-            if magicalButtonViewModel.isEnabled {
+            if isEnabled {
                 if isSelected {
                     color = ToolInterfaceTheme.contextUnderlayHighlightedEnabledLight
                 } else {
@@ -156,7 +157,8 @@ struct MagicalSegmentedPickerSegmentButtonButtonStyle: ButtonStyle {
                 MagicalSegmentedPickerSegmentContent(layoutSchemeFlavor: layoutSchemeFlavor,
                                                      layoutHeight: contentLayoutHeight,
                                                      isSelected: isSelected,
-                                                     isPressed: isPressed)
+                                                     isPressed: isPressed,
+                                                     isEnabled: isEnabled)
 #if INTERFACE_HINTS
                 Spacer()
                     .frame(width: 24.0, height: CGFloat(outsideBoxPaddingBottom))

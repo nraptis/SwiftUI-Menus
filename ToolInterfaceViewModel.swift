@@ -17,10 +17,16 @@ func getToolNodeID() -> UInt16 {
 
 @Observable class ToolInterfaceViewModel {
     
-    @ObservationIgnored var darkModeDidChangePublisher = PassthroughSubject<Void, Never>()
-    //@ObservationIgnored var selectedJiggleDidChangePublisher = PassthroughSubject<Void, Never>()
-    //@ObservationIgnored var darkModeDidChangePublisher = PassthroughSubject<Void, Never>()
+    @MainActor func reloadAllRows() {
+        let interfaceConfiguration = getCurrentInterfaceConfiguration()
+        let allRows = getAllRows()
+        for row in allRows {
+            snapRowContentForced(configuration: interfaceConfiguration, toolRow: row)
+        }
+    }
     
+    @ObservationIgnored var darkModeDidChangePublisher = PassthroughSubject<Void, Never>()
+    @ObservationIgnored var purchasedDidChangePublisher = PassthroughSubject<Void, Never>()
     
     let layoutRelay = ToolInterfaceLayoutRelay()
     
@@ -594,17 +600,6 @@ func getToolNodeID() -> UInt16 {
         let viewModel = MagicalFavoringOneLineLabelViewModel(orientation: orientation,
                                                              favoringOneLineLabelConfiguration: configuration)
         
-        let standardPaddingLeft = FavoringOneLineLabelLayout.getUniversalPaddingLeft(orientation: orientation,
-                                                                                     flavor: .long,
-                                                                                     squeeze: .standard,
-                                                                                     neighborTypeLeft: neighborTypeLeft,
-                                                                                     neighborTypeRight: neighborTypeRight)
-        let standardPaddingRight = FavoringOneLineLabelLayout.getUniversalPaddingRight(orientation: orientation,
-                                                                                       flavor: .long,
-                                                                                       squeeze: .standard,
-                                                                                       neighborTypeLeft: neighborTypeLeft,
-                                                                                       neighborTypeRight: neighborTypeRight)
-        let oneLineWidthPadded = configuration.oneLineWidth + standardPaddingLeft + standardPaddingRight
         let flex = ToolInterfaceViewModel.getFavoringOneLineLabelFlex(orientation: orientation,
                                                                       configuration: configuration,
                                                                       minimumWidth: minimumWidth,
@@ -767,12 +762,12 @@ func getToolNodeID() -> UInt16 {
         ]
         return RowBluePrint(nodes: nodes, configuration: .video_export_1, centerPinnedElement: nil)
     }
-    */
+    
     
     @MainActor func getRowBluePrintVideoExport2() -> RowBluePrint {
         let nodes = [
             Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getMenuSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
+            getMenuButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
         ]
         return RowBluePrint(nodes: nodes, configuration: .video_export_2, centerPinnedElement: nil)
     }
@@ -780,7 +775,7 @@ func getToolNodeID() -> UInt16 {
     
     @MainActor func getRowBluePrintZoom1() -> RowBluePrint {
         let nodes = [
-            getExitZoomExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            getZoomExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
             
             Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
         ]
@@ -798,17 +793,18 @@ func getToolNodeID() -> UInt16 {
     
     @MainActor func getRowBluePrintZoom3() -> RowBluePrint {
         let nodes = [
-            getExitZoomExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            getZoomExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
             
             Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getExitZoomExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            getZoomExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
             
-            getZoomResetSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getZoomJiggleSexyButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
+            getZoomResetButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
+            getZoomJiggleButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
             
         ]
         return RowBluePrint(nodes: nodes, configuration: .zoom_3, centerPinnedElement: nil)
     }
+     */
     
     var isBlocked: Bool {
         
@@ -908,6 +904,12 @@ func getToolNodeID() -> UInt16 {
         darkModeDidChangePublisher.send(())
     }
     
+    func publishPurchasedDidChange() {
+        purchasedDidChangePublisher.send(())
+    }
+    
+    
+    
     @MainActor func snapRowContent(configuration: any InterfaceConfigurationConforming,
                         toolRows: [ToolRow]) {
         for toolRow in toolRows {
@@ -965,6 +967,35 @@ func getToolNodeID() -> UInt16 {
                                              safeAreaRight: layoutRelay.safeAreaRight,
                                              centerPinnedElement: nil)
             }
+        }
+    }
+    
+    @MainActor func snapRowContentForced(configuration: any InterfaceConfigurationConforming,
+                                                 toolRow: ToolRow) {
+        let width = layoutRelay.menuWidthWithSafeArea
+        if let bluePrint = getRowBluePrint(slot: toolRow.slot,
+                                           configuration: configuration,
+                                           orientation: orientation) {
+            
+            toolRow.configuration = bluePrint.configuration
+            toolRow.setNodes_NotAnimated(bluePrint.nodes,
+                                         orientation: orientation,
+                                         menuWidthWithSafeArea: width,
+                                         height: layoutRelay.rowHeight,
+                                         safeAreaLeft: layoutRelay.safeAreaLeft,
+                                         safeAreaRight: layoutRelay.safeAreaRight,
+                                         centerPinnedElement: bluePrint.centerPinnedElement)
+            
+        } else {
+            toolRow.configuration = .empty
+            toolRow.setNodes_NotAnimated([],
+                                         orientation: orientation,
+                                         menuWidthWithSafeArea: width,
+                                         height: layoutRelay.rowHeight,
+                                         safeAreaLeft: layoutRelay.safeAreaLeft,
+                                         safeAreaRight: layoutRelay.safeAreaRight,
+                                         centerPinnedElement: nil)
+            
         }
     }
     
@@ -1038,6 +1069,8 @@ func getToolNodeID() -> UInt16 {
             result.isGuidesEnabled = jiggleViewModel.jiggleDocument.isGuidesEnabled
             result.isAnimationLoopsEnabled = jiggleViewModel.jiggleDocument.isAnimationLoopsEnabled
             result.isTimeLineEnabled = jiggleViewModel.jiggleDocument.isTimeLineEnabled
+            result.isTimeLinePage2Enabled = jiggleViewModel.isTimeLinePage2Enabled
+            
             result.isGraphEnabled = jiggleViewModel.isGraphEnabled
             result.isZoomEnabled = jiggleViewModel.isZoomEnabled
             result.documentMode = jiggleViewModel.jiggleDocument.documentMode
@@ -1061,6 +1094,8 @@ func getToolNodeID() -> UInt16 {
             result.isGuidesEnabled = jiggleViewModel.jiggleDocument.isGuidesEnabled
             result.isAnimationLoopsEnabled = jiggleViewModel.jiggleDocument.isAnimationLoopsEnabled
             result.isTimeLineEnabled = jiggleViewModel.jiggleDocument.isTimeLineEnabled
+            result.isTimeLinePage2Enabled = jiggleViewModel.isTimeLinePage2Enabled
+            
             result.isGraphEnabled = jiggleViewModel.isGraphEnabled
             result.isZoomEnabled = jiggleViewModel.isZoomEnabled
             result.documentMode = jiggleViewModel.jiggleDocument.documentMode

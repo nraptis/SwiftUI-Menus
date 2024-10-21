@@ -93,6 +93,8 @@ class TopMenuStandardContainerView: UIView, PrimaryMenuStandardContainerConformi
         let orientation = toolInterfaceViewModel.orientation
         let topMenuHeight = MenuHeightCategoryPhoneTop.get(category: .standard, orientation: orientation)
         let graphMenuHeight = MenuHeightCategoryPhoneTop.get(category: .graph, orientation: orientation)
+        let timeLineMenuHeight = MenuHeightCategoryPhoneTop.get(category: .timeLine, orientation: orientation)
+        
         
         addSubview(topMenuView)
         addConstraints([
@@ -135,7 +137,7 @@ class TopMenuStandardContainerView: UIView, PrimaryMenuStandardContainerConformi
         timeLineContainerView.addConstraint(NSLayoutConstraint(item: timeLineContainerView, attribute: .height, relatedBy: .equal,
                                                             toItem: nil, attribute: .notAnAttribute,
                                                             multiplier: 1.0,
-                                                            constant: CGFloat(graphMenuHeight)))
+                                                            constant: CGFloat(timeLineMenuHeight)))
         
         graphContainerView.setup(width: width, safeAreaLeft: safeAreaLeft,
                                  safeAreaRight: safeAreaRight, safeAreaTop: safeAreaTop)

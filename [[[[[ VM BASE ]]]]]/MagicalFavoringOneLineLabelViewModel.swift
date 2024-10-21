@@ -17,38 +17,38 @@ import SwiftUI
     
     let favoringOneLineLabelConfiguration: ToolInterfaceElementFavoringOneLineLabelConfiguration
     @MainActor init(orientation: Orientation,
-         favoringOneLineLabelConfiguration: ToolInterfaceElementFavoringOneLineLabelConfiguration) {
+                    favoringOneLineLabelConfiguration: ToolInterfaceElementFavoringOneLineLabelConfiguration) {
         self.favoringOneLineLabelConfiguration = favoringOneLineLabelConfiguration
         super.init(orientation: orientation)
     }
     
     override func refreshLayoutFrame() {
         
-        let outsideBoxLeftSqueezed = FavoringOneLineLabelLayout.getOutsideBoxPaddingLeftLong(orientation: orientation,
-                                                                                             squeeze: .squeezed,
-                                                                                             neighborTypeLeft: neighborTypeLeft,
-                                                                                             neighborTypeRight: neighborTypeRight)
-        let outsideBoxLeftStandard = FavoringOneLineLabelLayout.getOutsideBoxPaddingLeftLong(orientation: orientation,
-                                                                                             squeeze: .standard,
-                                                                                             neighborTypeLeft: neighborTypeLeft,
-                                                                                             neighborTypeRight: neighborTypeRight)
-        let outsideBoxLeftRelaxed = FavoringOneLineLabelLayout.getOutsideBoxPaddingLeftLong(orientation: orientation,
-                                                                                            squeeze: .relaxed,
-                                                                                            neighborTypeLeft: neighborTypeLeft,
-                                                                                            neighborTypeRight: neighborTypeRight)
+        let outsideBoxLeftSqueezed = FavoringOneLineLabelLayout.getOutsideBoxPaddingLeft(orientation: orientation,
+                                                                                         squeeze: .squeezed,
+                                                                                         neighborTypeLeft: neighborTypeLeft,
+                                                                                         neighborTypeRight: neighborTypeRight)
+        let outsideBoxLeftStandard = FavoringOneLineLabelLayout.getOutsideBoxPaddingLeft(orientation: orientation,
+                                                                                         squeeze: .standard,
+                                                                                         neighborTypeLeft: neighborTypeLeft,
+                                                                                         neighborTypeRight: neighborTypeRight)
+        let outsideBoxLeftRelaxed = FavoringOneLineLabelLayout.getOutsideBoxPaddingLeft(orientation: orientation,
+                                                                                        squeeze: .relaxed,
+                                                                                        neighborTypeLeft: neighborTypeLeft,
+                                                                                        neighborTypeRight: neighborTypeRight)
         
-        let outsideBoxRightSqueezed = FavoringOneLineLabelLayout.getOutsideBoxPaddingRightLong(orientation: orientation,
-                                                                                               squeeze: .squeezed,
-                                                                                               neighborTypeLeft: neighborTypeLeft,
-                                                                                               neighborTypeRight: neighborTypeRight)
-        let outsideBoxRightStandard = FavoringOneLineLabelLayout.getOutsideBoxPaddingRightLong(orientation: orientation,
-                                                                                               squeeze: .standard,
-                                                                                               neighborTypeLeft: neighborTypeLeft,
-                                                                                               neighborTypeRight: neighborTypeRight)
-        let outsideBoxRightRelaxed = FavoringOneLineLabelLayout.getOutsideBoxPaddingRightLong(orientation: orientation,
-                                                                                              squeeze: .relaxed,
-                                                                                              neighborTypeLeft: neighborTypeLeft,
-                                                                                              neighborTypeRight: neighborTypeRight)
+        let outsideBoxRightSqueezed = FavoringOneLineLabelLayout.getOutsideBoxPaddingRight(orientation: orientation,
+                                                                                           squeeze: .squeezed,
+                                                                                           neighborTypeLeft: neighborTypeLeft,
+                                                                                           neighborTypeRight: neighborTypeRight)
+        let outsideBoxRightStandard = FavoringOneLineLabelLayout.getOutsideBoxPaddingRight(orientation: orientation,
+                                                                                           squeeze: .standard,
+                                                                                           neighborTypeLeft: neighborTypeLeft,
+                                                                                           neighborTypeRight: neighborTypeRight)
+        let outsideBoxRightRelaxed = FavoringOneLineLabelLayout.getOutsideBoxPaddingRight(orientation: orientation,
+                                                                                          squeeze: .relaxed,
+                                                                                          neighborTypeLeft: neighborTypeLeft,
+                                                                                          neighborTypeRight: neighborTypeRight)
         
         var _isTwoLine = false
         

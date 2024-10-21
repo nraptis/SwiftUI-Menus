@@ -486,11 +486,11 @@ struct ToolInterfaceStringLibraryButtons {
         GeneralStringLibrary.get(localized: "time_line_dupe_current_channel_line_2", table: "ToolInterfaceButtons")
     }
     
-    static func buttonTextTimeLineFlattenCurrentChannelLine1() -> String? {
+    static func buttonTextTimeLineResetFlatCurrentChannelLine1() -> String? {
         GeneralStringLibrary.get(localized: "time_line_flatten_current_channel_line_1", table: "ToolInterfaceButtons")
     }
     
-    static func buttonTextTimeLineFlattenCurrentChannelLine2() -> String? {
+    static func buttonTextTimeLineResetFlatCurrentChannelLine2() -> String? {
         GeneralStringLibrary.get(localized: "time_line_flatten_current_channel_line_2", table: "ToolInterfaceButtons")
     }
     

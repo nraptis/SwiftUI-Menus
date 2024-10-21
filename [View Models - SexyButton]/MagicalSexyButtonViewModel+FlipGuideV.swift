@@ -1,5 +1,5 @@
 //
-//  MagicalSexyButtonViewModel+FlipGuideV.swift
+//  MagicalButtonViewModel+FlipGuideV.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 9/30/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-@Observable class MagicalSexyButtonViewModelFlipGuideV: MagicalSexyButtonViewModel {
+@Observable class MagicalButtonViewModelFlipGuideV: MagicalButtonViewModel {
     
     override func handleClicked() {
         if let toolInterfaceViewModel = ApplicationController.shared.toolInterfaceViewModel {

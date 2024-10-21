@@ -89,8 +89,10 @@ struct MagicalEnterModeContent: View {
             }
         }
         
-        let heroPaddingTopStacked = EnterModeLayout.getHeroPaddingTopStacked(orientation: orientation)
-        let heroPaddingBottomStacked = EnterModeLayout.getHeroPaddingBottomStacked(orientation: orientation)
+        let heroPaddingTopStacked = EnterModeLayout.getHeroPaddingTopStacked(orientation: orientation,
+                                                                             numberOfLines: numberOfLines)
+        let heroPaddingBottomStacked = EnterModeLayout.getHeroPaddingBottomStacked(orientation: orientation,
+                                                                                   numberOfLines: numberOfLines)
         
         let slaveWidth = accentIcon.width
         let slaveHeight = accentIcon.height
