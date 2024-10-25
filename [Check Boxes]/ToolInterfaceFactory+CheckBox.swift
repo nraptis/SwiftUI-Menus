@@ -15,7 +15,7 @@ extension ToolInterfaceFactory {
         
         let textLine1 = ToolInterfaceStringLibraryCheckBoxes.checkBoxTextDarkModeEnabledLine1()
         let textLine2 = ToolInterfaceStringLibraryCheckBoxes.checkBoxTextDarkModeEnabledLine2()
-        let iconPack = FramedConvertibleIconLibrary.stereoscopic
+        let iconPack = FramedConvertibleIconLibrary.darkModeB
         
         
         let configuration = ToolInterfaceElementCheckBoxConfiguration(iconPack: iconPack,
@@ -76,7 +76,7 @@ extension ToolInterfaceFactory {
         
         let textLine1 = "IZ"
         let textLine2 = "BUY"
-        let iconPack = FramedConvertibleIconLibrary.menuC
+        let iconPack = FramedConvertibleIconLibrary.darkModeA
         
         let configuration = ToolInterfaceElementCheckBoxConfiguration(iconPack: iconPack,
                                                                       orientation: orientation,

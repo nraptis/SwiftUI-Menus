@@ -10,15 +10,15 @@ import SwiftUI
 struct ArrowViewSquare: View {
     var body: some View {
         HStack {
-            Spacer()
+            Spacer(minLength: 0.0)
             VStack {
-                Spacer()
+                Spacer(minLength: 0.0)
                 Image(systemName: "checkmark.square")
                     .font(.system(size: 28.0, weight: .thin))
                     .foregroundStyle(Color(uiColor: DialogTheme.dialogTextMessage))
-                Spacer()
+                Spacer(minLength: 0.0)
             }
-            Spacer()
+            Spacer(minLength: 0.0)
         }
     }
 }

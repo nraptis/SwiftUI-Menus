@@ -32,11 +32,11 @@ struct MagicalCheckBoxButtonStyle: ButtonStyle {
         let boxHeight = magicalViewModel.layoutHeight - outsideBoxPaddingTop - outsideBoxPaddingBottom
         
         return HStack(spacing: 0.0) {
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingLeft))
             
             VStack(spacing: 0.0) {
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(height: CGFloat(outsideBoxPaddingTop))
                 ZStack {
                     
@@ -46,11 +46,11 @@ struct MagicalCheckBoxButtonStyle: ButtonStyle {
                 .background(getStrokeRect(isPressed: isPressed))
                 .background(getFillRect(isPressed: isPressed))
                 
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(height: CGFloat(outsideBoxPaddingBottom))
             }
             
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight))
         }
     }
@@ -134,22 +134,22 @@ struct MagicalCheckBoxButtonStyle: ButtonStyle {
         
         return HStack(spacing: 0.0) {
 #if INTERFACE_HINTS
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingLeft), height: 24.0)
                 .background(Color(red: 0.15, green: 0.95, blue: 0.55, opacity: 0.40))
 #else
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingLeft))
 #endif
             
             VStack(spacing: 0.0) {
                 
 #if INTERFACE_HINTS
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: 24.0, height: CGFloat(outsideBoxPaddingTop))
                     .background(Color(red: 0.25, green: 0.45, blue: 0.15, opacity: 0.40))
 #else
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(height: CGFloat(outsideBoxPaddingTop))
 #endif
                 
@@ -160,21 +160,21 @@ struct MagicalCheckBoxButtonStyle: ButtonStyle {
                                            layoutHeight: contentLayoutHeight)
                 
 #if INTERFACE_HINTS
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: 24.0, height: CGFloat(outsideBoxPaddingBottom))
                     .background(Color(red: 0.25, green: 0.45, blue: 0.15, opacity: 0.40))
 #else
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(height: CGFloat(outsideBoxPaddingBottom))
 #endif
                 
             }
 #if INTERFACE_HINTS
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight), height: 24.0)
                 .background(Color(red: 0.55, green: 0.35, blue: 0.84, opacity: 0.40))
 #else
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight))
 #endif
         }

@@ -67,6 +67,10 @@ class ToolRow {
     
     var isRowAnimationActive = false
     
+    var animationNodesWillChange = false
+    //var animationNodes = [ToolNode]()
+    //var animationCenterPinnedElement: ToolInterfaceElement?
+    
     @MainActor func setNodes_NotAnimated(_ nodes: [ToolNode],
                                          orientation: Orientation,
                                          menuWidthWithSafeArea: Int,
@@ -74,14 +78,6 @@ class ToolRow {
                                          safeAreaLeft: Int,
                                          safeAreaRight: Int,
                                          centerPinnedElement: ToolInterfaceElement?) {
-        
-        let width = (menuWidthWithSafeArea - safeAreaLeft - safeAreaRight)
-        let layoutStackingCategory = ToolInterfaceViewModel.calculateLayoutStackingCategory(orientation: orientation,
-                                                                                            width: width,
-                                                                                            height: height,
-                                                                                            nodes: nodes,
-                                                                                            centerPinnedElement: centerPinnedElement,
-                                                                                            slot: slot)
         
         isRowAnimationActive = false
         removePreviousNodes()
@@ -114,14 +110,6 @@ class ToolRow {
                                            safeAreaLeft: Int,
                                            safeAreaRight: Int,
                                            centerPinnedElement: ToolInterfaceElement?) {
-        
-        let width = (menuWidthWithSafeArea - safeAreaLeft - safeAreaRight)
-        let layoutStackingCategory = ToolInterfaceViewModel.calculateLayoutStackingCategory(orientation: orientation,
-                                                                                            width: width,
-                                                                                            height: height,
-                                                                                            nodes: nodes,
-                                                                                            centerPinnedElement: centerPinnedElement,
-                                                                                            slot: slot)
         
         isRowAnimationActive = true
         removePreviousNodes()

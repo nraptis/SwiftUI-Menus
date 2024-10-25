@@ -34,27 +34,19 @@ struct MagicalCreateSwatchSegmentButtonButtonStyle: ButtonStyle {
     func getBox(isPressed: Bool) -> some View {
         let boxWidth = magicalButtonViewModel.layoutWidth
         let boxHeight = magicalViewModel.layoutHeight - outsideBoxPaddingTop - outsideBoxPaddingBottom
-        return HStack(spacing: 0.0) {
-            Spacer()
-                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingLeft))
-            
-            VStack(spacing: 0.0) {
-                Spacer()
-                    .frame(height: CGFloat(outsideBoxPaddingTop))
-                ZStack {
-                    
-                }
-                .frame(width: CGFloat(boxWidth),
-                       height: CGFloat(boxHeight))
-                .background(getStrokeRect(isPressed: isPressed))
-                .background(getFillRect(isPressed: isPressed))
+        return VStack(spacing: 0.0) {
+            Spacer(minLength: 0.0)
+                .frame(height: CGFloat(outsideBoxPaddingTop))
+            ZStack {
                 
-                Spacer()
-                    .frame(height: CGFloat(outsideBoxPaddingBottom))
             }
+            .frame(width: CGFloat(boxWidth),
+                   height: CGFloat(boxHeight))
+            .background(getStrokeRect(isPressed: isPressed))
+            .background(getFillRect(isPressed: isPressed))
             
-            Spacer()
-                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight))
+            Spacer(minLength: 0.0)
+                .frame(height: CGFloat(outsideBoxPaddingBottom))
         }
     }
     
@@ -125,48 +117,30 @@ struct MagicalCreateSwatchSegmentButtonButtonStyle: ButtonStyle {
     
     func bodyContent(isPressed: Bool) -> some View {
         let contentLayoutHeight = magicalViewModel.layoutHeight - outsideBoxPaddingTop - outsideBoxPaddingBottom
-        return HStack(spacing: 0.0) {
+        return VStack(spacing: 0.0) {
+            
 #if INTERFACE_HINTS
-            Spacer()
-                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingLeft), height: 24.0)
-                .background(Color(red: 0.99, green: 0.03, blue: 0.98, opacity: 0.40))
+            Spacer(minLength: 0.0)
+                .frame(width: 24.0, height: CGFloat(outsideBoxPaddingTop))
+                .background(Color(red: 0.74, green: 0.39, blue: 0.19, opacity: 0.40))
 #else
-            Spacer()
-                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingLeft))
+            Spacer(minLength: 0.0)
+                .frame(height: CGFloat(outsideBoxPaddingTop))
+#endif
+            MagicalCreateSwatchSegmentContent(layoutSchemeFlavor: layoutSchemeFlavor,
+                                              layoutHeight: contentLayoutHeight,
+                                              isPressed: isPressed,
+                                              isEnabled: isEnabled)
+#if INTERFACE_HINTS
+            Spacer(minLength: 0.0)
+                .frame(width: 24.0, height: CGFloat(outsideBoxPaddingBottom))
+                .background(Color(red: 0.88, green: 0.88, blue: 0.67, opacity: 0.40))
+#else
+            Spacer(minLength: 0.0)
+                .frame(height: CGFloat(outsideBoxPaddingBottom))
 #endif
             
-            VStack(spacing: 0.0) {
-                
-#if INTERFACE_HINTS
-                Spacer()
-                    .frame(width: 24.0, height: CGFloat(outsideBoxPaddingTop))
-                    .background(Color(red: 0.74, green: 0.39, blue: 0.19, opacity: 0.40))
-#else
-                Spacer()
-                    .frame(height: CGFloat(outsideBoxPaddingTop))
-#endif
-                MagicalCreateSwatchSegmentContent(layoutSchemeFlavor: layoutSchemeFlavor,
-                                                  layoutHeight: contentLayoutHeight,
-                                                  isPressed: isPressed,
-                                                  isEnabled: isEnabled)
-#if INTERFACE_HINTS
-                Spacer()
-                    .frame(width: 24.0, height: CGFloat(outsideBoxPaddingBottom))
-                    .background(Color(red: 0.88, green: 0.88, blue: 0.67, opacity: 0.40))
-#else
-                Spacer()
-                    .frame(height: CGFloat(outsideBoxPaddingBottom))
-#endif
-                
-            }
-#if INTERFACE_HINTS
-            Spacer()
-                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight), height: 24.0)
-                .background(Color(red: 0.86, green: 0.00, blue: 0.63, opacity: 0.40))
-#else
-            Spacer()
-                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight))
-#endif
         }
+        
     }
 }

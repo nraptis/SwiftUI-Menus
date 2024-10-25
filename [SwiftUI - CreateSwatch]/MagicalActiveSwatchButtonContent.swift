@@ -104,8 +104,11 @@ struct MagicalActiveSwatchButtonContent: View {
                      nameLabelWidth: nameLabelWidth,
                      lineHeight: lineHeight,
                      nameLabelColor: nameLabelColor)
+            //KLUDGE: TODONR
+            //.offset(x: 1.0)
             
             Spacer(minLength: 0.0)
+            
             ZStack {
                 IconBoxMainTab(icon: checkBoxSquare,
                                iconWidth: slaveWidth,
@@ -125,16 +128,17 @@ struct MagicalActiveSwatchButtonContent: View {
             .opacity(isPressed ? 0.75 : 1.0)
             
 #if INTERFACE_HINTS
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(slavePaddingRight), height: 24.0)
                 .background(Color(red: 0.47, green: 0.87, blue: 0.16, opacity: 0.70))
 #else
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(slavePaddingRight))
 #endif
             
             
         }
+        .frame(width: CGFloat(layoutWidth))
 #if INTERFACE_HINTS
         .overlay(Rectangle().stroke().foregroundStyle(
             LinearGradient(colors: [Color(red: 0.57, green: 0.28, blue: 0.61, opacity: 0.65),

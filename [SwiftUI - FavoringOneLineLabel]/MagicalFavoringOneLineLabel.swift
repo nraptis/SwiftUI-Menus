@@ -46,20 +46,20 @@ struct MagicalFavoringOneLineLabel: View {
         
         return VStack(spacing: 0.0) {
 #if INTERFACE_HINTS
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: 24.0, height: CGFloat(outsideBoxPaddingBottom))
                 .background(Color(red: 0.86, green: 0.65, blue: 0.98, opacity: 0.40))
 #else
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(height: CGFloat(outsideBoxPaddingBottom))
 #endif
             HStack(spacing: 0.0) {
 #if INTERFACE_HINTS
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(outsideBoxPaddingLeft), height: 24.0)
                     .background(Color(red: 0.73, green: 0.91, blue: 0.97, opacity: 0.40))
 #else
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(outsideBoxPaddingLeft))
 #endif
                 
@@ -67,21 +67,21 @@ struct MagicalFavoringOneLineLabel: View {
                                                    layoutHeight: contentLayoutHeight)
                 
 #if INTERFACE_HINTS
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(outsideBoxPaddingRight), height: 24.0)
                     .background(Color(red: 0.92, green: 0.55, blue: 0.75, opacity: 0.40))
 #else
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(outsideBoxPaddingRight))
 #endif
             }
             
 #if INTERFACE_HINTS
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: 24.0, height: CGFloat(outsideBoxPaddingBottom))
                 .background(Color(red: 0.88, green: 0.88, blue: 0.61, opacity: 0.40))
 #else
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(height: CGFloat(outsideBoxPaddingBottom))
 #endif
             

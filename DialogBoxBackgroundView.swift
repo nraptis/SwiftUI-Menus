@@ -10,11 +10,11 @@ import SwiftUI
 struct DialogBoxBackgroundView: View {
     var body: some View {
         VStack {
-            Spacer()
+            Spacer(minLength: 0.0)
             HStack {
-                Spacer()
+                Spacer(minLength: 0.0)
             }
-            Spacer()
+            Spacer(minLength: 0.0)
         }
         .background(Rectangle()
             .foregroundStyle(.regularMaterial)

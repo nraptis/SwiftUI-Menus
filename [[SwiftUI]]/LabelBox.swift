@@ -78,11 +78,11 @@ struct LabelBox: View {
             HStack(spacing: 0.0) {
                 
 #if INTERFACE_HINTS
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(paddingLeft), height: 12.0)
                     .background(Color(red: 0.75, green: 0.85, blue: 0.35))
 #else
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(paddingLeft))
 #endif
                 
@@ -116,11 +116,11 @@ struct LabelBox: View {
 #endif
                 
 #if INTERFACE_HINTS
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(paddingRight), height: 12.0)
                     .background(Color(red: 0.75, green: 0.35, blue: 0.85))
 #else
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(paddingRight))
 #endif
                 
@@ -132,11 +132,11 @@ struct LabelBox: View {
                 
                 
 #if INTERFACE_HINTS
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(paddingLeft), height: 12.0)
                     .background(Color(red: 0.75, green: 0.35, blue: 0.85))
 #else
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(paddingLeft))
 #endif
                 
@@ -170,11 +170,11 @@ struct LabelBox: View {
 #endif
                 
 #if INTERFACE_HINTS
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(paddingRight), height: 12.0)
                     .background(Color(red: 0.75, green: 0.85, blue: 0.35))
 #else
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(paddingRight))
 #endif
             }
@@ -191,11 +191,11 @@ struct LabelBox: View {
             HStack(spacing: 0.0) {
                 
 #if INTERFACE_HINTS
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(paddingLeft), height: 12.0)
                     .background(Color(red: 0.75, green: 0.85, blue: 0.35))
 #else
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(paddingLeft))
 #endif
                 
@@ -229,11 +229,11 @@ struct LabelBox: View {
 #endif
                 
 #if INTERFACE_HINTS
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(paddingRight), height: 12.0)
                     .background(Color(red: 0.75, green: 0.35, blue: 0.85))
 #else
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(paddingRight))
 #endif
                 

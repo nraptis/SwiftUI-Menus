@@ -66,6 +66,9 @@ enum LayoutSchemeSqueeze {
 
 protocol LayoutScheme {
     
+    static func getWallPaddingLeft(orientation: Orientation) -> Int
+    static func getWallPaddingRight(orientation: Orientation) -> Int
+    
     static func getValueLabelFont(orientation: Orientation, flavor: LayoutSchemeFlavor) -> UIFont
     static func getValuePaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
     static func getValuePaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
@@ -100,6 +103,30 @@ protocol LayoutScheme {
 
 extension LayoutScheme {
     
+    static func getWallPaddingLeft(orientation: Orientation) -> Int {
+        if Device.isPad {
+            return 8
+        } else {
+            if orientation.isLandscape {
+                return 4
+            } else {
+                return 8
+            }
+        }
+    }
+    
+    static func getWallPaddingRight(orientation: Orientation) -> Int {
+        if Device.isPad {
+            return 8
+        } else {
+            if orientation.isLandscape {
+                return 4
+            } else {
+                return 8
+            }
+        }
+    }
+    
     static func getValuePaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
         switch squeeze {
         case .squeezed:
@@ -121,15 +148,25 @@ extension LayoutScheme {
         }
     }
     
+    /*
     static func getOutsideBoxPaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
                                                 neighborTypeRight: ToolInterfaceElementType?) -> Int {
-        2
+        if neighborTypeLeft == nil {
+            return 120
+        } else {
+            return 2
+        }
     }
     
     static func getOutsideBoxPaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
                                                  neighborTypeRight: ToolInterfaceElementType?) -> Int {
-        2
+        if neighborTypeRight == nil {
+            return 60
+        } else {
+            return 2
+        }
     }
+    */
     
     static func getHeroPaddingLeftStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
         if Device.isPad {

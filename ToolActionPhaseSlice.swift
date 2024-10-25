@@ -23,7 +23,8 @@ enum ToolActionPhaseSliceType {
     case setAnimationContinuousMode
     case setAnimationLoopsPage
     case setTimeLinePage2Mode
-    
+    case setGraphPage2Mode
+    case setAnimationContinuousPage2Mode
     
     case setTimeLineMode
     case setStereoscopicMode
@@ -198,6 +199,32 @@ class ToolActionPhaseSliceSetTimeLinePage2Mode: ToolActionPhaseSlice {
     deinit {
         if ApplicationController.DEBUG_DEALLOCS {
             print("[--] ToolActionPhaseSliceSetTimeLinePage2Mode")
+        }
+    }
+}
+
+class ToolActionPhaseSliceSetGraphPage2Mode: ToolActionPhaseSlice {
+    let isGraphPage2Mode: Bool
+    init(isGraphPage2Mode: Bool) {
+        self.isGraphPage2Mode = isGraphPage2Mode
+        super.init(toolActionPhaseSliceType: .setGraphPage2Mode, sleepTicks: 0)
+    }
+    deinit {
+        if ApplicationController.DEBUG_DEALLOCS {
+            print("[--] ToolActionPhaseSliceSetGraphPage2Mode")
+        }
+    }
+}
+
+class ToolActionPhaseSliceSetAnimationContinuousPage2Mode: ToolActionPhaseSlice {
+    let isAnimationContinuousPage2Mode: Bool
+    init(isAnimationContinuousPage2Mode: Bool) {
+        self.isAnimationContinuousPage2Mode = isAnimationContinuousPage2Mode
+        super.init(toolActionPhaseSliceType: .setAnimationContinuousPage2Mode, sleepTicks: 0)
+    }
+    deinit {
+        if ApplicationController.DEBUG_DEALLOCS {
+            print("[--] ToolActionPhaseSliceSetAnimationContinuousPage2Mode")
         }
     }
 }

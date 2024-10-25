@@ -23,6 +23,156 @@ enum ToolInterfaceElementType: UInt16 {
     case favoringOneLineLabel
     case createSwatch
     case checkBox
+}
+
+struct ToolInterfaceElementTable {
+    
+    static var lookUpTable = [ToolInterfaceElement: ToolInterfaceElementType]()
+    static func build() {
+        
+        lookUpTable[.checkBoxDarkMode] = .checkBox
+        lookUpTable[.checkBoxGyroscopeEnabled] = .checkBox
+        lookUpTable[.checkBoxRecordAudioEnabled] = .checkBox
+        lookUpTable[.checkBoxStereoscopicEnabled] = .checkBox
+        lookUpTable[.checkBoxAnimationGrabApplyToAll] = .checkBox
+        lookUpTable[.checkBoxAnimationLoopApplyToAll] = .checkBox
+        lookUpTable[.checkBoxPurchasedEnabled] = .checkBox
+        lookUpTable[.checkBoxImageImporterRotationEnabled] = .checkBox
+        lookUpTable[.checkBoxImageImporterEdgesEnabled] = .checkBox
+        
+        lookUpTable[.stepperTimelinePointCount] = .stepper
+        lookUpTable[.stepperGemCount] = .stepper
+        lookUpTable[.stepperCoinCount] = .stepper
+        
+        lookUpTable[.buttonUndo] = .button
+        lookUpTable[.buttonRedo] = .button
+        lookUpTable[.buttonMenu] = .button
+        lookUpTable[.buttonRotateJiggleRight] = .button
+        lookUpTable[.buttonRotateJiggleLeft] = .button
+        lookUpTable[.buttonRotateGuideLeft] = .button
+        lookUpTable[.buttonRotateGuideRight] = .button
+        lookUpTable[.buttonFlipJiggleH] = .button
+        lookUpTable[.buttonFlipJiggleV] = .button
+        lookUpTable[.buttonFlipGuideH] = .button
+        lookUpTable[.buttonFlipGuideV] = .button
+        lookUpTable[.buttonFreezeSelectedJiggle] = .button
+        lookUpTable[.buttonFreezeSelectedGuide] = .button
+        lookUpTable[.buttonUnfreezeAllJiggles] = .button
+        lookUpTable[.buttonUnfreezeAllGuides] = .button
+        lookUpTable[.buttonCloneJiggle] = .button
+        lookUpTable[.buttonCloneGuide] = .button
+        lookUpTable[.buttonDeleteJiggle] = .button
+        lookUpTable[.buttonDeleteGuide] = .button
+        lookUpTable[.buttonDeleteJigglePoint] = .button
+        lookUpTable[.buttonDeleteGuidePoint] = .button
+        lookUpTable[.buttonTimeLineDupeAll] = .button
+        lookUpTable[.buttonTimeLineDupeDuration] = .button
+        lookUpTable[.buttonTimeLineDupeCurrentChannel] = .button
+        lookUpTable[.buttonTimeLineResetFlatCurrentChannel] = .button
+        lookUpTable[.buttonTimeLineResetDefaultCurrentChannel] = .button
+        lookUpTable[.buttonTimeLineBreakPoint] = .button
+        lookUpTable[.buttonTimeLineInvertH] = .button
+        lookUpTable[.buttonTimeLineInvertV] = .button
+        lookUpTable[.buttonTimeLineResetCurve] = .button
+        lookUpTable[.buttonTimeLineAmplify] = .button
+        lookUpTable[.buttonTimeLineDampen] = .button
+        lookUpTable[.buttonTimeLineFlipAll] = .button
+        lookUpTable[.buttonSelectNextJigglePoint] = .button
+        lookUpTable[.buttonSelectPreviousJigglePoint] = .button
+        lookUpTable[.buttonSelectNextGuidePoint] = .button
+        lookUpTable[.buttonSelectPreviousGuidePoint] = .button
+        lookUpTable[.buttonSelectNextJiggle] = .button
+        lookUpTable[.buttonSelectPreviousJiggle] = .button
+        lookUpTable[.buttonSelectNextGuide] = .button
+        lookUpTable[.buttonSelectPreviousGuide] = .button
+        lookUpTable[.buttonZoomReset] = .button
+        lookUpTable[.buttonZoomJiggle] = .button
+        lookUpTable[.buttonBreakTangentWeightGraph] = .button
+        lookUpTable[.buttonGenerateTopography] = .button
+        lookUpTable[.buttonResetWeightGraphInverse] = .button
+        lookUpTable[.buttonResetWeightGraphInverseDampened] = .button
+        lookUpTable[.buttonResetWeightGraphLinear] = .button
+        lookUpTable[.buttonResetWeightGraphLinearDampened] = .button
+        lookUpTable[.buttonResetWeightGraphStandard] = .button
+        lookUpTable[.buttonResetWeightGraphStandardDampened] = .button
+        lookUpTable[.buttonSwivelPanLeft] = .button
+        lookUpTable[.buttonSwivelPanReset] = .button
+        lookUpTable[.buttonSwivelPanRight] = .button
+        lookUpTable[.buttonZoomIn] = .button
+        lookUpTable[.buttonZoomOut] = .button
+        lookUpTable[.buttonImageImporterRotateRight] = .button
+        lookUpTable[.buttonImageImporterRotateLeft] = .button
+        lookUpTable[.buttonImageImporterResetAspectFit] = .button
+        lookUpTable[.buttonImageImporterResetAspectFill] = .button
+        lookUpTable[.buttonImageImporterButtonBack] = .button
+        lookUpTable[.buttonLoadScreenButtonBack] = .button
+        
+        lookUpTable[.createSwatchMakeAndDrawJiggle] = .createSwatch
+        lookUpTable[.createSwatchMakeAndDrawGuide] = .createSwatch
+        lookUpTable[.createSwatchAddAndRemoveJigglePoints] = .createSwatch
+        lookUpTable[.createSwatchAddAndRemoveGuidePoints] = .createSwatch
+        
+        lookUpTable[.enterModeZoom] = .enterMode
+        lookUpTable[.enterModeGuides] = .enterMode
+        lookUpTable[.enterModeGraph] = .enterMode
+        lookUpTable[.enterModeAnimationLoops] = .enterMode
+        lookUpTable[.enterModeVideoRecord] = .enterMode
+        lookUpTable[.enterModeVideoExport] = .enterMode
+        lookUpTable[.enterModeTimeLine] = .enterMode
+        lookUpTable[.enterModeTimeLinePage2] = .enterMode
+        lookUpTable[.enterModeGraphPage2] = .enterMode
+        lookUpTable[.enterModeLoopsPage1] = .enterMode
+        lookUpTable[.enterModeLoopsPage2] = .enterMode
+        lookUpTable[.enterModeLoopsPage3] = .enterMode
+        lookUpTable[.enterModeAnimationContinuous] = .enterMode
+        lookUpTable[.enterModeAnimationContinuousPage2] = .enterMode
+        
+        lookUpTable[.exitModeZoom] = .exitMode
+        lookUpTable[.exitModeGuides] = .exitMode
+        lookUpTable[.exitModeGraph] = .exitMode
+        lookUpTable[.exitModeAnimationLoops] = .exitMode
+        lookUpTable[.exitModeVideoRecord] = .exitMode
+        lookUpTable[.exitModeVideoExport] = .exitMode
+        lookUpTable[.exitModeTimeLine] = .exitMode
+        lookUpTable[.exitModeAnimationContinuous] = .exitMode
+        lookUpTable[.exitModeTimeLinePage2] = .exitMode
+        lookUpTable[.exitModeGraphPage2] = .exitMode
+        
+        
+        lookUpTable[.exitModeLoopsPage1] = .exitMode
+        lookUpTable[.exitModeLoopsPage2] = .exitMode
+        lookUpTable[.exitModeLoopsPage3] = .exitMode
+        lookUpTable[.exitModeAnimationContinuousPage2] = .exitMode
+        
+        
+        lookUpTable[.greenButtonCreateScene] = .greenButton
+        lookUpTable[.greenButtonDone] = .greenButton
+        
+        lookUpTable[.mainTabDocumentMode] = .mainTab
+        lookUpTable[.mainTabJainTest] = .mainTab
+        lookUpTable[.mainTabSkainTest] = .mainTab
+        
+        lookUpTable[.sliderBouncePower] = .slider
+        lookUpTable[.sliderBounceSpeed] = .slider
+        lookUpTable[.sliderJigglePower] = .slider
+        lookUpTable[.sliderJiggleSpeed] = .slider
+        lookUpTable[.sliderLoopSpeed] = .slider
+        lookUpTable[.sliderZoomAmount] = .slider
+        lookUpTable[.sliderJiggleOpacity] = .slider
+        lookUpTable[.sliderJiggleDampen] = .slider
+        lookUpTable[.sliderTimeLineDuration] = .slider
+        lookUpTable[.sliderTimeLineOffset] = .slider
+        
+        lookUpTable[.segmentEditMode] = .segment
+        lookUpTable[.segmentWeightMode] = .segment
+        lookUpTable[.segmentAnimationMode] = .segment
+        
+        lookUpTable[.favoringOneLineLabel] = .favoringOneLineLabel
+        lookUpTable[.dividerTiny] = .dividerTiny
+        lookUpTable[.dividerHuge] = .dividerHuge
+        lookUpTable[.dividerSpacerDivider] = .dividerSpacerDivider
+        lookUpTable[.spacer] = .spacer
+    }
     
 }
 
@@ -30,51 +180,40 @@ enum ToolInterfaceElement: UInt16 {
     
     case checkBoxDarkMode
     case checkBoxGyroscopeEnabled
-    //case checkBoxAutoLoopEnabled
     case checkBoxRecordAudioEnabled
     case checkBoxStereoscopicEnabled
     case checkBoxAnimationGrabApplyToAll
     case checkBoxAnimationLoopApplyToAll
-    //case checkBoxAnimationTwistApplyToAll
     case checkBoxPurchasedEnabled
-    //case checkBoxAnimationWobbleApplyToAll
+    
     case checkBoxImageImporterRotationEnabled
     case checkBoxImageImporterEdgesEnabled
-    
-    
     
     case stepperTimelinePointCount
     case stepperGemCount
     case stepperCoinCount
     
-    
     case buttonUndo
     case buttonRedo
-    
     case buttonMenu
     case buttonRotateJiggleRight
     case buttonRotateJiggleLeft
     case buttonRotateGuideLeft
     case buttonRotateGuideRight
-    
     case buttonFlipJiggleH
     case buttonFlipJiggleV
     case buttonFlipGuideH
     case buttonFlipGuideV
-    
     case buttonFreezeSelectedJiggle
     case buttonFreezeSelectedGuide
     case buttonUnfreezeAllJiggles
     case buttonUnfreezeAllGuides
-    
     case buttonCloneJiggle
     case buttonCloneGuide
     case buttonDeleteJiggle
     case buttonDeleteGuide
     case buttonDeleteJigglePoint
     case buttonDeleteGuidePoint
-    
-    
     case buttonTimeLineDupeAll
     case buttonTimeLineDupeDuration
     case buttonTimeLineDupeCurrentChannel
@@ -95,10 +234,8 @@ enum ToolInterfaceElement: UInt16 {
     case buttonSelectPreviousJiggle
     case buttonSelectNextGuide
     case buttonSelectPreviousGuide
-    
     case buttonZoomReset
     case buttonZoomJiggle
-    
     case buttonBreakTangentWeightGraph
     case buttonGenerateTopography
     case buttonResetWeightGraphInverse
@@ -110,18 +247,8 @@ enum ToolInterfaceElement: UInt16 {
     case buttonSwivelPanLeft
     case buttonSwivelPanReset
     case buttonSwivelPanRight
-    case buttonSwivelRotateLeft
-    case buttonSwivelRotateReset
-    case buttonSwivelRotateRight
-    case buttonSwivelTiltDown
-    case buttonSwivelTiltReset
-    case buttonSwivelTiltUp
-    case buttonSwivelZoomIn
-    case buttonSwivelZoomOut
-    case buttonSwivelZoomReset
     case buttonZoomIn
     case buttonZoomOut
-    
     
     case buttonImageImporterRotateRight
     case buttonImageImporterRotateLeft
@@ -144,13 +271,12 @@ enum ToolInterfaceElement: UInt16 {
     case enterModeVideoExport
     case enterModeTimeLine
     case enterModeTimeLinePage2
-    
-    
+    case enterModeGraphPage2
     case enterModeLoopsPage1
     case enterModeLoopsPage2
     case enterModeLoopsPage3
     case enterModeAnimationContinuous
-    
+    case enterModeAnimationContinuousPage2
     
     case exitModeZoom
     case exitModeGuides
@@ -161,17 +287,19 @@ enum ToolInterfaceElement: UInt16 {
     case exitModeTimeLine
     case exitModeAnimationContinuous
     case exitModeTimeLinePage2
+    case exitModeGraphPage2
+    case exitModeAnimationContinuousPage2
+    
+    case exitModeLoopsPage1
     case exitModeLoopsPage2
     case exitModeLoopsPage3
     
     case greenButtonCreateScene
     case greenButtonDone
     
-    
     case mainTabDocumentMode
     case mainTabJainTest
     case mainTabSkainTest
-    
     
     case sliderBouncePower
     case sliderBounceSpeed
@@ -183,12 +311,6 @@ enum ToolInterfaceElement: UInt16 {
     case sliderJiggleDampen
     case sliderTimeLineDuration
     case sliderTimeLineOffset
-    
-
-    
-    
-
-    
     
     case segmentEditMode
     case segmentWeightMode
@@ -202,345 +324,10 @@ enum ToolInterfaceElement: UInt16 {
     
     case favoringOneLineLabel
     
-    
     var type: ToolInterfaceElementType {
-        switch self {
-            
-        case .checkBoxDarkMode:
-            return .checkBox
-            
-        case .checkBoxGyroscopeEnabled:
-            return .checkBox
-            
-        case .checkBoxRecordAudioEnabled:
-            return .checkBox
-        case .checkBoxStereoscopicEnabled:
-            return .checkBox
-        case .checkBoxAnimationGrabApplyToAll:
-            return .checkBox
-        case .checkBoxAnimationLoopApplyToAll:
-            return .checkBox
-            
-            
-        case .checkBoxImageImporterRotationEnabled:
-            return .checkBox
-        case .checkBoxImageImporterEdgesEnabled:
-            return .checkBox
-        case .checkBoxPurchasedEnabled:
-            return .checkBox
-            
-        case .stepperTimelinePointCount:
-            return .stepper
-        case .stepperGemCount:
-            return .stepper
-        case .stepperCoinCount:
-            return .stepper
-            
-            
-        case .buttonUndo:
-            return .button
-        case .buttonRedo:
-            return .button
-            
-        case .buttonMenu:
-            return .button
-        case .buttonRotateJiggleRight:
-            return .button
-        case .buttonRotateJiggleLeft:
-            return .button
-            
-        case .buttonRotateGuideLeft:
-            return .button
-        case .buttonRotateGuideRight:
-            return .button
-        case .buttonFlipJiggleH:
-            return .button
-        case .buttonFlipJiggleV:
-            return .button
-        case .buttonFlipGuideH:
-            return .button
-        case .buttonFlipGuideV:
-            return .button
-            
-            
-        case .buttonFreezeSelectedJiggle:
-            return .button
-        case .buttonFreezeSelectedGuide:
-            return .button
-        case .buttonUnfreezeAllJiggles:
-            return .button
-        case .buttonUnfreezeAllGuides:
-            return .button
-            
-            
-            
-            
-        case .buttonCloneJiggle:
-            return .button
-        case .buttonCloneGuide:
-            return .button
-        case .buttonDeleteJiggle:
-            return .button
-        case .buttonDeleteGuide:
-            return .button
-        case .buttonDeleteJigglePoint:
-            return .button
-        case .buttonDeleteGuidePoint:
-            return .button
-            
-            
-        case .buttonTimeLineDupeAll:
-            return .button
-        case .buttonTimeLineDupeDuration:
-            return .button
-        case .buttonTimeLineDupeCurrentChannel:
-            return .button
-        case .buttonTimeLineResetFlatCurrentChannel:
-            return .button
-        case .buttonTimeLineResetDefaultCurrentChannel:
-            return .button
-            
-        case .buttonTimeLineBreakPoint:
-            return .button
-            
-        case .buttonTimeLineInvertH:
-            return .button
-        case .buttonTimeLineInvertV:
-            return .button
-        case .buttonTimeLineResetCurve:
-            return .button
-            
-        case .buttonTimeLineAmplify:
-            return .button
-        case .buttonTimeLineDampen:
-            return .button
-            
-        case .buttonTimeLineFlipAll:
-            return .button
-            
-            
-            
-        case .buttonSelectNextJigglePoint:
-            return .button
-        case .buttonSelectPreviousJigglePoint:
-            return .button
-        case .buttonSelectNextGuidePoint:
-            return .button
-        case .buttonSelectPreviousGuidePoint:
-            return .button
-            
-        case .buttonSelectNextJiggle:
-            return .button
-        case .buttonSelectPreviousJiggle:
-            return .button
-        case .buttonSelectNextGuide:
-            return .button
-        case .buttonSelectPreviousGuide:
-            return .button
-        case .buttonZoomReset:
-            return .button
-        case .buttonZoomJiggle:
-            return .button
-            
-        case .buttonBreakTangentWeightGraph:
-            return .button
-            
-        case .buttonGenerateTopography:
-            return .button
-            
-        case .buttonResetWeightGraphInverse:
-            return .button
-            
-        case .buttonResetWeightGraphInverseDampened:
-            return .button
-            
-        case .buttonResetWeightGraphLinear:
-            return .button
-            
-        case .buttonResetWeightGraphLinearDampened:
-            return .button
-            
-        case .buttonResetWeightGraphStandard:
-            return .button
-            
-        case .buttonResetWeightGraphStandardDampened:
-            return .button
-            
-        case .buttonSwivelPanLeft:
-            return .button
-            
-        case .buttonSwivelPanReset:
-            return .button
-            
-        case .buttonSwivelPanRight:
-            return .button
-            
-        case .buttonSwivelRotateLeft:
-            return .button
-            
-        case .buttonSwivelRotateReset:
-            return .button
-            
-        case .buttonSwivelRotateRight:
-            return .button
-            
-        case .buttonSwivelTiltDown:
-            return .button
-            
-        case .buttonSwivelTiltReset:
-            return .button
-            
-        case .buttonSwivelTiltUp:
-            return .button
-            
-        case .buttonSwivelZoomIn:
-            return .button
-            
-        case .buttonSwivelZoomOut:
-            return .button
-            
-        case .buttonSwivelZoomReset:
-            return .button
-            
-        case .buttonZoomIn:
-            return .button
-            
-        case .buttonZoomOut:
-            return .button
-            
-            
-        case .buttonImageImporterRotateRight:
-            return .button
-        case .buttonImageImporterRotateLeft:
-            return .button
-        case .buttonImageImporterResetAspectFit:
-            return .button
-        case .buttonImageImporterResetAspectFill:
-            return .button
-        case .buttonImageImporterButtonBack:
-            return .button
-        case .buttonLoadScreenButtonBack:
-            return .button
-            
-            
-
-            
-        case .createSwatchMakeAndDrawJiggle:
-            return .createSwatch
-        case .createSwatchMakeAndDrawGuide:
-            return .createSwatch
-        case .createSwatchAddAndRemoveJigglePoints:
-            return .createSwatch
-        case .createSwatchAddAndRemoveGuidePoints:
-            return .createSwatch
-            
-            
-        case .enterModeZoom:
-            return .enterMode
-        case .enterModeGuides:
-            return .enterMode
-        case .enterModeGraph:
-            return .enterMode
-        case .enterModeAnimationLoops:
-            return .enterMode
-        case .enterModeVideoRecord:
-            return .enterMode
-        case .enterModeVideoExport:
-            return .enterMode
-        case .enterModeTimeLine:
-            return .enterMode
-        case .enterModeLoopsPage1:
-            return .enterMode
-        case .enterModeLoopsPage2:
-            return .enterMode
-        case .enterModeLoopsPage3:
-            return .enterMode
-        case .enterModeAnimationContinuous:
-            return .enterMode
-        case .enterModeTimeLinePage2:
-            return .enterMode
-            
-            
-        case .exitModeZoom:
-            return .exitMode
-        case .exitModeGuides:
-            return .exitMode
-        case .exitModeGraph:
-            return .exitMode
-        case .exitModeAnimationLoops:
-            return .exitMode
-        case .exitModeVideoRecord:
-            return .exitMode
-        case .exitModeVideoExport:
-            return .exitMode
-        case .exitModeTimeLine:
-            return .exitMode
-        case .exitModeAnimationContinuous:
-            return .exitMode
-        case .exitModeTimeLinePage2:
-            return .exitMode
-            
-        case .exitModeLoopsPage2:
-            return .exitMode
-        case .exitModeLoopsPage3:
-            return .exitMode
-            
-            
-        case .mainTabDocumentMode:
-            return .mainTab
-        case .mainTabJainTest:
-            return .mainTab
-        case .mainTabSkainTest:
-            return .mainTab
-            
-            
-        case .favoringOneLineLabel:
-            return .favoringOneLineLabel
-        case .greenButtonCreateScene:
-            return .greenButton
-        case .greenButtonDone:
-            return .greenButton
-        case .sliderBouncePower:
-            return .slider
-        case .sliderBounceSpeed:
-            return .slider
-        case .sliderJigglePower:
-            return .slider
-        case .sliderJiggleSpeed:
-            return .slider
-        case .sliderLoopSpeed:
-            return .slider
-        case .sliderZoomAmount:
-            return .slider
-        case .sliderJiggleOpacity:
-            return .slider
-        case .sliderJiggleDampen:
-            return .slider
-        case .sliderTimeLineDuration:
-            return .slider
-        case .sliderTimeLineOffset:
-            return .slider
-            
-            
-        case .segmentEditMode:
-            return .segment
-        case .segmentWeightMode:
-            return .segment
-        case .segmentAnimationMode:
-            return .segment
-
-            
-        case .spacer:
-            return .spacer
-            
-        case .dividerTiny:
-            return .dividerTiny
-        case .dividerHuge:
-            return .dividerHuge
-        case .dividerSpacerDivider:
-            return .dividerSpacerDivider
-
-            
+        guard let result = ToolInterfaceElementTable.lookUpTable[self] else {
+            fatalError("Expected a type lookup for \(self)")
         }
+        return result
     }
 }

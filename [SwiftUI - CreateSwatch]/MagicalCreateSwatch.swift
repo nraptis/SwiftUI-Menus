@@ -43,11 +43,11 @@ struct MagicalCreateSwatch: View {
         let contentLayoutWidth = magicalViewModel.layoutWidth - outsideBoxPaddingLeft - outsideBoxPaddingRight
         return HStack(spacing: 0.0) {
 #if INTERFACE_HINTS
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(outsideBoxPaddingLeft), height: 28.0)
                 .background(Color(red: 0.45, green: 0.85, blue: 0.65, opacity: 0.40))
 #else
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(outsideBoxPaddingLeft))
 #endif
             MagicalCreateSwatchGuts(layoutSchemeFlavor: layoutSchemeFlavor,
@@ -55,11 +55,11 @@ struct MagicalCreateSwatch: View {
                                     outsideBoxPaddingTop: outsideBoxPaddingTop,
                                     outsideBoxPaddingBottom: outsideBoxPaddingBottom)
 #if INTERFACE_HINTS
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(outsideBoxPaddingRight), height: 28.0)
                 .background(Color(red: 1.0, green: 0.75, blue: 0.25, opacity: 0.40))
 #else
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(outsideBoxPaddingRight))
 #endif
             

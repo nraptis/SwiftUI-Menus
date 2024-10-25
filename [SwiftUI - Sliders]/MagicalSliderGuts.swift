@@ -85,11 +85,11 @@ struct MagicalSliderGuts: View {
             HStack {
                 
 #if INTERFACE_HINTS
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(extraPaddingLeft), height: 33)
                     .background(Color.yellow.opacity(0.5))
 #else
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(extraPaddingLeft))
 #endif
                 
@@ -118,11 +118,11 @@ struct MagicalSliderGuts: View {
             HStack(spacing: 0.0) {
                 
 #if INTERFACE_HINTS
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(valuePaddingLeft), height: 12.0)
                     .background(Color(red: 0.98, green: 0.65, blue: 0.125, opacity: 0.5))
 #else
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(valuePaddingLeft))
 #endif
                 
@@ -132,11 +132,11 @@ struct MagicalSliderGuts: View {
                         .foregroundColor(textColor)
                 
 #if INTERFACE_HINTS
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(valuePaddingRight), height: 12.0)
                     .background(Color(red: 0.98, green: 0.65, blue: 0.125, opacity: 0.5))
 #else
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(valuePaddingRight))
 #endif
                 

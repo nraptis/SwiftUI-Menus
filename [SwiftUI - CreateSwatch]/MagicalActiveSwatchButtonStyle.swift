@@ -14,6 +14,7 @@ struct MagicalActiveSwatchButtonStyle: ButtonStyle {
     let activeButtonConfiguration: ToolInterfaceElementCreateSwatchButtonConfiguration
     let firstButtonViewModel: MagicalSegmentButtonViewModel
     let layoutSchemeFlavor: LayoutSchemeFlavor
+    let layoutWidth: Int
     let outsideBoxPaddingTop: Int
     let outsideBoxPaddingBottom: Int
     let isEnabled: Bool
@@ -24,7 +25,7 @@ struct MagicalActiveSwatchButtonStyle: ButtonStyle {
             getBox(isPressed: configuration.isPressed)
             bodyContent(isPressed: configuration.isPressed)
         }
-        .frame(width: CGFloat(magicalViewModel.layoutWidth),
+        .frame(width: CGFloat(layoutWidth),
                height: CGFloat(magicalViewModel.layoutHeight))
         .transaction { transaction in
             transaction.animation = nil
@@ -32,31 +33,22 @@ struct MagicalActiveSwatchButtonStyle: ButtonStyle {
     }
     
     func getBox(isPressed: Bool) -> some View {
-        
-        let boxWidth = magicalViewModel.layoutWidth - magicalViewModel.outsideBoxPaddingLeft - magicalViewModel.outsideBoxPaddingRight
         let boxHeight = magicalViewModel.layoutHeight - outsideBoxPaddingTop - outsideBoxPaddingBottom
-        
         return HStack(spacing: 0.0) {
-            Spacer()
-                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingLeft))
-            
             VStack(spacing: 0.0) {
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(height: CGFloat(outsideBoxPaddingTop))
                 ZStack {
                     
                 }
-                .frame(width: CGFloat(boxWidth),
+                .frame(width: CGFloat(layoutWidth),
                        height: CGFloat(boxHeight))
                 .background(getStrokeRect(isPressed: isPressed))
                 .background(getFillRect(isPressed: isPressed))
                 
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(height: CGFloat(outsideBoxPaddingBottom))
             }
-            
-            Spacer()
-                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight))
         }
     }
     
@@ -79,7 +71,6 @@ struct MagicalActiveSwatchButtonStyle: ButtonStyle {
                 color = ToolInterfaceTheme.createSwatchActiveBorderLight
             }
         }
-        
         return RoundedRectangle(cornerRadius: CGFloat(cornerRadius))
             .stroke(style: StrokeStyle(lineWidth: CGFloat(lineThickness)))
             .foregroundStyle(color)
@@ -108,56 +99,37 @@ struct MagicalActiveSwatchButtonStyle: ButtonStyle {
     
     func bodyContent(isPressed: Bool) -> some View {
         
-        let contentLayoutWidth = magicalViewModel.layoutWidth - magicalViewModel.outsideBoxPaddingLeft - magicalViewModel.outsideBoxPaddingRight
         let contentLayoutHeight = magicalViewModel.layoutHeight - outsideBoxPaddingTop - outsideBoxPaddingBottom
         
-        return HStack(spacing: 0.0) {
+        return VStack(spacing: 0.0) {
+            
 #if INTERFACE_HINTS
-            Spacer()
-                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingLeft), height: 24.0)
-                .background(Color(red: 0.15, green: 0.95, blue: 0.55, opacity: 0.40))
+            Spacer(minLength: 0.0)
+                .frame(width: 24.0, height: CGFloat(outsideBoxPaddingTop))
+                .background(Color(red: 0.25, green: 0.45, blue: 0.15, opacity: 0.40))
 #else
-            Spacer()
-                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingLeft))
+            Spacer(minLength: 0.0)
+                .frame(height: CGFloat(outsideBoxPaddingTop))
 #endif
             
-            VStack(spacing: 0.0) {
-                
+            MagicalActiveSwatchButtonContent(activeButtonViewModel: activeButtonViewModel,
+                                             activeButtonConfiguration: activeButtonConfiguration,
+                                             firstButtonViewModel: firstButtonViewModel,
+                                             layoutSchemeFlavor: layoutSchemeFlavor,
+                                             isPressed: isPressed,
+                                             isEnabled: isEnabled,
+                                             layoutWidth: layoutWidth,
+                                             layoutHeight: contentLayoutHeight)
+            
 #if INTERFACE_HINTS
-                Spacer()
-                    .frame(width: 24.0, height: CGFloat(outsideBoxPaddingTop))
-                    .background(Color(red: 0.25, green: 0.45, blue: 0.15, opacity: 0.40))
+            Spacer(minLength: 0.0)
+                .frame(width: 24.0, height: CGFloat(outsideBoxPaddingBottom))
+                .background(Color(red: 0.25, green: 0.45, blue: 0.15, opacity: 0.40))
 #else
-                Spacer()
-                    .frame(height: CGFloat(outsideBoxPaddingTop))
+            Spacer(minLength: 0.0)
+                .frame(height: CGFloat(outsideBoxPaddingBottom))
 #endif
-                
-                MagicalActiveSwatchButtonContent(activeButtonViewModel: activeButtonViewModel,
-                                           activeButtonConfiguration: activeButtonConfiguration,
-                                           firstButtonViewModel: firstButtonViewModel,
-                                           layoutSchemeFlavor: layoutSchemeFlavor,
-                                           isPressed: isPressed,
-                                           isEnabled: isEnabled,
-                                           layoutWidth: contentLayoutWidth,
-                                           layoutHeight: contentLayoutHeight)
-#if INTERFACE_HINTS
-                Spacer()
-                    .frame(width: 24.0, height: CGFloat(outsideBoxPaddingBottom))
-                    .background(Color(red: 0.25, green: 0.45, blue: 0.15, opacity: 0.40))
-#else
-                Spacer()
-                    .frame(height: CGFloat(outsideBoxPaddingBottom))
-#endif
-                
-            }
-#if INTERFACE_HINTS
-            Spacer()
-                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight), height: 24.0)
-                .background(Color(red: 0.55, green: 0.35, blue: 0.84, opacity: 0.40))
-#else
-            Spacer()
-                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight))
-#endif
+            
         }
     }
 }

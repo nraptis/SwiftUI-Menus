@@ -354,7 +354,7 @@ struct ToolInterfaceElementCheckBoxConfiguration {
 
 }
 
-enum ToolInterfaceElementSliderWidthCategory {
+enum ToolInterfaceElementSliderWidthCategory: UInt8 {
     case fullWidth
     case stretch
     case halfWidthLeft // There may be a 1 pixel difference

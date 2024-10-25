@@ -9,6 +9,14 @@ import Foundation
 import Observation
 import Combine
 
+
+// These are the menu flavors
+
+// JiggleAffine
+// JigglePoints
+
+
+
 var toolNodeBaseID = UInt16(0)
 func getToolNodeID() -> UInt16 {
     toolNodeBaseID += 1
@@ -17,11 +25,22 @@ func getToolNodeID() -> UInt16 {
 
 @Observable class ToolInterfaceViewModel {
     
+    @MainActor @ObservationIgnored var rowRecipeTable = [ToolRowSlot: RowRecipe]()
+    @MainActor func isRowRecipeOnSlot(recipe: RowRecipe, slot: ToolRowSlot) -> Bool {
+        rowRecipeTable[slot] == recipe
+    }
+    @MainActor func storeRowRecipeOnSlot(recipe: RowRecipe, slot: ToolRowSlot) {
+        rowRecipeTable[slot] = recipe
+    }
+    @MainActor func getNodesFromRecipe(recipe: RowRecipe) -> [ToolNode] {
+        ToolInterfaceFactory.generateNodes(orientation: orientation, inrs: recipe.inrs)
+    }
+    
     @MainActor func reloadAllRows() {
         let interfaceConfiguration = getCurrentInterfaceConfiguration()
         let allRows = getAllRows()
         for row in allRows {
-            snapRowContentForced(configuration: interfaceConfiguration, toolRow: row)
+            snapRowContent(configuration: interfaceConfiguration, toolRow: row)
         }
     }
     
@@ -275,6 +294,11 @@ func getToolNodeID() -> UInt16 {
         if Device.isPad {
             rowsVideoRecord.append(generateRow(slot: .video_record_1))
             rowsVideoRecord.append(generateRow(slot: .video_record_2))
+            rowsVideoRecord.append(generateRow(slot: .video_record_3))
+            rowsVideoRecord.append(generateRow(slot: .video_record_4))
+            rowsVideoRecord.append(generateRow(slot: .video_record_5))
+            rowsVideoRecord.append(generateRow(slot: .video_record_6))
+            
             if ApplicationController.TEST_ROW_TOP_1 {
                 rowsVideoRecord.append(generateRow(slot: .top_Test_1))
             }
@@ -301,6 +325,11 @@ func getToolNodeID() -> UInt16 {
         } else {
             rowsVideoRecord.append(generateRow(slot: .video_record_1))
             rowsVideoRecord.append(generateRow(slot: .video_record_2))
+            rowsVideoRecord.append(generateRow(slot: .video_record_3))
+            rowsVideoRecord.append(generateRow(slot: .video_record_4))
+            rowsVideoRecord.append(generateRow(slot: .video_record_5))
+            rowsVideoRecord.append(generateRow(slot: .video_record_6))
+            
             if ApplicationController.TEST_ROW_TOP_1 {
                 rowsVideoRecord.append(generateRow(slot: .top_Test_1))
             }
@@ -330,6 +359,10 @@ func getToolNodeID() -> UInt16 {
             rowsVideoExport.append(generateRow(slot: .video_export_1))
             rowsVideoExport.append(generateRow(slot: .video_export_2))
             rowsVideoExport.append(generateRow(slot: .video_export_3))
+            rowsVideoExport.append(generateRow(slot: .video_export_4))
+            rowsVideoExport.append(generateRow(slot: .video_export_5))
+            rowsVideoExport.append(generateRow(slot: .video_export_6))
+            
             if ApplicationController.TEST_ROW_TOP_1 {
                 rowsVideoExport.append(generateRow(slot: .top_Test_1))
             }
@@ -359,6 +392,9 @@ func getToolNodeID() -> UInt16 {
             rowsVideoExport.append(generateRow(slot: .video_export_2))
             rowsVideoExport.append(generateRow(slot: .video_export_3))
             rowsVideoExport.append(generateRow(slot: .video_export_4))
+            rowsVideoExport.append(generateRow(slot: .video_export_5))
+            rowsVideoExport.append(generateRow(slot: .video_export_6))
+            
             if ApplicationController.TEST_ROW_TOP_1 {
                 rowsVideoExport.append(generateRow(slot: .top_Test_1))
             }
@@ -388,6 +424,10 @@ func getToolNodeID() -> UInt16 {
             rowsZoom.append(generateRow(slot: .zoom_1))
             rowsZoom.append(generateRow(slot: .zoom_2))
             rowsZoom.append(generateRow(slot: .zoom_3))
+            rowsZoom.append(generateRow(slot: .zoom_4))
+            rowsZoom.append(generateRow(slot: .zoom_5))
+            rowsZoom.append(generateRow(slot: .zoom_6))
+            
             if ApplicationController.TEST_ROW_TOP_1 {
                 rowsZoom.append(generateRow(slot: .top_Test_1))
             }
@@ -417,6 +457,9 @@ func getToolNodeID() -> UInt16 {
             rowsZoom.append(generateRow(slot: .zoom_2))
             rowsZoom.append(generateRow(slot: .zoom_3))
             rowsZoom.append(generateRow(slot: .zoom_4))
+            rowsZoom.append(generateRow(slot: .zoom_5))
+            rowsZoom.append(generateRow(slot: .zoom_6))
+            
             if ApplicationController.TEST_ROW_TOP_1 {
                 rowsZoom.append(generateRow(slot: .top_Test_1))
             }
@@ -720,6 +763,7 @@ func getToolNodeID() -> UInt16 {
         }
     }
     
+    /*
     @MainActor func getRowBluePrintEmpty() -> RowBluePrint {
         RowBluePrint(nodes: [], configuration: .empty)
     }
@@ -739,6 +783,7 @@ func getToolNodeID() -> UInt16 {
     @MainActor func getRowBluePrint_Bottom_Secondary1_Empty() -> RowBluePrint {
         return RowBluePrint(nodes: [], configuration: .bottom_Secondary1_Empty)
     }
+    */
     
     //TODO: This is used?
     /*
@@ -919,8 +964,8 @@ func getToolNodeID() -> UInt16 {
     }
     
     @MainActor func animateRowContent_Step1(configuration: any InterfaceConfigurationConforming,
-                                 toolRows: [ToolRow],
-                                 reversed: Bool) {
+                                            toolRows: [ToolRow],
+                                            reversed: Bool) {
         for toolRow in toolRows {
             animateRowContent_Step1(configuration: configuration,
                                     toolRow: toolRow,
@@ -941,61 +986,28 @@ func getToolNodeID() -> UInt16 {
     }
     
     @MainActor func snapRowContent(configuration: any InterfaceConfigurationConforming,
-                        toolRow: ToolRow) {
-        let width = layoutRelay.menuWidthWithSafeArea
-        if let bluePrint = getRowBluePrint(slot: toolRow.slot,
-                                           configuration: configuration,
-                                           orientation: orientation) {
-            if toolRow.configuration != bluePrint.configuration {
-                toolRow.configuration = bluePrint.configuration
-                toolRow.setNodes_NotAnimated(bluePrint.nodes,
-                                             orientation: orientation,
-                                             menuWidthWithSafeArea: width,
-                                             height: layoutRelay.rowHeight,
-                                             safeAreaLeft: layoutRelay.safeAreaLeft,
-                                             safeAreaRight: layoutRelay.safeAreaRight,
-                                             centerPinnedElement: bluePrint.centerPinnedElement)
-            }
+                                   toolRow: ToolRow) {
+        
+        let slot = toolRow.slot
+        let recipe = getRowRecipe(slot: slot,
+                                  configuration: configuration,
+                                  orientation: orientation)
+        if isRowRecipeOnSlot(recipe: recipe,
+                             slot: slot) {
+            toolRow.animationNodesWillChange = false
         } else {
-            if toolRow.configuration != .empty {
-                toolRow.configuration = .empty
-                toolRow.setNodes_NotAnimated([],
-                                             orientation: orientation,
-                                             menuWidthWithSafeArea: width,
-                                             height: layoutRelay.rowHeight,
-                                             safeAreaLeft: layoutRelay.safeAreaLeft,
-                                             safeAreaRight: layoutRelay.safeAreaRight,
-                                             centerPinnedElement: nil)
-            }
-        }
-    }
-    
-    @MainActor func snapRowContentForced(configuration: any InterfaceConfigurationConforming,
-                                                 toolRow: ToolRow) {
-        let width = layoutRelay.menuWidthWithSafeArea
-        if let bluePrint = getRowBluePrint(slot: toolRow.slot,
-                                           configuration: configuration,
-                                           orientation: orientation) {
-            
-            toolRow.configuration = bluePrint.configuration
-            toolRow.setNodes_NotAnimated(bluePrint.nodes,
+            storeRowRecipeOnSlot(recipe: recipe, slot: slot)
+            toolRow.animationNodesWillChange = true
+            let nodes = getNodesFromRecipe(recipe: recipe)
+            let centerPinnedElement = recipe.centerPinnedElement
+            let menuWidthWithSafeArea = layoutRelay.menuWidthWithSafeArea
+            toolRow.setNodes_NotAnimated(nodes,
                                          orientation: orientation,
-                                         menuWidthWithSafeArea: width,
+                                         menuWidthWithSafeArea: menuWidthWithSafeArea,
                                          height: layoutRelay.rowHeight,
                                          safeAreaLeft: layoutRelay.safeAreaLeft,
                                          safeAreaRight: layoutRelay.safeAreaRight,
-                                         centerPinnedElement: bluePrint.centerPinnedElement)
-            
-        } else {
-            toolRow.configuration = .empty
-            toolRow.setNodes_NotAnimated([],
-                                         orientation: orientation,
-                                         menuWidthWithSafeArea: width,
-                                         height: layoutRelay.rowHeight,
-                                         safeAreaLeft: layoutRelay.safeAreaLeft,
-                                         safeAreaRight: layoutRelay.safeAreaRight,
-                                         centerPinnedElement: nil)
-            
+                                         centerPinnedElement: centerPinnedElement)
         }
     }
     
@@ -1003,52 +1015,38 @@ func getToolNodeID() -> UInt16 {
                                  toolRow: ToolRow,
                                  reversed: Bool) {
         
-        if let bluePrint = getRowBluePrint(slot: toolRow.slot,
-                                           configuration: configuration,
-                                           orientation: orientation) {
-            if toolRow.configuration != bluePrint.configuration {
-                toolRow.setNodes_AnimatedStep1(bluePrint.nodes,
-                                               orientation: orientation,
-                                               reversed: reversed,
-                                               menuWidthWithSafeArea: layoutRelay.menuWidthWithSafeArea,
-                                               height: layoutRelay.rowHeight,
-                                               safeAreaLeft: layoutRelay.safeAreaLeft,
-                                               safeAreaRight: layoutRelay.safeAreaRight,
-                                               centerPinnedElement: bluePrint.centerPinnedElement)
-            }
+        let slot = toolRow.slot
+        let recipe = getRowRecipe(slot: slot,
+                                  configuration: configuration,
+                                  orientation: orientation)
+        if isRowRecipeOnSlot(recipe: recipe,
+                             slot: slot) {
+            toolRow.animationNodesWillChange = false
         } else {
-            if toolRow.configuration != .empty {
-                toolRow.setNodes_AnimatedStep1([],
-                                               orientation: orientation,
-                                               reversed: reversed,
-                                               menuWidthWithSafeArea: layoutRelay.menuWidthWithSafeArea,
-                                               height: layoutRelay.rowHeight,
-                                               safeAreaLeft: layoutRelay.safeAreaLeft,
-                                               safeAreaRight: layoutRelay.safeAreaRight,
-                                               centerPinnedElement: nil)
-            }
+            storeRowRecipeOnSlot(recipe: recipe, slot: slot)
+            toolRow.animationNodesWillChange = true
+            let nodes = getNodesFromRecipe(recipe: recipe)
+            let centerPinnedElement = recipe.centerPinnedElement
+            let menuWidthWithSafeArea = layoutRelay.menuWidthWithSafeArea
+            toolRow.setNodes_AnimatedStep1(nodes,
+                                           orientation: orientation,
+                                           reversed: reversed,
+                                           menuWidthWithSafeArea: menuWidthWithSafeArea,
+                                           height: layoutRelay.rowHeight,
+                                           safeAreaLeft: layoutRelay.safeAreaLeft,
+                                           safeAreaRight: layoutRelay.safeAreaRight,
+                                           centerPinnedElement: centerPinnedElement)
         }
     }
     
     @MainActor func animateRowContent_Step2(configuration: any InterfaceConfigurationConforming,
                                  toolRow: ToolRow,
                                  reversed: Bool,
-                                 time: CGFloat) {
-
-        if let bluePrint = getRowBluePrint(slot: toolRow.slot,
-                                           configuration: configuration,
-                                           orientation: orientation) {
-            if toolRow.configuration != bluePrint.configuration {
-                toolRow.configuration = bluePrint.configuration
-                toolRow.setNodes_AnimatedStep2(reversed: reversed,
-                                               time: time)
-            }
-        } else {
-            if toolRow.configuration != .empty {
-                toolRow.configuration = .empty
-                toolRow.setNodes_AnimatedStep2(reversed: reversed,
-                                               time: time)
-            }
+                                            time: CGFloat) {
+        
+        if toolRow.animationNodesWillChange {
+            toolRow.setNodes_AnimatedStep2(reversed: reversed,
+                                           time: time)
         }
     }
     
@@ -1070,13 +1068,13 @@ func getToolNodeID() -> UInt16 {
             result.isAnimationLoopsEnabled = jiggleViewModel.jiggleDocument.isAnimationLoopsEnabled
             result.isTimeLineEnabled = jiggleViewModel.jiggleDocument.isTimeLineEnabled
             result.isTimeLinePage2Enabled = jiggleViewModel.isTimeLinePage2Enabled
-            
+            result.isGraphPage2Enabled = jiggleViewModel.isGraphPage2Enabled
+            result.isAnimationContinuousPage2Enabled = jiggleViewModel.isAnimationContinuousPage2Enabled
             result.isGraphEnabled = jiggleViewModel.isGraphEnabled
             result.isZoomEnabled = jiggleViewModel.isZoomEnabled
             result.documentMode = jiggleViewModel.jiggleDocument.documentMode
             result.editMode = jiggleViewModel.jiggleDocument.editMode
             result.weightMode = jiggleViewModel.jiggleDocument.weightMode
-            //result.animationMode = jiggleViewModel.jiggleDocument.animationMode
             result.creatorMode = jiggleViewModel.jiggleDocument.creatorMode
             result.isAnimationContinuousEnabled = jiggleViewModel.jiggleDocument.isAnimationContinuousEnabled
             result.animationLoopsPage = jiggleViewModel.jiggleDocument.animationLoopsPage
@@ -1095,13 +1093,13 @@ func getToolNodeID() -> UInt16 {
             result.isAnimationLoopsEnabled = jiggleViewModel.jiggleDocument.isAnimationLoopsEnabled
             result.isTimeLineEnabled = jiggleViewModel.jiggleDocument.isTimeLineEnabled
             result.isTimeLinePage2Enabled = jiggleViewModel.isTimeLinePage2Enabled
-            
+            result.isGraphPage2Enabled = jiggleViewModel.isGraphPage2Enabled
+            result.isAnimationContinuousPage2Enabled = jiggleViewModel.isAnimationContinuousPage2Enabled
             result.isGraphEnabled = jiggleViewModel.isGraphEnabled
             result.isZoomEnabled = jiggleViewModel.isZoomEnabled
             result.documentMode = jiggleViewModel.jiggleDocument.documentMode
             result.editMode = jiggleViewModel.jiggleDocument.editMode
             result.weightMode = jiggleViewModel.jiggleDocument.weightMode
-            //result.animationMode = jiggleViewModel.jiggleDocument.animationMode
             result.creatorMode = jiggleViewModel.jiggleDocument.creatorMode
             result.isAnimationContinuousEnabled = jiggleViewModel.jiggleDocument.isAnimationContinuousEnabled
             result.animationLoopsPage = jiggleViewModel.jiggleDocument.animationLoopsPage

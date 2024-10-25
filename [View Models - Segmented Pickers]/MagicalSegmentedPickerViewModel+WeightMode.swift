@@ -11,7 +11,7 @@ import Foundation
     
     override func handleSelectedIndex(_ index: Int) {
         if let jiggleViewController = ApplicationController.shared.jiggleViewController {
-            if index == 0 { jiggleViewController.set(weightMode: .affine) }
+            if index == 0 { jiggleViewController.set(weightMode: .guides) }
             if index == 1 { jiggleViewController.set(weightMode: .points) }
         }
     }
@@ -19,7 +19,7 @@ import Foundation
     override func refresh() {
         if let jiggleDocument = ApplicationController.shared.jiggleDocument {
             switch jiggleDocument.weightMode {
-            case .affine:
+            case .guides:
                 selectedSegmentIndex = 0
             case .points:
                 selectedSegmentIndex = 1

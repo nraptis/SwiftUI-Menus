@@ -59,22 +59,18 @@ struct MagicalCreateSwatchSegmentContent: View {
                 nameLabelColor = ToolInterfaceTheme.primaryDownDisabled
             }
         } else {
-            
             if isDarkMode {
                 if isEnabled {
                     nameLabelColor = ToolInterfaceTheme.primaryEnabledDark
                 } else {
                     nameLabelColor = ToolInterfaceTheme.primaryDisabledDark
                 }
-                
             } else {
-                
                 if isEnabled {
                     nameLabelColor = ToolInterfaceTheme.primaryEnabledLight
                 } else {
                     nameLabelColor = ToolInterfaceTheme.primaryDisabledLight
                 }
-                
             }
         }
         
@@ -102,5 +98,6 @@ struct MagicalCreateSwatchSegmentContent: View {
                         nameLabelWidth: nameLabelWidth,
                         lineHeight: lineHeight,
                         nameLabelColor: nameLabelColor)
+        
     }
 }

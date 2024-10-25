@@ -300,6 +300,14 @@ extension ToolInterfaceViewModel {
         
     }
     
+    func handleGraphPage2DidChange() {
+        print("handleGraphPage2DidChange()...")
+    }
+    
+    
+    func handleAnimationContinuousPage2DidChange() {
+        print("handleAnimationContinuousPage2DidChange()...")
+    }
     
     func handleTimeLineEnabledDidChange() {
         
@@ -324,6 +332,15 @@ extension ToolInterfaceViewModel {
                                           
                                           .buttonRotateJiggleLeft,
                                           .buttonRotateJiggleRight,
+                                          
+                                            .buttonRotateGuideLeft,
+                                          .buttonRotateGuideRight,
+                                          
+            .buttonFreezeSelectedJiggle,
+                                          .buttonUnfreezeAllJiggles,
+                                          
+            .buttonFreezeSelectedJiggle,
+                                          .buttonUnfreezeAllJiggles,
                                           
                                           .createSwatchMakeAndDrawJiggle,
                                           .createSwatchMakeAndDrawGuide,

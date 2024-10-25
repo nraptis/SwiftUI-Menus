@@ -9,7 +9,71 @@ import UIKit
 
 struct ButtonLayout: LayoutScheme {
     
+    static func getOutsideBoxPaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
+                                                neighborTypeRight: ToolInterfaceElementType?) -> Int {
+        if neighborTypeLeft == nil {
+            return getWallPaddingLeft(orientation: orientation)
+        } else {
+            if neighborTypeLeft == .dividerTiny {
+                return 1
+            } else if neighborTypeLeft == .dividerHuge || neighborTypeLeft == .dividerSpacerDivider {
+                return 2
+            } else {
+                if Device.isPad {
+                    switch squeeze {
+                    case .squeezed:
+                        return 1
+                    case .standard:
+                        return 3
+                    case .relaxed:
+                        return 6
+                    }
+                } else {
+                    switch squeeze {
+                    case .squeezed:
+                        return 1
+                    case .standard:
+                        return 2
+                    case .relaxed:
+                        return 4
+                    }
+                }
+            }
+        }
+    }
     
+    static func getOutsideBoxPaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
+                                                 neighborTypeRight: ToolInterfaceElementType?) -> Int {
+        if neighborTypeRight == nil {
+            return getWallPaddingRight(orientation: orientation)
+        } else {
+            if neighborTypeRight == .dividerTiny {
+                return 1
+            } else if neighborTypeRight == .dividerHuge || neighborTypeRight == .dividerSpacerDivider {
+                return 2
+            } else {
+                if Device.isPad {
+                    switch squeeze {
+                    case .squeezed:
+                        return 1
+                    case .standard:
+                        return 3
+                    case .relaxed:
+                        return 6
+                    }
+                } else {
+                    switch squeeze {
+                    case .squeezed:
+                        return 1
+                    case .standard:
+                        return 2
+                    case .relaxed:
+                        return 4
+                    }
+                }
+            }
+        }
+    }
     
     static func getAccentPaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
         switch squeeze {

@@ -9,6 +9,64 @@ import Foundation
 
 struct FramedConvertibleIconLibrary {
 
+    static var continuousA: FramedConvertibleIconPack {
+        Self.build(prefix: "framed",
+                  name: "continuous_a",
+                  widthPad_0: 43, heightPad_0: 42,
+                  widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 33, heightPhonePortrait_0: 32,
+                  widthPad_1: 37, heightPad_1: 36,
+                  widthPhoneLandscape_1: 25, heightPhoneLandscape_1: 24,
+                  widthPhonePortrait_1: 29, heightPhonePortrait_1: 28,
+                  widthPad_2: 24, heightPad_2: 23,
+                  widthPhoneLandscape_2: 17, heightPhoneLandscape_2: 16,
+                  widthPhonePortrait_2: 21, heightPhonePortrait_2: 20)
+    }
+
+
+    static var continuousB: FramedConvertibleIconPack {
+        Self.build(prefix: "framed",
+                  name: "continuous_b",
+                  widthPad_0: 43, heightPad_0: 42,
+                  widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 33, heightPhonePortrait_0: 32,
+                  widthPad_1: 37, heightPad_1: 36,
+                  widthPhoneLandscape_1: 25, heightPhoneLandscape_1: 24,
+                  widthPhonePortrait_1: 29, heightPhonePortrait_1: 28,
+                  widthPad_2: 24, heightPad_2: 23,
+                  widthPhoneLandscape_2: 17, heightPhoneLandscape_2: 16,
+                  widthPhonePortrait_2: 21, heightPhonePortrait_2: 20)
+    }
+    
+    static var darkModeA: FramedConvertibleIconPack {
+        Self.build(prefix: "framed",
+                  name: "dark_mode_a",
+                  widthPad_0: 38, heightPad_0: 42,
+                  widthPhoneLandscape_0: 25, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 29, heightPhonePortrait_0: 32,
+                  widthPad_1: 33, heightPad_1: 36,
+                  widthPhoneLandscape_1: 22, heightPhoneLandscape_1: 24,
+                  widthPhonePortrait_1: 26, heightPhonePortrait_1: 28,
+                  widthPad_2: 21, heightPad_2: 23,
+                  widthPhoneLandscape_2: 15, heightPhoneLandscape_2: 16,
+                  widthPhonePortrait_2: 19, heightPhonePortrait_2: 20)
+    }
+
+
+    static var darkModeB: FramedConvertibleIconPack {
+        Self.build(prefix: "framed",
+                  name: "dark_mode_b",
+                  widthPad_0: 42, heightPad_0: 42,
+                  widthPhoneLandscape_0: 27, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 32, heightPhonePortrait_0: 32,
+                  widthPad_1: 36, heightPad_1: 36,
+                  widthPhoneLandscape_1: 24, heightPhoneLandscape_1: 24,
+                  widthPhonePortrait_1: 28, heightPhonePortrait_1: 28,
+                  widthPad_2: 23, heightPad_2: 23,
+                  widthPhoneLandscape_2: 16, heightPhoneLandscape_2: 16,
+                  widthPhonePortrait_2: 20, heightPhonePortrait_2: 20)
+    }
+    
     static var stereoscopic: FramedConvertibleIconPack {
         Self.build(prefix: "framed",
                   name: "stereoscopic",

@@ -87,7 +87,8 @@ enum ToolRowConfiguration {
     
     case bottom_Secondary1_Guides_Affine
     case bottom_Secondary1_Guides_Points
-    case bottom_Secondary1_Graph
+    case bottom_Secondary1_Graph_Page1
+    case bottom_Secondary1_Graph_Page2
     
     
     case bottom_Secondary2_Guides_Affine
@@ -101,14 +102,14 @@ enum ToolRowConfiguration {
     case bottom_Secondary2_View_TimeLine_Page1
     case bottom_Secondary2_View_TimeLine_Page2
     
-    case bottom_Secondary2_Graph
-    
-    
+    case bottom_Secondary2_Graph_Page1
+    case bottom_Secondary2_Graph_Page2
     
     
     case bottom_Primary_Standard
     case bottom_Primary_Zoom
-    case bottom_Primary_Graph
+    case bottom_Primary_Graph_Page1
+    case bottom_Primary_Graph_Page2
     
     case bottom_Primary_View_Grab
     case bottom_Primary_View_Continuous

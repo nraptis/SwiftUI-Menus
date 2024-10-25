@@ -111,8 +111,8 @@ extension ToolInterfaceFactory {
         
         let textLine1 = ToolInterfaceStringLibraryModeChange.modeTextAnimationContinuousEnterLine1()
         let textLine2 = ToolInterfaceStringLibraryModeChange.modeTextAnimationContinuousEnterLine2()
-        let iconPack = FramedConvertibleIconLibrary.stereoscopic
-        let accentPack = FramedLongIconLibrary.wolvenStein
+        let iconPack = FramedConvertibleIconLibrary.continuousA
+        let accentPack = FramedLongIconLibrary.continuousA
         
         let configuration = ToolInterfaceElementChangeModeConfiguration(iconPack: iconPack,
                                                                         accentPack: accentPack,
@@ -228,6 +228,62 @@ extension ToolInterfaceFactory {
         viewModelTimeLinePage2Enter.refresh()
         return enterTimeLinePage2ToolNode
     }
+    
+    static func getGraphPage2EnterModeToolNode(orientation: Orientation,
+                                                      neighborTypeLeft: ToolInterfaceElementType?,
+                                               neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+        let textLine1 = ToolInterfaceStringLibraryModeChange.modeTextGraphPage2EnterLine1()
+        let textLine2 = ToolInterfaceStringLibraryModeChange.modeTextGraphPage2EnterLine2()
+        let iconPack = FramedConvertibleIconLibrary.magGlass
+        let accentPack = FramedLongIconLibrary.magGlass
+        let configuration = ToolInterfaceElementChangeModeConfiguration(iconPack: iconPack,
+                                                                        accentPack: accentPack,
+                                                                        orientation: orientation,
+                                                                        nameLabelLine1: textLine1,
+                                                                        nameLabelLine2: textLine2)
+        let flex = Self.getEnterModeFlex(orientation: orientation,
+                                         configuration: configuration,
+                                         neighborTypeLeft: neighborTypeLeft,
+                                         neighborTypeRight: neighborTypeRight)
+        let viewModelGraphPage2Enter = MagicalModeChangeViewModelGraphPage2Enter(orientation: orientation,
+                                                                                 modeChangeConfiguration: configuration)
+        let enterGraphPage2ToolNode = ToolNode(id: getToolNodeID(),
+                                               element: .enterModeGraphPage2,
+                                               flex: flex,
+                                               magicalViewModel: viewModelGraphPage2Enter,
+                                               neighborTypeLeft: neighborTypeLeft,
+                                               neighborTypeRight: neighborTypeRight)
+        viewModelGraphPage2Enter.refresh()
+        return enterGraphPage2ToolNode
+    }
+    
+    static func getAnimationContinuousPage2EnterModeToolNode(orientation: Orientation,
+                                                          neighborTypeLeft: ToolInterfaceElementType?,
+                                                   neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+            let textLine1 = ToolInterfaceStringLibraryModeChange.modeTextAnimationContinuousPage2EnterLine1()
+            let textLine2 = ToolInterfaceStringLibraryModeChange.modeTextAnimationContinuousPage2EnterLine2()
+            let iconPack = FramedConvertibleIconLibrary.magGlass
+            let accentPack = FramedLongIconLibrary.magGlass
+            let configuration = ToolInterfaceElementChangeModeConfiguration(iconPack: iconPack,
+                                                                            accentPack: accentPack,
+                                                                            orientation: orientation,
+                                                                            nameLabelLine1: textLine1,
+                                                                            nameLabelLine2: textLine2)
+            let flex = Self.getEnterModeFlex(orientation: orientation,
+                                             configuration: configuration,
+                                             neighborTypeLeft: neighborTypeLeft,
+                                             neighborTypeRight: neighborTypeRight)
+            let viewModelAnimationContinuousPage2Enter = MagicalModeChangeViewModelAnimationContinuousPage2Enter(orientation: orientation,
+                                                                                     modeChangeConfiguration: configuration)
+            let enterAnimationContinuousPage2ToolNode = ToolNode(id: getToolNodeID(),
+                                                   element: .enterModeAnimationContinuousPage2,
+                                                   flex: flex,
+                                                   magicalViewModel: viewModelAnimationContinuousPage2Enter,
+                                                   neighborTypeLeft: neighborTypeLeft,
+                                                   neighborTypeRight: neighborTypeRight)
+            viewModelAnimationContinuousPage2Enter.refresh()
+            return enterAnimationContinuousPage2ToolNode
+        }
     
     static func getVideoRecordEnterModeToolNode(orientation: Orientation,
                                                 neighborTypeLeft: ToolInterfaceElementType?,

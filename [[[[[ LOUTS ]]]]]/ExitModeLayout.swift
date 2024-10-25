@@ -8,6 +8,21 @@
 import UIKit
 
 struct ExitModeLayout: LayoutScheme {
+    
+    static func getOutsideBoxPaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
+                                         neighborTypeRight: ToolInterfaceElementType?) -> Int {
+        EnterModeLayout.getOutsideBoxPaddingLeft(orientation: orientation,
+                                                 squeeze: squeeze,
+                                                 neighborTypeLeft: neighborTypeLeft,
+                                                 neighborTypeRight: neighborTypeRight)
+    }
+    
+    static func getOutsideBoxPaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
+                                          neighborTypeRight: ToolInterfaceElementType?) -> Int {
+        EnterModeLayout.getOutsideBoxPaddingRight(orientation: orientation,
+                                                  squeeze: squeeze, neighborTypeLeft: neighborTypeLeft, neighborTypeRight: neighborTypeRight)
+    }
+    
     static func getNameLabelVerticalSpacing(orientation: Orientation, flavor: LayoutSchemeFlavor) -> Int {
         EnterModeLayout.getNameLabelVerticalSpacing(orientation: orientation, flavor: flavor)
     }

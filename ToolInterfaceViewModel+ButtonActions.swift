@@ -10,6 +10,45 @@ import UIKit
 
 extension ToolInterfaceViewModel {
     
+    @MainActor func toolActionAnimationContinuousPage2Enter() {
+                print("[IMB] Action - toolActionAnimationContinuousPage2Enter")
+                if isBlocked { return }
+                
+                if let jiggleViewController = jiggleViewController {
+                    jiggleViewController.animationContinuousPage2Enter()
+                }
+                
+            }
+            
+            @MainActor func toolActionAnimationContinuousPage2Exit() {
+                print("[IMB] Action - toolActionAnimationContinuousPage2Exit")
+                if isBlocked { return }
+                
+                if let jiggleViewController = jiggleViewController {
+                    jiggleViewController.animationContinuousPage2Exit()
+                }
+            }
+    
+    @MainActor func toolActionGraphPage2Enter() {
+            print("[IMB] Action - toolActionGraphPage2Enter")
+            if isBlocked { return }
+            
+            if let jiggleViewController = jiggleViewController {
+                jiggleViewController.graphPage2Enter()
+            }
+            
+        }
+        
+        @MainActor func toolActionGraphPage2Exit() {
+            print("[IMB] Action - toolActionGraphPage2Exit")
+            if isBlocked { return }
+            
+            if let jiggleViewController = jiggleViewController {
+                jiggleViewController.graphPage2Exit()
+            }
+        }
+    
+    
     @MainActor func toolActionTimeLinePage2Enter() {
         print("[IMB] Action - toolActionTimeLinePage2Enter")
         if isBlocked { return }
@@ -261,6 +300,13 @@ extension ToolInterfaceViewModel {
     
     @MainActor func toolActionLoopsPage3Enter() {
         print("[IMB] Action - toolActionTimeLineEnter")
+        if let jiggleViewController = jiggleViewController {
+            jiggleViewController.animationLoopsPage3Enter()
+        }
+    }
+    
+    @MainActor func toolActionLoopsPage1Exit() {
+        print("[IMB] Action - toolActionLoopsPage1Exit")
         if let jiggleViewController = jiggleViewController {
             jiggleViewController.animationLoopsPage3Enter()
         }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ToolRowSlot {
+enum ToolRowSlot: UInt8 {
     
     case unknown
     
@@ -30,14 +30,23 @@ enum ToolRowSlot {
     
     case video_record_1
     case video_record_2
+    case video_record_3
+    case video_record_4
+    case video_record_5
+    case video_record_6
     
     case video_export_1
     case video_export_2
     case video_export_3
     case video_export_4
+    case video_export_5
+    case video_export_6
     
     case zoom_1
     case zoom_2
     case zoom_3
     case zoom_4
+    case zoom_5
+    case zoom_6
+    
 }

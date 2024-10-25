@@ -36,11 +36,8 @@ struct MagicalMainTabSegmentButtonButtonStyle: ButtonStyle {
         let boxWidth = magicalButtonViewModel.layoutWidth
         let boxHeight = magicalViewModel.layoutHeight - outsideBoxPaddingTop - outsideBoxPaddingBottom
         return HStack(spacing: 0.0) {
-            Spacer()
-                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingLeft))
-            
             VStack(spacing: 0.0) {
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(height: CGFloat(outsideBoxPaddingTop))
                 ZStack {
                     
@@ -50,12 +47,10 @@ struct MagicalMainTabSegmentButtonButtonStyle: ButtonStyle {
                 .background(getStrokeRect(isPressed: isPressed))
                 .background(getFillRect(isPressed: isPressed))
                 
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(height: CGFloat(outsideBoxPaddingBottom))
             }
-            
-            Spacer()
-                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight))
+
         }
     }
     
@@ -135,23 +130,14 @@ struct MagicalMainTabSegmentButtonButtonStyle: ButtonStyle {
     func bodyContent(isPressed: Bool) -> some View {
         let contentLayoutHeight = magicalViewModel.layoutHeight - outsideBoxPaddingTop - outsideBoxPaddingBottom
         return HStack(spacing: 0.0) {
-#if INTERFACE_HINTS
-            Spacer()
-                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingLeft), height: 24.0)
-                .background(Color(red: 0.99, green: 0.03, blue: 0.98, opacity: 0.40))
-#else
-            Spacer()
-                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingLeft))
-#endif
-            
             VStack(spacing: 0.0) {
                 
 #if INTERFACE_HINTS
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: 24.0, height: CGFloat(outsideBoxPaddingTop))
                     .background(Color(red: 0.74, green: 0.39, blue: 0.19, opacity: 0.40))
 #else
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(height: CGFloat(outsideBoxPaddingTop))
 #endif
                 MagicalMainTabSegmentContent(layoutSchemeFlavor: layoutSchemeFlavor,
@@ -160,23 +146,15 @@ struct MagicalMainTabSegmentButtonButtonStyle: ButtonStyle {
                                              isPressed: isPressed,
                                              isEnabled: isEnabled)
 #if INTERFACE_HINTS
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: 24.0, height: CGFloat(outsideBoxPaddingBottom))
                     .background(Color(red: 0.88, green: 0.88, blue: 0.67, opacity: 0.40))
 #else
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(height: CGFloat(outsideBoxPaddingBottom))
 #endif
                 
             }
-#if INTERFACE_HINTS
-            Spacer()
-                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight), height: 24.0)
-                .background(Color(red: 0.86, green: 0.00, blue: 0.63, opacity: 0.40))
-#else
-            Spacer()
-                .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight))
-#endif
         }
     }
 }

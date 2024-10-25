@@ -120,11 +120,11 @@ struct MagicalEnterModeContent: View {
                      nameLabelColor: nameLabelColor)
             
 #if INTERFACE_HINTS
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalViewModel.slavePaddingLeft), height: 24.0)
                 .background(Color(red: 0.60, green: 0.50, blue: 0.90, opacity: 0.40))
 #else
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalViewModel.slavePaddingLeft))
 #endif
             
@@ -137,11 +137,11 @@ struct MagicalEnterModeContent: View {
             .opacity(isPressed ? 0.75 : 1.0)
             
 #if INTERFACE_HINTS
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalViewModel.slavePaddingRight), height: 24.0)
                 .background(Color(red: 0.57, green: 0.42, blue: 0.71, opacity: 0.70))
 #else
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalViewModel.slavePaddingRight))
 #endif
             

@@ -73,7 +73,7 @@ struct ToolInterfaceTheme {
     }
     
     static func getDraggableMenuVideoRecordRowCount() -> Int {
-        var result = 2
+        var result = 6
         if ApplicationController.TEST_ROW_TOP_1 {
             result += 1
         }
@@ -101,7 +101,7 @@ struct ToolInterfaceTheme {
     }
     
     static func getDraggableMenuVideoExportRowCount() -> Int {
-        var result = 3
+        var result = 6
         if ApplicationController.TEST_ROW_TOP_1 {
             result += 1
         }
@@ -128,7 +128,8 @@ struct ToolInterfaceTheme {
     }
     
     static func getDraggableMenuZoomRowCount() -> Int {
-        var result = 3
+        var result = 6
+        
         if ApplicationController.TEST_ROW_TOP_1 {
             result += 1
         }
@@ -231,7 +232,7 @@ struct ToolInterfaceTheme {
     
     
     static func getDraggableMenuTimeLineInsetLeft() -> Int {
-        return 104
+        return 94
     }
     
     static func getDraggableMenuTimeLineInsetRight() -> Int {
@@ -239,11 +240,11 @@ struct ToolInterfaceTheme {
     }
     
     static func getDraggableMenuTimeLineInsetTop() -> Int {
-        return 6
+        return 4
     }
     
     static func getDraggableMenuTimeLineInsetBottom() -> Int {
-        return 12
+        return 4
     }
     
     static func getDraggableMenuTimeLineCornerRadius() -> Int {
@@ -320,11 +321,19 @@ struct ToolInterfaceTheme {
     }
     
     static func getTopTimeLineInsetTop(orientation: Orientation) -> Int {
-        return 12
+        if orientation.isLandscape {
+            return 2
+        } else {
+            return 4
+        }
     }
     
     static func getTopTimeLineInsetBottom(orientation: Orientation) -> Int {
-        return 12
+        if orientation.isLandscape {
+            return 2
+        } else {
+            return 4
+        }
     }
     
     static func getTopTimeLineCornerRadius(orientation: Orientation) -> Int {
@@ -361,7 +370,7 @@ struct ToolInterfaceTheme {
     }
     
     static func getTopMenuVideoExportRowCount(orientation: Orientation) -> Int {
-        var result = 1
+        var result = 3
         if ApplicationController.TEST_ROW_TOP_1 {
             result += 1
         }
@@ -375,7 +384,7 @@ struct ToolInterfaceTheme {
     }
     
     static func getTopMenuVideoRecordRowCount(orientation: Orientation) -> Int {
-        var result = 1
+        var result = 3
         if ApplicationController.TEST_ROW_TOP_1 {
             result += 1
         }
@@ -389,7 +398,7 @@ struct ToolInterfaceTheme {
     }
     
     static func getTopMenuZoomRowCount(orientation: Orientation) -> Int {
-        var result = 2
+        var result = 3
         if ApplicationController.TEST_ROW_TOP_1 {
             result += 1
         }
@@ -405,7 +414,7 @@ struct ToolInterfaceTheme {
     static func getTopMenuGraphRowCount(orientation: Orientation) -> Int {
         switch orientation {
         case .landscape:
-            return 3
+            return 4
         case .portrait:
             return 4
         }
@@ -414,7 +423,7 @@ struct ToolInterfaceTheme {
     static func getTopMenuTimeLineRowCount(orientation: Orientation) -> Int {
         switch orientation {
         case .landscape:
-            return 3
+            return 4
         case .portrait:
             return 4
         }
@@ -482,7 +491,7 @@ struct ToolInterfaceTheme {
     }
     
     static func getBottomMenuVideoRecordRowCount(orientation: Orientation) -> Int {
-        var result = 1
+        var result = 3
         if ApplicationController.TEST_ROW_BOTTOM_1 {
             result += 1
         }
@@ -499,7 +508,7 @@ struct ToolInterfaceTheme {
     }
     
     static func getBottomMenuZoomRowCount(orientation: Orientation) -> Int {
-        var result = 2
+        var result = 3
         if ApplicationController.TEST_ROW_BOTTOM_1 {
             result += 1
         }
@@ -554,7 +563,7 @@ struct ToolInterfaceTheme {
     
     
     
-
+    
     
     
     static let _blueBasic = UIColor(red: 0.200, green: 0.630, blue: 1.000, alpha: 1.0)
@@ -940,4 +949,193 @@ struct ToolInterfaceTheme {
     
     static let greenButtonFillDown = Color(uiColor: _greenButtonFillDown)
     static let greenButtonFillDownDisabled = Color(uiColor: _greenButtonFillDownDisabled)
+    
+    
+    private static var _timeLinePlaceholderImage = UIImage()
+    
+    
+    private static var _timeLineButtonXPortraitDark: UIImage?
+    private static var _timeLineButtonXPortraitLight: UIImage?
+    private static var _timeLineButtonXLandscapeDark: UIImage?
+    private static var _timeLineButtonXLandscapeLight: UIImage?
+    static func timeLineButtonX(orientation: Orientation, isDarkMode: Bool) -> UIImage {
+        if isDarkMode {
+            if Device.isPad {
+                if _timeLineButtonXPortraitDark === nil {
+                    _timeLineButtonXPortraitDark = UIImage(named: "framed_time_line_x_pad_0l_dark")
+                }
+                return _timeLineButtonXPortraitDark ?? _timeLinePlaceholderImage
+            } else {
+                if orientation.isLandscape {
+                    if _timeLineButtonXLandscapeDark === nil {
+                        _timeLineButtonXLandscapeDark = UIImage(named: "framed_time_line_x_phone_ls_0l_dark")
+                    }
+                    return _timeLineButtonXLandscapeDark ?? _timeLinePlaceholderImage
+                } else {
+                    if _timeLineButtonXPortraitDark === nil {
+                        _timeLineButtonXPortraitDark = UIImage(named: "framed_time_line_x_phone_po_0l_dark")
+                    }
+                    return _timeLineButtonXPortraitDark ?? _timeLinePlaceholderImage
+                }
+            }
+        } else {
+            if Device.isPad {
+                if _timeLineButtonXPortraitLight === nil {
+                    _timeLineButtonXPortraitLight = UIImage(named: "framed_time_line_x_pad_0l_light")
+                }
+                return _timeLineButtonXPortraitLight ?? _timeLinePlaceholderImage
+            } else {
+                if orientation.isLandscape {
+                    if _timeLineButtonXLandscapeLight === nil {
+                        _timeLineButtonXLandscapeLight = UIImage(named: "framed_time_line_x_phone_ls_0l_light")
+                    }
+                    return _timeLineButtonXLandscapeLight ?? _timeLinePlaceholderImage
+                } else {
+                    if _timeLineButtonXPortraitLight === nil {
+                        _timeLineButtonXPortraitLight = UIImage(named: "framed_time_line_x_phone_po_0l_light")
+                    }
+                    return _timeLineButtonXPortraitLight ?? _timeLinePlaceholderImage
+                }
+            }
+        }
+    }
+    
+    private static var _timeLineButtonYPortraitDark: UIImage?
+    private static var _timeLineButtonYPortraitLight: UIImage?
+    private static var _timeLineButtonYLandscapeDark: UIImage?
+    private static var _timeLineButtonYLandscapeLight: UIImage?
+    static func timeLineButtonY(orientation: Orientation, isDarkMode: Bool) -> UIImage {
+        if isDarkMode {
+            if Device.isPad {
+                if _timeLineButtonYPortraitDark === nil {
+                    _timeLineButtonYPortraitDark = UIImage(named: "framed_time_line_y_pad_0l_dark")
+                }
+                return _timeLineButtonYPortraitDark ?? _timeLinePlaceholderImage
+            } else {
+                if orientation.isLandscape {
+                    if _timeLineButtonYLandscapeDark === nil {
+                        _timeLineButtonYLandscapeDark = UIImage(named: "framed_time_line_y_phone_ls_0l_dark")
+                    }
+                    return _timeLineButtonYLandscapeDark ?? _timeLinePlaceholderImage
+                } else {
+                    if _timeLineButtonYPortraitDark === nil {
+                        _timeLineButtonYPortraitDark = UIImage(named: "framed_time_line_y_phone_po_0l_dark")
+                    }
+                    return _timeLineButtonYPortraitDark ?? _timeLinePlaceholderImage
+                }
+            }
+        } else {
+            if Device.isPad {
+                if _timeLineButtonYPortraitLight === nil {
+                    _timeLineButtonYPortraitLight = UIImage(named: "framed_time_line_y_pad_0l_light")
+                }
+                return _timeLineButtonYPortraitLight ?? _timeLinePlaceholderImage
+            } else {
+                if orientation.isLandscape {
+                    if _timeLineButtonYLandscapeLight === nil {
+                        _timeLineButtonYLandscapeLight = UIImage(named: "framed_time_line_y_phone_ls_0l_light")
+                    }
+                    return _timeLineButtonYLandscapeLight ?? _timeLinePlaceholderImage
+                } else {
+                    if _timeLineButtonYPortraitLight === nil {
+                        _timeLineButtonYPortraitLight = UIImage(named: "framed_time_line_y_phone_po_0l_light")
+                    }
+                    return _timeLineButtonYPortraitLight ?? _timeLinePlaceholderImage
+                }
+            }
+        }
+    }
+    
+    private static var _timeLineButtonScalePortraitDark: UIImage?
+    private static var _timeLineButtonScalePortraitLight: UIImage?
+    private static var _timeLineButtonScaleLandscapeDark: UIImage?
+    private static var _timeLineButtonScaleLandscapeLight: UIImage?
+    static func timeLineButtonScale(orientation: Orientation, isDarkMode: Bool) -> UIImage {
+        if isDarkMode {
+            if Device.isPad {
+                if _timeLineButtonScalePortraitDark === nil {
+                    _timeLineButtonScalePortraitDark = UIImage(named: "framed_time_line_scale_pad_0l_dark")
+                }
+                return _timeLineButtonScalePortraitDark ?? _timeLinePlaceholderImage
+            } else {
+                if orientation.isLandscape {
+                    if _timeLineButtonScaleLandscapeDark === nil {
+                        _timeLineButtonScaleLandscapeDark = UIImage(named: "framed_time_line_scale_phone_ls_0l_dark")
+                    }
+                    return _timeLineButtonScaleLandscapeDark ?? _timeLinePlaceholderImage
+                } else {
+                    if _timeLineButtonScalePortraitDark === nil {
+                        _timeLineButtonScalePortraitDark = UIImage(named: "framed_time_line_scale_phone_po_0l_dark")
+                    }
+                    return _timeLineButtonScalePortraitDark ?? _timeLinePlaceholderImage
+                }
+            }
+        } else {
+            if Device.isPad {
+                if _timeLineButtonScalePortraitLight === nil {
+                    _timeLineButtonScalePortraitLight = UIImage(named: "framed_time_line_scale_pad_0l_light")
+                }
+                return _timeLineButtonScalePortraitLight ?? _timeLinePlaceholderImage
+            } else {
+                if orientation.isLandscape {
+                    if _timeLineButtonScaleLandscapeLight === nil {
+                        _timeLineButtonScaleLandscapeLight = UIImage(named: "framed_time_line_scale_phone_ls_0l_light")
+                    }
+                    return _timeLineButtonScaleLandscapeLight ?? _timeLinePlaceholderImage
+                } else {
+                    if _timeLineButtonScalePortraitLight === nil {
+                        _timeLineButtonScalePortraitLight = UIImage(named: "framed_time_line_scale_phone_po_0l_light")
+                    }
+                    return _timeLineButtonScalePortraitLight ?? _timeLinePlaceholderImage
+                }
+            }
+        }
+    }
+    
+    private static var _timeLineButtonRotationPortraitDark: UIImage?
+    private static var _timeLineButtonRotationPortraitLight: UIImage?
+    private static var _timeLineButtonRotationLandscapeDark: UIImage?
+    private static var _timeLineButtonRotationLandscapeLight: UIImage?
+    static func timeLineButtonRotation(orientation: Orientation, isDarkMode: Bool) -> UIImage {
+        if isDarkMode {
+            if Device.isPad {
+                if _timeLineButtonRotationPortraitDark === nil {
+                    _timeLineButtonRotationPortraitDark = UIImage(named: "framed_time_line_rotation_pad_0l_dark")
+                }
+                return _timeLineButtonRotationPortraitDark ?? _timeLinePlaceholderImage
+            } else {
+                if orientation.isLandscape {
+                    if _timeLineButtonRotationLandscapeDark === nil {
+                        _timeLineButtonRotationLandscapeDark = UIImage(named: "framed_time_line_rotation_phone_ls_0l_dark")
+                    }
+                    return _timeLineButtonRotationLandscapeDark ?? _timeLinePlaceholderImage
+                } else {
+                    if _timeLineButtonRotationPortraitDark === nil {
+                        _timeLineButtonRotationPortraitDark = UIImage(named: "framed_time_line_rotation_phone_po_0l_dark")
+                    }
+                    return _timeLineButtonRotationPortraitDark ?? _timeLinePlaceholderImage
+                }
+            }
+        } else {
+            if Device.isPad {
+                if _timeLineButtonRotationPortraitLight === nil {
+                    _timeLineButtonRotationPortraitLight = UIImage(named: "framed_time_line_rotation_pad_0l_light")
+                }
+                return _timeLineButtonRotationPortraitLight ?? _timeLinePlaceholderImage
+            } else {
+                if orientation.isLandscape {
+                    if _timeLineButtonRotationLandscapeLight === nil {
+                        _timeLineButtonRotationLandscapeLight = UIImage(named: "framed_time_line_rotation_phone_ls_0l_light")
+                    }
+                    return _timeLineButtonRotationLandscapeLight ?? _timeLinePlaceholderImage
+                } else {
+                    if _timeLineButtonRotationPortraitLight === nil {
+                        _timeLineButtonRotationPortraitLight = UIImage(named: "framed_time_line_rotation_phone_po_0l_light")
+                    }
+                    return _timeLineButtonRotationPortraitLight ?? _timeLinePlaceholderImage
+                }
+            }
+        }
+    }
+    
 }

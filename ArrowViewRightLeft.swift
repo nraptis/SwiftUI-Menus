@@ -11,15 +11,15 @@ struct ArrowViewRightLeft: View {
     
     var body: some View {
         HStack {
-            Spacer()
+            Spacer(minLength: 0.0)
             VStack {
-                Spacer()
+                Spacer(minLength: 0.0)
                 Image(systemName: "arrow.left.and.right")
                     .font(.system(size: 28.0, weight: .thin))
                     .foregroundStyle(Color(uiColor: DialogTheme.dialogTextMessage))
-                Spacer()
+                Spacer(minLength: 0.0)
             }
-            Spacer()
+            Spacer(minLength: 0.0)
         }
     }
 }

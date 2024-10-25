@@ -10,6 +10,22 @@ import Foundation
 struct FramedLongIconLibrary {
 
  
+    static var continuousA: FramedLongIconPack {
+        Self.build(prefix: "framed",
+                  name: "continuous_a",
+                  widthPad_0: 43, heightPad_0: 42,
+                  widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 33, heightPhonePortrait_0: 32)
+    }
+    
+    static var continuousB: FramedLongIconPack {
+        Self.build(prefix: "framed",
+                  name: "continuous_b",
+                  widthPad_0: 43, heightPad_0: 42,
+                  widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 33, heightPhonePortrait_0: 32)
+    }
+    
     static var jiggleCenter: FramedLongIconPack {
         Self.build(prefix: "framed",
                   name: "jiggle_center",

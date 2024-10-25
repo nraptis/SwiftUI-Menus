@@ -8,19 +8,59 @@
 import UIKit
 
 struct FavoringOneLineLabelLayout: LayoutScheme {
-    
-    static func getOutsideBoxPaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
-                                          neighborTypeRight: ToolInterfaceElementType?) -> Int { 0 }
-    
+
     static func getOutsideBoxPaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
                                          neighborTypeRight: ToolInterfaceElementType?) -> Int {
-        switch squeeze {
-        case .squeezed:
-            2
-        case .standard:
-            4
-        case .relaxed:
-            6
+        if neighborTypeLeft == nil {
+            return getWallPaddingLeft(orientation: orientation)
+        } else {
+            
+            if Device.isPad {
+                switch squeeze {
+                case .squeezed:
+                    return 3
+                case .standard:
+                    return 5
+                case .relaxed:
+                    return 8
+                }
+            } else {
+                switch squeeze {
+                case .squeezed:
+                    return 2
+                case .standard:
+                    return 4
+                case .relaxed:
+                    return 6
+                }
+            }
+        }
+    }
+    
+    static func getOutsideBoxPaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
+                                          neighborTypeRight: ToolInterfaceElementType?) -> Int {
+        if neighborTypeRight == nil {
+            return getWallPaddingRight(orientation: orientation)
+        } else {
+            if Device.isPad {
+                switch squeeze {
+                case .squeezed:
+                    return 3
+                case .standard:
+                    return 5
+                case .relaxed:
+                    return 8
+                }
+            } else {
+                switch squeeze {
+                case .squeezed:
+                    return 2
+                case .standard:
+                    return 4
+                case .relaxed:
+                    return 6
+                }
+            }
         }
     }
     

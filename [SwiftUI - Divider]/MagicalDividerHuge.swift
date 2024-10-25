@@ -14,9 +14,9 @@ struct MagicalDividerHuge: View {
         let orientation = magicalViewModel.orientation
         let isDarkMode = magicalViewModel.isDarkModeEnabled
         return VStack(spacing: 0.0) {
-            Spacer()
+            Spacer(minLength: 0.0)
             DividerHuge(orientation: orientation, isDarkMode: isDarkMode)
-            Spacer()
+            Spacer(minLength: 0.0)
         }
         .frame(width: CGFloat(magicalViewModel.layoutWidth),
                height: CGFloat(magicalViewModel.layoutHeight))

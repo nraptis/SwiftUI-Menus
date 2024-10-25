@@ -32,11 +32,11 @@ struct MagicalExitModeButtonStyle: ButtonStyle {
         let boxHeight = magicalViewModel.layoutHeight - outsideBoxPaddingTop - outsideBoxPaddingBottom
         
         return HStack(spacing: 0.0) {
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingLeft))
             
             VStack(spacing: 0.0) {
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(height: CGFloat(outsideBoxPaddingTop))
                 ZStack {
                     
@@ -46,11 +46,11 @@ struct MagicalExitModeButtonStyle: ButtonStyle {
                 .background(getStrokeRect(isPressed: isPressed))
                 .background(getFillRect(isPressed: isPressed))
                 
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(height: CGFloat(outsideBoxPaddingBottom))
             }
             
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight))
         }
     }
@@ -134,22 +134,22 @@ struct MagicalExitModeButtonStyle: ButtonStyle {
         
         return HStack(spacing: 0.0) {
 #if INTERFACE_HINTS
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingLeft), height: 24.0)
                 .background(Color(red: 0.65, green: 0.655, blue: 0.155, opacity: 0.40))
 #else
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingLeft))
 #endif
             
             VStack(spacing: 0.0) {
                 
 #if INTERFACE_HINTS
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: 24.0, height: CGFloat(outsideBoxPaddingTop))
                     .background(Color(red: 0.90, green: 0.67, blue: 0.45, opacity: 0.40))
 #else
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(height: CGFloat(outsideBoxPaddingTop))
 #endif
                 
@@ -159,21 +159,21 @@ struct MagicalExitModeButtonStyle: ButtonStyle {
                                        layoutHeight: contentLayoutHeight)
                 
 #if INTERFACE_HINTS
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: 24.0, height: CGFloat(outsideBoxPaddingBottom))
                     .background(Color(red: 0.93, green: 0.21, blue: 0.26, opacity: 0.40))
 #else
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(height: CGFloat(outsideBoxPaddingBottom))
 #endif
                 
             }
 #if INTERFACE_HINTS
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight), height: 24.0)
                 .background(Color(red: 0.58, green: 0.367, blue: 0.91, opacity: 0.40))
 #else
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalViewModel.outsideBoxPaddingRight))
 #endif
         }

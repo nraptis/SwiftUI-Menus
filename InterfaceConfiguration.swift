@@ -92,6 +92,8 @@ protocol InterfaceConfigurationConforming {
     var isAnimationContinuousEnabled: Bool { get set }
     var isTimeLineEnabled: Bool { get set }
     var isTimeLinePage2Enabled: Bool { get set }
+    var isGraphPage2Enabled: Bool { get set }
+    var isAnimationContinuousPage2Enabled: Bool { get set }
     
     var documentMode: DocumentMode { get set }
     var editMode: EditMode { get set }
@@ -287,6 +289,12 @@ extension InterfaceConfigurationConforming {
                                 
                             } else if currentConfiguration.isAnimationContinuousEnabled != previousConfiguration.isAnimationContinuousEnabled {
                                 isRowsAnimationActive = true
+                            } else {
+                                if currentConfiguration.isAnimationContinuousEnabled {
+                                    if currentConfiguration.isAnimationContinuousPage2Enabled != previousConfiguration.isAnimationContinuousPage2Enabled {
+                                        isRowsAnimationActive = true
+                                    }
+                                }
                             }
                         }
                     case .edit:
@@ -300,6 +308,11 @@ extension InterfaceConfigurationConforming {
                                     if currentConfiguration.isGraphEnabled != previousConfiguration.isGraphEnabled {
                                         isRowsAnimationActive = true
                                     } else {
+                                        if currentConfiguration.isGraphEnabled {
+                                            if currentConfiguration.isGraphPage2Enabled != previousConfiguration.isGraphPage2Enabled {
+                                                isRowsAnimationActive = true
+                                            }
+                                        }
                                         if currentConfiguration.weightMode != previousConfiguration.weightMode {
                                             isRowsAnimationActive = true
                                         }
@@ -887,10 +900,18 @@ extension InterfaceConfigurationConforming {
         }
         
         if documentMode.isEdit && configuration.documentMode.isEdit {
-            
             if isGraphEnabled {
                 if configuration.isGraphEnabled {
-                    return false
+                    
+                    if isGraphPage2Enabled {
+                        if configuration.isGraphPage2Enabled {
+                            return false
+                        } else {
+                            return true
+                        }
+                    } else {
+                        return false
+                    }
                 } else {
                     return true
                 }
@@ -900,7 +921,27 @@ extension InterfaceConfigurationConforming {
             
             if isGuidesEnabled {
                 if configuration.isGuidesEnabled {
-                    return false
+                    
+                    switch weightMode {
+                    case .guides:
+                        switch configuration.weightMode {
+                        case .guides:
+                            print("[aa] trig a")
+                            return false
+                        case .points:
+                            print("[aa] trig b")
+                            return false
+                        }
+                    case .points:
+                        switch configuration.weightMode {
+                        case .guides:
+                            print("[aa] trig c")
+                            return true
+                        case .points:
+                            print("[aa] trig d")
+                            return false
+                        }
+                    }
                 } else {
                     return true
                 }
@@ -933,6 +974,9 @@ extension InterfaceConfigurationConforming {
                         if animationLoopsPage >= 3 && configuration.animationLoopsPage <= 1 {
                             // Loop from 3 to 1...
                             return false
+                        } else if animationLoopsPage <= 1 && configuration.animationLoopsPage >= 3 {
+                            // Loop from 1 to 3...
+                            return true
                         } else if animationLoopsPage > configuration.animationLoopsPage {
                             return true
                         } else {
@@ -946,7 +990,16 @@ extension InterfaceConfigurationConforming {
                 return false
             } else if isAnimationContinuousEnabled {
                 if configuration.isAnimationContinuousEnabled {
-                    return false
+                    
+                    if isAnimationContinuousPage2Enabled {
+                        if configuration.isAnimationContinuousPage2Enabled {
+                            return false
+                        } else {
+                            return true
+                        }
+                    } else {
+                        return false
+                    }
                 } else {
                     return true
                 }
@@ -1005,11 +1058,13 @@ struct InterfaceConfigurationPad: InterfaceConfigurationConforming {
     var isAnimationContinuousEnabled = false
     var isTimeLineEnabled = false
     var isTimeLinePage2Enabled = false
+    var isGraphPage2Enabled = false
+    var isAnimationContinuousPage2Enabled = false
     var animationLoopsPage = 0
     
     var documentMode = DocumentMode.edit
     var editMode = EditMode.jiggles
-    var weightMode = WeightMode.affine
+    var weightMode = WeightMode.guides
     var creatorMode = CreatorMode.none
     
     mutating func calculateHeightCategories() {
@@ -1052,11 +1107,14 @@ struct InterfaceConfigurationPhone: InterfaceConfigurationConforming {
     var isAnimationContinuousEnabled = false
     var isTimeLineEnabled = false
     var isTimeLinePage2Enabled = false
+    var isGraphPage2Enabled = false
+    var isAnimationContinuousPage2Enabled = false
+    
     var animationLoopsPage = 0
     
     var documentMode = DocumentMode.edit
     var editMode = EditMode.jiggles
-    var weightMode = WeightMode.affine
+    var weightMode = WeightMode.guides
     var creatorMode = CreatorMode.none
     
     mutating func calculateHeightCategories() {
@@ -1219,7 +1277,7 @@ extension InterfaceConfigurationConforming {
     var isGuidesAffine: Bool {
         if isGuides {
             switch weightMode {
-            case .affine:
+            case .guides:
                 return true
             default:
                 return false

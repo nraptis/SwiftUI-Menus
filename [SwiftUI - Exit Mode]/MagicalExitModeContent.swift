@@ -101,11 +101,11 @@ struct MagicalExitModeContent: View {
         return HStack(spacing: 0.0) {
             
 #if INTERFACE_HINTS
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalViewModel.slavePaddingLeft), height: 24.0)
                 .background(Color(red: 0.26, green: 0.78, blue: 0.54, opacity: 0.40))
 #else
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalViewModel.slavePaddingLeft))
 #endif
             
@@ -118,11 +118,11 @@ struct MagicalExitModeContent: View {
             .opacity(isPressed ? 0.75 : 1.0)
             
 #if INTERFACE_HINTS
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalViewModel.slavePaddingRight), height: 24.0)
                 .background(Color(red: 0.31, green: 0.77, blue: 0.47, opacity: 0.70))
 #else
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalViewModel.slavePaddingRight))
 #endif
             

@@ -13,8 +13,8 @@ struct MagicalActiveSwatchButton: View {
     let activeButtonViewModel: MagicalSegmentButtonViewModel
     let activeButtonConfiguration: ToolInterfaceElementCreateSwatchButtonConfiguration
     let firstButtonViewModel: MagicalSegmentButtonViewModel
-    
     let layoutSchemeFlavor: LayoutSchemeFlavor
+    let layoutWidth: Int
     let outsideBoxPaddingTop: Int
     let outsideBoxPaddingBottom: Int
     let isEnabled: Bool
@@ -34,12 +34,13 @@ struct MagicalActiveSwatchButton: View {
                                                         activeButtonConfiguration: activeButtonConfiguration,
                                                         firstButtonViewModel: firstButtonViewModel,
                                                         layoutSchemeFlavor: layoutSchemeFlavor,
+                                                        layoutWidth: layoutWidth,
                                                         outsideBoxPaddingTop: outsideBoxPaddingTop,
                                                         outsideBoxPaddingBottom: outsideBoxPaddingBottom,
                                                         isEnabled: isEnabled))
             .disabled(!isEnabled)
         }
-        .frame(width: CGFloat(magicalViewModel.layoutWidth),
+        .frame(width: CGFloat(layoutWidth),
                height: CGFloat(magicalViewModel.layoutHeight))
     }
 }

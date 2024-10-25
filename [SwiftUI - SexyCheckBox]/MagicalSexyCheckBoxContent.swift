@@ -129,11 +129,11 @@ struct MagicalCheckBoxContent: View {
                      nameLabelColor: nameLabelColor)
             
 #if INTERFACE_HINTS
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalViewModel.slavePaddingLeft), height: 24.0)
                 .background(Color(red: 0.35, green: 0.61, blue: 0.81, opacity: 0.40))
 #else
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalViewModel.slavePaddingLeft))
 #endif
             
@@ -158,11 +158,11 @@ struct MagicalCheckBoxContent: View {
             .opacity(isPressed ? 0.75 : 1.0)
             
 #if INTERFACE_HINTS
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalViewModel.slavePaddingRight), height: 24.0)
                 .background(Color(red: 0.47, green: 0.87, blue: 0.16, opacity: 0.70))
 #else
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalViewModel.slavePaddingRight))
 #endif
             

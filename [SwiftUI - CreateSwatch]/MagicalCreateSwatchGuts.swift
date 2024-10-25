@@ -23,10 +23,13 @@ struct MagicalCreateSwatchGuts: View {
             if let activeButtonViewModel = activeButtonViewModel,
                let activeButtonConfiguration = magicalViewModel.getButtonConfiguration(buttonViewModel: activeButtonViewModel) {
                 
+                let contentLayoutWidth = magicalViewModel.layoutWidth - magicalViewModel.outsideBoxPaddingLeft - magicalViewModel.outsideBoxPaddingRight
+                
                 MagicalActiveSwatchButton(activeButtonViewModel: activeButtonViewModel,
                                           activeButtonConfiguration: activeButtonConfiguration,
                                           firstButtonViewModel: magicalViewModel.segmentButtonViewModels[0],
                                           layoutSchemeFlavor: layoutSchemeFlavor,
+                                          layoutWidth: contentLayoutWidth,
                                           outsideBoxPaddingTop: outsideBoxPaddingTop,
                                           outsideBoxPaddingBottom: outsideBoxPaddingBottom,
                                           isEnabled: magicalViewModel.isEnabled)
@@ -56,6 +59,9 @@ struct MagicalCreateSwatchGuts: View {
                 }
                 .frame(width: CGFloat(layoutWidth),
                        height: CGFloat(magicalViewModel.layoutHeight))
+#if INTERFACE_HINTS
+                .overlay(RoundedRectangle(cornerRadius: 12).foregroundStyle(Color.red.opacity(0.7)).allowsHitTesting(false))
+#endif
             }
         }
     }

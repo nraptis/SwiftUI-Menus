@@ -9,6 +9,61 @@ import UIKit
 
 struct GreenButtonLayout: LayoutScheme {
     
+    static func getOutsideBoxPaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
+                                         neighborTypeRight: ToolInterfaceElementType?) -> Int {
+        if neighborTypeLeft == nil {
+            return getWallPaddingLeft(orientation: orientation)
+        } else {
+            
+            if Device.isPad {
+                switch squeeze {
+                case .squeezed:
+                    return 1
+                case .standard:
+                    return 3
+                case .relaxed:
+                    return 6
+                }
+            } else {
+                switch squeeze {
+                case .squeezed:
+                    return 1
+                case .standard:
+                    return 2
+                case .relaxed:
+                    return 4
+                }
+            }
+        }
+    }
+    
+    static func getOutsideBoxPaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
+                                          neighborTypeRight: ToolInterfaceElementType?) -> Int {
+        if neighborTypeRight == nil {
+            return getWallPaddingRight(orientation: orientation)
+        } else {
+            if Device.isPad {
+                switch squeeze {
+                case .squeezed:
+                    return 1
+                case .standard:
+                    return 3
+                case .relaxed:
+                    return 6
+                }
+            } else {
+                switch squeeze {
+                case .squeezed:
+                    return 1
+                case .standard:
+                    return 2
+                case .relaxed:
+                    return 4
+                }
+            }
+        }
+    }
+    
     static func getNameLabelVerticalSpacing(orientation: Orientation, flavor: LayoutSchemeFlavor) -> Int {
         if Device.isPad {
             return -3

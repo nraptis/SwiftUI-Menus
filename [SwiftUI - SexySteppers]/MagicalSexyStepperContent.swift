@@ -130,11 +130,11 @@ struct MagicalStepperContent: View {
                      nameLabelColor: textColor)
             
 #if INTERFACE_HINTS
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalViewModel.slavePaddingLeft), height: 24.0)
                 .background(Color(red: 0.35, green: 0.61, blue: 0.81, opacity: 0.40))
 #else
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalViewModel.slavePaddingLeft))
 #endif
             
@@ -151,11 +151,11 @@ struct MagicalStepperContent: View {
             .disabled(!isEnabled || !magicalViewModel.isDecrementEnabled)
             
 #if INTERFACE_HINTS
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalViewModel.slavePaddingRight), height: 24.0)
                 .background(Color(red: 0.47, green: 0.87, blue: 0.16, opacity: 0.70))
 #else
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalViewModel.slavePaddingRight))
 #endif
             
@@ -164,11 +164,11 @@ struct MagicalStepperContent: View {
                 
                 
 #if INTERFACE_HINTS
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(magicalViewModel.valuePaddingLeft), height: 12.0)
                     .background(Color(red: 0.98, green: 0.65, blue: 0.125, opacity: 0.5))
 #else
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(magicalViewModel.valuePaddingLeft))
 #endif
                 
@@ -189,11 +189,11 @@ struct MagicalStepperContent: View {
 #endif
                 
 #if INTERFACE_HINTS
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(magicalViewModel.valuePaddingRight), height: 12.0)
                     .background(Color(red: 0.98, green: 0.65, blue: 0.125, opacity: 0.5))
 #else
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(magicalViewModel.valuePaddingRight))
 #endif
                 
@@ -211,11 +211,11 @@ struct MagicalStepperContent: View {
 #endif
             
 #if INTERFACE_HINTS
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalViewModel.accentPaddingLeft), height: 24.0)
                 .background(Color(red: 0.35, green: 0.61, blue: 0.81, opacity: 0.40))
 #else
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalViewModel.accentPaddingLeft))
 #endif
             
@@ -232,11 +232,11 @@ struct MagicalStepperContent: View {
             .disabled(!isEnabled || !magicalViewModel.isIncrementEnabled)
             
 #if INTERFACE_HINTS
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalViewModel.accentPaddingRight), height: 24.0)
                 .background(Color(red: 0.47, green: 0.87, blue: 0.16, opacity: 0.70))
 #else
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalViewModel.accentPaddingRight))
 #endif
             

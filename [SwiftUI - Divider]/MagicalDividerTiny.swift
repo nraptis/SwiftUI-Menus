@@ -17,9 +17,9 @@ struct MagicalDividerTiny: View {
         let isDarkMode = magicalViewModel.isDarkModeEnabled
         
         return VStack(spacing: 0.0) {
-            Spacer()
+            Spacer(minLength: 0.0)
             DividerTiny(orientation: orientation, isDarkMode: isDarkMode)
-            Spacer()
+            Spacer(minLength: 0.0)
         }
         .frame(width: CGFloat(magicalViewModel.layoutWidth),
                height: CGFloat(magicalViewModel.layoutHeight))
@@ -31,6 +31,7 @@ struct MagicalDividerTiny: View {
             LinearGradient(colors: [Color(red: 0.55, green: 0.67, blue: 0.37, opacity: 0.15),
                                     Color(red: 0.55, green: 0.76, blue: 0.65, opacity: 0.15)], startPoint: .leading, endPoint: .trailing)))
 #endif
+        
         .offset(x: CGFloat(magicalViewModel.layoutX),
                 y: CGFloat(magicalViewModel.layoutY))
         

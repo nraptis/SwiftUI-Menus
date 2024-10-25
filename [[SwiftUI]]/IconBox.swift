@@ -27,22 +27,22 @@ struct IconBox: View {
         return VStack(spacing: 0.0) {
             
 #if INTERFACE_HINTS
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: 12.0, height: CGFloat(iconPaddingTop))
                 .background(RoundedRectangle(cornerRadius: 2.0).foregroundStyle(Color(red: 0.65, green: 0.45, blue: 0.925, opacity: 0.5)))
 #else
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(height: CGFloat(iconPaddingTop))
 #endif
             
             HStack(spacing: 0.0) {
                 
 #if INTERFACE_HINTS
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(iconPaddingLeft), height: 12.0)
                     .background(Color(red: 0.75, green: 0.65, blue: 0.925, opacity: 0.5))
 #else
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(iconPaddingLeft))
 #endif
                 
@@ -70,11 +70,11 @@ struct IconBox: View {
 #endif
                 
 #if INTERFACE_HINTS
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(iconPaddingRight), height: 12.0)
                     .background(Color(red: 0.925, green: 0.75, blue: 0.65, opacity: 0.5))
 #else
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(iconPaddingRight))
 #endif
                 

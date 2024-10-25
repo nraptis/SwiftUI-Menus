@@ -15,7 +15,7 @@ extension ToolInterfaceFactory {
         
         var buttonConfigurations = [ToolInterfaceElementMainTabButtonConfiguration]()
         
-        let viewTextIconPackable = FramedLongIconLibrary.jiggleCenter
+        let viewTextIconPackable = FramedLongIconLibrary.continuousA
         let viewLine1 = ToolInterfaceStringLibraryMainTabs.buttonTextViewLine1()
         let viewLine2 = ToolInterfaceStringLibraryMainTabs.buttonTextViewLine2()
         let viewConfiguration = ToolInterfaceElementMainTabButtonConfiguration(id: 0,
@@ -25,7 +25,7 @@ extension ToolInterfaceFactory {
                                                                                nameLabelLine2: viewLine2)
         buttonConfigurations.append(viewConfiguration)
         
-        let editTextIconPackable = FramedLongIconLibrary.guideCenter
+        let editTextIconPackable = FramedLongIconLibrary.continuousB
         let editLine1 = ToolInterfaceStringLibraryMainTabs.buttonTextEditLine1()
         let editLine2 = ToolInterfaceStringLibraryMainTabs.buttonTextEditLine2()
         let editConfiguration = ToolInterfaceElementMainTabButtonConfiguration(id: 1,
@@ -75,7 +75,7 @@ extension ToolInterfaceFactory {
                                                                                nameLabelLine2: viewLine2)
         buttonConfigurations.append(viewConfiguration)
         
-        let editTextIconPackable = FramedLongIconLibrary.menuC
+        let editTextIconPackable = FramedLongIconLibrary.continuousB
         let editLine1: String? = nil
         let editLine2 = "L2"
         let editConfiguration = ToolInterfaceElementMainTabButtonConfiguration(id: 1,
@@ -85,7 +85,7 @@ extension ToolInterfaceFactory {
                                                                                nameLabelLine2: editLine2)
         buttonConfigurations.append(editConfiguration)
         
-        let thirdTextIconPackable = FramedLongIconLibrary.menuC
+        let thirdTextIconPackable = FramedLongIconLibrary.continuousA
         let thirdLine1 = "Harvey"
         let thirdLine2 = "Nash X"
         let thirdConfiguration = ToolInterfaceElementMainTabButtonConfiguration(id: 2,

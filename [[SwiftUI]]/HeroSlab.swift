@@ -44,11 +44,11 @@ struct HeroSlab: View {
         return HStack(spacing: 0.0) {
             
 #if INTERFACE_HINTS
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(heroPaddingLeft), height: 24.0)
                 .background(Color(red: 0.75, green: 0.45, blue: 0.62, opacity: 0.40))
 #else
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(heroPaddingLeft))
 #endif
             
@@ -63,11 +63,11 @@ struct HeroSlab: View {
                     .opacity(isPressed ? 0.75 : 1.0)
                     
 #if INTERFACE_HINTS
-                    Spacer()
+                    Spacer(minLength: 0.0)
                         .frame(width: CGFloat(heroSpacingLong), height: 24.0)
                         .background(Color(red: 0.75, green: 0.45, blue: 0.62, opacity: 0.40))
 #else
-                    Spacer()
+                    Spacer(minLength: 0.0)
                         .frame(width: CGFloat(heroSpacingLong))
 #endif
                     
@@ -118,11 +118,11 @@ struct HeroSlab: View {
             }
             
 #if INTERFACE_HINTS
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(heroPaddingRight), height: 24.0)
                 .background(Color(red: 0.75, green: 0.45, blue: 0.62, opacity: 0.70))
 #else
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(heroPaddingRight))
 #endif
 

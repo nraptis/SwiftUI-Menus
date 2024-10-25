@@ -53,17 +53,17 @@ struct MagicalDividerSpacerDivider: View {
         
         return HStack(spacing: 0.0) {
             if isShowingTwoDividers {
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(universalPaddingLeft))
                 DividerHuge(orientation: orientation, isDarkMode: isDarkMode)
-                Spacer()
+                Spacer(minLength: 0.0)
                 DividerHuge(orientation: orientation, isDarkMode: isDarkMode)
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(universalPaddingRight))
             } else {
-                Spacer()
+                Spacer(minLength: 0.0)
                 DividerHuge(orientation: orientation, isDarkMode: isDarkMode)
-                Spacer()
+                Spacer(minLength: 0.0)
             }
         }
         .frame(width: CGFloat(magicalViewModel.layoutWidth),

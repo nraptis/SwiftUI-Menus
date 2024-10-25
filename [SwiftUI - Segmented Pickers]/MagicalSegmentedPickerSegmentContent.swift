@@ -162,11 +162,11 @@ struct MagicalSegmentedPickerSegmentContent: View {
                      nameLabelColor: nameLabelColor)
             
 #if INTERFACE_HINTS
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalButtonViewModel.slavePaddingLeft), height: 24.0)
                 .background(Color(red: 0.35, green: 0.61, blue: 0.81, opacity: 0.40))
 #else
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalButtonViewModel.slavePaddingLeft))
 #endif
             
@@ -178,21 +178,21 @@ struct MagicalSegmentedPickerSegmentContent: View {
                            iconPaddingTop: 0)
             
 #if INTERFACE_HINTS
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalButtonViewModel.slavePaddingRight), height: 24.0)
                 .background(Color(red: 0.47, green: 0.87, blue: 0.16, opacity: 0.70))
 #else
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalButtonViewModel.slavePaddingRight))
 #endif
             
             
 #if INTERFACE_HINTS
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalButtonViewModel.accentPaddingLeft), height: 24.0)
                 .background(Color(red: 0.35, green: 0.61, blue: 0.81, opacity: 0.40))
 #else
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalButtonViewModel.accentPaddingLeft))
 #endif
             
@@ -204,11 +204,11 @@ struct MagicalSegmentedPickerSegmentContent: View {
                            iconPaddingTop: 0)
             
 #if INTERFACE_HINTS
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalButtonViewModel.accentPaddingRight), height: 24.0)
                 .background(Color(red: 0.47, green: 0.87, blue: 0.16, opacity: 0.70))
 #else
-            Spacer()
+            Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalButtonViewModel.accentPaddingRight))
 #endif
             

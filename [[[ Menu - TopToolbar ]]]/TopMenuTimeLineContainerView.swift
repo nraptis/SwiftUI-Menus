@@ -18,47 +18,71 @@ class TopMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
         print("DraggableMenuStandardContainerView => handleSelectedSwatchDidChange")
     }
     
-    lazy var buttonX: UIButton = {
-        let result = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: 512.0, height: 512.0))
+    lazy var buttonXBottomConstraint: NSLayoutConstraint = {
+        NSLayoutConstraint(item: buttonX, attribute: .bottom, relatedBy: .equal, toItem: self,
+                           attribute: .bottom, multiplier: 1.0, constant: 0.0)
+    }()
+    lazy var buttonXHeightConstraint: NSLayoutConstraint = {
+        NSLayoutConstraint(item: buttonX, attribute: .height, relatedBy: .equal, toItem: nil,
+                           attribute: .notAnAttribute, multiplier: 1.0, constant: CGFloat(44))
+    }()
+    lazy var buttonX: TimeLineButton = {
+        let orientation = toolInterfaceViewModel.orientation
+        let imageDark = ToolInterfaceTheme.timeLineButtonX(orientation: toolInterfaceViewModel.orientation, isDarkMode: true)
+        let imageLight = ToolInterfaceTheme.timeLineButtonX(orientation: toolInterfaceViewModel.orientation, isDarkMode: false)
+        let result = TimeLineButton(cornerRadius: 6, imageDark: imageDark, imageLight: imageLight, isSelectedSwatch: false)
         result.translatesAutoresizingMaskIntoConstraints = false
-        result.setTitle("eXo", for: .normal)
-        result.backgroundColor = UIColor.green
-        result.layer.cornerRadius = 16.0
-        result.clipsToBounds = true
-        result.setTitleColor(UIColor.black, for: .normal)
         return result
     }()
     
-    lazy var buttonY: UIButton = {
-        let result = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: 512.0, height: 512.0))
+    lazy var buttonYBottomConstraint: NSLayoutConstraint = {
+        NSLayoutConstraint(item: buttonY, attribute: .bottom, relatedBy: .equal, toItem: self,
+                           attribute: .bottom, multiplier: 1.0, constant: 0.0)
+    }()
+    lazy var buttonYHeightConstraint: NSLayoutConstraint = {
+        NSLayoutConstraint(item: buttonY, attribute: .height, relatedBy: .equal, toItem: nil,
+                           attribute: .notAnAttribute, multiplier: 1.0, constant: CGFloat(44))
+    }()
+    lazy var buttonY: TimeLineButton = {
+        let orientation = toolInterfaceViewModel.orientation
+        let imageDark = ToolInterfaceTheme.timeLineButtonY(orientation: toolInterfaceViewModel.orientation, isDarkMode: true)
+        let imageLight = ToolInterfaceTheme.timeLineButtonY(orientation: toolInterfaceViewModel.orientation, isDarkMode: false)
+        let result = TimeLineButton(cornerRadius: 6, imageDark: imageDark, imageLight: imageLight, isSelectedSwatch: false)
         result.translatesAutoresizingMaskIntoConstraints = false
-        result.setTitle("eYo", for: .normal)
-        result.backgroundColor = UIColor.green
-        result.layer.cornerRadius = 16.0
-        result.clipsToBounds = true
-        result.setTitleColor(UIColor.black, for: .normal)
         return result
     }()
     
-    lazy var buttonRotation: UIButton = {
-        let result = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: 512.0, height: 512.0))
+    lazy var buttonScaleBottomConstraint: NSLayoutConstraint = {
+        NSLayoutConstraint(item: buttonScale, attribute: .bottom, relatedBy: .equal, toItem: self,
+                           attribute: .bottom, multiplier: 1.0, constant: 0.0)
+    }()
+    lazy var buttonScaleHeightConstraint: NSLayoutConstraint = {
+        NSLayoutConstraint(item: buttonScale, attribute: .height, relatedBy: .equal, toItem: nil,
+                           attribute: .notAnAttribute, multiplier: 1.0, constant: CGFloat(44))
+    }()
+    lazy var buttonScale: TimeLineButton = {
+        let orientation = toolInterfaceViewModel.orientation
+        let imageDark = ToolInterfaceTheme.timeLineButtonScale(orientation: toolInterfaceViewModel.orientation, isDarkMode: true)
+        let imageLight = ToolInterfaceTheme.timeLineButtonScale(orientation: toolInterfaceViewModel.orientation, isDarkMode: false)
+        let result = TimeLineButton(cornerRadius: 6, imageDark: imageDark, imageLight: imageLight, isSelectedSwatch: false)
         result.translatesAutoresizingMaskIntoConstraints = false
-        result.setTitle("eRo", for: .normal)
-        result.backgroundColor = UIColor.green
-        result.layer.cornerRadius = 16.0
-        result.clipsToBounds = true
-        result.setTitleColor(UIColor.black, for: .normal)
         return result
     }()
     
-    lazy var buttonScale: UIButton = {
-        let result = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: 512.0, height: 512.0))
+    lazy var buttonRotationBottomConstraint: NSLayoutConstraint = {
+        NSLayoutConstraint(item: buttonRotation, attribute: .bottom, relatedBy: .equal, toItem: self,
+                           attribute: .bottom, multiplier: 1.0, constant: 0.0)
+    }()
+    lazy var buttonRotationHeightConstraint: NSLayoutConstraint = {
+        NSLayoutConstraint(item: buttonRotation, attribute: .height, relatedBy: .equal, toItem: nil,
+                           attribute: .notAnAttribute, multiplier: 1.0, constant: CGFloat(44))
+    }()
+    lazy var buttonRotation: TimeLineButton = {
+        let orientation = toolInterfaceViewModel.orientation
+        let imageDark = ToolInterfaceTheme.timeLineButtonRotation(orientation: toolInterfaceViewModel.orientation, isDarkMode: true)
+        let imageLight = ToolInterfaceTheme.timeLineButtonRotation(orientation: toolInterfaceViewModel.orientation, isDarkMode: false)
+        let result = TimeLineButton(cornerRadius: 6, imageDark: imageDark, imageLight: imageLight, isSelectedSwatch: false)
         result.translatesAutoresizingMaskIntoConstraints = false
-        result.setTitle("eSKo", for: .normal)
-        result.backgroundColor = UIColor.green
-        result.layer.cornerRadius = 16.0
-        result.clipsToBounds = true
-        result.setTitleColor(UIColor.black, for: .normal)
         return result
     }()
     
@@ -156,6 +180,11 @@ class TopMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
         }
         timeLineClippingView.setNeedsDisplay()
         timeLineView.setNeedsDisplay()
+        
+        buttonX.setNeedsDisplay()
+        buttonY.setNeedsDisplay()
+        buttonScale.setNeedsDisplay()
+        buttonRotation.setNeedsDisplay()
     }
     
     let toolInterfaceViewModel: ToolInterfaceViewModel
@@ -295,64 +324,97 @@ class TopMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
         ])
         
         
-        
-        addSubview(buttonX)
-        addConstraints([
-            buttonX.leftAnchor.constraint(equalTo: leftAnchor),
-            buttonX.topAnchor.constraint(equalTo: topAnchor, constant: 0.0)
-        ])
-        buttonX.addConstraints([
-            NSLayoutConstraint(item: buttonX, attribute: .width, relatedBy: .equal, toItem: nil,
-                               attribute: .notAnAttribute, multiplier: 1.0, constant: 66.0),
-            NSLayoutConstraint(item: buttonX, attribute: .height, relatedBy: .equal, toItem: nil,
-                               attribute: .notAnAttribute, multiplier: 1.0, constant: 30.0),
-            
-        ])
-        buttonX.addTarget(self, action: #selector(clickX), for: .touchUpInside)
-        
-        addSubview(buttonY)
-        addConstraints([
-            buttonY.leftAnchor.constraint(equalTo: leftAnchor),
-            buttonY.topAnchor.constraint(equalTo: topAnchor, constant: 30.0)
-        ])
-        buttonY.addConstraints([
-            NSLayoutConstraint(item: buttonY, attribute: .width, relatedBy: .equal, toItem: nil,
-                               attribute: .notAnAttribute, multiplier: 1.0, constant: 66.0),
-            NSLayoutConstraint(item: buttonY, attribute: .height, relatedBy: .equal, toItem: nil,
-                               attribute: .notAnAttribute, multiplier: 1.0, constant: 30.0),
-            
-        ])
-        buttonY.addTarget(self, action: #selector(clickY), for: .touchUpInside)
+        let buttonWidth: Int
+        let buttonHeight: Int
+        let buttonSpacing: Int
+        let buttonLeft: Int
+        var buttonBottomY = -ToolInterfaceTheme.getTopTimeLineInsetBottom(orientation: orientation)
+        switch orientation {
+        case .landscape:
+            buttonWidth = 66
+            buttonHeight = 32
+            buttonSpacing = 2
+            buttonLeft = 2
+            buttonBottomY -= 2
+        case .portrait:
+            buttonWidth = 66
+            buttonHeight = 44
+            buttonSpacing = 6
+            buttonLeft = 2
+            buttonBottomY -= 2
+        }
         
         addSubview(buttonRotation)
         addConstraints([
-            buttonRotation.leftAnchor.constraint(equalTo: leftAnchor),
-            buttonRotation.topAnchor.constraint(equalTo: topAnchor, constant: 60.0)
+            buttonRotation.leftAnchor.constraint(equalTo: timeLineClippingView.leftAnchor, constant: CGFloat(buttonLeft)),
+            buttonRotationBottomConstraint
         ])
         buttonRotation.addConstraints([
             NSLayoutConstraint(item: buttonRotation, attribute: .width, relatedBy: .equal, toItem: nil,
-                               attribute: .notAnAttribute, multiplier: 1.0, constant: 66.0),
-            NSLayoutConstraint(item: buttonRotation, attribute: .height, relatedBy: .equal, toItem: nil,
-                               attribute: .notAnAttribute, multiplier: 1.0, constant: 30.0),
+                               attribute: .notAnAttribute, multiplier: 1.0, constant: CGFloat(buttonWidth)),
+            buttonRotationHeightConstraint
             
         ])
         buttonRotation.addTarget(self, action: #selector(clickRotation), for: .touchUpInside)
+        buttonRotationBottomConstraint.constant = CGFloat(buttonBottomY)
+        
+        buttonBottomY -= buttonHeight
+        buttonBottomY -= buttonSpacing
         
         addSubview(buttonScale)
         addConstraints([
-            buttonScale.leftAnchor.constraint(equalTo: leftAnchor),
-            buttonScale.topAnchor.constraint(equalTo: topAnchor, constant: 90.0)
+            buttonScale.leftAnchor.constraint(equalTo: timeLineClippingView.leftAnchor, constant: CGFloat(buttonLeft)),
+            buttonScaleBottomConstraint
         ])
         buttonScale.addConstraints([
             NSLayoutConstraint(item: buttonScale, attribute: .width, relatedBy: .equal, toItem: nil,
-                               attribute: .notAnAttribute, multiplier: 1.0, constant: 66.0),
-            NSLayoutConstraint(item: buttonScale, attribute: .height, relatedBy: .equal, toItem: nil,
-                               attribute: .notAnAttribute, multiplier: 1.0, constant: 30.0),
+                               attribute: .notAnAttribute, multiplier: 1.0, constant: CGFloat(buttonWidth)),
+            buttonScaleHeightConstraint
             
         ])
         buttonScale.addTarget(self, action: #selector(clickScale), for: .touchUpInside)
+        buttonScaleBottomConstraint.constant = CGFloat(buttonBottomY)
         
+        buttonBottomY -= buttonHeight
+        buttonBottomY -= buttonSpacing
         
+        addSubview(buttonY)
+        addConstraints([
+            buttonY.leftAnchor.constraint(equalTo: timeLineClippingView.leftAnchor, constant: CGFloat(buttonLeft)),
+            buttonYBottomConstraint
+        ])
+        buttonY.addConstraints([
+            NSLayoutConstraint(item: buttonY, attribute: .width, relatedBy: .equal, toItem: nil,
+                               attribute: .notAnAttribute, multiplier: 1.0, constant: CGFloat(buttonWidth)),
+            buttonYHeightConstraint
+            
+        ])
+        buttonY.addTarget(self, action: #selector(clickY), for: .touchUpInside)
+        buttonYBottomConstraint.constant = CGFloat(buttonBottomY)
+        
+        buttonBottomY -= buttonHeight
+        buttonBottomY -= buttonSpacing
+        
+        addSubview(buttonX)
+        addConstraints([
+            buttonX.leftAnchor.constraint(equalTo: timeLineClippingView.leftAnchor, constant: CGFloat(buttonLeft)),
+            buttonXBottomConstraint
+            
+        ])
+        buttonX.addConstraints([
+            NSLayoutConstraint(item: buttonX, attribute: .width, relatedBy: .equal, toItem: nil,
+                               attribute: .notAnAttribute, multiplier: 1.0, constant: CGFloat(buttonWidth)),
+            buttonXHeightConstraint
+            
+        ])
+        buttonX.addTarget(self, action: #selector(clickX), for: .touchUpInside)
+        buttonXBottomConstraint.constant = CGFloat(buttonBottomY)
+        
+        let blockerHeight = ToolInterfaceTheme.getTopBlockerHeight(orientation: orientation,
+                                                                   safeAreaTop: safeAreaTop)
+        handleBlockerHeightOrSafeAreaDidChange(blockerHeight: blockerHeight,
+                                               safeAreaTop: safeAreaTop,
+                                               orientation: orientation)
     }
     
     @objc func clickX() {
@@ -420,6 +482,64 @@ class TopMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
             jiggleViewController.timeLineUpdateRelay(jiggle: selectedJiggle)
             
         }
+    }
+    
+    func handleBlockerHeightOrSafeAreaDidChange(blockerHeight: Int, safeAreaTop: Int, orientation: Orientation) {
+        
+        let insetTop = ToolInterfaceTheme.getTopTimeLineInsetTop(orientation: orientation)
+        let insetBottom = ToolInterfaceTheme.getTopTimeLineInsetBottom(orientation: orientation)
+
+        let availableSpace = MenuHeightCategoryPhoneTop.get(category: .timeLine, orientation: orientation) - insetTop - blockerHeight - insetBottom
+        
+        let buttonBaseHeight = availableSpace / 4
+        
+        var buttonHeightX = buttonBaseHeight
+        var buttonHeightY = buttonBaseHeight
+        var buttonHeightScale = buttonBaseHeight
+        var buttonHeightRotation = buttonBaseHeight
+        var spaceRemaining = availableSpace - (buttonHeightX + buttonHeightY + buttonHeightScale + buttonHeightRotation)
+        
+        var fudge = 0
+        while spaceRemaining > 0 && fudge < 10 {
+            if spaceRemaining > 0 {
+                buttonHeightX += 1
+                spaceRemaining -= 1
+            }
+            if spaceRemaining > 0 {
+                buttonHeightY += 1
+                spaceRemaining -= 1
+            }
+            if spaceRemaining > 0 {
+                buttonHeightScale += 1
+                spaceRemaining -= 1
+            }
+            if spaceRemaining > 0 {
+                buttonHeightRotation += 1
+                spaceRemaining -= 1
+            }
+            fudge += 1
+        }
+        
+        var buttonY = -insetBottom
+        
+        buttonRotationBottomConstraint.constant = CGFloat(buttonY)
+        buttonRotationHeightConstraint.constant = CGFloat(buttonHeightRotation)
+        
+        buttonY -= buttonHeightRotation
+        
+        buttonScaleBottomConstraint.constant = CGFloat(buttonY)
+        buttonScaleHeightConstraint.constant = CGFloat(buttonHeightScale)
+        
+        buttonY -= buttonHeightScale
+        
+        buttonYBottomConstraint.constant = CGFloat(buttonY)
+        buttonYHeightConstraint.constant = CGFloat(buttonHeightY)
+        
+        buttonY -= buttonHeightY
+        
+        buttonXBottomConstraint.constant = CGFloat(buttonY)
+        buttonXHeightConstraint.constant = CGFloat(buttonHeightX)
+        
     }
     
 }

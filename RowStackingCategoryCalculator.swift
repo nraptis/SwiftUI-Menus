@@ -12,6 +12,7 @@ class RowStackingCategoryCalculator {
     let orientation: Orientation
     let nodes: [ToolNode]
     let slot: ToolRowSlot
+    /*
     init(orientation: Orientation,
          rowBluePrint: RowBluePrint,
          slot: ToolRowSlot) {
@@ -19,6 +20,7 @@ class RowStackingCategoryCalculator {
         self.nodes = rowBluePrint.nodes
         self.slot = slot
     }
+    */
     
     init(orientation: Orientation,
          nodes: [ToolNode],

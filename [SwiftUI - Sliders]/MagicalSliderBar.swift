@@ -111,7 +111,7 @@ struct MagicalSliderBar: View {
             if barStrokeWidth > 0 {
                 HStack(spacing: 0.0) {
                     
-                    Spacer()
+                    Spacer(minLength: 0.0)
                         .frame(width: CGFloat(barInset))
                     
                     ZStack {
@@ -120,7 +120,7 @@ struct MagicalSliderBar: View {
                             .foregroundStyle(barColorStroke)
                         
                         HStack(spacing: 0.0) {
-                            Spacer()
+                            Spacer(minLength: 0.0)
                                 .frame(width: CGFloat(barFillInset))
                             ZStack {
                                 HStack(spacing: 0.0) {
@@ -132,11 +132,11 @@ struct MagicalSliderBar: View {
                                         .foregroundStyle(barColorFillOff)
                                 }
                             }
-                            Spacer()
+                            Spacer(minLength: 0.0)
                                 .frame(width: CGFloat(barFillInset))
                         }
                     }
-                    Spacer()
+                    Spacer(minLength: 0.0)
                         .frame(width: CGFloat(barInset))
                 }
                 .frame(width: CGFloat(sliderBoxWidth), height: CGFloat(barDiameterStroke))
@@ -179,11 +179,11 @@ struct MagicalSliderBar: View {
                         .onEnded(dragEnded(dragValue:)))
                 
 #if INTERFACE_HINTS
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(sliderBoxWidthMinusBoxWidth), height: 20.0)
                 //.background(Color(red: 0.75, green: 1.0, blue: 1.0, opacity: 0.5))
 #else
-                Spacer()
+                Spacer(minLength: 0.0)
                     .frame(width: CGFloat(sliderBoxWidthMinusBoxWidth))
 #endif
             }
