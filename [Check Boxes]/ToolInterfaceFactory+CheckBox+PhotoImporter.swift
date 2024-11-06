@@ -20,10 +20,10 @@ extension ToolInterfaceFactory {
                                                                       orientation: orientation,
                                                                       nameLabelLine1: textLine1,
                                                                       nameLabelLine2: textLine2)
-        let flex = ToolInterfaceViewModel.getCheckBoxFlex(orientation: orientation,
-                                                          configuration: configuration,
-                                                          neighborTypeLeft: neighborTypeLeft,
-                                                          neighborTypeRight: neighborTypeRight)
+        let flex = Self.getCheckBoxFlex(orientation: orientation,
+                                        configuration: configuration,
+                                        neighborTypeLeft: neighborTypeLeft,
+                                        neighborTypeRight: neighborTypeRight)
         let viewModelSnapEdgesEnabled = MagicalCheckBoxViewModelSnapEdgesEnabled(orientation: orientation,
                                                                                  checkBoxConfiguration: configuration)
         
@@ -49,10 +49,10 @@ extension ToolInterfaceFactory {
                                                                       orientation: orientation,
                                                                       nameLabelLine1: textLine1,
                                                                       nameLabelLine2: textLine2)
-        let flex = ToolInterfaceViewModel.getCheckBoxFlex(orientation: orientation,
-                                                          configuration: configuration,
-                                                          neighborTypeLeft: neighborTypeLeft,
-                                                          neighborTypeRight: neighborTypeRight)
+        let flex = Self.getCheckBoxFlex(orientation: orientation,
+                                        configuration: configuration,
+                                        neighborTypeLeft: neighborTypeLeft,
+                                        neighborTypeRight: neighborTypeRight)
         let viewModelSnapRotationEnabled = MagicalCheckBoxViewModelSnapRotationEnabled(orientation: orientation,
                                                                                        checkBoxConfiguration: configuration)
         

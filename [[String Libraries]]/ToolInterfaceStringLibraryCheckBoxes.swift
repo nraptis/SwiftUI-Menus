@@ -9,6 +9,14 @@ import Foundation
 
 struct ToolInterfaceStringLibraryCheckBoxes {
     
+    static func checkBoxTextContinuousDisableGrabLine1() -> String? {
+        GeneralStringLibrary.get(localized: "continuous_disable_grab_line_1", table: "ToolInterfaceCheckBoxes")
+    }
+    
+    static func checkBoxTextContinuousDisableGrabLine2() -> String? {
+        GeneralStringLibrary.get(localized: "continuous_disable_grab_line_2", table: "ToolInterfaceCheckBoxes")
+    }
+    
     static func checkBoxTextGuideCentersEnabledLine1() -> String? {
         GeneralStringLibrary.get(localized: "guide_centers_enabled_line_1", table: "ToolInterfaceCheckBoxes")
     }
@@ -26,6 +34,14 @@ struct ToolInterfaceStringLibraryCheckBoxes {
         GeneralStringLibrary.get(localized: "jiggle_centers_enabled_line_2", table: "ToolInterfaceCheckBoxes")
     }
     
+    
+    static func checkBoxTextAnimationContinuousApplyToAllLine1() -> String? {
+            GeneralStringLibrary.get(localized: "animation_continuous_apply_to_all_line_1", table: "ToolInterfaceCheckBoxes")
+        }
+        
+        static func checkBoxTextAnimationContinuousApplyToAllLine2() -> String? {
+            GeneralStringLibrary.get(localized: "animation_continuous_apply_to_all_line_2", table: "ToolInterfaceCheckBoxes")
+        }
     
     static func checkBoxTextAnimationGrabApplyToAllLine1() -> String? {
         GeneralStringLibrary.get(localized: "animation_jiggle_apply_to_all_line_1", table: "ToolInterfaceCheckBoxes")

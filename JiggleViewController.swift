@@ -9,6 +9,14 @@ import UIKit
 
 class JiggleViewController: MetalViewController {
     
+    
+    func selectTimeLineSwatch(swatch: Swatch) {
+        jiggleViewModel.selectTimeLineSwatch(swatch: swatch)
+        if let selectedJiggle = jiggleViewModel.getSelectedJiggle() {
+            timeLineUpdateRelay(jiggle: selectedJiggle)
+        }
+    }
+    
     static let expandButtonWidth: CGFloat = 48.0
     static let expandButtonHeight: CGFloat = 44.0
     
@@ -302,14 +310,14 @@ class JiggleViewController: MetalViewController {
         }
         
         let appWidth: Int
-        let appHeight: Int
+        //let appHeight: Int
         switch orientation {
         case .landscape:
             appWidth = Int(ApplicationController.widthLandscape + 0.5)
-            appHeight = Int(ApplicationController.heightLandscape + 0.5)
+            //appHeight = Int(ApplicationController.heightLandscape + 0.5)
         case .portrait:
             appWidth = Int(ApplicationController.widthPortrait + 0.5)
-            appHeight = Int(ApplicationController.heightPortrait + 0.5)
+            //appHeight = Int(ApplicationController.heightPortrait + 0.5)
         }
         
         let safeAreaLeft = Int(ApplicationController.rootViewController.view.safeAreaInsets.left + 0.5)
@@ -473,50 +481,6 @@ class JiggleViewController: MetalViewController {
         
     }
     
-    @objc func clockTestPopover1(sender: UIButton) {
-        print("clockTestPopover1")
-        ApplicationController.rootViewController.pushDialogBox(DialogBoxModel.saveJiggle) { result in
-            print("Push'D (A:\(result))")
-        }
-    }
-    
-    @objc func clockTestPopover2(sender: UIButton) {
-        print("clockTestPopover2")
-        
-        
-        /*
-         guard let image = UIImage(named: ApplicationController.testTextureName) else {
-         print("Unable to load \(ApplicationController.testTextureName)")
-         return
-         }
-         guard image.size.width > 32.0 && image.size.height > 32.0 else {
-         print("Invalid dimension \(ApplicationController.testTextureName)")
-         return
-         }
-         
-         let scaledWidth = ApplicationController.widthPortraitScaled
-         let scaledHeight = ApplicationController.heightPortraitScaled
-         let scaledSize = CGSize(width: CGFloat(scaledWidth), height: CGFloat(scaledHeight))
-         
-         let aspect = scaledSize.getAspectFit(image.size)
-         
-         guard let resizedImage = image.resize(aspect.size) else {
-         
-         //guard let resizedImage = image.resizeAspectFill(UIScreen.main.bounds.size) else {
-         print("Resized Invalid dimension \(ApplicationController.testTextureName)")
-         return
-         }
-         
-         let jiggleDocument = JiggleDocument(image: resizedImage, orientation: .landscape)
-         ApplicationController.rootViewModel.pushToJiggle(jiggleDocument: jiggleDocument,
-         animated: true,
-         reversed: false)
-         */
-        
-        ApplicationController.rootViewModel.pushToLoadScene(animated: true, reversed: false)
-        
-    }
-    
     func registerContentFrame(safeAreaLeft: Int, safeAreaRight: Int, safeAreaTop: Int, safeAreaBottom: Int) {
         let orientation = jiggleDocument.orientation
         let appWidth: Int
@@ -532,7 +496,7 @@ class JiggleViewController: MetalViewController {
         
         if Device.isPhone {
             var interfaceConfiguration = toolInterfaceViewModel.getCurrentInterfaceConfigurationPhone()
-            interfaceConfiguration.prepare()
+            interfaceConfiguration.prepare(disableCreatorModes: false)
             let topMenuHeight = MenuHeightCategoryPhoneTop.get(category: interfaceConfiguration.heightCategoryTop,
                                                                orientation: orientation)
             let bottomMenuHeight = MenuHeightCategoryPhoneBottom.get(category: interfaceConfiguration.heightCategoryBottom,
@@ -558,7 +522,6 @@ class JiggleViewController: MetalViewController {
             
             let blockerHeight = ToolInterfaceTheme.getTopBlockerHeight(orientation: orientation,
                                                                        safeAreaTop: safeAreaTop)
-            print("The blocker height is \(blockerHeight), safeAreaTop was \(safeAreaTop)")
             
             phoneTopMenu.standardContainerView.graphContainerView.dragBlockerViewHeightConstraint.constant = CGFloat(blockerHeight)
             phoneTopMenu.standardContainerView.graphContainerView.setNeedsLayout()
@@ -581,23 +544,6 @@ class JiggleViewController: MetalViewController {
             phoneExpandToolbarButtonTop.masterBoundsWidth = CGFloat(appWidth)
             phoneExpandToolbarButtonTop.masterSafeAreaLeft = CGFloat(safeAreaLeft)
             phoneExpandToolbarButtonTop.masterSafeAreaRight = CGFloat(safeAreaRight)
-            
-            print("=.=.=.=")
-            
-            print("AAA phoneExpandToolbarButtonTop.masterBoundsWidth = \(phoneExpandToolbarButtonTop.masterBoundsWidth)")
-            print("AAA phoneExpandToolbarButtonBottom.masterBoundsWidth = \(phoneExpandToolbarButtonBottom.masterBoundsWidth)")
-            
-            print("=.=.=.=")
-            
-            print("AAA phoneExpandToolbarButtonTop.masterSafeAreaLeft = \(phoneExpandToolbarButtonTop.masterSafeAreaLeft)")
-            print("AAA phoneExpandToolbarButtonBottom.masterSafeAreaLeft = \(phoneExpandToolbarButtonBottom.masterSafeAreaLeft)")
-            
-            print("=.=.=.=")
-            
-            print("AAA phoneExpandToolbarButtonTop.masterSafeAreaRight = \(phoneExpandToolbarButtonTop.masterSafeAreaRight)")
-            print("AAA phoneExpandToolbarButtonBottom.masterSafeAreaRight = \(phoneExpandToolbarButtonBottom.masterSafeAreaRight)")
-            
-            print("=.=.=.=")
             
             phoneExpandToolbarButtonBottomBottomConstraint.constant = CGFloat(-safeAreaBottom) - 4.0
             phoneExpandToolbarButtonTopTopConstraint.constant = CGFloat(safeAreaTop) + 4.0
@@ -623,7 +569,7 @@ class JiggleViewController: MetalViewController {
             
         } else {
             var interfaceConfiguration = toolInterfaceViewModel.getCurrentInterfaceConfigurationPad()
-            interfaceConfiguration.prepare()
+            interfaceConfiguration.prepare(disableCreatorModes: false)
             snapMenuExpandedPad(configuration: interfaceConfiguration,
                                 snapMenus: true)
             jiggleScene.registerContentFrame(clipFrameX: 0, clipFrameY: 0,
@@ -865,8 +811,8 @@ class JiggleViewController: MetalViewController {
         let changeCommandSlices = changeCommand(&interfaceConfigurationCurrent)
         let alongsideMeshCommandSlices = alongsideMeshCommand()
         // 3.) Prepare the configurations.
-        interfaceConfigurationPrevious.prepare()
-        interfaceConfigurationCurrent.prepare()
+        interfaceConfigurationPrevious.prepare(disableCreatorModes: false)
+        interfaceConfigurationCurrent.prepare(disableCreatorModes: disableCreatorModes)
         
         let phaseSliceInterfaceUpdate = getInterfaceConfigurationUpdateSlice(
             previous: interfaceConfigurationPrevious,
@@ -915,7 +861,8 @@ class JiggleViewController: MetalViewController {
         var phases = [ToolActionPhase]()
         
         if InterfaceConfigurationPhone.getMeshCommandRequired(previousConfiguration: interfaceConfigurationPrevious,
-                                                              currentConfiguration: interfaceConfigurationCurrent) {
+                                                              currentConfiguration: interfaceConfigurationCurrent,
+                                                              disableCreatorModes: disableCreatorModes) {
             
             var phaseChangeCommandSlices = [ToolActionPhaseSlice]()
             phaseChangeCommandSlices.append(ToolActionPhaseSliceLockState())
@@ -1124,37 +1071,6 @@ class JiggleViewController: MetalViewController {
         toolActionPerform(toolAction)
     }
     
-    
-    func timeLinePage2Enter() {
-        timeLinePage2Go(isEnabled: true)
-    }
-    
-    func timeLinePage2Exit() {
-        timeLinePage2Go(isEnabled: false)
-    }
-    
-    func timeLinePage2Go(isEnabled: Bool) {
-        if jiggleViewModel.isTimeLinePage2Enabled == isEnabled {
-            print("timeLinePage2Go, already was isTimeLinePage2Enabled = \(isEnabled)")
-            return
-        }
-        
-        print("timeLinePage2Go, freshly entering = \(isEnabled)")
-        
-        
-        if toolInterfaceViewModel.isBlocked { return }
-        
-        let toolAction = batchInterfaceAction(disableCreatorModes: false,
-                                              changeCommand: { configuration in
-            configuration.isTimeLinePage2Enabled = isEnabled
-            return [ToolActionPhaseSliceSetTimeLinePage2Mode(isTimeLinePage2Mode: isEnabled)]
-        }, alongsideMeshCommand: {
-            [ ]
-        })
-        
-        toolActionPerform(toolAction)
-    }
-    
     func graphPage2Enter() {
         graphPage2Go(isEnabled: true)
     }
@@ -1184,36 +1100,6 @@ class JiggleViewController: MetalViewController {
         
         toolActionPerform(toolAction)
     }
-    
-    func animationContinuousPage2Enter() {
-            animationContinuousPage2Go(isEnabled: true)
-        }
-        
-        func animationContinuousPage2Exit() {
-            animationContinuousPage2Go(isEnabled: false)
-        }
-        
-        func animationContinuousPage2Go(isEnabled: Bool) {
-            if jiggleViewModel.isAnimationContinuousPage2Enabled == isEnabled {
-                print("animationContinuousPage2Go, already was isAnimationContinuousPage2Enabled = \(isEnabled)")
-                return
-            }
-            
-            print("animationContinuousPage2Go, freshly entering = \(isEnabled)")
-            
-            
-            if toolInterfaceViewModel.isBlocked { return }
-            
-            let toolAction = batchInterfaceAction(disableCreatorModes: false,
-                                                  changeCommand: { configuration in
-                configuration.isAnimationContinuousPage2Enabled = isEnabled
-                return [ToolActionPhaseSliceSetAnimationContinuousPage2Mode(isAnimationContinuousPage2Mode: isEnabled)]
-            }, alongsideMeshCommand: {
-                [ ]
-            })
-            
-            toolActionPerform(toolAction)
-        }
     
     func stereoscopicEnter() {
         stereoscopicGo(isEnabled: true)
@@ -1360,26 +1246,106 @@ class JiggleViewController: MetalViewController {
         toolActionPerform(toolAction)
     }
     
+    
+    func animationContinuousPage1Enter() {
+        animationContinuousPageGo(page: 1)
+    }
+
+    func animationContinuousPage2Enter() {
+        animationContinuousPageGo(page: 2)
+    }
+
+    func animationContinuousPage3Enter() {
+        animationContinuousPageGo(page: 3)
+    }
+
+    func animationContinuousPage2Exit() {
+        animationContinuousPageGo(page: 1)
+    }
+
+    func animationContinuousPage3Exit() {
+        animationContinuousPageGo(page: 2)
+    }
+
+    func animationContinuousPageGo(page: Int) {
+        
+        if jiggleViewModel.jiggleDocument.animationContinuousPage == page {
+            return
+        }
+        
+        if toolInterfaceViewModel.isBlocked { return }
+        
+        let toolAction = batchInterfaceAction(disableCreatorModes: true,
+                                              changeCommand: { configuration in
+            configuration.animationContinuousPage = page
+            return [ToolActionPhaseSliceSetContinuousPage(animationContinuousPage: page)]
+        }, alongsideMeshCommand: {
+            [ ]
+        })
+        
+        toolActionPerform(toolAction)
+    }
+    
+    func animationTimeLinePage1Enter() {
+        animationTimeLinePageGo(page: 1)
+    }
+
+    func animationTimeLinePage2Enter() {
+        animationTimeLinePageGo(page: 2)
+    }
+
+    func animationTimeLinePage3Enter() {
+        animationTimeLinePageGo(page: 3)
+    }
+
+    func animationTimeLinePage2Exit() {
+        animationTimeLinePageGo(page: 1)
+    }
+
+    func animationTimeLinePage3Exit() {
+        animationTimeLinePageGo(page: 2)
+    }
+
+    func animationTimeLinePageGo(page: Int) {
+        
+        if jiggleViewModel.jiggleDocument.animationTimeLinePage == page {
+            return
+        }
+        
+        if toolInterfaceViewModel.isBlocked { return }
+        
+        let toolAction = batchInterfaceAction(disableCreatorModes: true,
+                                              changeCommand: { configuration in
+            configuration.animationTimeLinePage = page
+            return [ToolActionPhaseSliceSetTimeLinePage(animationTimeLinePage: page)]
+        }, alongsideMeshCommand: {
+            [ ]
+        })
+        
+        toolActionPerform(toolAction)
+    }
+    
+    
     func animationLoopsPage1Enter() {
         animationLoopsPageGo(page: 1)
     }
-    
+
     func animationLoopsPage2Enter() {
         animationLoopsPageGo(page: 2)
     }
-    
+
     func animationLoopsPage3Enter() {
         animationLoopsPageGo(page: 3)
     }
-    
+
     func animationLoopsPage2Exit() {
         animationLoopsPageGo(page: 1)
     }
-    
+
     func animationLoopsPage3Exit() {
         animationLoopsPageGo(page: 2)
     }
-    
+
     func animationLoopsPageGo(page: Int) {
         
         if jiggleViewModel.jiggleDocument.animationLoopsPage == page {
@@ -1391,7 +1357,7 @@ class JiggleViewController: MetalViewController {
         let toolAction = batchInterfaceAction(disableCreatorModes: true,
                                               changeCommand: { configuration in
             configuration.animationLoopsPage = page
-            return [ToolActionPhaseSliceSetAnimationLoopsPage(animationLoopsPage: page)]
+            return [ToolActionPhaseSliceSetLoopsPage(animationLoopsPage: page)]
         }, alongsideMeshCommand: {
             [ ]
         })
@@ -1563,8 +1529,9 @@ class JiggleViewController: MetalViewController {
         let toolAction = ToolAction(phase: phase)
         toolActionPerform(toolAction)
         
-        toolInterfaceViewModel.handleJiggleSpeedDidChange()
-        toolInterfaceViewModel.handleJigglePowerDidChange()
+        
+        //toolInterfaceViewModel.handleJiggleSpeedDidChange()
+        //toolInterfaceViewModel.handleJigglePowerDidChange()
         
     }
     
@@ -1896,11 +1863,13 @@ class JiggleViewController: MetalViewController {
                 if isDisplayNeeded {
                     padDraggableMenu.standardContainerView.timeLineContainerView.timeLineView.setNeedsDisplay()
                 }
+                padDraggableMenu.standardContainerView.timeLineContainerView.handleSelectedSwatchDidChange()
             } else {
                 phoneTopMenu.standardContainerView.timeLineContainerView.timeLineView.jiggle = jiggle
                 if isDisplayNeeded {
                     phoneTopMenu.standardContainerView.timeLineContainerView.timeLineView.setNeedsDisplay()
                 }
+                phoneTopMenu.standardContainerView.timeLineContainerView.handleSelectedSwatchDidChange()
             }
         } else {
             if Device.isPad {
@@ -1908,11 +1877,13 @@ class JiggleViewController: MetalViewController {
                 if isDisplayNeeded {
                     padDraggableMenu.standardContainerView.timeLineContainerView.timeLineView.setNeedsDisplay()
                 }
+                padDraggableMenu.standardContainerView.timeLineContainerView.handleSelectedSwatchDidChange()
             } else {
                 phoneTopMenu.standardContainerView.timeLineContainerView.timeLineView.jiggle = nil
                 if isDisplayNeeded {
                     phoneTopMenu.standardContainerView.timeLineContainerView.timeLineView.setNeedsDisplay()
                 }
+                phoneTopMenu.standardContainerView.timeLineContainerView.handleSelectedSwatchDidChange()
             }
         }
     }

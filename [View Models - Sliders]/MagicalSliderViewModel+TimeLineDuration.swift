@@ -12,15 +12,23 @@ import Foundation
     override func refresh() {
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
             if let selectedJiggle = jiggleViewModel.getSelectedJiggle() {
+                
+                if jiggleViewModel.getTimeLineDraggingStatus() {
+                    refreshDisabled(value: selectedJiggle.timeLine.animationDuration)
+                    return
+                }
+                
+                if jiggleViewModel.isSliderActiveBesides(thisSlider: .sliderTimeLineDuration) {
+                    refreshDisabled(value: selectedJiggle.timeLine.animationDuration)
+                    return
+                }
+                
                 refreshEnabled(value: selectedJiggle.timeLine.animationDuration)
+                
             } else {
                 refreshDisabled()
             }
         }
-        
-        //minimumValue: AnimationInstructionLoops.minTime,
-        //maximumValue: AnimationInstructionLoops.maxTime,
-        
     }
     
     deinit {
@@ -33,7 +41,7 @@ import Foundation
         super.handleSlideStarted(percent: percent)
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
             let value = sliderConfiguration.minimumValue + (sliderConfiguration.maximumValue - sliderConfiguration.minimumValue) * Float(percent)
-            jiggleViewModel.notifySliderStartedTimeLineOffset(value: value)
+            jiggleViewModel.notifySliderStartedTimeLineDuration(value: value)
         }
     }
     
@@ -74,7 +82,7 @@ import Foundation
                     }
                 }
             }
-            jiggleViewModel.notifySliderFinishedTimeLineOffset(value: value)
+            jiggleViewModel.notifySliderFinishedTimeLineDuration(value: value)
         }
     }
     

@@ -21,10 +21,12 @@ enum ToolActionPhaseSliceType {
     case setZoomMode
     case setAnimationLoopsMode
     case setAnimationContinuousMode
-    case setAnimationLoopsPage
-    case setTimeLinePage2Mode
+    case setLoopsPage
+    case setTimeLinePage
+    case setContinuousPage
+    
     case setGraphPage2Mode
-    case setAnimationContinuousPage2Mode
+    //case setAnimationContinuousPage2Mode
     
     case setTimeLineMode
     case setStereoscopicMode
@@ -190,19 +192,6 @@ class ToolActionPhaseSliceSetZoomMode: ToolActionPhaseSlice {
     }
 }
 
-class ToolActionPhaseSliceSetTimeLinePage2Mode: ToolActionPhaseSlice {
-    let isTimeLinePage2Mode: Bool
-    init(isTimeLinePage2Mode: Bool) {
-        self.isTimeLinePage2Mode = isTimeLinePage2Mode
-        super.init(toolActionPhaseSliceType: .setTimeLinePage2Mode, sleepTicks: 0)
-    }
-    deinit {
-        if ApplicationController.DEBUG_DEALLOCS {
-            print("[--] ToolActionPhaseSliceSetTimeLinePage2Mode")
-        }
-    }
-}
-
 class ToolActionPhaseSliceSetGraphPage2Mode: ToolActionPhaseSlice {
     let isGraphPage2Mode: Bool
     init(isGraphPage2Mode: Bool) {
@@ -212,19 +201,6 @@ class ToolActionPhaseSliceSetGraphPage2Mode: ToolActionPhaseSlice {
     deinit {
         if ApplicationController.DEBUG_DEALLOCS {
             print("[--] ToolActionPhaseSliceSetGraphPage2Mode")
-        }
-    }
-}
-
-class ToolActionPhaseSliceSetAnimationContinuousPage2Mode: ToolActionPhaseSlice {
-    let isAnimationContinuousPage2Mode: Bool
-    init(isAnimationContinuousPage2Mode: Bool) {
-        self.isAnimationContinuousPage2Mode = isAnimationContinuousPage2Mode
-        super.init(toolActionPhaseSliceType: .setAnimationContinuousPage2Mode, sleepTicks: 0)
-    }
-    deinit {
-        if ApplicationController.DEBUG_DEALLOCS {
-            print("[--] ToolActionPhaseSliceSetAnimationContinuousPage2Mode")
         }
     }
 }
@@ -255,15 +231,41 @@ class ToolActionPhaseSliceSetAnimationContinuousMode: ToolActionPhaseSlice {
     }
 }
 
-class ToolActionPhaseSliceSetAnimationLoopsPage: ToolActionPhaseSlice {
+class ToolActionPhaseSliceSetLoopsPage: ToolActionPhaseSlice {
     let animationLoopsPage: Int
     init(animationLoopsPage: Int) {
         self.animationLoopsPage = animationLoopsPage
-        super.init(toolActionPhaseSliceType: .setAnimationLoopsPage, sleepTicks: 0)
+        super.init(toolActionPhaseSliceType: .setLoopsPage, sleepTicks: 0)
     }
     deinit {
         if ApplicationController.DEBUG_DEALLOCS {
-            print("[--] ToolActionPhaseSliceSetAnimationLoopsPage")
+            print("[--] ToolActionPhaseSliceSetLoopsPage")
+        }
+    }
+}
+
+class ToolActionPhaseSliceSetContinuousPage: ToolActionPhaseSlice {
+    let animationContinuousPage: Int
+    init(animationContinuousPage: Int) {
+        self.animationContinuousPage = animationContinuousPage
+        super.init(toolActionPhaseSliceType: .setContinuousPage, sleepTicks: 0)
+    }
+    deinit {
+        if ApplicationController.DEBUG_DEALLOCS {
+            print("[--] ToolActionPhaseSliceSetContinuousPage")
+        }
+    }
+}
+
+class ToolActionPhaseSliceSetTimeLinePage: ToolActionPhaseSlice {
+    let animationTimeLinePage: Int
+    init(animationTimeLinePage: Int) {
+        self.animationTimeLinePage = animationTimeLinePage
+        super.init(toolActionPhaseSliceType: .setTimeLinePage, sleepTicks: 0)
+    }
+    deinit {
+        if ApplicationController.DEBUG_DEALLOCS {
+            print("[--] ToolActionPhaseSliceSetTimeLinePage")
         }
     }
 }

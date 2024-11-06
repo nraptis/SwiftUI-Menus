@@ -10,18 +10,7 @@ import Foundation
 @Observable class MagicalSliderViewModelJiggleOpacity: MagicalSliderViewModel {
     
     override func refresh() {
-        
         refreshEnabled(value: ApplicationController.jiggleOpacity)
-        
-        
-        
-        /*
-        if let selectedJiggle = jiggleViewModel.getSelectedJiggle() {
-            
-        } else {
-            refreshDisabled()
-        }
-        */
     }
     
     deinit {

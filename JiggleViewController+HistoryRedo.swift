@@ -114,11 +114,6 @@ extension JiggleViewController {
             if let historyStateResetWeightGraph = historyState as? HistoryStateResetWeightGraph {
                 applyHistoryStateResetWeightGraphRedo(historyStateResetWeightGraph)
             }
-        case .breakWeightGraphNodeManual:
-            if let historyStateBreakWeightGraphNodeManual = historyState as? HistoryStateBreakWeightGraphNodeManual {
-                applyHistoryStateBreakWeightGraphNodeManualRedo(historyStateBreakWeightGraphNodeManual)
-            }
-            
         case .jiggleSpeed:
             if let historyStateJiggleSpeed = historyState as? HistoryStateJiggleSpeed {
                 applyHistoryStateJiggleSpeedRedo(historyStateJiggleSpeed)
@@ -127,13 +122,26 @@ extension JiggleViewController {
             if let historyStateGyroPower = historyState as? HistoryStateGyroPower {
                 applyHistoryStateGyroPowerRedo(historyStateGyroPower)
             }
-        case .timeLineUpdate:
-            if let historyStateTimeLineUpdate = historyState as? HistoryStateTimeLineUpdate {
-                applyHistoryStateTimeLineUpdateRedo(historyStateTimeLineUpdate)
-            }
         case .jiggleDampen:
             if let historyStateJiggleDampen = historyState as? HistoryStateJiggleDampen {
                 applyHistoryStateJiggleDampenRedo(historyStateJiggleDampen)
+            }
+        case .loopAttributeOne:
+            if let historyStateLoopAttributeOne = historyState as? HistoryStateLoopAttributeOne {
+                applyHistoryStateLoopAttributeOneRedo(historyStateLoopAttributeOne)
+            }
+        case .loopAttributesAll:
+            if let historyStateLoopAttributesAll = historyState as? HistoryStateLoopAttributesAll {
+                applyHistoryStateLoopAttributesAllRedo(historyStateLoopAttributesAll)
+            }
+            
+        case .continuousAttributeOne:
+            if let historyStateContinuousAttributeOne = historyState as? HistoryStateContinuousAttributeOne {
+                applyHistoryStateContinuousAttributeOneRedo(historyStateContinuousAttributeOne)
+            }
+        case .continuousAttributesAll:
+            if let historyStateContinuousAttributesAll = historyState as? HistoryStateContinuousAttributesAll {
+                applyHistoryStateContinuousAttributesAllRedo(historyStateContinuousAttributesAll)
             }
         }
         toolInterfaceViewModel.handleUndoRedoDidChange()
@@ -215,10 +223,6 @@ extension JiggleViewController {
         jiggleViewModel.applyHistoryStateResetWeightGraphRedo(historyState)
     }
     
-    private func applyHistoryStateBreakWeightGraphNodeManualRedo(_ historyState: HistoryStateBreakWeightGraphNodeManual) {
-        jiggleViewModel.applyHistoryStateBreakWeightGraphNodeManualRedo(historyState)
-    }
-    
     private func applyHistoryStateJiggleSpeedRedo(_ historyState: HistoryStateJiggleSpeed) {
         jiggleViewModel.applyHistoryStateJiggleSpeedRedo(historyState)
     }
@@ -227,12 +231,24 @@ extension JiggleViewController {
         jiggleViewModel.applyHistoryStateGyroPowerRedo(historyState)
     }
     
-    private func applyHistoryStateTimeLineUpdateRedo(_ historyState: HistoryStateTimeLineUpdate) {
-        jiggleViewModel.applyHistoryStateTimeLineUpdateRedo(historyState)
-    }
-    
     private func applyHistoryStateJiggleDampenRedo(_ historyState: HistoryStateJiggleDampen) {
         jiggleViewModel.applyHistoryStateJiggleDampenRedo(historyState)
+    }
+    
+    private func applyHistoryStateLoopAttributeOneRedo(_ historyState: HistoryStateLoopAttributeOne) {
+        jiggleViewModel.applyHistoryStateLoopAttributeOneRedo(historyState)
+    }
+    
+    private func applyHistoryStateLoopAttributesAllRedo(_ historyState: HistoryStateLoopAttributesAll) {
+        jiggleViewModel.applyHistoryStateLoopAttributesAllRedo(historyState)
+    }
+    
+    private func applyHistoryStateContinuousAttributeOneRedo(_ historyState: HistoryStateContinuousAttributeOne) {
+        jiggleViewModel.applyHistoryStateContinuousAttributeOneRedo(historyState)
+    }
+    
+    private func applyHistoryStateContinuousAttributesAllRedo(_ historyState: HistoryStateContinuousAttributesAll) {
+        jiggleViewModel.applyHistoryStateContinuousAttributesAllRedo(historyState)
     }
     
 }

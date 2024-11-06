@@ -18,10 +18,10 @@ extension ToolInterfaceFactory {
         let iconPack = LooseConvertibleIconLibrary.menuC
         
         let configuration = ToolInterfaceElementButtonConfiguration(iconPack: iconPack, orientation: ImageImportViewModel.orientation, nameLabelLine1: textLine1, nameLabelLine2: textLine2)
-        let flex = ToolInterfaceViewModel.getButtonFlex(orientation: ImageImportViewModel.orientation,
-                                                        configuration: configuration,
-                                                        neighborTypeLeft: neighborTypeLeft,
-                                                        neighborTypeRight: neighborTypeRight)
+        let flex = Self.getButtonFlex(orientation: ImageImportViewModel.orientation,
+                                      configuration: configuration,
+                                      neighborTypeLeft: neighborTypeLeft,
+                                      neighborTypeRight: neighborTypeRight)
         
         let viewModelImageImportBack = MagicalButtonViewModelImageImportBack(orientation: ImageImportViewModel.orientation,
                                                                              buttonConfiguration: configuration)
@@ -47,10 +47,10 @@ extension ToolInterfaceFactory {
                                                                     orientation: ImageImportViewModel.orientation,
                                                                     nameLabelLine1: textLine1,
                                                                     nameLabelLine2: textLine2)
-        let flex = ToolInterfaceViewModel.getButtonFlex(orientation: ImageImportViewModel.orientation,
-                                                        configuration: configuration,
-                                                        neighborTypeLeft: neighborTypeLeft,
-                                                        neighborTypeRight: neighborTypeRight)
+        let flex = Self.getButtonFlex(orientation: ImageImportViewModel.orientation,
+                                      configuration: configuration,
+                                      neighborTypeLeft: neighborTypeLeft,
+                                      neighborTypeRight: neighborTypeRight)
         
         let viewModelRotateRight = MagicalButtonViewModelRotateRight(orientation: ImageImportViewModel.orientation,
                                                                      buttonConfiguration: configuration)
@@ -76,10 +76,10 @@ extension ToolInterfaceFactory {
                                                                     orientation: ImageImportViewModel.orientation,
                                                                     nameLabelLine1: textLine1,
                                                                     nameLabelLine2: textLine2)
-        let flex = ToolInterfaceViewModel.getButtonFlex(orientation: ImageImportViewModel.orientation,
-                                                        configuration: configuration,
-                                                        neighborTypeLeft: neighborTypeLeft,
-                                                        neighborTypeRight: neighborTypeRight)
+        let flex = Self.getButtonFlex(orientation: ImageImportViewModel.orientation,
+                                      configuration: configuration,
+                                      neighborTypeLeft: neighborTypeLeft,
+                                      neighborTypeRight: neighborTypeRight)
         
         let viewModelRotateLeft = MagicalButtonViewModelRotateLeft(orientation: ImageImportViewModel.orientation,
                                                                    buttonConfiguration: configuration)
@@ -105,10 +105,10 @@ extension ToolInterfaceFactory {
                                                                     orientation: ImageImportViewModel.orientation,
                                                                     nameLabelLine1: textLine1,
                                                                     nameLabelLine2: textLine2)
-        let flex = ToolInterfaceViewModel.getButtonFlex(orientation: ImageImportViewModel.orientation,
-                                                        configuration: configuration,
-                                                        neighborTypeLeft: neighborTypeLeft,
-                                                        neighborTypeRight: neighborTypeRight)
+        let flex = Self.getButtonFlex(orientation: ImageImportViewModel.orientation,
+                                      configuration: configuration,
+                                      neighborTypeLeft: neighborTypeLeft,
+                                      neighborTypeRight: neighborTypeRight)
         
         let viewModelResetAspectFit = MagicalButtonViewModelResetAspectFit(orientation: ImageImportViewModel.orientation,
                                                                            buttonConfiguration: configuration)
@@ -134,10 +134,10 @@ extension ToolInterfaceFactory {
                                                                     orientation: ImageImportViewModel.orientation,
                                                                     nameLabelLine1: textLine1,
                                                                     nameLabelLine2: textLine2)
-        let flex = ToolInterfaceViewModel.getButtonFlex(orientation: ImageImportViewModel.orientation,
-                                                        configuration: configuration,
-                                                        neighborTypeLeft: neighborTypeLeft,
-                                                        neighborTypeRight: neighborTypeRight)
+        let flex = Self.getButtonFlex(orientation: ImageImportViewModel.orientation,
+                                      configuration: configuration,
+                                      neighborTypeLeft: neighborTypeLeft,
+                                      neighborTypeRight: neighborTypeRight)
         
         let viewModelResetAspectFill = MagicalButtonViewModelResetAspectFill(orientation: ImageImportViewModel.orientation,
                                                                              buttonConfiguration: configuration)

@@ -10,61 +10,96 @@ import UIKit
 
 extension ToolInterfaceViewModel {
     
-    @MainActor func toolActionAnimationContinuousPage2Enter() {
-                print("[IMB] Action - toolActionAnimationContinuousPage2Enter")
-                if isBlocked { return }
-                
-                if let jiggleViewController = jiggleViewController {
-                    jiggleViewController.animationContinuousPage2Enter()
-                }
-                
-            }
-            
-            @MainActor func toolActionAnimationContinuousPage2Exit() {
-                print("[IMB] Action - toolActionAnimationContinuousPage2Exit")
-                if isBlocked { return }
-                
-                if let jiggleViewController = jiggleViewController {
-                    jiggleViewController.animationContinuousPage2Exit()
-                }
-            }
+    @MainActor func toolActionContinuousResetAngleDiag1() {
+        print("[IMB] Action - ContinuousResetAngleDiag1")
+        if isBlocked { return }
+        if let jiggleViewModel = jiggleViewModel {
+            jiggleViewModel.continuousResetAngleDiag1()
+        }
+    }
+    @MainActor func toolActionContinuousResetAngleDiag2() {
+        print("[IMB] Action - ContinuousResetAngleDiag2")
+        if isBlocked { return }
+        if let jiggleViewModel = jiggleViewModel {
+            jiggleViewModel.continuousResetAngleDiag2()
+        }
+    }
+    @MainActor func toolActionContinuousResetAngleHorizontal() {
+        print("[IMB] Action - ContinuousResetAngleHorizontal")
+        if isBlocked { return }
+        if let jiggleViewModel = jiggleViewModel {
+            jiggleViewModel.continuousResetAngleHorizontal()
+        }
+    }
+    @MainActor func toolActionContinuousResetAngleVertical() {
+        print("[IMB] Action - ContinuousResetAngleVertical")
+        if isBlocked { return }
+        if let jiggleViewModel = jiggleViewModel {
+            jiggleViewModel.continuousResetAngleVertical()
+        }
+    }
+    
+    @MainActor func toolActionContinuousResetEndRotation() {
+        print("[IMB] Action - ContinuousResetEndRotation")
+        if isBlocked { return }
+        if let jiggleViewModel = jiggleViewModel {
+            jiggleViewModel.continuousResetEndRotation()
+        }
+    }
+    
+    @MainActor func toolActionContinuousResetEndScale() {
+        print("[IMB] Action - ContinuousResetEndScale")
+        if isBlocked { return }
+        if let jiggleViewModel = jiggleViewModel {
+            jiggleViewModel.continuousResetEndScale()
+        }
+    }
+
+    @MainActor func toolActionContinuousResetStartRotation() {
+        print("[IMB] Action - ContinuousResetStartRotation")
+        if isBlocked { return }
+        if let jiggleViewModel = jiggleViewModel {
+            jiggleViewModel.continuousResetStartRotation()
+        }
+    }
+    @MainActor func toolActionContinuousResetStartScale() {
+        print("[IMB] Action - ContinuousResetStartScale")
+        if isBlocked { return }
+        if let jiggleViewModel = jiggleViewModel {
+            jiggleViewModel.continuousResetStartScale()
+        }
+    }
+    @MainActor func toolActionContinuousResetSwoop() {
+        print("[IMB] Action - ContinuousResetSwoop")
+        if isBlocked { return }
+        if let jiggleViewModel = jiggleViewModel {
+            jiggleViewModel.continuousResetSwoop()
+        }
+    }
+    @MainActor func toolActionContinuousSyncFrames() {
+        print("[IMB] Action - ContinuousSyncFrames")
+        if isBlocked { return }
+        if let jiggleViewModel = jiggleViewModel {
+            jiggleViewModel.continuousSyncFrames()
+        }
+    }
     
     @MainActor func toolActionGraphPage2Enter() {
-            print("[IMB] Action - toolActionGraphPage2Enter")
-            if isBlocked { return }
-            
-            if let jiggleViewController = jiggleViewController {
-                jiggleViewController.graphPage2Enter()
-            }
-            
-        }
-        
-        @MainActor func toolActionGraphPage2Exit() {
-            print("[IMB] Action - toolActionGraphPage2Exit")
-            if isBlocked { return }
-            
-            if let jiggleViewController = jiggleViewController {
-                jiggleViewController.graphPage2Exit()
-            }
-        }
-    
-    
-    @MainActor func toolActionTimeLinePage2Enter() {
-        print("[IMB] Action - toolActionTimeLinePage2Enter")
+        print("[IMB] Action - toolActionGraphPage2Enter")
         if isBlocked { return }
         
         if let jiggleViewController = jiggleViewController {
-            jiggleViewController.timeLinePage2Enter()
+            jiggleViewController.graphPage2Enter()
         }
         
     }
     
-    @MainActor func toolActionTimeLinePage2Exit() {
-        print("[IMB] Action - toolActionTimeLinePage2Exit")
+    @MainActor func toolActionGraphPage2Exit() {
+        print("[IMB] Action - toolActionGraphPage2Exit")
         if isBlocked { return }
         
         if let jiggleViewController = jiggleViewController {
-            jiggleViewController.timeLinePage2Exit()
+            jiggleViewController.graphPage2Exit()
         }
     }
     
@@ -126,7 +161,7 @@ extension ToolInterfaceViewModel {
         if isBlocked { return }
         
     }
-
+    
     @MainActor func toolActionResetWeightGraphStandard() {
         print("[IMB] Action - toolActionResetWeightGraphStandard")
         if isBlocked { return }
@@ -197,18 +232,7 @@ extension ToolInterfaceViewModel {
         if isBlocked { return }
         
     }
-    
-    
-    
-    
-    
-    @MainActor func toolActionBreakTangentWeightGraph() {
-        print("[IMB] Action - toolActionBreakTangentWeightGraph")
-        if isBlocked { return }
-        
-    }
-    
-    
+
     @MainActor func toolActionCloneJiggle() {
         print("[IMB] Action - CloneJiggle")
         if isBlocked { return }
@@ -284,41 +308,131 @@ extension ToolInterfaceViewModel {
         }
     }
     
+    
+    
+    @MainActor func toolActionContinuousPage1Enter() {
+        print("[IMB] Action - toolActionContinuousPage1Enter")
+        if let jiggleViewController = jiggleViewController {
+            jiggleViewController.animationContinuousPage1Enter()
+        }
+    }
+
+    @MainActor func toolActionContinuousPage1Exit() {
+        print("[IMB] Action - toolActionContinuousPage1Exit")
+        if let jiggleViewController = jiggleViewController {
+            jiggleViewController.animationContinuousPage3Enter()
+        }
+    }
+
+    @MainActor func toolActionContinuousPage2Enter() {
+        print("[IMB] Action - toolActionContinuousPage2Enter")
+        if let jiggleViewController = jiggleViewController {
+            jiggleViewController.animationContinuousPage2Enter()
+        }
+    }
+
+    @MainActor func toolActionContinuousPage2Exit() {
+        print("[IMB] Action - toolActionContinuousPage2Exit")
+        if let jiggleViewController = jiggleViewController {
+            jiggleViewController.animationContinuousPage2Exit()
+        }
+    }
+
+    @MainActor func toolActionContinuousPage3Enter() {
+        print("[IMB] Action - toolActionTimeLineEnter")
+        if let jiggleViewController = jiggleViewController {
+            jiggleViewController.animationContinuousPage3Enter()
+        }
+    }
+
+    @MainActor func toolActionContinuousPage3Exit() {
+        print("[IMB] Action - toolActionContinuousPage3Exit")
+        if let jiggleViewController = jiggleViewController {
+            jiggleViewController.animationContinuousPage3Exit()
+        }
+    }
+    
+    
+    
+    @MainActor func toolActionTimeLinePage1Enter() {
+        print("[IMB] Action - toolActionTimeLinePage1Enter")
+        if let jiggleViewController = jiggleViewController {
+            jiggleViewController.animationTimeLinePage1Enter()
+        }
+    }
+
+    @MainActor func toolActionTimeLinePage1Exit() {
+        print("[IMB] Action - toolActionTimeLinePage1Exit")
+        if let jiggleViewController = jiggleViewController {
+            jiggleViewController.animationTimeLinePage3Enter()
+        }
+    }
+
+    @MainActor func toolActionTimeLinePage2Enter() {
+        print("[IMB] Action - toolActionTimeLinePage2Enter")
+        if let jiggleViewController = jiggleViewController {
+            jiggleViewController.animationTimeLinePage2Enter()
+        }
+    }
+
+    @MainActor func toolActionTimeLinePage2Exit() {
+        print("[IMB] Action - toolActionTimeLinePage2Exit")
+        if let jiggleViewController = jiggleViewController {
+            jiggleViewController.animationTimeLinePage2Exit()
+        }
+    }
+
+    @MainActor func toolActionTimeLinePage3Enter() {
+        print("[IMB] Action - toolActionTimeLineEnter")
+        if let jiggleViewController = jiggleViewController {
+            jiggleViewController.animationTimeLinePage3Enter()
+        }
+    }
+
+    @MainActor func toolActionTimeLinePage3Exit() {
+        print("[IMB] Action - toolActionTimeLinePage3Exit")
+        if let jiggleViewController = jiggleViewController {
+            jiggleViewController.animationTimeLinePage3Exit()
+        }
+    }
+
+    
+    
     @MainActor func toolActionLoopsPage1Enter() {
         print("[IMB] Action - toolActionLoopsPage1Enter")
         if let jiggleViewController = jiggleViewController {
             jiggleViewController.animationLoopsPage1Enter()
         }
     }
-    
-    @MainActor func toolActionLoopsPage2Enter() {
-        print("[IMB] Action - toolActionLoopsPage2Enter")
-        if let jiggleViewController = jiggleViewController {
-            jiggleViewController.animationLoopsPage2Enter()
-        }
-    }
-    
-    @MainActor func toolActionLoopsPage3Enter() {
-        print("[IMB] Action - toolActionTimeLineEnter")
-        if let jiggleViewController = jiggleViewController {
-            jiggleViewController.animationLoopsPage3Enter()
-        }
-    }
-    
+
     @MainActor func toolActionLoopsPage1Exit() {
         print("[IMB] Action - toolActionLoopsPage1Exit")
         if let jiggleViewController = jiggleViewController {
             jiggleViewController.animationLoopsPage3Enter()
         }
     }
-    
+
+    @MainActor func toolActionLoopsPage2Enter() {
+        print("[IMB] Action - toolActionLoopsPage2Enter")
+        if let jiggleViewController = jiggleViewController {
+            jiggleViewController.animationLoopsPage2Enter()
+        }
+    }
+
     @MainActor func toolActionLoopsPage2Exit() {
         print("[IMB] Action - toolActionLoopsPage2Exit")
         if let jiggleViewController = jiggleViewController {
             jiggleViewController.animationLoopsPage2Exit()
         }
     }
-    
+
+    @MainActor func toolActionLoopsPage3Enter() {
+        print("[IMB] Action - toolActionTimeLineEnter")
+        if let jiggleViewController = jiggleViewController {
+            jiggleViewController.animationLoopsPage3Enter()
+        }
+    }
+
     @MainActor func toolActionLoopsPage3Exit() {
         print("[IMB] Action - toolActionLoopsPage3Exit")
         if let jiggleViewController = jiggleViewController {
@@ -427,7 +541,13 @@ extension ToolInterfaceViewModel {
         jiggleViewModel.selectPreviousGuide()
     }
     
-    
+    @MainActor func toolActionTimeLineSyncFrames() {
+        print("[IMB] Action - toolActionTimeLineSyncFrames")
+        if isBlocked { return }
+        if let jiggleViewModel = jiggleViewModel {
+            jiggleViewModel.timeLineSyncFrames()
+        }
+    }
     
     @MainActor func toolActionTimeLineFlipAll() {
         print("[IMB] Action - toolActionTimeLineFlipAll")
@@ -496,23 +616,83 @@ extension ToolInterfaceViewModel {
         handleTimeLineUpdate()
     }
     
-    @MainActor func toolActionTimeLineBreakPoint() {
-        print("[IMB] Action - toolActionTimeLineBreakPoint")
+    @MainActor func toolActionTimeLineResetCurveSmall() {
+        print("[IMB] Action - toolActionTimeLineResetCurveSmall")
         if isBlocked { return }
         if let jiggleViewModel = jiggleViewModel {
             if let selectedJiggle = jiggleViewModel.getSelectedJiggle() {
-                jiggleViewModel.timeLineBreakPoint(selectedJiggle)
+                jiggleViewModel.timeLineResetCurveSmall(selectedJiggle)
+            }
+        }
+        handleTimeLineUpdate()
+    }
+
+
+    @MainActor func toolActionTimeLineResetDivot() {
+        print("[IMB] Action - toolActionTimeLineResetDivot")
+        if isBlocked { return }
+        if let jiggleViewModel = jiggleViewModel {
+            if let selectedJiggle = jiggleViewModel.getSelectedJiggle() {
+                jiggleViewModel.timeLineResetDivot(selectedJiggle)
+            }
+        }
+        handleTimeLineUpdate()
+    }
+
+
+    @MainActor func toolActionTimeLineResetDivotSmall() {
+        print("[IMB] Action - toolActionTimeLineResetDivotSmall")
+        if isBlocked { return }
+        if let jiggleViewModel = jiggleViewModel {
+            if let selectedJiggle = jiggleViewModel.getSelectedJiggle() {
+                jiggleViewModel.timeLineResetDivotSmall(selectedJiggle)
+            }
+        }
+        handleTimeLineUpdate()
+    }
+
+
+    @MainActor func toolActionTimeLineResetFlat() {
+        print("[IMB] Action - toolActionTimeLineResetFlat")
+        if isBlocked { return }
+        if let jiggleViewModel = jiggleViewModel {
+            if let selectedJiggle = jiggleViewModel.getSelectedJiggle() {
+                jiggleViewModel.timeLineResetFlat(selectedJiggle)
             }
         }
         handleTimeLineUpdate()
     }
     
-    @MainActor func toolActionTimeLineResetGraph() {
-        print("[IMB] Action - toolActionTimeLineResetGraph")
+    @MainActor func toolActionTimeLineResetSwan() {
+        print("[IMB] Action - toolActionTimeLineResetSwan")
         if isBlocked { return }
         if let jiggleViewModel = jiggleViewModel {
             if let selectedJiggle = jiggleViewModel.getSelectedJiggle() {
-                jiggleViewModel.timeLineResetGraph(selectedJiggle)
+                jiggleViewModel.timeLineResetSwan(selectedJiggle)
+            }
+        }
+        handleTimeLineUpdate()
+    }
+
+
+    @MainActor func toolActionTimeLineShiftDown() {
+        print("[IMB] Action - toolActionTimeLineShiftDown")
+        if isBlocked { return }
+        if let jiggleViewModel = jiggleViewModel {
+            if let selectedJiggle = jiggleViewModel.getSelectedJiggle() {
+                jiggleViewModel.timeLineShiftDown(selectedJiggle)
+            }
+        }
+        handleTimeLineUpdate()
+    }
+
+
+    @MainActor func toolActionTimeLineShiftUp() {
+        print("[IMB] Action - toolActionTimeLineShiftUp")
+        if isBlocked { return }
+        if let jiggleViewModel = jiggleViewModel {
+            if let selectedJiggle = jiggleViewModel.getSelectedJiggle() {
+                jiggleViewModel.timeLineShiftUp(selectedJiggle)
             }
         }
         handleTimeLineUpdate()
@@ -527,16 +707,7 @@ extension ToolInterfaceViewModel {
             }
         }
     }
-    
-    @MainActor func toolActionTimeLineDupeDuration() {
-        print("[IMB] Action - toolActionTimeLineDupeDuration")
-        if isBlocked { return }
-        if let jiggleViewModel = jiggleViewModel {
-            if let selectedJiggle = jiggleViewModel.getSelectedJiggle() {
-                jiggleViewModel.timeLineDupeDuration(selectedJiggle)
-            }
-        }
-    }
+
     
     @MainActor func toolActionTimeLineDupeCurrentChannel() {
         print("[IMB] Action - toolActionTimeLineDupeCurrentChannel")
@@ -546,28 +717,6 @@ extension ToolInterfaceViewModel {
                 jiggleViewModel.timeLineDupeCurrentChannel(selectedJiggle)
             }
         }
-    }
-    
-    @MainActor func toolActionTimeLineResetFlatCurrentChannel() {
-        print("[IMB] Action - toolActionTimeLineResetFlatCurrentChannel")
-        if isBlocked { return }
-        if let jiggleViewModel = jiggleViewModel {
-            if let selectedJiggle = jiggleViewModel.getSelectedJiggle() {
-                jiggleViewModel.timeLineResetFlatCurrentChannel(selectedJiggle)
-            }
-        }
-        handleTimeLineUpdate()
-    }
-    
-    @MainActor func toolActionTimeLineResetDefaultCurrentChannel() {
-        print("[IMB] Action - toolActionTimeLineResetDefaultCurrentChannel")
-        if isBlocked { return }
-        if let jiggleViewModel = jiggleViewModel {
-            if let selectedJiggle = jiggleViewModel.getSelectedJiggle() {
-                jiggleViewModel.timeLineResetDefaultCurrentChannel(selectedJiggle)
-            }
-        }
-        handleTimeLineUpdate()
     }
     
     @MainActor func toolActionTimelinePointCountIncrement() {
@@ -721,11 +870,6 @@ extension ToolInterfaceViewModel {
         }
     }
     
-    @MainActor func toolActionBreakManualWeightGraph() {
-        print("[IMB] Action - BreakManualWeightGraph")
-        jiggleViewModel.attemptBreakManualWeightGraph()
-    }
-    
     @MainActor func toolActionRandomizeWeightGraph() {
         print("[IMB] Action - RandomizeWeightGraph")
         if isBlocked { return }
@@ -763,7 +907,7 @@ extension ToolInterfaceViewModel {
         if isBlocked { return }
         jiggleViewModel.setResetZoomActive()
     }
-   
+    
     @MainActor func toolActionUndo() {
         print("[IMB] Action - Undo")
         if isBlocked { return }
@@ -807,14 +951,6 @@ extension ToolInterfaceViewModel {
         }
     }
     
-    @MainActor func toolActionPadCollapseMenu() {
-        print("[IMB] Action - PadCollapseMenu")
-    }
-    
-    @MainActor func toolActionPadExpandMenu() {
-        print("[IMB] Action - PadExpandMenu")
-    }
-    
     @MainActor func toolActionTest1() {
         print("[IMB] Action - Test1")
     }
@@ -837,27 +973,12 @@ extension ToolInterfaceViewModel {
     @MainActor func toolActionGenerateTopography() {
         print("[IMB] Action - GenerateTopography")
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
-            if let selectedJiggle = jiggleViewModel.getSelectedJiggle() {
+            if jiggleViewModel.getSelectedJiggle() !== nil {
                 ApplicationController.rootViewController.pushDialogBox(DialogBoxModel.editRings) { _ in }
             } else {
                 ApplicationController.rootViewController.pushDialogBox(DialogBoxModel.noJiggleSelected) { _ in }
             }
         }
-    }
-    
-    @MainActor func toolActionFreezeOnAllUnselectedJiggle() {
-        print("[IMB] Action - FreezeOnAllUnselectedJiggle")
-        
-    }
-    
-    @MainActor func toolActionFreezeOnAllUnselectedGuide() {
-        print("[IMB] Action - FreezeOnAllUnselectedGuide")
-        
-    }
-    
-    @MainActor func toolActionSendFrontJiggle() {
-        print("[IMB] Action - SendFrontJiggle")
-        
     }
     
     @MainActor func toolActionExitRecordMode() {
@@ -921,6 +1042,9 @@ extension ToolInterfaceViewModel {
     
     @MainActor func toolActionMainMenu() {
         print("[IMB] Action - MainMenu Exit")
-        ApplicationController.rootViewModel.pushToMainMenu(animated: true, reversed: false)
+        
+        if ApplicationController.rootViewController.isPushing == false {
+            ApplicationController.rootViewModel.pushToMainMenu(animated: true, reversed: false)
+        }
     }
 }

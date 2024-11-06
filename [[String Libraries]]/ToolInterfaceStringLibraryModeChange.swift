@@ -9,6 +9,57 @@ import Foundation
 
 struct ToolInterfaceStringLibraryModeChange {
     
+    
+    static func modeTextContinuousPage1Line1() -> String? {
+        GeneralStringLibrary.get(localized: "continuous_page_1_line_1", table: "ToolInterfaceModeChange")
+    }
+
+    static func modeTextContinuousPage1Line2() -> String? {
+        GeneralStringLibrary.get(localized: "continuous_page_1_line_2", table: "ToolInterfaceModeChange")
+    }
+
+    static func modeTextContinuousPage2Line1() -> String? {
+        GeneralStringLibrary.get(localized: "continuous_page_2_line_1", table: "ToolInterfaceModeChange")
+    }
+
+    static func modeTextContinuousPage2Line2() -> String? {
+        GeneralStringLibrary.get(localized: "continuous_page_2_line_2", table: "ToolInterfaceModeChange")
+    }
+
+    static func modeTextContinuousPage3Line1() -> String? {
+        GeneralStringLibrary.get(localized: "continuous_page_3_line_1", table: "ToolInterfaceModeChange")
+    }
+
+    static func modeTextContinuousPage3Line2() -> String? {
+        GeneralStringLibrary.get(localized: "continuous_page_3_line_2", table: "ToolInterfaceModeChange")
+    }
+    
+    
+    static func modeTextTimeLinePage1Line1() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_page_1_line_1", table: "ToolInterfaceModeChange")
+    }
+
+    static func modeTextTimeLinePage1Line2() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_page_1_line_2", table: "ToolInterfaceModeChange")
+    }
+
+    static func modeTextTimeLinePage2Line1() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_page_2_line_1", table: "ToolInterfaceModeChange")
+    }
+
+    static func modeTextTimeLinePage2Line2() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_page_2_line_2", table: "ToolInterfaceModeChange")
+    }
+
+    static func modeTextTimeLinePage3Line1() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_page_3_line_1", table: "ToolInterfaceModeChange")
+    }
+
+    static func modeTextTimeLinePage3Line2() -> String? {
+        GeneralStringLibrary.get(localized: "time_line_page_3_line_2", table: "ToolInterfaceModeChange")
+    }
+    
+    
     static func modeTextAnimationContinuousPage2EnterLine1() -> String? {
         GeneralStringLibrary.get(localized: "animation_continuous_page_2_enter_line_1", table: "ToolInterfaceModeChange")
     }
@@ -77,23 +128,23 @@ struct ToolInterfaceStringLibraryModeChange {
     static func modeTextLoopsPage1Line1() -> String? {
         GeneralStringLibrary.get(localized: "loops_page_1_line_1", table: "ToolInterfaceModeChange")
     }
-    
+
     static func modeTextLoopsPage1Line2() -> String? {
         GeneralStringLibrary.get(localized: "loops_page_1_line_2", table: "ToolInterfaceModeChange")
     }
-    
+
     static func modeTextLoopsPage2Line1() -> String? {
         GeneralStringLibrary.get(localized: "loops_page_2_line_1", table: "ToolInterfaceModeChange")
     }
-    
+
     static func modeTextLoopsPage2Line2() -> String? {
         GeneralStringLibrary.get(localized: "loops_page_2_line_2", table: "ToolInterfaceModeChange")
     }
-    
+
     static func modeTextLoopsPage3Line1() -> String? {
         GeneralStringLibrary.get(localized: "loops_page_3_line_1", table: "ToolInterfaceModeChange")
     }
-    
+
     static func modeTextLoopsPage3Line2() -> String? {
         GeneralStringLibrary.get(localized: "loops_page_3_line_2", table: "ToolInterfaceModeChange")
     }

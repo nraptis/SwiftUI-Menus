@@ -10,12 +10,139 @@ import UIKit
 class TopMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
 
     func handleSelectedJiggleDidChange() {
-        print("DraggableMenuStandardContainerView => handleSelectedJiggleDidChange")
+        print("TopMenuTimeLineContainerView => handleSelectedJiggleDidChange")
         
     }
     
     func handleSelectedSwatchDidChange() {
-        print("DraggableMenuStandardContainerView => handleSelectedSwatchDidChange")
+        if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
+            switch jiggleViewModel.timeLineSelectedSwatch {
+            case .x:
+                turnOnX()
+                turnOffY()
+                turnOffScale()
+                turnOffRotation()
+            case .y:
+                turnOffX()
+                turnOnY()
+                turnOffScale()
+                turnOffRotation()
+            case .scale:
+                turnOffX()
+                turnOffY()
+                turnOnScale()
+                turnOffRotation()
+            case .rotation:
+                turnOffX()
+                turnOffY()
+                turnOffScale()
+                turnOnRotation()
+            }
+        }
+    }
+    
+    private func getSelectedX() -> Bool {
+        if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
+            switch jiggleViewModel.timeLineSelectedSwatch {
+            case .x:
+                return true
+            default:
+                return false
+            }
+        } else {
+            return false
+        }
+    }
+    
+    private func getSelectedY() -> Bool {
+        if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
+            switch jiggleViewModel.timeLineSelectedSwatch {
+            case .y:
+                return true
+            default:
+                return false
+            }
+        } else {
+            return false
+        }
+    }
+    
+    private func getSelectedScale() -> Bool {
+        if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
+            switch jiggleViewModel.timeLineSelectedSwatch {
+            case .scale:
+                return true
+            default:
+                return false
+            }
+        } else {
+            return false
+        }
+    }
+    
+    private func getSelectedRotation() -> Bool {
+        if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
+            switch jiggleViewModel.timeLineSelectedSwatch {
+            case .rotation:
+                return true
+            default:
+                return false
+            }
+        } else {
+            return false
+        }
+    }
+    
+    private func turnOffX() {
+        if buttonX.isSelectedSwatch == true {
+            buttonX.isSelectedSwatch = false
+            buttonX.setNeedsDisplay()
+        }
+    }
+    private func turnOnX() {
+        if buttonX.isSelectedSwatch == false {
+            buttonX.isSelectedSwatch = true
+            buttonX.setNeedsDisplay()
+        }
+    }
+    
+    private func turnOffY() {
+        if buttonY.isSelectedSwatch == true {
+            buttonY.isSelectedSwatch = false
+            buttonY.setNeedsDisplay()
+        }
+    }
+    private func turnOnY() {
+        if buttonY.isSelectedSwatch == false {
+            buttonY.isSelectedSwatch = true
+            buttonY.setNeedsDisplay()
+        }
+    }
+    
+    private func turnOffScale() {
+        if buttonScale.isSelectedSwatch == true {
+            buttonScale.isSelectedSwatch = false
+            buttonScale.setNeedsDisplay()
+        }
+    }
+    private func turnOnScale() {
+        if buttonScale.isSelectedSwatch == false {
+            buttonScale.isSelectedSwatch = true
+            buttonScale.setNeedsDisplay()
+        }
+    }
+    
+    private func turnOffRotation() {
+        if buttonRotation.isSelectedSwatch == true {
+            buttonRotation.isSelectedSwatch = false
+            buttonRotation.setNeedsDisplay()
+        }
+    }
+    private func turnOnRotation() {
+        if buttonRotation.isSelectedSwatch == false {
+            buttonRotation.isSelectedSwatch = true
+            buttonRotation.setNeedsDisplay()
+        }
     }
     
     lazy var buttonXBottomConstraint: NSLayoutConstraint = {
@@ -30,7 +157,11 @@ class TopMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
         let orientation = toolInterfaceViewModel.orientation
         let imageDark = ToolInterfaceTheme.timeLineButtonX(orientation: toolInterfaceViewModel.orientation, isDarkMode: true)
         let imageLight = ToolInterfaceTheme.timeLineButtonX(orientation: toolInterfaceViewModel.orientation, isDarkMode: false)
-        let result = TimeLineButton(cornerRadius: 6, imageDark: imageDark, imageLight: imageLight, isSelectedSwatch: false)
+        let isSelectedSwatch = getSelectedX()
+        let result = TimeLineButton(cornerRadius: 6,
+                                    imageDark: imageDark,
+                                    imageLight: imageLight,
+                                    isSelectedSwatch: isSelectedSwatch)
         result.translatesAutoresizingMaskIntoConstraints = false
         return result
     }()
@@ -47,7 +178,11 @@ class TopMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
         let orientation = toolInterfaceViewModel.orientation
         let imageDark = ToolInterfaceTheme.timeLineButtonY(orientation: toolInterfaceViewModel.orientation, isDarkMode: true)
         let imageLight = ToolInterfaceTheme.timeLineButtonY(orientation: toolInterfaceViewModel.orientation, isDarkMode: false)
-        let result = TimeLineButton(cornerRadius: 6, imageDark: imageDark, imageLight: imageLight, isSelectedSwatch: false)
+        let isSelectedSwatch = getSelectedY()
+        let result = TimeLineButton(cornerRadius: 6,
+                                    imageDark: imageDark,
+                                    imageLight: imageLight,
+                                    isSelectedSwatch: isSelectedSwatch)
         result.translatesAutoresizingMaskIntoConstraints = false
         return result
     }()
@@ -64,7 +199,11 @@ class TopMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
         let orientation = toolInterfaceViewModel.orientation
         let imageDark = ToolInterfaceTheme.timeLineButtonScale(orientation: toolInterfaceViewModel.orientation, isDarkMode: true)
         let imageLight = ToolInterfaceTheme.timeLineButtonScale(orientation: toolInterfaceViewModel.orientation, isDarkMode: false)
-        let result = TimeLineButton(cornerRadius: 6, imageDark: imageDark, imageLight: imageLight, isSelectedSwatch: false)
+        let isSelectedSwatch = getSelectedScale()
+        let result = TimeLineButton(cornerRadius: 6,
+                                    imageDark: imageDark,
+                                    imageLight: imageLight,
+                                    isSelectedSwatch: isSelectedSwatch)
         result.translatesAutoresizingMaskIntoConstraints = false
         return result
     }()
@@ -81,7 +220,11 @@ class TopMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
         let orientation = toolInterfaceViewModel.orientation
         let imageDark = ToolInterfaceTheme.timeLineButtonRotation(orientation: toolInterfaceViewModel.orientation, isDarkMode: true)
         let imageLight = ToolInterfaceTheme.timeLineButtonRotation(orientation: toolInterfaceViewModel.orientation, isDarkMode: false)
-        let result = TimeLineButton(cornerRadius: 6, imageDark: imageDark, imageLight: imageLight, isSelectedSwatch: false)
+        let isSelectedSwatch = getSelectedRotation()
+        let result = TimeLineButton(cornerRadius: 6,
+                                    imageDark: imageDark,
+                                    imageLight: imageLight,
+                                    isSelectedSwatch: isSelectedSwatch)
         result.translatesAutoresizingMaskIntoConstraints = false
         return result
     }()
@@ -419,7 +562,10 @@ class TopMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
     
     @objc func clickX() {
         print("X Clicked")
-        
+        if let jiggleViewController = ApplicationController.shared.jiggleViewController {
+            jiggleViewController.selectTimeLineSwatch(swatch: .x)
+        }
+        /*
         if let jiggleViewController = ApplicationController.shared.jiggleViewController {
             let jiggleViewModel = jiggleViewController.jiggleViewModel
             let selectedJiggle = jiggleViewModel.getSelectedJiggle()
@@ -432,11 +578,15 @@ class TopMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
             jiggleViewController.toolInterfaceViewModel.handleTimelinePointCountDidChange()
             jiggleViewController.timeLineUpdateRelay(jiggle: selectedJiggle)
         }
+        */
     }
     
     @objc func clickY() {
         print("Y Clicked")
-        
+        if let jiggleViewController = ApplicationController.shared.jiggleViewController {
+            jiggleViewController.selectTimeLineSwatch(swatch: .y)
+        }
+        /*
         if let jiggleViewController = ApplicationController.shared.jiggleViewController {
             let jiggleViewModel = jiggleViewController.jiggleViewModel
             let selectedJiggle = jiggleViewModel.getSelectedJiggle()
@@ -449,10 +599,15 @@ class TopMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
             jiggleViewController.toolInterfaceViewModel.handleTimelinePointCountDidChange()
             jiggleViewController.timeLineUpdateRelay(jiggle: selectedJiggle)
         }
+        */
     }
     
     @objc func clickScale() {
         print("Scale Clicked")
+        if let jiggleViewController = ApplicationController.shared.jiggleViewController {
+            jiggleViewController.selectTimeLineSwatch(swatch: .scale)
+        }
+        /*
         if let jiggleViewController = ApplicationController.shared.jiggleViewController {
             let jiggleViewModel = jiggleViewController.jiggleViewModel
             let selectedJiggle = jiggleViewModel.getSelectedJiggle()
@@ -465,10 +620,15 @@ class TopMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
             jiggleViewController.toolInterfaceViewModel.handleTimelinePointCountDidChange()
             jiggleViewController.timeLineUpdateRelay(jiggle: selectedJiggle)
         }
+        */
     }
     
     @objc func clickRotation() {
         print("Rotation Clicked")
+        if let jiggleViewController = ApplicationController.shared.jiggleViewController {
+            jiggleViewController.selectTimeLineSwatch(swatch: .rotation)
+        }
+        /*
         if let jiggleViewController = ApplicationController.shared.jiggleViewController {
             let jiggleViewModel = jiggleViewController.jiggleViewModel
             let selectedJiggle = jiggleViewModel.getSelectedJiggle()
@@ -482,9 +642,12 @@ class TopMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
             jiggleViewController.timeLineUpdateRelay(jiggle: selectedJiggle)
             
         }
+        */
     }
     
-    func handleBlockerHeightOrSafeAreaDidChange(blockerHeight: Int, safeAreaTop: Int, orientation: Orientation) {
+    func handleBlockerHeightOrSafeAreaDidChange(blockerHeight: Int,
+                                                safeAreaTop: Int,
+                                                orientation: Orientation) {
         
         let insetTop = ToolInterfaceTheme.getTopTimeLineInsetTop(orientation: orientation)
         let insetBottom = ToolInterfaceTheme.getTopTimeLineInsetBottom(orientation: orientation)
@@ -539,7 +702,5 @@ class TopMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
         
         buttonXBottomConstraint.constant = CGFloat(buttonY)
         buttonXHeightConstraint.constant = CGFloat(buttonHeightX)
-        
     }
-    
 }

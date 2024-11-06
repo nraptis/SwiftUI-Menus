@@ -15,7 +15,7 @@ extension ToolInterfaceFactory {
         
         let textLine1 = ToolInterfaceStringLibraryCheckBoxes.checkBoxTextDarkModeEnabledLine1()
         let textLine2 = ToolInterfaceStringLibraryCheckBoxes.checkBoxTextDarkModeEnabledLine2()
-        let iconPack = FramedConvertibleIconLibrary.darkModeB
+        let iconPack = FramedConvertibleIconLibrary.darkModeA
         
         
         let configuration = ToolInterfaceElementCheckBoxConfiguration(iconPack: iconPack,
@@ -76,7 +76,7 @@ extension ToolInterfaceFactory {
         
         let textLine1 = "IZ"
         let textLine2 = "BUY"
-        let iconPack = FramedConvertibleIconLibrary.darkModeA
+        let iconPack = FramedConvertibleIconLibrary.weightRingD
         
         let configuration = ToolInterfaceElementCheckBoxConfiguration(iconPack: iconPack,
                                                                       orientation: orientation,
@@ -101,8 +101,8 @@ extension ToolInterfaceFactory {
     }
     
     static func getAnimationLoopApplyToAllCheckBoxToolNode(orientation: Orientation,
-                                                             neighborTypeLeft: ToolInterfaceElementType?,
-                                                             neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+                                                           neighborTypeLeft: ToolInterfaceElementType?,
+                                                           neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
         let textLine1 = ToolInterfaceStringLibraryCheckBoxes.checkBoxTextAnimationLoopApplyToAllLine1()
         let textLine2 = ToolInterfaceStringLibraryCheckBoxes.checkBoxTextAnimationLoopApplyToAllLine2()
@@ -119,7 +119,7 @@ extension ToolInterfaceFactory {
                                         neighborTypeRight: neighborTypeRight)
         
         let viewModelAnimationLoopApplyToAll = MagicalCheckBoxViewModelAnimationLoopApplyToAll(orientation: orientation,
-                                                                                                   checkBoxConfiguration: configuration)
+                                                                                               checkBoxConfiguration: configuration)
         let animationBounceApplyToAllToolNode = ToolNode(id: getToolNodeID(),
                                                          element: .checkBoxAnimationLoopApplyToAll,
                                                          flex: flex,
@@ -131,12 +131,12 @@ extension ToolInterfaceFactory {
     }
     
     static func getAnimationGrabApplyToAllCheckBoxToolNode(orientation: Orientation,
-                                                             neighborTypeLeft: ToolInterfaceElementType?,
-                                                             neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+                                                           neighborTypeLeft: ToolInterfaceElementType?,
+                                                           neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
         let textLine1 = ToolInterfaceStringLibraryCheckBoxes.checkBoxTextAnimationGrabApplyToAllLine1()
         let textLine2 = ToolInterfaceStringLibraryCheckBoxes.checkBoxTextAnimationGrabApplyToAllLine2()
-        let iconPack = FramedConvertibleIconLibrary.menuC
+        let iconPack = FramedConvertibleIconLibrary.weightRingC
         
         let configuration = ToolInterfaceElementCheckBoxConfiguration(iconPack: iconPack,
                                                                       orientation: orientation,
@@ -149,7 +149,7 @@ extension ToolInterfaceFactory {
                                         neighborTypeRight: neighborTypeRight)
         
         let viewModelAnimationGrabApplyToAll = MagicalCheckBoxViewModelAnimationGrabApplyToAll(orientation: orientation,
-                                                                                                   checkBoxConfiguration: configuration)
+                                                                                               checkBoxConfiguration: configuration)
         let animationJiggleApplyToAllToolNode = ToolNode(id: getToolNodeID(),
                                                          element: .checkBoxAnimationGrabApplyToAll,
                                                          flex: flex,
@@ -158,6 +158,66 @@ extension ToolInterfaceFactory {
                                                          neighborTypeRight: neighborTypeRight)
         viewModelAnimationGrabApplyToAll.refresh()
         return animationJiggleApplyToAllToolNode
+    }
+    
+    static func getAnimationContinuousApplyToAllCheckBoxToolNode(orientation: Orientation,
+                                                                 neighborTypeLeft: ToolInterfaceElementType?,
+                                                                 neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+        
+        let textLine1 = ToolInterfaceStringLibraryCheckBoxes.checkBoxTextAnimationContinuousApplyToAllLine1()
+        let textLine2 = ToolInterfaceStringLibraryCheckBoxes.checkBoxTextAnimationContinuousApplyToAllLine2()
+        let iconPack = FramedConvertibleIconLibrary.menuC
+        
+        let configuration = ToolInterfaceElementCheckBoxConfiguration(iconPack: iconPack,
+                                                                      orientation: orientation,
+                                                                      nameLabelLine1: textLine1,
+                                                                      nameLabelLine2: textLine2)
+        
+        let flex = Self.getCheckBoxFlex(orientation: orientation,
+                                        configuration: configuration,
+                                        neighborTypeLeft: neighborTypeLeft,
+                                        neighborTypeRight: neighborTypeRight)
+        
+        let viewModelAnimationContinuousApplyToAll = MagicalCheckBoxViewModelAnimationContinuousApplyToAll(orientation: orientation,
+                                                                                                           checkBoxConfiguration: configuration)
+        let animationBounceApplyToAllToolNode = ToolNode(id: getToolNodeID(),
+                                                         element: .checkBoxAnimationContinuousApplyToAll,
+                                                         flex: flex,
+                                                         magicalViewModel: viewModelAnimationContinuousApplyToAll,
+                                                         neighborTypeLeft: neighborTypeLeft,
+                                                         neighborTypeRight: neighborTypeRight)
+        viewModelAnimationContinuousApplyToAll.refresh()
+        return animationBounceApplyToAllToolNode
+    }
+    
+    static func getContinuousDisableGrabEnabledCheckBoxToolNode(orientation: Orientation,
+                                                                neighborTypeLeft: ToolInterfaceElementType?,
+                                                                neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+        
+        let textLine1 = ToolInterfaceStringLibraryCheckBoxes.checkBoxTextContinuousDisableGrabLine1()
+        let textLine2 = ToolInterfaceStringLibraryCheckBoxes.checkBoxTextContinuousDisableGrabLine2()
+        let iconPack = FramedConvertibleIconLibrary.menuC
+        
+        let configuration = ToolInterfaceElementCheckBoxConfiguration(iconPack: iconPack,
+                                                                      orientation: orientation,
+                                                                      nameLabelLine1: textLine1,
+                                                                      nameLabelLine2: textLine2)
+        
+        let flex = Self.getCheckBoxFlex(orientation: orientation,
+                                        configuration: configuration,
+                                        neighborTypeLeft: neighborTypeLeft,
+                                        neighborTypeRight: neighborTypeRight)
+        
+        let viewModelContinuousDisableGrab = MagicalCheckBoxViewModelContinuousDisableGrab(orientation: orientation,
+                                                                                           checkBoxConfiguration: configuration)
+        let animationBounceApplyToAllToolNode = ToolNode(id: getToolNodeID(),
+                                                         element: .checkBoxContinuousDisableGrab,
+                                                         flex: flex,
+                                                         magicalViewModel: viewModelContinuousDisableGrab,
+                                                         neighborTypeLeft: neighborTypeLeft,
+                                                         neighborTypeRight: neighborTypeRight)
+        viewModelContinuousDisableGrab.refresh()
+        return animationBounceApplyToAllToolNode
     }
     
     static func getGyroscopeEnabledCheckBoxToolNode(orientation: Orientation,

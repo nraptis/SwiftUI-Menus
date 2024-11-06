@@ -14,7 +14,7 @@ extension ToolInterfaceFactory {
                                                       neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextSelectPreviousJiggleLine1()
         let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextSelectPreviousJiggleLine2()
-        let iconPack = LooseConvertibleIconLibrary.rotateRightB
+        let iconPack = LooseConvertibleIconLibrary.cloneJiggleA
         
         let configuration = ToolInterfaceElementButtonConfiguration(iconPack: iconPack,
                                                                     orientation: orientation,
@@ -43,7 +43,7 @@ extension ToolInterfaceFactory {
         
         let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextSelectNextJiggleLine1()
         let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextSelectNextJiggleLine2()
-        let iconPack = LooseConvertibleIconLibrary.rotateLeftB
+        let iconPack = LooseConvertibleIconLibrary.cloneJiggleA
         
         let configuration = ToolInterfaceElementButtonConfiguration(iconPack: iconPack,
                                                                     orientation: orientation,
@@ -97,7 +97,7 @@ extension ToolInterfaceFactory {
                                                        neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextSelectNextJigglePointLine1()
         let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextSelectNextJigglePointLine2()
-        let iconPack = LooseConvertibleIconLibrary.menuC
+        let iconPack = LooseConvertibleIconLibrary.cloneJiggleA
         let configuration = ToolInterfaceElementButtonConfiguration(iconPack: iconPack,
                                                                     orientation: orientation,
                                                                     nameLabelLine1: textLine1,
@@ -123,7 +123,7 @@ extension ToolInterfaceFactory {
                                                      neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextSelectPreviousGuideLine1()
         let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextSelectPreviousGuideLine2()
-        let iconPack = LooseConvertibleIconLibrary.menuC
+        let iconPack = LooseConvertibleIconLibrary.cloneJiggleA
         let configuration = ToolInterfaceElementButtonConfiguration(iconPack: iconPack,
                                                                     orientation: orientation,
                                                                     nameLabelLine1: textLine1,

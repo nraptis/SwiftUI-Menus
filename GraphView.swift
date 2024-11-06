@@ -830,6 +830,10 @@ class GraphView: UIView {
                 _grabWeightCurveControlPointData.guideIndex = jiggle.getSelectedWeightCurveGraphIndexGuideIndex()
                 
             }
+            
+            if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
+                jiggleViewModel.graphDragNotifyStarted()
+            }
         }
         
         func selectTan() {
@@ -880,30 +884,6 @@ class GraphView: UIView {
                 selectedWeightCurveControlTanType = .out
             }
             
-            /*
-            selectedTimeLineControlTanTouch = touch
-            selectedTimeLineControlTanStartTouchX = point.x
-            selectedTimeLineControlTanStartTouchY = point.y
-            switch bestControlTanType {
-            case .in:
-                selectedTimeLineControlTanStartHandleX = inX
-                selectedTimeLineControlTanStartHandleY = inY
-                
-                selectedTimeLineControlTanStartHandleOffsetX = tanHandles.inX - inX
-                selectedTimeLineControlTanStartHandleOffsetY = tanHandles.inY - inY
-                
-                selectedTimeLineControlTanType = .in
-            case .out:
-                selectedTimeLineControlTanStartHandleX = outX
-                selectedTimeLineControlTanStartHandleY = outY
-                
-                selectedTimeLineControlTanStartHandleOffsetX = tanHandles.outX - outX
-                selectedTimeLineControlTanStartHandleOffsetY = tanHandles.outY - outY
-                
-                selectedTimeLineControlTanType = .out
-            }
-        */
-
             _handleGraphSelection(graphIndex: bestControlTanIndex)
             
             if let selectedWeightCurveControlPoint = jiggle.getSelectedWeightCurveControlPointBasedOnGraphIndex() {
@@ -920,6 +900,10 @@ class GraphView: UIView {
                 _grabWeightCurveControlTanHandleData.isFirstControlPoint = jiggle.getSelectedWeightCurveGraphIndexIsFirstControlPoint()
                 _grabWeightCurveControlTanHandleData.isLastControlPoint = jiggle.getSelectedWeightCurveGraphIndexIsLastControlPoint()
                 _grabWeightCurveControlTanHandleData.guideIndex = jiggle.getSelectedWeightCurveGraphIndexGuideIndex()
+            }
+            
+            if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
+                jiggleViewModel.graphDragNotifyStarted()
             }
         }
         
@@ -1202,6 +1186,12 @@ class GraphView: UIView {
                     }
                     
                 }
+                
+                if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
+                    selectedWeightCurveControlPointTouch = nil
+                    selectedWeightCurveControlTanTouch = nil
+                    jiggleViewModel.graphDragNotifyFinished()
+                }
             }
         }
         selectedWeightCurveControlPointTouch = nil
@@ -1214,6 +1204,12 @@ class GraphView: UIView {
                     if _grabWeightCurveControlTanHandleData.jiggleIndex == jiggleDocument.getJiggleIndex(jiggle) {
                         grabWeightCurveControlTanHandleStopPublisher.send(_grabWeightCurveControlTanHandleData)
                     }
+                }
+                
+                if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
+                    selectedWeightCurveControlPointTouch = nil
+                    selectedWeightCurveControlTanTouch = nil
+                    jiggleViewModel.graphDragNotifyFinished()
                 }
             }
         }

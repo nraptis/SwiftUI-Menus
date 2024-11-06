@@ -17,7 +17,7 @@ class TopMenuView: UIView, PrimaryMenuConforming {
     
     func handleSelectedSwatchDidChange() {
         print("TopMenuView => handleSelectedSwatchDidChange")
-        standardContainerView.handleSelectedJiggleDidChange()
+        standardContainerView.handleSelectedSwatchDidChange()
     }
     
     var isModeAnimating = false

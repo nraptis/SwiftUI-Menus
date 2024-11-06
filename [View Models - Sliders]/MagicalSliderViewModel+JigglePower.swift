@@ -12,7 +12,12 @@ import Foundation
     override func refresh() {
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
             if let selectedJiggle = jiggleViewModel.getSelectedJiggle() {
-                refreshEnabled(value: selectedJiggle.jigglePowerAmount)
+                if jiggleViewModel.isSliderActiveBesides(thisSlider: .sliderJigglePower) {
+                    refreshDisabled(value: selectedJiggle.jigglePowerAmount)
+                } else {
+                    refreshEnabled(value: selectedJiggle.jigglePowerAmount)
+                }
+                
             } else {
                 refreshDisabled()
             }

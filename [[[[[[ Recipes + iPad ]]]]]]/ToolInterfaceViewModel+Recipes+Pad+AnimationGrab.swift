@@ -11,7 +11,7 @@ extension ToolInterfaceViewModel {
     
     @MainActor func getRowRecipe_Pad_Portrait_AnimationGrab_Top_Primary() -> RowRecipe {
         let inrs: [INR] = [
-            .favoringOneLineLabel(.init(minimumWidth: 0, text: "View Grab")),
+            .favoringOneLineLabel(.init(minimumWidth: 0, text: "[V.G]")),
             .button(.menu),
             .checkBox(.darkMode),
             .spacer,

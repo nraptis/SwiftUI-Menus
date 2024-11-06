@@ -11,6 +11,7 @@ import Foundation
     
     override func refresh() {
         
+        
         if let jiggleDocument = ApplicationController.shared.jiggleDocument {
             switch jiggleDocument.documentMode {
             case .view:
@@ -20,8 +21,19 @@ import Foundation
             }
         }
         
-        if !isEnabled {
-            isEnabled = true
+        if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
+            
+            if jiggleViewModel.getGraphDraggingStatus() {
+                refreshDisabled()
+            } else if jiggleViewModel.getTimeLineDraggingStatus() {
+                refreshDisabled()
+            } else if jiggleViewModel.getContinuousDraggingStatus() {
+                refreshDisabled()
+            } else if jiggleViewModel.isAnySliderActive {
+                refreshDisabled()
+            } else {
+                refreshEnabled()
+            }
         }
     }
     

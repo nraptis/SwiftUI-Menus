@@ -13,7 +13,7 @@ class TimeLineButton: DrawableButton {
     let cornerRadius: Int
     let imageDark: UIImage
     let imageLight: UIImage
-    let isSelectedSwatch: Bool
+    var isSelectedSwatch: Bool
     required init(cornerRadius: Int,
                   imageDark: UIImage,
                   imageLight: UIImage,
@@ -52,16 +52,30 @@ class TimeLineButton: DrawableButton {
         
         let roundedRectPath = UIBezierPath(roundedRect: bounds, cornerRadius: CGFloat(cornerRadius))
         
-        context.saveGState()
-        context.addPath(roundedRectPath.cgPath)
-        if ApplicationController.isDarkModeEnabled {
-            context.setFillColor(ToolInterfaceTheme._graphBackgroundDark.cgColor)
+        if isSelectedSwatch {
+            
+            context.saveGState()
+            context.addPath(roundedRectPath.cgPath)
+            if ApplicationController.isDarkModeEnabled {
+                context.setFillColor(ToolInterfaceTheme._greenButtonFillDisabled.cgColor)
+            } else {
+                context.setFillColor(ToolInterfaceTheme._blueBasic.cgColor)
+            }
+            context.fillPath()
+            context.restoreGState()
+            
         } else {
-            context.setFillColor(ToolInterfaceTheme._graphBackgroundLight.cgColor)
+            
+            context.saveGState()
+            context.addPath(roundedRectPath.cgPath)
+            if ApplicationController.isDarkModeEnabled {
+                context.setFillColor(ToolInterfaceTheme._graphBackgroundDark.cgColor)
+            } else {
+                context.setFillColor(ToolInterfaceTheme._graphBackgroundLight.cgColor)
+            }
+            context.fillPath()
+            context.restoreGState()
         }
-        context.fillPath()
-        context.restoreGState()
-        
         
         context.saveGState()
         context.addPath(roundedRectPath.cgPath)

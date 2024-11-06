@@ -27,7 +27,6 @@ extension ToolInterfaceFactory {
             return getRedoButtonToolNode(orientation: orientation,
                                          neighborTypeLeft: neighborTypeLeft,
                                          neighborTypeRight: neighborTypeRight)
-            
         case .zoomReset:
             return getZoomResetButtonToolNode(orientation: orientation,
                                               neighborTypeLeft: neighborTypeLeft,
@@ -44,17 +43,14 @@ extension ToolInterfaceFactory {
             return getZoomOutButtonToolNode(orientation: orientation,
                                             neighborTypeLeft: neighborTypeLeft,
                                             neighborTypeRight: neighborTypeRight)
-            
         case .generateTopography:
             return getGenerateTopographyButtonToolNode(orientation: orientation,
                                                        neighborTypeLeft: neighborTypeLeft,
                                                        neighborTypeRight: neighborTypeRight)
-            
         case .flipJiggleHorizontal:
             return getFlipJiggleHorizontalButtonToolNode(orientation: orientation,
                                                          neighborTypeLeft: neighborTypeLeft,
                                                          neighborTypeRight: neighborTypeRight)
-            
         case .flipJiggleVertical:
             return getFlipJiggleVerticalButtonToolNode(orientation: orientation,
                                                        neighborTypeLeft: neighborTypeLeft,
@@ -103,7 +99,6 @@ extension ToolInterfaceFactory {
             return getDeleteJigglePointButtonToolNode(orientation: orientation,
                                                       neighborTypeLeft: neighborTypeLeft,
                                                       neighborTypeRight: neighborTypeRight)
-            
         case .flipGuideHorizontal:
             return getFlipGuideHorizontalButtonToolNode(orientation: orientation,
                                                         neighborTypeLeft: neighborTypeLeft,
@@ -156,7 +151,6 @@ extension ToolInterfaceFactory {
             return getDeleteGuidePointButtonToolNode(orientation: orientation,
                                                      neighborTypeLeft: neighborTypeLeft,
                                                      neighborTypeRight: neighborTypeRight)
-            
         case .timeLineAmplify:
             return getTimeLineAmplifyButtonToolNode(orientation: orientation,
                                                     neighborTypeLeft: neighborTypeLeft,
@@ -173,10 +167,6 @@ extension ToolInterfaceFactory {
             return getTimeLineInvertHorizontalButtonToolNode(orientation: orientation,
                                                              neighborTypeLeft: neighborTypeLeft,
                                                              neighborTypeRight: neighborTypeRight)
-        case .timeLineDupeDuration:
-            return getTimeLineDupeDurationButtonToolNode(orientation: orientation,
-                                                         neighborTypeLeft: neighborTypeLeft,
-                                                         neighborTypeRight: neighborTypeRight)
         case .timeLineDupeCurrentChannel:
             return getTimeLineDupeCurrentChannelButtonToolNode(orientation: orientation,
                                                                neighborTypeLeft: neighborTypeLeft,
@@ -189,28 +179,55 @@ extension ToolInterfaceFactory {
             return getTimeLineFlipAllButtonToolNode(orientation: orientation,
                                                     neighborTypeLeft: neighborTypeLeft,
                                                     neighborTypeRight: neighborTypeRight)
-        case .timeLineResetDefaultCurrentChannel:
-            return getTimeLineResetDefaultCurrentChannelButtonToolNode(orientation: orientation,
-                                                                       neighborTypeLeft: neighborTypeLeft,
-                                                                       neighborTypeRight: neighborTypeRight)
-        case .timeLineResetFlatCurrentChannel:
-            return getTimeLineResetFlatCurrentChannelButtonToolNode(orientation: orientation,
-                                                                    neighborTypeLeft: neighborTypeLeft,
-                                                                    neighborTypeRight: neighborTypeRight)
-        case .timeLineResetCurveCurrentChannel:
-            return getTimeLineResetCurveCurrentChannelButtonToolNode(orientation: orientation,
-                                                                     neighborTypeLeft: neighborTypeLeft,
-                                                                     neighborTypeRight: neighborTypeRight)
-        case .timeLineBreakPoint:
-            return getTimeLineBreakPointButtonToolNode(orientation: orientation,
+        case .timeLineSyncFrames:
+            return getTimeLineSyncFramesButtonToolNode(orientation: orientation,
+                                                       neighborTypeLeft: neighborTypeLeft,
+                                                       neighborTypeRight: neighborTypeRight)
+        case .timeLineResetCurve:
+            return getTimeLineResetCurveButtonToolNode(orientation: orientation,
+                                                       neighborTypeLeft: neighborTypeLeft,
+                                                       neighborTypeRight: neighborTypeRight)
+            
+        case .timeLineResetCurveSmall:
+            return getTimeLineResetCurveSmallButtonToolNode(orientation: orientation,
+                                                            neighborTypeLeft: neighborTypeLeft,
+                                                            neighborTypeRight: neighborTypeRight)
+            
+            
+        case .timeLineResetDivot:
+            return getTimeLineResetDivotButtonToolNode(orientation: orientation,
                                                        neighborTypeLeft: neighborTypeLeft,
                                                        neighborTypeRight: neighborTypeRight)
             
             
-        case .breakTangentWeightGraph:
-            return getBreakTangentWeightGraphButtonToolNode(orientation: orientation,
+        case .timeLineResetDivotSmall:
+            return getTimeLineResetDivotSmallButtonToolNode(orientation: orientation,
                                                             neighborTypeLeft: neighborTypeLeft,
                                                             neighborTypeRight: neighborTypeRight)
+            
+            
+        case .timeLineResetFlat:
+            return getTimeLineResetFlatButtonToolNode(orientation: orientation,
+                                                      neighborTypeLeft: neighborTypeLeft,
+                                                      neighborTypeRight: neighborTypeRight)
+            
+            
+        case .timeLineResetSwan:
+            return getTimeLineResetSwanButtonToolNode(orientation: orientation,
+                                                      neighborTypeLeft: neighborTypeLeft,
+                                                      neighborTypeRight: neighborTypeRight)
+            
+            
+        case .timeLineShiftDown:
+            return getTimeLineShiftDownButtonToolNode(orientation: orientation,
+                                                      neighborTypeLeft: neighborTypeLeft,
+                                                      neighborTypeRight: neighborTypeRight)
+            
+            
+        case .timeLineShiftUp:
+            return getTimeLineShiftUpButtonToolNode(orientation: orientation,
+                                                    neighborTypeLeft: neighborTypeLeft,
+                                                    neighborTypeRight: neighborTypeRight)
             
         case .resetWeightGraphStandard:
             return getResetWeightGraphStandardButtonToolNode(orientation: orientation,
@@ -252,6 +269,46 @@ extension ToolInterfaceFactory {
                                                    neighborTypeLeft: neighborTypeLeft,
                                                    neighborTypeRight: neighborTypeRight)
             
+        case .continuousResetAngleDiag1:
+            return getContinuousResetAngleDiag1ButtonToolNode(orientation: orientation,
+                                                              neighborTypeLeft: neighborTypeLeft,
+                                                              neighborTypeRight: neighborTypeRight)
+        case .continuousResetAngleDiag2:
+            return getContinuousResetAngleDiag2ButtonToolNode(orientation: orientation,
+                                                              neighborTypeLeft: neighborTypeLeft,
+                                                              neighborTypeRight: neighborTypeRight)
+        case .continuousResetAngleHorizontal:
+            return getContinuousResetAngleHorizontalButtonToolNode(orientation: orientation,
+                                                                   neighborTypeLeft: neighborTypeLeft,
+                                                                   neighborTypeRight: neighborTypeRight)
+        case .continuousResetAngleVertical:
+            return getContinuousResetAngleVerticalButtonToolNode(orientation: orientation,
+                                                                 neighborTypeLeft: neighborTypeLeft,
+                                                                 neighborTypeRight: neighborTypeRight)
+        case .continuousResetEndRotation:
+            return getContinuousResetEndRotationButtonToolNode(orientation: orientation,
+                                                               neighborTypeLeft: neighborTypeLeft,
+                                                               neighborTypeRight: neighborTypeRight)
+        case .continuousResetEndScale:
+            return getContinuousResetEndScaleButtonToolNode(orientation: orientation,
+                                                            neighborTypeLeft: neighborTypeLeft,
+                                                            neighborTypeRight: neighborTypeRight)
+        case .continuousResetStartRotation:
+            return getContinuousResetStartRotationButtonToolNode(orientation: orientation,
+                                                                 neighborTypeLeft: neighborTypeLeft,
+                                                                 neighborTypeRight: neighborTypeRight)
+        case .continuousResetStartScale:
+            return getContinuousResetStartScaleButtonToolNode(orientation: orientation,
+                                                              neighborTypeLeft: neighborTypeLeft,
+                                                              neighborTypeRight: neighborTypeRight)
+        case .continuousResetSwoop:
+            return getContinuousResetSwoopButtonToolNode(orientation: orientation,
+                                                         neighborTypeLeft: neighborTypeLeft,
+                                                         neighborTypeRight: neighborTypeRight)
+        case .continuousSyncFrames:
+            return getContinuousSyncFramesButtonToolNode(orientation: orientation,
+                                                         neighborTypeLeft: neighborTypeLeft,
+                                                         neighborTypeRight: neighborTypeRight)
             
         case .imageImporterButtonBack:
             return getImageImportBackButtonToolNode(orientation: orientation,

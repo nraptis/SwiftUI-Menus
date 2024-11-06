@@ -9,6 +9,65 @@ import Foundation
 
 struct FramedConvertibleIconLibrary {
 
+    static var weightRingA: FramedConvertibleIconPack {
+        Self.build(prefix: "framed",
+                  name: "weight_ring_a",
+                  widthPad_0: 45, heightPad_0: 42,
+                  widthPhoneLandscape_0: 29, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 35, heightPhonePortrait_0: 32,
+                  widthPad_1: 39, heightPad_1: 36,
+                  widthPhoneLandscape_1: 26, heightPhoneLandscape_1: 24,
+                  widthPhonePortrait_1: 31, heightPhonePortrait_1: 28,
+                  widthPad_2: 25, heightPad_2: 23,
+                  widthPhoneLandscape_2: 18, heightPhoneLandscape_2: 16,
+                  widthPhonePortrait_2: 22, heightPhonePortrait_2: 20)
+    }
+
+
+    static var weightRingB: FramedConvertibleIconPack {
+        Self.build(prefix: "framed",
+                  name: "weight_ring_b",
+                  widthPad_0: 45, heightPad_0: 42,
+                  widthPhoneLandscape_0: 29, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 35, heightPhonePortrait_0: 32,
+                  widthPad_1: 39, heightPad_1: 36,
+                  widthPhoneLandscape_1: 26, heightPhoneLandscape_1: 24,
+                  widthPhonePortrait_1: 31, heightPhonePortrait_1: 28,
+                  widthPad_2: 25, heightPad_2: 23,
+                  widthPhoneLandscape_2: 18, heightPhoneLandscape_2: 16,
+                  widthPhonePortrait_2: 22, heightPhonePortrait_2: 20)
+    }
+
+
+    static var weightRingC: FramedConvertibleIconPack {
+        Self.build(prefix: "framed",
+                  name: "weight_ring_c",
+                  widthPad_0: 51, heightPad_0: 42,
+                  widthPhoneLandscape_0: 33, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 39, heightPhonePortrait_0: 32,
+                  widthPad_1: 44, heightPad_1: 36,
+                  widthPhoneLandscape_1: 29, heightPhoneLandscape_1: 24,
+                  widthPhonePortrait_1: 34, heightPhonePortrait_1: 28,
+                  widthPad_2: 28, heightPad_2: 23,
+                  widthPhoneLandscape_2: 20, heightPhoneLandscape_2: 16,
+                  widthPhonePortrait_2: 25, heightPhonePortrait_2: 20)
+    }
+
+
+    static var weightRingD: FramedConvertibleIconPack {
+        Self.build(prefix: "framed",
+                  name: "weight_ring_d",
+                  widthPad_0: 51, heightPad_0: 42,
+                  widthPhoneLandscape_0: 33, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 39, heightPhonePortrait_0: 32,
+                  widthPad_1: 44, heightPad_1: 36,
+                  widthPhoneLandscape_1: 29, heightPhoneLandscape_1: 24,
+                  widthPhonePortrait_1: 34, heightPhonePortrait_1: 28,
+                  widthPad_2: 28, heightPad_2: 23,
+                  widthPhoneLandscape_2: 20, heightPhoneLandscape_2: 16,
+                  widthPhonePortrait_2: 25, heightPhonePortrait_2: 20)
+    }
+    
     static var continuousA: FramedConvertibleIconPack {
         Self.build(prefix: "framed",
                   name: "continuous_a",

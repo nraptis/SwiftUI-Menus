@@ -81,7 +81,7 @@ func getToolNodeID() -> UInt16 {
     
     private func generateRow(slot: ToolRowSlot) -> ToolRow {
         let result = ToolRow(slot: slot)
-        result.configuration = .unknown
+        //result.configuration = .unknown
         return result
     }
     
@@ -565,9 +565,11 @@ func getToolNodeID() -> UInt16 {
         selectedJiggleDidChangeCancellable = jiggleViewModel
             .jiggleDocument
             .selectedJiggleDidChangePublisher
-            .sink { [weak self] _ in
-                if let self = self {
-                    self.handleSelectedJiggleDidChange()
+            .sink {
+                Task { @MainActor [weak self] in
+                    if let self = self {
+                        self.handleSelectedJiggleDidChange()
+                    }
                 }
             }
         
@@ -592,6 +594,7 @@ func getToolNodeID() -> UInt16 {
         
     }
     
+    /*
     @MainActor static func getSpacerToolNode(neighborTypeLeft: ToolInterfaceElementType?,
                                   neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         return getSpacerToolNode(neighborTypeLeft: neighborTypeLeft,
@@ -643,7 +646,7 @@ func getToolNodeID() -> UInt16 {
         let viewModel = MagicalFavoringOneLineLabelViewModel(orientation: orientation,
                                                              favoringOneLineLabelConfiguration: configuration)
         
-        let flex = ToolInterfaceViewModel.getFavoringOneLineLabelFlex(orientation: orientation,
+        let flex = Self.getFavoringOneLineLabelFlex(orientation: orientation,
                                                                       configuration: configuration,
                                                                       minimumWidth: minimumWidth,
                                                                       neighborTypeLeft: neighborTypeLeft,
@@ -656,11 +659,7 @@ func getToolNodeID() -> UInt16 {
                         neighborTypeLeft: neighborTypeLeft,
                         neighborTypeRight: neighborTypeRight)
     }
-    
-    //var menuWidthWithSafeArea = 320
-    //var rowHeight = 44
-    //var safeAreaLeft = 0
-    //var safeAreaRight = 0
+    */
     
     @MainActor func layoutAllRowsPhone(menuWidthWithSafeArea: Int, rowHeight: Int, safeAreaLeft: Int, safeAreaRight: Int) {
         if menuWidthWithSafeArea != layoutRelay.menuWidthWithSafeArea ||
@@ -673,7 +672,7 @@ func getToolNodeID() -> UInt16 {
             layoutRelay.safeAreaLeft = safeAreaLeft
             layoutRelay.safeAreaRight = safeAreaRight
             
-            print("layoutAllRowsPhone(menuWidthWithSafeArea: \(menuWidthWithSafeArea), safeAreaLeft: \(safeAreaLeft), safeAreaRight: \(safeAreaRight))")
+            //print("layoutAllRowsPhone(menuWidthWithSafeArea: \(menuWidthWithSafeArea), safeAreaLeft: \(safeAreaLeft), safeAreaRight: \(safeAreaRight))")
             
             for row in rowsTop {
                 row.layout(orientation: orientation,
@@ -1067,9 +1066,10 @@ func getToolNodeID() -> UInt16 {
             result.isGuidesEnabled = jiggleViewModel.jiggleDocument.isGuidesEnabled
             result.isAnimationLoopsEnabled = jiggleViewModel.jiggleDocument.isAnimationLoopsEnabled
             result.isTimeLineEnabled = jiggleViewModel.jiggleDocument.isTimeLineEnabled
-            result.isTimeLinePage2Enabled = jiggleViewModel.isTimeLinePage2Enabled
+            //result.isTimeLinePage2Enabled = jiggleViewModel.isTimeLinePage2Enabled
             result.isGraphPage2Enabled = jiggleViewModel.isGraphPage2Enabled
-            result.isAnimationContinuousPage2Enabled = jiggleViewModel.isAnimationContinuousPage2Enabled
+            //result.isAnimationContinuousPage2Enabled = jiggleViewModel.isAnimationContinuousPage2Enabled
+            
             result.isGraphEnabled = jiggleViewModel.isGraphEnabled
             result.isZoomEnabled = jiggleViewModel.isZoomEnabled
             result.documentMode = jiggleViewModel.jiggleDocument.documentMode
@@ -1078,6 +1078,9 @@ func getToolNodeID() -> UInt16 {
             result.creatorMode = jiggleViewModel.jiggleDocument.creatorMode
             result.isAnimationContinuousEnabled = jiggleViewModel.jiggleDocument.isAnimationContinuousEnabled
             result.animationLoopsPage = jiggleViewModel.jiggleDocument.animationLoopsPage
+            result.animationTimeLinePage = jiggleViewModel.jiggleDocument.animationTimeLinePage
+            result.animationContinuousPage = jiggleViewModel.jiggleDocument.animationContinuousPage
+            
         }
         return result
     }
@@ -1092,9 +1095,9 @@ func getToolNodeID() -> UInt16 {
             result.isGuidesEnabled = jiggleViewModel.jiggleDocument.isGuidesEnabled
             result.isAnimationLoopsEnabled = jiggleViewModel.jiggleDocument.isAnimationLoopsEnabled
             result.isTimeLineEnabled = jiggleViewModel.jiggleDocument.isTimeLineEnabled
-            result.isTimeLinePage2Enabled = jiggleViewModel.isTimeLinePage2Enabled
+            //result.isTimeLinePage2Enabled = jiggleViewModel.isTimeLinePage2Enabled
             result.isGraphPage2Enabled = jiggleViewModel.isGraphPage2Enabled
-            result.isAnimationContinuousPage2Enabled = jiggleViewModel.isAnimationContinuousPage2Enabled
+            //result.isAnimationContinuousPage2Enabled = jiggleViewModel.isAnimationContinuousPage2Enabled
             result.isGraphEnabled = jiggleViewModel.isGraphEnabled
             result.isZoomEnabled = jiggleViewModel.isZoomEnabled
             result.documentMode = jiggleViewModel.jiggleDocument.documentMode
@@ -1103,6 +1106,8 @@ func getToolNodeID() -> UInt16 {
             result.creatorMode = jiggleViewModel.jiggleDocument.creatorMode
             result.isAnimationContinuousEnabled = jiggleViewModel.jiggleDocument.isAnimationContinuousEnabled
             result.animationLoopsPage = jiggleViewModel.jiggleDocument.animationLoopsPage
+            result.animationTimeLinePage = jiggleViewModel.jiggleDocument.animationTimeLinePage
+            result.animationContinuousPage = jiggleViewModel.jiggleDocument.animationContinuousPage
         }
         return result
     }

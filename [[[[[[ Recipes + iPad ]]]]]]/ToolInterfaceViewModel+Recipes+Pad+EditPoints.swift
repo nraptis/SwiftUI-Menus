@@ -11,7 +11,7 @@ extension ToolInterfaceViewModel {
     
     @MainActor func getRowRecipe_Pad_Portrait_EditPoints_Top_Primary() -> RowRecipe {
         let inrs: [INR] = [
-            .favoringOneLineLabel(.init(minimumWidth: 0, text: "Points")),
+            .favoringOneLineLabel(.init(minimumWidth: 0, text: "[J.P.]")),
             .button(.menu),
             .checkBox(.darkMode),
             .slider(.init(widthCategory: .stretch, slider: .jiggleOpacity))

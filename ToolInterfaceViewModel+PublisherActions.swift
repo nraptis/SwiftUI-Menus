@@ -23,6 +23,176 @@ extension ToolInterfaceViewModel {
         return result
     }
     
+    private func getAllCommonElements() -> [ToolInterfaceElement] {
+        return [
+                .buttonMenu,
+                .checkBoxDarkMode,
+                .checkBoxPurchasedEnabled,
+                .mainTabDocumentMode,
+                .buttonUndo,
+                .buttonRedo,
+                .enterModeVideoRecord,
+                .enterModeVideoExport,
+                .enterModeZoom,
+                .exitModeVideoRecord,
+                .exitModeVideoExport,
+                .exitModeZoom,
+                .sliderJiggleOpacity,
+        ]
+    }
+    
+    private func getAllGrabElements() -> [ToolInterfaceElement] {
+        return [
+            .checkBoxAnimationGrabApplyToAll,
+            .sliderJigglePower,
+            .sliderJiggleSpeed,
+            .sliderJiggleDampen,
+            
+        ]
+    }
+    
+    private func getAllJigglesElements() -> [ToolInterfaceElement] {
+        return [
+            .buttonRotateJiggleRight,
+            .buttonRotateJiggleLeft,
+            .buttonFlipJiggleH,
+            .buttonFlipJiggleV,
+            .buttonFreezeSelectedJiggle,
+            .buttonUnfreezeAllJiggles,
+            .buttonCloneJiggle,
+            .buttonDeleteJiggle,
+            .buttonDeleteJigglePoint,
+            .buttonSelectNextJigglePoint,
+            .buttonSelectPreviousJigglePoint,
+            .buttonSelectNextJiggle,
+            .buttonSelectPreviousJiggle,
+            .createSwatchMakeAndDrawJiggle,
+            .createSwatchAddAndRemoveJigglePoints,
+            .enterModeGuides,
+            .segmentEditMode,
+        ]
+    }
+    
+    private func getAllGuidesElements() -> [ToolInterfaceElement] {
+        return [
+            .buttonRotateGuideLeft,
+            .buttonRotateGuideRight,
+            .buttonFlipGuideH,
+            .buttonFlipGuideV,
+            .buttonFreezeSelectedGuide,
+            .buttonUnfreezeAllGuides,
+            .buttonCloneGuide,
+            .buttonDeleteGuide,
+            .buttonDeleteGuidePoint,
+            .buttonSelectNextGuidePoint,
+            .buttonSelectPreviousGuidePoint,
+            .buttonSelectNextGuide,
+            .buttonSelectPreviousGuide,
+            .buttonGenerateTopography,
+            .createSwatchMakeAndDrawGuide,
+            .createSwatchAddAndRemoveGuidePoints,
+            .enterModeGraph,
+            .exitModeGuides,
+            .exitModeGraph,
+            .segmentWeightMode,
+        ]
+    }
+    
+    private func getAllTimeLineElements() -> [ToolInterfaceElement] {
+        return [.sliderTimeLineFrameOffset,
+                .sliderTimeLineDuration,
+                .buttonTimeLineSyncFrames,
+                .buttonTimeLineDupeAll,
+                .buttonTimeLineDupeCurrentChannel,
+                .buttonTimeLineResetCurve,
+                .buttonTimeLineResetCurveSmall,
+                .buttonTimeLineResetDivot,
+                .buttonTimeLineResetDivotSmall,
+                .buttonTimeLineResetFlat,
+                .buttonTimeLineResetSwan,
+                .buttonTimeLineShiftDown,
+                .buttonTimeLineShiftUp,
+                .buttonTimeLineInvertH,
+                .buttonTimeLineInvertV,
+                .buttonTimeLineAmplify,
+                .buttonTimeLineDampen,
+                .buttonTimeLineFlipAll,
+                .stepperTimelinePointCount,
+                .checkBoxAnimationLoopApplyToAll,
+                .enterModeContinuousPage1,
+                .enterModeContinuousPage2,
+                .enterModeContinuousPage3,
+                .enterModeAnimationContinuous,
+                .exitModeContinuousPage1,
+                .exitModeContinuousPage2,
+                .exitModeContinuousPage3,
+                .exitModeAnimationContinuous,
+        ]
+    }
+    
+    private func getAllContinuousElements() -> [ToolInterfaceElement] {
+        return [
+            .sliderContinuousAngle,
+            .sliderContinuousDuration,
+            .sliderContinuousPower,
+            .sliderContinuousSwoop,
+            .sliderContinuousFrameOffset,
+            .sliderContinuousStartScale,
+            .sliderContinuousEndScale,
+            .sliderContinuousStartRotation,
+            .sliderContinuousEndRotation,
+            .buttonContinuousSyncFrames,
+            .buttonContinuousResetDuration,
+            .buttonContinuousResetFrameOffset,
+            .buttonContinuousResetAngleVertical,
+            .buttonContinuousResetAngleHorizontal,
+            .buttonContinuousResetAngleDiag1,
+            .buttonContinuousResetAngleDiag2,
+            .buttonContinuousResetSwoop,
+            .buttonContinuousResetStartScale,
+            .buttonContinuousResetEndScale,
+            .buttonContinuousResetStartRotation,
+            .buttonContinuousResetEndRotation,
+            .checkBoxAnimationContinuousApplyToAll,
+            .enterModeLoopsPage1,
+            .enterModeLoopsPage2,
+            .enterModeLoopsPage3,
+            .exitModeLoopsPage1,
+            .exitModeLoopsPage2,
+            .exitModeLoopsPage3,
+            .enterModeTimeLinePage1,
+            .enterModeTimeLinePage2,
+            .enterModeTimeLinePage3,
+            .exitModeTimeLinePage1,
+            .exitModeTimeLinePage2,
+            .exitModeTimeLinePage3,
+            .enterModeAnimationLoops,
+            .exitModeAnimationLoops,
+            .enterModeTimeLine,
+            .exitModeTimeLine,
+        ]
+    }
+    
+    private func getAllGraphElements() -> [ToolInterfaceElement] {
+        return [
+            .buttonResetWeightGraphInverse,
+            .buttonResetWeightGraphInverseDampened,
+            .buttonResetWeightGraphLinear,
+            .buttonResetWeightGraphLinearDampened,
+            .buttonResetWeightGraphStandard,
+            .buttonResetWeightGraphStandardDampened,
+            .buttonSwivelPanLeft,
+            .buttonSwivelPanReset,
+            .buttonSwivelPanRight,
+            .enterModeGuides,
+            .enterModeGraph,
+            .enterModeGraphPage2,
+            .exitModeGuides,
+            .exitModeGraph,
+            .exitModeGraphPage2
+        ]
+    }
+    
     private func refreshAllRows() {
         Task { @MainActor in
             let allRows = getAllRows()
@@ -37,344 +207,132 @@ extension ToolInterfaceViewModel {
     
     private func refreshAllRowsMatching(elements: [ToolInterfaceElement]) {
         Task { @MainActor in
-            var elementSet = Set<ToolInterfaceElement>()
-            for element in elements {
-                elementSet.insert(element)
-            }
-            let allRows = getAllRows()
-            for row in allRows {
-                for node in row.nodes {
-                    if elementSet.contains(node.element) {
-                        node.magicalViewModel.refresh()
+            if elements.count > 0 {
+                var elementSet = Set<ToolInterfaceElement>()
+                for element in elements {
+                    elementSet.insert(element)
+                }
+                let allRows = getAllRows()
+                for row in allRows {
+                    for node in row.nodes {
+                        if elementSet.contains(node.element) {
+                            node.magicalViewModel.refresh()
+                        }
                     }
                 }
             }
-            
         }
     }
     
+    @MainActor func handleTimeLineUpdate() {
+        refreshAllRowsMatching(elements: getAllTimeLineElements())
+    }
     
-    func handleTimeLineUpdate() {
-        refreshAllRowsMatching(elements: [.sliderTimeLineOffset,
-                                          .sliderTimeLineDuration,
-                                          .buttonTimeLineDampen,
-                                          .buttonTimeLineAmplify,
-                                          .buttonTimeLineInvertH,
-                                          .buttonTimeLineInvertV,
-                                          .buttonTimeLineBreakPoint,
-                                          .buttonTimeLineResetCurve,
-                                          .buttonTimeLineResetFlatCurrentChannel,
-                                          .buttonTimeLineResetDefaultCurrentChannel,
-                                          .stepperTimelinePointCount,
+    func handleTimePointOrTanHandleUpdate() {
         
-        ])
-        /*
-        @MainActor func handleTimeLineUpdate(row: ToolRow) {
-            for node in row.nodes {
-                if .sliderTimeLineOffset,
-                    .sliderTimeLineDuration,
-                    .buttonTimeLineDampen,
-                    .buttonTimeLineAmplify,
-                    .buttonTimeLineInvertH,
-                    .buttonTimeLineInvertV,
-                    .buttonTimeLineBreakPoint,
-                    .buttonTimeLineResetCurve,
-                    .buttonTimeLineResetFlatCurrentChannel,
-                    .buttonTimeLineResetDefaultCurrentChannel,
-                    .stepperTimelinePointCount {
-                    node.magicalViewModel.refresh()
-                }
-            }
-        }
-        Task { @MainActor in
-            for row in getAllRows() { handleTimeLineUpdate(row: row) }
-        }
-        */
     }
     
     func handleSelectedTimeLineSwatchDidChange() {
-        refreshAllRowsMatching(elements: [.sliderTimeLineOffset,
-        
+        refreshAllRowsMatching(elements: [
+            .sliderTimeLineFrameOffset,
         ])
-        /*
-        @MainActor func handleSelectedJiggleDidChange(row: ToolRow) {
-            for node in row.nodes {
-                if .sliderTimeLineOffset
-                {
-                    node.magicalViewModel.refresh()
-                }
-            }
-        }
-        Task { @MainActor in
-            for row in getAllRows() { handleSelectedJiggleDidChange(row: row) }
-        }
-        */
     }
     
-    func handleSelectedJiggleDidChange() {
-        
-        refreshAllRowsMatching(elements: [
-            .sliderJigglePower,
-            .sliderJiggleSpeed,
-            .sliderJiggleDampen,
-            
-                
-            .enterModeZoom,
-            .enterModeGraph,
-            .enterModeGuides,
-            
-            .createSwatchMakeAndDrawJiggle,
-            .createSwatchMakeAndDrawGuide,
-            .createSwatchAddAndRemoveJigglePoints,
-            .createSwatchAddAndRemoveGuidePoints,
-            
-            .stepperTimelinePointCount,
-            .stepperGemCount,
-            .stepperCoinCount,
-            
-            .buttonSelectNextJiggle,
-            .buttonSelectPreviousJiggle,
-            .buttonSelectNextGuide,
-            .buttonSelectPreviousGuide,
-            
-            .buttonFlipJiggleH,
-            .buttonFlipJiggleV,
-            .buttonRotateJiggleLeft,
-            .buttonRotateJiggleRight,
-            
-            .buttonFlipGuideH,
-            .buttonFlipGuideV,
-            .buttonRotateGuideLeft,
-            .buttonRotateGuideRight,
-            
-            .buttonFreezeSelectedJiggle,
-            .buttonFreezeSelectedGuide,
-            .buttonUnfreezeAllJiggles,
-            .buttonUnfreezeAllGuides,
-            
-            .buttonCloneJiggle,
-            .buttonDeleteJiggle,
-            .buttonCloneGuide,
-            .buttonDeleteGuide,
-            
-            .buttonDeleteJigglePoint,
-            .buttonDeleteJigglePoint,
-            
-            .buttonZoomJiggle
-        ])
+    @MainActor func handleSelectedJiggleDidChange() {
+        var elements: [ToolInterfaceElement] = []
+        elements.append(contentsOf: getAllJigglesElements())
+        elements.append(contentsOf: getAllGuidesElements())
+        elements.append(contentsOf: getAllGraphElements())
+        elements.append(contentsOf: getAllGrabElements())
+        elements.append(contentsOf: getAllCommonElements())
+        elements.append(contentsOf: getAllTimeLineElements())
+        elements.append(contentsOf: getAllContinuousElements())
+        refreshAllRowsMatching(elements: elements)
     }
     
     func handleTimelinePointCountDidChange() {
-        refreshAllRowsMatching(elements: [.stepperTimelinePointCount,
-                                          
+        refreshAllRowsMatching(elements: [
+            .stepperTimelinePointCount,
         ])
     }
     
     func handleZoomEnabledDidChange() {
         refreshAllRowsMatching(elements: [
-                                          
+            
         ])
     }
     
     func handleRecordingEnabledDidChange() {
         refreshAllRowsMatching(elements: [
             
-                                          
+            
         ])
     }
     
     func handleResetZoomActiveDidChange() {
         refreshAllRowsMatching(elements: [
             
-                                          
+            
         ])
-        /*
-        @MainActor func handleResetZoomActiveDidChange(row: ToolRow) {
-            for node in row.nodes {
-                //if .OLDcheckBoxZoomEnabled {
-                //    node.magicalViewModel.refresh()
-                //}
-            }
-        }
-        Task { @MainActor in
-            for row in getAllRows() { handleResetZoomActiveDidChange(row: row) }
-        }
-        */
     }
     
     func handleWeightCurveGraphEnabledDidChange() {
         refreshAllRowsMatching(elements: [
             
-                                          
         ])
-        /*
-        @MainActor func handleWeightCurveGraphEnabledDidChange(row: ToolRow) {
-            for node in row.nodes {
-                if .checkBoxWeightCurveGraphEnabled {
-                    node.magicalViewModel.refresh()
-                }
-            }
-        }
-        Task { @MainActor in
-            for row in getAllRows() { handleWeightCurveGraphEnabledDidChange(row: row) }
-        }
-        */
     }
     
     func handleGuidesEnabledDidChange() {
         
-        /*
-        @MainActor func handleGuidesEnabledDidChange(row: ToolRow) {
-            for node in row.nodes {
-                node.magicalViewModel.refresh()
-            }
-        }
-        Task { @MainActor in
-            for row in getAllRows() { handleGuidesEnabledDidChange(row: row) }
-        }
-        */
     }
-    
-    
-    
     
     func handleAnimationLoopsEnabledDidChange() {
         refreshAllRowsMatching(elements: [
-            //.checkBoxAutoLoopEnabled,
-                                          
-                                          
+            
         ])
-        /*
-        @MainActor func handleAnimationLoopsEnabledDidChange(row: ToolRow) {
-            for node in row.nodes {
-                if .checkBoxAutoLoopEnabled {
-                    node.magicalViewModel.refresh()
-                }
-            }
-        }
-        Task { @MainActor in
-            for row in getAllRows() { handleAnimationLoopsEnabledDidChange(row: row) }
-        }
-        */
     }
     
     func handleAnimationContinuousEnabledDidChange() {
         refreshAllRowsMatching(elements: [
-                                          
+            
         ])
-        /*
-        @MainActor func handleAnimationContinuousEnabledDidChange(row: ToolRow) {
-            for node in row.nodes {
-                if .checkBoxAutoLoopEnabled {
-                    node.magicalViewModel.refresh()
-                }
-            }
-        }
-        Task { @MainActor in
-            for row in getAllRows() { handleAnimationContinuousEnabledDidChange(row: row) }
-        }
-        */
     }
     
-    func handleAnimationLoopsPageDidChange() {
+    func handleLoopsPageDidChange() {
         refreshAllRowsMatching(elements: [
-            //.checkBoxAutoLoopEnabled
-                                          
+            
         ])
-        /*
-        @MainActor func handleAnimationLoopsPageDidChange(row: ToolRow) {
-            for node in row.nodes {
-                if .checkBoxAutoLoopEnabled {
-                    node.magicalViewModel.refresh()
-                }
-            }
-        }
-        Task { @MainActor in
-            for row in getAllRows() { handleAnimationLoopsPageDidChange(row: row) }
-        }
-        */
     }
     
-    func handleTimeLinePage2DidChange() {
-        print("handleTimeLinePage2DidChange()...")
-        
+    func handleTimeLinePageDidChange() {
+        refreshAllRowsMatching(elements: [
+            
+        ])
+    }
+    
+    //T.I.V.M.
+    func handleContinuousPageDidChange() {
+        refreshAllRowsMatching(elements: [
+
+        ])
     }
     
     func handleGraphPage2DidChange() {
-        print("handleGraphPage2DidChange()...")
+        
     }
     
-    
-    func handleAnimationContinuousPage2DidChange() {
-        print("handleAnimationContinuousPage2DidChange()...")
-    }
     
     func handleTimeLineEnabledDidChange() {
-        
-        /*
-        @MainActor func handleTimeLineEnabledDidChange(row: ToolRow) {
-            for node in row.nodes {
-                node.magicalViewModel.refresh()
-                
-            }
-        }
-        Task { @MainActor in
-            for row in getAllRows() { handleTimeLineEnabledDidChange(row: row) }
-        }
-        */
+
     }
     
     func handleCreatorModesDidChange() {
         
-        //TODO: More, More
-        refreshAllRowsMatching(elements: [.buttonRedo,
-                                          .buttonRedo,
-                                          
-                                          .buttonRotateJiggleLeft,
-                                          .buttonRotateJiggleRight,
-                                          
-                                            .buttonRotateGuideLeft,
-                                          .buttonRotateGuideRight,
-                                          
-            .buttonFreezeSelectedJiggle,
-                                          .buttonUnfreezeAllJiggles,
-                                          
-            .buttonFreezeSelectedJiggle,
-                                          .buttonUnfreezeAllJiggles,
-                                          
-                                          .createSwatchMakeAndDrawJiggle,
-                                          .createSwatchMakeAndDrawGuide,
-                                          .createSwatchAddAndRemoveJigglePoints,
-                                          .createSwatchAddAndRemoveGuidePoints,
-                                          
-                                          .checkBoxDarkMode,
-                                          
-                                          .buttonSelectNextJiggle,
-                                          .buttonSelectPreviousJiggle,
-                                          .buttonSelectNextGuide,
-                                          .buttonSelectPreviousGuide,
-                                          
-                                        .enterModeGuides,
-                                          .enterModeGraph,
-                                          .exitModeGuides,
-                                          .exitModeGraph,
-        ])
-        /*
-        @MainActor func handleCreatorModesDidChange(row: ToolRow) {
-            for node in row.nodes {
-                
-                if
-                {
-                    node.magicalViewModel.refresh()
-                }
-            }
-        }
-        Task { @MainActor in
-            for row in getAllRows() {
-                handleCreatorModesDidChange(row: row)
-            }
-        }
-        */
+        var elements: [ToolInterfaceElement] = []
+        elements.append(contentsOf: getAllJigglesElements())
+        elements.append(contentsOf: getAllGuidesElements())
+        elements.append(contentsOf: getAllCommonElements())
+        refreshAllRowsMatching(elements: elements)
     }
     
     func handleJigglesDidChange() {
@@ -428,11 +386,11 @@ extension ToolInterfaceViewModel {
                                           .buttonSelectNextGuide,
                                           .buttonSelectPreviousGuide,
                                           
-                                            .createSwatchMakeAndDrawJiggle,
-                                            .createSwatchMakeAndDrawGuide,
-                                            .createSwatchAddAndRemoveJigglePoints,
-                                            .createSwatchAddAndRemoveGuidePoints,
-        
+            .createSwatchMakeAndDrawJiggle,
+                                          .createSwatchMakeAndDrawGuide,
+                                          .createSwatchAddAndRemoveJigglePoints,
+                                          .createSwatchAddAndRemoveGuidePoints,
+                                          
         ])
     }
     
@@ -465,19 +423,24 @@ extension ToolInterfaceViewModel {
         refreshAllRowsMatching(elements: [
             .checkBoxAnimationLoopApplyToAll
         ])
-        /*
-        @MainActor func handleAnimationLoopsAppliedToAllDidChange(row: ToolRow) {
-            for node in row.nodes {
-                if .checkBoxAnimationLoopApplyToAll {
-                    node.magicalViewModel.refresh()
-                }
-            }
-        }
-        Task { @MainActor in
-            
-            for row in getAllRows() { handleAnimationLoopsAppliedToAllDidChange(row: row) }
-        }
-        */
+    }
+    
+    func handleAnimationContinuousAppliedToAllDidChange() {
+        refreshAllRowsMatching(elements: [
+            .checkBoxAnimationContinuousApplyToAll,
+            .buttonContinuousSyncFrames,
+            .buttonContinuousResetDuration,
+            .buttonContinuousResetFrameOffset,
+            .buttonContinuousResetAngleVertical,
+            .buttonContinuousResetAngleHorizontal,
+            .buttonContinuousResetAngleDiag1,
+            .buttonContinuousResetAngleDiag2,
+            .buttonContinuousResetSwoop,
+            .buttonContinuousResetStartScale,
+            .buttonContinuousResetEndScale,
+            .buttonContinuousResetStartRotation,
+            .buttonContinuousResetEndRotation,
+        ])
     }
     
     func handleJiggleSpeedDidChange() {
@@ -490,6 +453,89 @@ extension ToolInterfaceViewModel {
     
     func handleJiggleDampenDidChange() {
         refreshAllRowsMatching(elements: [.sliderJiggleDampen])
+    }
+    
+    func handleContinuousDisableGrabDidChange() {
+        refreshAllRowsMatching(elements: [.checkBoxContinuousDisableGrab])
+        print("handleContinuousDisableGrabDidChange...")
+    }
+    
+    func handleContinuousAngleDidChange() {
+        refreshAllRowsMatching(elements: [.sliderContinuousAngle])
+        print("handleContinuousAngleDidChange...")
+    }
+    
+    func handleContinuousDurationDidChange() {
+        refreshAllRowsMatching(elements: [.sliderContinuousDuration])
+    }
+    
+    func handleContinuousPowerDidChange() {
+        refreshAllRowsMatching(elements: [.sliderContinuousPower])
+    }
+    
+    func handleContinuousSwoopDidChange() {
+        refreshAllRowsMatching(elements: [.sliderContinuousSwoop])
+    }
+    
+    func handleContinuousFrameOffsetDidChange() {
+        refreshAllRowsMatching(elements: [.sliderContinuousFrameOffset])
+    }
+    
+    func handleContinuousStartScaleDidChange() {
+        refreshAllRowsMatching(elements: [.sliderContinuousStartScale])
+    }
+    
+    func handleContinuousEndScaleDidChange() {
+        refreshAllRowsMatching(elements: [.sliderContinuousEndScale])
+    }
+    
+    func handleContinuousStartRotationDidChange() {
+        refreshAllRowsMatching(elements: [.sliderContinuousStartRotation])
+    }
+    
+    func handleContinuousEndRotationDidChange() {
+        refreshAllRowsMatching(elements: [.sliderContinuousEndRotation])
+    }
+    
+    func handleSliderActiveDidChange() {
+        var elements: [ToolInterfaceElement] = []
+        elements.append(contentsOf: getAllJigglesElements())
+        elements.append(contentsOf: getAllGuidesElements())
+        elements.append(contentsOf: getAllGraphElements())
+        elements.append(contentsOf: getAllGrabElements())
+        
+        elements.append(contentsOf: getAllCommonElements())
+        elements.append(contentsOf: getAllTimeLineElements())
+        elements.append(contentsOf: getAllContinuousElements())
+        refreshAllRowsMatching(elements: elements)
+    }
+    
+    func handleContinuousDraggedJigglesDidChange() {
+        var elements: [ToolInterfaceElement] = []
+        elements.append(contentsOf: getAllContinuousElements())
+        elements.append(contentsOf: getAllCommonElements())
+        refreshAllRowsMatching(elements: elements)
+    }
+    
+    func handleContinuousUpdate() {
+        var elements: [ToolInterfaceElement] = []
+        elements.append(contentsOf: getAllContinuousElements())
+        elements.append(contentsOf: getAllCommonElements())
+        refreshAllRowsMatching(elements: elements)
+    }
+    
+    func handleTimeLineDraggedJigglesDidChange() {
+        var elements: [ToolInterfaceElement] = []
+        elements.append(contentsOf: getAllTimeLineElements())
+        elements.append(contentsOf: getAllCommonElements())
+        refreshAllRowsMatching(elements: elements)
+    }
+    
+    func handleGraphDraggedJigglesDidChange() {
+        var elements: [ToolInterfaceElement] = []
+        elements.append(contentsOf: getAllGraphElements())
+        elements.append(contentsOf: getAllCommonElements())
+        refreshAllRowsMatching(elements: elements)
     }
     
 }

@@ -66,9 +66,9 @@ extension ToolInterfaceViewModel {
             return getRowRecipe_Bottom_Zoom_Primary(orientation: orientation)
             
         case .top_Test_1:
-            return getRowRecipe_Bottom_Primary(configuration: configuration, orientation: orientation)
+            return getRowRecipe_Top_Test1(configuration: configuration, orientation: orientation)
         case .top_Test_2:
-            return getRowRecipe_Bottom_Primary(configuration: configuration, orientation: orientation)
+            return getRowRecipe_Top_Test2(configuration: configuration, orientation: orientation)
         case .top_Test_3:
             return getRowRecipe_Bottom_Primary(configuration: configuration, orientation: orientation)
         case .bottom_Test_1:
@@ -82,6 +82,24 @@ extension ToolInterfaceViewModel {
         default:
             return getRowRecipe_Bottom_Primary(configuration: configuration, orientation: orientation)
         }
+    }
+    
+    @MainActor func getRowRecipe_Top_Test1(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowRecipe {
+        let inrs: [INR] = [
+            .mainTab(.skainTabTest),
+            .spacer,
+            .segment(.animationMode)
+        ]
+        return RowRecipe(inrs: inrs)
+    }
+    @MainActor func getRowRecipe_Top_Test2(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowRecipe {
+        let inrs: [INR] = [
+            .checkBox(.gyroscopeEnabled),
+            .mainTab(.documentMode),
+            .spacer,
+            .mainTab(.jainTabTest)
+        ]
+        return RowRecipe(inrs: inrs)
     }
     
     @MainActor func getRowRecipe_Top_Primary(configuration: any InterfaceConfigurationConforming, orientation: Orientation) -> RowRecipe {

@@ -91,9 +91,9 @@ protocol InterfaceConfigurationConforming {
     var isAnimationLoopsEnabled: Bool { get set }
     var isAnimationContinuousEnabled: Bool { get set }
     var isTimeLineEnabled: Bool { get set }
-    var isTimeLinePage2Enabled: Bool { get set }
+    //var isTimeLinePage2Enabled: Bool { get set }
     var isGraphPage2Enabled: Bool { get set }
-    var isAnimationContinuousPage2Enabled: Bool { get set }
+    //var isAnimationContinuousPage2Enabled: Bool { get set }
     
     var documentMode: DocumentMode { get set }
     var editMode: EditMode { get set }
@@ -102,15 +102,16 @@ protocol InterfaceConfigurationConforming {
     var weightMode: WeightMode { get set }
     
     var animationLoopsPage: Int { get set }
-    
+    var animationTimeLinePage: Int { get set }
+    var animationContinuousPage: Int { get set }
     
     var isExpanded: Bool { get set }
     var isExpandedTop: Bool { get set }
     var isExpandedBottom: Bool { get set }
     
-    mutating func prepare()
+    mutating func prepare(disableCreatorModes: Bool)
     
-    mutating func ensureConsistency()
+    mutating func ensureConsistency(disableCreatorModes: Bool)
     mutating func calculateHeightCategories()
     
     func isRightOf(_ configuration: any InterfaceConfigurationConforming) -> Bool
@@ -136,7 +137,17 @@ extension InterfaceConfigurationConforming {
     }
     
     static func getMeshCommandRequired(previousConfiguration: any InterfaceConfigurationConforming,
-                                       currentConfiguration: any InterfaceConfigurationConforming) -> Bool {
+                                       currentConfiguration: any InterfaceConfigurationConforming,
+                                       disableCreatorModes: Bool) -> Bool {
+        
+        if disableCreatorModes {
+            switch previousConfiguration.creatorMode {
+            case .none:
+                break
+            default:
+                return true
+            }
+        }
         
         // Switching move-guide-center...
         switch previousConfiguration.creatorMode {
@@ -156,6 +167,24 @@ extension InterfaceConfigurationConforming {
             }
         }
         
+        // Switching add-guide-point...
+        switch previousConfiguration.creatorMode {
+        case .addGuidePoint:
+            switch currentConfiguration.creatorMode {
+            case .addGuidePoint:
+                break
+            default:
+                return true
+            }
+        default:
+            switch currentConfiguration.creatorMode {
+            case .addGuidePoint:
+                return true
+            default:
+                break
+            }
+        }
+        
         // Switching move-jiggle-center...
         switch previousConfiguration.creatorMode {
         case .moveJiggleCenter:
@@ -168,6 +197,24 @@ extension InterfaceConfigurationConforming {
         default:
             switch currentConfiguration.creatorMode {
             case .moveJiggleCenter:
+                return true
+            default:
+                break
+            }
+        }
+        
+        // Switching add-jiggle-point...
+        switch previousConfiguration.creatorMode {
+        case .addJigglePoint:
+            switch currentConfiguration.creatorMode {
+            case .addJigglePoint:
+                break
+            default:
+                return true
+            }
+        default:
+            switch currentConfiguration.creatorMode {
+            case .addJigglePoint:
                 return true
             default:
                 break
@@ -278,7 +325,9 @@ extension InterfaceConfigurationConforming {
                                 if currentConfiguration.isTimeLineEnabled != previousConfiguration.isTimeLineEnabled {
                                     isRowsAnimationActive = true
                                 } else if currentConfiguration.isTimeLineEnabled {
-                                    if currentConfiguration.isTimeLinePage2Enabled != previousConfiguration.isTimeLinePage2Enabled {
+                                
+                                    if currentConfiguration.animationTimeLinePage !=
+                                        previousConfiguration.animationTimeLinePage {
                                         isRowsAnimationActive = true
                                     }
                                 }
@@ -291,7 +340,9 @@ extension InterfaceConfigurationConforming {
                                 isRowsAnimationActive = true
                             } else {
                                 if currentConfiguration.isAnimationContinuousEnabled {
-                                    if currentConfiguration.isAnimationContinuousPage2Enabled != previousConfiguration.isAnimationContinuousPage2Enabled {
+                                    
+                                    if currentConfiguration.animationContinuousPage !=
+                                        previousConfiguration.animationContinuousPage {
                                         isRowsAnimationActive = true
                                     }
                                 }
@@ -826,12 +877,12 @@ extension InterfaceConfigurationConforming {
                                             startAction: .none)
     }
     
-    mutating func prepare() {
-        ensureConsistency()
+    mutating func prepare(disableCreatorModes: Bool) {
+        ensureConsistency(disableCreatorModes: disableCreatorModes)
         calculateHeightCategories()
     }
     
-    mutating func ensureConsistency() {
+    mutating func ensureConsistency(disableCreatorModes: Bool) {
         
         if isVideoExportEnabled {
             isGraphEnabled = false
@@ -840,6 +891,10 @@ extension InterfaceConfigurationConforming {
         if isVideoRecordEnabled {
             isGraphEnabled = false
             isGuidesEnabled = false
+        }
+        
+        if disableCreatorModes {
+            creatorMode = .none
         }
         
         switch documentMode {
@@ -926,19 +981,19 @@ extension InterfaceConfigurationConforming {
                     case .guides:
                         switch configuration.weightMode {
                         case .guides:
-                            print("[aa] trig a")
+                            
                             return false
                         case .points:
-                            print("[aa] trig b")
+                            
                             return false
                         }
                     case .points:
                         switch configuration.weightMode {
                         case .guides:
-                            print("[aa] trig c")
+                            
                             return true
                         case .points:
-                            print("[aa] trig d")
+                            
                             return false
                         }
                     }
@@ -955,15 +1010,19 @@ extension InterfaceConfigurationConforming {
                     if isTimeLineEnabled {
                         if configuration.isTimeLineEnabled {
                             
-                            if isTimeLinePage2Enabled {
-                                if configuration.isTimeLinePage2Enabled {
-                                    return false
-                                } else {
-                                    return true
-                                }
+                            // Right-Of
+                            if animationTimeLinePage >= 3 && configuration.animationTimeLinePage <= 1 {
+                                // Loop from 3 to 1...
+                                return false
+                            } else if animationTimeLinePage <= 1 && configuration.animationTimeLinePage >= 3 {
+                                // Loop from 1 to 3...
+                                return true
+                            } else if animationTimeLinePage > configuration.animationTimeLinePage {
+                                return true
                             } else {
                                 return false
                             }
+                            
                         } else {
                             return true
                         }
@@ -991,15 +1050,19 @@ extension InterfaceConfigurationConforming {
             } else if isAnimationContinuousEnabled {
                 if configuration.isAnimationContinuousEnabled {
                     
-                    if isAnimationContinuousPage2Enabled {
-                        if configuration.isAnimationContinuousPage2Enabled {
-                            return false
-                        } else {
-                            return true
-                        }
+                    // Right-Of
+                    if animationContinuousPage >= 3 && configuration.animationContinuousPage <= 1 {
+                        // Loop from 3 to 1...
+                        return false
+                    } else if animationContinuousPage <= 1 && configuration.animationContinuousPage >= 3 {
+                        // Loop from 1 to 3...
+                        return true
+                    } else if animationContinuousPage > configuration.animationContinuousPage {
+                        return true
                     } else {
                         return false
                     }
+                    
                 } else {
                     return true
                 }
@@ -1057,10 +1120,12 @@ struct InterfaceConfigurationPad: InterfaceConfigurationConforming {
     var isAnimationLoopsEnabled = false
     var isAnimationContinuousEnabled = false
     var isTimeLineEnabled = false
-    var isTimeLinePage2Enabled = false
+    //var isTimeLinePage2Enabled = false
     var isGraphPage2Enabled = false
-    var isAnimationContinuousPage2Enabled = false
+    //var isAnimationContinuousPage2Enabled = false
     var animationLoopsPage = 0
+    var animationTimeLinePage = 0
+    var animationContinuousPage = 0
     
     var documentMode = DocumentMode.edit
     var editMode = EditMode.jiggles
@@ -1106,11 +1171,13 @@ struct InterfaceConfigurationPhone: InterfaceConfigurationConforming {
     var isAnimationLoopsEnabled = false
     var isAnimationContinuousEnabled = false
     var isTimeLineEnabled = false
-    var isTimeLinePage2Enabled = false
+    //var isTimeLinePage2Enabled = false
     var isGraphPage2Enabled = false
-    var isAnimationContinuousPage2Enabled = false
+    //var isAnimationContinuousPage2Enabled = false
     
     var animationLoopsPage = 0
+    var animationTimeLinePage = 0
+    var animationContinuousPage = 0
     
     var documentMode = DocumentMode.edit
     var editMode = EditMode.jiggles

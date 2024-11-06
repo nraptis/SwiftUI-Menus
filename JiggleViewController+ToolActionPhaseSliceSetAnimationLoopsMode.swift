@@ -11,6 +11,7 @@ extension JiggleViewController {
     func toolActionConsumePhaseSliceSetAnimationLoopsMode(_ slice: ToolActionPhaseSliceSetAnimationLoopsMode) {
         jiggleViewModel.jiggleDocument.isAnimationLoopsEnabled = slice.isAnimationLoopsMode
         toolInterfaceViewModel.handleAnimationLoopsEnabledDidChange()
+        jiggleViewModel.handleAnimationModeDidChange()
         jiggleViewModel.killDragAll()
     }
 }

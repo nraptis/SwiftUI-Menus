@@ -36,7 +36,9 @@ struct ToolInterfaceElementTable {
         lookUpTable[.checkBoxStereoscopicEnabled] = .checkBox
         lookUpTable[.checkBoxAnimationGrabApplyToAll] = .checkBox
         lookUpTable[.checkBoxAnimationLoopApplyToAll] = .checkBox
+        lookUpTable[.checkBoxAnimationContinuousApplyToAll] = .checkBox
         lookUpTable[.checkBoxPurchasedEnabled] = .checkBox
+        lookUpTable[.checkBoxContinuousDisableGrab] = .checkBox
         lookUpTable[.checkBoxImageImporterRotationEnabled] = .checkBox
         lookUpTable[.checkBoxImageImporterEdgesEnabled] = .checkBox
         
@@ -65,18 +67,28 @@ struct ToolInterfaceElementTable {
         lookUpTable[.buttonDeleteGuide] = .button
         lookUpTable[.buttonDeleteJigglePoint] = .button
         lookUpTable[.buttonDeleteGuidePoint] = .button
+        
         lookUpTable[.buttonTimeLineDupeAll] = .button
-        lookUpTable[.buttonTimeLineDupeDuration] = .button
         lookUpTable[.buttonTimeLineDupeCurrentChannel] = .button
-        lookUpTable[.buttonTimeLineResetFlatCurrentChannel] = .button
-        lookUpTable[.buttonTimeLineResetDefaultCurrentChannel] = .button
-        lookUpTable[.buttonTimeLineBreakPoint] = .button
+        
+        lookUpTable[.buttonTimeLineResetCurve] = .button
+        lookUpTable[.buttonTimeLineResetCurveSmall] = .button
+        lookUpTable[.buttonTimeLineResetDivot] = .button
+        lookUpTable[.buttonTimeLineResetDivotSmall] = .button
+        lookUpTable[.buttonTimeLineResetFlat] = .button
+        lookUpTable[.buttonTimeLineResetSwan] = .button
+        lookUpTable[.buttonTimeLineShiftDown] = .button
+        lookUpTable[.buttonTimeLineResetCurve] = .button
+        lookUpTable[.buttonTimeLineShiftUp] = .button
+        
         lookUpTable[.buttonTimeLineInvertH] = .button
         lookUpTable[.buttonTimeLineInvertV] = .button
         lookUpTable[.buttonTimeLineResetCurve] = .button
         lookUpTable[.buttonTimeLineAmplify] = .button
         lookUpTable[.buttonTimeLineDampen] = .button
         lookUpTable[.buttonTimeLineFlipAll] = .button
+        lookUpTable[.buttonTimeLineSyncFrames] = .button
+        
         lookUpTable[.buttonSelectNextJigglePoint] = .button
         lookUpTable[.buttonSelectPreviousJigglePoint] = .button
         lookUpTable[.buttonSelectNextGuidePoint] = .button
@@ -87,7 +99,6 @@ struct ToolInterfaceElementTable {
         lookUpTable[.buttonSelectPreviousGuide] = .button
         lookUpTable[.buttonZoomReset] = .button
         lookUpTable[.buttonZoomJiggle] = .button
-        lookUpTable[.buttonBreakTangentWeightGraph] = .button
         lookUpTable[.buttonGenerateTopography] = .button
         lookUpTable[.buttonResetWeightGraphInverse] = .button
         lookUpTable[.buttonResetWeightGraphInverseDampened] = .button
@@ -100,6 +111,28 @@ struct ToolInterfaceElementTable {
         lookUpTable[.buttonSwivelPanRight] = .button
         lookUpTable[.buttonZoomIn] = .button
         lookUpTable[.buttonZoomOut] = .button
+        
+        
+        lookUpTable[.buttonContinuousSyncFrames] = .button
+        lookUpTable[.buttonContinuousResetDuration] = .button
+        lookUpTable[.buttonContinuousResetFrameOffset] = .button
+        lookUpTable[.buttonContinuousResetSwoop] = .button
+
+        
+        lookUpTable[.buttonContinuousResetAngleVertical] = .button
+        lookUpTable[.buttonContinuousResetAngleHorizontal] = .button
+
+        lookUpTable[.buttonContinuousResetAngleDiag1] = .button
+        lookUpTable[.buttonContinuousResetAngleDiag2] = .button
+
+        
+        lookUpTable[.buttonContinuousResetStartScale] = .button
+        lookUpTable[.buttonContinuousResetEndScale] = .button
+        
+        lookUpTable[.buttonContinuousResetStartRotation] = .button
+        lookUpTable[.buttonContinuousResetEndRotation] = .button
+        
+        
         lookUpTable[.buttonImageImporterRotateRight] = .button
         lookUpTable[.buttonImageImporterRotateLeft] = .button
         lookUpTable[.buttonImageImporterResetAspectFit] = .button
@@ -119,13 +152,18 @@ struct ToolInterfaceElementTable {
         lookUpTable[.enterModeVideoRecord] = .enterMode
         lookUpTable[.enterModeVideoExport] = .enterMode
         lookUpTable[.enterModeTimeLine] = .enterMode
-        lookUpTable[.enterModeTimeLinePage2] = .enterMode
         lookUpTable[.enterModeGraphPage2] = .enterMode
         lookUpTable[.enterModeLoopsPage1] = .enterMode
         lookUpTable[.enterModeLoopsPage2] = .enterMode
         lookUpTable[.enterModeLoopsPage3] = .enterMode
+        lookUpTable[.enterModeTimeLinePage1] = .enterMode
+                lookUpTable[.enterModeTimeLinePage2] = .enterMode
+                lookUpTable[.enterModeTimeLinePage3] = .enterMode
+        lookUpTable[.enterModeContinuousPage1] = .enterMode
+                lookUpTable[.enterModeContinuousPage2] = .enterMode
+                lookUpTable[.enterModeContinuousPage3] = .enterMode
         lookUpTable[.enterModeAnimationContinuous] = .enterMode
-        lookUpTable[.enterModeAnimationContinuousPage2] = .enterMode
+        
         
         lookUpTable[.exitModeZoom] = .exitMode
         lookUpTable[.exitModeGuides] = .exitMode
@@ -135,15 +173,19 @@ struct ToolInterfaceElementTable {
         lookUpTable[.exitModeVideoExport] = .exitMode
         lookUpTable[.exitModeTimeLine] = .exitMode
         lookUpTable[.exitModeAnimationContinuous] = .exitMode
-        lookUpTable[.exitModeTimeLinePage2] = .exitMode
         lookUpTable[.exitModeGraphPage2] = .exitMode
         
         
         lookUpTable[.exitModeLoopsPage1] = .exitMode
         lookUpTable[.exitModeLoopsPage2] = .exitMode
         lookUpTable[.exitModeLoopsPage3] = .exitMode
-        lookUpTable[.exitModeAnimationContinuousPage2] = .exitMode
+        lookUpTable[.exitModeTimeLinePage1] = .exitMode
+        lookUpTable[.exitModeTimeLinePage2] = .exitMode
+        lookUpTable[.exitModeTimeLinePage3] = .exitMode
         
+        lookUpTable[.exitModeContinuousPage1] = .exitMode
+                lookUpTable[.exitModeContinuousPage2] = .exitMode
+                lookUpTable[.exitModeContinuousPage3] = .exitMode
         
         lookUpTable[.greenButtonCreateScene] = .greenButton
         lookUpTable[.greenButtonDone] = .greenButton
@@ -152,16 +194,27 @@ struct ToolInterfaceElementTable {
         lookUpTable[.mainTabJainTest] = .mainTab
         lookUpTable[.mainTabSkainTest] = .mainTab
         
-        lookUpTable[.sliderBouncePower] = .slider
-        lookUpTable[.sliderBounceSpeed] = .slider
         lookUpTable[.sliderJigglePower] = .slider
         lookUpTable[.sliderJiggleSpeed] = .slider
-        lookUpTable[.sliderLoopSpeed] = .slider
         lookUpTable[.sliderZoomAmount] = .slider
         lookUpTable[.sliderJiggleOpacity] = .slider
         lookUpTable[.sliderJiggleDampen] = .slider
         lookUpTable[.sliderTimeLineDuration] = .slider
-        lookUpTable[.sliderTimeLineOffset] = .slider
+        lookUpTable[.sliderTimeLineFrameOffset] = .slider
+        
+        lookUpTable[.sliderContinuousAngle] = .slider
+        lookUpTable[.sliderContinuousDuration] = .slider
+        lookUpTable[.sliderContinuousPower] = .slider
+        lookUpTable[.sliderContinuousSwoop] = .slider
+        lookUpTable[.sliderContinuousFrameOffset] = .slider
+        
+        lookUpTable[.sliderContinuousStartScale] = .slider
+        lookUpTable[.sliderContinuousEndScale] = .slider
+        lookUpTable[.sliderContinuousStartRotation] = .slider
+        lookUpTable[.sliderContinuousEndRotation] = .slider
+        
+        
+        
         
         lookUpTable[.segmentEditMode] = .segment
         lookUpTable[.segmentWeightMode] = .segment
@@ -184,7 +237,10 @@ enum ToolInterfaceElement: UInt16 {
     case checkBoxStereoscopicEnabled
     case checkBoxAnimationGrabApplyToAll
     case checkBoxAnimationLoopApplyToAll
+    case checkBoxAnimationContinuousApplyToAll
     case checkBoxPurchasedEnabled
+    case checkBoxContinuousDisableGrab
+    
     
     case checkBoxImageImporterRotationEnabled
     case checkBoxImageImporterEdgesEnabled
@@ -214,18 +270,7 @@ enum ToolInterfaceElement: UInt16 {
     case buttonDeleteGuide
     case buttonDeleteJigglePoint
     case buttonDeleteGuidePoint
-    case buttonTimeLineDupeAll
-    case buttonTimeLineDupeDuration
-    case buttonTimeLineDupeCurrentChannel
-    case buttonTimeLineResetFlatCurrentChannel
-    case buttonTimeLineResetDefaultCurrentChannel
-    case buttonTimeLineBreakPoint
-    case buttonTimeLineInvertH
-    case buttonTimeLineInvertV
-    case buttonTimeLineResetCurve
-    case buttonTimeLineAmplify
-    case buttonTimeLineDampen
-    case buttonTimeLineFlipAll
+    
     case buttonSelectNextJigglePoint
     case buttonSelectPreviousJigglePoint
     case buttonSelectNextGuidePoint
@@ -236,7 +281,7 @@ enum ToolInterfaceElement: UInt16 {
     case buttonSelectPreviousGuide
     case buttonZoomReset
     case buttonZoomJiggle
-    case buttonBreakTangentWeightGraph
+    
     case buttonGenerateTopography
     case buttonResetWeightGraphInverse
     case buttonResetWeightGraphInverseDampened
@@ -247,8 +292,39 @@ enum ToolInterfaceElement: UInt16 {
     case buttonSwivelPanLeft
     case buttonSwivelPanReset
     case buttonSwivelPanRight
+    
     case buttonZoomIn
     case buttonZoomOut
+    
+    case buttonTimeLineSyncFrames
+    case buttonTimeLineDupeAll
+    case buttonTimeLineDupeCurrentChannel
+    case buttonTimeLineResetCurve
+    case buttonTimeLineResetCurveSmall
+    case buttonTimeLineResetDivot
+    case buttonTimeLineResetDivotSmall
+    case buttonTimeLineResetFlat
+    case buttonTimeLineResetSwan
+    case buttonTimeLineShiftDown
+    case buttonTimeLineShiftUp
+    case buttonTimeLineInvertH
+    case buttonTimeLineInvertV
+    case buttonTimeLineAmplify
+    case buttonTimeLineDampen
+    case buttonTimeLineFlipAll
+    
+    case buttonContinuousSyncFrames
+    case buttonContinuousResetDuration
+    case buttonContinuousResetFrameOffset
+    case buttonContinuousResetAngleVertical
+    case buttonContinuousResetAngleHorizontal
+    case buttonContinuousResetAngleDiag1
+    case buttonContinuousResetAngleDiag2
+    case buttonContinuousResetSwoop
+    case buttonContinuousResetStartScale
+    case buttonContinuousResetEndScale
+    case buttonContinuousResetStartRotation
+    case buttonContinuousResetEndRotation
     
     case buttonImageImporterRotateRight
     case buttonImageImporterRotateLeft
@@ -270,13 +346,19 @@ enum ToolInterfaceElement: UInt16 {
     case enterModeVideoRecord
     case enterModeVideoExport
     case enterModeTimeLine
-    case enterModeTimeLinePage2
     case enterModeGraphPage2
+    
     case enterModeLoopsPage1
     case enterModeLoopsPage2
     case enterModeLoopsPage3
+    case enterModeTimeLinePage1
+    case enterModeTimeLinePage2
+    case enterModeTimeLinePage3
+    case enterModeContinuousPage1
+    case enterModeContinuousPage2
+    case enterModeContinuousPage3
+    
     case enterModeAnimationContinuous
-    case enterModeAnimationContinuousPage2
     
     case exitModeZoom
     case exitModeGuides
@@ -286,13 +368,16 @@ enum ToolInterfaceElement: UInt16 {
     case exitModeVideoExport
     case exitModeTimeLine
     case exitModeAnimationContinuous
-    case exitModeTimeLinePage2
     case exitModeGraphPage2
-    case exitModeAnimationContinuousPage2
-    
     case exitModeLoopsPage1
     case exitModeLoopsPage2
     case exitModeLoopsPage3
+    case exitModeTimeLinePage1
+    case exitModeTimeLinePage2
+    case exitModeTimeLinePage3
+    case exitModeContinuousPage1
+    case exitModeContinuousPage2
+    case exitModeContinuousPage3
     
     case greenButtonCreateScene
     case greenButtonDone
@@ -301,16 +386,25 @@ enum ToolInterfaceElement: UInt16 {
     case mainTabJainTest
     case mainTabSkainTest
     
-    case sliderBouncePower
-    case sliderBounceSpeed
+    
     case sliderJigglePower
     case sliderJiggleSpeed
-    case sliderLoopSpeed
     case sliderZoomAmount
     case sliderJiggleOpacity
     case sliderJiggleDampen
+    
     case sliderTimeLineDuration
-    case sliderTimeLineOffset
+    case sliderTimeLineFrameOffset
+    
+    case sliderContinuousAngle
+    case sliderContinuousDuration
+    case sliderContinuousPower
+    case sliderContinuousSwoop
+    case sliderContinuousFrameOffset
+    case sliderContinuousStartScale
+    case sliderContinuousEndScale
+    case sliderContinuousStartRotation
+    case sliderContinuousEndRotation
     
     case segmentEditMode
     case segmentWeightMode

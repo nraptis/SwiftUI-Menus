@@ -118,14 +118,6 @@ struct ToolInterfaceStringLibrary {
         String("Point")
     }
     
-    static func interfaceTextPointBreakTangentLine1() -> String? {
-        GeneralStringLibrary.get(localized: "break_tangent_point_line_1", table: "ToolInterface")
-    }
-    
-    static func interfaceTextPointBreakTangentLine2() -> String? {
-        GeneralStringLibrary.get(localized: "break_tangent_point_line_2", table: "ToolInterface")
-    }
-    
     static func interfaceTextUndoLine1() -> String? {
         GeneralStringLibrary.get(localized: "undo_line_1", table: "ToolInterface")
     }

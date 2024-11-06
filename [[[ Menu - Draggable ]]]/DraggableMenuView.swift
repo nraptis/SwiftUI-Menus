@@ -514,6 +514,8 @@ class DraggableMenuView: UIView, PrimaryMenuConforming {
                 snapToVideoExport()
             } else if configuration.isVideoRecordEnabled {
                 snapToVideoRecord()
+            } else if configuration.isZoomEnabled {
+                snapToZoom()
             } else {
                 if snapStandardMenus {
                     if configuration.isGraph {

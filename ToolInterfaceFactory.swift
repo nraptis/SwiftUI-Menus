@@ -26,9 +26,9 @@ import Foundation
     }
     
     static func getButtonFlex(orientation: Orientation,
-                                  configuration: ToolInterfaceElementButtonConfiguration,
-                                  neighborTypeLeft: ToolInterfaceElementType?,
-                                  neighborTypeRight: ToolInterfaceElementType?) -> ToolInterfaceElementFlex {
+                              configuration: ToolInterfaceElementButtonConfiguration,
+                              neighborTypeLeft: ToolInterfaceElementType?,
+                              neighborTypeRight: ToolInterfaceElementType?) -> ToolInterfaceElementFlex {
         
         let iconPackTertiary = ApplicationController.isPurchased ? FramedLongIconLibrary.uncoloredLock : nil
         
@@ -54,9 +54,9 @@ import Foundation
     }
     
     static func getCheckBoxFlex(orientation: Orientation,
-                                    configuration: ToolInterfaceElementCheckBoxConfiguration,
-                                    neighborTypeLeft: ToolInterfaceElementType?,
-                                    neighborTypeRight: ToolInterfaceElementType?) -> ToolInterfaceElementFlex {
+                                configuration: ToolInterfaceElementCheckBoxConfiguration,
+                                neighborTypeLeft: ToolInterfaceElementType?,
+                                neighborTypeRight: ToolInterfaceElementType?) -> ToolInterfaceElementFlex {
         let flexConvertibleData = getConvertibleFlex(orientation: orientation,
                                                      scheme: CheckBoxLayout.self,
                                                      neighborTypeLeft: neighborTypeLeft,
@@ -85,8 +85,8 @@ import Foundation
         
         let infoList = configuration.buttonConfigurations.map {
             SEGMENT_FLEX_INFO_CONVERTIBLE(iconPackMain: $0.iconPack,
-                                          iconPackSecondary: FramedLongIconLibrary.checkBoxSquare,
-                                          iconPackTertiary: FramedLongIconLibrary.testArrowRight,
+                                          iconPackSecondary: nil,//FramedLongIconLibrary.checkBoxSquare,
+                                          iconPackTertiary: nil,//FramedLongIconLibrary.testArrowRight,
                                           nameLabelWidthLong: $0.nameLabelWidthLong,
                                           nameLabelWidthStackedLarge: $0.nameLabelWidthStackedLarge,
                                           nameLabelWidthStackedMedium: $0.nameLabelWidthStackedMedium,
@@ -181,9 +181,9 @@ import Foundation
     }
     
     static func getStepperFlex(orientation: Orientation,
-                                   configuration: ToolInterfaceElementStepperConfiguration,
-                                   neighborTypeLeft: ToolInterfaceElementType?,
-                                   neighborTypeRight: ToolInterfaceElementType?) -> ToolInterfaceElementFlex {
+                               configuration: ToolInterfaceElementStepperConfiguration,
+                               neighborTypeLeft: ToolInterfaceElementType?,
+                               neighborTypeRight: ToolInterfaceElementType?) -> ToolInterfaceElementFlex {
         let flexConvertibleData = getConvertibleFlex(orientation: orientation,
                                                      scheme: StepperLayout.self,
                                                      neighborTypeLeft: neighborTypeLeft,
@@ -280,36 +280,36 @@ import Foundation
     }
     
     static func getFavoringOneLineLabelFlex(orientation: Orientation,
-                                   configuration: ToolInterfaceElementFavoringOneLineLabelConfiguration,
-                                   minimumWidth: Int,
-                                   neighborTypeLeft: ToolInterfaceElementType?,
-                                   neighborTypeRight: ToolInterfaceElementType?) -> ToolInterfaceElementFlex {
+                                            configuration: ToolInterfaceElementFavoringOneLineLabelConfiguration,
+                                            minimumWidth: Int,
+                                            neighborTypeLeft: ToolInterfaceElementType?,
+                                            neighborTypeRight: ToolInterfaceElementType?) -> ToolInterfaceElementFlex {
         
         let outsideBoxLeftSqueezed = FavoringOneLineLabelLayout.getOutsideBoxPaddingLeft(orientation: orientation,
-                                                                                             squeeze: .squeezed,
-                                                                                             neighborTypeLeft: neighborTypeLeft,
-                                                                                             neighborTypeRight: neighborTypeRight)
+                                                                                         squeeze: .squeezed,
+                                                                                         neighborTypeLeft: neighborTypeLeft,
+                                                                                         neighborTypeRight: neighborTypeRight)
         let outsideBoxLeftStandard = FavoringOneLineLabelLayout.getOutsideBoxPaddingLeft(orientation: orientation,
-                                                                                             squeeze: .standard,
-                                                                                             neighborTypeLeft: neighborTypeLeft,
-                                                                                             neighborTypeRight: neighborTypeRight)
+                                                                                         squeeze: .standard,
+                                                                                         neighborTypeLeft: neighborTypeLeft,
+                                                                                         neighborTypeRight: neighborTypeRight)
         let outsideBoxLeftRelaxed = FavoringOneLineLabelLayout.getOutsideBoxPaddingLeft(orientation: orientation,
-                                                                                            squeeze: .relaxed,
-                                                                                            neighborTypeLeft: neighborTypeLeft,
-                                                                                            neighborTypeRight: neighborTypeRight)
+                                                                                        squeeze: .relaxed,
+                                                                                        neighborTypeLeft: neighborTypeLeft,
+                                                                                        neighborTypeRight: neighborTypeRight)
         
         let outsideBoxRightSqueezed = FavoringOneLineLabelLayout.getOutsideBoxPaddingRight(orientation: orientation,
-                                                                                               squeeze: .squeezed,
-                                                                                               neighborTypeLeft: neighborTypeLeft,
-                                                                                               neighborTypeRight: neighborTypeRight)
+                                                                                           squeeze: .squeezed,
+                                                                                           neighborTypeLeft: neighborTypeLeft,
+                                                                                           neighborTypeRight: neighborTypeRight)
         let outsideBoxRightStandard = FavoringOneLineLabelLayout.getOutsideBoxPaddingRight(orientation: orientation,
-                                                                                               squeeze: .standard,
-                                                                                               neighborTypeLeft: neighborTypeLeft,
-                                                                                               neighborTypeRight: neighborTypeRight)
+                                                                                           squeeze: .standard,
+                                                                                           neighborTypeLeft: neighborTypeLeft,
+                                                                                           neighborTypeRight: neighborTypeRight)
         let outsideBoxRightRelaxed = FavoringOneLineLabelLayout.getOutsideBoxPaddingRight(orientation: orientation,
-                                                                                              squeeze: .relaxed,
-                                                                                              neighborTypeLeft: neighborTypeLeft,
-                                                                                              neighborTypeRight: neighborTypeRight)
+                                                                                          squeeze: .relaxed,
+                                                                                          neighborTypeLeft: neighborTypeLeft,
+                                                                                          neighborTypeRight: neighborTypeRight)
         let paddingSqueezed = outsideBoxLeftSqueezed + outsideBoxRightSqueezed
         let paddingStandard = outsideBoxLeftStandard + outsideBoxRightStandard
         let paddingRelaxed = outsideBoxLeftRelaxed + outsideBoxRightRelaxed

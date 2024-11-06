@@ -11,41 +11,51 @@ extension ToolInterfaceViewModel {
     
     @MainActor func getRowRecipe_Pad_Portrait_AnimationContinuousPage1_Top_Primary() -> RowRecipe {
         let inrs: [INR] = [
-            .favoringOneLineLabel(.init(minimumWidth: 0, text: "A.C. Page 1")),
+            .favoringOneLineLabel(.init(minimumWidth: 0, text: "[A.C1]")),
             .button(.menu),
             .checkBox(.darkMode),
-            .spacer,
-            .checkBox(.buy)
+            .slider(.init(widthCategory: .halfWidthLeft, slider: .continuousAngle)),
         ]
         return RowRecipe(inrs: inrs)
     }
     
     @MainActor func getRowRecipe_Pad_Portrait_AnimationContinuousPage1_Top_Secondary() -> RowRecipe {
         let inrs: [INR] = [
-            
+            .slider(.init(widthCategory: .halfWidthLeft, slider: .continuousDuration)),
+            .slider(.init(widthCategory: .halfWidthRight, slider: .continuousPower)),
         ]
         return RowRecipe(inrs: inrs)
     }
     
+    
     @MainActor func getRowRecipe_Pad_Portrait_AnimationContinuousPage1_Top_Tertiary() -> RowRecipe {
         let inrs: [INR] = [
+            .button_pair(.continuousResetAngleVertical, .continuousResetAngleHorizontal),
             .spacer,
-            .enterMode(.animationContinuousPage2),
+            .button_pair(.continuousResetAngleDiag1, .continuousResetAngleDiag2),
         ]
         return RowRecipe(inrs: inrs)
     }
     
     @MainActor func getRowRecipe_Pad_Portrait_AnimationContinuousPage1_Bottom_Tertiary() -> RowRecipe {
         let inrs: [INR] = [
-            .exitMode(.animationContinuous),
-            .spacer
+            
+            .exitMode(.continuousPage1),
+            .button_pair(.continuousResetSwoop, .continuousSyncFrames),
+            .button_pair(.continuousResetAngleHorizontal, .continuousResetAngleVertical),
+            
+            .enterMode(.continuousPage2),
         ]
         return RowRecipe(inrs: inrs)
     }
     
     @MainActor func getRowRecipe_Pad_Portrait_AnimationContinuousPage1_Bottom_Secondary() -> RowRecipe {
         let inrs: [INR] = [
+            .exitMode(.animationContinuous),
+            .checkBox(.animationContinuousApplyToAll),
+            .checkBox(.continuousDisableGrabEnabled),
             .spacer,
+            .button_pair(.continuousSyncFrames, .zoomReset),
             .button(.zoomReset)
         ]
         return RowRecipe(inrs: inrs)

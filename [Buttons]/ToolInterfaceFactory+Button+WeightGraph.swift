@@ -9,34 +9,6 @@ import Foundation
 
 extension ToolInterfaceFactory {
     
-    static func getBreakTangentWeightGraphButtonToolNode(orientation: Orientation,
-                                                         neighborTypeLeft: ToolInterfaceElementType?,
-                                                         neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
-        
-        let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextBreakTangentWeightGraphLine1()
-        let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextBreakTangentWeightGraphLine2()
-        let iconPack = LooseConvertibleIconLibrary.menuC
-        let configuration = ToolInterfaceElementButtonConfiguration(iconPack: iconPack,
-                                                                    orientation: orientation,
-                                                                    nameLabelLine1: textLine1,
-                                                                    nameLabelLine2: textLine2)
-        let flex = Self.getButtonFlex(orientation: orientation,
-                                      configuration: configuration,
-                                      neighborTypeLeft: neighborTypeLeft,
-                                      neighborTypeRight: neighborTypeRight)
-        
-        let viewModelBreakTangentWeightGraph = MagicalButtonViewModelBreakTangentWeightGraph(orientation: orientation,
-                                                                                             buttonConfiguration: configuration)
-        let breakTangentWeightGraphToolNode = ToolNode(id: getToolNodeID(),
-                                                       element: .buttonBreakTangentWeightGraph,
-                                                       flex: flex,
-                                                       magicalViewModel: viewModelBreakTangentWeightGraph,
-                                                       neighborTypeLeft: neighborTypeLeft,
-                                                       neighborTypeRight: neighborTypeRight)
-        viewModelBreakTangentWeightGraph.refresh()
-        return breakTangentWeightGraphToolNode
-    }
-    
     static func getResetWeightGraphStandardButtonToolNode(orientation: Orientation,
                                                           neighborTypeLeft: ToolInterfaceElementType?,
                                                           neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {

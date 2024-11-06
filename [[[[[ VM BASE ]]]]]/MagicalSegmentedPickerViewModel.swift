@@ -43,8 +43,8 @@ import SwiftUI
         case .long:
             let infoList = segmentedPickerConfiguration.buttonConfigurations.map {
                 SEGMENT_LAYOUT_INFO(iconPackMain: $0.iconPack,
-                                    iconPackSecondary: FramedLongIconLibrary.checkBoxSquare,
-                                    iconPackTertiary: LooseConvertibleIconLibrary.testArrowRight,
+                                    iconPackSecondary: nil,//FramedLongIconLibrary.checkBoxSquare,
+                                    iconPackTertiary: nil,//LooseConvertibleIconLibrary.testArrowRight,
                                     nameLabelWidth: $0.nameLabelWidthLong,
                                     numberOfLines: $0.nameLabelNumberOfLines)
             }
@@ -52,8 +52,8 @@ import SwiftUI
         case .stackedLarge:
             let infoList = segmentedPickerConfiguration.buttonConfigurations.map {
                 SEGMENT_LAYOUT_INFO(iconPackMain: $0.iconPack,
-                                    iconPackSecondary: FramedLongIconLibrary.checkBoxSquare,
-                                    iconPackTertiary: LooseConvertibleIconLibrary.testArrowRight,
+                                    iconPackSecondary: nil,//FramedLongIconLibrary.checkBoxSquare,
+                                    iconPackTertiary: nil,//LooseConvertibleIconLibrary.testArrowRight,
                                     nameLabelWidth: $0.nameLabelWidthStackedLarge,
                                     numberOfLines: $0.nameLabelNumberOfLines)
             }
@@ -61,8 +61,8 @@ import SwiftUI
         case .stackedMedium:
             let infoList = segmentedPickerConfiguration.buttonConfigurations.map {
                 SEGMENT_LAYOUT_INFO(iconPackMain: $0.iconPack,
-                                    iconPackSecondary: FramedLongIconLibrary.checkBoxSquare,
-                                    iconPackTertiary: LooseConvertibleIconLibrary.testArrowRight,
+                                    iconPackSecondary: nil,//FramedLongIconLibrary.checkBoxSquare,
+                                    iconPackTertiary: nil,//LooseConvertibleIconLibrary.testArrowRight,
                                     nameLabelWidth: $0.nameLabelWidthStackedMedium,
                                     numberOfLines: $0.nameLabelNumberOfLines)
             }
@@ -70,8 +70,8 @@ import SwiftUI
         case .stackedSmall:
             let infoList = segmentedPickerConfiguration.buttonConfigurations.map {
                 SEGMENT_LAYOUT_INFO(iconPackMain: $0.iconPack,
-                                    iconPackSecondary: FramedLongIconLibrary.checkBoxSquare,
-                                    iconPackTertiary: LooseConvertibleIconLibrary.testArrowRight,
+                                    iconPackSecondary: nil,//FramedLongIconLibrary.checkBoxSquare,
+                                    iconPackTertiary: nil,//LooseConvertibleIconLibrary.testArrowRight,
                                     nameLabelWidth: $0.nameLabelWidthStackedSmall,
                                     numberOfLines: $0.nameLabelNumberOfLines)
             }

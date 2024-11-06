@@ -45,11 +45,59 @@ extension ToolInterfaceFactory {
                                                      widthCategory: inr.widthCategory,
                                                      neighborTypeLeft: neighborTypeLeft,
                                                      neighborTypeRight: neighborTypeRight)
-        case .timeLineOffset:
-            return getTimeLineOffsetSliderToolNode(orientation: orientation,
+        case .timeLineFrameOffset:
+            return getTimeLineFrameOffsetSliderToolNode(orientation: orientation,
                                                    widthCategory: inr.widthCategory,
                                                    neighborTypeLeft: neighborTypeLeft,
                                                    neighborTypeRight: neighborTypeRight)
+            
+        case .continuousAngle:
+            return getContinuousAngleSliderToolNode(orientation: orientation,
+                                                    widthCategory: inr.widthCategory,
+                                                    neighborTypeLeft: neighborTypeLeft,
+                                                    neighborTypeRight: neighborTypeRight)
+        case .continuousDuration:
+            return getContinuousDurationSliderToolNode(orientation: orientation,
+                                                    widthCategory: inr.widthCategory,
+                                                    neighborTypeLeft: neighborTypeLeft,
+                                                    neighborTypeRight: neighborTypeRight)
+        case .continuousPower:
+            return getContinuousPowerSliderToolNode(orientation: orientation,
+                                                    widthCategory: inr.widthCategory,
+                                                    neighborTypeLeft: neighborTypeLeft,
+                                                    neighborTypeRight: neighborTypeRight)
+        case .continuousSwoop:
+            return getContinuousSwoopSliderToolNode(orientation: orientation,
+                                                    widthCategory: inr.widthCategory,
+                                                    neighborTypeLeft: neighborTypeLeft,
+                                                    neighborTypeRight: neighborTypeRight)
+        case .continuousFrameOffset:
+            return getContinuousFrameOffsetSliderToolNode(orientation: orientation,
+                                                    widthCategory: inr.widthCategory,
+                                                    neighborTypeLeft: neighborTypeLeft,
+                                                    neighborTypeRight: neighborTypeRight)
+            
+        case .continuousStartScale:
+            return getContinuousStartScaleSliderToolNode(orientation: orientation,
+                                                    widthCategory: inr.widthCategory,
+                                                    neighborTypeLeft: neighborTypeLeft,
+                                                    neighborTypeRight: neighborTypeRight)
+        case .continuousEndScale:
+            return getContinuousEndScaleSliderToolNode(orientation: orientation,
+                                                    widthCategory: inr.widthCategory,
+                                                    neighborTypeLeft: neighborTypeLeft,
+                                                    neighborTypeRight: neighborTypeRight)
+        case .continuousStartRotation:
+            return getContinuousStartRotationSliderToolNode(orientation: orientation,
+                                                    widthCategory: inr.widthCategory,
+                                                    neighborTypeLeft: neighborTypeLeft,
+                                                    neighborTypeRight: neighborTypeRight)
+        case .continuousEndRotation:
+            return getContinuousEndRotationSliderToolNode(orientation: orientation,
+                                                    widthCategory: inr.widthCategory,
+                                                    neighborTypeLeft: neighborTypeLeft,
+                                                    neighborTypeRight: neighborTypeRight)
+            
         }
     }
 }

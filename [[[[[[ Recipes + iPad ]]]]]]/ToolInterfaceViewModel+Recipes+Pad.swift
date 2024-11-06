@@ -44,32 +44,39 @@ extension ToolInterfaceViewModel {
         case .view:
             if configuration.isAnimationLoopsEnabled {
                 if configuration.isTimeLineEnabled {
-                    if configuration.isTimeLinePage2Enabled {
-                        // time line page 2 [TimeLinePage2]
+                    if configuration.animationTimeLinePage == 3 {
+                        // animation loops page 3 [TimeLinePage3]
+                        return getRowRecipe_Pad_Portrait_TimeLinePage3_Top_Primary()
+                    } else if configuration.animationTimeLinePage == 2 {
+                        // animation loops page 2 [TimeLinePage2]
                         return getRowRecipe_Pad_Portrait_TimeLinePage2_Top_Primary()
                     } else {
-                        // time line page 1 [TimeLinePage1]
+                        // animation loops page 1 [TimeLinePage1]
                         return getRowRecipe_Pad_Portrait_TimeLinePage1_Top_Primary()
                     }
+
                 } else {
                     if configuration.animationLoopsPage == 3 {
-                        // animation loops page 3 [AnimationLoopsPage3]
-                        return getRowRecipe_Pad_Portrait_AnimationLoopsPage3_Top_Primary()
+                        // animation loops page 3 [LoopsPage3]
+                        return getRowRecipe_Pad_Portrait_LoopsPage3_Top_Primary()
                     } else if configuration.animationLoopsPage == 2 {
-                        // animation loops page 2 [AnimationLoopsPage2]
-                        return getRowRecipe_Pad_Portrait_AnimationLoopsPage2_Top_Primary()
+                        // animation loops page 2 [LoopsPage2]
+                        return getRowRecipe_Pad_Portrait_LoopsPage2_Top_Primary()
                     } else {
-                        // animation loops page 1 [AnimationLoopsPage1]
-                        return getRowRecipe_Pad_Portrait_AnimationLoopsPage1_Top_Primary()
+                        // animation loops page 1 [LoopsPage1]
+                        return getRowRecipe_Pad_Portrait_LoopsPage1_Top_Primary()
                     }
                 }
             } else {
                 if configuration.isAnimationContinuousEnabled {
-                    if configuration.isAnimationContinuousPage2Enabled {
-                        // animation continuous page 2 [AnimationContinuousPage2]
+                    if configuration.animationContinuousPage == 3 {
+                        // animation loops page 3 [AnimationContinuousPage3]
+                        return getRowRecipe_Pad_Portrait_AnimationContinuousPage3_Top_Primary()
+                    } else if configuration.animationContinuousPage == 2 {
+                        // animation loops page 2 [AnimationContinuousPage2]
                         return getRowRecipe_Pad_Portrait_AnimationContinuousPage2_Top_Primary()
                     } else {
-                        // animation continuous page 1 [AnimationContinuousPage1]
+                        // animation loops page 1 [AnimationContinuousPage1]
                         return getRowRecipe_Pad_Portrait_AnimationContinuousPage1_Top_Primary()
                     }
                 } else {
@@ -115,32 +122,38 @@ extension ToolInterfaceViewModel {
         case .view:
             if configuration.isAnimationLoopsEnabled {
                 if configuration.isTimeLineEnabled {
-                    if configuration.isTimeLinePage2Enabled {
-                        // time line page 2 [TimeLinePage2]
+                    if configuration.animationTimeLinePage == 3 {
+                        // animation loops page 3 [LoopsPage3]
+                        return getRowRecipe_Pad_Portrait_TimeLinePage3_Top_Secondary()
+                    } else if configuration.animationTimeLinePage == 2 {
+                        // animation loops page 2 [LoopsPage2]
                         return getRowRecipe_Pad_Portrait_TimeLinePage2_Top_Secondary()
                     } else {
-                        // time line page 1 [TimeLinePage1]
+                        // animation loops page 1 [LoopsPage1]
                         return getRowRecipe_Pad_Portrait_TimeLinePage1_Top_Secondary()
                     }
                 } else {
                     if configuration.animationLoopsPage == 3 {
-                        // animation loops page 3 [AnimationLoopsPage3]
-                        return getRowRecipe_Pad_Portrait_AnimationLoopsPage3_Top_Secondary()
+                        // animation loops page 3 [LoopsPage3]
+                        return getRowRecipe_Pad_Portrait_LoopsPage3_Top_Secondary()
                     } else if configuration.animationLoopsPage == 2 {
-                        // animation loops page 2 [AnimationLoopsPage2]
-                        return getRowRecipe_Pad_Portrait_AnimationLoopsPage2_Top_Secondary()
+                        // animation loops page 2 [LoopsPage2]
+                        return getRowRecipe_Pad_Portrait_LoopsPage2_Top_Secondary()
                     } else {
-                        // animation loops page 1 [AnimationLoopsPage1]
-                        return getRowRecipe_Pad_Portrait_AnimationLoopsPage1_Top_Secondary()
+                        // animation loops page 1 [LoopsPage1]
+                        return getRowRecipe_Pad_Portrait_LoopsPage1_Top_Secondary()
                     }
                 }
             } else {
                 if configuration.isAnimationContinuousEnabled {
-                    if configuration.isAnimationContinuousPage2Enabled {
-                        // animation continuous page 2 [AnimationContinuousPage2]
+                    if configuration.animationContinuousPage == 3 {
+                        // animation loops page 3 [AnimationContinuousPage3]
+                        return getRowRecipe_Pad_Portrait_AnimationContinuousPage3_Top_Secondary()
+                    } else if configuration.animationContinuousPage == 2 {
+                        // animation loops page 2 [AnimationContinuousPage2]
                         return getRowRecipe_Pad_Portrait_AnimationContinuousPage2_Top_Secondary()
                     } else {
-                        // animation continuous page 1 [AnimationContinuousPage1]
+                        // animation loops page 1 [AnimationContinuousPage1]
                         return getRowRecipe_Pad_Portrait_AnimationContinuousPage1_Top_Secondary()
                     }
                 } else {
@@ -186,34 +199,42 @@ extension ToolInterfaceViewModel {
         case .view:
             if configuration.isAnimationLoopsEnabled {
                 if configuration.isTimeLineEnabled {
-                    if configuration.isTimeLinePage2Enabled {
-                        // time line page 2 [TimeLinePage2]
+                    if configuration.animationTimeLinePage == 3 {
+                        // animation loops page 3 [LoopsPage3]
+                        return getRowRecipe_Pad_Portrait_TimeLinePage3_Top_Tertiary()
+                    } else if configuration.animationLoopsPage == 2 {
+                        // animation loops page 2 [LoopsPage2]
                         return getRowRecipe_Pad_Portrait_TimeLinePage2_Top_Tertiary()
                     } else {
-                        // time line page 1 [TimeLinePage1]
+                        // animation loops page 1 [LoopsPage1]
                         return getRowRecipe_Pad_Portrait_TimeLinePage1_Top_Tertiary()
                     }
                 } else {
                     if configuration.animationLoopsPage == 3 {
-                        // animation loops page 3 [AnimationLoopsPage3]
-                        return getRowRecipe_Pad_Portrait_AnimationLoopsPage3_Top_Tertiary()
+                        // animation loops page 3 [LoopsPage3]
+                        return getRowRecipe_Pad_Portrait_LoopsPage3_Top_Tertiary()
                     } else if configuration.animationLoopsPage == 2 {
-                        // animation loops page 2 [AnimationLoopsPage2]
-                        return getRowRecipe_Pad_Portrait_AnimationLoopsPage2_Top_Tertiary()
+                        // animation loops page 2 [LoopsPage2]
+                        return getRowRecipe_Pad_Portrait_LoopsPage2_Top_Tertiary()
                     } else {
-                        // animation loops page 1 [AnimationLoopsPage1]
-                        return getRowRecipe_Pad_Portrait_AnimationLoopsPage1_Top_Tertiary()
+                        // animation loops page 1 [LoopsPage1]
+                        return getRowRecipe_Pad_Portrait_LoopsPage1_Top_Tertiary()
                     }
                 }
             } else {
                 if configuration.isAnimationContinuousEnabled {
-                    if configuration.isAnimationContinuousPage2Enabled {
-                        // animation continuous page 2 [AnimationContinuousPage2]
+                    
+                    if configuration.animationContinuousPage == 3 {
+                        // animation loops page 3 [AnimationContinuousPage3]
+                        return getRowRecipe_Pad_Portrait_AnimationContinuousPage3_Top_Tertiary()
+                    } else if configuration.animationContinuousPage == 2 {
+                        // animation loops page 2 [AnimationContinuousPage2]
                         return getRowRecipe_Pad_Portrait_AnimationContinuousPage2_Top_Tertiary()
                     } else {
-                        // animation continuous page 1 [AnimationContinuousPage1]
+                        // animation loops page 1 [AnimationContinuousPage1]
                         return getRowRecipe_Pad_Portrait_AnimationContinuousPage1_Top_Tertiary()
                     }
+                    
                 } else {
                     // animation grab page 1 [AnimationGrab]
                     return getRowRecipe_Pad_Portrait_AnimationGrab_Top_Tertiary()
@@ -257,32 +278,39 @@ extension ToolInterfaceViewModel {
         case .view:
             if configuration.isAnimationLoopsEnabled {
                 if configuration.isTimeLineEnabled {
-                    if configuration.isTimeLinePage2Enabled {
-                        // time line page 2 [TimeLinePage2]
+                    
+                    if configuration.animationTimeLinePage == 3 {
+                        // animation loops page 3 [LoopsPage3]
+                        return getRowRecipe_Pad_Portrait_TimeLinePage3_Bottom_Tertiary()
+                    } else if configuration.animationTimeLinePage == 2 {
+                        // animation loops page 2 [LoopsPage2]
                         return getRowRecipe_Pad_Portrait_TimeLinePage2_Bottom_Tertiary()
                     } else {
-                        // time line page 1 [TimeLinePage1]
+                        // animation loops page 1 [LoopsPage1]
                         return getRowRecipe_Pad_Portrait_TimeLinePage1_Bottom_Tertiary()
                     }
                 } else {
                     if configuration.animationLoopsPage == 3 {
-                        // animation loops page 3 [AnimationLoopsPage3]
-                        return getRowRecipe_Pad_Portrait_AnimationLoopsPage3_Bottom_Tertiary()
+                        // animation loops page 3 [LoopsPage3]
+                        return getRowRecipe_Pad_Portrait_LoopsPage3_Bottom_Tertiary()
                     } else if configuration.animationLoopsPage == 2 {
-                        // animation loops page 2 [AnimationLoopsPage2]
-                        return getRowRecipe_Pad_Portrait_AnimationLoopsPage2_Bottom_Tertiary()
+                        // animation loops page 2 [LoopsPage2]
+                        return getRowRecipe_Pad_Portrait_LoopsPage2_Bottom_Tertiary()
                     } else {
-                        // animation loops page 1 [AnimationLoopsPage1]
-                        return getRowRecipe_Pad_Portrait_AnimationLoopsPage1_Bottom_Tertiary()
+                        // animation loops page 1 [LoopsPage1]
+                        return getRowRecipe_Pad_Portrait_LoopsPage1_Bottom_Tertiary()
                     }
                 }
             } else {
                 if configuration.isAnimationContinuousEnabled {
-                    if configuration.isAnimationContinuousPage2Enabled {
-                        // animation continuous page 2 [AnimationContinuousPage2]
+                    if configuration.animationContinuousPage == 3 {
+                        // animation loops page 3 [AnimationContinuousPage3]
+                        return getRowRecipe_Pad_Portrait_AnimationContinuousPage3_Bottom_Tertiary()
+                    } else if configuration.animationContinuousPage == 2 {
+                        // animation loops page 2 [AnimationContinuousPage2]
                         return getRowRecipe_Pad_Portrait_AnimationContinuousPage2_Bottom_Tertiary()
                     } else {
-                        // animation continuous page 1 [AnimationContinuousPage1]
+                        // animation loops page 1 [AnimationContinuousPage1]
                         return getRowRecipe_Pad_Portrait_AnimationContinuousPage1_Bottom_Tertiary()
                     }
                 } else {
@@ -329,32 +357,39 @@ extension ToolInterfaceViewModel {
             
             if configuration.isAnimationLoopsEnabled {
                 if configuration.isTimeLineEnabled {
-                    if configuration.isTimeLinePage2Enabled {
-                        // time line page 2 [TimeLinePage2]
+                    
+                    if configuration.animationTimeLinePage == 3 {
+                        // animation loops page 3 [LoopsPage3]
+                        return getRowRecipe_Pad_Portrait_TimeLinePage3_Bottom_Secondary()
+                    } else if configuration.animationTimeLinePage == 2 {
+                        // animation loops page 2 [LoopsPage2]
                         return getRowRecipe_Pad_Portrait_TimeLinePage2_Bottom_Secondary()
                     } else {
-                        // time line page 1 [TimeLinePage1]
+                        // animation loops page 1 [LoopsPage1]
                         return getRowRecipe_Pad_Portrait_TimeLinePage1_Bottom_Secondary()
                     }
                 } else {
                     if configuration.animationLoopsPage == 3 {
-                        // animation loops page 3 [AnimationLoopsPage3]
-                        return getRowRecipe_Pad_Portrait_AnimationLoopsPage3_Bottom_Secondary()
+                        // animation loops page 3 [LoopsPage3]
+                        return getRowRecipe_Pad_Portrait_LoopsPage3_Bottom_Secondary()
                     } else if configuration.animationLoopsPage == 2 {
-                        // animation loops page 2 [AnimationLoopsPage2]
-                        return getRowRecipe_Pad_Portrait_AnimationLoopsPage2_Bottom_Secondary()
+                        // animation loops page 2 [LoopsPage2]
+                        return getRowRecipe_Pad_Portrait_LoopsPage2_Bottom_Secondary()
                     } else {
-                        // animation loops page 1 [AnimationLoopsPage1]
-                        return getRowRecipe_Pad_Portrait_AnimationLoopsPage1_Bottom_Secondary()
+                        // animation loops page 1 [LoopsPage1]
+                        return getRowRecipe_Pad_Portrait_LoopsPage1_Bottom_Secondary()
                     }
                 }
             } else {
                 if configuration.isAnimationContinuousEnabled {
-                    if configuration.isAnimationContinuousPage2Enabled {
-                        // animation continuous page 2 [AnimationContinuousPage2]
+                    if configuration.animationContinuousPage == 3 {
+                        // animation loops page 3 [AnimationContinuousPage3]
+                        return getRowRecipe_Pad_Portrait_AnimationContinuousPage3_Bottom_Secondary()
+                    } else if configuration.animationContinuousPage == 2 {
+                        // animation loops page 2 [AnimationContinuousPage2]
                         return getRowRecipe_Pad_Portrait_AnimationContinuousPage2_Bottom_Secondary()
                     } else {
-                        // animation continuous page 1 [AnimationContinuousPage1]
+                        // animation loops page 1 [AnimationContinuousPage1]
                         return getRowRecipe_Pad_Portrait_AnimationContinuousPage1_Bottom_Secondary()
                     }
                 } else {
@@ -398,35 +433,40 @@ extension ToolInterfaceViewModel {
                 }
             }
         case .view:
-            
             if configuration.isAnimationLoopsEnabled {
                 if configuration.isTimeLineEnabled {
-                    if configuration.isTimeLinePage2Enabled {
-                        // time line page 2 [TimeLinePage2]
+                    if configuration.animationTimeLinePage == 3 {
+                        // animation loops page 3 [LoopsPage3]
+                        return getRowRecipe_Pad_Portrait_TimeLinePage3_Bottom_Primary()
+                    } else if configuration.animationTimeLinePage == 2 {
+                        // animation loops page 2 [LoopsPage2]
                         return getRowRecipe_Pad_Portrait_TimeLinePage2_Bottom_Primary()
                     } else {
-                        // time line page 1 [TimeLinePage1]
+                        // animation loops page 1 [LoopsPage1]
                         return getRowRecipe_Pad_Portrait_TimeLinePage1_Bottom_Primary()
                     }
                 } else {
                     if configuration.animationLoopsPage == 3 {
-                        // animation loops page 3 [AnimationLoopsPage3]
-                        return getRowRecipe_Pad_Portrait_AnimationLoopsPage3_Bottom_Primary()
+                        // animation loops page 3 [LoopsPage3]
+                        return getRowRecipe_Pad_Portrait_LoopsPage3_Bottom_Primary()
                     } else if configuration.animationLoopsPage == 2 {
-                        // animation loops page 2 [AnimationLoopsPage2]
-                        return getRowRecipe_Pad_Portrait_AnimationLoopsPage2_Bottom_Primary()
+                        // animation loops page 2 [LoopsPage2]
+                        return getRowRecipe_Pad_Portrait_LoopsPage2_Bottom_Primary()
                     } else {
-                        // animation loops page 1 [AnimationLoopsPage1]
-                        return getRowRecipe_Pad_Portrait_AnimationLoopsPage1_Bottom_Primary()
+                        // animation loops page 1 [LoopsPage1]
+                        return getRowRecipe_Pad_Portrait_LoopsPage1_Bottom_Primary()
                     }
                 }
             } else {
                 if configuration.isAnimationContinuousEnabled {
-                    if configuration.isAnimationContinuousPage2Enabled {
-                        // animation continuous page 2 [AnimationContinuousPage2]
+                    if configuration.animationContinuousPage == 3 {
+                        // animation loops page 3 [AnimationContinuousPage3]
+                        return getRowRecipe_Pad_Portrait_AnimationContinuousPage3_Bottom_Primary()
+                    } else if configuration.animationContinuousPage == 2 {
+                        // animation loops page 2 [AnimationContinuousPage2]
                         return getRowRecipe_Pad_Portrait_AnimationContinuousPage2_Bottom_Primary()
                     } else {
-                        // animation continuous page 1 [AnimationContinuousPage1]
+                        // animation loops page 1 [AnimationContinuousPage1]
                         return getRowRecipe_Pad_Portrait_AnimationContinuousPage1_Bottom_Primary()
                     }
                 } else {

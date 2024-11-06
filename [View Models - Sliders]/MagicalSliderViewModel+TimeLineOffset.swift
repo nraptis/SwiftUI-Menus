@@ -1,5 +1,5 @@
 //
-//  MagicalSliderViewModel+TimeLineOffset.swift
+//  MagicalSliderViewModel+TimeLineFrameOffset.swift
 //  Jiggle3
 //
 //  Created by Nicky Taylor on 9/24/24.
@@ -7,12 +7,26 @@
 
 import Foundation
 
-@Observable class MagicalSliderViewModelTimeLineOffset: MagicalSliderViewModel {
+@Observable class MagicalSliderViewModelTimeLineFrameOffset: MagicalSliderViewModel {
     
     override func refresh() {
+        
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
             if let selectedJiggle = jiggleViewModel.getSelectedJiggle() {
-                refreshEnabled(value: selectedJiggle.timeLine.selectedSwatch.timeOffset)
+                let selectedSwatch = selectedJiggle.timeLine.getSelectedSwatch(swatch: jiggleViewModel.timeLineSelectedSwatch)
+                
+                if jiggleViewModel.getTimeLineDraggingStatus() {
+                    refreshDisabled(value: selectedSwatch.frameOffset)
+                    return
+                }
+                
+                if jiggleViewModel.isSliderActiveBesides(thisSlider: .sliderTimeLineFrameOffset) {
+                    refreshDisabled(value: selectedSwatch.frameOffset)
+                    return
+                }
+                
+                refreshEnabled(value: selectedSwatch.frameOffset)
+                
             } else {
                 refreshDisabled()
             }
@@ -29,7 +43,7 @@ import Foundation
         super.handleSlideStarted(percent: percent)
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
             let value = sliderConfiguration.minimumValue + (sliderConfiguration.maximumValue - sliderConfiguration.minimumValue) * Float(percent)
-            jiggleViewModel.notifySliderStartedTimeLineOffset(value: value)
+            jiggleViewModel.notifySliderStartedTimeLineFrameOffset(value: value)
         }
     }
     
@@ -39,30 +53,32 @@ import Foundation
             if let selectedJiggle = jiggleViewModel.getSelectedJiggle() {
                 if jiggleViewModel.isAnimationLoopsAppliedToAll {
                     let jiggleDocument = jiggleViewModel.jiggleDocument
-                    switch selectedJiggle.timeLine.selectedSwatch.swatch {
+                    
+                    switch jiggleViewModel.timeLineSelectedSwatch {
                     case .x:
                         for jiggleIndex in 0..<jiggleDocument.jiggleCount {
                             let jiggle = jiggleDocument.jiggles[jiggleIndex]
-                            jiggle.timeLine.swatchPositionX.timeOffset = value
+                            jiggle.timeLine.swatchPositionX.frameOffset = value
                         }
                     case .y:
                         for jiggleIndex in 0..<jiggleDocument.jiggleCount {
                             let jiggle = jiggleDocument.jiggles[jiggleIndex]
-                            jiggle.timeLine.swatchPositionY.timeOffset = value
+                            jiggle.timeLine.swatchPositionY.frameOffset = value
                         }
                     case .scale:
                         for jiggleIndex in 0..<jiggleDocument.jiggleCount {
                             let jiggle = jiggleDocument.jiggles[jiggleIndex]
-                            jiggle.timeLine.swatchScale.timeOffset = value
+                            jiggle.timeLine.swatchScale.frameOffset = value
                         }
                     case .rotation:
                         for jiggleIndex in 0..<jiggleDocument.jiggleCount {
                             let jiggle = jiggleDocument.jiggles[jiggleIndex]
-                            jiggle.timeLine.swatchRotation.timeOffset = value
+                            jiggle.timeLine.swatchRotation.frameOffset = value
                         }
                     }
                 } else {
-                    selectedJiggle.timeLine.selectedSwatch.timeOffset = value
+                    let selectedSwatch = selectedJiggle.timeLine.getSelectedSwatch(swatch: jiggleViewModel.timeLineSelectedSwatch)
+                    selectedSwatch.frameOffset = value
                 }
             }
         }
@@ -76,36 +92,35 @@ import Foundation
             if let selectedJiggle = jiggleViewModel.getSelectedJiggle() {
                 if jiggleViewModel.isAnimationLoopsAppliedToAll {
                     let jiggleDocument = jiggleViewModel.jiggleDocument
-                    switch selectedJiggle.timeLine.selectedSwatch.swatch {
+                    switch jiggleViewModel.timeLineSelectedSwatch {
                     case .x:
                         for jiggleIndex in 0..<jiggleDocument.jiggleCount {
                             let jiggle = jiggleDocument.jiggles[jiggleIndex]
-                            jiggle.timeLine.swatchPositionX.timeOffset = value
+                            jiggle.timeLine.swatchPositionX.frameOffset = value
                         }
                     case .y:
                         for jiggleIndex in 0..<jiggleDocument.jiggleCount {
                             let jiggle = jiggleDocument.jiggles[jiggleIndex]
-                            jiggle.timeLine.swatchPositionY.timeOffset = value
+                            jiggle.timeLine.swatchPositionY.frameOffset = value
                         }
                     case .scale:
                         for jiggleIndex in 0..<jiggleDocument.jiggleCount {
                             let jiggle = jiggleDocument.jiggles[jiggleIndex]
-                            jiggle.timeLine.swatchScale.timeOffset = value
+                            jiggle.timeLine.swatchScale.frameOffset = value
                         }
                     case .rotation:
                         for jiggleIndex in 0..<jiggleDocument.jiggleCount {
                             let jiggle = jiggleDocument.jiggles[jiggleIndex]
-                            jiggle.timeLine.swatchRotation.timeOffset = value
+                            jiggle.timeLine.swatchRotation.frameOffset = value
                         }
                     }
                 } else {
-                    selectedJiggle.timeLine.selectedSwatch.timeOffset = value
+                    let selectedSwatch = selectedJiggle.timeLine.getSelectedSwatch(swatch: jiggleViewModel.timeLineSelectedSwatch)
+                    selectedSwatch.frameOffset = value
                 }
             }
-            jiggleViewModel.notifySliderFinishedTimeLineOffset(value: value)
+            jiggleViewModel.notifySliderFinishedTimeLineFrameOffset(value: value)
+            
         }
     }
-    
-    
-    
 }

@@ -18,7 +18,7 @@ class ToolRow {
     var updatePublisher = PassthroughSubject<Void, Never>()
     
     let slot: ToolRowSlot
-    var configuration = ToolRowConfiguration.unknown
+    //var configuration = ToolRowConfiguration.unknown
     
     var nodesDidChangePublisher_NotAnimated = PassthroughSubject<Void, Never>()
     var nodesDidChangePublisher_AnimatedStep1 = PassthroughSubject<Bool, Never>()

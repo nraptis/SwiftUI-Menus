@@ -15,7 +15,7 @@ extension ToolInterfaceFactory {
         
         let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextCloneJiggleLine1()
         let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextCloneJiggleLine2()
-        let iconPack = LooseConvertibleIconLibrary.deleteBinA
+        let iconPack = LooseConvertibleIconLibrary.cloneJiggleA
         let configuration = ToolInterfaceElementButtonConfiguration(iconPack: iconPack,
                                                                     orientation: orientation,
                                                                     nameLabelLine1: textLine1,
@@ -101,7 +101,7 @@ extension ToolInterfaceFactory {
         
         let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextCloneGuideLine1()
         let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextCloneGuideLine2()
-        let iconPack = LooseConvertibleIconLibrary.menuC
+        let iconPack = LooseConvertibleIconLibrary.cloneJiggleA
         let configuration = ToolInterfaceElementButtonConfiguration(iconPack: iconPack,
                                                                     orientation: orientation,
                                                                     nameLabelLine1: textLine1,

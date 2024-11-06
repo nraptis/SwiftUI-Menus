@@ -203,10 +203,18 @@ extension JiggleViewController {
                 toolActionConsumePhaseSliceSetAnimationContinuousMode(slice)
             }
             
-        case .setAnimationLoopsPage:
-            if let slice = slice as? ToolActionPhaseSliceSetAnimationLoopsPage {
-                toolActionConsumePhaseSliceSetAnimationLoopsPage(slice)
+        case .setLoopsPage:
+            if let slice = slice as? ToolActionPhaseSliceSetLoopsPage {
+                toolActionConsumePhaseSliceSetLoopsPage(slice)
             }
+        case .setTimeLinePage:
+                    if let slice = slice as? ToolActionPhaseSliceSetTimeLinePage {
+                        toolActionConsumePhaseSliceSetTimeLinePage(slice)
+                    }
+        case .setContinuousPage:
+                    if let slice = slice as? ToolActionPhaseSliceSetContinuousPage {
+                        toolActionConsumePhaseSliceSetContinuousPage(slice)
+                    }
             
         case .setStereoscopicMode:
             if let slice = slice as? ToolActionPhaseSliceSetStereoscopicMode {
@@ -224,17 +232,9 @@ extension JiggleViewController {
             if let slice = slice as? ToolActionPhaseSliceSetCreatorMode {
                 toolActionConsumePhaseSliceSetCreatorMode(slice)
             }
-        case .setTimeLinePage2Mode:
-            if let slice = slice as? ToolActionPhaseSliceSetTimeLinePage2Mode {
-                toolActionConsumePhaseSliceSetTimeLinePage2Mode(slice)
-            }
         case .setGraphPage2Mode:
             if let slice = slice as? ToolActionPhaseSliceSetGraphPage2Mode {
                 toolActionConsumePhaseSliceSetGraphPage2Mode(slice)
-            }
-        case .setAnimationContinuousPage2Mode:
-            if let slice = slice as? ToolActionPhaseSliceSetAnimationContinuousPage2Mode {
-                toolActionConsumePhaseSliceSetAnimationContinuousPage2Mode(slice)
             }
         case .setExpandedDraggable:
             if let slice = slice as? ToolActionPhaseSliceSetExpandedDraggable {

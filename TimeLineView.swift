@@ -10,8 +10,9 @@ import Combine
 
 class TimeLineView: UIView {
     
-    typealias GrabTimeLineControlPointData = JiggleDocumentPublisherLibrary.GrabTimeLineControlPointData
-    typealias GrabTimeLineControlTanHandleData = JiggleDocumentPublisherLibrary.GrabTimeLineControlTanHandleData
+    //typealias GrabTimeLineControlPointData = JiggleDocumentPublisherLibrary.GrabTimeLineControlPointData
+    //typealias GrabTimeLineControlTanHandleData = JiggleDocumentPublisherLibrary.GrabTimeLineControlTanHandleData
+    
     typealias TanType = JiggleDocument.TanType
     typealias Point = Math.Point
     
@@ -25,11 +26,14 @@ class TimeLineView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var _grabTimeLineControlPointData = GrabTimeLineControlPointData()
-    var grabTimeLineControlPointStopPublisher = PassthroughSubject<GrabTimeLineControlPointData, Never>()
+    //var _grabTimeLineControlPointData = GrabTimeLineControlPointData()
+    //var grabTimeLineControlPointStopPublisher = PassthroughSubject<GrabTimeLineControlPointData, Never>()
     
-    var _grabTimeLineControlTanHandleData = GrabTimeLineControlTanHandleData()
-    var grabTimeLineControlTanHandleStopPublisher = PassthroughSubject<GrabTimeLineControlTanHandleData, Never>()
+    //var _grabTimeLineControlTanHandleData = GrabTimeLineControlTanHandleData()
+    //var grabTimeLineControlTanHandleStopPublisher = PassthroughSubject<GrabTimeLineControlTanHandleData, Never>()
+    
+    var controlPointDidChange = false
+    var controlTanDidChange = false
     
     lazy var mediumDotStroke: UIImage = {
         if let image = UIImage(named: "ring_dot_medium_stroke") {
@@ -225,13 +229,17 @@ class TimeLineView: UIView {
             return
         }
         
+        guard let jiggleViewModel = jiggleViewModel else {
+            drawEmpty(context: context)
+            return
+        }
+        
         let timeLine = jiggle.timeLine
         
-        let selectedSwatch = timeLine.selectedSwatch
-        
+        let selectedSwatch = timeLine.getSelectedSwatch(swatch: jiggleViewModel.timeLineSelectedSwatch)
         
         let selectedChannel = selectedSwatch.selectedChannel
-
+        
         
         let frameWidth = jiggleScene.timeLineWidth
         let frameHeight = jiggleScene.timeLineHeight
@@ -329,7 +337,7 @@ class TimeLineView: UIView {
                 if pointOut.y > maxY { pointOut.y = maxY }
                 tanPointPairsOut.append((center, pointOut.cgPoint))
             }
-
+            
         }
         
         for controlPointIndex in 0..<selectedChannel.controlPointCount {
@@ -351,7 +359,7 @@ class TimeLineView: UIView {
         context.setLineCap(.butt)
         if splinePoints.count > 0 {
             for splineIndex in 0..<splinePoints.count {
-                var point = splinePoints[splineIndex]
+                let point = splinePoints[splineIndex]
                 
                 if splineIndex == 0 {
                     context.move(to: point)
@@ -386,19 +394,19 @@ class TimeLineView: UIView {
         context.restoreGState()
         
         /*
-        for tanPointPair in MINI_P_PAIR {
-            let point1 = tanPointPair.0
-            let point2 = tanPointPair.1
-            context.saveGState()
-            context.setLineWidth(ToolInterfaceTheme.graphTanLineStrokeThickness)
-            context.setStrokeColor(UIColor.blue.withAlphaComponent(0.7).cgColor)
-            context.setLineCap(.butt)
-            context.move(to: point1)
-            context.addLine(to: point2)
-            context.strokePath()
-            context.restoreGState()
-        }
-        */
+         for tanPointPair in MINI_P_PAIR {
+         let point1 = tanPointPair.0
+         let point2 = tanPointPair.1
+         context.saveGState()
+         context.setLineWidth(ToolInterfaceTheme.graphTanLineStrokeThickness)
+         context.setStrokeColor(UIColor.blue.withAlphaComponent(0.7).cgColor)
+         context.setLineCap(.butt)
+         context.move(to: point1)
+         context.addLine(to: point2)
+         context.strokePath()
+         context.restoreGState()
+         }
+         */
         
         
         for tanPointPair in tanPointPairsIn {
@@ -652,7 +660,12 @@ class TimeLineView: UIView {
             return
         }
         
-        let selectedSwatch = jiggle.timeLine.selectedSwatch
+        guard let jiggleViewModel = jiggleViewModel else {
+            killDragAll()
+            return
+        }
+        
+        let selectedSwatch = jiggle.timeLine.getSelectedSwatch(swatch: jiggleViewModel.timeLineSelectedSwatch)
         let selectedChannel = selectedSwatch.selectedChannel
         
         guard selectedTimeLineControlPointTouch === nil else {
@@ -762,22 +775,16 @@ class TimeLineView: UIView {
             selectedTimeLineControlPointStartTouchY = point.y
             selectedTimeLineControlPointStartX = x
             selectedTimeLineControlPointStartY = y
-
+            
             _handleTimeLineSelection(controlIndex: bestControlPointIndex)
             
-            /*
-             if let selectedTimeLineControlPoint = jiggle.getSelectedTimeLineControlPointBasedOnGraphIndex() {
-             _grabTimeLineControlPointData.didChange = false
-             _grabTimeLineControlPointData.startHeightFactor = selectedTimeLineControlPoint.normalizedHeightFactor
-             _grabTimeLineControlPointData.endHeightFactor = selectedTimeLineControlPoint.normalizedHeightFactor
-             _grabTimeLineControlPointData.startManual = selectedTimeLineControlPoint.isManualHeightEnabled
-             _grabTimeLineControlPointData.jiggleIndex = jiggleDocument.getJiggleIndex(jiggle)
-             _grabTimeLineControlPointData.isFirstControlPoint = jiggle.getSelectedTimeLineGraphIndexIsFirstControlPoint()
-             _grabTimeLineControlPointData.isLastControlPoint = jiggle.getSelectedTimeLineGraphIndexIsLastControlPoint()
-             _grabTimeLineControlPointData.guideIndex = jiggle.getSelectedTimeLineGraphIndexGuideIndex()
-             
-             }
-             */
+            controlPointDidChange = false
+            
+            if let toolInterfaceViewModel = jiggleViewModel.toolInterfaceViewModel {
+                toolInterfaceViewModel.handleTimePointOrTanHandleUpdate()
+            }
+            
+            jiggleViewModel.timeLineDragNotifyStarted()
         }
         
         func selectTan() {
@@ -827,26 +834,15 @@ class TimeLineView: UIView {
                 selectedTimeLineControlTanType = .out
             }
             
-            //_handleTimeLineSelection(graphIndex: bestControlTanIndex)
             _handleTimeLineSelection(controlIndex: bestControlTanIndex)
             
-            /*
-             if let selectedTimeLineControlPoint = jiggle.getSelectedTimeLineControlPointBasedOnGraphIndex() {
-             _grabTimeLineControlTanHandleData.didChange = false
-             _grabTimeLineControlTanHandleData.startDirection = selectedTimeLineControlPoint.normalizedTanDirection
-             _grabTimeLineControlTanHandleData.startMagnitudeIn = selectedTimeLineControlPoint.normalizedTanMagnitudeIn
-             _grabTimeLineControlTanHandleData.startMagnitudeOut = selectedTimeLineControlPoint.normalizedTanMagnitudeOut
-             _grabTimeLineControlTanHandleData.startManual = selectedTimeLineControlPoint.isManualTanHandleEnabled
-             _grabTimeLineControlTanHandleData.startType = selectedTimeLineControlTanType
-             _grabTimeLineControlTanHandleData.endDirection = selectedTimeLineControlPoint.normalizedTanDirection
-             _grabTimeLineControlTanHandleData.endMagnitudeIn = selectedTimeLineControlPoint.normalizedTanMagnitudeIn
-             _grabTimeLineControlTanHandleData.endMagnitudeOut = selectedTimeLineControlPoint.normalizedTanMagnitudeOut
-             _grabTimeLineControlTanHandleData.jiggleIndex = jiggleDocument.getJiggleIndex(jiggle)
-             _grabTimeLineControlTanHandleData.isFirstControlPoint = jiggle.getSelectedTimeLineGraphIndexIsFirstControlPoint()
-             _grabTimeLineControlTanHandleData.isLastControlPoint = jiggle.getSelectedTimeLineGraphIndexIsLastControlPoint()
-             _grabTimeLineControlTanHandleData.guideIndex = jiggle.getSelectedTimeLineGraphIndexGuideIndex()
-             }
-             */
+            controlTanDidChange = false
+            
+            if let toolInterfaceViewModel = jiggleViewModel.toolInterfaceViewModel {
+                toolInterfaceViewModel.handleTimePointOrTanHandleUpdate()
+            }
+            
+            jiggleViewModel.timeLineDragNotifyStarted()
         }
         
         if bestControlPointIndex != -1 {
@@ -904,7 +900,7 @@ class TimeLineView: UIView {
             return
         }
         
-        let selectedSwatch = jiggle.timeLine.selectedSwatch
+        let selectedSwatch = jiggle.timeLine.getSelectedSwatch(swatch: jiggleViewModel.timeLineSelectedSwatch)
         let selectedChannel = selectedSwatch.selectedChannel
         
         guard let selectedTimeLineControlPointTouch = selectedTimeLineControlPointTouch else {
@@ -1004,12 +1000,8 @@ class TimeLineView: UIView {
         setNeedsDisplay()
         
         if !isFromRelease {
-            _grabTimeLineControlPointData.didChange = true
+            controlPointDidChange = true
         }
-        
-        //TODO: x and y...
-        _grabTimeLineControlPointData.endHeightFactor = selectedControlPoint.normalizedY
-        
     }
     
     func attemptUpdateTimeLineControlTan(touch: UITouch,
@@ -1030,7 +1022,8 @@ class TimeLineView: UIView {
             return
         }
         
-        let selectedSwatch = jiggle.timeLine.selectedSwatch
+        let selectedSwatch = jiggle.timeLine.getSelectedSwatch(swatch: jiggleViewModel.timeLineSelectedSwatch)
+        
         let selectedChannel = selectedSwatch.selectedChannel
         
         guard let selectedTimeLineControlTanTouch = selectedTimeLineControlTanTouch else {
@@ -1092,13 +1085,8 @@ class TimeLineView: UIView {
         setNeedsDisplay()
         
         if !isFromRelease {
-            _grabTimeLineControlTanHandleData.didChange = true
+            controlTanDidChange = true
         }
-        
-        _grabTimeLineControlTanHandleData.endDirection = selectedControlPoint.normalizedTanDirection
-        _grabTimeLineControlTanHandleData.endMagnitudeIn = selectedControlPoint.normalizedTanMagnitudeIn
-        _grabTimeLineControlTanHandleData.endMagnitudeOut = selectedControlPoint.normalizedTanMagnitudeOut
-        
     }
     
     private func _handleTimeLineSelection(controlIndex: Int) {
@@ -1106,10 +1094,15 @@ class TimeLineView: UIView {
             killDragAll()
             return
         }
-        jiggle.switchSelectedTimeLineControlIndex(index: controlIndex)
-        if let jiggleDocument = jiggleDocument {
-            jiggleDocument.snapshotTimeLineHistory()
+        
+        guard let jiggleViewModel = jiggleViewModel else {
+            killDragAll()
+            return
         }
+        
+        jiggle.switchSelectedTimeLineControlIndex(index: controlIndex,
+                                                  currentSwatch: jiggleViewModel.timeLineSelectedSwatch)
+        jiggleViewModel.snapshotTimeLineHistoryForTimeLineViewDrag(jiggle: jiggle)
     }
     
     private func killDragAll() {
@@ -1118,35 +1111,44 @@ class TimeLineView: UIView {
     }
     
     func killDragTimeLineControlPoint() {
-        if let jiggleDocument = jiggleDocument {
-            if selectedTimeLineControlPointTouch !== nil {
-                if let jiggle = jiggle {
-                    if _grabTimeLineControlPointData.jiggleIndex == jiggleDocument.getJiggleIndex(jiggle) {
-                        grabTimeLineControlPointStopPublisher.send(_grabTimeLineControlPointData)
-                    }
-                    
+        if selectedTimeLineControlPointTouch !== nil {
+            if let jiggleViewModel = jiggleViewModel {
+                if controlPointDidChange {
+                    jiggleViewModel.recordTimeLineHistoryForTimeLineViewDrag()
                 }
-                if let jiggleViewModel = jiggleViewModel {
-                    jiggleViewModel.recordTimeLineHistory()
+                
+                if let toolInterfaceViewModel = jiggleViewModel.toolInterfaceViewModel {
+                    toolInterfaceViewModel.handleTimePointOrTanHandleUpdate()
                 }
+                
+                selectedTimeLineControlPointTouch = nil
+                selectedTimeLineControlTanTouch = nil
+                jiggleViewModel.timeLineDragNotifyFinished()
             }
         }
+        
+        controlPointDidChange = false
         selectedTimeLineControlPointTouch = nil
     }
     
     func killDragTimeLineControlTan() {
-        if let jiggleDocument = jiggleDocument {
-            if selectedTimeLineControlTanTouch !== nil {
-                if let jiggle = jiggle {
-                    if _grabTimeLineControlTanHandleData.jiggleIndex == jiggleDocument.getJiggleIndex(jiggle) {
-                        grabTimeLineControlTanHandleStopPublisher.send(_grabTimeLineControlTanHandleData)
-                    }
+        if selectedTimeLineControlTanTouch !== nil {
+            if let jiggleViewModel = jiggleViewModel {
+                if controlTanDidChange {
+                    jiggleViewModel.recordTimeLineHistoryForTimeLineViewDrag()
                 }
-                if let jiggleViewModel = jiggleViewModel {
-                    jiggleViewModel.recordTimeLineHistory()
+                
+                if let toolInterfaceViewModel = jiggleViewModel.toolInterfaceViewModel {
+                    toolInterfaceViewModel.handleTimePointOrTanHandleUpdate()
                 }
+                
+                selectedTimeLineControlPointTouch = nil
+                selectedTimeLineControlTanTouch = nil
+                jiggleViewModel.timeLineDragNotifyFinished()
             }
+            
         }
         selectedTimeLineControlTanTouch = nil
+        controlTanDidChange = false
     }
 }

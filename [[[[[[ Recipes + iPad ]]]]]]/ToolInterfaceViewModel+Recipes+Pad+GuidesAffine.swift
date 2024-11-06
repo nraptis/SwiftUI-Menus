@@ -11,11 +11,11 @@ extension ToolInterfaceViewModel {
     
     @MainActor func getRowRecipe_Pad_Portrait_GuidesAffine_Top_Primary() -> RowRecipe {
         let inrs: [INR] = [
-            .favoringOneLineLabel(.init(minimumWidth: 0, text: "Guides")),
+            .favoringOneLineLabel(.init(minimumWidth: 0, text: "G")),
             .button(.menu),
             .checkBox(.darkMode),
             .slider(.init(widthCategory: .stretch, slider: .jiggleOpacity)),
-            .checkBox(.buy),
+            //.checkBox(.buy),
         ]
         return RowRecipe(inrs: inrs)
     }

@@ -11,7 +11,7 @@ extension ToolInterfaceViewModel {
     
     @MainActor func getRowRecipe_Pad_Portrait_VideoRecord_Top_Primary() -> RowRecipe {
         let inrs: [INR] = [
-            .favoringOneLineLabel(.init(minimumWidth: 0, text: "Video Record")),
+            .favoringOneLineLabel(.init(minimumWidth: 0, text: "[V.R.]")),
             .button(.menu),
             .checkBox(.darkMode),
             .spacer,

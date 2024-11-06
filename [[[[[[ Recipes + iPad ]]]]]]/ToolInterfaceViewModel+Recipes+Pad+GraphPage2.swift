@@ -30,7 +30,7 @@ extension ToolInterfaceViewModel {
     
     @MainActor func getRowRecipe_Pad_Portrait_GraphPage2_Bottom_Tertiary() -> RowRecipe {
         let inrs: [INR] = [
-            .favoringOneLineLabel(.init(minimumWidth: 0, text: "Graph Page 2")),
+            .favoringOneLineLabel(.init(minimumWidth: 0, text: "[GR2]")),
             .exitMode(.graphPage2),
             .spacer,
             .button_triplet(.swivelPanLeft, .swivelPanRight, .swivelPanReset),

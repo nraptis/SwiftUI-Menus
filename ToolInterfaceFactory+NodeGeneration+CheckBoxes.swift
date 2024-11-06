@@ -39,6 +39,14 @@ extension ToolInterfaceFactory {
             return getAnimationLoopApplyToAllCheckBoxToolNode(orientation: orientation,
                                                               neighborTypeLeft: neighborTypeLeft,
                                                               neighborTypeRight: neighborTypeRight)
+        case .animationContinuousApplyToAll:
+            return getAnimationContinuousApplyToAllCheckBoxToolNode(orientation: orientation,
+                                                                    neighborTypeLeft: neighborTypeLeft,
+                                                                    neighborTypeRight: neighborTypeRight)
+        case .continuousDisableGrabEnabled:
+            return getContinuousDisableGrabEnabledCheckBoxToolNode(orientation: orientation,
+                                                                   neighborTypeLeft: neighborTypeLeft,
+                                                                   neighborTypeRight: neighborTypeRight)
         case .recordAudioEnabled:
             return getRecordAudioEnabledCheckBoxToolNode(orientation: orientation,
                                                          neighborTypeLeft: neighborTypeLeft,

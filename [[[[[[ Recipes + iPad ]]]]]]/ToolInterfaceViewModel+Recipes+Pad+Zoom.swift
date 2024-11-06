@@ -11,7 +11,7 @@ extension ToolInterfaceViewModel {
     
     @MainActor func getRowRecipe_Pad_Portrait_Zoom_Top_Primary() -> RowRecipe {
         let inrs: [INR] = [
-            .favoringOneLineLabel(.init(minimumWidth: 0, text: "Zoom")),
+            .favoringOneLineLabel(.init(minimumWidth: 0, text: "[Z]")),
             .button(.menu),
             .checkBox(.darkMode),
             .spacer,

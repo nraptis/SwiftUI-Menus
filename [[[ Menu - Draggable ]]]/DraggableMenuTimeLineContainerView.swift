@@ -9,61 +9,139 @@ import UIKit
 
 class DraggableMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
     
-    func skinButtonForSelected(button: UIButton) {
-        button.layer.borderColor = UIColor.black.cgColor
-        button.layer.borderWidth = 2.0
-        button.backgroundColor = UIColor.blue
-        button.setTitleColor(UIColor.white, for: .normal)
-    }
-    
-    func skinButtonForNotSelected(button: UIButton) {
-        button.layer.borderColor = UIColor.clear.cgColor
-        button.layer.borderWidth = 0.0
-        button.backgroundColor = UIColor.green
-        button.setTitleColor(UIColor.black, for: .normal)
-    }
-    
-    
     func handleSelectedJiggleDidChange() {
         handleSelectedSwatchDidChange()
     }
     
     func handleSelectedSwatchDidChange() {
-        if let jiggleDocument = ApplicationController.shared.jiggleDocument {
-            if let selectedJiggle = jiggleDocument.getSelectedJiggle() {
-                let selectedSwatch = selectedJiggle.timeLine.selectedSwatch
-                switch selectedSwatch.swatch {
-                case .x:
-                    skinButtonForSelected(button: buttonX)
-                    skinButtonForNotSelected(button: buttonY)
-                    skinButtonForNotSelected(button: buttonScale)
-                    skinButtonForNotSelected(button: buttonRotation)
-                case .y:
-                    skinButtonForNotSelected(button: buttonX)
-                    skinButtonForSelected(button: buttonY)
-                    skinButtonForNotSelected(button: buttonScale)
-                    skinButtonForNotSelected(button: buttonRotation)
-                case .scale:
-                    skinButtonForNotSelected(button: buttonX)
-                    skinButtonForNotSelected(button: buttonY)
-                    skinButtonForSelected(button: buttonScale)
-                    skinButtonForNotSelected(button: buttonRotation)
-                case .rotation:
-                    skinButtonForNotSelected(button: buttonX)
-                    skinButtonForNotSelected(button: buttonY)
-                    skinButtonForNotSelected(button: buttonScale)
-                    skinButtonForSelected(button: buttonRotation)
-                }
-                
-            } else {
-                skinButtonForNotSelected(button: buttonX)
-                skinButtonForNotSelected(button: buttonY)
-                skinButtonForNotSelected(button: buttonScale)
-                skinButtonForNotSelected(button: buttonRotation)
+        if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
+            switch jiggleViewModel.timeLineSelectedSwatch {
+            case .x:
+                turnOnX()
+                turnOffY()
+                turnOffScale()
+                turnOffRotation()
+            case .y:
+                turnOffX()
+                turnOnY()
+                turnOffScale()
+                turnOffRotation()
+            case .scale:
+                turnOffX()
+                turnOffY()
+                turnOnScale()
+                turnOffRotation()
+            case .rotation:
+                turnOffX()
+                turnOffY()
+                turnOffScale()
+                turnOnRotation()
             }
-            
         }
-        
+    }
+    
+    private func getSelectedX() -> Bool {
+        if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
+            switch jiggleViewModel.timeLineSelectedSwatch {
+            case .x:
+                return true
+            default:
+                return false
+            }
+        } else {
+            return false
+        }
+    }
+    
+    private func getSelectedY() -> Bool {
+        if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
+            switch jiggleViewModel.timeLineSelectedSwatch {
+            case .y:
+                return true
+            default:
+                return false
+            }
+        } else {
+            return false
+        }
+    }
+    
+    private func getSelectedScale() -> Bool {
+        if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
+            switch jiggleViewModel.timeLineSelectedSwatch {
+            case .scale:
+                return true
+            default:
+                return false
+            }
+        } else {
+            return false
+        }
+    }
+    
+    private func getSelectedRotation() -> Bool {
+        if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
+            switch jiggleViewModel.timeLineSelectedSwatch {
+            case .rotation:
+                return true
+            default:
+                return false
+            }
+        } else {
+            return false
+        }
+    }
+    
+    private func turnOffX() {
+        if buttonX.isSelectedSwatch == true {
+            buttonX.isSelectedSwatch = false
+            buttonX.setNeedsDisplay()
+        }
+    }
+    private func turnOnX() {
+        if buttonX.isSelectedSwatch == false {
+            buttonX.isSelectedSwatch = true
+            buttonX.setNeedsDisplay()
+        }
+    }
+    
+    private func turnOffY() {
+        if buttonY.isSelectedSwatch == true {
+            buttonY.isSelectedSwatch = false
+            buttonY.setNeedsDisplay()
+        }
+    }
+    private func turnOnY() {
+        if buttonY.isSelectedSwatch == false {
+            buttonY.isSelectedSwatch = true
+            buttonY.setNeedsDisplay()
+        }
+    }
+    
+    private func turnOffScale() {
+        if buttonScale.isSelectedSwatch == true {
+            buttonScale.isSelectedSwatch = false
+            buttonScale.setNeedsDisplay()
+        }
+    }
+    private func turnOnScale() {
+        if buttonScale.isSelectedSwatch == false {
+            buttonScale.isSelectedSwatch = true
+            buttonScale.setNeedsDisplay()
+        }
+    }
+    
+    private func turnOffRotation() {
+        if buttonRotation.isSelectedSwatch == true {
+            buttonRotation.isSelectedSwatch = false
+            buttonRotation.setNeedsDisplay()
+        }
+    }
+    private func turnOnRotation() {
+        if buttonRotation.isSelectedSwatch == false {
+            buttonRotation.isSelectedSwatch = true
+            buttonRotation.setNeedsDisplay()
+        }
     }
     
     lazy var buttonXBottomConstraint: NSLayoutConstraint = {
@@ -78,7 +156,11 @@ class DraggableMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
         let orientation = toolInterfaceViewModel.orientation
         let imageDark = ToolInterfaceTheme.timeLineButtonX(orientation: toolInterfaceViewModel.orientation, isDarkMode: true)
         let imageLight = ToolInterfaceTheme.timeLineButtonX(orientation: toolInterfaceViewModel.orientation, isDarkMode: false)
-        let result = TimeLineButton(cornerRadius: 6, imageDark: imageDark, imageLight: imageLight, isSelectedSwatch: false)
+        let isSelectedSwatch = getSelectedX()
+        let result = TimeLineButton(cornerRadius: 6,
+                                    imageDark: imageDark,
+                                    imageLight: imageLight,
+                                    isSelectedSwatch: isSelectedSwatch)
         result.translatesAutoresizingMaskIntoConstraints = false
         return result
     }()
@@ -95,7 +177,11 @@ class DraggableMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
         let orientation = toolInterfaceViewModel.orientation
         let imageDark = ToolInterfaceTheme.timeLineButtonY(orientation: toolInterfaceViewModel.orientation, isDarkMode: true)
         let imageLight = ToolInterfaceTheme.timeLineButtonY(orientation: toolInterfaceViewModel.orientation, isDarkMode: false)
-        let result = TimeLineButton(cornerRadius: 6, imageDark: imageDark, imageLight: imageLight, isSelectedSwatch: false)
+        let isSelectedSwatch = getSelectedY()
+        let result = TimeLineButton(cornerRadius: 6,
+                                    imageDark: imageDark,
+                                    imageLight: imageLight,
+                                    isSelectedSwatch: isSelectedSwatch)
         result.translatesAutoresizingMaskIntoConstraints = false
         return result
     }()
@@ -112,7 +198,11 @@ class DraggableMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
         let orientation = toolInterfaceViewModel.orientation
         let imageDark = ToolInterfaceTheme.timeLineButtonScale(orientation: toolInterfaceViewModel.orientation, isDarkMode: true)
         let imageLight = ToolInterfaceTheme.timeLineButtonScale(orientation: toolInterfaceViewModel.orientation, isDarkMode: false)
-        let result = TimeLineButton(cornerRadius: 6, imageDark: imageDark, imageLight: imageLight, isSelectedSwatch: false)
+        let isSelectedSwatch = getSelectedScale()
+        let result = TimeLineButton(cornerRadius: 6,
+                                    imageDark: imageDark,
+                                    imageLight: imageLight,
+                                    isSelectedSwatch: isSelectedSwatch)
         result.translatesAutoresizingMaskIntoConstraints = false
         return result
     }()
@@ -129,7 +219,11 @@ class DraggableMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
         let orientation = toolInterfaceViewModel.orientation
         let imageDark = ToolInterfaceTheme.timeLineButtonRotation(orientation: toolInterfaceViewModel.orientation, isDarkMode: true)
         let imageLight = ToolInterfaceTheme.timeLineButtonRotation(orientation: toolInterfaceViewModel.orientation, isDarkMode: false)
-        let result = TimeLineButton(cornerRadius: 6, imageDark: imageDark, imageLight: imageLight, isSelectedSwatch: false)
+        let isSelectedSwatch = getSelectedRotation()
+        let result = TimeLineButton(cornerRadius: 6,
+                                    imageDark: imageDark,
+                                    imageLight: imageLight,
+                                    isSelectedSwatch: isSelectedSwatch)
         result.translatesAutoresizingMaskIntoConstraints = false
         return result
     }()
@@ -156,7 +250,7 @@ class DraggableMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
         let insetBottom = ToolInterfaceTheme.getDraggableMenuTimeLineInsetBottom()
         let cornerRadius = ToolInterfaceTheme.getDraggableMenuTimeLineCornerRadius()
         let result = TimeLineClippingView(insetLeft: insetLeft, insetRight: insetRight, insetTop: insetTop,
-                                       insetBottom: insetBottom, cornerRadius: cornerRadius)
+                                          insetBottom: insetBottom, cornerRadius: cornerRadius)
         result.translatesAutoresizingMaskIntoConstraints = false
         result.backgroundColor = ToolInterfaceTheme._toolbarBackground
         return result
@@ -323,76 +417,94 @@ class DraggableMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
     
     @objc func clickX() {
         print("X Clicked")
-        
         if let jiggleViewController = ApplicationController.shared.jiggleViewController {
-            let jiggleViewModel = jiggleViewController.jiggleViewModel
-            let selectedJiggle = jiggleViewModel.getSelectedJiggle()
-            if let selectedJiggle = selectedJiggle {
-                selectedJiggle.timeLine.selectedSwatch = selectedJiggle.timeLine.swatchPositionX
-                if let jiggleDocument = ApplicationController.shared.jiggleDocument {
-                    jiggleDocument.selectedTimeLineSwatchUpdatePublisher.send(())
-                }
-            }
-            jiggleViewController.toolInterfaceViewModel.handleTimelinePointCountDidChange()
-            jiggleViewController.timeLineUpdateRelay(jiggle: selectedJiggle)
+            jiggleViewController.selectTimeLineSwatch(swatch: .x)
         }
+        /*
+         if let jiggleViewController = ApplicationController.shared.jiggleViewController {
+         let jiggleViewModel = jiggleViewController.jiggleViewModel
+         let selectedJiggle = jiggleViewModel.getSelectedJiggle()
+         if let selectedJiggle = selectedJiggle {
+         selectedJiggle.timeLine.selectedSwatch = selectedJiggle.timeLine.swatchPositionX
+         if let jiggleDocument = ApplicationController.shared.jiggleDocument {
+         jiggleDocument.selectedTimeLineSwatchUpdatePublisher.send(())
+         }
+         }
+         jiggleViewController.toolInterfaceViewModel.handleTimelinePointCountDidChange()
+         jiggleViewController.timeLineUpdateRelay(jiggle: selectedJiggle)
+         }
+         */
     }
     
     @objc func clickY() {
         print("Y Clicked")
-        
         if let jiggleViewController = ApplicationController.shared.jiggleViewController {
-            let jiggleViewModel = jiggleViewController.jiggleViewModel
-            let selectedJiggle = jiggleViewModel.getSelectedJiggle()
-            if let selectedJiggle = selectedJiggle {
-                selectedJiggle.timeLine.selectedSwatch = selectedJiggle.timeLine.swatchPositionY
-                if let jiggleDocument = ApplicationController.shared.jiggleDocument {
-                    jiggleDocument.selectedTimeLineSwatchUpdatePublisher.send(())
-                }
-            }
-            jiggleViewController.toolInterfaceViewModel.handleTimelinePointCountDidChange()
-            jiggleViewController.timeLineUpdateRelay(jiggle: selectedJiggle)
+            jiggleViewController.selectTimeLineSwatch(swatch: .y)
         }
+        /*
+         if let jiggleViewController = ApplicationController.shared.jiggleViewController {
+         let jiggleViewModel = jiggleViewController.jiggleViewModel
+         let selectedJiggle = jiggleViewModel.getSelectedJiggle()
+         if let selectedJiggle = selectedJiggle {
+         selectedJiggle.timeLine.selectedSwatch = selectedJiggle.timeLine.swatchPositionY
+         if let jiggleDocument = ApplicationController.shared.jiggleDocument {
+         jiggleDocument.selectedTimeLineSwatchUpdatePublisher.send(())
+         }
+         }
+         jiggleViewController.toolInterfaceViewModel.handleTimelinePointCountDidChange()
+         jiggleViewController.timeLineUpdateRelay(jiggle: selectedJiggle)
+         }
+         */
     }
     
     @objc func clickScale() {
         print("Scale Clicked")
         if let jiggleViewController = ApplicationController.shared.jiggleViewController {
-            let jiggleViewModel = jiggleViewController.jiggleViewModel
-            let selectedJiggle = jiggleViewModel.getSelectedJiggle()
-            if let selectedJiggle = selectedJiggle {
-                selectedJiggle.timeLine.selectedSwatch = selectedJiggle.timeLine.swatchScale
-                if let jiggleDocument = ApplicationController.shared.jiggleDocument {
-                    jiggleDocument.selectedTimeLineSwatchUpdatePublisher.send(())
-                }
-            }
-            jiggleViewController.toolInterfaceViewModel.handleTimelinePointCountDidChange()
-            jiggleViewController.timeLineUpdateRelay(jiggle: selectedJiggle)
+            jiggleViewController.selectTimeLineSwatch(swatch: .scale)
         }
+        /*
+         if let jiggleViewController = ApplicationController.shared.jiggleViewController {
+         let jiggleViewModel = jiggleViewController.jiggleViewModel
+         let selectedJiggle = jiggleViewModel.getSelectedJiggle()
+         if let selectedJiggle = selectedJiggle {
+         selectedJiggle.timeLine.selectedSwatch = selectedJiggle.timeLine.swatchScale
+         if let jiggleDocument = ApplicationController.shared.jiggleDocument {
+         jiggleDocument.selectedTimeLineSwatchUpdatePublisher.send(())
+         }
+         }
+         jiggleViewController.toolInterfaceViewModel.handleTimelinePointCountDidChange()
+         jiggleViewController.timeLineUpdateRelay(jiggle: selectedJiggle)
+         }
+         */
     }
     
     @objc func clickRotation() {
         print("Rotation Clicked")
         if let jiggleViewController = ApplicationController.shared.jiggleViewController {
-            let jiggleViewModel = jiggleViewController.jiggleViewModel
-            let selectedJiggle = jiggleViewModel.getSelectedJiggle()
-            if let selectedJiggle = selectedJiggle {
-                selectedJiggle.timeLine.selectedSwatch = selectedJiggle.timeLine.swatchRotation
-                if let jiggleDocument = ApplicationController.shared.jiggleDocument {
-                    jiggleDocument.selectedTimeLineSwatchUpdatePublisher.send(())
-                }
-            }
-            jiggleViewController.toolInterfaceViewModel.handleTimelinePointCountDidChange()
-            jiggleViewController.timeLineUpdateRelay(jiggle: selectedJiggle)
-            
+            jiggleViewController.selectTimeLineSwatch(swatch: .rotation)
         }
+        /*
+         if let jiggleViewController = ApplicationController.shared.jiggleViewController {
+         let jiggleViewModel = jiggleViewController.jiggleViewModel
+         let selectedJiggle = jiggleViewModel.getSelectedJiggle()
+         if let selectedJiggle = selectedJiggle {
+         selectedJiggle.timeLine.selectedSwatch = selectedJiggle.timeLine.swatchRotation
+         if let jiggleDocument = ApplicationController.shared.jiggleDocument {
+         jiggleDocument.selectedTimeLineSwatchUpdatePublisher.send(())
+         }
+         }
+         jiggleViewController.toolInterfaceViewModel.handleTimelinePointCountDidChange()
+         jiggleViewController.timeLineUpdateRelay(jiggle: selectedJiggle)
+         
+         }
+         */
     }
     
     func handleBlockerHeightOrSafeAreaDidChange() {
         
         let insetTop = ToolInterfaceTheme.getDraggableMenuTimeLineInsetTop()
         let insetBottom = ToolInterfaceTheme.getDraggableMenuTimeLineInsetBottom()
-
+        
         let rowHeight = ToolInterfaceTheme.getRowHeight(orientation: .portrait)
         let timeLineRowCount = ToolInterfaceTheme.getDraggableMenuStandardTopHalfRowCount()
         let rowSeparatorHeight = ToolInterfaceTheme.getDraggableMenuRowSeparatorHeight()

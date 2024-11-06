@@ -32,8 +32,10 @@ extension ToolInterfaceViewModel {
     
     @MainActor func getRowRecipe_Pad_Portrait_TimeLinePage1_Bottom_Tertiary() -> RowRecipe {
         let inrs: [INR] = [
-            .exitMode(.timeLine),
-            .slider(.init(widthCategory: .stretch, slider: .timeLineDuration)),
+            .exitMode(.timeLinePage1),
+            .spacer,
+            .button_triplet(.timeLineResetFlat, .timeLineResetCurve, .timeLineResetCurveSmall),
+            .spacer,
             .enterMode(.timeLinePage2)
         ]
         return RowRecipe(inrs: inrs)
@@ -41,11 +43,11 @@ extension ToolInterfaceViewModel {
     
     @MainActor func getRowRecipe_Pad_Portrait_TimeLinePage1_Bottom_Secondary() -> RowRecipe {
         let inrs: [INR] = [
-            .checkBox(.animationLoopApplyToAll),
+            .exitMode(.timeLine),
             .spacer,
-            .button_triplet(.timeLineDupeAll, .timeLineDupeCurrentChannel, .timeLineDupeDuration),
-            .dividerSpacerDivider,
-            .button(.timeLineResetDefaultCurrentChannel)
+            .button_triplet(.timeLineResetSwan, .timeLineResetDivot, .timeLineResetDivotSmall),
+            .spacer,
+            .checkBox(.animationLoopApplyToAll),
         ]
         return RowRecipe(inrs: inrs)
     }
@@ -54,7 +56,7 @@ extension ToolInterfaceViewModel {
         let inrs: [INR] = [
             .button_pair(.undo, .redo),
             .mainTab(.documentMode),
-            .button_pair(.timeLineDampen, .timeLineAmplify)
+            .button(.timeLineSyncFrames)
         ]
         return RowRecipe(inrs: inrs, centerPinnedElement: .mainTabDocumentMode)
     }

@@ -9,7 +9,85 @@ import Foundation
 
 struct FramedLongIconLibrary {
 
- 
+    static var eyeA: FramedLongIconPack {
+        Self.build(prefix: "framed",
+                   name: "eye_a",
+                   widthPad_0: 74, heightPad_0: 42,
+                   widthPhoneLandscape_0: 48, heightPhoneLandscape_0: 27,
+                   widthPhonePortrait_0: 57, heightPhonePortrait_0: 32)
+    }
+
+
+    static var eyeB: FramedLongIconPack {
+        Self.build(prefix: "framed",
+                   name: "eye_b",
+                   widthPad_0: 43, heightPad_0: 42,
+                   widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
+                   widthPhonePortrait_0: 33, heightPhonePortrait_0: 32)
+    }
+
+
+    static var eyeC: FramedLongIconPack {
+        Self.build(prefix: "framed",
+                   name: "eye_c",
+                   widthPad_0: 67, heightPad_0: 42,
+                   widthPhoneLandscape_0: 44, heightPhoneLandscape_0: 27,
+                   widthPhonePortrait_0: 51, heightPhonePortrait_0: 32)
+    }
+
+
+    static var eyeD: FramedLongIconPack {
+        Self.build(prefix: "framed",
+                   name: "eye_d",
+                   widthPad_0: 45, heightPad_0: 42,
+                   widthPhoneLandscape_0: 29, heightPhoneLandscape_0: 27,
+                   widthPhonePortrait_0: 34, heightPhonePortrait_0: 32)
+    }
+
+
+    static var eyeE: FramedLongIconPack {
+        Self.build(prefix: "framed",
+                   name: "eye_e",
+                   widthPad_0: 43, heightPad_0: 42,
+                   widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
+                   widthPhonePortrait_0: 33, heightPhonePortrait_0: 32)
+    }
+    
+    static var weightRingA: FramedLongIconPack {
+        Self.build(prefix: "framed",
+                  name: "weight_ring_a",
+                  widthPad_0: 45, heightPad_0: 42,
+                  widthPhoneLandscape_0: 29, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 35, heightPhonePortrait_0: 32)
+    }
+
+
+    static var weightRingB: FramedLongIconPack {
+        Self.build(prefix: "framed",
+                  name: "weight_ring_b",
+                  widthPad_0: 45, heightPad_0: 42,
+                  widthPhoneLandscape_0: 29, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 35, heightPhonePortrait_0: 32)
+    }
+
+
+    static var weightRingC: FramedLongIconPack {
+        Self.build(prefix: "framed",
+                  name: "weight_ring_c",
+                  widthPad_0: 51, heightPad_0: 42,
+                  widthPhoneLandscape_0: 33, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 39, heightPhonePortrait_0: 32)
+    }
+
+
+    static var weightRingD: FramedLongIconPack {
+        Self.build(prefix: "framed",
+                  name: "weight_ring_d",
+                  widthPad_0: 51, heightPad_0: 42,
+                  widthPhoneLandscape_0: 33, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 39, heightPhonePortrait_0: 32)
+    }
+    
     static var continuousA: FramedLongIconPack {
         Self.build(prefix: "framed",
                   name: "continuous_a",

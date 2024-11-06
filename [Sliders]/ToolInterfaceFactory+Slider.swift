@@ -252,8 +252,8 @@ extension ToolInterfaceFactory {
                                                                     friend_3_nameLabelLine2: nil,
                                                                     friend_4_nameLabelLine1: nil,
                                                                     friend_4_nameLabelLine2: nil,
-                                                                    minimumValue: TimeLine.minAnimationDuration,
-                                                                    maximumValue: TimeLine.maxAnimationDuration,
+                                                                    minimumValue: AnimationInstructionLoops.userContinuousDurationMin,
+                                                                    maximumValue: AnimationInstructionLoops.userContinuousDurationMax,
                                                                     valueWholeNumberCount: 1,
                                                                     valueDecimalCount: 2,
                                                                     widthCategory: widthCategory)
@@ -274,13 +274,13 @@ extension ToolInterfaceFactory {
         return result
     }
     
-    static func getTimeLineOffsetSliderToolNode(orientation: Orientation,
+    static func getTimeLineFrameOffsetSliderToolNode(orientation: Orientation,
                                                 widthCategory: ToolInterfaceElementSliderWidthCategory,
                                                 neighborTypeLeft: ToolInterfaceElementType?,
                                                 neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
-        let textLine1 = ToolInterfaceStringLibrarySliders.sliderTextTimeLineOffsetLine1()
-        let textLine2 = ToolInterfaceStringLibrarySliders.sliderTextTimeLineOffsetLine2()
+        let textLine1 = ToolInterfaceStringLibrarySliders.sliderTextTimeLineFrameOffsetLine1()
+        let textLine2 = ToolInterfaceStringLibrarySliders.sliderTextTimeLineFrameOffsetLine2()
         
         let configuration = ToolInterfaceElementSliderConfiguration(orientation: orientation,
                                                                     nameLabelLine1: textLine1,
@@ -293,8 +293,8 @@ extension ToolInterfaceFactory {
                                                                     friend_3_nameLabelLine2: nil,
                                                                     friend_4_nameLabelLine1: nil,
                                                                     friend_4_nameLabelLine2: nil,
-                                                                    minimumValue: 0.0,
-                                                                    maximumValue: 1.0,
+                                                                    minimumValue: AnimationInstructionLoops.userContinuousFrameOffsetMin,
+                                                                    maximumValue: AnimationInstructionLoops.userContinuousFrameOffsetMax,
                                                                     valueWholeNumberCount: 1,
                                                                     valueDecimalCount: 2,
                                                                     widthCategory: widthCategory)
@@ -303,15 +303,15 @@ extension ToolInterfaceFactory {
                                       configuration: configuration,
                                       neighborTypeLeft: neighborTypeLeft,
                                       neighborTypeRight: neighborTypeRight)
-        let viewModelTimeLineOffset = MagicalSliderViewModelTimeLineOffset(orientation: orientation,
+        let viewModelTimeLineFrameOffset = MagicalSliderViewModelTimeLineFrameOffset(orientation: orientation,
                                                                            sliderConfiguration: configuration)
         let result = ToolNode(id: getToolNodeID(),
-                              element: .sliderTimeLineOffset,
+                              element: .sliderTimeLineFrameOffset,
                               flex: flex,
-                              magicalViewModel: viewModelTimeLineOffset,
+                              magicalViewModel: viewModelTimeLineFrameOffset,
                               neighborTypeLeft: neighborTypeLeft,
                               neighborTypeRight: neighborTypeRight)
-        viewModelTimeLineOffset.refresh()
+        viewModelTimeLineFrameOffset.refresh()
         return result
     }
 }

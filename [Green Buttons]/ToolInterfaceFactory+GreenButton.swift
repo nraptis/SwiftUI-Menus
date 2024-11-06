@@ -21,10 +21,10 @@ extension ToolInterfaceFactory {
                                                                          orientation: orientation,
                                                                          nameLabelLine1: textLine1,
                                                                          nameLabelLine2: textLine2)
-        let flex = ToolInterfaceViewModel.getGreenButtonFlex(orientation: orientation,
-                                                             configuration: configuration,
-                                                             neighborTypeLeft: neighborTypeLeft,
-                                                             neighborTypeRight: neighborTypeRight)
+        let flex = Self.getGreenButtonFlex(orientation: orientation,
+                                           configuration: configuration,
+                                           neighborTypeLeft: neighborTypeLeft,
+                                           neighborTypeRight: neighborTypeRight)
         
         let viewModelCreateScene = MagicalGreenButtonViewModelCreateScene(orientation: orientation,
                                                                           greenButtonConfiguration: configuration)
@@ -42,7 +42,7 @@ extension ToolInterfaceFactory {
                                            neighborTypeLeft: ToolInterfaceElementType?,
                                            neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
-        let textLine1 = "U Done"
+        let textLine1 = "Done?"
         let textLine2: String? = nil
         let iconPack = FramedLongIconLibrary.menuC
         
@@ -50,10 +50,10 @@ extension ToolInterfaceFactory {
                                                                          orientation: orientation,
                                                                          nameLabelLine1: textLine1,
                                                                          nameLabelLine2: textLine2)
-        let flex = ToolInterfaceViewModel.getGreenButtonFlex(orientation: orientation,
-                                                             configuration: configuration,
-                                                             neighborTypeLeft: neighborTypeLeft,
-                                                             neighborTypeRight: neighborTypeRight)
+        let flex = Self.getGreenButtonFlex(orientation: orientation,
+                                           configuration: configuration,
+                                           neighborTypeLeft: neighborTypeLeft,
+                                           neighborTypeRight: neighborTypeRight)
         
         let viewModelDone = MagicalGreenButtonViewModelDone(orientation: orientation,
                                                             greenButtonConfiguration: configuration)

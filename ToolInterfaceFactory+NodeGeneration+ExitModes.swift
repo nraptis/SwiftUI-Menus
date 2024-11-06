@@ -47,18 +47,11 @@ extension ToolInterfaceFactory {
             return getTimeLineExitModeToolNode(orientation: orientation,
                                                neighborTypeLeft: neighborTypeLeft,
                                                neighborTypeRight: neighborTypeRight)
-        case .timeLinePage2:
-            return getTimeLinePage2ExitModeToolNode(orientation: orientation,
-                                                    neighborTypeLeft: neighborTypeLeft,
-                                                    neighborTypeRight: neighborTypeRight)
+            
         case .graphPage2:
             return getGraphPage2ExitModeToolNode(orientation: orientation,
                                                  neighborTypeLeft: neighborTypeLeft,
                                                  neighborTypeRight: neighborTypeRight)
-        case .animationContinuousPage2:
-            return getAnimationContinuousPage2ExitModeToolNode(orientation: orientation,
-                                                               neighborTypeLeft: neighborTypeLeft,
-                                                               neighborTypeRight: neighborTypeRight)
         case .loopsPage1:
             return getLoopsPage1ExitModeToolNode(orientation: orientation,
                                                  neighborTypeLeft: neighborTypeLeft,
@@ -71,6 +64,32 @@ extension ToolInterfaceFactory {
             return getLoopsPage3ExitModeToolNode(orientation: orientation,
                                                  neighborTypeLeft: neighborTypeLeft,
                                                  neighborTypeRight: neighborTypeRight)
+            
+        case .timeLinePage1:
+            return getTimeLinePage1ExitModeToolNode(orientation: orientation,
+                                                    neighborTypeLeft: neighborTypeLeft,
+                                                    neighborTypeRight: neighborTypeRight)
+        case .timeLinePage2:
+            return getTimeLinePage2ExitModeToolNode(orientation: orientation,
+                                                    neighborTypeLeft: neighborTypeLeft,
+                                                    neighborTypeRight: neighborTypeRight)
+        case .timeLinePage3:
+            return getTimeLinePage3ExitModeToolNode(orientation: orientation,
+                                                    neighborTypeLeft: neighborTypeLeft,
+                                                    neighborTypeRight: neighborTypeRight)
+            
+        case .continuousPage1:
+            return getContinuousPage1ExitModeToolNode(orientation: orientation,
+                                                      neighborTypeLeft: neighborTypeLeft,
+                                                      neighborTypeRight: neighborTypeRight)
+        case .continuousPage2:
+            return getContinuousPage2ExitModeToolNode(orientation: orientation,
+                                                      neighborTypeLeft: neighborTypeLeft,
+                                                      neighborTypeRight: neighborTypeRight)
+        case .continuousPage3:
+            return getContinuousPage3ExitModeToolNode(orientation: orientation,
+                                                      neighborTypeLeft: neighborTypeLeft,
+                                                      neighborTypeRight: neighborTypeRight)
         }
     }
 }

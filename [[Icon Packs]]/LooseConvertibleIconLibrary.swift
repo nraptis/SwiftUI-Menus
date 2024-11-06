@@ -9,6 +9,48 @@ import Foundation
 
 struct LooseConvertibleIconLibrary {
     
+    static var cloneJiggleA: LooseConvertibleIconPack {
+        Self.build(prefix: "loose",
+                  name: "clone_jiggle_a",
+                  widthPad_0: 65, heightPad_0: 42,
+                  widthPhoneLandscape_0: 42, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 49, heightPhonePortrait_0: 32,
+                  widthPad_1: 59, heightPad_1: 38,
+                  widthPhoneLandscape_1: 42, heightPhoneLandscape_1: 27,
+                  widthPhonePortrait_1: 49, heightPhonePortrait_1: 32,
+                  widthPad_2: 39, heightPad_2: 25,
+                  widthPhoneLandscape_2: 27, heightPhoneLandscape_2: 17,
+                  widthPhonePortrait_2: 33, heightPhonePortrait_2: 21)
+    }
+    
+    static var freeze: LooseConvertibleIconPack {
+        Self.build(prefix: "loose",
+                  name: "freeze_new",
+                  widthPad_0: 43, heightPad_0: 42,
+                  widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 33, heightPhonePortrait_0: 32,
+                  widthPad_1: 39, heightPad_1: 38,
+                  widthPhoneLandscape_1: 28, heightPhoneLandscape_1: 27,
+                  widthPhonePortrait_1: 33, heightPhonePortrait_1: 32,
+                  widthPad_2: 26, heightPad_2: 25,
+                  widthPhoneLandscape_2: 18, heightPhoneLandscape_2: 17,
+                  widthPhonePortrait_2: 22, heightPhonePortrait_2: 21)
+    }
+    
+    static var unfreeze: LooseConvertibleIconPack {
+        Self.build(prefix: "loose",
+                  name: "unfreeze_new",
+                  widthPad_0: 43, heightPad_0: 42,
+                  widthPhoneLandscape_0: 28, heightPhoneLandscape_0: 27,
+                  widthPhonePortrait_0: 33, heightPhonePortrait_0: 32,
+                  widthPad_1: 39, heightPad_1: 38,
+                  widthPhoneLandscape_1: 28, heightPhoneLandscape_1: 27,
+                  widthPhonePortrait_1: 33, heightPhonePortrait_1: 32,
+                  widthPad_2: 26, heightPad_2: 25,
+                  widthPhoneLandscape_2: 18, heightPhoneLandscape_2: 17,
+                  widthPhonePortrait_2: 22, heightPhonePortrait_2: 21)
+    }
+    
     static var deleteBinA: LooseConvertibleIconPack {
         Self.build(prefix: "loose",
                   name: "delete_bin_a",

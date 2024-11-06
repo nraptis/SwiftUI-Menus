@@ -15,7 +15,7 @@ extension ToolInterfaceFactory {
         
         var buttonConfigurations = [ToolInterfaceElementSegmentedPickerButtonConfiguration]()
         
-        let jigglesTextIconPackable = FramedConvertibleIconLibrary.jiggleA
+        let jigglesTextIconPackable = FramedConvertibleIconLibrary.weightRingB
         let jigglesLine1 = ToolInterfaceStringLibrarySegments.segmentTextEditModeJigglesLine1()
         let jigglesLine2 = ToolInterfaceStringLibrarySegments.segmentTextEditModeJigglesLine2()
         let jigglesConfiguration = ToolInterfaceElementSegmentedPickerButtonConfiguration(id: 0,
@@ -25,7 +25,7 @@ extension ToolInterfaceFactory {
                                                                                           nameLabelLine2: jigglesLine2)
         buttonConfigurations.append(jigglesConfiguration)
         
-        let pointsTextIconPackable = FramedConvertibleIconLibrary.pointsA
+        let pointsTextIconPackable = FramedConvertibleIconLibrary.weightRingD
         let pointsLine1 = ToolInterfaceStringLibrarySegments.segmentTextEditModePointsLine1()
         let pointsLine2 = ToolInterfaceStringLibrarySegments.segmentTextEditModePointsLine2()
         let pointsConfiguration = ToolInterfaceElementSegmentedPickerButtonConfiguration(id: 1,
@@ -61,7 +61,7 @@ extension ToolInterfaceFactory {
         
         var buttonConfigurations = [ToolInterfaceElementSegmentedPickerButtonConfiguration]()
         
-        let affineTextIconPackable = FramedConvertibleIconLibrary.wolfView
+        let affineTextIconPackable = FramedConvertibleIconLibrary.weightRingA
         let affineLine1 = ToolInterfaceStringLibrarySegments.segmentTextWeightModeAffineLine1()
         let affineLine2 = ToolInterfaceStringLibrarySegments.segmentTextWeightModeAffineLine2()
         let affineConfiguration = ToolInterfaceElementSegmentedPickerButtonConfiguration(id: 0,
@@ -71,7 +71,7 @@ extension ToolInterfaceFactory {
                                                                                          nameLabelLine2: affineLine2)
         buttonConfigurations.append(affineConfiguration)
         
-        let pointsTextIconPackable = FramedConvertibleIconLibrary.wolfView
+        let pointsTextIconPackable = FramedConvertibleIconLibrary.weightRingC
         let pointsLine1 = ToolInterfaceStringLibrarySegments.segmentTextWeightModePointsLine1()
         let pointsLine2 = ToolInterfaceStringLibrarySegments.segmentTextWeightModePointsLine2()
         let pointsConfiguration = ToolInterfaceElementSegmentedPickerButtonConfiguration(id: 1,

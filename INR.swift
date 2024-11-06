@@ -51,10 +51,14 @@ enum INR_Button: UInt8 {
     case deleteGuidePoint
     
     // {TimeLine}
-    case timeLineResetDefaultCurrentChannel //
-    case timeLineResetCurveCurrentChannel //
-    case timeLineResetFlatCurrentChannel //
-    case timeLineDupeDuration //
+    case timeLineResetCurve //
+    case timeLineResetCurveSmall
+    case timeLineResetDivot
+    case timeLineResetDivotSmall
+    case timeLineResetFlat
+    case timeLineResetSwan
+    case timeLineShiftDown
+    case timeLineShiftUp
     case timeLineDupeCurrentChannel //
     case timeLineDupeAll //
     case timeLineInvertVertical //
@@ -62,10 +66,10 @@ enum INR_Button: UInt8 {
     case timeLineFlipAll //
     case timeLineDampen //
     case timeLineAmplify //
-    case timeLineBreakPoint //
+    case timeLineSyncFrames //
+    
     
     // {Weight Graph}
-    case breakTangentWeightGraph
     case resetWeightGraphStandard
     case resetWeightGraphStandardDampened
     case resetWeightGraphLinear
@@ -77,6 +81,18 @@ enum INR_Button: UInt8 {
     case swivelPanReset
     case swivelPanLeft
     case swivelPanRight
+    
+    // {Continuous}
+    case continuousResetAngleDiag1
+    case continuousResetAngleDiag2
+    case continuousResetAngleHorizontal
+    case continuousResetAngleVertical
+    case continuousResetEndRotation
+    case continuousResetEndScale
+    case continuousResetStartRotation
+    case continuousResetStartScale
+    case continuousResetSwoop
+    case continuousSyncFrames
     
     // {Image Importer}
     case imageImporterButtonBack
@@ -99,13 +115,14 @@ enum INR_CheckBox: UInt8 {
     
     case animationGrabApplyToAll
     case animationLoopApplyToAll
+    case animationContinuousApplyToAll
+    
+    case continuousDisableGrabEnabled
     
     case recordAudioEnabled
     
     case imageImportSnapEdges
     case imageImportSnapRotation
-    
-    
     
 }
 
@@ -132,14 +149,19 @@ enum INR_EnterMode: UInt8 {
     case animationLoops
     case animationContinuous
     case timeLine
-    case timeLinePage2
     case graphPage2
-    case animationContinuousPage2
-    
     
     case loopsPage1
     case loopsPage2
     case loopsPage3
+    
+    case timeLinePage1
+    case timeLinePage2
+    case timeLinePage3
+    
+    case continuousPage1
+    case continuousPage2
+    case continuousPage3
 }
 
 enum INR_ExitMode: UInt8 {
@@ -151,13 +173,19 @@ enum INR_ExitMode: UInt8 {
     case animationLoops
     case animationContinuous
     case timeLine
-    case timeLinePage2
     case graphPage2
-    case animationContinuousPage2
     
     case loopsPage1
     case loopsPage2
     case loopsPage3
+    
+    case timeLinePage1
+    case timeLinePage2
+    case timeLinePage3
+    
+    case continuousPage1
+    case continuousPage2
+    case continuousPage3
 }
 
 enum INR_MainTab: UInt8 {
@@ -184,7 +212,6 @@ extension INR_Slider_Data: Equatable {
 
 enum INR_Slider: UInt8 {
     
-    
     case jiggleOpacity
     case jigglePower
     case jiggleSpeed
@@ -193,7 +220,18 @@ enum INR_Slider: UInt8 {
     case zoomAmount
     
     case timeLineDuration
-    case timeLineOffset
+    case timeLineFrameOffset
+    
+    case continuousAngle
+    case continuousDuration
+    case continuousPower
+    case continuousSwoop
+    case continuousFrameOffset
+    
+    case continuousStartScale
+    case continuousEndScale
+    case continuousStartRotation
+    case continuousEndRotation
 }
 
 struct INR_FavoringOneLineLabel_Data {

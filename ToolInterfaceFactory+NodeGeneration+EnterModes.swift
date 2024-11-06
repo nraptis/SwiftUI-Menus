@@ -46,18 +46,12 @@ extension ToolInterfaceFactory {
             return getTimeLineEnterModeToolNode(orientation: orientation,
                                                 neighborTypeLeft: neighborTypeLeft,
                                                 neighborTypeRight: neighborTypeRight)
-        case .timeLinePage2:
-            return getTimeLinePage2EnterModeToolNode(orientation: orientation,
-                                                     neighborTypeLeft: neighborTypeLeft,
-                                                     neighborTypeRight: neighborTypeRight)
+            
         case .graphPage2:
             return getGraphPage2EnterModeToolNode(orientation: orientation,
                                                   neighborTypeLeft: neighborTypeLeft,
                                                   neighborTypeRight: neighborTypeRight)
-        case .animationContinuousPage2:
-            return getAnimationContinuousPage2EnterModeToolNode(orientation: orientation,
-                                                                neighborTypeLeft: neighborTypeLeft,
-                                                                neighborTypeRight: neighborTypeRight)
+            
         case .loopsPage1:
             return getLoopsPage1EnterModeToolNode(orientation: orientation,
                                                   neighborTypeLeft: neighborTypeLeft,
@@ -70,6 +64,33 @@ extension ToolInterfaceFactory {
             return getLoopsPage3EnterModeToolNode(orientation: orientation,
                                                   neighborTypeLeft: neighborTypeLeft,
                                                   neighborTypeRight: neighborTypeRight)
+            
+        case .timeLinePage1:
+            return getTimeLinePage1EnterModeToolNode(orientation: orientation,
+                                                     neighborTypeLeft: neighborTypeLeft,
+                                                     neighborTypeRight: neighborTypeRight)
+        case .timeLinePage2:
+            return getTimeLinePage2EnterModeToolNode(orientation: orientation,
+                                                     neighborTypeLeft: neighborTypeLeft,
+                                                     neighborTypeRight: neighborTypeRight)
+        case .timeLinePage3:
+            return getTimeLinePage3EnterModeToolNode(orientation: orientation,
+                                                     neighborTypeLeft: neighborTypeLeft,
+                                                     neighborTypeRight: neighborTypeRight)
+            
+        case .continuousPage1:
+            return getContinuousPage1EnterModeToolNode(orientation: orientation,
+                                                       neighborTypeLeft: neighborTypeLeft,
+                                                       neighborTypeRight: neighborTypeRight)
+        case .continuousPage2:
+            return getContinuousPage2EnterModeToolNode(orientation: orientation,
+                                                       neighborTypeLeft: neighborTypeLeft,
+                                                       neighborTypeRight: neighborTypeRight)
+        case .continuousPage3:
+            return getContinuousPage3EnterModeToolNode(orientation: orientation,
+                                                       neighborTypeLeft: neighborTypeLeft,
+                                                       neighborTypeRight: neighborTypeRight)
+            
         }
     }
 }

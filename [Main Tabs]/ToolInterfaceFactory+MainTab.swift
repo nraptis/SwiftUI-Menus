@@ -15,7 +15,7 @@ extension ToolInterfaceFactory {
         
         var buttonConfigurations = [ToolInterfaceElementMainTabButtonConfiguration]()
         
-        let viewTextIconPackable = FramedLongIconLibrary.continuousA
+        let viewTextIconPackable = FramedLongIconLibrary.eyeD
         let viewLine1 = ToolInterfaceStringLibraryMainTabs.buttonTextViewLine1()
         let viewLine2 = ToolInterfaceStringLibraryMainTabs.buttonTextViewLine2()
         let viewConfiguration = ToolInterfaceElementMainTabButtonConfiguration(id: 0,
@@ -25,7 +25,7 @@ extension ToolInterfaceFactory {
                                                                                nameLabelLine2: viewLine2)
         buttonConfigurations.append(viewConfiguration)
         
-        let editTextIconPackable = FramedLongIconLibrary.continuousB
+        let editTextIconPackable = FramedLongIconLibrary.eyeE
         let editLine1 = ToolInterfaceStringLibraryMainTabs.buttonTextEditLine1()
         let editLine2 = ToolInterfaceStringLibraryMainTabs.buttonTextEditLine2()
         let editConfiguration = ToolInterfaceElementMainTabButtonConfiguration(id: 1,
@@ -66,8 +66,8 @@ extension ToolInterfaceFactory {
         
         
         let viewTextIconPackable = FramedLongIconLibrary.menuC
-        let viewLine1 = "Line One"
-        let viewLine2 = "Two"
+        let viewLine1 = "AAAAA"
+        let viewLine2: String? = nil
         let viewConfiguration = ToolInterfaceElementMainTabButtonConfiguration(id: 0,
                                                                                iconPack: viewTextIconPackable,
                                                                                orientation: orientation,
@@ -77,7 +77,7 @@ extension ToolInterfaceFactory {
         
         let editTextIconPackable = FramedLongIconLibrary.continuousB
         let editLine1: String? = nil
-        let editLine2 = "L2"
+        let editLine2: String? = nil
         let editConfiguration = ToolInterfaceElementMainTabButtonConfiguration(id: 1,
                                                                                iconPack: editTextIconPackable,
                                                                                orientation: orientation,
@@ -89,7 +89,7 @@ extension ToolInterfaceFactory {
         let thirdLine1 = "Harvey"
         let thirdLine2 = "Nash X"
         let thirdConfiguration = ToolInterfaceElementMainTabButtonConfiguration(id: 2,
-                                                                                iconPack: editTextIconPackable,
+                                                                                iconPack: thirdTextIconPackable,
                                                                                 orientation: orientation,
                                                                                 nameLabelLine1: thirdLine1,
                                                                                 nameLabelLine2: thirdLine2)
@@ -121,13 +121,9 @@ extension ToolInterfaceFactory {
         
         var buttonConfigurations = [ToolInterfaceElementMainTabButtonConfiguration]()
         
-        
-        
-        
-        
-        let viewTextIconPackable = FramedLongIconLibrary.checkBoxSquare
-        let viewLine1 = "Pit"
-        let viewLine2 = "Patter"
+        let viewTextIconPackable = FramedLongIconLibrary.eyeA
+        let viewLine1 = "One"
+        let viewLine2: String? = nil
         let viewConfiguration = ToolInterfaceElementMainTabButtonConfiguration(id: 0,
                                                                                iconPack: viewTextIconPackable,
                                                                                orientation: orientation,
@@ -135,9 +131,9 @@ extension ToolInterfaceFactory {
                                                                                nameLabelLine2: viewLine2)
         buttonConfigurations.append(viewConfiguration)
         
-        let editTextIconPackable = FramedLongIconLibrary.checkBoxSquare
-        let editLine1 = "Skain"
-        let editLine2 = "Ska"
+        let editTextIconPackable = FramedLongIconLibrary.eyeB
+        let editLine1: String? = nil
+        let editLine2 = "Two"
         let editConfiguration = ToolInterfaceElementMainTabButtonConfiguration(id: 1,
                                                                                iconPack: editTextIconPackable,
                                                                                orientation: orientation,
@@ -145,26 +141,37 @@ extension ToolInterfaceFactory {
                                                                                nameLabelLine2: editLine2)
         buttonConfigurations.append(editConfiguration)
         
-        let thirdTextIconPackable = FramedLongIconLibrary.menuC
-        let thirdLine1: String? = "A"
+        let thirdTextIconPackable = FramedLongIconLibrary.eyeC
+        let thirdLine1: String? = "Three"
         let thirdLine2: String? = nil
         let thirdConfiguration = ToolInterfaceElementMainTabButtonConfiguration(id: 2,
-                                                                                iconPack: editTextIconPackable,
+                                                                                iconPack: thirdTextIconPackable,
                                                                                 orientation: orientation,
                                                                                 nameLabelLine1: thirdLine1,
                                                                                 nameLabelLine2: thirdLine2)
         buttonConfigurations.append(thirdConfiguration)
         
         
-        let fortTextIconPackable = FramedConvertibleIconLibrary.menuC
-        let fortLine1: String? = "A"
-        let fortLine2: String? = nil
+        let fortTextIconPackable = FramedLongIconLibrary.eyeD
+        let fortLine1: String? = nil
+        let fortLine2: String? = "Four"
         let fortConfiguration = ToolInterfaceElementMainTabButtonConfiguration(id: 3,
-                                                                               iconPack: editTextIconPackable,
+                                                                               iconPack: fortTextIconPackable,
                                                                                orientation: orientation,
                                                                                nameLabelLine1: fortLine1,
                                                                                nameLabelLine2: fortLine2)
         buttonConfigurations.append(fortConfiguration)
+        
+        
+        let fithTextIconPackable = FramedLongIconLibrary.eyeE
+        let fithLine1: String? = "Five"
+        let fithLine2: String? = nil
+        let fithtConfiguration = ToolInterfaceElementMainTabButtonConfiguration(id: 4,
+                                                                               iconPack: fithTextIconPackable,
+                                                                               orientation: orientation,
+                                                                               nameLabelLine1: fithLine1,
+                                                                               nameLabelLine2: fithLine2)
+        buttonConfigurations.append(fithtConfiguration)
         
         let configuration = ToolInterfaceElementMainTabConfiguration(buttonConfigurations: buttonConfigurations)
         

@@ -59,6 +59,20 @@ import SwiftUI
         refreshEnabled()
     }
     
+    @MainActor func refreshDisabled(value: Float) {
+        let delta = (sliderConfiguration.maximumValue - sliderConfiguration.minimumValue)
+        if delta > Math.epsilon {
+            var _percent = CGFloat((value - sliderConfiguration.minimumValue) / delta)
+            if _percent < 0.0 { _percent = 0.0 }
+            if _percent > 1.0 { _percent = 1.0 }
+            
+            thumbOffsetX = thumbMinimumX + (thumbMaximumX - thumbMinimumX) * _percent
+            percent = _percent
+            valueString = getValueString()
+        }
+        refreshDisabled()
+    }
+    
     @MainActor private func getValueString() -> String {
         let value = sliderConfiguration.minimumValue + (sliderConfiguration.maximumValue - sliderConfiguration.minimumValue) * Float(percent)
         let formatString = "%.\(sliderConfiguration.valueDecimalCount)f"

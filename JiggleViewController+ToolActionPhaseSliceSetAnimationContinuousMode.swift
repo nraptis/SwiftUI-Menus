@@ -11,6 +11,7 @@ extension JiggleViewController {
     func toolActionConsumePhaseSliceSetAnimationContinuousMode(_ slice: ToolActionPhaseSliceSetAnimationContinuousMode) {
         jiggleViewModel.jiggleDocument.isAnimationContinuousEnabled = slice.isAnimationContinuousMode
         toolInterfaceViewModel.handleAnimationContinuousEnabledDidChange()
+        jiggleViewModel.handleAnimationModeDidChange()
         jiggleViewModel.killDragAll()
     }
 }

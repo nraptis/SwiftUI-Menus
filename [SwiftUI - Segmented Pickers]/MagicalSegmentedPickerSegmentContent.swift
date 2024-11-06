@@ -119,13 +119,13 @@ struct MagicalSegmentedPickerSegmentContent: View {
         let heroPaddingBottomStacked = SegmentedPickerLayout.getHeroPaddingBottomStacked(orientation: orientation,
                                                                                          numberOfLines: numberOfLines)
         
-        let slaveWidth = checkBoxSquare.width
-        let slaveHeight = checkBoxSquare.height
-        let slaveContentWidth = checkBoxSquare.width + magicalButtonViewModel.slavePaddingLeft + magicalButtonViewModel.slavePaddingRight
+        //let slaveWidth = checkBoxSquare.width
+        //let slaveHeight = checkBoxSquare.height
+        //let slaveContentWidth = checkBoxSquare.width + magicalButtonViewModel.slavePaddingLeft + magicalButtonViewModel.slavePaddingRight
         
-        let accentWidth = testArrowLeft.width
-        let accentHeight = testArrowLeft.height
-        let accentContentWidth = testArrowLeft.width + magicalButtonViewModel.accentPaddingLeft + magicalButtonViewModel.accentPaddingRight
+        //let accentWidth = testArrowLeft.width
+        //let accentHeight = testArrowLeft.height
+        //let accentContentWidth = testArrowLeft.width + magicalButtonViewModel.accentPaddingLeft + magicalButtonViewModel.accentPaddingRight
         
         var computedHeroWidth = 0
         switch layoutSchemeFlavor {
@@ -142,7 +142,7 @@ struct MagicalSegmentedPickerSegmentContent: View {
         
         return HStack(spacing: 0.0) {
             HeroSlab(orientation: orientation,
-                     layoutWidth: layoutWidth - slaveContentWidth - accentContentWidth,
+                     layoutWidth: layoutWidth,// - slaveContentWidth - accentContentWidth,
                      layoutHeight: layoutHeight,
                      isLong: isLong,
                      isPressed: isPressed,
@@ -161,6 +161,7 @@ struct MagicalSegmentedPickerSegmentContent: View {
                      lineHeight: lineHeight,
                      nameLabelColor: nameLabelColor)
             
+            /*
 #if INTERFACE_HINTS
             Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalButtonViewModel.slavePaddingLeft), height: 24.0)
@@ -211,7 +212,7 @@ struct MagicalSegmentedPickerSegmentContent: View {
             Spacer(minLength: 0.0)
                 .frame(width: CGFloat(magicalButtonViewModel.accentPaddingRight))
 #endif
-            
+            */
             
         }
 #if INTERFACE_HINTS

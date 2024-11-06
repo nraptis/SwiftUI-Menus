@@ -15,7 +15,7 @@ extension ToolInterfaceFactory {
         
         let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextFreezeSelectedJiggleLine1()
         let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextFreezeSelectedJiggleLine2()
-        let iconPack = LooseConvertibleIconLibrary.menuC
+        let iconPack = LooseConvertibleIconLibrary.freeze
         
         let configuration = ToolInterfaceElementButtonConfiguration(iconPack: iconPack,
                                                                     orientation: orientation,
@@ -44,7 +44,7 @@ extension ToolInterfaceFactory {
         
         let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextFreezeSelectedGuideLine1()
         let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextFreezeSelectedGuideLine2()
-        let iconPack = LooseConvertibleIconLibrary.menuC
+        let iconPack = LooseConvertibleIconLibrary.freeze
         let configuration = ToolInterfaceElementButtonConfiguration(iconPack: iconPack,
                                                                     orientation: orientation,
                                                                     nameLabelLine1: textLine1,
@@ -72,7 +72,7 @@ extension ToolInterfaceFactory {
         
         let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextUnfreezeAllJigglesLine1()
         let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextUnfreezeAllJigglesLine2()
-        let iconPack = LooseConvertibleIconLibrary.menuC
+        let iconPack = LooseConvertibleIconLibrary.unfreeze
         
         let configuration = ToolInterfaceElementButtonConfiguration(iconPack: iconPack,
                                                                     orientation: orientation,
@@ -101,7 +101,7 @@ extension ToolInterfaceFactory {
         
         let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextUnfreezeAllGuidesLine1()
         let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextUnfreezeAllGuidesLine2()
-        let iconPack = LooseConvertibleIconLibrary.menuC
+        let iconPack = LooseConvertibleIconLibrary.unfreeze
         
         let configuration = ToolInterfaceElementButtonConfiguration(iconPack: iconPack,
                                                                     orientation: orientation,

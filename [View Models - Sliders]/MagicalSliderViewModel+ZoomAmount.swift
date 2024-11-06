@@ -30,6 +30,7 @@ import Foundation
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
             let value = sliderConfiguration.minimumValue + (sliderConfiguration.maximumValue - sliderConfiguration.minimumValue) * Float(percent)
             jiggleViewModel.notifySliderStartedZoomAmount(value: value)
+            
         }
     }
     

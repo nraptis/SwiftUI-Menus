@@ -172,20 +172,20 @@ extension LayoutScheme {
         if Device.isPad {
             switch squeeze {
             case .squeezed:
-                return 8
-            case .standard:
-                return 12
-            case .relaxed:
-                return 14
-            }
-        } else {
-            switch squeeze {
-            case .squeezed:
-                return 3
+                return 2
             case .standard:
                 return 4
             case .relaxed:
                 return 6
+            }
+        } else {
+            switch squeeze {
+            case .squeezed:
+                return 1
+            case .standard:
+                return 2
+            case .relaxed:
+                return 4
             }
         }
     }
@@ -193,20 +193,20 @@ extension LayoutScheme {
         if Device.isPad {
             switch squeeze {
             case .squeezed:
-                return 8
-            case .standard:
-                return 12
-            case .relaxed:
-                return 14
-            }
-        } else {
-            switch squeeze {
-            case .squeezed:
-                return 3
+                return 2
             case .standard:
                 return 4
             case .relaxed:
                 return 6
+            }
+        } else {
+            switch squeeze {
+            case .squeezed:
+                return 1
+            case .standard:
+                return 2
+            case .relaxed:
+                return 4
             }
         }
     }
@@ -214,20 +214,20 @@ extension LayoutScheme {
         if Device.isPad {
             switch squeeze {
             case .squeezed:
-                return 8
-            case .standard:
-                return 12
-            case .relaxed:
-                return 14
-            }
-        } else {
-            switch squeeze {
-            case .squeezed:
-                return 3
+                return 2
             case .standard:
                 return 4
             case .relaxed:
                 return 6
+            }
+        } else {
+            switch squeeze {
+            case .squeezed:
+                return 1
+            case .standard:
+                return 2
+            case .relaxed:
+                return 4
             }
         }
     }
@@ -235,63 +235,107 @@ extension LayoutScheme {
         if Device.isPad {
             switch squeeze {
             case .squeezed:
-                return 8
-            case .standard:
-                return 12
-            case .relaxed:
-                return 14
-            }
-        } else {
-            switch squeeze {
-            case .squeezed:
-                return 3
+                return 2
             case .standard:
                 return 4
             case .relaxed:
                 return 6
             }
+        } else {
+            switch squeeze {
+            case .squeezed:
+                return 1
+            case .standard:
+                return 2
+            case .relaxed:
+                return 4
+            }
         }
     }
     
     static func getSlavePaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
-        switch squeeze {
-        case .squeezed:
-            return 8
-        case .standard:
-            return 12
-        case .relaxed:
-            return 14
+        if Device.isPad {
+            switch squeeze {
+            case .squeezed:
+                return 2
+            case .standard:
+                return 4
+            case .relaxed:
+                return 6
+            }
+        } else {
+            switch squeeze {
+            case .squeezed:
+                return 1
+            case .standard:
+                return 2
+            case .relaxed:
+                return 4
+            }
         }
     }
     static func getSlavePaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
-        switch squeeze {
-        case .squeezed:
-            return 8
-        case .standard:
-            return 12
-        case .relaxed:
-            return 14
+        if Device.isPad {
+            switch squeeze {
+            case .squeezed:
+                return 2
+            case .standard:
+                return 4
+            case .relaxed:
+                return 6
+            }
+        } else {
+            switch squeeze {
+            case .squeezed:
+                return 1
+            case .standard:
+                return 2
+            case .relaxed:
+                return 4
+            }
         }
     }
     
     static func getAccentPaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
-        switch squeeze {
-        case .squeezed:
-            return 8
-        case .standard:
-            return 12
-        case .relaxed:
-            return 14
+        if Device.isPad {
+            switch squeeze {
+            case .squeezed:
+                return 2
+            case .standard:
+                return 4
+            case .relaxed:
+                return 6
+            }
+        } else {
+            switch squeeze {
+            case .squeezed:
+                return 1
+            case .standard:
+                return 2
+            case .relaxed:
+                return 4
+            }
         }
     }
     static func getAccentPaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
-        switch squeeze {
-        case .squeezed:
-            return 8
-        case .standard:
-            return 12
-        case .relaxed:
-            return 14
+        if Device.isPad {
+            switch squeeze {
+            case .squeezed:
+                return 2
+            case .standard:
+                return 4
+            case .relaxed:
+                return 6
+            }
+        } else {
+            switch squeeze {
+            case .squeezed:
+                return 1
+            case .standard:
+                return 2
+            case .relaxed:
+                return 4
+            }
         }
     }
     
@@ -299,20 +343,20 @@ extension LayoutScheme {
         if Device.isPad {
             switch squeeze {
             case .squeezed:
-                return 8
-            case .standard:
-                return 12
-            case .relaxed:
-                return 14
-            }
-        } else {
-            switch squeeze {
-            case .squeezed:
-                return 3
+                return 2
             case .standard:
                 return 4
             case .relaxed:
                 return 6
+            }
+        } else {
+            switch squeeze {
+            case .squeezed:
+                return 1
+            case .standard:
+                return 2
+            case .relaxed:
+                return 4
             }
         }
     }
