@@ -36,7 +36,7 @@ class DialogBoxButtonModel {
         self.action = action
     }
     
-    func manufactureButton() -> DialogBoxButtonViewController {
+    @MainActor func manufactureButton() -> DialogBoxButtonViewController {
         switch type {
         case .navArrowGreenCentered:
             return DialogBoxButtonViewController(model: self,

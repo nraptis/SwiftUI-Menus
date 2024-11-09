@@ -26,7 +26,7 @@ extension JiggleViewController {
         if true {
             let fileBuffer = FileBuffer()
             menuSave(fileBuffer: fileBuffer)
-            fileBuffer.save(filePath: menuSaveFilePath)
+            _ = fileBuffer.save(filePath: menuSaveFilePath)
         }
     }
     

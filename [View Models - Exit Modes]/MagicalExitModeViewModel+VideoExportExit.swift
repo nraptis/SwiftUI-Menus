@@ -16,9 +16,9 @@ import Foundation
     }
     
     override func refresh() {
-        if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
+        //if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
             refreshEnabled()
-        }
+        //}
     }
     
     deinit {

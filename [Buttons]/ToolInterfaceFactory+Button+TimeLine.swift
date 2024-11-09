@@ -96,6 +96,64 @@ extension ToolInterfaceFactory {
         return timeLineFlipAllToolNode
     }
     
+    static func getTimeLineFlipCurrentChannelHorizontalButtonToolNode(orientation: Orientation,
+                                                                      neighborTypeLeft: ToolInterfaceElementType?,
+                                                                      neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+        
+        let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextTimeLineFlipCurrentChannelHorizontalLine1()
+        let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextTimeLineFlipCurrentChannelHorizontalLine2()
+        let iconPack = LooseConvertibleIconLibrary.menuC
+        
+        let configuration = ToolInterfaceElementButtonConfiguration(iconPack: iconPack,
+                                                                    orientation: orientation,
+                                                                    nameLabelLine1: textLine1,
+                                                                    nameLabelLine2: textLine2)
+        let flex = Self.getButtonFlex(orientation: orientation,
+                                      configuration: configuration,
+                                      neighborTypeLeft: neighborTypeLeft,
+                                      neighborTypeRight: neighborTypeRight)
+        
+        let viewModelTimeLineFlipCurrentChannelHorizontal = MagicalButtonViewModelTimeLineFlipCurrentChannelHorizontal(orientation: orientation,
+                                                                                                                       buttonConfiguration: configuration)
+        let timeLineFlipCurrentChannelHorizontalToolNode = ToolNode(id: getToolNodeID(),
+                                                                    element: .buttonTimeLineFlipCurrentChannelHorizontal,
+                                                                    flex: flex,
+                                                                    magicalViewModel: viewModelTimeLineFlipCurrentChannelHorizontal,
+                                                                    neighborTypeLeft: neighborTypeLeft,
+                                                                    neighborTypeRight: neighborTypeRight)
+        viewModelTimeLineFlipCurrentChannelHorizontal.refresh()
+        return timeLineFlipCurrentChannelHorizontalToolNode
+    }
+    
+    static func getTimeLineFlipCurrentChannelVerticalButtonToolNode(orientation: Orientation,
+                                                                    neighborTypeLeft: ToolInterfaceElementType?,
+                                                                    neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+        
+        let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextTimeLineFlipCurrentChannelVerticalLine1()
+        let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextTimeLineFlipCurrentChannelVerticalLine2()
+        let iconPack = LooseConvertibleIconLibrary.menuC
+        
+        let configuration = ToolInterfaceElementButtonConfiguration(iconPack: iconPack,
+                                                                    orientation: orientation,
+                                                                    nameLabelLine1: textLine1,
+                                                                    nameLabelLine2: textLine2)
+        let flex = Self.getButtonFlex(orientation: orientation,
+                                      configuration: configuration,
+                                      neighborTypeLeft: neighborTypeLeft,
+                                      neighborTypeRight: neighborTypeRight)
+        
+        let viewModelTimeLineFlipCurrentChannelVertical = MagicalButtonViewModelTimeLineFlipCurrentChannelVertical(orientation: orientation,
+                                                                                                                   buttonConfiguration: configuration)
+        let timeLineFlipCurrentChannelVerticalToolNode = ToolNode(id: getToolNodeID(),
+                                                                  element: .buttonTimeLineFlipCurrentChannelVertical,
+                                                                  flex: flex,
+                                                                  magicalViewModel: viewModelTimeLineFlipCurrentChannelVertical,
+                                                                  neighborTypeLeft: neighborTypeLeft,
+                                                                  neighborTypeRight: neighborTypeRight)
+        viewModelTimeLineFlipCurrentChannelVertical.refresh()
+        return timeLineFlipCurrentChannelVerticalToolNode
+    }
+    
     static func getTimeLineSyncFramesButtonToolNode(orientation: Orientation,
                                                     neighborTypeLeft: ToolInterfaceElementType?,
                                                     neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
@@ -185,8 +243,8 @@ extension ToolInterfaceFactory {
     }
     
     static func getTimeLineResetCurveButtonToolNode(orientation: Orientation,
-                                                                  neighborTypeLeft: ToolInterfaceElementType?,
-                                                                  neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+                                                    neighborTypeLeft: ToolInterfaceElementType?,
+                                                    neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
         let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextTimeLineResetCurveLine1()
         let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextTimeLineResetCurveLine2()
@@ -214,8 +272,8 @@ extension ToolInterfaceFactory {
     }
     
     static func getTimeLineResetCurveSmallButtonToolNode(orientation: Orientation,
-                                                                  neighborTypeLeft: ToolInterfaceElementType?,
-                                                                  neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+                                                         neighborTypeLeft: ToolInterfaceElementType?,
+                                                         neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
         let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextTimeLineResetCurveSmallLine1()
         let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextTimeLineResetCurveSmallLine2()
@@ -231,20 +289,20 @@ extension ToolInterfaceFactory {
                                       neighborTypeRight: neighborTypeRight)
         
         let viewModelTimeLineResetCurveSmall = MagicalButtonViewModelTimeLineResetCurveSmall(orientation: orientation,
-                                                                                   buttonConfiguration: configuration)
+                                                                                             buttonConfiguration: configuration)
         let timeLineResetCurveSmallToolNode = ToolNode(id: getToolNodeID(),
-                                                  element: .buttonTimeLineResetCurveSmall,
-                                                  flex: flex,
-                                                  magicalViewModel: viewModelTimeLineResetCurveSmall,
-                                                  neighborTypeLeft: neighborTypeLeft,
-                                                  neighborTypeRight: neighborTypeRight)
+                                                       element: .buttonTimeLineResetCurveSmall,
+                                                       flex: flex,
+                                                       magicalViewModel: viewModelTimeLineResetCurveSmall,
+                                                       neighborTypeLeft: neighborTypeLeft,
+                                                       neighborTypeRight: neighborTypeRight)
         viewModelTimeLineResetCurveSmall.refresh()
         return timeLineResetCurveSmallToolNode
     }
     
     static func getTimeLineResetDivotButtonToolNode(orientation: Orientation,
-                                                                  neighborTypeLeft: ToolInterfaceElementType?,
-                                                                  neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+                                                    neighborTypeLeft: ToolInterfaceElementType?,
+                                                    neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
         let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextTimeLineResetDivotLine1()
         let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextTimeLineResetDivotLine2()
@@ -270,10 +328,10 @@ extension ToolInterfaceFactory {
         viewModelTimeLineResetDivot.refresh()
         return timeLineResetDivotToolNode
     }
-
+    
     static func getTimeLineResetDivotSmallButtonToolNode(orientation: Orientation,
-                                                                  neighborTypeLeft: ToolInterfaceElementType?,
-                                                                  neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+                                                         neighborTypeLeft: ToolInterfaceElementType?,
+                                                         neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
         let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextTimeLineResetDivotSmallLine1()
         let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextTimeLineResetDivotSmallLine2()
@@ -289,20 +347,20 @@ extension ToolInterfaceFactory {
                                       neighborTypeRight: neighborTypeRight)
         
         let viewModelTimeLineResetDivotSmall = MagicalButtonViewModelTimeLineResetDivotSmall(orientation: orientation,
-                                                                                   buttonConfiguration: configuration)
+                                                                                             buttonConfiguration: configuration)
         let timeLineResetDivotSmallToolNode = ToolNode(id: getToolNodeID(),
-                                                  element: .buttonTimeLineResetDivotSmall,
-                                                  flex: flex,
-                                                  magicalViewModel: viewModelTimeLineResetDivotSmall,
-                                                  neighborTypeLeft: neighborTypeLeft,
-                                                  neighborTypeRight: neighborTypeRight)
+                                                       element: .buttonTimeLineResetDivotSmall,
+                                                       flex: flex,
+                                                       magicalViewModel: viewModelTimeLineResetDivotSmall,
+                                                       neighborTypeLeft: neighborTypeLeft,
+                                                       neighborTypeRight: neighborTypeRight)
         viewModelTimeLineResetDivotSmall.refresh()
         return timeLineResetDivotSmallToolNode
     }
-
+    
     static func getTimeLineResetFlatButtonToolNode(orientation: Orientation,
-                                                                  neighborTypeLeft: ToolInterfaceElementType?,
-                                                                  neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+                                                   neighborTypeLeft: ToolInterfaceElementType?,
+                                                   neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
         let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextTimeLineResetFlatLine1()
         let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextTimeLineResetFlatLine2()
@@ -318,20 +376,20 @@ extension ToolInterfaceFactory {
                                       neighborTypeRight: neighborTypeRight)
         
         let viewModelTimeLineResetFlat = MagicalButtonViewModelTimeLineResetFlat(orientation: orientation,
-                                                                                   buttonConfiguration: configuration)
+                                                                                 buttonConfiguration: configuration)
         let timeLineResetFlatToolNode = ToolNode(id: getToolNodeID(),
-                                                  element: .buttonTimeLineResetFlat,
-                                                  flex: flex,
-                                                  magicalViewModel: viewModelTimeLineResetFlat,
-                                                  neighborTypeLeft: neighborTypeLeft,
-                                                  neighborTypeRight: neighborTypeRight)
+                                                 element: .buttonTimeLineResetFlat,
+                                                 flex: flex,
+                                                 magicalViewModel: viewModelTimeLineResetFlat,
+                                                 neighborTypeLeft: neighborTypeLeft,
+                                                 neighborTypeRight: neighborTypeRight)
         viewModelTimeLineResetFlat.refresh()
         return timeLineResetFlatToolNode
     }
-
+    
     static func getTimeLineResetSwanButtonToolNode(orientation: Orientation,
-                                                                  neighborTypeLeft: ToolInterfaceElementType?,
-                                                                  neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+                                                   neighborTypeLeft: ToolInterfaceElementType?,
+                                                   neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
         let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextTimeLineResetSwanLine1()
         let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextTimeLineResetSwanLine2()
@@ -347,20 +405,20 @@ extension ToolInterfaceFactory {
                                       neighborTypeRight: neighborTypeRight)
         
         let viewModelTimeLineResetSwan = MagicalButtonViewModelTimeLineResetSwan(orientation: orientation,
-                                                                                   buttonConfiguration: configuration)
+                                                                                 buttonConfiguration: configuration)
         let timeLineResetSwanToolNode = ToolNode(id: getToolNodeID(),
-                                                  element: .buttonTimeLineResetSwan,
-                                                  flex: flex,
-                                                  magicalViewModel: viewModelTimeLineResetSwan,
-                                                  neighborTypeLeft: neighborTypeLeft,
-                                                  neighborTypeRight: neighborTypeRight)
+                                                 element: .buttonTimeLineResetSwan,
+                                                 flex: flex,
+                                                 magicalViewModel: viewModelTimeLineResetSwan,
+                                                 neighborTypeLeft: neighborTypeLeft,
+                                                 neighborTypeRight: neighborTypeRight)
         viewModelTimeLineResetSwan.refresh()
         return timeLineResetSwanToolNode
     }
-
+    
     static func getTimeLineShiftDownButtonToolNode(orientation: Orientation,
-                                                                  neighborTypeLeft: ToolInterfaceElementType?,
-                                                                  neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+                                                   neighborTypeLeft: ToolInterfaceElementType?,
+                                                   neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
         let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextTimeLineShiftDownLine1()
         let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextTimeLineShiftDownLine2()
@@ -376,20 +434,20 @@ extension ToolInterfaceFactory {
                                       neighborTypeRight: neighborTypeRight)
         
         let viewModelTimeLineShiftDown = MagicalButtonViewModelTimeLineShiftDown(orientation: orientation,
-                                                                                   buttonConfiguration: configuration)
+                                                                                 buttonConfiguration: configuration)
         let timeLineShiftDownToolNode = ToolNode(id: getToolNodeID(),
-                                                  element: .buttonTimeLineShiftDown,
-                                                  flex: flex,
-                                                  magicalViewModel: viewModelTimeLineShiftDown,
-                                                  neighborTypeLeft: neighborTypeLeft,
-                                                  neighborTypeRight: neighborTypeRight)
+                                                 element: .buttonTimeLineShiftDown,
+                                                 flex: flex,
+                                                 magicalViewModel: viewModelTimeLineShiftDown,
+                                                 neighborTypeLeft: neighborTypeLeft,
+                                                 neighborTypeRight: neighborTypeRight)
         viewModelTimeLineShiftDown.refresh()
         return timeLineShiftDownToolNode
     }
-
+    
     static func getTimeLineShiftUpButtonToolNode(orientation: Orientation,
-                                                                  neighborTypeLeft: ToolInterfaceElementType?,
-                                                                  neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+                                                 neighborTypeLeft: ToolInterfaceElementType?,
+                                                 neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
         
         let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextTimeLineShiftUpLine1()
         let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextTimeLineShiftUpLine2()
@@ -405,13 +463,13 @@ extension ToolInterfaceFactory {
                                       neighborTypeRight: neighborTypeRight)
         
         let viewModelTimeLineShiftUp = MagicalButtonViewModelTimeLineShiftUp(orientation: orientation,
-                                                                                   buttonConfiguration: configuration)
+                                                                             buttonConfiguration: configuration)
         let timeLineShiftUpToolNode = ToolNode(id: getToolNodeID(),
-                                                  element: .buttonTimeLineShiftUp,
-                                                  flex: flex,
-                                                  magicalViewModel: viewModelTimeLineShiftUp,
-                                                  neighborTypeLeft: neighborTypeLeft,
-                                                  neighborTypeRight: neighborTypeRight)
+                                               element: .buttonTimeLineShiftUp,
+                                               flex: flex,
+                                               magicalViewModel: viewModelTimeLineShiftUp,
+                                               neighborTypeLeft: neighborTypeLeft,
+                                               neighborTypeRight: neighborTypeRight)
         viewModelTimeLineShiftUp.refresh()
         return timeLineShiftUpToolNode
     }

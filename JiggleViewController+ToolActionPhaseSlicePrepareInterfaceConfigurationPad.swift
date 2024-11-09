@@ -9,9 +9,11 @@ import UIKit
 
 extension JiggleViewController {
     
+    //
     // It's expected that all the stuff is going to
-    // be correctly assigned after this functom..
-    func toolActionConsumePhaseSlicePrepareInterfaceConfigurationPad(_ slice: ToolActionPhaseSlicePrepareInterfaceConfigurationPad) {
+    // be correctly assigned after this functon finished..
+    //
+    @MainActor func toolActionConsumePhaseSlicePrepareInterfaceConfigurationPad(_ slice: ToolActionPhaseSlicePrepareInterfaceConfigurationPad) {
         let configurationPrevious = slice.interfaceConfigurationPrevious
         let configurationCurrent = slice.interfaceConfigurationCurrent
         let isReversed = configurationPrevious.isRightOf(configurationCurrent)

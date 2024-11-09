@@ -20,7 +20,7 @@ import Foundation
             switch jiggleViewModel.jiggleDocument.creatorMode {
             case .none:
                 if let selectedJiggle = jiggleViewModel.getSelectedJiggle() {
-                    if let selectedGuide = selectedJiggle.getSelectedGuide() {
+                    if selectedJiggle.getSelectedGuide() !== nil {
                         refreshEnabled()
                     } else {
                         refreshDisabled()
@@ -33,7 +33,7 @@ import Foundation
             }
         }
         
-        super.refresh()
+        
     }
     
     deinit {

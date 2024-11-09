@@ -9,7 +9,7 @@ import Foundation
 
 struct DividerHugeLayout {
     
-    static func getUniversalPaddingLeft(orientation: Orientation,
+    @MainActor static func getUniversalPaddingLeft(orientation: Orientation,
                                         flavor: LayoutSchemeFlavor,
                                         squeeze: LayoutSchemeSqueeze,
                                         neighborTypeLeft: ToolInterfaceElementType?,
@@ -17,7 +17,7 @@ struct DividerHugeLayout {
         return 3
     }
     
-    static func getUniversalPaddingRight(orientation: Orientation,
+    @MainActor static func getUniversalPaddingRight(orientation: Orientation,
                                          flavor: LayoutSchemeFlavor,
                                          squeeze: LayoutSchemeSqueeze,
                                          neighborTypeLeft: ToolInterfaceElementType?,
@@ -25,7 +25,7 @@ struct DividerHugeLayout {
         return 3
     }
     
-    static func getCapsuleWidth(orientation: Orientation) -> Int {
+    @MainActor static func getCapsuleWidth(orientation: Orientation) -> Int {
         if Device.isPad {
             return 1
         } else {
@@ -33,7 +33,7 @@ struct DividerHugeLayout {
         }
     }
     
-    static func getCapsuleHeight(orientation: Orientation) -> Int {
+    @MainActor static func getCapsuleHeight(orientation: Orientation) -> Int {
         if Device.isPad {
             return 54
         } else {

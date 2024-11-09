@@ -168,34 +168,6 @@ extension ToolInterfaceFactory {
         return exitTimeLineToolNode
     }
     
-    static func getGraphPage2ExitModeToolNode(orientation: Orientation,
-                                              neighborTypeLeft: ToolInterfaceElementType?,
-                                              neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
-        let textLine1 = ToolInterfaceStringLibraryModeChange.modeTextGraphPage2ExitLine1()
-        let textLine2 = ToolInterfaceStringLibraryModeChange.modeTextGraphPage2ExitLine2()
-        let iconPack = FramedConvertibleIconLibrary.menuC
-        let accentPack = FramedLongIconLibrary.pointsA
-        let configuration = ToolInterfaceElementChangeModeConfiguration(iconPack: iconPack,
-                                                                        accentPack: accentPack,
-                                                                        orientation: orientation,
-                                                                        nameLabelLine1: textLine1,
-                                                                        nameLabelLine2: textLine2)
-        let flex = Self.getExitModeFlex(orientation: orientation,
-                                        configuration: configuration,
-                                        neighborTypeLeft: neighborTypeLeft,
-                                        neighborTypeRight: neighborTypeRight)
-        let viewModelGraphPage2Exit = MagicalExitModeViewModelGraphPage2Exit(orientation: orientation,
-                                                                             modeChangeConfiguration: configuration)
-        let exitGraphPage2ToolNode = ToolNode(id: getToolNodeID(),
-                                              element: .exitModeGraphPage2,
-                                              flex: flex,
-                                              magicalViewModel: viewModelGraphPage2Exit,
-                                              neighborTypeLeft: neighborTypeLeft,
-                                              neighborTypeRight: neighborTypeRight)
-        viewModelGraphPage2Exit.refresh()
-        return exitGraphPage2ToolNode
-    }
-    
     static func getVideoRecordExitModeToolNode(orientation: Orientation,
                                                neighborTypeLeft: ToolInterfaceElementType?,
                                                neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
@@ -578,6 +550,102 @@ extension ToolInterfaceFactory {
                                                    neighborTypeRight: neighborTypeRight)
         viewModelContinuousPage3Exit.refresh()
         return exitContinuousPage3ToolNode
+    }
+    
+    static func getGraphPage1ExitModeToolNode(orientation: Orientation,
+                                              neighborTypeLeft: ToolInterfaceElementType?,
+                                              neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+        
+        let textLine1 = ToolInterfaceStringLibraryModeChange.modeTextGraphPage3Line1()
+        let textLine2 = ToolInterfaceStringLibraryModeChange.modeTextGraphPage3Line2()
+        let iconPack = FramedConvertibleIconLibrary.testArrowLeft
+        let accentPack = FramedLongIconLibrary.testArrowRight
+        
+        let configuration = ToolInterfaceElementChangeModeConfiguration(iconPack: iconPack,
+                                                                        accentPack: accentPack,
+                                                                        orientation: orientation,
+                                                                        nameLabelLine1: textLine1,
+                                                                        nameLabelLine2: textLine2)
+        
+        let flex = Self.getExitModeFlex(orientation: orientation,
+                                        configuration: configuration,
+                                        neighborTypeLeft: neighborTypeLeft,
+                                        neighborTypeRight: neighborTypeRight)
+        
+        let viewModelGraphPage1Exit = MagicalExitModeViewModelGraphPage1Exit(orientation: orientation,
+                                                                             modeChangeConfiguration: configuration)
+        let exitGraphPage2ToolNode = ToolNode(id: getToolNodeID(),
+                                              element: .exitModeGraphPage1,
+                                              flex: flex,
+                                              magicalViewModel: viewModelGraphPage1Exit,
+                                              neighborTypeLeft: neighborTypeLeft,
+                                              neighborTypeRight: neighborTypeRight)
+        viewModelGraphPage1Exit.refresh()
+        return exitGraphPage2ToolNode
+    }
+    
+    static func getGraphPage2ExitModeToolNode(orientation: Orientation,
+                                              neighborTypeLeft: ToolInterfaceElementType?,
+                                              neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+        
+        let textLine1 = ToolInterfaceStringLibraryModeChange.modeTextGraphPage1Line1()
+        let textLine2 = ToolInterfaceStringLibraryModeChange.modeTextGraphPage1Line2()
+        let iconPack = FramedConvertibleIconLibrary.testArrowLeft
+        let accentPack = FramedLongIconLibrary.testArrowRight
+        
+        let configuration = ToolInterfaceElementChangeModeConfiguration(iconPack: iconPack,
+                                                                        accentPack: accentPack,
+                                                                        orientation: orientation,
+                                                                        nameLabelLine1: textLine1,
+                                                                        nameLabelLine2: textLine2)
+        
+        let flex = Self.getExitModeFlex(orientation: orientation,
+                                        configuration: configuration,
+                                        neighborTypeLeft: neighborTypeLeft,
+                                        neighborTypeRight: neighborTypeRight)
+        
+        let viewModelGraphPage2Exit = MagicalExitModeViewModelGraphPage2Exit(orientation: orientation,
+                                                                             modeChangeConfiguration: configuration)
+        let exitGraphPage2ToolNode = ToolNode(id: getToolNodeID(),
+                                              element: .exitModeGraphPage2,
+                                              flex: flex,
+                                              magicalViewModel: viewModelGraphPage2Exit,
+                                              neighborTypeLeft: neighborTypeLeft,
+                                              neighborTypeRight: neighborTypeRight)
+        viewModelGraphPage2Exit.refresh()
+        return exitGraphPage2ToolNode
+    }
+    
+    static func getGraphPage3ExitModeToolNode(orientation: Orientation,
+                                              neighborTypeLeft: ToolInterfaceElementType?,
+                                              neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+        
+        let textLine1 = ToolInterfaceStringLibraryModeChange.modeTextGraphPage2Line1()
+        let textLine2 = ToolInterfaceStringLibraryModeChange.modeTextGraphPage2Line2()
+        let iconPack = FramedConvertibleIconLibrary.guides
+        let accentPack = FramedLongIconLibrary.guides
+        
+        let configuration = ToolInterfaceElementChangeModeConfiguration(iconPack: iconPack,
+                                                                        accentPack: accentPack,
+                                                                        orientation: orientation,
+                                                                        nameLabelLine1: textLine1,
+                                                                        nameLabelLine2: textLine2)
+        
+        let flex = Self.getExitModeFlex(orientation: orientation,
+                                        configuration: configuration,
+                                        neighborTypeLeft: neighborTypeLeft,
+                                        neighborTypeRight: neighborTypeRight)
+        
+        let viewModelGraphPage3Exit = MagicalExitModeViewModelGraphPage3Exit(orientation: orientation,
+                                                                             modeChangeConfiguration: configuration)
+        let exitGraphPage3ToolNode = ToolNode(id: getToolNodeID(),
+                                              element: .exitModeGraphPage3,
+                                              flex: flex,
+                                              magicalViewModel: viewModelGraphPage3Exit,
+                                              neighborTypeLeft: neighborTypeLeft,
+                                              neighborTypeRight: neighborTypeRight)
+        viewModelGraphPage3Exit.refresh()
+        return exitGraphPage3ToolNode
     }
     
 }

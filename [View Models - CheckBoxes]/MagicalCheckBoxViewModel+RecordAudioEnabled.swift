@@ -10,21 +10,7 @@ import Foundation
 @Observable class MagicalCheckBoxViewModelRecordAudioEnabled: MagicalCheckBoxViewModel {
     
     override func refresh() {
-        
-        if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
-            /*
-            if jiggleViewModel.jiggleDocument.creatorMode == .moveJiggleCenter {
-                if isChecked == false {
-                    isChecked = true
-                }
-            } else {
-                if isChecked == true {
-                    isChecked = false
-                }
-            }
-            */
-        }
-        
+
         //
         // See if we should be enabled...
         //

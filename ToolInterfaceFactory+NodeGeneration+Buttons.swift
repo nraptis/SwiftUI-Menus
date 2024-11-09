@@ -179,6 +179,14 @@ extension ToolInterfaceFactory {
             return getTimeLineFlipAllButtonToolNode(orientation: orientation,
                                                     neighborTypeLeft: neighborTypeLeft,
                                                     neighborTypeRight: neighborTypeRight)
+        case .timeLineFlipCurrentChannelVertical:
+            return getTimeLineFlipCurrentChannelVerticalButtonToolNode(orientation: orientation,
+                                                                       neighborTypeLeft: neighborTypeLeft,
+                                                                       neighborTypeRight: neighborTypeRight)
+        case .timeLineFlipCurrentChannelHorizontal:
+            return getTimeLineFlipCurrentChannelHorizontalButtonToolNode(orientation: orientation,
+                                                                         neighborTypeLeft: neighborTypeLeft,
+                                                                         neighborTypeRight: neighborTypeRight)
         case .timeLineSyncFrames:
             return getTimeLineSyncFramesButtonToolNode(orientation: orientation,
                                                        neighborTypeLeft: neighborTypeLeft,
@@ -309,6 +317,60 @@ extension ToolInterfaceFactory {
             return getContinuousSyncFramesButtonToolNode(orientation: orientation,
                                                          neighborTypeLeft: neighborTypeLeft,
                                                          neighborTypeRight: neighborTypeRight)
+        case .continuousInvertAngles:
+            return getContinuousInvertAnglesButtonToolNode(orientation: orientation,
+                                                           neighborTypeLeft: neighborTypeLeft,
+                                                           neighborTypeRight: neighborTypeRight)
+            
+        case .continuousInvertRotation:
+            return getContinuousInvertRotationButtonToolNode(orientation: orientation,
+                                                             neighborTypeLeft: neighborTypeLeft,
+                                                             neighborTypeRight: neighborTypeRight)
+            
+        case .continuousInvertSwoop:
+            return getContinuousInvertSwoopButtonToolNode(orientation: orientation,
+                                                          neighborTypeLeft: neighborTypeLeft,
+                                                          neighborTypeRight: neighborTypeRight)
+            
+        case .continuousResetFrameOffset:
+            return getContinuousResetFrameOffsetButtonToolNode(orientation: orientation,
+                                                               neighborTypeLeft: neighborTypeLeft,
+                                                               neighborTypeRight: neighborTypeRight)
+            
+        case .continuousShuffleGroup1:
+            return getContinuousShuffleGroup1ButtonToolNode(orientation: orientation,
+                                                            neighborTypeLeft: neighborTypeLeft,
+                                                            neighborTypeRight: neighborTypeRight)
+            
+        case .continuousShuffleGroup2:
+            return getContinuousShuffleGroup2ButtonToolNode(orientation: orientation,
+                                                            neighborTypeLeft: neighborTypeLeft,
+                                                            neighborTypeRight: neighborTypeRight)
+            
+        case .continuousShuffleGroup3:
+            return getContinuousShuffleGroup3ButtonToolNode(orientation: orientation,
+                                                            neighborTypeLeft: neighborTypeLeft,
+                                                            neighborTypeRight: neighborTypeRight)
+            
+        case .continuousResetGroup1:
+            return getContinuousResetGroup1ButtonToolNode(orientation: orientation,
+                                                          neighborTypeLeft: neighborTypeLeft,
+                                                          neighborTypeRight: neighborTypeRight)
+            
+        case .continuousResetGroup2:
+            return getContinuousResetGroup2ButtonToolNode(orientation: orientation,
+                                                          neighborTypeLeft: neighborTypeLeft,
+                                                          neighborTypeRight: neighborTypeRight)
+            
+        case .continuousResetGroup3:
+            return getContinuousResetGroup3ButtonToolNode(orientation: orientation,
+                                                          neighborTypeLeft: neighborTypeLeft,
+                                                          neighborTypeRight: neighborTypeRight)
+            
+        case .continuousSwapRotation:
+            return getContinuousSwapRotationButtonToolNode(orientation: orientation,
+                                                           neighborTypeLeft: neighborTypeLeft,
+                                                           neighborTypeRight: neighborTypeRight)
             
         case .imageImporterButtonBack:
             return getImageImportBackButtonToolNode(orientation: orientation,

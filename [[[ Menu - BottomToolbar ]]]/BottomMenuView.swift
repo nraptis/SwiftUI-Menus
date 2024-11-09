@@ -55,48 +55,48 @@ class BottomMenuView: UIView, SecondaryMenuConforming {
         return result
     }()
     
-    lazy var standardViewLeftConstraint: NSLayoutConstraint = {
+    @MainActor lazy var standardViewLeftConstraint: NSLayoutConstraint = {
         NSLayoutConstraint(item: standardView, attribute: .left, relatedBy: .equal,
                            toItem: containerView, attribute: .left, multiplier: 1.0, constant: 0.0)
     }()
     
-    lazy var standardView: BottomMenuMenuStandardView = {
+    @MainActor lazy var standardView: BottomMenuMenuStandardView = {
         let result = BottomMenuMenuStandardView(toolInterfaceViewModel: toolInterfaceViewModel)
         result.translatesAutoresizingMaskIntoConstraints = false
         result.backgroundColor = ToolInterfaceTheme._toolbarBackground
         return result
     }()
     
-    lazy var videoRecordViewLeftConstraint: NSLayoutConstraint = {
+    @MainActor lazy var videoRecordViewLeftConstraint: NSLayoutConstraint = {
         NSLayoutConstraint(item: videoRecordView, attribute: .left, relatedBy: .equal, toItem: containerView,
                            attribute: .left, multiplier: 1.0, constant: 0.0)
     }()
     
-    lazy var videoRecordView: BottomMenuMenuVideoRecordView = {
+    @MainActor lazy var videoRecordView: BottomMenuMenuVideoRecordView = {
         let result = BottomMenuMenuVideoRecordView(toolInterfaceViewModel: toolInterfaceViewModel)
         result.translatesAutoresizingMaskIntoConstraints = false
         result.backgroundColor = ToolInterfaceTheme._toolbarBackground
         return result
     }()
     
-    lazy var videoExportViewLeftConstraint: NSLayoutConstraint = {
+    @MainActor lazy var videoExportViewLeftConstraint: NSLayoutConstraint = {
         NSLayoutConstraint(item: videoExportView, attribute: .left, relatedBy: .equal, toItem: containerView,
                            attribute: .left, multiplier: 1.0, constant: 0.0)
     }()
 
-    lazy var videoExportView: BottomMenuMenuVideoExportView = {
+    @MainActor lazy var videoExportView: BottomMenuMenuVideoExportView = {
         let result = BottomMenuMenuVideoExportView(toolInterfaceViewModel: toolInterfaceViewModel)
         result.translatesAutoresizingMaskIntoConstraints = false
         result.backgroundColor = ToolInterfaceTheme._toolbarBackground
         return result
     }()
     
-    lazy var zoomViewLeftConstraint: NSLayoutConstraint = {
+    @MainActor lazy var zoomViewLeftConstraint: NSLayoutConstraint = {
         NSLayoutConstraint(item: zoomView, attribute: .left, relatedBy: .equal, toItem: containerView,
                            attribute: .left, multiplier: 1.0, constant: 0.0)
     }()
     
-    lazy var zoomView: BottomMenuZoomView = {
+    @MainActor lazy var zoomView: BottomMenuZoomView = {
         let result = BottomMenuZoomView(toolInterfaceViewModel: toolInterfaceViewModel)
         result.translatesAutoresizingMaskIntoConstraints = false
         result.backgroundColor = ToolInterfaceTheme._toolbarBackground

@@ -10,9 +10,10 @@ import Foundation
 class HistoryStateCreateJiggle: HistoryState {
     
     let fileBuffer = FileBuffer()
-    convenience init(jiggle: Jiggle) {
+    convenience init(fileBuffer: FileBuffer) {
         self.init()
-        jiggle.save(fileBuffer: fileBuffer)
+        self.fileBuffer.copy(fileBuffer: fileBuffer)
+        //jiggle.save(fileBuffer: fileBuffer)
     }
     
     required init() {

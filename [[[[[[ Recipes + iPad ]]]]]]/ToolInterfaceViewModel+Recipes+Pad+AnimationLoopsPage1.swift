@@ -11,18 +11,20 @@ extension ToolInterfaceViewModel {
     
     @MainActor func getRowRecipe_Pad_Portrait_LoopsPage1_Top_Primary() -> RowRecipe {
         let inrs: [INR] = [
-            .favoringOneLineLabel(.init(minimumWidth: 0, text: "[A.L1]")),
             .button(.menu),
             .checkBox(.darkMode),
             .spacer,
-            .checkBox(.stereoscopic)
+            .checkBox(.stereoscopic),
+            .enterMode(.videoRecord),
         ]
         return RowRecipe(inrs: inrs)
     }
     
     @MainActor func getRowRecipe_Pad_Portrait_LoopsPage1_Top_Secondary() -> RowRecipe {
         let inrs: [INR] = [
-            
+            .exitMode(.loopsPage1),
+            .spacer,
+            .enterMode(.loopsPage2)
             
         ]
         return RowRecipe(inrs: inrs)
@@ -30,11 +32,7 @@ extension ToolInterfaceViewModel {
     
     @MainActor func getRowRecipe_Pad_Portrait_LoopsPage1_Top_Tertiary() -> RowRecipe {
         let inrs: [INR] = [
-            .exitMode(.loopsPage1),
-            .spacer,
-            .button(.timeLineSyncFrames),
-            .spacer,
-            .enterMode(.loopsPage2)
+            
         ]
         return RowRecipe(inrs: inrs)
     }
@@ -42,7 +40,7 @@ extension ToolInterfaceViewModel {
     @MainActor func getRowRecipe_Pad_Portrait_LoopsPage1_Bottom_Tertiary() -> RowRecipe {
         let inrs: [INR] = [
             .exitMode(.animationLoops),
-            .slider(.init(widthCategory: .stretch, slider: .timeLineFrameOffset)),
+            .spacer,
             .enterMode(.timeLine)
         ]
         return RowRecipe(inrs: inrs)
@@ -50,7 +48,7 @@ extension ToolInterfaceViewModel {
     
     @MainActor func getRowRecipe_Pad_Portrait_LoopsPage1_Bottom_Secondary() -> RowRecipe {
         let inrs: [INR] = [
-            .checkBox(.animationLoopApplyToAll),
+            .button(.timeLineSyncFrames),
             .slider(.init(widthCategory: .stretch, slider: .timeLineDuration)),
             .button(.zoomReset),
         ]
@@ -61,7 +59,7 @@ extension ToolInterfaceViewModel {
         let inrs: [INR] = [
             .button_pair(.undo, .redo),
             .mainTab(.documentMode),
-            .enterMode(.videoRecord),
+            .checkBox(.animationLoopApplyToAll),
         ]
         return RowRecipe(inrs: inrs, centerPinnedElement: .mainTabDocumentMode)
     }

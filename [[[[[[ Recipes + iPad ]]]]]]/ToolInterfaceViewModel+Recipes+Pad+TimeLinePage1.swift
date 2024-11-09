@@ -34,7 +34,7 @@ extension ToolInterfaceViewModel {
         let inrs: [INR] = [
             .exitMode(.timeLinePage1),
             .spacer,
-            .button_triplet(.timeLineResetFlat, .timeLineResetCurve, .timeLineResetCurveSmall),
+            .button_triplet(.timeLineResetCurve, .timeLineResetCurveSmall, .timeLineResetFlat),
             .spacer,
             .enterMode(.timeLinePage2)
         ]
@@ -45,9 +45,9 @@ extension ToolInterfaceViewModel {
         let inrs: [INR] = [
             .exitMode(.timeLine),
             .spacer,
-            .button_triplet(.timeLineResetSwan, .timeLineResetDivot, .timeLineResetDivotSmall),
-            .spacer,
-            .checkBox(.animationLoopApplyToAll),
+            .button_triplet(.timeLineResetDivot, .timeLineResetDivotSmall, .timeLineResetSwan),
+            .dividerSpacerDivider,
+            .button(.timeLineFlipCurrentChannelVertical)
         ]
         return RowRecipe(inrs: inrs)
     }
@@ -56,7 +56,7 @@ extension ToolInterfaceViewModel {
         let inrs: [INR] = [
             .button_pair(.undo, .redo),
             .mainTab(.documentMode),
-            .button(.timeLineSyncFrames)
+            .checkBox(.animationLoopApplyToAll),
         ]
         return RowRecipe(inrs: inrs, centerPinnedElement: .mainTabDocumentMode)
     }

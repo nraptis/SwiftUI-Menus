@@ -34,7 +34,7 @@ class HistoryStateRotateOrFlipGuide: HistoryState {
         let result = HistoryWorldConfiguration(documentMode: .edit,
                                                editModeType: .dontCare,
                                                weightModeType: .dontCare,
-                                               graphType: .dontCare,
+                                               graphType: .forceLeave,
                                                guidesType: .forceEnter,
                                                phoneExpandedTopType: .dontCare,
                                                phoneExpandedBottomType: .dontCare,

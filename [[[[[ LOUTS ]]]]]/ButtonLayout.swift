@@ -119,7 +119,7 @@ struct ButtonLayout: LayoutScheme {
         }
     }
     
-    static func getCornerRadius(orientation: Orientation) -> Int {
+    @MainActor static func getCornerRadius(orientation: Orientation) -> Int {
         if Device.isPad {
             return 6
         } else {

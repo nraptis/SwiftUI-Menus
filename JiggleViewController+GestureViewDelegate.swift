@@ -104,8 +104,6 @@ extension JiggleViewController: GestureViewDelegate {
         
         if Device.isPad {
             
-            let orientation = jiggleDocument.orientation
-            
             for touchIndex in 0..<touches.count {
                 let touch = touches[touchIndex]
                 let point = points[touchIndex]
@@ -193,122 +191,122 @@ extension JiggleViewController: GestureViewDelegate {
     
     func touchesMoved(touches: [UITouch], points: [Math.Point], isFromRelease: Bool, allTouchCount: Int) {
         
-        
-        
-        for touchIndex in 0..<touches.count {
-            let touch = touches[touchIndex]
-            let point = points[touchIndex]
-            
-            if resizeTabletInterfaceMenuTouch !== nil {
+        if let rootViewController = ApplicationController.rootViewController {
+            if let rootView = rootViewController.view {
                 
-                
-                if touch === resizeTabletInterfaceMenuTouch {
+                for touchIndex in 0..<touches.count {
+                    let touch = touches[touchIndex]
+                    let point = points[touchIndex]
                     
-                    let pointX = CGFloat(point.x)
-                    
-                    let diffX = pointX - resizeTabletInterfaceMenuStartTouchX
-                    
-                    let rootView = ApplicationController.rootViewController.view ?? UIView()
-                    
-                    let minWidth = CGFloat(DraggableMenuView.getMinimumWidth(orientation: jiggleDocument.orientation))
-                    let maxWidth = CGFloat(DraggableMenuView.getMaximumWidth(orientation: jiggleDocument.orientation))
-                    
-                    let minX = rootView.safeAreaInsets.left
-                    let maxX = rootView.bounds.size.width - (rootView.safeAreaInsets.right)
-                    
-                    let rowHeight = ToolInterfaceTheme.getRowHeight(orientation: jiggleDocument.orientation)
-                    
-                    if resizeTabletInterfaceMenuCorner == .topRight || resizeTabletInterfaceMenuCorner == .bottomRight {
-                        var newWidth = resizeTabletInterfaceMenuStartWidth + diffX
+                    if resizeTabletInterfaceMenuTouch !== nil {
                         
-                        if newWidth > maxWidth { newWidth = maxWidth }
-                        if newWidth < minWidth { newWidth = minWidth }
                         
-                        if resizeTabletInterfaceMenuStartX + newWidth > maxX {
-                            newWidth = (maxX - resizeTabletInterfaceMenuStartX)
+                        if touch === resizeTabletInterfaceMenuTouch {
+                            
+                            let pointX = CGFloat(point.x)
+                            
+                            let diffX = pointX - resizeTabletInterfaceMenuStartTouchX
+                            
+                            
+                            let minWidth = CGFloat(DraggableMenuView.getMinimumWidth(orientation: jiggleDocument.orientation))
+                            let maxWidth = CGFloat(DraggableMenuView.getMaximumWidth(orientation: jiggleDocument.orientation))
+                            
+                            let minX = rootView.safeAreaInsets.left
+                            let maxX = rootView.bounds.size.width - (rootView.safeAreaInsets.right)
+                            
+                            let rowHeight = ToolInterfaceTheme.getRowHeight(orientation: jiggleDocument.orientation)
+                            
+                            if resizeTabletInterfaceMenuCorner == .topRight || resizeTabletInterfaceMenuCorner == .bottomRight {
+                                var newWidth = resizeTabletInterfaceMenuStartWidth + diffX
+                                
+                                if newWidth > maxWidth { newWidth = maxWidth }
+                                if newWidth < minWidth { newWidth = minWidth }
+                                
+                                if resizeTabletInterfaceMenuStartX + newWidth > maxX {
+                                    newWidth = (maxX - resizeTabletInterfaceMenuStartX)
+                                }
+                                
+                                padDraggableMenuWidthConstraint.constant = newWidth
+                                
+                                let newWidthI = Int(newWidth + 0.5)
+                                jiggleViewModel.toolInterfaceViewModel.layoutAllRowsTablet(menuWidthWithSafeArea: newWidthI,
+                                                                                           rowHeight:  rowHeight,
+                                                                                           safeAreaLeft: 0,
+                                                                                           safeAreaRight: 0)
+                                
+                                registerGraphFrame()
+                                registerTimeLineFrame()
+                                
+                                return
+                            } else {
+                                
+                                // The rightX never moves here, we drag the left...
+                                let rightX = resizeTabletInterfaceMenuStartX + resizeTabletInterfaceMenuStartWidth
+                                
+                                var newX = resizeTabletInterfaceMenuStartX + diffX
+                                if newX < minX { newX = minX }
+                                
+                                var newWidth = rightX - newX
+                                if newWidth > maxWidth {
+                                    newX = rightX - maxWidth
+                                    newWidth = maxWidth
+                                }
+                                
+                                if newWidth < minWidth {
+                                    newX = rightX - minWidth
+                                    newWidth = minWidth
+                                }
+                                
+                                padDraggableMenuLeftConstraint.constant = newX
+                                padDraggableMenuWidthConstraint.constant = newWidth
+                                
+                                let newWidthI = Int(newWidth + 0.5)
+                                
+                                jiggleViewModel.toolInterfaceViewModel.layoutAllRowsTablet(menuWidthWithSafeArea: newWidthI,
+                                                                                           rowHeight:  rowHeight,
+                                                                                           safeAreaLeft: 0,
+                                                                                           safeAreaRight: 0)
+                                
+                                registerGraphFrame()
+                                registerTimeLineFrame()
+                                
+                                return
+                            }
                         }
-                        
-                        padDraggableMenuWidthConstraint.constant = newWidth
-                        
-                        let newWidthI = Int(newWidth + 0.5)
-                        jiggleViewModel.toolInterfaceViewModel.layoutAllRowsTablet(menuWidthWithSafeArea: newWidthI,
-                                                                                   rowHeight:  rowHeight,
-                                                                                   safeAreaLeft: 0,
-                                                                                   safeAreaRight: 0)
-                        
-                        registerGraphFrame()
-                        registerTimeLineFrame()
-                        
-                        return
-                    } else {
-                        
-                        // The rightX never moves here, we drag the left...
-                        let rightX = resizeTabletInterfaceMenuStartX + resizeTabletInterfaceMenuStartWidth
-                        
-                        var newX = resizeTabletInterfaceMenuStartX + diffX
-                        if newX < minX { newX = minX }
-                        
-                        var newWidth = rightX - newX
-                        if newWidth > maxWidth {
-                            newX = rightX - maxWidth
-                            newWidth = maxWidth
-                        }
-                        
-                        if newWidth < minWidth {
-                            newX = rightX - minWidth
-                            newWidth = minWidth
-                        }
-                        
-                        padDraggableMenuLeftConstraint.constant = newX
-                        padDraggableMenuWidthConstraint.constant = newWidth
-                        
-                        let newWidthI = Int(newWidth + 0.5)
-                        
-                        jiggleViewModel.toolInterfaceViewModel.layoutAllRowsTablet(menuWidthWithSafeArea: newWidthI,
-                                                                                   rowHeight:  rowHeight,
-                                                                                   safeAreaLeft: 0,
-                                                                                   safeAreaRight: 0)
-                        
-                        registerGraphFrame()
-                        registerTimeLineFrame()
-                        
-                        return
                     }
-                }
-            }
-            
-            if dragTabletInterfaceMenuTouch !== nil {
-                if touch === dragTabletInterfaceMenuTouch {
-                    let pointX = CGFloat(point.x)
-                    let pointY = CGFloat(point.y)
                     
-                    let diffX = pointX - dragTabletInterfaceMenuStartTouchX
-                    let diffY = pointY - dragTabletInterfaceMenuStartTouchY
-                    
-                    let menuWidth = padDraggableMenuWidthConstraint.constant
-                    let menuHeight = MenuHeightCategoryPad.get(category: .standard,
-                                                               orientation: jiggleDocument.orientation,
-                                                               isExpanded: false)
-                    
-                    var newX = dragTabletInterfaceMenuStartX + diffX
-                    var newY = dragTabletInterfaceMenuStartY + diffY
-                    
-                    let rootView = ApplicationController.rootViewController.view ?? UIView()
-                    
-                    let minX = rootView.safeAreaInsets.left
-                    let maxX = rootView.bounds.size.width - (menuWidth + rootView.safeAreaInsets.right)
-                    let minY = rootView.safeAreaInsets.top
-                    let maxY = rootView.bounds.size.height - (CGFloat(menuHeight) + rootView.safeAreaInsets.bottom)
-                    
-                    if newX < minX { newX = minX }
-                    if newX > maxX { newX = maxX }
-                    if newY < minY { newY = minY }
-                    if newY > maxY { newY = maxY }
-                    
-                    padDraggableMenuLeftConstraint.constant = newX
-                    padDraggableMenuTopConstraint.constant = newY
-                    
-                    return
+                    if dragTabletInterfaceMenuTouch !== nil {
+                        if touch === dragTabletInterfaceMenuTouch {
+                            let pointX = CGFloat(point.x)
+                            let pointY = CGFloat(point.y)
+                            
+                            let diffX = pointX - dragTabletInterfaceMenuStartTouchX
+                            let diffY = pointY - dragTabletInterfaceMenuStartTouchY
+                            
+                            let menuWidth = padDraggableMenuWidthConstraint.constant
+                            let menuHeight = MenuHeightCategoryPad.get(category: .standard,
+                                                                       orientation: jiggleDocument.orientation,
+                                                                       isExpanded: false)
+                            
+                            var newX = dragTabletInterfaceMenuStartX + diffX
+                            var newY = dragTabletInterfaceMenuStartY + diffY
+                            
+                            let minX = rootView.safeAreaInsets.left
+                            let maxX = rootView.bounds.size.width - (menuWidth + rootView.safeAreaInsets.right)
+                            let minY = rootView.safeAreaInsets.top
+                            let maxY = rootView.bounds.size.height - (CGFloat(menuHeight) + rootView.safeAreaInsets.bottom)
+                            
+                            if newX < minX { newX = minX }
+                            if newX > maxX { newX = maxX }
+                            if newY < minY { newY = minY }
+                            if newY > maxY { newY = maxY }
+                            
+                            padDraggableMenuLeftConstraint.constant = newX
+                            padDraggableMenuTopConstraint.constant = newY
+                            
+                            return
+                        }
+                    }
                 }
             }
         }
@@ -319,7 +317,7 @@ extension JiggleViewController: GestureViewDelegate {
                                  allTouchCount: allTouchCount)
     }
     
-    func touchesEnded(touches: [UITouch], 
+    @MainActor func touchesEnded(touches: [UITouch],
                       points: [Math.Point],
                       allTouchCount: Int) {
         jiggleScene.touchesEnded(touches: touches,
@@ -329,7 +327,7 @@ extension JiggleViewController: GestureViewDelegate {
         resizeTabletInterfaceMenuTouch = nil
     }
     
-    func handleDoubleTap(center: Math.Point, numberOfTouches: Int) {
+    @MainActor func handleDoubleTap(center: Math.Point, numberOfTouches: Int) {
         
         if Device.isPad { return }
         

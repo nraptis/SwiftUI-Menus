@@ -35,11 +35,11 @@ enum DialogBoxRowModelType {
 class DialogBoxRowModel {
     
     let rowModelType: DialogBoxRowModelType
-    init(rowModelType: DialogBoxRowModelType) {
+    @MainActor init(rowModelType: DialogBoxRowModelType) {
         self.rowModelType = rowModelType
     }
     
-    func manufactureView() -> UIView? {
+    @MainActor func manufactureView() -> UIView? {
         switch rowModelType {
         case .emptySpace:
             if let model = self as? DialogBoxRowModelEmptySpace {

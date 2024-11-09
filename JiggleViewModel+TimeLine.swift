@@ -10,7 +10,7 @@ import Foundation
 extension JiggleViewModel {
     
     
-    func timeLineDupeAll(_ selectedJiggle: Jiggle?) {
+    @MainActor func timeLineDupeAll(_ selectedJiggle: Jiggle?) {
         
         if let selectedJiggle = selectedJiggle,
            let jiggleIndex = jiggleDocument.getJiggleIndex(selectedJiggle) {
@@ -33,17 +33,16 @@ extension JiggleViewModel {
             historyRecordLoopAttributesAll(jiggleIndex: jiggleDocument.snapShotLoopAttributesAllSelectedIndex,
                                              startAttributes: startAttributes,
                                              endAttributes: endAttributes)
-            
         }
     }
     
-    func timeLineSyncFrames() {
+    @MainActor func timeLineSyncFrames() {
         print("JVM: timeLineSyncFrames")
         jiggleDocument.timeLineSyncFrames()
         
     }
     
-    func timeLineFlipAll(_ selectedJiggle: Jiggle?) {
+    @MainActor func timeLineFlipAll(_ selectedJiggle: Jiggle?) {
         print("JVM: timeLineFlipAll")
         
         if let selectedJiggle = selectedJiggle,
@@ -123,7 +122,7 @@ extension JiggleViewModel {
         }
     }
     
-    private func _timeLineCurrentSwatchActionWithHistory(_actionPreBoth: () -> Void,
+    @MainActor private func _timeLineCurrentSwatchActionWithHistory(_actionPreBoth: () -> Void,
                                                          _actionAll: () -> Void,
                                                          _actionOne: () -> Void,
                                                          selectedJiggle: Jiggle,
@@ -250,7 +249,61 @@ extension JiggleViewModel {
         
     }
     
-    func timeLineAmplify(_ selectedJiggle: Jiggle?) {
+    @MainActor func timeLineFlipCurrentChannelHorizontal(_ selectedJiggle: Jiggle?) {
+        
+        if let selectedJiggle = selectedJiggle,
+           let jiggleIndex = jiggleDocument.getJiggleIndex(selectedJiggle) {
+            
+            let frameWidth = jiggleScene.timeLineWidth
+            let frameHeight = jiggleScene.timeLineHeight
+            let paddingH = jiggleScene.timeLinePaddingH
+            let paddingV = jiggleScene.timeLinePaddingV
+            
+            _timeLineCurrentSwatchActionWithHistory(_actionPreBoth: {
+                
+                jiggleDocument.timeLineFlipCurrentChannelHorizontal(selectedJiggle,
+                                               frameWidth: frameWidth,
+                                               frameHeight: frameHeight,
+                                               paddingH: paddingH,
+                                               paddingV: paddingV,
+                                               currentSwatch: timeLineSelectedSwatch)
+                
+            }, _actionAll: {
+                timeLineDupeCurrentChannel(selectedJiggle)
+            }, _actionOne: {
+                timeLineComputeCurrentChannel(selectedJiggle)
+            }, selectedJiggle: selectedJiggle, jiggleIndex: jiggleIndex)
+        }
+    }
+    
+    @MainActor func timeLineFlipCurrentChannelVertical(_ selectedJiggle: Jiggle?) {
+        
+        if let selectedJiggle = selectedJiggle,
+           let jiggleIndex = jiggleDocument.getJiggleIndex(selectedJiggle) {
+            
+            let frameWidth = jiggleScene.timeLineWidth
+            let frameHeight = jiggleScene.timeLineHeight
+            let paddingH = jiggleScene.timeLinePaddingH
+            let paddingV = jiggleScene.timeLinePaddingV
+            
+            _timeLineCurrentSwatchActionWithHistory(_actionPreBoth: {
+                
+                jiggleDocument.timeLineFlipCurrentChannelVertical(selectedJiggle,
+                                               frameWidth: frameWidth,
+                                               frameHeight: frameHeight,
+                                               paddingH: paddingH,
+                                               paddingV: paddingV,
+                                               currentSwatch: timeLineSelectedSwatch)
+                
+            }, _actionAll: {
+                timeLineDupeCurrentChannel(selectedJiggle)
+            }, _actionOne: {
+                timeLineComputeCurrentChannel(selectedJiggle)
+            }, selectedJiggle: selectedJiggle, jiggleIndex: jiggleIndex)
+        }
+    }
+    
+    @MainActor func timeLineAmplify(_ selectedJiggle: Jiggle?) {
         
         if let selectedJiggle = selectedJiggle,
            let jiggleIndex = jiggleDocument.getJiggleIndex(selectedJiggle) {
@@ -277,7 +330,7 @@ extension JiggleViewModel {
         }
     }
     
-    func timeLineDampen(_ selectedJiggle: Jiggle?) {
+    @MainActor func timeLineDampen(_ selectedJiggle: Jiggle?) {
         
         if let selectedJiggle = selectedJiggle,
            let jiggleIndex = jiggleDocument.getJiggleIndex(selectedJiggle) {
@@ -304,7 +357,7 @@ extension JiggleViewModel {
         }
     }
     
-    func timeLineInvertH(_ selectedJiggle: Jiggle?) {
+    @MainActor func timeLineInvertH(_ selectedJiggle: Jiggle?) {
         
         if let selectedJiggle = selectedJiggle,
            let jiggleIndex = jiggleDocument.getJiggleIndex(selectedJiggle) {
@@ -331,7 +384,7 @@ extension JiggleViewModel {
         }
     }
     
-    func timeLineInvertV(_ selectedJiggle: Jiggle?) {
+    @MainActor func timeLineInvertV(_ selectedJiggle: Jiggle?) {
         
         if let selectedJiggle = selectedJiggle,
            let jiggleIndex = jiggleDocument.getJiggleIndex(selectedJiggle) {
@@ -358,7 +411,7 @@ extension JiggleViewModel {
         }
     }
     
-    func timeLineResetCurveSmall(_ selectedJiggle: Jiggle?) {
+    @MainActor func timeLineResetCurveSmall(_ selectedJiggle: Jiggle?) {
         print("JVM: timeLineResetFlatCurrentChannel")
         
         if let selectedJiggle = selectedJiggle,
@@ -372,11 +425,11 @@ extension JiggleViewModel {
             _timeLineCurrentSwatchActionWithHistory(_actionPreBoth: {
                 
                 jiggleDocument.timeLineResetCurveSmall(selectedJiggle,
-                                                               frameWidth: frameWidth,
-                                                               frameHeight: frameHeight,
-                                                               paddingH: paddingH,
-                                                               paddingV: paddingV,
-                                                               currentSwatch: timeLineSelectedSwatch)
+                                                       frameWidth: frameWidth,
+                                                       frameHeight: frameHeight,
+                                                       paddingH: paddingH,
+                                                       paddingV: paddingV,
+                                                       currentSwatch: timeLineSelectedSwatch)
                 
             }, _actionAll: {
                 timeLineDupeCurrentChannel(selectedJiggle)
@@ -385,9 +438,8 @@ extension JiggleViewModel {
             }, selectedJiggle: selectedJiggle, jiggleIndex: jiggleIndex)
         }
     }
-
-
-    func timeLineResetDivot(_ selectedJiggle: Jiggle?) {
+    
+    @MainActor func timeLineResetDivot(_ selectedJiggle: Jiggle?) {
         print("JVM: timeLineResetFlatCurrentChannel")
         
         if let selectedJiggle = selectedJiggle,
@@ -415,8 +467,7 @@ extension JiggleViewModel {
         }
     }
 
-
-    func timeLineResetDivotSmall(_ selectedJiggle: Jiggle?) {
+    @MainActor func timeLineResetDivotSmall(_ selectedJiggle: Jiggle?) {
         print("JVM: timeLineResetFlatCurrentChannel")
         
         if let selectedJiggle = selectedJiggle,
@@ -444,9 +495,7 @@ extension JiggleViewModel {
         }
     }
 
-
-    func timeLineResetFlat(_ selectedJiggle: Jiggle?) {
-        print("JVM: timeLineResetFlatCurrentChannel")
+    @MainActor func timeLineResetFlat(_ selectedJiggle: Jiggle?) {
         
         if let selectedJiggle = selectedJiggle,
            let jiggleIndex = jiggleDocument.getJiggleIndex(selectedJiggle) {
@@ -473,9 +522,7 @@ extension JiggleViewModel {
         }
     }
 
-
-    func timeLineResetSwan(_ selectedJiggle: Jiggle?) {
-        print("JVM: timeLineResetFlatCurrentChannel")
+    @MainActor func timeLineResetSwan(_ selectedJiggle: Jiggle?) {
         
         if let selectedJiggle = selectedJiggle,
            let jiggleIndex = jiggleDocument.getJiggleIndex(selectedJiggle) {
@@ -502,9 +549,7 @@ extension JiggleViewModel {
         }
     }
 
-
-    func timeLineShiftDown(_ selectedJiggle: Jiggle?) {
-        print("JVM: timeLineResetFlatCurrentChannel")
+    @MainActor func timeLineShiftDown(_ selectedJiggle: Jiggle?) {
         
         if let selectedJiggle = selectedJiggle,
            let jiggleIndex = jiggleDocument.getJiggleIndex(selectedJiggle) {
@@ -531,9 +576,7 @@ extension JiggleViewModel {
         }
     }
 
-
-    func timeLineShiftUp(_ selectedJiggle: Jiggle?) {
-        print("JVM: timeLineResetFlatCurrentChannel")
+    @MainActor func timeLineShiftUp(_ selectedJiggle: Jiggle?) {
         
         if let selectedJiggle = selectedJiggle,
            let jiggleIndex = jiggleDocument.getJiggleIndex(selectedJiggle) {
@@ -560,8 +603,7 @@ extension JiggleViewModel {
         }
     }
     
-    func timeLineResetCurve(_ selectedJiggle: Jiggle?) {
-        print("JVM: timeLineResetCurve")
+    @MainActor func timeLineResetCurve(_ selectedJiggle: Jiggle?) {
         
         if let selectedJiggle = selectedJiggle,
            let jiggleIndex = jiggleDocument.getJiggleIndex(selectedJiggle) {
@@ -588,9 +630,7 @@ extension JiggleViewModel {
         }
     }
     
-    func timelinePointCountIncrement(_ selectedJiggle: Jiggle?) {
-        print("JVM: timelinePointCountIncrement")
-        
+    @MainActor func timelinePointCountIncrement(_ selectedJiggle: Jiggle?) {
         if let selectedJiggle = selectedJiggle,
            let jiggleIndex = jiggleDocument.getJiggleIndex(selectedJiggle) {
             
@@ -607,9 +647,7 @@ extension JiggleViewModel {
         }
     }
     
-    func timelinePointCountDecrement(_ selectedJiggle: Jiggle?) {
-        print("JVM: timelinePointCountDecrement")
-        
+    @MainActor func timelinePointCountDecrement(_ selectedJiggle: Jiggle?) {
         if let selectedJiggle = selectedJiggle,
            let jiggleIndex = jiggleDocument.getJiggleIndex(selectedJiggle) {
             
@@ -630,7 +668,7 @@ extension JiggleViewModel {
         jiggleDocument.getTimelinePointCountString(currentSwatch: timeLineSelectedSwatch)
     }
     
-    func timeLineComputeCurrentChannel(_ selectedJiggle: Jiggle?) {
+    @MainActor func timeLineComputeCurrentChannel(_ selectedJiggle: Jiggle?) {
         if let selectedJiggle = selectedJiggle {
             let selectedSwatch = selectedJiggle.timeLine.getSelectedSwatch(swatch: timeLineSelectedSwatch)
             let selectedChannel = selectedSwatch.selectedChannel
@@ -651,14 +689,14 @@ extension JiggleViewModel {
         }
     }
     
-    func timeLineComputeAllChannels(_ selectedJiggle: Jiggle?, swatch: Swatch) {
+    @MainActor func timeLineComputeAllChannels(_ selectedJiggle: Jiggle?) {
         timeLineComputeChannel(selectedJiggle, swatch: .x)
         timeLineComputeChannel(selectedJiggle, swatch: .y)
         timeLineComputeChannel(selectedJiggle, swatch: .scale)
         timeLineComputeChannel(selectedJiggle, swatch: .rotation)
     }
     
-    func timeLineComputeChannel(_ selectedJiggle: Jiggle?, swatch: Swatch) {
+    @MainActor func timeLineComputeChannel(_ selectedJiggle: Jiggle?, swatch: Swatch) {
         if let selectedJiggle = selectedJiggle {
             let chosenSwatch = selectedJiggle.timeLine.getSwatch(swatch: swatch)
             let chosenChannel = chosenSwatch.selectedChannel
@@ -679,7 +717,7 @@ extension JiggleViewModel {
         }
     }
     
-    func timeLineDupeCurrentChannel(_ selectedJiggle: Jiggle?) {
+    @MainActor func timeLineDupeCurrentChannel(_ selectedJiggle: Jiggle?) {
         print("JVM: timeLineDupeCurrentChannel")
         if let selectedJiggle = selectedJiggle {
             jiggleDocument.timeLineDupeCurrentChannel(selectedJiggle,
@@ -691,7 +729,7 @@ extension JiggleViewModel {
         }
     }
     
-    func timeLineDupeChannel(_ selectedJiggle: Jiggle?, swatch: Swatch) {
+    @MainActor func timeLineDupeChannel(_ selectedJiggle: Jiggle?, swatch: Swatch) {
         print("JVM: timeLineDupeCurrentChannel")
         if let selectedJiggle = selectedJiggle {
             jiggleDocument.timeLineDupeChannelForSpecifiedSwatch(selectedJiggle, specifiedSwatch: swatch)
@@ -702,7 +740,7 @@ extension JiggleViewModel {
         }
     }
     
-    func refreshAllTimeLines() {
+    @MainActor func refreshAllTimeLines() {
         let timeLineWidth = jiggleScene.timeLineWidth
         let timeLineHeight = jiggleScene.timeLineHeight
         let timeLinePaddingH = jiggleScene.timeLinePaddingH

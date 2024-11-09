@@ -9,6 +9,29 @@ import Foundation
 
 struct ToolInterfaceStringLibraryModeChange {
     
+    static func modeTextGraphPage1Line1() -> String? {
+        GeneralStringLibrary.get(localized: "graph_page_1_line_1", table: "ToolInterfaceModeChange")
+    }
+
+    static func modeTextGraphPage1Line2() -> String? {
+        GeneralStringLibrary.get(localized: "graph_page_1_line_2", table: "ToolInterfaceModeChange")
+    }
+
+    static func modeTextGraphPage2Line1() -> String? {
+        GeneralStringLibrary.get(localized: "graph_page_2_line_1", table: "ToolInterfaceModeChange")
+    }
+
+    static func modeTextGraphPage2Line2() -> String? {
+        GeneralStringLibrary.get(localized: "graph_page_2_line_2", table: "ToolInterfaceModeChange")
+    }
+
+    static func modeTextGraphPage3Line1() -> String? {
+        GeneralStringLibrary.get(localized: "graph_page_3_line_1", table: "ToolInterfaceModeChange")
+    }
+
+    static func modeTextGraphPage3Line2() -> String? {
+        GeneralStringLibrary.get(localized: "graph_page_3_line_2", table: "ToolInterfaceModeChange")
+    }
     
     static func modeTextContinuousPage1Line1() -> String? {
         GeneralStringLibrary.get(localized: "continuous_page_1_line_1", table: "ToolInterfaceModeChange")
@@ -74,22 +97,6 @@ struct ToolInterfaceStringLibraryModeChange {
     
     static func modeTextAnimationContinuousPage2ExitLine2() -> String? {
         GeneralStringLibrary.get(localized: "animation_continuous_page_2_exit_line_2", table: "ToolInterfaceModeChange")
-    }
-    
-    static func modeTextGraphPage2EnterLine1() -> String? {
-        GeneralStringLibrary.get(localized: "graph_page_2_enter_line_1", table: "ToolInterfaceModeChange")
-    }
-    
-    static func modeTextGraphPage2EnterLine2() -> String? {
-        GeneralStringLibrary.get(localized: "graph_page_2_enter_line_2", table: "ToolInterfaceModeChange")
-    }
-    
-    static func modeTextGraphPage2ExitLine1() -> String? {
-        GeneralStringLibrary.get(localized: "graph_page_2_exit_line_1", table: "ToolInterfaceModeChange")
-    }
-    
-    static func modeTextGraphPage2ExitLine2() -> String? {
-        GeneralStringLibrary.get(localized: "graph_page_2_exit_line_2", table: "ToolInterfaceModeChange")
     }
     
     static func modeTextTimeLinePage2EnterLine1() -> String? {

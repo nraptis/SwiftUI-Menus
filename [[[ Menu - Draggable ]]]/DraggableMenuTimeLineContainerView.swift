@@ -9,11 +9,11 @@ import UIKit
 
 class DraggableMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
     
-    func handleSelectedJiggleDidChange() {
+    @MainActor func handleSelectedJiggleDidChange() {
         handleSelectedSwatchDidChange()
     }
     
-    func handleSelectedSwatchDidChange() {
+    @MainActor func handleSelectedSwatchDidChange() {
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
             switch jiggleViewModel.timeLineSelectedSwatch {
             case .x:
@@ -40,7 +40,7 @@ class DraggableMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
         }
     }
     
-    private func getSelectedX() -> Bool {
+    @MainActor private func getSelectedX() -> Bool {
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
             switch jiggleViewModel.timeLineSelectedSwatch {
             case .x:
@@ -53,7 +53,7 @@ class DraggableMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
         }
     }
     
-    private func getSelectedY() -> Bool {
+    @MainActor private func getSelectedY() -> Bool {
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
             switch jiggleViewModel.timeLineSelectedSwatch {
             case .y:
@@ -66,7 +66,7 @@ class DraggableMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
         }
     }
     
-    private func getSelectedScale() -> Bool {
+    @MainActor private func getSelectedScale() -> Bool {
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
             switch jiggleViewModel.timeLineSelectedSwatch {
             case .scale:
@@ -79,7 +79,7 @@ class DraggableMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
         }
     }
     
-    private func getSelectedRotation() -> Bool {
+    @MainActor private func getSelectedRotation() -> Bool {
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
             switch jiggleViewModel.timeLineSelectedSwatch {
             case .rotation:
@@ -92,67 +92,73 @@ class DraggableMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
         }
     }
     
-    private func turnOffX() {
+    @MainActor private func turnOffX() {
         if buttonX.isSelectedSwatch == true {
             buttonX.isSelectedSwatch = false
             buttonX.setNeedsDisplay()
         }
     }
-    private func turnOnX() {
+    
+    @MainActor private func turnOnX() {
         if buttonX.isSelectedSwatch == false {
             buttonX.isSelectedSwatch = true
             buttonX.setNeedsDisplay()
         }
     }
     
-    private func turnOffY() {
+    @MainActor private func turnOffY() {
         if buttonY.isSelectedSwatch == true {
             buttonY.isSelectedSwatch = false
             buttonY.setNeedsDisplay()
         }
     }
-    private func turnOnY() {
+    
+    @MainActor private func turnOnY() {
         if buttonY.isSelectedSwatch == false {
             buttonY.isSelectedSwatch = true
             buttonY.setNeedsDisplay()
         }
     }
     
-    private func turnOffScale() {
+    @MainActor private func turnOffScale() {
         if buttonScale.isSelectedSwatch == true {
             buttonScale.isSelectedSwatch = false
             buttonScale.setNeedsDisplay()
         }
     }
-    private func turnOnScale() {
+    
+    @MainActor private func turnOnScale() {
         if buttonScale.isSelectedSwatch == false {
             buttonScale.isSelectedSwatch = true
             buttonScale.setNeedsDisplay()
         }
     }
     
-    private func turnOffRotation() {
+    @MainActor private func turnOffRotation() {
         if buttonRotation.isSelectedSwatch == true {
             buttonRotation.isSelectedSwatch = false
             buttonRotation.setNeedsDisplay()
         }
     }
-    private func turnOnRotation() {
+    
+    @MainActor private func turnOnRotation() {
         if buttonRotation.isSelectedSwatch == false {
             buttonRotation.isSelectedSwatch = true
             buttonRotation.setNeedsDisplay()
         }
     }
     
-    lazy var buttonXBottomConstraint: NSLayoutConstraint = {
+    @MainActor lazy var buttonXBottomConstraint: NSLayoutConstraint = {
         NSLayoutConstraint(item: buttonX, attribute: .bottom, relatedBy: .equal, toItem: self,
                            attribute: .bottom, multiplier: 1.0, constant: 0.0)
     }()
-    lazy var buttonXHeightConstraint: NSLayoutConstraint = {
+    
+    @MainActor lazy var buttonXHeightConstraint: NSLayoutConstraint = {
         NSLayoutConstraint(item: buttonX, attribute: .height, relatedBy: .equal, toItem: nil,
                            attribute: .notAnAttribute, multiplier: 1.0, constant: CGFloat(44))
     }()
-    lazy var buttonX: TimeLineButton = {
+    
+    @MainActor lazy var buttonX: TimeLineButton = {
         let orientation = toolInterfaceViewModel.orientation
         let imageDark = ToolInterfaceTheme.timeLineButtonX(orientation: toolInterfaceViewModel.orientation, isDarkMode: true)
         let imageLight = ToolInterfaceTheme.timeLineButtonX(orientation: toolInterfaceViewModel.orientation, isDarkMode: false)
@@ -165,15 +171,17 @@ class DraggableMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
         return result
     }()
     
-    lazy var buttonYBottomConstraint: NSLayoutConstraint = {
+    @MainActor lazy var buttonYBottomConstraint: NSLayoutConstraint = {
         NSLayoutConstraint(item: buttonY, attribute: .bottom, relatedBy: .equal, toItem: self,
                            attribute: .bottom, multiplier: 1.0, constant: 0.0)
     }()
-    lazy var buttonYHeightConstraint: NSLayoutConstraint = {
+    
+    @MainActor lazy var buttonYHeightConstraint: NSLayoutConstraint = {
         NSLayoutConstraint(item: buttonY, attribute: .height, relatedBy: .equal, toItem: nil,
                            attribute: .notAnAttribute, multiplier: 1.0, constant: CGFloat(44))
     }()
-    lazy var buttonY: TimeLineButton = {
+    
+    @MainActor lazy var buttonY: TimeLineButton = {
         let orientation = toolInterfaceViewModel.orientation
         let imageDark = ToolInterfaceTheme.timeLineButtonY(orientation: toolInterfaceViewModel.orientation, isDarkMode: true)
         let imageLight = ToolInterfaceTheme.timeLineButtonY(orientation: toolInterfaceViewModel.orientation, isDarkMode: false)
@@ -186,15 +194,15 @@ class DraggableMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
         return result
     }()
     
-    lazy var buttonScaleBottomConstraint: NSLayoutConstraint = {
+    @MainActor lazy var buttonScaleBottomConstraint: NSLayoutConstraint = {
         NSLayoutConstraint(item: buttonScale, attribute: .bottom, relatedBy: .equal, toItem: self,
                            attribute: .bottom, multiplier: 1.0, constant: 0.0)
     }()
-    lazy var buttonScaleHeightConstraint: NSLayoutConstraint = {
+    @MainActor lazy var buttonScaleHeightConstraint: NSLayoutConstraint = {
         NSLayoutConstraint(item: buttonScale, attribute: .height, relatedBy: .equal, toItem: nil,
                            attribute: .notAnAttribute, multiplier: 1.0, constant: CGFloat(44))
     }()
-    lazy var buttonScale: TimeLineButton = {
+    @MainActor lazy var buttonScale: TimeLineButton = {
         let orientation = toolInterfaceViewModel.orientation
         let imageDark = ToolInterfaceTheme.timeLineButtonScale(orientation: toolInterfaceViewModel.orientation, isDarkMode: true)
         let imageLight = ToolInterfaceTheme.timeLineButtonScale(orientation: toolInterfaceViewModel.orientation, isDarkMode: false)
@@ -207,15 +215,16 @@ class DraggableMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
         return result
     }()
     
-    lazy var buttonRotationBottomConstraint: NSLayoutConstraint = {
+    @MainActor lazy var buttonRotationBottomConstraint: NSLayoutConstraint = {
         NSLayoutConstraint(item: buttonRotation, attribute: .bottom, relatedBy: .equal, toItem: self,
                            attribute: .bottom, multiplier: 1.0, constant: 0.0)
     }()
-    lazy var buttonRotationHeightConstraint: NSLayoutConstraint = {
+    @MainActor lazy var buttonRotationHeightConstraint: NSLayoutConstraint = {
         NSLayoutConstraint(item: buttonRotation, attribute: .height, relatedBy: .equal, toItem: nil,
                            attribute: .notAnAttribute, multiplier: 1.0, constant: CGFloat(44))
     }()
-    lazy var buttonRotation: TimeLineButton = {
+    
+    @MainActor lazy var buttonRotation: TimeLineButton = {
         let orientation = toolInterfaceViewModel.orientation
         let imageDark = ToolInterfaceTheme.timeLineButtonRotation(orientation: toolInterfaceViewModel.orientation, isDarkMode: true)
         let imageLight = ToolInterfaceTheme.timeLineButtonRotation(orientation: toolInterfaceViewModel.orientation, isDarkMode: false)
@@ -228,21 +237,21 @@ class DraggableMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
         return result
     }()
     
-    lazy var containerView: UIView = {
+    @MainActor lazy var containerView: UIView = {
         let result = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 512.0, height: 512.0))
         result.translatesAutoresizingMaskIntoConstraints = false
         result.backgroundColor = ToolInterfaceTheme._toolbarBackground
         return result
     }()
     
-    lazy var timeLineContainerView: UIView = {
+    @MainActor lazy var timeLineContainerView: UIView = {
         let result = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 512.0, height: 512.0))
         result.translatesAutoresizingMaskIntoConstraints = false
         result.backgroundColor = ToolInterfaceTheme._toolbarBackground
         return result
     }()
     
-    lazy var timeLineClippingView: TimeLineClippingView = {
+    @MainActor lazy var timeLineClippingView: TimeLineClippingView = {
         let orientation = toolInterfaceViewModel.orientation
         let insetLeft = ToolInterfaceTheme.getDraggableMenuTimeLineInsetLeft()
         let insetRight = ToolInterfaceTheme.getDraggableMenuTimeLineInsetRight()
@@ -256,7 +265,7 @@ class DraggableMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
         return result
     }()
     
-    lazy var timeLineView: TimeLineView = {
+    @MainActor lazy var timeLineView: TimeLineView = {
         let cornerRadius = ToolInterfaceTheme.getDraggableMenuTimeLineCornerRadius()
         let result = TimeLineView(cornerRadius: cornerRadius)
         result.translatesAutoresizingMaskIntoConstraints = false
@@ -264,7 +273,7 @@ class DraggableMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
         return result
     }()
     
-    func handleDarkModeDidChange() {
+    @MainActor func handleDarkModeDidChange() {
         timeLineClippingView.setNeedsDisplay()
         timeLineView.setNeedsDisplay()
         buttonX.setNeedsDisplay()
@@ -274,7 +283,7 @@ class DraggableMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
     }
     
     let toolInterfaceViewModel: ToolInterfaceViewModel
-    init(toolInterfaceViewModel: ToolInterfaceViewModel) {
+    @MainActor init(toolInterfaceViewModel: ToolInterfaceViewModel) {
         self.toolInterfaceViewModel = toolInterfaceViewModel
         super.init(frame: .zero)
     }
@@ -283,7 +292,7 @@ class DraggableMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup(width: Int) {
+    @MainActor func setup(width: Int) {
         
         addSubview(containerView)
         addConstraints([
@@ -420,20 +429,6 @@ class DraggableMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
         if let jiggleViewController = ApplicationController.shared.jiggleViewController {
             jiggleViewController.selectTimeLineSwatch(swatch: .x)
         }
-        /*
-         if let jiggleViewController = ApplicationController.shared.jiggleViewController {
-         let jiggleViewModel = jiggleViewController.jiggleViewModel
-         let selectedJiggle = jiggleViewModel.getSelectedJiggle()
-         if let selectedJiggle = selectedJiggle {
-         selectedJiggle.timeLine.selectedSwatch = selectedJiggle.timeLine.swatchPositionX
-         if let jiggleDocument = ApplicationController.shared.jiggleDocument {
-         jiggleDocument.selectedTimeLineSwatchUpdatePublisher.send(())
-         }
-         }
-         jiggleViewController.toolInterfaceViewModel.handleTimelinePointCountDidChange()
-         jiggleViewController.timeLineUpdateRelay(jiggle: selectedJiggle)
-         }
-         */
     }
     
     @objc func clickY() {
@@ -441,20 +436,6 @@ class DraggableMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
         if let jiggleViewController = ApplicationController.shared.jiggleViewController {
             jiggleViewController.selectTimeLineSwatch(swatch: .y)
         }
-        /*
-         if let jiggleViewController = ApplicationController.shared.jiggleViewController {
-         let jiggleViewModel = jiggleViewController.jiggleViewModel
-         let selectedJiggle = jiggleViewModel.getSelectedJiggle()
-         if let selectedJiggle = selectedJiggle {
-         selectedJiggle.timeLine.selectedSwatch = selectedJiggle.timeLine.swatchPositionY
-         if let jiggleDocument = ApplicationController.shared.jiggleDocument {
-         jiggleDocument.selectedTimeLineSwatchUpdatePublisher.send(())
-         }
-         }
-         jiggleViewController.toolInterfaceViewModel.handleTimelinePointCountDidChange()
-         jiggleViewController.timeLineUpdateRelay(jiggle: selectedJiggle)
-         }
-         */
     }
     
     @objc func clickScale() {
@@ -462,20 +443,6 @@ class DraggableMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
         if let jiggleViewController = ApplicationController.shared.jiggleViewController {
             jiggleViewController.selectTimeLineSwatch(swatch: .scale)
         }
-        /*
-         if let jiggleViewController = ApplicationController.shared.jiggleViewController {
-         let jiggleViewModel = jiggleViewController.jiggleViewModel
-         let selectedJiggle = jiggleViewModel.getSelectedJiggle()
-         if let selectedJiggle = selectedJiggle {
-         selectedJiggle.timeLine.selectedSwatch = selectedJiggle.timeLine.swatchScale
-         if let jiggleDocument = ApplicationController.shared.jiggleDocument {
-         jiggleDocument.selectedTimeLineSwatchUpdatePublisher.send(())
-         }
-         }
-         jiggleViewController.toolInterfaceViewModel.handleTimelinePointCountDidChange()
-         jiggleViewController.timeLineUpdateRelay(jiggle: selectedJiggle)
-         }
-         */
     }
     
     @objc func clickRotation() {
@@ -483,26 +450,10 @@ class DraggableMenuTimeLineContainerView: UIView, TimeLineContainerConforming {
         if let jiggleViewController = ApplicationController.shared.jiggleViewController {
             jiggleViewController.selectTimeLineSwatch(swatch: .rotation)
         }
-        /*
-         if let jiggleViewController = ApplicationController.shared.jiggleViewController {
-         let jiggleViewModel = jiggleViewController.jiggleViewModel
-         let selectedJiggle = jiggleViewModel.getSelectedJiggle()
-         if let selectedJiggle = selectedJiggle {
-         selectedJiggle.timeLine.selectedSwatch = selectedJiggle.timeLine.swatchRotation
-         if let jiggleDocument = ApplicationController.shared.jiggleDocument {
-         jiggleDocument.selectedTimeLineSwatchUpdatePublisher.send(())
-         }
-         }
-         jiggleViewController.toolInterfaceViewModel.handleTimelinePointCountDidChange()
-         jiggleViewController.timeLineUpdateRelay(jiggle: selectedJiggle)
-         
-         }
-         */
     }
     
-    func handleBlockerHeightOrSafeAreaDidChange() {
+    @MainActor func handleBlockerHeightOrSafeAreaDidChange() {
         
-        let insetTop = ToolInterfaceTheme.getDraggableMenuTimeLineInsetTop()
         let insetBottom = ToolInterfaceTheme.getDraggableMenuTimeLineInsetBottom()
         
         let rowHeight = ToolInterfaceTheme.getRowHeight(orientation: .portrait)

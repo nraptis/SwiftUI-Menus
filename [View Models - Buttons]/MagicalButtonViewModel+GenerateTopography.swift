@@ -19,13 +19,17 @@ import Foundation
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
             switch jiggleViewModel.jiggleDocument.creatorMode {
             case .none:
-                refreshEnabled()
+                if jiggleViewModel.isAnySliderActive {
+                    refreshDisabled()
+                } else {
+                    refreshEnabled()
+                }
             default:
                 refreshDisabled()
             }
         }
         
-        super.refresh()
+        
     }
     
     deinit {

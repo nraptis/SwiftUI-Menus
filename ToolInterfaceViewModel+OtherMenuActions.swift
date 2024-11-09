@@ -11,7 +11,7 @@ import UIKit
 
 extension ToolInterfaceViewModel {
     
-    func dialogActionSaveJiggle() {
+    @MainActor func dialogActionSaveJiggle() {
         
         let titleBar = DialogBoxRowModelTitleBar(title: "Save AI Model")
         let messageTitle = DialogBoxRowModelMessageBody(title: "What would you like to name your ai model?")
@@ -53,11 +53,13 @@ extension ToolInterfaceViewModel {
         let dialogBox = DialogBoxModel(bodyRowModels: bodyRowModels,
                                        buttonRowModels: buttonRowModels)
         
-        ApplicationController.rootViewController.pushDialogBox(dialogBox)
+        if let rootViewController = ApplicationController.rootViewController {
+            rootViewController.pushDialogBox(dialogBox)
+        }
         
     }
     
-    func dialogActionEditThumb() {
+    @MainActor func dialogActionEditThumb() {
         
         let titleBar = DialogBoxRowModelTitleBar(title: "Edit Thumbnail")
         
@@ -95,16 +97,20 @@ extension ToolInterfaceViewModel {
         let dialogBox = DialogBoxModel(bodyRowModels: bodyRowModels,
                                        buttonRowModels: buttonRowModels)
         
-        ApplicationController.rootViewController.pushDialogBox(dialogBox)
+        if let rootViewController = ApplicationController.rootViewController {
+            rootViewController.pushDialogBox(dialogBox)
+        }
     }
     
-    func dialogActionSaveReplacePrompt(documentName: String?) {
+    @MainActor func dialogActionSaveReplacePrompt(documentName: String?) {
         let titleBar = DialogBoxRowModelTitleBar(title: "Replace AI Model")
         
         let messageTitle = DialogBoxRowModelMessageBody(title: "Are tou air you wann osve write this?")
         
         let buttonLeft = DialogBoxButtonModel(title: "Cancel", type: .generic) {
-            ApplicationController.rootViewController.popDialogBox()
+            if let rootViewController = ApplicationController.rootViewController {
+                rootViewController.popDialogBox()
+            }
         }
         
         let buttonRight = DialogBoxButtonModel(title: "Repla", type: .navArrowGreenCentered) { [weak self] in
@@ -117,37 +123,43 @@ extension ToolInterfaceViewModel {
         
         let dialogBox = DialogBoxModel(bodyRowModels: bodyRowModels,
                                        buttonRowModels: buttonRowModels)
-        
-        ApplicationController.rootViewController.pushDialogBox(dialogBox)
+        if let rootViewController = ApplicationController.rootViewController {
+            rootViewController.pushDialogBox(dialogBox)
+        }
     }
     
-    func dialogActionSaveJiggleOkay(documentName: String?,
+    @MainActor func dialogActionSaveJiggleOkay(documentName: String?,
                                     isOverwriting: Bool) {
         print("[IMB] Action - toolActionSaveJiggleOkay")
         if let jiggleViewModel = jiggleViewModel {
             if !SavedFileManager.shared.save(jiggleDocument: jiggleViewModel.jiggleDocument,
                                              documentName: documentName,
                                              isOverwriting: isOverwriting) {
-                ApplicationController.rootViewController.popDialogBox { _ in
-                    
-                    self.dialogActionSimpleMessageBox(title: "Couldn't Save", 
-                                                      message: "There was an error saving that...")
+                if let rootViewController = ApplicationController.rootViewController {
+                    rootViewController.popDialogBox { _ in
+                        
+                        self.dialogActionSimpleMessageBox(title: "Couldn't Save",
+                                                          message: "There was an error saving that...")
+                    }
                 }
             } else {
-                ApplicationController.rootViewController.popDialogBox { _ in
-                    
-                    self.dialogActionSimpleMessageBox(title: "You Did Saved", 
-                                                      message: "This was a screamin sduccess...")
+                if let rootViewController = ApplicationController.rootViewController {
+                    rootViewController.popDialogBox { _ in
+                        self.dialogActionSimpleMessageBox(title: "You Did Saved",
+                                                          message: "This was a screamin sduccess...")
+                    }
                 }
             }
         }
     }
     
-    func dialogActionSaveJiggleCancel() {
-        ApplicationController.rootViewController.popDialogBox()
+    @MainActor func dialogActionSaveJiggleCancel() {
+        if let rootViewController = ApplicationController.rootViewController {
+            rootViewController.popDialogBox()
+        }
     }
     
-    func dialogActionCropThumb(image: UIImage?, thumbCropFrame: ThumbCropFrame) {
+    @MainActor func dialogActionCropThumb(image: UIImage?, thumbCropFrame: ThumbCropFrame) {
         
         if let jiggleViewModel = jiggleViewModel {
             jiggleViewModel.jiggleDocument.thumbCropFrame = thumbCropFrame
@@ -156,22 +168,27 @@ extension ToolInterfaceViewModel {
             print("SetThumbCropFrame => width: \(thumbCropFrame.width)")
             print("SetThumbCropFrame => height: \(thumbCropFrame.height)")
         }
-        
-        ApplicationController.rootViewController.popDialogBox()
+        if let rootViewController = ApplicationController.rootViewController {
+            rootViewController.popDialogBox()
+        }
     }
     
-    func dialogActionCropThumbCancel() {
-        ApplicationController.rootViewController.popDialogBox()
+    @MainActor func dialogActionCropThumbCancel() {
+        if let rootViewController = ApplicationController.rootViewController {
+            rootViewController.popDialogBox()
+        }
     }
     
-    func dialogActionSimpleMessageBox(title: String, message: String) {
+    @MainActor func dialogActionSimpleMessageBox(title: String, message: String) {
         
         let titleBar = DialogBoxRowModelTitleBar(title: "Replace AI Model")
         
         let messageTitle = DialogBoxRowModelMessageBody(title: "Are tou air you wann osve write this?")
         
         let button = DialogBoxButtonModel(title: "Okay", type: .generic) {
-            ApplicationController.rootViewController.popDialogBox()
+            if let rootViewController = ApplicationController.rootViewController {
+                rootViewController.popDialogBox()
+            }
         }
         
         let bodyRowModels: [DialogBoxRowModel] = [DialogBoxRowModelEmptySpace(height: 8),
@@ -184,7 +201,9 @@ extension ToolInterfaceViewModel {
         let dialogBox = DialogBoxModel(bodyRowModels: bodyRowModels,
                                        buttonRowModels: buttonRowModels)
         
-        ApplicationController.rootViewController.pushDialogBox(dialogBox)
+        if let rootViewController = ApplicationController.rootViewController {
+            rootViewController.pushDialogBox(dialogBox)
+        }
     }
     
 }

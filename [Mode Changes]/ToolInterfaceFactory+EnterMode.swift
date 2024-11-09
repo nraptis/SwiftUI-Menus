@@ -201,34 +201,6 @@ extension ToolInterfaceFactory {
         return enterZoomToolNode
     }
     
-    static func getGraphPage2EnterModeToolNode(orientation: Orientation,
-                                               neighborTypeLeft: ToolInterfaceElementType?,
-                                               neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
-        let textLine1 = ToolInterfaceStringLibraryModeChange.modeTextGraphPage2EnterLine1()
-        let textLine2 = ToolInterfaceStringLibraryModeChange.modeTextGraphPage2EnterLine2()
-        let iconPack = FramedConvertibleIconLibrary.magGlass
-        let accentPack = FramedLongIconLibrary.magGlass
-        let configuration = ToolInterfaceElementChangeModeConfiguration(iconPack: iconPack,
-                                                                        accentPack: accentPack,
-                                                                        orientation: orientation,
-                                                                        nameLabelLine1: textLine1,
-                                                                        nameLabelLine2: textLine2)
-        let flex = Self.getEnterModeFlex(orientation: orientation,
-                                         configuration: configuration,
-                                         neighborTypeLeft: neighborTypeLeft,
-                                         neighborTypeRight: neighborTypeRight)
-        let viewModelGraphPage2Enter = MagicalModeChangeViewModelGraphPage2Enter(orientation: orientation,
-                                                                                 modeChangeConfiguration: configuration)
-        let enterGraphPage2ToolNode = ToolNode(id: getToolNodeID(),
-                                               element: .enterModeGraphPage2,
-                                               flex: flex,
-                                               magicalViewModel: viewModelGraphPage2Enter,
-                                               neighborTypeLeft: neighborTypeLeft,
-                                               neighborTypeRight: neighborTypeRight)
-        viewModelGraphPage2Enter.refresh()
-        return enterGraphPage2ToolNode
-    }
-    
     static func getVideoRecordEnterModeToolNode(orientation: Orientation,
                                                 neighborTypeLeft: ToolInterfaceElementType?,
                                                 neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
@@ -579,6 +551,102 @@ extension ToolInterfaceFactory {
                                                     neighborTypeRight: neighborTypeRight)
         viewModelContinuousPage3Enter.refresh()
         return enterContinuousPage3ToolNode
+    }
+    
+    static func getGraphPage1EnterModeToolNode(orientation: Orientation,
+                                               neighborTypeLeft: ToolInterfaceElementType?,
+                                               neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+        
+        let textLine1 = ToolInterfaceStringLibraryModeChange.modeTextGraphPage1Line1()
+        let textLine2 = ToolInterfaceStringLibraryModeChange.modeTextGraphPage1Line2()
+        let iconPack = FramedConvertibleIconLibrary.stereoscopic
+        let accentPack = FramedLongIconLibrary.wolvenStein
+        
+        let configuration = ToolInterfaceElementChangeModeConfiguration(iconPack: iconPack,
+                                                                        accentPack: accentPack,
+                                                                        orientation: orientation,
+                                                                        nameLabelLine1: textLine1,
+                                                                        nameLabelLine2: textLine2)
+        
+        let flex = Self.getEnterModeFlex(orientation: orientation,
+                                         configuration: configuration,
+                                         neighborTypeLeft: neighborTypeLeft,
+                                         neighborTypeRight: neighborTypeRight)
+        
+        let viewModelGraphPage1Enter = MagicalModeChangeViewModelGraphPage1Enter(orientation: orientation,
+                                                                                 modeChangeConfiguration: configuration)
+        let enterGraphPage1ToolNode = ToolNode(id: getToolNodeID(),
+                                               element: .enterModeGraphPage1,
+                                               flex: flex,
+                                               magicalViewModel: viewModelGraphPage1Enter,
+                                               neighborTypeLeft: neighborTypeLeft,
+                                               neighborTypeRight: neighborTypeRight)
+        viewModelGraphPage1Enter.refresh()
+        return enterGraphPage1ToolNode
+    }
+    
+    static func getGraphPage2EnterModeToolNode(orientation: Orientation,
+                                               neighborTypeLeft: ToolInterfaceElementType?,
+                                               neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+        
+        let textLine1 = ToolInterfaceStringLibraryModeChange.modeTextGraphPage2Line1()
+        let textLine2 = ToolInterfaceStringLibraryModeChange.modeTextGraphPage2Line2()
+        let iconPack = FramedConvertibleIconLibrary.pointsA
+        let accentPack = FramedLongIconLibrary.pointsB
+        
+        let configuration = ToolInterfaceElementChangeModeConfiguration(iconPack: iconPack,
+                                                                        accentPack: accentPack,
+                                                                        orientation: orientation,
+                                                                        nameLabelLine1: textLine1,
+                                                                        nameLabelLine2: textLine2)
+        
+        let flex = Self.getEnterModeFlex(orientation: orientation,
+                                         configuration: configuration,
+                                         neighborTypeLeft: neighborTypeLeft,
+                                         neighborTypeRight: neighborTypeRight)
+        
+        let viewModelGraphPage2Enter = MagicalModeChangeViewModelGraphPage2Enter(orientation: orientation,
+                                                                                 modeChangeConfiguration: configuration)
+        let enterGraphPage2ToolNode = ToolNode(id: getToolNodeID(),
+                                               element: .enterModeGraphPage2,
+                                               flex: flex,
+                                               magicalViewModel: viewModelGraphPage2Enter,
+                                               neighborTypeLeft: neighborTypeLeft,
+                                               neighborTypeRight: neighborTypeRight)
+        viewModelGraphPage2Enter.refresh()
+        return enterGraphPage2ToolNode
+    }
+    
+    static func getGraphPage3EnterModeToolNode(orientation: Orientation,
+                                               neighborTypeLeft: ToolInterfaceElementType?,
+                                               neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+        
+        let textLine1 = ToolInterfaceStringLibraryModeChange.modeTextGraphPage3Line1()
+        let textLine2 = ToolInterfaceStringLibraryModeChange.modeTextGraphPage3Line2()
+        let iconPack = FramedConvertibleIconLibrary.menuC
+        let accentPack = FramedLongIconLibrary.menuC
+        
+        let configuration = ToolInterfaceElementChangeModeConfiguration(iconPack: iconPack,
+                                                                        accentPack: accentPack,
+                                                                        orientation: orientation,
+                                                                        nameLabelLine1: textLine1,
+                                                                        nameLabelLine2: textLine2)
+        
+        let flex = Self.getEnterModeFlex(orientation: orientation,
+                                         configuration: configuration,
+                                         neighborTypeLeft: neighborTypeLeft,
+                                         neighborTypeRight: neighborTypeRight)
+        
+        let viewModelGraphPage3Enter = MagicalModeChangeViewModelGraphPage3Enter(orientation: orientation,
+                                                                                 modeChangeConfiguration: configuration)
+        let enterGraphPage3ToolNode = ToolNode(id: getToolNodeID(),
+                                               element: .enterModeGraphPage3,
+                                               flex: flex,
+                                               magicalViewModel: viewModelGraphPage3Enter,
+                                               neighborTypeLeft: neighborTypeLeft,
+                                               neighborTypeRight: neighborTypeRight)
+        viewModelGraphPage3Enter.refresh()
+        return enterGraphPage3ToolNode
     }
     
 }

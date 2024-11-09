@@ -12,7 +12,7 @@ class DialogBoxRowModelEditThumb: DialogBoxRowModel {
     let fullSizedImage: UIImage?
     let originalThumbCropFrame: ThumbCropFrame
     var action: ((ThumbCropFrame) -> Void)?
-    init(fullSizedImage: UIImage?,
+    @MainActor init(fullSizedImage: UIImage?,
          originalThumbCropFrame: ThumbCropFrame,
          action: @escaping ((ThumbCropFrame) -> Void)) {
         self.fullSizedImage = fullSizedImage

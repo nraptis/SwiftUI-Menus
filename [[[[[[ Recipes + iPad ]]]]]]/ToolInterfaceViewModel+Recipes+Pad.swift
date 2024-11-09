@@ -14,11 +14,14 @@ extension ToolInterfaceViewModel {
         case .edit:
             if configuration.isGuidesEnabled {
                 if configuration.isGraphEnabled {
-                    if configuration.isGraphPage2Enabled {
-                        // graph page 2 [GraphPage2]
+                    if configuration.graphPage == 3 {
+                        // animation graph page 3 [GraphPage3]
+                        return getRowRecipe_Pad_Portrait_GraphPage3_Top_Primary()
+                    } else if configuration.graphPage == 2 {
+                        // animation graph page 2 [GraphPage2]
                         return getRowRecipe_Pad_Portrait_GraphPage2_Top_Primary()
                     } else {
-                        // graph page 1 [GraphPage1]
+                        // animation graph page 1 [GraphPage1]
                         return getRowRecipe_Pad_Portrait_GraphPage1_Top_Primary()
                     }
                 } else {
@@ -54,7 +57,7 @@ extension ToolInterfaceViewModel {
                         // animation loops page 1 [TimeLinePage1]
                         return getRowRecipe_Pad_Portrait_TimeLinePage1_Top_Primary()
                     }
-
+                    
                 } else {
                     if configuration.animationLoopsPage == 3 {
                         // animation loops page 3 [LoopsPage3]
@@ -92,11 +95,14 @@ extension ToolInterfaceViewModel {
         case .edit:
             if configuration.isGuidesEnabled {
                 if configuration.isGraphEnabled {
-                    if configuration.isGraphPage2Enabled {
-                        // graph page 2 [GraphPage2]
+                    if configuration.graphPage == 3 {
+                        // animation graph page 3 [GraphPage3]
+                        return getRowRecipe_Pad_Portrait_GraphPage3_Top_Secondary()
+                    } else if configuration.graphPage == 2 {
+                        // animation graph page 2 [GraphPage2]
                         return getRowRecipe_Pad_Portrait_GraphPage2_Top_Secondary()
                     } else {
-                        // graph page 1 [GraphPage1]
+                        // animation graph page 1 [GraphPage1]
                         return getRowRecipe_Pad_Portrait_GraphPage1_Top_Secondary()
                     }
                 } else {
@@ -169,11 +175,14 @@ extension ToolInterfaceViewModel {
         case .edit:
             if configuration.isGuidesEnabled {
                 if configuration.isGraphEnabled {
-                    if configuration.isGraphPage2Enabled {
-                        // graph page 2 [GraphPage2]
+                    if configuration.graphPage == 3 {
+                        // animation graph page 3 [GraphPage3]
+                        return getRowRecipe_Pad_Portrait_GraphPage3_Top_Tertiary()
+                    } else if configuration.graphPage == 2 {
+                        // animation graph page 2 [GraphPage2]
                         return getRowRecipe_Pad_Portrait_GraphPage2_Top_Tertiary()
                     } else {
-                        // graph page 1 [GraphPage1]
+                        // animation graph page 1 [GraphPage1]
                         return getRowRecipe_Pad_Portrait_GraphPage1_Top_Tertiary()
                     }
                 } else {
@@ -248,11 +257,14 @@ extension ToolInterfaceViewModel {
         case .edit:
             if configuration.isGuidesEnabled {
                 if configuration.isGraphEnabled {
-                    if configuration.isGraphPage2Enabled {
-                        // graph page 2 [GraphPage2]
+                    if configuration.graphPage == 3 {
+                        // animation graph page 3 [GraphPage3]
+                        return getRowRecipe_Pad_Portrait_GraphPage3_Bottom_Tertiary()
+                    } else if configuration.graphPage == 2 {
+                        // animation graph page 2 [GraphPage2]
                         return getRowRecipe_Pad_Portrait_GraphPage2_Bottom_Tertiary()
                     } else {
-                        // graph page 1 [GraphPage1]
+                        // animation graph page 1 [GraphPage1]
                         return getRowRecipe_Pad_Portrait_GraphPage1_Bottom_Tertiary()
                     }
                 } else {
@@ -326,11 +338,14 @@ extension ToolInterfaceViewModel {
         case .edit:
             if configuration.isGuidesEnabled {
                 if configuration.isGraphEnabled {
-                    if configuration.isGraphPage2Enabled {
-                        // graph page 2 [GraphPage2]
+                    if configuration.graphPage == 3 {
+                        // animation graph page 3 [GraphPage3]
+                        return getRowRecipe_Pad_Portrait_GraphPage3_Bottom_Secondary()
+                    } else if configuration.graphPage == 2 {
+                        // animation graph page 2 [GraphPage2]
                         return getRowRecipe_Pad_Portrait_GraphPage2_Bottom_Secondary()
                     } else {
-                        // graph page 1 [GraphPage1]
+                        // animation graph page 1 [GraphPage1]
                         return getRowRecipe_Pad_Portrait_GraphPage1_Bottom_Secondary()
                     }
                 } else {
@@ -405,11 +420,14 @@ extension ToolInterfaceViewModel {
         case .edit:
             if configuration.isGuidesEnabled {
                 if configuration.isGraphEnabled {
-                    if configuration.isGraphPage2Enabled {
-                        // graph page 2 [GraphPage2]
+                    if configuration.graphPage == 3 {
+                        // animation graph page 3 [GraphPage3]
+                        return getRowRecipe_Pad_Portrait_GraphPage3_Bottom_Primary()
+                    } else if configuration.graphPage == 2 {
+                        // animation graph page 2 [GraphPage2]
                         return getRowRecipe_Pad_Portrait_GraphPage2_Bottom_Primary()
                     } else {
-                        // graph page 1 [GraphPage1]
+                        // animation graph page 1 [GraphPage1]
                         return getRowRecipe_Pad_Portrait_GraphPage1_Bottom_Primary()
                     }
                 } else {
@@ -548,4 +566,5 @@ extension ToolInterfaceViewModel {
     @MainActor func getRowRecipe_Pad_VideoExport_Bottom_Primary() -> RowRecipe {
         return getRowRecipe_Pad_Portrait_VideoExport_Bottom_Primary()
     }
+    
 }

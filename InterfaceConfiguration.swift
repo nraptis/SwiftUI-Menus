@@ -92,7 +92,7 @@ protocol InterfaceConfigurationConforming {
     var isAnimationContinuousEnabled: Bool { get set }
     var isTimeLineEnabled: Bool { get set }
     //var isTimeLinePage2Enabled: Bool { get set }
-    var isGraphPage2Enabled: Bool { get set }
+    //var isGraphPage2Enabled: Bool { get set }
     //var isAnimationContinuousPage2Enabled: Bool { get set }
     
     var documentMode: DocumentMode { get set }
@@ -104,6 +104,7 @@ protocol InterfaceConfigurationConforming {
     var animationLoopsPage: Int { get set }
     var animationTimeLinePage: Int { get set }
     var animationContinuousPage: Int { get set }
+    var graphPage: Int { get set }
     
     var isExpanded: Bool { get set }
     var isExpandedTop: Bool { get set }
@@ -281,7 +282,7 @@ extension InterfaceConfigurationConforming {
         return false
     }
     
-    static func getAnimationTime(previousConfiguration: any InterfaceConfigurationConforming,
+    @MainActor static func getAnimationTime(previousConfiguration: any InterfaceConfigurationConforming,
                                  previousExpanded1: Bool,
                                  previousExpanded2: Bool,
                                  currentConfiguration: any InterfaceConfigurationConforming,
@@ -360,7 +361,7 @@ extension InterfaceConfigurationConforming {
                                         isRowsAnimationActive = true
                                     } else {
                                         if currentConfiguration.isGraphEnabled {
-                                            if currentConfiguration.isGraphPage2Enabled != previousConfiguration.isGraphPage2Enabled {
+                                            if currentConfiguration.graphPage != previousConfiguration.graphPage {
                                                 isRowsAnimationActive = true
                                             }
                                         }
@@ -958,12 +959,15 @@ extension InterfaceConfigurationConforming {
             if isGraphEnabled {
                 if configuration.isGraphEnabled {
                     
-                    if isGraphPage2Enabled {
-                        if configuration.isGraphPage2Enabled {
-                            return false
-                        } else {
-                            return true
-                        }
+                    // Right-Of
+                    if graphPage >= 3 && configuration.graphPage <= 1 {
+                        // Loop from 3 to 1...
+                        return false
+                    } else if graphPage <= 1 && configuration.graphPage >= 3 {
+                        // Loop from 1 to 3...
+                        return true
+                    } else if graphPage > configuration.graphPage {
+                        return true
                     } else {
                         return false
                     }
@@ -1121,11 +1125,12 @@ struct InterfaceConfigurationPad: InterfaceConfigurationConforming {
     var isAnimationContinuousEnabled = false
     var isTimeLineEnabled = false
     //var isTimeLinePage2Enabled = false
-    var isGraphPage2Enabled = false
+    //var isGraphPage2Enabled = false
     //var isAnimationContinuousPage2Enabled = false
     var animationLoopsPage = 0
     var animationTimeLinePage = 0
     var animationContinuousPage = 0
+    var graphPage = 0
     
     var documentMode = DocumentMode.edit
     var editMode = EditMode.jiggles
@@ -1172,12 +1177,13 @@ struct InterfaceConfigurationPhone: InterfaceConfigurationConforming {
     var isAnimationContinuousEnabled = false
     var isTimeLineEnabled = false
     //var isTimeLinePage2Enabled = false
-    var isGraphPage2Enabled = false
+    //var isGraphPage2Enabled = false
     //var isAnimationContinuousPage2Enabled = false
     
     var animationLoopsPage = 0
     var animationTimeLinePage = 0
     var animationContinuousPage = 0
+    var graphPage = 0
     
     var documentMode = DocumentMode.edit
     var editMode = EditMode.jiggles

@@ -17,7 +17,7 @@ class DialogBoxModel {
         self.buttonRowModels = buttonRowModels
     }
     
-    static func getDialogOkay(title: String, message: String) -> DialogBoxModel {
+    @MainActor static func getDialogOkay(title: String, message: String) -> DialogBoxModel {
         let topSpace = DialogBoxRowModelEmptySpace(height: 12)
         let titleBar = DialogBoxRowModelTitleBar(title: title)
         let middleSpace = DialogBoxRowModelEmptySpace(height: 4)
@@ -26,7 +26,9 @@ class DialogBoxModel {
         
         let textOkay = GeneralStringLibrary.generalTextOkay()
         let buttonOkay = DialogBoxButtonModel(title: textOkay, type: .generic) {
-            ApplicationController.rootViewController.popDialogBox()
+            if let rootViewController = ApplicationController.rootViewController {
+                rootViewController.popDialogBox()
+            }
         }
         let buttonModelOkay = DialogBoxRowModelOneButton(button: buttonOkay)
         
@@ -35,7 +37,7 @@ class DialogBoxModel {
         return DialogBoxModel(bodyRowModels: bodyRowModels, buttonRowModels: buttonRowModels)
     }
     
-    static func generatedLessGuides(numberOfRingsGenerated: Int,
+    @MainActor static func generatedLessGuides(numberOfRingsGenerated: Int,
                                          numberOfRingsRequested: Int) -> DialogBoxModel {
         let message = GeneralStringLibrary.generalTextCouldOnlyGenerateMessage(numberOfRingsGenerated: numberOfRingsGenerated, 
                                                                                numberOfRingsRequested: numberOfRingsRequested)
@@ -43,48 +45,54 @@ class DialogBoxModel {
                       message: message)
     }
     
-    static var generatedNoGuides: DialogBoxModel {
+    @MainActor static var generatedNoGuides: DialogBoxModel {
         getDialogOkay(title: GeneralStringLibrary.generalTextError(),
                       message: GeneralStringLibrary.generalTextCouldNotGenerate())
     }
     
-    static var unknownError: DialogBoxModel {
+    @MainActor static var unknownError: DialogBoxModel {
         getDialogOkay(title: GeneralStringLibrary.generalTextError(),
                       message: GeneralStringLibrary.generalTextAnUnknownErrorHasOccurred())
     }
     
-    static var couldNotLoadImage: DialogBoxModel {
+    @MainActor static var couldNotLoadImage: DialogBoxModel {
         getDialogOkay(title: GeneralStringLibrary.generalTextError(),
                       message: GeneralStringLibrary.generalTextCouldNotLoadImage())
     }
     
-    static var couldNotLoadDocument: DialogBoxModel {
+    @MainActor static var couldNotLoadDocument: DialogBoxModel {
         getDialogOkay(title: GeneralStringLibrary.generalTextError(),
                       message: GeneralStringLibrary.generalTextCouldNotLoadDocument())
     }
     
-    static var couldNotCopyFileLowMemory: DialogBoxModel {
+    @MainActor static var couldNotCopyFileLowMemory: DialogBoxModel {
         getDialogOkay(title: GeneralStringLibrary.generalTextWarning(),
                       message: GeneralStringLibrary.generalCouldNotCopyFileLowMemory())
     }
     
-    static var noJiggleSelected: DialogBoxModel {
+    @MainActor static var noJiggleSelected: DialogBoxModel {
         getDialogOkay(title: GeneralStringLibrary.generalTextNoJiggleSelected(),
                       message: GeneralStringLibrary.generalTextYouMustSelectAJiggleToPerformThisAction())
     }
     
-    static var editRings: DialogBoxModel {
+    @MainActor static var editRings: DialogBoxModel {
         let titleBar = DialogBoxRowModelTitleBar(title: GeneralStringLibrary.generalTextEditGuides())
         let editRings = DialogBoxRowModelEditRings()
         
         let textGenerate = GeneralStringLibrary.generalTextGenerate()
         let buttonGenerate = DialogBoxButtonModel(title: textGenerate, type: .confirm) {
-            editRings.generate()
+            Task { @MainActor in
+                editRings.generate()
+            }
         }
         
         let textCancel = GeneralStringLibrary.generalTextCancel()
         let buttonCancel = DialogBoxButtonModel(title: textCancel, type: .cancel) {
-            ApplicationController.rootViewController.popDialogBox()
+            Task { @MainActor in
+                if let rootViewController = ApplicationController.rootViewController {
+                    rootViewController.popDialogBox()
+                }
+            }
         }
         let buttonModelTwoButtons = DialogBoxRowModelTwoButtons(buttonLeft: buttonCancel,
                                                                 buttonRight: buttonGenerate)
@@ -94,7 +102,7 @@ class DialogBoxModel {
         return DialogBoxModel(bodyRowModels: bodyRowModels, buttonRowModels: buttonRowModels)
     }
     
-    static var saveJiggle: DialogBoxModel {
+    @MainActor static var saveJiggle: DialogBoxModel {
         
         let titleBar = DialogBoxRowModelTitleBar(title: "Save AI Model")
         let topSpace = DialogBoxRowModelEmptySpace(height: 24)
@@ -124,7 +132,7 @@ class DialogBoxModel {
         
     }
     
-    static var junkTest: DialogBoxModel {
+    @MainActor static var junkTest: DialogBoxModel {
         
         let titleBar1 = DialogBoxRowModelTitleBar(title: "This One Has Longer Title, Which Is Longer Title, Which is Longer")
         let titleBar2 = DialogBoxRowModelTitleBar(title: "This one a little title")
@@ -150,7 +158,7 @@ class DialogBoxModel {
         
     }
     
-    static var junkTestAllTitles: DialogBoxModel {
+    @MainActor static var junkTestAllTitles: DialogBoxModel {
         
         let titleBar1 = DialogBoxRowModelTitleBar(title: "Title Bar One")
         let titleBar2 = DialogBoxRowModelTitleBar(title: "Title Two")
@@ -167,7 +175,7 @@ class DialogBoxModel {
         
     }
     
-    static var junkTestTiddoes: DialogBoxModel {
+    @MainActor static var junkTestTiddoes: DialogBoxModel {
         
         let titleBar1 = DialogBoxRowModelTitleBar(title: "Title Bar One")
         let titleBar2 = DialogBoxRowModelTitleBar(title: "Title Two")

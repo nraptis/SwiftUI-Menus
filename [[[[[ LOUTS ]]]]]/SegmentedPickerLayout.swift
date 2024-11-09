@@ -95,7 +95,7 @@ struct SegmentedPickerLayout: LayoutScheme {
         return 11
     }
     
-    static func getCornerRadius(orientation: Orientation) -> Int {
+    @MainActor static func getCornerRadius(orientation: Orientation) -> Int {
         if Device.isPad {
             return 12
         } else {
@@ -108,7 +108,7 @@ struct SegmentedPickerLayout: LayoutScheme {
     }
     
     // [++] Final
-    static func getLineThickness(orientation: Orientation) -> Int {
+    @MainActor static func getLineThickness(orientation: Orientation) -> Int {
         return 1
     }
     

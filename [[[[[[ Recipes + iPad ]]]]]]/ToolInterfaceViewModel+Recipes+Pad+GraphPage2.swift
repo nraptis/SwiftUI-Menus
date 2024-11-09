@@ -30,18 +30,18 @@ extension ToolInterfaceViewModel {
     
     @MainActor func getRowRecipe_Pad_Portrait_GraphPage2_Bottom_Tertiary() -> RowRecipe {
         let inrs: [INR] = [
-            .favoringOneLineLabel(.init(minimumWidth: 0, text: "[GR2]")),
             .exitMode(.graphPage2),
             .spacer,
             .button_triplet(.swivelPanLeft, .swivelPanRight, .swivelPanReset),
             .spacer,
-            .exitMode(.graph),
+            .enterMode(.graphPage3),
         ]
         return RowRecipe(inrs: inrs)
     }
     
     @MainActor func getRowRecipe_Pad_Portrait_GraphPage2_Bottom_Secondary() -> RowRecipe {
         let inrs: [INR] = [
+            .exitMode(.graph),
             .button_pair(.resetWeightGraphLinear, .resetWeightGraphLinearDampened),
             .dividerSpacerDivider,
             .button_pair(.resetWeightGraphInverseDampened, .resetWeightGraphInverse),

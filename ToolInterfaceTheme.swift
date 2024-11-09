@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ToolInterfaceTheme {
     
-    static func getSideMenuWidth(orientation: Orientation) -> Int {
+    @MainActor static func getSideMenuWidth(orientation: Orientation) -> Int {
         if Device.isPad {
             if orientation.isLandscape {
                 return 420
@@ -40,7 +40,7 @@ struct ToolInterfaceTheme {
         return numberOfLines
     }
     
-    private static var textMinimumWidth = 12
+    private static let textMinimumWidth = 12
     static func getTextWidth(line1: String?,
                              line2: String?,
                              font: UIFont) -> Int {
@@ -231,27 +231,27 @@ struct ToolInterfaceTheme {
     }
     
     
-    static func getDraggableMenuTimeLineInsetLeft() -> Int {
+    @MainActor static func getDraggableMenuTimeLineInsetLeft() -> Int {
         return 94
     }
     
-    static func getDraggableMenuTimeLineInsetRight() -> Int {
+    @MainActor static func getDraggableMenuTimeLineInsetRight() -> Int {
         return 12
     }
     
-    static func getDraggableMenuTimeLineInsetTop() -> Int {
+    @MainActor static func getDraggableMenuTimeLineInsetTop() -> Int {
         return 4
     }
     
-    static func getDraggableMenuTimeLineInsetBottom() -> Int {
+    @MainActor static func getDraggableMenuTimeLineInsetBottom() -> Int {
         return 4
     }
     
-    static func getDraggableMenuTimeLineCornerRadius() -> Int {
+    @MainActor static func getDraggableMenuTimeLineCornerRadius() -> Int {
         return 12
     }
     
-    static func getRowHeight(orientation: Orientation) -> Int {
+    @MainActor static func getRowHeight(orientation: Orientation) -> Int {
         if Device.isPad {
             return 64
         } else {
@@ -264,27 +264,27 @@ struct ToolInterfaceTheme {
         }
     }
     
-    static func getStationaryRowSeparatorHeight(orientation: Orientation) -> Int {
+    @MainActor static func getStationaryRowSeparatorHeight(orientation: Orientation) -> Int {
         return 1
     }
     
-    static func getTopRowSeparatorHeightTop(orientation: Orientation) -> Int {
+    @MainActor static func getTopRowSeparatorHeightTop(orientation: Orientation) -> Int {
         return 1
     }
     
-    static func getTopRowSeparatorHeightBottom(orientation: Orientation) -> Int {
+    @MainActor static func getTopRowSeparatorHeightBottom(orientation: Orientation) -> Int {
         return 1
     }
     
-    static func getBottomRowSeparatorHeightTop(orientation: Orientation) -> Int {
+    @MainActor static func getBottomRowSeparatorHeightTop(orientation: Orientation) -> Int {
         return 1
     }
     
-    static func getBottomRowSeparatorHeightBottom(orientation: Orientation) -> Int {
+    @MainActor static func getBottomRowSeparatorHeightBottom(orientation: Orientation) -> Int {
         return 1
     }
     
-    static func getTopBlockerHeight(orientation: Orientation, safeAreaTop: Int) -> Int {
+    @MainActor static func getTopBlockerHeight(orientation: Orientation, safeAreaTop: Int) -> Int {
         var result = (46 - safeAreaTop - 6)
         if result < 0 {
             result = 0
@@ -292,35 +292,35 @@ struct ToolInterfaceTheme {
         return result
     }
     
-    static func getTopGraphInsetLeft(orientation: Orientation) -> Int {
+    @MainActor static func getTopGraphInsetLeft(orientation: Orientation) -> Int {
         return 8
     }
     
-    static func getTopGraphInsetRight(orientation: Orientation) -> Int {
+    @MainActor static func getTopGraphInsetRight(orientation: Orientation) -> Int {
         return 8
     }
     
-    static func getTopGraphInsetTop(orientation: Orientation) -> Int {
+    @MainActor static func getTopGraphInsetTop(orientation: Orientation) -> Int {
         return 6
     }
     
-    static func getTopGraphInsetBottom(orientation: Orientation) -> Int {
+    @MainActor static func getTopGraphInsetBottom(orientation: Orientation) -> Int {
         return 6
     }
     
-    static func getTopGraphCornerRadius(orientation: Orientation) -> Int {
+    @MainActor static func getTopGraphCornerRadius(orientation: Orientation) -> Int {
         return 8
     }
     
-    static func getTopTimeLineInsetLeft(orientation: Orientation) -> Int {
+    @MainActor static func getTopTimeLineInsetLeft(orientation: Orientation) -> Int {
         return 70
     }
     
-    static func getTopTimeLineInsetRight(orientation: Orientation) -> Int {
+    @MainActor static func getTopTimeLineInsetRight(orientation: Orientation) -> Int {
         return 6
     }
     
-    static func getTopTimeLineInsetTop(orientation: Orientation) -> Int {
+    @MainActor static func getTopTimeLineInsetTop(orientation: Orientation) -> Int {
         if orientation.isLandscape {
             return 2
         } else {
@@ -328,7 +328,7 @@ struct ToolInterfaceTheme {
         }
     }
     
-    static func getTopTimeLineInsetBottom(orientation: Orientation) -> Int {
+    @MainActor static func getTopTimeLineInsetBottom(orientation: Orientation) -> Int {
         if orientation.isLandscape {
             return 2
         } else {
@@ -336,11 +336,11 @@ struct ToolInterfaceTheme {
         }
     }
     
-    static func getTopTimeLineCornerRadius(orientation: Orientation) -> Int {
+    @MainActor static func getTopTimeLineCornerRadius(orientation: Orientation) -> Int {
         return 8
     }
     
-    static func getTopMenuStandardRowCount(orientation: Orientation) -> Int {
+    @MainActor static func getTopMenuStandardRowCount(orientation: Orientation) -> Int {
         switch orientation {
         case .landscape:
             var result = 3
@@ -369,7 +369,7 @@ struct ToolInterfaceTheme {
         }
     }
     
-    static func getTopMenuVideoExportRowCount(orientation: Orientation) -> Int {
+    @MainActor static func getTopMenuVideoExportRowCount(orientation: Orientation) -> Int {
         var result = 3
         if ApplicationController.TEST_ROW_TOP_1 {
             result += 1
@@ -383,7 +383,7 @@ struct ToolInterfaceTheme {
         return result
     }
     
-    static func getTopMenuVideoRecordRowCount(orientation: Orientation) -> Int {
+    @MainActor static func getTopMenuVideoRecordRowCount(orientation: Orientation) -> Int {
         var result = 3
         if ApplicationController.TEST_ROW_TOP_1 {
             result += 1
@@ -397,7 +397,7 @@ struct ToolInterfaceTheme {
         return result
     }
     
-    static func getTopMenuZoomRowCount(orientation: Orientation) -> Int {
+    @MainActor static func getTopMenuZoomRowCount(orientation: Orientation) -> Int {
         var result = 3
         if ApplicationController.TEST_ROW_TOP_1 {
             result += 1
@@ -411,7 +411,7 @@ struct ToolInterfaceTheme {
         return result
     }
     
-    static func getTopMenuGraphRowCount(orientation: Orientation) -> Int {
+    @MainActor static func getTopMenuGraphRowCount(orientation: Orientation) -> Int {
         switch orientation {
         case .landscape:
             return 4
@@ -420,7 +420,7 @@ struct ToolInterfaceTheme {
         }
     }
     
-    static func getTopMenuTimeLineRowCount(orientation: Orientation) -> Int {
+    @MainActor static func getTopMenuTimeLineRowCount(orientation: Orientation) -> Int {
         switch orientation {
         case .landscape:
             return 4
@@ -429,7 +429,7 @@ struct ToolInterfaceTheme {
         }
     }
     
-    static func getTopMenuShadowHeight(orientation: Orientation) -> Int {
+    @MainActor static func getTopMenuShadowHeight(orientation: Orientation) -> Int {
         switch orientation {
         case .landscape:
             return 4
@@ -438,7 +438,7 @@ struct ToolInterfaceTheme {
         }
     }
     
-    static func getBottomMenuStandardRowCount(orientation: Orientation) -> Int {
+    @MainActor static func getBottomMenuStandardRowCount(orientation: Orientation) -> Int {
         switch orientation {
         case .landscape:
             var result = 3
@@ -473,7 +473,7 @@ struct ToolInterfaceTheme {
         }
     }
     
-    static func getBottomMenuVideoExportRowCount(orientation: Orientation) -> Int {
+    @MainActor static func getBottomMenuVideoExportRowCount(orientation: Orientation) -> Int {
         var result = 3
         if ApplicationController.TEST_ROW_BOTTOM_1 {
             result += 1
@@ -490,7 +490,7 @@ struct ToolInterfaceTheme {
         return result
     }
     
-    static func getBottomMenuVideoRecordRowCount(orientation: Orientation) -> Int {
+    @MainActor static func getBottomMenuVideoRecordRowCount(orientation: Orientation) -> Int {
         var result = 3
         if ApplicationController.TEST_ROW_BOTTOM_1 {
             result += 1
@@ -507,7 +507,7 @@ struct ToolInterfaceTheme {
         return result
     }
     
-    static func getBottomMenuZoomRowCount(orientation: Orientation) -> Int {
+    @MainActor static func getBottomMenuZoomRowCount(orientation: Orientation) -> Int {
         var result = 3
         if ApplicationController.TEST_ROW_BOTTOM_1 {
             result += 1
@@ -524,7 +524,7 @@ struct ToolInterfaceTheme {
         return result
     }
     
-    private static func getBottomMenuHeight(orientation: Orientation, rowCount: Int) -> Int {
+    @MainActor private static func getBottomMenuHeight(orientation: Orientation, rowCount: Int) -> Int {
         var result = 0
         result += getBottomRowSeparatorHeightTop(orientation: orientation)
         if rowCount > 1 {
@@ -538,12 +538,12 @@ struct ToolInterfaceTheme {
         return result
     }
     
-    static func getBottomMenuHeight(orientation: Orientation) -> Int {
+    @MainActor static func getBottomMenuHeight(orientation: Orientation) -> Int {
         let rowCount = getBottomMenuStandardRowCount(orientation: orientation)
         return getBottomMenuHeight(orientation: orientation, rowCount: rowCount)
     }
     
-    static func getBottomMenuShadowHeight(orientation: Orientation) -> Int {
+    @MainActor static func getBottomMenuShadowHeight(orientation: Orientation) -> Int {
         switch orientation {
         case .landscape:
             return 4
@@ -937,11 +937,11 @@ struct ToolInterfaceTheme {
     static let _shadowOuter = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
     static let shadowOuter = Color(uiColor: _shadowOuter)
     
-    static let graphCurveStrokeThickness = CGFloat(Device.isPad ? 6.0 : 4.0)
-    static let graphCurveFillThickness = CGFloat(Device.isPad ? 4.0 : 2.5)
+    @MainActor static let graphCurveStrokeThickness = CGFloat(Device.isPad ? 6.0 : 4.0)
+    @MainActor static let graphCurveFillThickness = CGFloat(Device.isPad ? 4.0 : 2.5)
     
-    static let graphTanLineStrokeThickness = CGFloat(Device.isPad ? 5.0 : 4.0)
-    static let graphTanLineFillThickness = CGFloat(Device.isPad ? 3.0 : 2.5)
+    @MainActor static let graphTanLineStrokeThickness = CGFloat(Device.isPad ? 5.0 : 4.0)
+    @MainActor static let graphTanLineFillThickness = CGFloat(Device.isPad ? 3.0 : 2.5)
     
     
     static let greenButtonFill = Color(uiColor: _greenButtonFill)
@@ -951,14 +951,14 @@ struct ToolInterfaceTheme {
     static let greenButtonFillDownDisabled = Color(uiColor: _greenButtonFillDownDisabled)
     
     
-    private static var _timeLinePlaceholderImage = UIImage()
+    @MainActor private static var _timeLinePlaceholderImage = UIImage()
     
     
-    private static var _timeLineButtonXPortraitDark: UIImage?
-    private static var _timeLineButtonXPortraitLight: UIImage?
-    private static var _timeLineButtonXLandscapeDark: UIImage?
-    private static var _timeLineButtonXLandscapeLight: UIImage?
-    static func timeLineButtonX(orientation: Orientation, isDarkMode: Bool) -> UIImage {
+    @MainActor private static var _timeLineButtonXPortraitDark: UIImage?
+    @MainActor private static var _timeLineButtonXPortraitLight: UIImage?
+    @MainActor private static var _timeLineButtonXLandscapeDark: UIImage?
+    @MainActor private static var _timeLineButtonXLandscapeLight: UIImage?
+    @MainActor static func timeLineButtonX(orientation: Orientation, isDarkMode: Bool) -> UIImage {
         if isDarkMode {
             if Device.isPad {
                 if _timeLineButtonXPortraitDark === nil {
@@ -1000,11 +1000,11 @@ struct ToolInterfaceTheme {
         }
     }
     
-    private static var _timeLineButtonYPortraitDark: UIImage?
-    private static var _timeLineButtonYPortraitLight: UIImage?
-    private static var _timeLineButtonYLandscapeDark: UIImage?
-    private static var _timeLineButtonYLandscapeLight: UIImage?
-    static func timeLineButtonY(orientation: Orientation, isDarkMode: Bool) -> UIImage {
+    @MainActor private static var _timeLineButtonYPortraitDark: UIImage?
+    @MainActor private static var _timeLineButtonYPortraitLight: UIImage?
+    @MainActor private static var _timeLineButtonYLandscapeDark: UIImage?
+    @MainActor private static var _timeLineButtonYLandscapeLight: UIImage?
+    @MainActor static func timeLineButtonY(orientation: Orientation, isDarkMode: Bool) -> UIImage {
         if isDarkMode {
             if Device.isPad {
                 if _timeLineButtonYPortraitDark === nil {
@@ -1046,11 +1046,11 @@ struct ToolInterfaceTheme {
         }
     }
     
-    private static var _timeLineButtonScalePortraitDark: UIImage?
-    private static var _timeLineButtonScalePortraitLight: UIImage?
-    private static var _timeLineButtonScaleLandscapeDark: UIImage?
-    private static var _timeLineButtonScaleLandscapeLight: UIImage?
-    static func timeLineButtonScale(orientation: Orientation, isDarkMode: Bool) -> UIImage {
+    @MainActor private static var _timeLineButtonScalePortraitDark: UIImage?
+    @MainActor private static var _timeLineButtonScalePortraitLight: UIImage?
+    @MainActor private static var _timeLineButtonScaleLandscapeDark: UIImage?
+    @MainActor private static var _timeLineButtonScaleLandscapeLight: UIImage?
+    @MainActor static func timeLineButtonScale(orientation: Orientation, isDarkMode: Bool) -> UIImage {
         if isDarkMode {
             if Device.isPad {
                 if _timeLineButtonScalePortraitDark === nil {
@@ -1092,11 +1092,11 @@ struct ToolInterfaceTheme {
         }
     }
     
-    private static var _timeLineButtonRotationPortraitDark: UIImage?
-    private static var _timeLineButtonRotationPortraitLight: UIImage?
-    private static var _timeLineButtonRotationLandscapeDark: UIImage?
-    private static var _timeLineButtonRotationLandscapeLight: UIImage?
-    static func timeLineButtonRotation(orientation: Orientation, isDarkMode: Bool) -> UIImage {
+    @MainActor private static var _timeLineButtonRotationPortraitDark: UIImage?
+    @MainActor private static var _timeLineButtonRotationPortraitLight: UIImage?
+    @MainActor private static var _timeLineButtonRotationLandscapeDark: UIImage?
+    @MainActor private static var _timeLineButtonRotationLandscapeLight: UIImage?
+    @MainActor static func timeLineButtonRotation(orientation: Orientation, isDarkMode: Bool) -> UIImage {
         if isDarkMode {
             if Device.isPad {
                 if _timeLineButtonRotationPortraitDark === nil {

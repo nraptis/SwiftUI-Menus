@@ -10,11 +10,11 @@ import Combine
 
 class DraggableMenuView: UIView, PrimaryMenuConforming {
     
-    func handleSelectedJiggleDidChange() {
+    @MainActor func handleSelectedJiggleDidChange() {
         standardContainerView.handleSelectedJiggleDidChange()
     }
     
-    func handleSelectedSwatchDidChange() {
+    @MainActor func handleSelectedSwatchDidChange() {
         standardContainerView.handleSelectedJiggleDidChange()
     }
     
@@ -32,7 +32,7 @@ class DraggableMenuView: UIView, PrimaryMenuConforming {
         return 1400
     }
     
-    lazy var containerView: UIView = {
+    @MainActor lazy var containerView: UIView = {
         let result = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 512.0, height: 512.0))
         result.translatesAutoresizingMaskIntoConstraints = false
         result.clipsToBounds = true
@@ -40,7 +40,7 @@ class DraggableMenuView: UIView, PrimaryMenuConforming {
         return result
     }()
     
-    lazy var materialViewDarkMode: MaterialView = {
+    @MainActor lazy var materialViewDarkMode: MaterialView = {
         let result = MaterialView(material: .thick,
                                   opacity: 0.8,
                                   color: UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.6),
@@ -49,7 +49,7 @@ class DraggableMenuView: UIView, PrimaryMenuConforming {
         return result
     }()
     
-    lazy var materialViewLightMode: MaterialView = {
+    @MainActor lazy var materialViewLightMode: MaterialView = {
         let result = MaterialView(material: .regular,
                                   opacity: 0.76,
                                   color: UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.4),
@@ -58,69 +58,69 @@ class DraggableMenuView: UIView, PrimaryMenuConforming {
         return result
     }()
     
-    lazy var topBar: DraggableMenuTopBar = {
+    @MainActor lazy var topBar: DraggableMenuTopBar = {
         let orientation = toolInterfaceViewModel.orientation
         let result = DraggableMenuTopBar(toolInterfaceViewModel: toolInterfaceViewModel, orientation: orientation)
         result.translatesAutoresizingMaskIntoConstraints = false
         return result
     }()
     
-    lazy var standardContainerViewLeftConstraint: NSLayoutConstraint = {
+    @MainActor lazy var standardContainerViewLeftConstraint: NSLayoutConstraint = {
         NSLayoutConstraint(item: standardContainerView, attribute: .left, relatedBy: .equal,
                            toItem: containerView, attribute: .left, multiplier: 1.0, constant: 0.0)
     }()
     
-    lazy var standardContainerView: DraggableMenuStandardContainerView = {
+    @MainActor lazy var standardContainerView: DraggableMenuStandardContainerView = {
         let result = DraggableMenuStandardContainerView(toolInterfaceViewModel: toolInterfaceViewModel)
         result.translatesAutoresizingMaskIntoConstraints = false
         result.backgroundColor = ToolInterfaceTheme._toolbarBackground
         return result
     }()
     
-    lazy var videoExportViewLeftConstraint: NSLayoutConstraint = {
+    @MainActor lazy var videoExportViewLeftConstraint: NSLayoutConstraint = {
         NSLayoutConstraint(item: videoExportView, attribute: .left, relatedBy: .equal, toItem: containerView,
                            attribute: .left, multiplier: 1.0, constant: 0.0)
     }()
     
-    lazy var videoExportView: DraggableMenuVideoExportView = {
+    @MainActor lazy var videoExportView: DraggableMenuVideoExportView = {
         let result = DraggableMenuVideoExportView(toolInterfaceViewModel: toolInterfaceViewModel)
         result.translatesAutoresizingMaskIntoConstraints = false
         result.backgroundColor = ToolInterfaceTheme._toolbarBackground
         return result
     }()
     
-    lazy var videoRecordViewLeftConstraint: NSLayoutConstraint = {
+    @MainActor lazy var videoRecordViewLeftConstraint: NSLayoutConstraint = {
         NSLayoutConstraint(item: videoRecordView, attribute: .left, relatedBy: .equal, toItem: containerView,
                            attribute: .left, multiplier: 1.0, constant: 0.0)
     }()
     
-    lazy var videoRecordView: DraggableMenuVideoRecordView = {
+    @MainActor lazy var videoRecordView: DraggableMenuVideoRecordView = {
         let result = DraggableMenuVideoRecordView(toolInterfaceViewModel: toolInterfaceViewModel)
         result.translatesAutoresizingMaskIntoConstraints = false
         result.backgroundColor = ToolInterfaceTheme._toolbarBackground
         return result
     }()
     
-    lazy var zoomViewLeftConstraint: NSLayoutConstraint = {
+    @MainActor lazy var zoomViewLeftConstraint: NSLayoutConstraint = {
         NSLayoutConstraint(item: zoomView, attribute: .left, relatedBy: .equal, toItem: containerView,
                            attribute: .left, multiplier: 1.0, constant: 0.0)
     }()
     
-    lazy var zoomView: DraggableMenuZoomView = {
+    @MainActor lazy var zoomView: DraggableMenuZoomView = {
         let result = DraggableMenuZoomView(toolInterfaceViewModel: toolInterfaceViewModel)
         result.translatesAutoresizingMaskIntoConstraints = false
         result.backgroundColor = ToolInterfaceTheme._toolbarBackground
         return result
     }()
     
-    lazy var bottomBar: DraggableMenuBottomBar = {
+    @MainActor lazy var bottomBar: DraggableMenuBottomBar = {
         let result = DraggableMenuBottomBar(toolInterfaceViewModel: toolInterfaceViewModel)
         result.translatesAutoresizingMaskIntoConstraints = false
         return result
     }()
     
     let toolInterfaceViewModel: ToolInterfaceViewModel
-    init(toolInterfaceViewModel: ToolInterfaceViewModel) {
+    @MainActor init(toolInterfaceViewModel: ToolInterfaceViewModel) {
         self.toolInterfaceViewModel = toolInterfaceViewModel
         super.init(frame: .zero)
         
@@ -141,7 +141,7 @@ class DraggableMenuView: UIView, PrimaryMenuConforming {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func handleDarkModeDidChange() {
+    @MainActor func handleDarkModeDidChange() {
         if ApplicationController.isDarkModeEnabled {
             layer.borderColor = ToolInterfaceTheme._draggableBorderDark.cgColor
         } else {
@@ -162,7 +162,7 @@ class DraggableMenuView: UIView, PrimaryMenuConforming {
         standardContainerView.handleDarkModeDidChange()
     }
     
-    func handlePurchasedDidChange() {
+    @MainActor func handlePurchasedDidChange() {
         print("DRABBABLELELE MENU, HANDLED PURTCHASDEF")
         
     }
@@ -172,8 +172,7 @@ class DraggableMenuView: UIView, PrimaryMenuConforming {
     private var selectedJiggleDidChangeCancellable: AnyCancellable?
     private var selectedTimeLineSwatchChangeCancellable: AnyCancellable?
     
-    func setup(width: Int, height: Int , orientation: Orientation) {
-        
+    @MainActor func setup(width: Int, height: Int , orientation: Orientation) {
         
         darkModeDidChangeCancellable = toolInterfaceViewModel
             .darkModeDidChangePublisher

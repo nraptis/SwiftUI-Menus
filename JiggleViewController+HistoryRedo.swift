@@ -9,7 +9,7 @@ import Foundation
 
 extension JiggleViewController {
     
-    func redo() {
+    @MainActor func redo() {
         if toolInterfaceViewModel.isBlocked { return }
         if historyController.canRedo() { historyController.redo() }
     }
@@ -20,7 +20,7 @@ extension JiggleViewController {
     // the history state changes, we require a "world configuration" change, which
     // just means that we need to "switch modes" in the menus, metal scene, or both...
     //
-    func enterHistoryRedo(_ historyState: HistoryState) {
+    @MainActor func enterHistoryRedo(_ historyState: HistoryState) {
         let toolAction = getHistoryInterfaceToolAction(historyState)
         let sliceHistory = ToolActionPhaseSliceApplyHistoryRedo(historyState: historyState)
         let phaseHistory = ToolActionPhase(slice: sliceHistory)
@@ -32,7 +32,7 @@ extension JiggleViewController {
     // "B" is the execution of the history state... Note that some of these
     // will cause a lag thunk, which can temporarily block the UI.
     //
-    func executeHistoryStateRedo(_ historyState: HistoryState) {
+    @MainActor func executeHistoryStateRedo(_ historyState: HistoryState) {
         print("==> Apply History [\(historyState)] (REDO - B)")
         
         switch historyState.historyStateType {
@@ -147,107 +147,107 @@ extension JiggleViewController {
         toolInterfaceViewModel.handleUndoRedoDidChange()
     }
     
-    private func applyHistoryStateRotateOrFlipJiggleRedo(_ historyState: HistoryStateRotateOrFlipJiggle) {
+    @MainActor private func applyHistoryStateRotateOrFlipJiggleRedo(_ historyState: HistoryStateRotateOrFlipJiggle) {
         jiggleViewModel.applyHistoryStateRotateOrFlipJiggleRedo(historyState)
     }
     
-    private func applyHistoryStateRotateOrFlipGuideRedo(_ historyState: HistoryStateRotateOrFlipGuide) {
+    @MainActor private func applyHistoryStateRotateOrFlipGuideRedo(_ historyState: HistoryStateRotateOrFlipGuide) {
         jiggleViewModel.applyHistoryStateRotateOrFlipGuideRedo(historyState)
     }
     
-    private func applyHistoryStateCreateJiggleRedo(_ historyState: HistoryStateCreateJiggle) {
+    @MainActor private func applyHistoryStateCreateJiggleRedo(_ historyState: HistoryStateCreateJiggle) {
         jiggleViewModel.applyHistoryStateCreateJiggleRedo(historyState)
     }
     
-    private func applyHistoryStateRemoveJiggleRedo(_ historyState: HistoryStateRemoveJiggle) {
+    @MainActor private func applyHistoryStateRemoveJiggleRedo(_ historyState: HistoryStateRemoveJiggle) {
         jiggleViewModel.applyHistoryStateRemoveJiggleRedo(historyState)
     }
     
-    private func applyHistoryStateTransformJiggleRedo(_ historyState: HistoryStateTransformJiggle) {
+    @MainActor private func applyHistoryStateTransformJiggleRedo(_ historyState: HistoryStateTransformJiggle) {
         jiggleViewModel.applyHistoryStateTransformJiggleRedo(historyState)
     }
     
-    private func applyHistoryStateMoveControlPointRedo(_ historyState: HistoryStateMoveControlPoint) {
+    @MainActor private func applyHistoryStateMoveControlPointRedo(_ historyState: HistoryStateMoveControlPoint) {
         jiggleViewModel.applyHistoryStateMoveControlPointRedo(historyState)
     }
     
-    private func applyHistoryStateCreateControlPointRedo(_ historyState: HistoryStateCreateControlPoint) {
+    @MainActor private func applyHistoryStateCreateControlPointRedo(_ historyState: HistoryStateCreateControlPoint) {
         jiggleViewModel.applyHistoryStateCreateControlPointRedo(historyState)
     }
     
-    private func applyHistoryStateRemoveControlPointRedo(_ historyState: HistoryStateRemoveControlPoint) {
+    @MainActor private func applyHistoryStateRemoveControlPointRedo(_ historyState: HistoryStateRemoveControlPoint) {
         jiggleViewModel.applyHistoryStateRemoveControlPointRedo(historyState)
     }
     
-    private func applyHistoryStateCreateGuideRedo(_ historyState: HistoryStateCreateGuide) {
+    @MainActor private func applyHistoryStateCreateGuideRedo(_ historyState: HistoryStateCreateGuide) {
         jiggleViewModel.applyHistoryStateCreateGuideRedo(historyState)
     }
     
-    private func applyHistoryStateDeleteGuideRedo(_ historyState: HistoryStateDeleteGuide) {
+    @MainActor private func applyHistoryStateDeleteGuideRedo(_ historyState: HistoryStateDeleteGuide) {
         jiggleViewModel.applyHistoryStateDeleteGuideRedo(historyState)
     }
     
-    private func applyHistoryStateTransformGuideRedo(_ historyState: HistoryStateTransformGuide) {
+    @MainActor private func applyHistoryStateTransformGuideRedo(_ historyState: HistoryStateTransformGuide) {
         jiggleViewModel.applyHistoryStateTransformGuideRedo(historyState)
     }
     
-    private func applyHistoryStateMoveGuideControlPointRedo(_ historyState: HistoryStateMoveGuideControlPoint) {
+    @MainActor private func applyHistoryStateMoveGuideControlPointRedo(_ historyState: HistoryStateMoveGuideControlPoint) {
         jiggleViewModel.applyHistoryStateMoveGuideControlPointRedo(historyState)
     }
     
-    private func applyHistoryStateCreateGuideControlPointRedo(_ historyState: HistoryStateCreateGuideControlPoint) {
+    @MainActor private func applyHistoryStateCreateGuideControlPointRedo(_ historyState: HistoryStateCreateGuideControlPoint) {
         jiggleViewModel.applyHistoryStateCreateGuideControlPointRedo(historyState)
     }
     
-    private func applyHistoryStateDeleteGuideControlPointRedo(_ historyState: HistoryStateDeleteGuideControlPoint) {
+    @MainActor private func applyHistoryStateDeleteGuideControlPointRedo(_ historyState: HistoryStateDeleteGuideControlPoint) {
         jiggleViewModel.applyHistoryStateDeleteGuideControlPointRedo(historyState)
     }
     
-    private func applyHistoryStateMoveWeightCenterRedo(_ historyState: HistoryStateMoveWeightCenter) {
+    @MainActor private func applyHistoryStateMoveWeightCenterRedo(_ historyState: HistoryStateMoveWeightCenter) {
         jiggleViewModel.applyHistoryStateMoveWeightCenterRedo(historyState)
     }
     
-    private func applyHistoryStateMoveJiggleCenterRedo(_ historyState: HistoryStateMoveJiggleCenter) {
+    @MainActor private func applyHistoryStateMoveJiggleCenterRedo(_ historyState: HistoryStateMoveJiggleCenter) {
         jiggleViewModel.applyHistoryStateMoveJiggleCenterRedo(historyState)
     }
     
-    func applyHistoryStateMoveWeightGraphPositionRedo(_ historyState: HistoryStateMoveWeightGraphPosition) {
+    @MainActor func applyHistoryStateMoveWeightGraphPositionRedo(_ historyState: HistoryStateMoveWeightGraphPosition) {
         jiggleViewModel.applyHistoryStateMoveWeightGraphPositionRedo(historyState)
     }
     
-    func applyHistoryStateMoveWeightGraphTangentRedo(_ historyState: HistoryStateMoveWeightGraphTangent) {
+    @MainActor func applyHistoryStateMoveWeightGraphTangentRedo(_ historyState: HistoryStateMoveWeightGraphTangent) {
         jiggleViewModel.applyHistoryStateMoveWeightGraphTangentRedo(historyState)
     }
     
-    private func applyHistoryStateResetWeightGraphRedo(_ historyState: HistoryStateResetWeightGraph) {
+    @MainActor private func applyHistoryStateResetWeightGraphRedo(_ historyState: HistoryStateResetWeightGraph) {
         jiggleViewModel.applyHistoryStateResetWeightGraphRedo(historyState)
     }
     
-    private func applyHistoryStateJiggleSpeedRedo(_ historyState: HistoryStateJiggleSpeed) {
+    @MainActor private func applyHistoryStateJiggleSpeedRedo(_ historyState: HistoryStateJiggleSpeed) {
         jiggleViewModel.applyHistoryStateJiggleSpeedRedo(historyState)
     }
     
-    private func applyHistoryStateGyroPowerRedo(_ historyState: HistoryStateGyroPower) {
+    @MainActor private func applyHistoryStateGyroPowerRedo(_ historyState: HistoryStateGyroPower) {
         jiggleViewModel.applyHistoryStateGyroPowerRedo(historyState)
     }
     
-    private func applyHistoryStateJiggleDampenRedo(_ historyState: HistoryStateJiggleDampen) {
+    @MainActor private func applyHistoryStateJiggleDampenRedo(_ historyState: HistoryStateJiggleDampen) {
         jiggleViewModel.applyHistoryStateJiggleDampenRedo(historyState)
     }
     
-    private func applyHistoryStateLoopAttributeOneRedo(_ historyState: HistoryStateLoopAttributeOne) {
+    @MainActor private func applyHistoryStateLoopAttributeOneRedo(_ historyState: HistoryStateLoopAttributeOne) {
         jiggleViewModel.applyHistoryStateLoopAttributeOneRedo(historyState)
     }
     
-    private func applyHistoryStateLoopAttributesAllRedo(_ historyState: HistoryStateLoopAttributesAll) {
+    @MainActor private func applyHistoryStateLoopAttributesAllRedo(_ historyState: HistoryStateLoopAttributesAll) {
         jiggleViewModel.applyHistoryStateLoopAttributesAllRedo(historyState)
     }
     
-    private func applyHistoryStateContinuousAttributeOneRedo(_ historyState: HistoryStateContinuousAttributeOne) {
+    @MainActor private func applyHistoryStateContinuousAttributeOneRedo(_ historyState: HistoryStateContinuousAttributeOne) {
         jiggleViewModel.applyHistoryStateContinuousAttributeOneRedo(historyState)
     }
     
-    private func applyHistoryStateContinuousAttributesAllRedo(_ historyState: HistoryStateContinuousAttributesAll) {
+    @MainActor private func applyHistoryStateContinuousAttributesAllRedo(_ historyState: HistoryStateContinuousAttributesAll) {
         jiggleViewModel.applyHistoryStateContinuousAttributesAllRedo(historyState)
     }
     

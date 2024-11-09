@@ -12,7 +12,7 @@ import Foundation
 
 struct MenuHeightCategoryGeneric {
     
-    static func `get`(orientation: Orientation, rowCount: Int, isTop: Bool) -> Int {
+    @MainActor static func `get`(orientation: Orientation, rowCount: Int, isTop: Bool) -> Int {
         var result = 0
         
         if Device.isPad {
@@ -56,14 +56,14 @@ enum MenuHeightCategoryPad: UInt8 {
     case videoExport
     case zoom
     
-    static func `get`(configuration: InterfaceConfigurationPad,
+    @MainActor static func `get`(configuration: InterfaceConfigurationPad,
                       orientation: Orientation) -> Int {
         get(category: configuration.heightCategory,
             orientation: orientation,
             isExpanded: configuration.isExpanded)
     }
     
-    static func `get`(category: MenuHeightCategoryPad,
+    @MainActor static func `get`(category: MenuHeightCategoryPad,
                       orientation: Orientation,
                       isExpanded: Bool) -> Int {
         var result = ToolInterfaceTheme.getDraggableMenuTopToolbarHeight()
@@ -105,14 +105,14 @@ enum MenuHeightCategoryPhoneTop: UInt8 {
     case videoExport
     case zoom
     
-    static func `get`(configuration: InterfaceConfigurationPhone,
+    @MainActor static func `get`(configuration: InterfaceConfigurationPhone,
                       orientation: Orientation) -> Int {
         get(category: configuration.heightCategoryTop,
             orientation: orientation)
         
     }
     
-    static func `get`(category: MenuHeightCategoryPhoneTop,
+    @MainActor static func `get`(category: MenuHeightCategoryPhoneTop,
                       orientation: Orientation) -> Int {
         var rowCount: Int
         switch category {
@@ -150,13 +150,14 @@ enum MenuHeightCategoryPhoneBottom: UInt8 {
     case videoExport
     case zoom
     
-    static func `get`(configuration: InterfaceConfigurationPhone,
+    @MainActor static func `get`(configuration: InterfaceConfigurationPhone,
                       orientation: Orientation) -> Int {
         get(category: configuration.heightCategoryBottom,
             orientation: orientation)
         
     }
-    static func `get`(category: MenuHeightCategoryPhoneBottom,
+    
+    @MainActor static func `get`(category: MenuHeightCategoryPhoneBottom,
                       orientation: Orientation) -> Int {
         var rowCount: Int
         switch category {

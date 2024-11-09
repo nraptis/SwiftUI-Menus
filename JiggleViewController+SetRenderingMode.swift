@@ -9,9 +9,6 @@ import Foundation
 
 extension JiggleViewController {
     
-    func toolActionConsumePhaseSliceSetRenderingMode(_ slice: ToolActionPhaseSliceSetRenderingMode) {
-        jiggleViewModel.isRenderingRegular = slice.isRenderingRegularMode
-        jiggleViewModel.isRenderingSwivel = slice.isRenderingSwivelMode
-        
-    }
+    
+    
 }

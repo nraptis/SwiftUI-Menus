@@ -34,7 +34,7 @@ struct LooseStackedIconPack: TextIconPackable {
         self.planePhonePortrait_2 = planePhonePortrait_2
     }
     
-    func getTextIcon(orientation: Orientation,
+    @MainActor func getTextIcon(orientation: Orientation,
                      layoutSchemeFlavor: LayoutSchemeFlavor,
                      numberOfLines: Int,
                      isDarkMode: Bool,

@@ -11,9 +11,10 @@ class HistoryStateRemoveJiggle: HistoryState {
     
     let fileBuffer = FileBuffer()
     let jiggleIndex: Int
-    convenience init(jiggle: Jiggle, jiggleIndex: Int) {
+    convenience init(fileBuffer: FileBuffer, jiggleIndex: Int) {
         self.init(jiggleIndex: jiggleIndex)
-        jiggle.save(fileBuffer: fileBuffer)
+        self.fileBuffer.copy(fileBuffer: fileBuffer)
+        //jiggle.save(fileBuffer: fileBuffer)
     }
     
     required init(jiggleIndex: Int) {

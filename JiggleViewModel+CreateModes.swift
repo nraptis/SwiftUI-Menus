@@ -9,7 +9,7 @@ import Foundation
 
 extension JiggleViewModel {
     
-    func setCreatorMode(_ creatorMode: CreatorMode) {
+    @MainActor func setCreatorMode(_ creatorMode: CreatorMode) {
         jiggleDocument.setCreatorMode(creatorMode)
     }
     

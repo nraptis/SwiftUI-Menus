@@ -32,7 +32,7 @@ import Foundation
                 refreshDisabled()
             }
         }
-        super.refresh()
+        
     }
     
     deinit {

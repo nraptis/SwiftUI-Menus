@@ -8,9 +8,11 @@
 import Foundation
 
 final class SavedFileManager {
-
-    private(set) static var recentDocumentFullSizedImageFileName = "_recent_document_image_full.png"
-    private(set) static var recentDocumentSceneFileName = "_recent_document_scene.jscn"
+    
+    //private(set)
+    static let recentDocumentFullSizedImageFileName = "_recent_document_image_full.png"
+    //private(set)
+    static let recentDocumentSceneFileName = "_recent_document_scene.jscn"
     
     lazy var recentDocumentFullSizedImageFilePath: String = {
         FileUtils.shared.getDocumentPath(fileName: Self.recentDocumentFullSizedImageFileName)
@@ -26,7 +28,7 @@ final class SavedFileManager {
         placeholderSavedFile.documentName = "Place Holder"
     }
     
-    static let shared = SavedFileManager()
+    nonisolated(unsafe) static let shared = SavedFileManager()
     
     private(set) var savedFiles = [SavedFile]()
     
@@ -119,7 +121,7 @@ final class SavedFileManager {
         return false
     }
     
-    func save(jiggleDocument: JiggleDocument,
+    @MainActor func save(jiggleDocument: JiggleDocument,
               documentName: String?,
               isOverwriting: Bool) -> Bool {
         
@@ -374,6 +376,17 @@ final class SavedFileManager {
     
     func injectDemos() {
         
+        injectDemoIfNotExist(name: "ipad_landscape_yellow_shirt_blondie", index: 9882)
+        
+        injectDemoIfNotExist(name: "ipad_portrait_yellow_ripped_shirt_side_hussa", index: 9881)
+        injectDemoIfNotExist(name: "ipad_portrait_orange_spill_nippage", index: 9001)
+        
+        
+        injectDemoIfNotExist(name: "ipad_mini_por_super_duper_dupe_jiggle", index: 9000)
+        
+        
+        injectDemoIfNotExist(name: "ipad_portrait_prison_boobs_blue_taps", index: 667)
+        injectDemoIfNotExist(name: "ipad_portrait_prison_chests_squeeza_pleaza", index: 887)
         
         injectDemoIfNotExist(name: "ipad_portrait_pink_boobs_pasties_floor", index: 488)
         

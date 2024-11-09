@@ -42,7 +42,7 @@ class HistoryStateTransformGuide: HistoryState {
         let result = HistoryWorldConfiguration(documentMode: .edit,
                                                editModeType: .dontCare,
                                                weightModeType: .forceEnter(.guides),
-                                               graphType: .dontCare,
+                                               graphType: .forceLeave,
                                                guidesType: .forceEnter,
                                                phoneExpandedTopType: .dontCare,
                                                phoneExpandedBottomType: .dontCare,

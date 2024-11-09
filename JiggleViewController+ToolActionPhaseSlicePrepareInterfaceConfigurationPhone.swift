@@ -9,7 +9,11 @@ import UIKit
 
 extension JiggleViewController {
     
-    func toolActionConsumePhaseSlicePrepareInterfaceConfigurationPhone(_ slice: ToolActionPhaseSlicePrepareInterfaceConfigurationPhone) {
+    //
+    // It's expected that all the stuff is going to
+    // be correctly assigned after this functon finished..
+    //
+    @MainActor func toolActionConsumePhaseSlicePrepareInterfaceConfigurationPhone(_ slice: ToolActionPhaseSlicePrepareInterfaceConfigurationPhone) {
         
         let configurationPrevious = slice.interfaceConfigurationPrevious
         let configurationCurrent = slice.interfaceConfigurationCurrent

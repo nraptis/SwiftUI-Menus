@@ -19,7 +19,6 @@ extension JiggleViewController {
         
         self.toolAction = toolAction
         
-        
     }
     
     func toolActionStep() {
@@ -208,14 +207,17 @@ extension JiggleViewController {
                 toolActionConsumePhaseSliceSetLoopsPage(slice)
             }
         case .setTimeLinePage:
-                    if let slice = slice as? ToolActionPhaseSliceSetTimeLinePage {
-                        toolActionConsumePhaseSliceSetTimeLinePage(slice)
-                    }
+            if let slice = slice as? ToolActionPhaseSliceSetTimeLinePage {
+                toolActionConsumePhaseSliceSetTimeLinePage(slice)
+            }
         case .setContinuousPage:
-                    if let slice = slice as? ToolActionPhaseSliceSetContinuousPage {
-                        toolActionConsumePhaseSliceSetContinuousPage(slice)
-                    }
-            
+            if let slice = slice as? ToolActionPhaseSliceSetContinuousPage {
+                toolActionConsumePhaseSliceSetContinuousPage(slice)
+            }
+        case .setGraphPage:
+            if let slice = slice as? ToolActionPhaseSliceSetGraphPage {
+                toolActionConsumePhaseSliceSetGraphPage(slice)
+            }
         case .setStereoscopicMode:
             if let slice = slice as? ToolActionPhaseSliceSetStereoscopicMode {
                 toolActionConsumePhaseSliceSetStereoscopicMode(slice)
@@ -231,10 +233,6 @@ extension JiggleViewController {
         case .setCreatorMode:
             if let slice = slice as? ToolActionPhaseSliceSetCreatorMode {
                 toolActionConsumePhaseSliceSetCreatorMode(slice)
-            }
-        case .setGraphPage2Mode:
-            if let slice = slice as? ToolActionPhaseSliceSetGraphPage2Mode {
-                toolActionConsumePhaseSliceSetGraphPage2Mode(slice)
             }
         case .setExpandedDraggable:
             if let slice = slice as? ToolActionPhaseSliceSetExpandedDraggable {
@@ -260,12 +258,6 @@ extension JiggleViewController {
             if let slice = slice as? ToolActionPhaseSliceSetWeightMode {
                 toolActionConsumePhaseSliceSetWeightMode(slice)
             }
-            /*
-        case .setAnimationMode:
-            if let slice = slice as? ToolActionPhaseSliceSetAnimationMode {
-                toolActionConsumePhaseSliceSetAnimationMode(slice)
-            }
-            */
         case .setTimeLineMode:
             if let slice = slice as? ToolActionPhaseSliceSetTimeLineMode {
                 toolActionConsumePhaseSliceSetTimeLineMode(slice)
@@ -308,6 +300,4 @@ extension JiggleViewController {
             }
         }
     }
-    
-    
 }

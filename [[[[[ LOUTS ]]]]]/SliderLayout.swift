@@ -80,7 +80,7 @@ struct SliderLayout: LayoutScheme {
         }
     }
     
-    static func getExtraWidthStandard(orientation: Orientation) -> Int {
+    @MainActor static func getExtraWidthStandard(orientation: Orientation) -> Int {
         if Device.isPad {
             return 32
         } else {
@@ -88,7 +88,7 @@ struct SliderLayout: LayoutScheme {
         }
     }
     
-    static func getExtraWidthRelaxed(orientation: Orientation) -> Int {
+    @MainActor static func getExtraWidthRelaxed(orientation: Orientation) -> Int {
         if Device.isPad {
             return 136
         } else {
@@ -96,11 +96,11 @@ struct SliderLayout: LayoutScheme {
         }
     }
     
-    static func getHeroPaddingLeftLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+    @MainActor static func getHeroPaddingLeftLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
         12
     }
     
-    static func getHeroPaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+    @MainActor static func getHeroPaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
         if Device.isPad {
             return 5
         } else {
@@ -108,7 +108,7 @@ struct SliderLayout: LayoutScheme {
         }
     }
     
-    static func getPreferredMinimumBarWidth(orientation: Orientation, widthCategory: ToolInterfaceElementSliderWidthCategory) -> Int {
+    @MainActor static func getPreferredMinimumBarWidth(orientation: Orientation, widthCategory: ToolInterfaceElementSliderWidthCategory) -> Int {
         if Device.isPad {
             switch widthCategory {
             case .fullWidth:
@@ -134,7 +134,7 @@ struct SliderLayout: LayoutScheme {
         }
     }
     
-    static func getThumbDiameterFill(orientation: Orientation) -> Int {
+    @MainActor static func getThumbDiameterFill(orientation: Orientation) -> Int {
         if Device.isPad {
             return 38
         } else {
@@ -147,7 +147,7 @@ struct SliderLayout: LayoutScheme {
         }
     }
     
-    static func getThumbDiameterStroke(orientation: Orientation) -> Int {
+    @MainActor static func getThumbDiameterStroke(orientation: Orientation) -> Int {
         if Device.isPad {
             return 40
         } else {
@@ -160,7 +160,7 @@ struct SliderLayout: LayoutScheme {
         }
     }
     
-    static func getBarDiameterFill(orientation: Orientation) -> Int {
+    @MainActor static func getBarDiameterFill(orientation: Orientation) -> Int {
         if Device.isPad {
             return 10
         } else {
@@ -173,7 +173,7 @@ struct SliderLayout: LayoutScheme {
         }
     }
     
-    static func getBarDiameterStroke(orientation: Orientation) -> Int {
+    @MainActor static func getBarDiameterStroke(orientation: Orientation) -> Int {
         if Device.isPad {
             return 12
         } else {
@@ -186,7 +186,7 @@ struct SliderLayout: LayoutScheme {
         }
     }
     
-    static func getThumbHitBoxWidth(orientation: Orientation) -> Int {
+    @MainActor static func getThumbHitBoxWidth(orientation: Orientation) -> Int {
         if Device.isPad {
             return 54
         } else {
@@ -194,7 +194,7 @@ struct SliderLayout: LayoutScheme {
         }
     }
     
-    static func getCornerRadius(orientation: Orientation) -> Int {
+    @MainActor static func getCornerRadius(orientation: Orientation) -> Int {
         if Device.isPad {
             return 6
         } else {

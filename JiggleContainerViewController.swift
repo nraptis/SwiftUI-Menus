@@ -166,10 +166,21 @@ class JiggleContainerViewController: UIViewController {
         
         let orientation = jiggleViewController.jiggleDocument.orientation
         
-        let safeAreaLeft = Int(ApplicationController.rootViewController.view.safeAreaInsets.left + 0.5)
-        let safeAreaRight = Int(ApplicationController.rootViewController.view.safeAreaInsets.right + 0.5)
-        let safeAreaTop = Int(ApplicationController.rootViewController.view.safeAreaInsets.top + 0.5)
-        let safeAreaBottom = Int(ApplicationController.rootViewController.view.safeAreaInsets.bottom + 0.5)
+        let safeAreaLeft: Int
+        let safeAreaRight: Int
+        let safeAreaTop: Int
+        let safeAreaBottom: Int
+        if let rootViewController = ApplicationController.rootViewController {
+            safeAreaLeft = Int(rootViewController.view.safeAreaInsets.left + 0.5)
+            safeAreaRight = Int(rootViewController.view.safeAreaInsets.right + 0.5)
+            safeAreaTop = Int(rootViewController.view.safeAreaInsets.top + 0.5)
+            safeAreaBottom = Int(rootViewController.view.safeAreaInsets.bottom + 0.5)
+        } else {
+            safeAreaLeft = 0
+            safeAreaRight = 0
+            safeAreaTop = 0
+            safeAreaBottom = 0
+        }
         
         jiggleViewController.handleSafeAreaDidChange(safeAreaLeft: safeAreaLeft,
                                                      safeAreaRight: safeAreaRight,
@@ -242,7 +253,13 @@ class JiggleContainerViewController: UIViewController {
         
         let orientation = jiggleViewController.jiggleDocument.orientation
         
-        let safeAreaLeft = Int(ApplicationController.rootViewController.view.safeAreaInsets.left + 0.5)
+        let safeAreaLeft: Int
+        if let rootViewController = ApplicationController.rootViewController {
+            safeAreaLeft = Int(rootViewController.view.safeAreaInsets.left + 0.5)
+        } else {
+            safeAreaLeft = 0
+        }
+        
         let sideMenuWidth = ToolInterfaceTheme.getSideMenuWidth(orientation: orientation)
         let containerWidth = sideMenuWidth + safeAreaLeft
         
@@ -284,7 +301,13 @@ class JiggleContainerViewController: UIViewController {
         
         let orientation = jiggleViewController.jiggleDocument.orientation
         
-        let safeAreaLeft = Int(ApplicationController.rootViewController.view.safeAreaInsets.left + 0.5)
+        let safeAreaLeft: Int
+        if let rootViewController = ApplicationController.rootViewController {
+            safeAreaLeft = Int(rootViewController.view.safeAreaInsets.left + 0.5)
+        } else {
+            safeAreaLeft = 0
+        }
+        
         let sideMenuWidth = ToolInterfaceTheme.getSideMenuWidth(orientation: orientation)
         let containerWidth = sideMenuWidth + safeAreaLeft
         

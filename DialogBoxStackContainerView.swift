@@ -328,32 +328,42 @@ class DialogBoxStackContainerView: UIView {
     
     @objc func clickPush1(sender: UIButton) {
         print("clickPush1")
-        ApplicationController.rootViewController.pushDialogBox(DialogBoxModel.junkTestTiddoes)
+        if let rootViewController = ApplicationController.rootViewController {
+            rootViewController.pushDialogBox(DialogBoxModel.junkTestTiddoes)
+        }
     }
     
     @objc func clickPush2(sender: UIButton) {
         print("clickPush2")
-        ApplicationController.rootViewController.pushDialogBox(DialogBoxModel.junkTestAllTitles)
+        if let rootViewController = ApplicationController.rootViewController {
+            rootViewController.pushDialogBox(DialogBoxModel.junkTestAllTitles)
+        }
     }
     
     @objc func clickPush3(sender: UIButton) {
         print("clickPush3")
-        ApplicationController.rootViewController.pushDialogBox(DialogBoxModel.junkTest) { _ in
-            print("asdf FDSA asdf FDSA")
+        if let rootViewController = ApplicationController.rootViewController {
+            rootViewController.pushDialogBox(DialogBoxModel.junkTest) { _ in
+                print("asdf FDSA asdf FDSA")
+            }
         }
     }
     
     @objc func clickPopAll(sender: UIButton) {
         print("clickPopAll")
-        ApplicationController.rootViewController.popDialogStack { result in
-            print("Pop'D ALL (A:\(result))")
+        if let rootViewController = ApplicationController.rootViewController {
+            rootViewController.popDialogStack { result in
+                print("Pop'D ALL (A:\(result))")
+            }
         }
     }
     
     @objc func clickPopCurrent(sender: UIButton) {
         print("clickPopCurrent")
-        ApplicationController.rootViewController.popDialogBox() { result in
-            print("Pop'D ONE (B:\(result))")
+        if let rootViewController = ApplicationController.rootViewController {
+            rootViewController.popDialogBox() { result in
+                print("Pop'D ONE (B:\(result))")
+            }
         }
     }
     

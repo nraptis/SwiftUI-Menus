@@ -283,7 +283,7 @@ class HORIZONTAL_LAYOUT_STACKED: HORIZONTAL_LAYOUT, CustomStringConvertible {
 
 struct GENERIC_LAYOUT {
     
-    static func computeStacked(layoutSchemeType: LayoutScheme.Type,
+    @MainActor static func computeStacked(layoutSchemeType: LayoutScheme.Type,
                                layoutWidth: Int,
                                orientation: Orientation,
                                nameLabelWidth: Int,
@@ -515,7 +515,7 @@ struct GENERIC_LAYOUT {
         return result
     }
     
-    static func computeLong(layoutSchemeType: LayoutScheme.Type,
+    @MainActor static func computeLong(layoutSchemeType: LayoutScheme.Type,
                             layoutWidth: Int,
                             orientation: Orientation,
                             nameLabelWidth: Int,

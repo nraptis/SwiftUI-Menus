@@ -9,7 +9,7 @@ import UIKit
 
 struct MainTabLayout: LayoutScheme {
     
-    static func getOutsideBoxPaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
+    @MainActor static func getOutsideBoxPaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
                                          neighborTypeRight: ToolInterfaceElementType?) -> Int {
         if neighborTypeLeft == nil {
             return getWallPaddingLeft(orientation: orientation)
@@ -37,7 +37,7 @@ struct MainTabLayout: LayoutScheme {
         }
     }
     
-    static func getOutsideBoxPaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
+    @MainActor static func getOutsideBoxPaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
                                           neighborTypeRight: ToolInterfaceElementType?) -> Int {
         if neighborTypeRight == nil {
             return getWallPaddingRight(orientation: orientation)
@@ -85,7 +85,7 @@ struct MainTabLayout: LayoutScheme {
         }
     }
     
-    static func getCornerRadius(orientation: Orientation) -> Int {
+    @MainActor static func getCornerRadius(orientation: Orientation) -> Int {
         if Device.isPad {
             return 12
         } else {

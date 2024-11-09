@@ -10,13 +10,12 @@ import Combine
 
 class JiggleViewModel {
     
-    
     private var _graphDraggingStatus = false
     func getGraphDraggingStatus() -> Bool {
         return _graphDraggingStatus
     }
     
-    private func _calculateGraphDraggingStatus() -> Bool {
+    @MainActor private func _calculateGraphDraggingStatus() -> Bool {
         if isVideoExportEnabled { return false }
         if isVideoRecordEnabled { return false }
         if isZoomEnabled { return false }
@@ -28,9 +27,7 @@ class JiggleViewModel {
         switch jiggleDocument.documentMode {
         case .edit:
             if jiggleDocument.isGuidesEnabled {
-                
                 if isGraphEnabled {
-                    
                     let graphView: GraphView
                     if Device.isPad {
                         graphView = jiggleViewController.padDraggableMenu.standardContainerView.graphContainerView.graphView
@@ -55,7 +52,7 @@ class JiggleViewModel {
         }
     }
     
-    func graphDragNotifyStarted() {
+    @MainActor func graphDragNotifyStarted() {
         print("graphDragNotifyStarted")
         
         _graphDraggingStatus = _calculateGraphDraggingStatus()
@@ -65,8 +62,7 @@ class JiggleViewModel {
         }
     }
     
-    
-    func graphDragNotifyFinished() {
+    @MainActor func graphDragNotifyFinished() {
         print("graphDragNotifyFinished")
         
         
@@ -77,16 +73,13 @@ class JiggleViewModel {
             toolInterfaceViewModel.handleGraphDraggedJigglesDidChange()
         }
     }
-    
-    
-    
-    
+
     private var _timeLineDraggingStatus = false
-    func getTimeLineDraggingStatus() -> Bool {
+    @MainActor func getTimeLineDraggingStatus() -> Bool {
         return _timeLineDraggingStatus
     }
     
-    private func _calculateTimeLineDraggingStatus() -> Bool {
+    @MainActor private func _calculateTimeLineDraggingStatus() -> Bool {
         if isVideoExportEnabled { return false }
         if isVideoRecordEnabled { return false }
         if isZoomEnabled { return false }
@@ -125,7 +118,7 @@ class JiggleViewModel {
         }
     }
     
-    func timeLineDragNotifyStarted() {
+    @MainActor func timeLineDragNotifyStarted() {
         print("timeLineDragNotifyStarted")
         
         _timeLineDraggingStatus = _calculateTimeLineDraggingStatus()
@@ -136,7 +129,7 @@ class JiggleViewModel {
     }
     
     
-    func timeLineDragNotifyFinished() {
+    @MainActor func timeLineDragNotifyFinished() {
         print("timeLineDragNotifyFinished")
         
         
@@ -152,11 +145,11 @@ class JiggleViewModel {
     
     
     private var _continuousDraggingStatus = false
-    func getContinuousDraggingStatus() -> Bool {
+    @MainActor func getContinuousDraggingStatus() -> Bool {
         return _continuousDraggingStatus
     }
     
-    private func _calculateContinuousDraggingStatus() -> Bool {
+    @MainActor private func _calculateContinuousDraggingStatus() -> Bool {
         if isVideoExportEnabled { return false }
         if isVideoRecordEnabled { return false }
         if isZoomEnabled { return false }
@@ -186,14 +179,14 @@ class JiggleViewModel {
         }
     }
     
-    func continuousRealizeJiggleWillStartGrab(jiggle: Jiggle) {
+    @MainActor func continuousRealizeJiggleWillStartGrab(jiggle: Jiggle) {
         print("*** continuousRealizeJiggleWillStartGrab")
         
         jiggle.snapShotContinuousDragHistory()
         
     }
     
-    func continuousRealizeJiggleDidStartGrab(jiggle: Jiggle) {
+    @MainActor func continuousRealizeJiggleDidStartGrab(jiggle: Jiggle) {
         print("*** continuousRealizeJiggleDidStartGrab")
         
         _continuousDraggingStatus = _calculateContinuousDraggingStatus()
@@ -203,13 +196,13 @@ class JiggleViewModel {
         
     }
     
-    func continuousRealizeJiggleWillStopGrab(jiggle: Jiggle) {
+    @MainActor func continuousRealizeJiggleWillStopGrab(jiggle: Jiggle) {
         print("*** continuousRealizeJiggleWillStopGrab")
         
         
         if let jiggleIndex = jiggleDocument.getJiggleIndex(jiggle) {
             
-            let startData = ContinuousAttributeDataUserDrag(duration: jiggle._snapShotContinuousDuration,
+            let startData = ContinuousAttributeDataUserAll(duration: jiggle._snapShotContinuousDuration,
                                                             angle: jiggle._snapShotContinuousAngle,
                                                             power: jiggle._snapShotContinuousPower,
                                                             swoop: jiggle._snapShotContinuousSwoop,
@@ -219,10 +212,10 @@ class JiggleViewModel {
                                                             startRotation: jiggle._snapShotContinuousStartRotation,
                                                             endRotation: jiggle._snapShotContinuousEndRotation)
             let startAttribute = ContinuousAttribute(jiggleIndex: jiggleIndex,
-                                                     continuousAttributeType: .continuousDrag,
-                                                     continuousAttributeTypeWithData: .continuousDrag(startData))
+                                                     continuousAttributeType: .continuousAll,
+                                                     continuousAttributeTypeWithData: .continuousAll(startData))
             
-            let endData = ContinuousAttributeDataUserDrag(duration: jiggle.continuousDuration,
+            let endData = ContinuousAttributeDataUserAll(duration: jiggle.continuousDuration,
                                                           angle: jiggle.continuousAngle,
                                                           power: jiggle.continuousPower,
                                                           swoop: jiggle.continuousSwoop,
@@ -232,8 +225,8 @@ class JiggleViewModel {
                                                           startRotation: jiggle.continuousStartRotation,
                                                           endRotation: jiggle.continuousEndRotation)
             let endAttribute = ContinuousAttribute(jiggleIndex: jiggleIndex,
-                                                   continuousAttributeType: .continuousDrag,
-                                                   continuousAttributeTypeWithData: .continuousDrag(endData))
+                                                   continuousAttributeType: .continuousAll,
+                                                   continuousAttributeTypeWithData: .continuousAll(endData))
             
             historyRecordContinuousAttributeOne(jiggleIndex: jiggleIndex,
                                                 startAttribute: startAttribute,
@@ -306,7 +299,7 @@ class JiggleViewModel {
         }
     }
     
-    func recordTimeLineHistoryForOneSwatch() {
+    @MainActor func recordTimeLineHistoryForOneSwatch() {
         if jiggleDocument.snapShotLoopAttributeIsAppliedToAll {
             let startAttributes = jiggleDocument.snapShotLoopAttributesAll
             if startAttributes.count > 0 {
@@ -420,7 +413,7 @@ class JiggleViewModel {
     // [DONE!]: We can do a little better here; Better to save just the swatch / channel in question.
     //       What are the trade offs of this improvement? Might be better to just have much less
     //       channels at the max end and keep the over-fitted solution...
-    func recordTimeLineHistoryForTimeLineViewDrag() {
+    @MainActor func recordTimeLineHistoryForTimeLineViewDrag() {
         recordTimeLineHistoryForOneSwatch()
     }
     
@@ -442,7 +435,7 @@ class JiggleViewModel {
     var isAnySliderActiveStaleTime = Float(0.0)
     var activeSlider = ToolInterfaceElement.buttonMenu
     
-    func ANY_sliderActiveNotify(whichSlider: ToolInterfaceElement) {
+    @MainActor func ANY_sliderActiveNotify(whichSlider: ToolInterfaceElement) {
         print("*** SLIDER ACTIVE!!!")
         isAnySliderActive = true
         activeSlider = whichSlider
@@ -451,7 +444,7 @@ class JiggleViewModel {
         }
     }
     
-    func ANY_sliderInactiveNotify() {
+    @MainActor func ANY_sliderInactiveNotify() {
         print("*** SLIDER INACTIVE!!!")
         isAnySliderActive = false
         activeSlider = ToolInterfaceElement.buttonMenu
@@ -464,12 +457,9 @@ class JiggleViewModel {
     var isGraphEnabled = false
     //var isTimeLinePage2Enabled = false
     
-    var isGraphPage2Enabled = false
-    //var isAnimationContinuousPage2Enabled = false
-    
     var timeLineSelectedSwatch = Swatch.scale
     
-    func selectTimeLineSwatch(swatch: Swatch) {
+    @MainActor func selectTimeLineSwatch(swatch: Swatch) {
         timeLineSelectedSwatch = swatch
         jiggleDocument.selectedTimeLineSwatchUpdatePublisher.send(())
         if let toolInterfaceViewModel = toolInterfaceViewModel {
@@ -477,7 +467,7 @@ class JiggleViewModel {
         }
     }
     
-    func setContinuousDisableGrab(isEnabled: Bool) {
+    @MainActor func setContinuousDisableGrab(isEnabled: Bool) {
         jiggleDocument.isContinuousDisableGrabEnabled = isEnabled
         if let toolInterfaceViewModel = toolInterfaceViewModel {
             toolInterfaceViewModel.handleContinuousDisableGrabDidChange()
@@ -489,26 +479,32 @@ class JiggleViewModel {
     var sliderStartedJiggleDampenValueNodes = [HistorySingleJiggleValueNode]()
     
     @discardableResult
+    @MainActor
     func attemptCloneJiggle() -> Bool {
-        if jiggleDocument.attemptCloneJiggle(displayMode: displayMode,
+        if let clonedJiggle = jiggleDocument.attemptCloneJiggle(displayMode: displayMode,
                                              isGraphEnabled: isGraphEnabled,
                                              jiggleEngine: jiggleEngine) {
+            
+            timeLineComputeAllChannels(clonedJiggle)
+            
             return true
         }
         return false
     }
     
     @discardableResult
+    @MainActor
     func attemptCloneGuide() -> Bool {
         if jiggleDocument.attemptCloneGuide(displayMode: displayMode,
                                             isGraphEnabled: isGraphEnabled,
-                                            jiggleEngine: jiggleEngine) {
+                                            jiggleEngine: jiggleEngine) !== nil {
+            
             return true
         }
         return false
     }
     
-    func rotateGuideRight() {
+    @MainActor func rotateGuideRight() {
         if let selectedJiggle = getSelectedJiggle() {
             if let selectedGuide = selectedJiggle.getSelectedGuide() {
                 
@@ -532,7 +528,7 @@ class JiggleViewModel {
         }
     }
     
-    func rotateGuideLeft() {
+    @MainActor func rotateGuideLeft() {
         if let selectedJiggle = getSelectedJiggle() {
             if let selectedGuide = selectedJiggle.getSelectedGuide() {
                 
@@ -556,7 +552,7 @@ class JiggleViewModel {
         }
     }
     
-    func flipGuideHorizontal() {
+    @MainActor func flipGuideHorizontal() {
         if let selectedJiggle = getSelectedJiggle() {
             if let selectedGuide = selectedJiggle.getSelectedGuide() {
                 let fileBufferBefore = FileBuffer()
@@ -576,7 +572,7 @@ class JiggleViewModel {
         }
     }
     
-    func flipGuideVertical() {
+    @MainActor func flipGuideVertical() {
         if let selectedJiggle = getSelectedJiggle() {
             if let selectedGuide = selectedJiggle.getSelectedGuide() {
                 let fileBufferBefore = FileBuffer()
@@ -597,23 +593,21 @@ class JiggleViewModel {
     }
     
     private(set) var isRecordingEnabled = true
-    func startVideoRecording() {
+    @MainActor func startVideoRecording() {
         if isRecordingEnabled == false {
             isRecordingEnabled = true
             toolInterfaceViewModel.handleRecordingEnabledDidChange()
         }
     }
     
-    func stopVideoRecording() {
+    @MainActor func stopVideoRecording() {
         if isRecordingEnabled == false {
             isRecordingEnabled = true
             //toolInterfaceViewModel.handlRecordingEnabledDidChange()
         }
     }
     
-    
-    
-    func zoomReset() {
+    @MainActor func zoomReset() {
         if isResetZoomActive == false {
             self.isResetZoomActive = true
             cancelAllTouchesAndGestures(touches: [],
@@ -631,7 +625,7 @@ class JiggleViewModel {
         }
     }
     
-    func zoomJiggle() {
+    @MainActor func zoomJiggle() {
         
         if let selectedJiggle = getSelectedJiggle() {
             if isResetZoomActive == false {
@@ -733,59 +727,51 @@ class JiggleViewModel {
                         
                     }
                 }
-                
             }
-            
-            
-            
-            
         }
     }
     
-    func selectNextJiggle() {
+    @MainActor func selectNextJiggle() {
         jiggleDocument.selectNextJiggle(displayMode: displayMode,
                                         isGraphEnabled: isGraphEnabled)
     }
     
-    func selectPreviousJiggle() {
+    @MainActor func selectPreviousJiggle() {
         jiggleDocument.selectPreviousJiggle(displayMode: displayMode,
                                             isGraphEnabled: isGraphEnabled)
     }
     
-    func selectNextGuide() {
+    @MainActor func selectNextGuide() {
         jiggleDocument.selectNextGuide(displayMode: displayMode,
                                        isGraphEnabled: isGraphEnabled)
     }
     
-    func selectPreviousGuide() {
+    @MainActor func selectPreviousGuide() {
         jiggleDocument.selectPreviousGuide(displayMode: displayMode,
                                            isGraphEnabled: isGraphEnabled)
     }
     
-    func selectNextJigglePoint() {
+    @MainActor func selectNextJigglePoint() {
         jiggleDocument.selectNextJigglePoint(displayMode: displayMode,
                                              isGraphEnabled: isGraphEnabled)
     }
     
-    func selectPreviousJigglePoint() {
+    @MainActor func selectPreviousJigglePoint() {
         jiggleDocument.selectPreviousJigglePoint(displayMode: displayMode,
                                                  isGraphEnabled: isGraphEnabled)
     }
     
-    func selectNextGuidePoint() {
+    @MainActor func selectNextGuidePoint() {
         jiggleDocument.selectNextGuidePoint(displayMode: displayMode,
                                             isGraphEnabled: isGraphEnabled)
     }
     
-    func selectPreviousGuidePoint() {
+    @MainActor func selectPreviousGuidePoint() {
         jiggleDocument.selectPreviousGuidePoint(displayMode: displayMode,
                                                 isGraphEnabled: isGraphEnabled)
     }
     
-    
-    
-    
-    func rotateJiggleRight() {
+    @MainActor func rotateJiggleRight() {
         if let selectedJiggle = getSelectedJiggle() {
             
             let fileBufferBefore = FileBuffer()
@@ -804,7 +790,7 @@ class JiggleViewModel {
         }
     }
     
-    func rotateJiggleLeft() {
+    @MainActor func rotateJiggleLeft() {
         if let selectedJiggle = getSelectedJiggle() {
             
             let fileBufferBefore = FileBuffer()
@@ -823,7 +809,7 @@ class JiggleViewModel {
         }
     }
     
-    func flipJiggleHorizontal() {
+    @MainActor func flipJiggleHorizontal() {
         if let selectedJiggle = getSelectedJiggle() {
             
             let fileBufferBefore = FileBuffer()
@@ -842,7 +828,7 @@ class JiggleViewModel {
         }
     }
     
-    func flipJiggleVertical() {
+    @MainActor func flipJiggleVertical() {
         if let selectedJiggle = getSelectedJiggle() {
             
             let fileBufferBefore = FileBuffer()
@@ -886,8 +872,6 @@ class JiggleViewModel {
     var isVideoRecordEnabled = false
     var isVideoExportEnabled = false
     
-    
-    
     var isPadMenuExpanded = true
     
     var isPhoneTopMenuExpanded = true
@@ -903,44 +887,36 @@ class JiggleViewModel {
     //var isAnimationWobbleAppliedToAll = false
     
     
-    func isAnyJiggleFrozen() -> Bool {
+    @MainActor func isAnyJiggleFrozen() -> Bool {
         jiggleDocument.isAnyJiggleFrozen()
     }
     
-    func unfreezeAllJiggles() {
+    @MainActor func unfreezeAllJiggles() {
         jiggleDocument.unfreezeAllJiggles(displayMode: displayMode,
                                           isGraphEnabled: isGraphEnabled)
         toolInterfaceViewModel.handleFrozenJigglesDidChange()
     }
     
-    func freezeSelectedJiggle() {
+    @MainActor func freezeSelectedJiggle() {
         jiggleDocument.freezeSelectedJiggle(displayMode: displayMode,
                                             isGraphEnabled: isGraphEnabled)
         toolInterfaceViewModel.handleFrozenJigglesDidChange()
     }
     
-    func unfreezeAllGuides() {
+    @MainActor func unfreezeAllGuides() {
         jiggleDocument.unfreezeAllGuides(displayMode: displayMode,
                                          isGraphEnabled: isGraphEnabled)
-        toolInterfaceViewModel.handleFrozenJigglesDidChange()
+        toolInterfaceViewModel.handleFrozenGuidesDidChange()
     }
     
-    func freezeSelectedGuide() {
+    @MainActor func freezeSelectedGuide() {
         jiggleDocument.freezeSelectedGuide(displayMode: displayMode,
                                            isGraphEnabled: isGraphEnabled)
         toolInterfaceViewModel.handleFrozenGuidesDidChange()
     }
     
-    
-    func setJiggleOpacity(_ jiggleOpacity: Float) {
+    @MainActor func setJiggleOpacity(_ jiggleOpacity: Float) {
         ApplicationController.jiggleOpacity = jiggleOpacity
-        
-        
-        //currentHashTrianglesStandard
-        
-        
-        //documentMode.meshTypeIfNeeded
-        
         jiggleDocument.setJiggleOpacity(jiggleOpacity)
     }
     
@@ -965,15 +941,13 @@ class JiggleViewModel {
     static let tanFactorWeightCurveAutoStart = Float(0.6)
     static let tanFactorWeightCurveAutoEnd = Float(0.6)
     
-    
-    
-    func applyMeshCommandAllJiggles(meshCommand: JiggleMeshCommand,
+    @MainActor func applyMeshCommandAllJiggles(meshCommand: JiggleMeshCommand,
                                     guideCommand: GuideCommand) {
         jiggleDocument.applyMeshCommandAllJiggles(meshCommand: meshCommand,
                                                   guideCommand: guideCommand)
     }
     
-    func applyMeshCommandOneJiggle(meshCommand: JiggleMeshCommand,
+    @MainActor func applyMeshCommandOneJiggle(meshCommand: JiggleMeshCommand,
                                    guideCommand: GuideCommand,
                                    jiggle: Jiggle) {
         jiggleDocument.applyMeshCommandOneJiggle(meshCommand: meshCommand,
@@ -981,15 +955,15 @@ class JiggleViewModel {
                                                  jiggle: jiggle)
     }
     
-    func lockShowingState() {
+    @MainActor func lockShowingState() {
         jiggleDocument.lockShowingState()
     }
     
-    func unlockShowingState() {
+    @MainActor func unlockShowingState() {
         jiggleDocument.unlockShowingState()
     }
     
-    lazy var swivelCoordinator: SwivelCoordinator = {
+    @MainActor lazy var swivelCoordinator: SwivelCoordinator = {
         let camera = jiggleScene.camera
         let result = SwivelCoordinator(camera: camera)
         return result
@@ -1003,15 +977,15 @@ class JiggleViewModel {
     
     
     
-    var isBlocked: Bool {
+    @MainActor var isBlocked: Bool {
         toolInterfaceViewModel.isBlocked
     }
     
-    var isBlockedAnyTransition: Bool {
+    @MainActor var isBlockedAnyTransition: Bool {
         toolInterfaceViewModel.isBlockedAnyTransition
     }
     
-    var isBlockedExceptForHistory: Bool {
+    @MainActor var isBlockedExceptForHistory: Bool {
         toolInterfaceViewModel.isBlockedExceptForHistory
     }
     
@@ -1025,12 +999,8 @@ class JiggleViewModel {
         jiggleScene.isDisplayTransitionActiveRegular || jiggleScene.isDisplayTransitionActiveSwivel
     }
     
-    
-    
     var selectedWeightCurveDataUpdateCancellable: AnyCancellable?
     var selectedJiggleDidChangeCancellable: AnyCancellable?
-    
-    
     
     var jigglesDidChangeCancellable: AnyCancellable?
     
@@ -1153,246 +1123,276 @@ class JiggleViewModel {
         }
     }
     
-    func publisherLinkUp() {
+    @MainActor func publisherLinkUp() {
         
         selectedJiggleDidChangeCancellable = jiggleDocument
             .selectedJiggleDidChangePublisher
             .sink { [weak self] data in
-                if let self = self {
-                    self.graphUpdateRelay()
-                    self.timeLineUpdateRelay()
-                }
+                //Task { @MainActor [weak self] in
+                    if let self = self {
+                        self.graphUpdateRelay()
+                        self.timeLineUpdateRelay()
+                    }
+                //}
             }
         
         jigglesDidChangeCancellable = jiggleDocument
             .jigglesDidChangePublisher
             .sink { [weak self] in
-                if let self = self {
-                    
-                    self.handleJigglesDidChange()
-                }
+                //Task { @MainActor [weak self] in
+                    if let self = self {
+                        
+                        self.handleJigglesDidChange()
+                    }
+                //}
             }
         
         jiggleNumberOfControlPointsCancellable = jiggleDocument
             .controlPointsDidChangePublisher
-            .sink { [weak self] _ in
-                print("{{ Publisher }} jiggleNumberOfControlPoints")
-                if let self = self {
-                    
-                    self.handleControlPointsDidChange()
-                }
+            .sink { [weak self] in
+                //Task { @MainActor [weak self] in
+                    if let self = self {
+                        
+                        self.handleControlPointsDidChange()
+                    }
+                //}
             }
-        
         createJiggleCancellable = jiggleDocument
             .createJigglePublisher
             .sink { [weak self] createJiggleData in
-                print("{{ Publisher }} createJiggle, isHistoryAction: \(createJiggleData.isHistoryAction)")
-                if let self = self {
-                    if !createJiggleData.isHistoryAction {
-                        if let jiggle = createJiggleData.jiggle {
-                            self.historyRecordCreateJiggle(jiggle: jiggle)
+                if !createJiggleData.isHistoryAction {
+                //Task { @MainActor [weak self] in
+                    if let self = self {
+                        
+                            self.historyRecordCreateJiggle(fileBuffer: createJiggleData.jiggleData)
                         }
                     }
-                }
+                //}
             }
         
         createGuideCancellable = jiggleDocument
             .createGuidePublisher
             .sink { [weak self] createGuideData in
-                print("{{ Publisher }} createGuide, isHistoryAction: \(createGuideData.isHistoryAction)")
-                if let self = self {
-                    if !createGuideData.isHistoryAction {
-                        if let guide = createGuideData.guide {
-                            if let jiggleIndex = self.jiggleDocument.getJiggleIndexWithGuide(guide: guide) {
+                if !createGuideData.isHistoryAction {
+                    //Task { @MainActor [weak self] in
+                        if let self = self {
+                            if let jiggleIndex = createGuideData.jiggleIndex {
                                 self.historyRecordCreateGuide(jiggleIndex: jiggleIndex,
-                                                              guide: guide)
+                                                              fileBuffer: createGuideData.guideData)
                             }
                         }
                     }
-                }
+                
             }
         
         removeJiggleCancellable = jiggleDocument
             .removeJigglePublisher
             .sink { [weak self] removeJiggleData in
-                print("{{ Publisher }} removeJiggle, isHistoryAction: \(removeJiggleData.isHistoryAction)")
-                if let self = self {
-                    if !removeJiggleData.isHistoryAction {
-                        if let jiggle = removeJiggleData.jiggle, let jiggleIndex = removeJiggleData.jiggleIndex {
-                            self.historyRecordRemoveJiggle(jiggle: jiggle,
-                                                           jiggleIndex: jiggleIndex)
+                if !removeJiggleData.isHistoryAction {
+                    //Task { @MainActor [weak self] in
+                        if let self = self {
+                            
+                            if let jiggleIndex = removeJiggleData.jiggleIndex {
+                                self.historyRecordRemoveJiggle(fileBuffer: removeJiggleData.jiggleData,
+                                                               jiggleIndex: jiggleIndex)
+                            }
                         }
                     }
-                }
+                //}
             }
         
         removeGuideCancellable = jiggleDocument
             .removeGuidePublisher
             .sink { [weak self] removeGuideData in
-                print("{{ Publisher }} removeGuide, isHistoryAction: \(removeGuideData.isHistoryAction)")
-                if let self = self {
-                    if !removeGuideData.isHistoryAction {
-                        if let guide = removeGuideData.guide {
+                if !removeGuideData.isHistoryAction {
+                    //Task { @MainActor [weak self] in
+                        if let self = self {
+                            
                             if let jiggleIndex = removeGuideData.jiggleIndex,
                                let weightCurveIndex = removeGuideData.weightCurveIndex {
                                 self.historyRecordDeleteGuide(jiggleIndex: jiggleIndex,
                                                               weightCurveIndex: weightCurveIndex,
-                                                              guide: guide)
+                                                              fileBuffer: removeGuideData.guideData)
                             }
+                            
                         }
-                    }
+                    //}
                 }
             }
         
         transformJiggleCancellable = jiggleDocument
             .transformJigglePublisher
             .sink { [weak self] transformJiggleData in
-                if let self = self {
-                    if let jiggleIndex = transformJiggleData.jiggleIndex {
-                        historyRecordTransformJiggle(jiggleIndex: jiggleIndex, data: transformJiggleData)
+                //Task { @MainActor [weak self] in
+                    if let self = self {
+                        if let jiggleIndex = transformJiggleData.jiggleIndex {
+                            historyRecordTransformJiggle(jiggleIndex: jiggleIndex, data: transformJiggleData)
+                        }
                     }
-                }
+                
             }
         
         transformGuideCancellable = jiggleDocument
             .transformGuidePublisher
             .sink { [weak self] transformJiggleData in
-                if let self = self {
-                    if let jiggleIndex = transformJiggleData.jiggleIndex,
-                       let weightCurveIndex = transformJiggleData.weightCurveIndex {
-                        historyRecordTransformGuide(jiggleIndex: jiggleIndex,
-                                                    weightCurveIndex: weightCurveIndex,
-                                                    data: transformJiggleData)
+                //Task { @MainActor [weak self] in
+                    if let self = self {
+                        if let jiggleIndex = transformJiggleData.jiggleIndex,
+                           let weightCurveIndex = transformJiggleData.weightCurveIndex {
+                            historyRecordTransformGuide(jiggleIndex: jiggleIndex,
+                                                        weightCurveIndex: weightCurveIndex,
+                                                        data: transformJiggleData)
+                        }
                     }
-                }
+                //}
             }
         
         grabControlPointStopCancellable = jiggleDocument
             .grabControlPointStopPublisher
             .sink { [weak self] grabControlPointData in
-                print("{{ Publisher }} grabControlPointStop, didChange: \(grabControlPointData.didChange)")
                 if grabControlPointData.didChange {
-                    if let self = self {
-                        if let jiggleIndex = grabControlPointData.jiggleIndex, let controlPointIndex = grabControlPointData.controlPointIndex {
-                            let startPoint = Point(x: grabControlPointData.startX,
-                                                   y: grabControlPointData.startY)
-                            let endPoint = Point(x: grabControlPointData.endX,
-                                                 y: grabControlPointData.endY)
-                            self.historyRecordMoveControlPoint(jiggleIndex: jiggleIndex,
-                                                               controlPointIndex: controlPointIndex,
-                                                               startPoint: startPoint,
-                                                               endPoint: endPoint)
+                    //Task { @MainActor [weak self] in
+                        if let self = self {
+                            
+                            if let jiggleIndex = grabControlPointData.jiggleIndex, let controlPointIndex = grabControlPointData.controlPointIndex {
+                                let startPoint = Point(x: grabControlPointData.startX,
+                                                       y: grabControlPointData.startY)
+                                let endPoint = Point(x: grabControlPointData.endX,
+                                                     y: grabControlPointData.endY)
+                                self.historyRecordMoveControlPoint(jiggleIndex: jiggleIndex,
+                                                                   controlPointIndex: controlPointIndex,
+                                                                   startPoint: startPoint,
+                                                                   endPoint: endPoint)
+                            }
                         }
-                    }
+                    //}
                 }
             }
         
         grabGuidePointStopCancellable = jiggleDocument
             .grabGuidePointStopPublisher
             .sink { [weak self] grabGuidePointData in
-                print("{{ Publisher }} grabGuidePointStop, didChange: \(grabGuidePointData.didChange)")
                 if grabGuidePointData.didChange {
-                    let startPoint = Point(x: grabGuidePointData.startX,
-                                           y: grabGuidePointData.startY)
-                    let endPoint = Point(x: grabGuidePointData.endX,
-                                         y: grabGuidePointData.endY)
-                    if let jiggleIndex = grabGuidePointData.jiggleIndex,
-                       let weightCurveIndex = grabGuidePointData.weightCurveIndex,
-                       let weightControlPointIndex = grabGuidePointData.weightControlPointIndex {
-                        
-                        self?.historyRecordMoveGuideControlPoint(jiggleIndex: jiggleIndex,
-                                                                 weightCurveIndex: weightCurveIndex,
-                                                                 guideControlPointIndex: weightControlPointIndex,
-                                                                 startPoint: startPoint,
-                                                                 endPoint: endPoint)
-                    }
+                    //Task { @MainActor [weak self] in
+                        if let self = self {
+                            
+                            let startPoint = Point(x: grabGuidePointData.startX,
+                                                   y: grabGuidePointData.startY)
+                            let endPoint = Point(x: grabGuidePointData.endX,
+                                                 y: grabGuidePointData.endY)
+                            if let jiggleIndex = grabGuidePointData.jiggleIndex,
+                               let weightCurveIndex = grabGuidePointData.weightCurveIndex,
+                               let weightControlPointIndex = grabGuidePointData.weightControlPointIndex {
+                                self.historyRecordMoveGuideControlPoint(jiggleIndex: jiggleIndex,
+                                                                        weightCurveIndex: weightCurveIndex,
+                                                                        guideControlPointIndex: weightControlPointIndex,
+                                                                        startPoint: startPoint,
+                                                                        endPoint: endPoint)
+                            }
+                        }
+                    //}
                 }
             }
         
         grabWeightCenterStopCancellable = jiggleDocument
             .grabWeightCenterStopPublisher
             .sink { [weak self] grabWeightCenterData in
-                print("{{ Publisher }} grabWeightCenterStop, didChange: \(grabWeightCenterData.didChange)")
                 if grabWeightCenterData.didChange {
-                    let startPoint = Point(x: grabWeightCenterData.startX,
-                                           y: grabWeightCenterData.startY)
-                    let endPoint = Point(x: grabWeightCenterData.endX,
-                                         y: grabWeightCenterData.endY)
-                    if let jiggleIndex = grabWeightCenterData.jiggleIndex {
-                        self?.historyRecordMoveWeightCenter(jiggleIndex: jiggleIndex,
-                                                            startCenter: startPoint,
-                                                            endCenter: endPoint)
-                    }
+                    //Task { @MainActor [weak self] in
+                        if let self = self {
+                            
+                            let startPoint = Point(x: grabWeightCenterData.startX,
+                                                   y: grabWeightCenterData.startY)
+                            let endPoint = Point(x: grabWeightCenterData.endX,
+                                                 y: grabWeightCenterData.endY)
+                            if let jiggleIndex = grabWeightCenterData.jiggleIndex {
+                                self.historyRecordMoveWeightCenter(jiggleIndex: jiggleIndex,
+                                                                   startCenter: startPoint,
+                                                                   endCenter: endPoint)
+                            }
+                        }
+                    //}
                 }
             }
         
         grabJiggleCenterStopCancellable = jiggleDocument
             .grabJiggleCenterStopPublisher
             .sink { [weak self] grabJiggleCenterData in
-                print("{{ Publisher }} grabJiggleCenterStop, didChange: \(grabJiggleCenterData.didChange)")
                 if grabJiggleCenterData.didChange {
-                    let startPoint = Point(x: grabJiggleCenterData.startX,
-                                           y: grabJiggleCenterData.startY)
-                    let endPoint = Point(x: grabJiggleCenterData.endX,
-                                         y: grabJiggleCenterData.endY)
-                    if let jiggleIndex = grabJiggleCenterData.jiggleIndex {
-                        self?.historyRecordMoveJiggleCenter(jiggleIndex: jiggleIndex,
-                                                            startCenter: startPoint,
-                                                            endCenter: endPoint)
-                    }
+                    //Task { @MainActor [weak self] in
+                        if let self = self {
+                            
+                            let startPoint = Point(x: grabJiggleCenterData.startX,
+                                                   y: grabJiggleCenterData.startY)
+                            let endPoint = Point(x: grabJiggleCenterData.endX,
+                                                 y: grabJiggleCenterData.endY)
+                            if let jiggleIndex = grabJiggleCenterData.jiggleIndex {
+                                self.historyRecordMoveJiggleCenter(jiggleIndex: jiggleIndex,
+                                                                   startCenter: startPoint,
+                                                                   endCenter: endPoint)
+                            }
+                        }
+                    //}
                 }
             }
         
         animationContinuousDraggingCancellable = jiggleDocument
             .animationContinuousDraggingPublisher
-            .sink { [weak self] _ in
-                if let self = self {
-                    if let toolInterfaceViewModel = self.toolInterfaceViewModel {
-                        toolInterfaceViewModel.handleContinuousAngleDidChange()
-                        toolInterfaceViewModel.handleContinuousPowerDidChange()
+            .sink { [weak self] in
+                //Task { @MainActor [weak self] in
+                    if let self = self {
+                        if let toolInterfaceViewModel = self.toolInterfaceViewModel {
+                            toolInterfaceViewModel.handleContinuousAngleDidChange()
+                            toolInterfaceViewModel.handleContinuousPowerDidChange()
+                        }
                     }
-                }
+                //}
             }
         
         animationContinuousScaleCancellable = jiggleDocument
             .animationContinuousScalePublisher
-            .sink { [weak self] _ in
-                if let self = self {
-                    if let toolInterfaceViewModel = self.toolInterfaceViewModel {
-                        toolInterfaceViewModel.handleContinuousStartScaleDidChange()
+            .sink { [weak self] in
+                //Task { @MainActor [weak self] in
+                    if let self = self {
+                        if let toolInterfaceViewModel = self.toolInterfaceViewModel {
+                            toolInterfaceViewModel.handleContinuousStartScaleDidChange()
+                        }
                     }
-                }
+                //}
             }
         
         animationContinuousRotationCancellable = jiggleDocument
             .animationContinuousRotationPublisher
-            .sink { [weak self] _ in
-                if let self = self {
-                    if let toolInterfaceViewModel = self.toolInterfaceViewModel {
-                        toolInterfaceViewModel.handleContinuousStartRotationDidChange()
+            .sink { [weak self] in
+                //Task { @MainActor [weak self] in
+                    if let self = self {
+                        if let toolInterfaceViewModel = self.toolInterfaceViewModel {
+                            toolInterfaceViewModel.handleContinuousStartRotationDidChange()
+                        }
                     }
-                }
+                //}
             }
         
         animationContinuousSyncAllCancellable = jiggleDocument
             .animationContinuousSyncAllPublisher
-            .sink { [weak self] _ in
-                print("{{ Publisher }} animationContinuousSyncAllPublisher")
-                if let self = self {
-                    if let toolInterfaceViewModel = self.toolInterfaceViewModel {
-                        toolInterfaceViewModel.handleContinuousAngleDidChange()
-                        toolInterfaceViewModel.handleContinuousPowerDidChange()
-                        toolInterfaceViewModel.handleContinuousStartScaleDidChange()
-                        toolInterfaceViewModel.handleContinuousEndScaleDidChange()
-                        toolInterfaceViewModel.handleContinuousStartRotationDidChange()
-                        toolInterfaceViewModel.handleContinuousEndRotationDidChange()
-                        
-                        // Shouldn't need these 3?
-                        toolInterfaceViewModel.handleContinuousDurationDidChange()
-                        toolInterfaceViewModel.handleContinuousSwoopDidChange()
-                        toolInterfaceViewModel.handleContinuousFrameOffsetDidChange()
+            .sink { [weak self] in
+                //Task { @MainActor [weak self] in
+                    if let self = self {
+                        if let toolInterfaceViewModel = self.toolInterfaceViewModel {
+                            toolInterfaceViewModel.handleContinuousAngleDidChange()
+                            toolInterfaceViewModel.handleContinuousPowerDidChange()
+                            toolInterfaceViewModel.handleContinuousStartScaleDidChange()
+                            toolInterfaceViewModel.handleContinuousEndScaleDidChange()
+                            toolInterfaceViewModel.handleContinuousStartRotationDidChange()
+                            toolInterfaceViewModel.handleContinuousEndRotationDidChange()
+                            
+                            // Shouldn't need these 3?
+                            toolInterfaceViewModel.handleContinuousDurationDidChange()
+                            toolInterfaceViewModel.handleContinuousSwoopDidChange()
+                            toolInterfaceViewModel.handleContinuousFrameOffsetDidChange()
+                        }
                     }
-                }
+                //}
             }
         
         if let jiggleViewController = jiggleViewController {
@@ -1409,73 +1409,80 @@ class JiggleViewModel {
             
             grabWeightCurveControlPointStopCancellable = grabWeightCurveControlPointStopPublisher
                 .sink { [weak self] grabWeightCurveControlPointData in
-                    print("{{ Publisher }} grabWeightCurveControlPointStop, didChange: \(grabWeightCurveControlPointData.didChange)")
                     if grabWeightCurveControlPointData.didChange {
-                        if let jiggleIndex = grabWeightCurveControlPointData.jiggleIndex {
-                            if let guideIndex = grabWeightCurveControlPointData.guideIndex {
-                                self?.historyRecordMoveWeightGraphPosition(jiggleIndex: jiggleIndex,
-                                                                           isFirstControlPoint: grabWeightCurveControlPointData.isFirstControlPoint,
-                                                                           isLastControlPoint: grabWeightCurveControlPointData.isLastControlPoint,
-                                                                           guideIndex: guideIndex,
-                                                                           startHeightManual: grabWeightCurveControlPointData.startManual,
-                                                                           startHeightFactor: grabWeightCurveControlPointData.startHeightFactor,
-                                                                           endHeightFactor: grabWeightCurveControlPointData.endHeightFactor)
+                        //Task { @MainActor [weak self] in
+                            if let self = self {
                                 
-                            } else if (grabWeightCurveControlPointData.isFirstControlPoint || grabWeightCurveControlPointData.isLastControlPoint) {
-                                self?.historyRecordMoveWeightGraphPosition(jiggleIndex: jiggleIndex,
-                                                                           isFirstControlPoint: grabWeightCurveControlPointData.isFirstControlPoint,
-                                                                           isLastControlPoint: grabWeightCurveControlPointData.isLastControlPoint,
-                                                                           guideIndex: -1,
-                                                                           startHeightManual: grabWeightCurveControlPointData.startManual,
-                                                                           startHeightFactor: grabWeightCurveControlPointData.startHeightFactor,
-                                                                           endHeightFactor: grabWeightCurveControlPointData.endHeightFactor)
+                                if let jiggleIndex = grabWeightCurveControlPointData.jiggleIndex {
+                                    if let guideIndex = grabWeightCurveControlPointData.guideIndex {
+                                        self.historyRecordMoveWeightGraphPosition(jiggleIndex: jiggleIndex,
+                                                                                  isFirstControlPoint: grabWeightCurveControlPointData.isFirstControlPoint,
+                                                                                  isLastControlPoint: grabWeightCurveControlPointData.isLastControlPoint,
+                                                                                  guideIndex: guideIndex,
+                                                                                  startHeightManual: grabWeightCurveControlPointData.startManual,
+                                                                                  startHeightFactor: grabWeightCurveControlPointData.startHeightFactor,
+                                                                                  endHeightFactor: grabWeightCurveControlPointData.endHeightFactor)
+                                        
+                                    } else if (grabWeightCurveControlPointData.isFirstControlPoint || grabWeightCurveControlPointData.isLastControlPoint) {
+                                        self.historyRecordMoveWeightGraphPosition(jiggleIndex: jiggleIndex,
+                                                                                  isFirstControlPoint: grabWeightCurveControlPointData.isFirstControlPoint,
+                                                                                  isLastControlPoint: grabWeightCurveControlPointData.isLastControlPoint,
+                                                                                  guideIndex: -1,
+                                                                                  startHeightManual: grabWeightCurveControlPointData.startManual,
+                                                                                  startHeightFactor: grabWeightCurveControlPointData.startHeightFactor,
+                                                                                  endHeightFactor: grabWeightCurveControlPointData.endHeightFactor)
+                                    }
+                                }
                             }
-                        }
+                        //}
                     }
                 }
             
             grabWeightCurveControlTanHandleStopCancellable = grabWeightCurveControlTanHandleStopPublisher
                 .sink { [weak self] grabWeightCurveControlTanHandleData in
-                    print("{{ Publisher }} grabWeightCurveControlTanHandleStop, didChange: \(grabWeightCurveControlTanHandleData.didChange)")
-                    
                     if grabWeightCurveControlTanHandleData.didChange {
-                        if let jiggleIndex = grabWeightCurveControlTanHandleData.jiggleIndex {
-                            
-                            if let guideIndex = grabWeightCurveControlTanHandleData.guideIndex {
-                                self?.historyRecordMoveWeightGraphTangent(jiggleIndex: jiggleIndex,
-                                                                          isFirstControlPoint: grabWeightCurveControlTanHandleData.isFirstControlPoint,
-                                                                          isLastControlPoint: grabWeightCurveControlTanHandleData.isLastControlPoint,
-                                                                          guideIndex: guideIndex,
-                                                                          tanType: grabWeightCurveControlTanHandleData.startType,
-                                                                          startTangentManual: grabWeightCurveControlTanHandleData.startManual,
-                                                                          startDirection: grabWeightCurveControlTanHandleData.startDirection,
-                                                                          startMagnitudeIn: grabWeightCurveControlTanHandleData.startMagnitudeIn,
-                                                                          startMagnitudeOut: grabWeightCurveControlTanHandleData.startMagnitudeOut,
-                                                                          endDirection: grabWeightCurveControlTanHandleData.endDirection,
-                                                                          endMagnitudeIn: grabWeightCurveControlTanHandleData.endMagnitudeIn,
-                                                                          endMagnitudeOut: grabWeightCurveControlTanHandleData.endMagnitudeOut)
-                            } else if (grabWeightCurveControlTanHandleData.isFirstControlPoint || grabWeightCurveControlTanHandleData.isLastControlPoint) {
-                                self?.historyRecordMoveWeightGraphTangent(jiggleIndex: jiggleIndex,
-                                                                          isFirstControlPoint: grabWeightCurveControlTanHandleData.isFirstControlPoint,
-                                                                          isLastControlPoint: grabWeightCurveControlTanHandleData.isLastControlPoint,
-                                                                          guideIndex: -1,
-                                                                          tanType: grabWeightCurveControlTanHandleData.startType,
-                                                                          startTangentManual: grabWeightCurveControlTanHandleData.startManual,
-                                                                          startDirection: grabWeightCurveControlTanHandleData.startDirection,
-                                                                          startMagnitudeIn: grabWeightCurveControlTanHandleData.startMagnitudeIn,
-                                                                          startMagnitudeOut: grabWeightCurveControlTanHandleData.startMagnitudeOut,
-                                                                          endDirection: grabWeightCurveControlTanHandleData.endDirection,
-                                                                          endMagnitudeIn: grabWeightCurveControlTanHandleData.endMagnitudeIn,
-                                                                          endMagnitudeOut: grabWeightCurveControlTanHandleData.endMagnitudeOut)
+                        //Task { @MainActor [weak self] in
+                            if let self = self {
+                                
+                                if let jiggleIndex = grabWeightCurveControlTanHandleData.jiggleIndex {
+                                    
+                                    if let guideIndex = grabWeightCurveControlTanHandleData.guideIndex {
+                                        self.historyRecordMoveWeightGraphTangent(jiggleIndex: jiggleIndex,
+                                                                                 isFirstControlPoint: grabWeightCurveControlTanHandleData.isFirstControlPoint,
+                                                                                 isLastControlPoint: grabWeightCurveControlTanHandleData.isLastControlPoint,
+                                                                                 guideIndex: guideIndex,
+                                                                                 tanType: grabWeightCurveControlTanHandleData.startType,
+                                                                                 startTangentManual: grabWeightCurveControlTanHandleData.startManual,
+                                                                                 startDirection: grabWeightCurveControlTanHandleData.startDirection,
+                                                                                 startMagnitudeIn: grabWeightCurveControlTanHandleData.startMagnitudeIn,
+                                                                                 startMagnitudeOut: grabWeightCurveControlTanHandleData.startMagnitudeOut,
+                                                                                 endDirection: grabWeightCurveControlTanHandleData.endDirection,
+                                                                                 endMagnitudeIn: grabWeightCurveControlTanHandleData.endMagnitudeIn,
+                                                                                 endMagnitudeOut: grabWeightCurveControlTanHandleData.endMagnitudeOut)
+                                    } else if (grabWeightCurveControlTanHandleData.isFirstControlPoint || grabWeightCurveControlTanHandleData.isLastControlPoint) {
+                                        self.historyRecordMoveWeightGraphTangent(jiggleIndex: jiggleIndex,
+                                                                                 isFirstControlPoint: grabWeightCurveControlTanHandleData.isFirstControlPoint,
+                                                                                 isLastControlPoint: grabWeightCurveControlTanHandleData.isLastControlPoint,
+                                                                                 guideIndex: -1,
+                                                                                 tanType: grabWeightCurveControlTanHandleData.startType,
+                                                                                 startTangentManual: grabWeightCurveControlTanHandleData.startManual,
+                                                                                 startDirection: grabWeightCurveControlTanHandleData.startDirection,
+                                                                                 startMagnitudeIn: grabWeightCurveControlTanHandleData.startMagnitudeIn,
+                                                                                 startMagnitudeOut: grabWeightCurveControlTanHandleData.startMagnitudeOut,
+                                                                                 endDirection: grabWeightCurveControlTanHandleData.endDirection,
+                                                                                 endMagnitudeIn: grabWeightCurveControlTanHandleData.endMagnitudeIn,
+                                                                                 endMagnitudeOut: grabWeightCurveControlTanHandleData.endMagnitudeOut)
+                                    }
+                                }
                             }
-                        }
+                        //}
                     }
                 }
         }
     }
     
     var autoSaveTimer = Float(0.0)
-    func update(deltaTime: Float) {
+    @MainActor func update(deltaTime: Float) {
         
         var isStereoscopicEnabled = false
         if let jiggleViewController = jiggleViewController {
@@ -1533,18 +1540,18 @@ class JiggleViewModel {
         }
     }
     
-    func setAnimationGrabAppliedToAll(_ isAnimationGrabAppliedToAll: Bool) {
+    @MainActor func setAnimationGrabAppliedToAll(_ isAnimationGrabAppliedToAll: Bool) {
         self.isAnimationGrabAppliedToAll = isAnimationGrabAppliedToAll
         toolInterfaceViewModel.handleAnimationGrabAppliedToAllDidChange()
     }
     
-    func setAnimationLoopsAppliedToAll(_ isAnimationLoopsAppliedToAll: Bool) {
+    @MainActor func setAnimationLoopsAppliedToAll(_ isAnimationLoopsAppliedToAll: Bool) {
         print("isAnimationLoopsAppliedToAll => \(isAnimationLoopsAppliedToAll)")
         self.isAnimationLoopsAppliedToAll = isAnimationLoopsAppliedToAll
         toolInterfaceViewModel.handleAnimationLoopsAppliedToAllDidChange()
     }
     
-    func setAnimationContinuousAppliedToAll(_ isAnimationContinuousAppliedToAll: Bool) {
+    @MainActor func setAnimationContinuousAppliedToAll(_ isAnimationContinuousAppliedToAll: Bool) {
         print("setAnimationContinuousAppliedToAll => \(isAnimationContinuousAppliedToAll)")
         self.isAnimationContinuousAppliedToAll = isAnimationContinuousAppliedToAll
         toolInterfaceViewModel.handleAnimationContinuousAppliedToAllDidChange()
@@ -1568,11 +1575,8 @@ class JiggleViewModel {
         return jiggleDocument.getSelectedGuide()
     }
     
-    
-    
-    
     @discardableResult
-    func attemptDeleteSelectedJiggle(isHistoryAction: Bool) -> Bool {
+    @MainActor func attemptDeleteSelectedJiggle(isHistoryAction: Bool) -> Bool {
         if jiggleDocument.attemptDeleteSelectedJiggle(isHistoryAction: isHistoryAction,
                                                       displayMode: displayMode,
                                                       isGraphEnabled: isGraphEnabled) {
@@ -1581,7 +1585,7 @@ class JiggleViewModel {
         return false
     }
     
-    func selectAnyJiggleIfNoneSelected() {
+    @MainActor func selectAnyJiggleIfNoneSelected() {
         jiggleDocument.selectAnyJiggleIfNoneSelected(displayMode: displayMode,
                                                      isGraphEnabled: isGraphEnabled)
     }
@@ -1593,7 +1597,7 @@ class JiggleViewModel {
         return false
     }
     
-    func cancelAllTouchesAndGestures(touches: [UITouch], points: [Math.Point]) {
+    @MainActor func cancelAllTouchesAndGestures(touches: [UITouch], points: [Math.Point]) {
         if let gestureView = gestureView {
             gestureView.cancelAllGestureRecognizers()
             gestureView.cancelAllTouches(touches: [],
@@ -1602,7 +1606,7 @@ class JiggleViewModel {
     }
     
     @discardableResult
-    func attemptJiggleAffineSelectWithTouch(at point: Point) -> Bool {
+    @MainActor func attemptJiggleAffineSelectWithTouch(at point: Point) -> Bool {
         if jiggleDocument.attemptJiggleAffineSelectWithTouch(at: point,
                                                              displayMode: displayMode,
                                                              isGraphEnabled: isGraphEnabled) {
@@ -1612,7 +1616,7 @@ class JiggleViewModel {
     }
     
     @discardableResult
-    func attemptGuideAffineSelectWithTouch(at point: Point) -> Bool {
+    @MainActor func attemptGuideAffineSelectWithTouch(at point: Point) -> Bool {
         if jiggleDocument.attemptGuideAffineSelectWithTouch(at: point,
                                                             displayMode: displayMode,
                                                             isGraphEnabled: isGraphEnabled) {
@@ -1622,13 +1626,13 @@ class JiggleViewModel {
     }
     
     @discardableResult
-    func attemptCreateJiggleStandard(at point: Point) -> Bool {
+    @MainActor func attemptCreateJiggleStandard(at point: Point) -> Bool {
         if jiggleDocument.attemptCreateJiggle(at: point,
                                               jiggleEngine: jiggleEngine,
                                               displayMode: displayMode,
                                               isGraphEnabled: isGraphEnabled) {
             if let selectedJiggle = getSelectedJiggle() {
-                timeLineComputeAllChannels(selectedJiggle, swatch: .x)
+                timeLineComputeAllChannels(selectedJiggle)
             }
             return true
         }
@@ -1636,7 +1640,7 @@ class JiggleViewModel {
     }
     
     @discardableResult
-    func attemptCreateControlPoint(at point: Point) -> Bool {
+    @MainActor func attemptCreateControlPoint(at point: Point) -> Bool {
         if jiggleDocument.attemptCreateControlPoint(point,
                                                     displayMode: displayMode,
                                                     isGraphEnabled: isGraphEnabled) {
@@ -1650,7 +1654,7 @@ class JiggleViewModel {
     }
     
     @discardableResult
-    func attemptRemoveControlPoint(at point: Point, sceneScaleBase: Float) -> Bool {
+    @MainActor func attemptRemoveControlPoint(at point: Point, sceneScaleBase: Float) -> Bool {
         if let attemptRemoveControlPointResult = jiggleDocument.attemptRemoveControlPoint(point,
                                                                                           sceneScaleBase: sceneScaleBase,
                                                                                           displayMode: displayMode,
@@ -1664,7 +1668,7 @@ class JiggleViewModel {
     }
     
     @discardableResult
-    func attemptDeleteSelectedJigglePoint() -> Bool {
+    @MainActor func attemptDeleteSelectedJigglePoint() -> Bool {
         if let attemptRemoveControlPointResult = jiggleDocument.attemptDeleteSelectedJigglePoint(displayMode: displayMode,
                                                                                                  isGraphEnabled: isGraphEnabled) {
             historyRecordRemoveControlPoint(jiggleIndex: attemptRemoveControlPointResult.jiggleIndex,
@@ -1675,7 +1679,7 @@ class JiggleViewModel {
         return false
     }
     
-    func attemptCreateGuidesFromSplines(splines: [ManualSpline],
+    @MainActor func attemptCreateGuidesFromSplines(splines: [ManualSpline],
                                         isUntransformRequired: Bool,
                                         isFixWeightCenterRequired: Bool) -> Bool {
         if jiggleDocument.createGuidesFromSplines(splines: splines,
@@ -1690,7 +1694,7 @@ class JiggleViewModel {
     }
     
     @discardableResult
-    func attemptCreateGuide(at point: Point) -> Bool {
+    @MainActor func attemptCreateGuide(at point: Point) -> Bool {
         if jiggleDocument.attemptCreateGuide(point,
                                              jiggleEngine: jiggleEngine,
                                              displayMode: displayMode,
@@ -1703,7 +1707,7 @@ class JiggleViewModel {
     }
     
     @discardableResult
-    func attemptRemoveSelectedGuide(isHistoryAction: Bool) -> Bool {
+    @MainActor func attemptRemoveSelectedGuide(isHistoryAction: Bool) -> Bool {
         if jiggleDocument.attemptRemoveSelectedGuide(isHistoryAction: isHistoryAction,
                                                      displayMode: displayMode,
                                                      isGraphEnabled: isGraphEnabled) {
@@ -1716,7 +1720,7 @@ class JiggleViewModel {
     }
     
     @discardableResult
-    func attemptCreateGuidePoint(at point: Point) -> Bool {
+    @MainActor func attemptCreateGuidePoint(at point: Point) -> Bool {
         if jiggleDocument.attemptCreateGuidePoint(point,
                                                   displayMode: displayMode,
                                                   isGraphEnabled: isGraphEnabled) {
@@ -1736,7 +1740,7 @@ class JiggleViewModel {
     }
     
     @discardableResult
-    func attemptRemoveGuidePoint(at point: Point, sceneScaleBase: Float) -> Bool {
+    @MainActor func attemptRemoveGuidePoint(at point: Point, sceneScaleBase: Float) -> Bool {
         if let attemptRemoveControlPointResult = jiggleDocument.attemptDeleteGuideControlPoint(point,
                                                                                                sceneScaleBase: sceneScaleBase,
                                                                                                displayMode: displayMode,
@@ -1752,7 +1756,7 @@ class JiggleViewModel {
     }
     
     @discardableResult
-    func attemptDeleteSelectedGuidePoint() -> Bool {
+    @MainActor func attemptDeleteSelectedGuidePoint() -> Bool {
         if let attemptRemoveControlPointResult = jiggleDocument.attemptRemoveSelectedGuideControlPoint(displayMode: displayMode,
                                                                                                        isGraphEnabled: isGraphEnabled) {
             historyRecordDeleteGuideControlPoint(jiggleIndex: attemptRemoveControlPointResult.jiggleIndex,
@@ -1767,7 +1771,7 @@ class JiggleViewModel {
     
     
     @discardableResult
-    func attemptResetWeightGraph() -> Bool {
+    @MainActor func attemptResetWeightGraph() -> Bool {
         if let selectedJiggle = jiggleDocument.getSelectedJiggle() {
             typealias StorageNode = HistoryStateResetWeightGraph.StorageNode
             var storageNodes = [StorageNode]()
@@ -1811,19 +1815,19 @@ class JiggleViewModel {
         return false
     }
     
-    func attemptGrabDrawJiggles(touch: UITouch,
+    @MainActor func attemptGrabDrawJiggles(touch: UITouch,
                                 at point: Point) {
         _ = jiggleDocument.attemptGrabDrawJiggles(touch: touch,
                                                   at: point)
     }
     
-    func attemptGrabDrawGuides(touch: UITouch,
+    @MainActor func attemptGrabDrawGuides(touch: UITouch,
                                at point: Point) {
         _ = jiggleDocument.attemptGrabDrawGuides(touch: touch,
                                                  at: point)
     }
     
-    func attemptUpdateDrawJiggles(touch: UITouch,
+    @MainActor func attemptUpdateDrawJiggles(touch: UITouch,
                                   at point: Point,
                                   isFromRelease: Bool) {
         _ = jiggleDocument.attemptUpdateDrawJiggles(touch: touch,
@@ -1832,7 +1836,7 @@ class JiggleViewModel {
                                                     isFromRelease: isFromRelease)
     }
     
-    func attemptUpdateDrawGuides(touch: UITouch,
+    @MainActor func attemptUpdateDrawGuides(touch: UITouch,
                                  at point: Point,
                                  isFromRelease: Bool) {
         _ = jiggleDocument.attemptUpdateDrawGuides(touch: touch,
@@ -1841,7 +1845,7 @@ class JiggleViewModel {
                                                    isFromRelease: isFromRelease)
     }
     
-    func attemptReleaseDrawJiggles(touch: UITouch,
+    @MainActor func attemptReleaseDrawJiggles(touch: UITouch,
                                    at point: Point) {
         if jiggleDocument.attemptReleaseDrawJiggles(touch: touch,
                                                     at: point,
@@ -1849,12 +1853,12 @@ class JiggleViewModel {
                                                     displayMode: displayMode,
                                                     isGraphEnabled: isGraphEnabled) {
             if let selectedJiggle = getSelectedJiggle() {
-                timeLineComputeAllChannels(selectedJiggle, swatch: .x)
+                timeLineComputeAllChannels(selectedJiggle)
             }
         }
     }
     
-    func attemptReleaseDrawGuides(touch: UITouch,
+    @MainActor func attemptReleaseDrawGuides(touch: UITouch,
                                   at point: Point) {
         _ = jiggleDocument.attemptReleaseDrawGuides(touch: touch,
                                                     at: point,
@@ -1879,9 +1883,9 @@ class JiggleViewModel {
         }
     }
     
-    func attemptTouchesBegan_ViewMode_Yes(touches: [UITouch],
-                                          at points: [Point],
-                                          allTouchCount: Int) {
+    @MainActor func attemptTouchesBegan_ViewMode_Yes(touches: [UITouch],
+                                                     at points: [Point],
+                                                     allTouchCount: Int) {
         let animatonMode = _getAnimationMode()
         switch animatonMode {
         case .grab:
@@ -1907,27 +1911,15 @@ class JiggleViewModel {
         }
     }
     
-    func attemptTouchesBegan_ViewMode_No(touches: [UITouch],
-                                         at points: [Point],
-                                         allTouchCount: Int) {
+    @MainActor func attemptTouchesBegan_ViewMode_No(touches: [UITouch],
+                                                    at points: [Point],
+                                                    allTouchCount: Int) {
         jiggleDocument.attemptKillDragAll_ViewMode()
     }
     
-    /*
-     func attemptGrabJiggleJustToSelect(touches: [UITouch],
-     at points: [Point],
-     allTouchCount: Int) {
-     jiggleDocument.attemptGrabJiggleJustToSelect(touches: touches,
-     at: points,
-     allTouchCount: allTouchCount,
-     displayMode: displayMode,
-     isGraphEnabled: isGraphEnabled)
-     }
-     */
-    
-    func attemptTouchesMoved_ViewMode_Yes(touches: [UITouch],
-                                          at points: [Point],
-                                          allTouchCount: Int) {
+    @MainActor func attemptTouchesMoved_ViewMode_Yes(touches: [UITouch],
+                                                     at points: [Point],
+                                                     allTouchCount: Int) {
         
         let animatonMode = _getAnimationMode()
         switch animatonMode {
@@ -1954,15 +1946,15 @@ class JiggleViewModel {
         }
     }
     
-    func attemptTouchesMoved_ViewMode_No(touches: [UITouch],
-                                         at points: [Point],
-                                         allTouchCount: Int) {
+    @MainActor func attemptTouchesMoved_ViewMode_No(touches: [UITouch],
+                                                    at points: [Point],
+                                                    allTouchCount: Int) {
         jiggleDocument.attemptKillDragAll_ViewMode()
     }
     
-    func attemptTouchesEnded_ViewMode_Yes(touches: [UITouch],
-                                          at points: [Point],
-                                          allTouchCount: Int) {
+    @MainActor func attemptTouchesEnded_ViewMode_Yes(touches: [UITouch],
+                                                     at points: [Point],
+                                                     allTouchCount: Int) {
         let untransformScale: Float
         if jiggleScene.sceneScale > Math.epsilon {
             untransformScale = jiggleScene.sceneScale
@@ -1998,15 +1990,15 @@ class JiggleViewModel {
         }
     }
     
-    func attemptTouchesEnded_ViewMode_No(touches: [UITouch],
-                                         at points: [Point],
-                                         allTouchCount: Int) {
+    @MainActor func attemptTouchesEnded_ViewMode_No(touches: [UITouch],
+                                                    at points: [Point],
+                                                    allTouchCount: Int) {
         jiggleDocument.attemptKillDragAll_ViewMode()
     }
     
-    func attemptGrabControlPoint(touch: UITouch,
-                                 at point: Point,
-                                 sceneScaleBase: Float) {
+    @MainActor func attemptGrabControlPoint(touch: UITouch,
+                                            at point: Point,
+                                            sceneScaleBase: Float) {
         jiggleDocument.attemptGrabControlPoint(touch: touch,
                                                at: point,
                                                sceneScaleBase: sceneScaleBase,
@@ -2014,9 +2006,9 @@ class JiggleViewModel {
                                                isGraphEnabled: isGraphEnabled)
     }
     
-    func attemptGrabGuidePoint(touch: UITouch,
-                               at point: Point,
-                               sceneScaleBase: Float) {
+    @MainActor func attemptGrabGuidePoint(touch: UITouch,
+                                          at point: Point,
+                                          sceneScaleBase: Float) {
         jiggleDocument.attemptGrabGuidePoint(touch: touch,
                                              at: point,
                                              sceneScaleBase: sceneScaleBase,
@@ -2024,9 +2016,9 @@ class JiggleViewModel {
                                              isGraphEnabled: isGraphEnabled)
     }
     
-    func attemptUpdateControlPoint(touch: UITouch,
-                                   at point: Point,
-                                   isFromRelease: Bool) {
+    @MainActor func attemptUpdateControlPoint(touch: UITouch,
+                                              at point: Point,
+                                              isFromRelease: Bool) {
         jiggleDocument.attemptUpdateControlPoint(touch: touch,
                                                  at: point,
                                                  isFromRelease: isFromRelease,
@@ -2034,9 +2026,9 @@ class JiggleViewModel {
                                                  isGraphEnabled: isGraphEnabled)
     }
     
-    func attemptUpdateGuidePoint(touch: UITouch,
-                                 at point: Point,
-                                 isFromRelease: Bool) {
+    @MainActor func attemptUpdateGuidePoint(touch: UITouch,
+                                            at point: Point,
+                                            isFromRelease: Bool) {
         jiggleDocument.attemptUpdateGuidePoint(touch: touch,
                                                at: point,
                                                isFromRelease: isFromRelease,
@@ -2044,21 +2036,21 @@ class JiggleViewModel {
                                                isGraphEnabled: isGraphEnabled)
     }
     
-    func attemptReleaseControlPoint(touch: UITouch,
-                                    at point: Point) {
+    @MainActor func attemptReleaseControlPoint(touch: UITouch,
+                                               at point: Point) {
         jiggleDocument.attemptReleaseControlPoint(touch: touch,
                                                   at: point)
     }
     
-    func attemptReleaseGuidePoint(touch: UITouch,
-                                  at point: Point) {
+    @MainActor func attemptReleaseGuidePoint(touch: UITouch,
+                                             at point: Point) {
         jiggleDocument.attemptReleaseGuidePoint(touch: touch,
                                                 at: point)
     }
     
-    func attemptGrabWeightCenter(touch: UITouch,
-                                 at point: Point,
-                                 sceneScaleBase: Float) {
+    @MainActor func attemptGrabWeightCenter(touch: UITouch,
+                                            at point: Point,
+                                            sceneScaleBase: Float) {
         jiggleDocument.attemptGrabWeightCenter(touch: touch,
                                                at: point,
                                                sceneScaleBase: sceneScaleBase,
@@ -2066,23 +2058,23 @@ class JiggleViewModel {
                                                isGraphEnabled: isGraphEnabled)
     }
     
-    func attemptUpdateWeightCenter(touch: UITouch,
-                                   at point: Point,
-                                   isFromRelease: Bool) {
+    @MainActor func attemptUpdateWeightCenter(touch: UITouch,
+                                              at point: Point,
+                                              isFromRelease: Bool) {
         jiggleDocument.attemptUpdateWeightCenter(touch: touch,
                                                  at: point,
                                                  isFromRelease: isFromRelease)
     }
     
-    func attemptReleaseWeightCenter(touch: UITouch,
-                                    at point: Point) {
+    @MainActor func attemptReleaseWeightCenter(touch: UITouch,
+                                               at point: Point) {
         jiggleDocument.attemptReleaseWeightCenter(touch: touch,
                                                   at: point)
     }
     
-    func attemptGrabJiggleCenter(touch: UITouch,
-                                 at point: Point,
-                                 sceneScaleBase: Float) {
+    @MainActor func attemptGrabJiggleCenter(touch: UITouch,
+                                            at point: Point,
+                                            sceneScaleBase: Float) {
         jiggleDocument.attemptGrabJiggleCenter(touch: touch,
                                                at: point,
                                                sceneScaleBase: sceneScaleBase,
@@ -2090,30 +2082,30 @@ class JiggleViewModel {
                                                isGraphEnabled: isGraphEnabled)
     }
     
-    func attemptUpdateJiggleCenter(touch: UITouch,
-                                   at point: Point,
-                                   isFromRelease: Bool) {
+    @MainActor func attemptUpdateJiggleCenter(touch: UITouch,
+                                              at point: Point,
+                                              isFromRelease: Bool) {
         jiggleDocument.attemptUpdateJiggleCenter(touch: touch,
                                                  at: point,
                                                  isFromRelease: isFromRelease)
     }
     
-    func attemptReleaseJiggleCenter(touch: UITouch,
-                                    at point: Point) {
+    @MainActor func attemptReleaseJiggleCenter(touch: UITouch,
+                                               at point: Point) {
         jiggleDocument.attemptReleaseJiggleCenter(touch: touch,
                                                   at: point)
     }
     
-    func killDragAll() {
+    @MainActor func killDragAll() {
         killDragNormal()
         killDragSwivel()
     }
     
-    func killDragNormal() {
+    @MainActor func killDragNormal() {
         jiggleDocument.killDragNormal()
     }
     
-    func killDragSwivel() {
+    @MainActor func killDragSwivel() {
         swivelCoordinator.allTouchesWereCancelled(jiggle: getSelectedJiggle())
     }
     
@@ -2125,21 +2117,19 @@ class JiggleViewModel {
         return result
     }
     
-    func graphUpdateRelay() {
+    @MainActor func graphUpdateRelay() {
         if let jiggleViewController = jiggleViewController {
             jiggleViewController.graphUpdateRelay(jiggle: getSelectedJiggle())
         }
     }
     
-    func timeLineUpdateRelay() {
+    @MainActor func timeLineUpdateRelay() {
         if let jiggleViewController = jiggleViewController {
             jiggleViewController.timeLineUpdateRelay(jiggle: getSelectedJiggle())
         }
     }
     
-    
-    
-    func handleWakeUpBegin() {
+    @MainActor func handleWakeUpBegin() {
         print(".....handleWakeUpBegin (Part Only).....")
         jiggleDocument.handleWakeUpBegin(jiggleEngine: jiggleEngine,
                                          displayMode: displayMode,
@@ -2147,20 +2137,17 @@ class JiggleViewModel {
                                          jiggleScene: jiggleScene)
     }
     
-    func handleWakeUpComplete_PartA() {
+    @MainActor func handleWakeUpComplete_PartA() {
         
         print(".....handleWakeUpComplete (PartA).....")
         
         jiggleDocument.handleWakeUpComplete_PartA(jiggleEngine: jiggleEngine,
                                                   displayMode: displayMode,
                                                   isGraphEnabled: isGraphEnabled)
-        
         refreshAllTimeLines()
-        
-        
     }
     
-    func handleWakeUpComplete_PartB() {
+    @MainActor func handleWakeUpComplete_PartB() {
         print(".....handleWakeUpComplete (PartB).....")
         
         handleAnimationModeDidChange()
@@ -2172,42 +2159,41 @@ class JiggleViewModel {
                                                   isGraphEnabled: isGraphEnabled)
         
         jiggleDocument.isWakeUpComplete = true
-        
     }
     
-    func handleExit() {
+    @MainActor func handleExit() {
         jiggleDocument.handleExit()
     }
     
-    func handleAnimationModeDidChange() {
+    @MainActor func handleAnimationModeDidChange() {
         let animationMode = _getAnimationMode()
         jiggleDocument.handleAnimationModeDidChange(animationMode: animationMode)
     }
     
-    func handleJigglesDidChange() {
+    @MainActor func handleJigglesDidChange() {
         let animationMode = _getAnimationMode()
         jiggleDocument.handleJigglesDidChange(animationMode: animationMode)
     }
     
-    func handleControlPointsDidChange() {
+    @MainActor func handleControlPointsDidChange() {
         jiggleDocument.handleControlPointsDidChange()
     }
     
-    func handleDocumentModeDidChange() {
+    @MainActor func handleDocumentModeDidChange() {
         let animationMode = _getAnimationMode()
         jiggleDocument.handleDocumentModeDidChange(animationMode: animationMode)
     }
     
-    func handleEditModeDidChange() {
+    @MainActor func handleEditModeDidChange() {
         jiggleDocument.handleEditModeDidChange()
     }
     
-    func applicationWillResignActive() {
+    @MainActor func applicationWillResignActive() {
         print("JiggleViewModel.applicationWillResignActive")
         jiggleDocument.applicationWillResignActive()
     }
     
-    func applicationDidBecomeActive() {
+    @MainActor func applicationDidBecomeActive() {
         print("JiggleViewModel.applicationDidBecomeActive")
         jiggleDocument.applicationDidBecomeActive()
     }

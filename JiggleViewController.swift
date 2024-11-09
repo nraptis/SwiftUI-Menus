@@ -9,7 +9,6 @@ import UIKit
 
 class JiggleViewController: MetalViewController {
     
-    
     func selectTimeLineSwatch(swatch: Swatch) {
         jiggleViewModel.selectTimeLineSwatch(swatch: swatch)
         if let selectedJiggle = jiggleViewModel.getSelectedJiggle() {
@@ -320,10 +319,21 @@ class JiggleViewController: MetalViewController {
             //appHeight = Int(ApplicationController.heightPortrait + 0.5)
         }
         
-        let safeAreaLeft = Int(ApplicationController.rootViewController.view.safeAreaInsets.left + 0.5)
-        let safeAreaRight = Int(ApplicationController.rootViewController.view.safeAreaInsets.right + 0.5)
-        let safeAreaTop = Int(ApplicationController.rootViewController.view.safeAreaInsets.top + 0.5)
-        let safeAreaBottom = Int(ApplicationController.rootViewController.view.safeAreaInsets.bottom + 0.5)
+        let safeAreaLeft: Int
+        let safeAreaRight: Int
+        let safeAreaTop: Int
+        let safeAreaBottom: Int
+        if let rootViewController = ApplicationController.rootViewController {
+            safeAreaLeft = Int(rootViewController.view.safeAreaInsets.left + 0.5)
+            safeAreaRight = Int(rootViewController.view.safeAreaInsets.right + 0.5)
+            safeAreaTop = Int(rootViewController.view.safeAreaInsets.top + 0.5)
+            safeAreaBottom = Int(rootViewController.view.safeAreaInsets.bottom + 0.5)
+        } else {
+            safeAreaLeft = 0
+            safeAreaRight = 0
+            safeAreaTop = 0
+            safeAreaBottom = 0
+        }
         
         if Device.isPad {
             
@@ -594,9 +604,18 @@ class JiggleViewController: MetalViewController {
         var graphHeight: Int
         if Device.isPhone {
             
-            let safeAreaLeft = Int(ApplicationController.rootViewController.view.safeAreaInsets.left + 0.5)
-            let safeAreaRight = Int(ApplicationController.rootViewController.view.safeAreaInsets.right + 0.5)
-            let safeAreaTop = Int(ApplicationController.rootViewController.view.safeAreaInsets.top + 0.5)
+            let safeAreaLeft: Int
+            let safeAreaRight: Int
+            let safeAreaTop: Int
+            if let rootViewController = ApplicationController.rootViewController {
+                safeAreaLeft = Int(rootViewController.view.safeAreaInsets.left + 0.5)
+                safeAreaRight = Int(rootViewController.view.safeAreaInsets.right + 0.5)
+                safeAreaTop = Int(rootViewController.view.safeAreaInsets.top + 0.5)
+            } else {
+                safeAreaLeft = 0
+                safeAreaRight = 0
+                safeAreaTop = 0
+            }
             
             switch orientation {
             case .landscape:
@@ -660,9 +679,18 @@ class JiggleViewController: MetalViewController {
         var timeLineHeight: Int
         if Device.isPhone {
             
-            let safeAreaLeft = Int(ApplicationController.rootViewController.view.safeAreaInsets.left + 0.5)
-            let safeAreaRight = Int(ApplicationController.rootViewController.view.safeAreaInsets.right + 0.5)
-            let safeAreaTop = Int(ApplicationController.rootViewController.view.safeAreaInsets.top + 0.5)
+            let safeAreaLeft: Int
+            let safeAreaRight: Int
+            let safeAreaTop: Int
+            if let rootViewController = ApplicationController.rootViewController {
+                safeAreaLeft = Int(rootViewController.view.safeAreaInsets.left + 0.5)
+                safeAreaRight = Int(rootViewController.view.safeAreaInsets.right + 0.5)
+                safeAreaTop = Int(rootViewController.view.safeAreaInsets.top + 0.5)
+            } else {
+                safeAreaLeft = 0
+                safeAreaRight = 0
+                safeAreaTop = 0
+            }
             
             switch orientation {
             case .landscape:
@@ -731,8 +759,17 @@ class JiggleViewController: MetalViewController {
     func postUpdateInterfaceWidth() {
         if !Device.isPad {
             let rowHeight = ToolInterfaceTheme.getRowHeight(orientation: jiggleDocument.orientation)
-            let safeAreaLeft = Int(ApplicationController.rootViewController.view.safeAreaInsets.left + 0.5)
-            let safeAreaRight = Int(ApplicationController.rootViewController.view.safeAreaInsets.right + 0.5)
+            
+            let safeAreaLeft: Int
+            let safeAreaRight: Int
+            if let rootViewController = ApplicationController.rootViewController {
+                safeAreaLeft = Int(rootViewController.view.safeAreaInsets.left + 0.5)
+                safeAreaRight = Int(rootViewController.view.safeAreaInsets.right + 0.5)
+            } else {
+                safeAreaLeft = 0
+                safeAreaRight = 0
+            }
+            
             let width: Int
             switch jiggleDocument.orientation {
             case .landscape:
@@ -1070,36 +1107,8 @@ class JiggleViewController: MetalViewController {
         
         toolActionPerform(toolAction)
     }
+
     
-    func graphPage2Enter() {
-        graphPage2Go(isEnabled: true)
-    }
-    
-    func graphPage2Exit() {
-        graphPage2Go(isEnabled: false)
-    }
-    
-    func graphPage2Go(isEnabled: Bool) {
-        if jiggleViewModel.isGraphPage2Enabled == isEnabled {
-            print("graphPage2Go, already was isGraphPage2Enabled = \(isEnabled)")
-            return
-        }
-        
-        print("graphPage2Go, freshly entering = \(isEnabled)")
-        
-        
-        if toolInterfaceViewModel.isBlocked { return }
-        
-        let toolAction = batchInterfaceAction(disableCreatorModes: false,
-                                              changeCommand: { configuration in
-            configuration.isGraphPage2Enabled = isEnabled
-            return [ToolActionPhaseSliceSetGraphPage2Mode(isGraphPage2Mode: isEnabled)]
-        }, alongsideMeshCommand: {
-            [ ]
-        })
-        
-        toolActionPerform(toolAction)
-    }
     
     func stereoscopicEnter() {
         stereoscopicGo(isEnabled: true)
@@ -1365,6 +1374,45 @@ class JiggleViewController: MetalViewController {
         toolActionPerform(toolAction)
     }
     
+    func graphPage1Enter() {
+        graphPageGo(page: 1)
+    }
+
+    func graphPage2Enter() {
+        graphPageGo(page: 2)
+    }
+
+    func graphPage3Enter() {
+        graphPageGo(page: 3)
+    }
+
+    func graphPage2Exit() {
+        graphPageGo(page: 1)
+    }
+
+    func graphPage3Exit() {
+        graphPageGo(page: 2)
+    }
+
+    func graphPageGo(page: Int) {
+        
+        if jiggleViewModel.jiggleDocument.graphPage == page {
+            return
+        }
+        
+        if toolInterfaceViewModel.isBlocked { return }
+        
+        let toolAction = batchInterfaceAction(disableCreatorModes: true,
+                                              changeCommand: { configuration in
+            configuration.graphPage = page
+            return [ToolActionPhaseSliceSetGraphPage(graphPage: page)]
+        }, alongsideMeshCommand: {
+            [ ]
+        })
+        
+        toolActionPerform(toolAction)
+    }
+    
     func darkModeGo(isEnabled: Bool) {
         
         if ApplicationController.isDarkModeEnabled == isEnabled {
@@ -1540,8 +1588,16 @@ class JiggleViewController: MetalViewController {
                                   snapMenus: Bool,
                                   time: CGFloat) {
         
-        let safeAreaTop = Int(ApplicationController.rootViewController.view.safeAreaInsets.top + 0.5)
-        let safeAreaBottom = Int(ApplicationController.rootViewController.view.safeAreaInsets.bottom + 0.5)
+        let safeAreaTop: Int
+        let safeAreaBottom: Int
+        if let rootViewController = ApplicationController.rootViewController {
+            safeAreaTop = Int(rootViewController.view.safeAreaInsets.top + 0.5)
+            safeAreaBottom = Int(rootViewController.view.safeAreaInsets.bottom + 0.5)
+        } else {
+            safeAreaTop = 0
+            safeAreaBottom = 0
+        }
+        
         let orientation = jiggleDocument.orientation
         let topMenuHeight = MenuHeightCategoryPhoneTop.get(category: configurationCurrent.heightCategoryTop,
                                                            orientation: orientation)
@@ -1689,8 +1745,17 @@ class JiggleViewController: MetalViewController {
     
     func snapMenuExpandedPhone(configuration: InterfaceConfigurationPhone,
                                snapMenus: Bool) {
-        let safeAreaTop = Int(ApplicationController.rootViewController.view.safeAreaInsets.top + 0.5)
-        let safeAreaBottom = Int(ApplicationController.rootViewController.view.safeAreaInsets.bottom + 0.5)
+        
+        let safeAreaTop: Int
+        let safeAreaBottom: Int
+        if let rootViewController = ApplicationController.rootViewController {
+            safeAreaTop = Int(rootViewController.view.safeAreaInsets.top + 0.5)
+            safeAreaBottom = Int(rootViewController.view.safeAreaInsets.bottom + 0.5)
+        } else {
+            safeAreaTop = 0
+            safeAreaBottom = 0
+        }
+        
         let orientation = jiggleDocument.orientation
         let topMenuHeight = MenuHeightCategoryPhoneTop.get(category: configuration.heightCategoryTop,
                                                            orientation: orientation)

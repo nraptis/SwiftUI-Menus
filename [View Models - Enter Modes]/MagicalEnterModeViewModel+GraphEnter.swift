@@ -22,7 +22,11 @@ import Foundation
                 if jiggleViewModel.isAnySliderActive {
                     refreshDisabled()
                 } else {
-                    refreshEnabled()
+                    if jiggleViewModel.getSelectedJiggle() === nil {
+                        refreshDisabled()
+                    } else {
+                        refreshEnabled()
+                    }
                 }
             default:
                 refreshDisabled()

@@ -58,12 +58,12 @@ struct ExitModeLayout: LayoutScheme {
     }
     
     // [++] Final
-    static func getCornerRadius(orientation: Orientation) -> Int {
+    @MainActor static func getCornerRadius(orientation: Orientation) -> Int {
         EnterModeLayout.getCornerRadius(orientation: orientation)
     }
     
     // [++] Final
-    static func getLineThickness(orientation: Orientation) -> Int {
+    @MainActor static func getLineThickness(orientation: Orientation) -> Int {
         EnterModeLayout.getLineThickness(orientation: orientation)
     }
     

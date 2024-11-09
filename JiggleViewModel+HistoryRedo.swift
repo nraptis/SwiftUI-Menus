@@ -9,7 +9,7 @@ import Foundation
 
 extension JiggleViewModel {
     
-    func applyHistoryStateJiggleSpeedRedo(_ historyState: HistoryStateJiggleSpeed) {
+    @MainActor func applyHistoryStateJiggleSpeedRedo(_ historyState: HistoryStateJiggleSpeed) {
         print("applyHistoryStateJiggleSpeedRedo")
         
         for valueNode in historyState.valueNodes {
@@ -33,7 +33,7 @@ extension JiggleViewModel {
         jiggleDocument.killDragAll()
     }
     
-    func applyHistoryStateGyroPowerRedo(_ historyState: HistoryStateGyroPower) {
+    @MainActor func applyHistoryStateGyroPowerRedo(_ historyState: HistoryStateGyroPower) {
         print("applyHistoryStateGyroPowerRedo")
         
         for valueNode in historyState.valueNodes {
@@ -57,7 +57,7 @@ extension JiggleViewModel {
         jiggleDocument.killDragAll()
     }
     
-    func applyHistoryStateJiggleDampenRedo(_ historyState: HistoryStateJiggleDampen) {
+    @MainActor func applyHistoryStateJiggleDampenRedo(_ historyState: HistoryStateJiggleDampen) {
         print("applyHistoryStateJiggleDampenRedo")
         
         for valueNode in historyState.valueNodes {
@@ -81,7 +81,7 @@ extension JiggleViewModel {
         jiggleDocument.killDragAll()
     }
     
-    func applyHistoryStateRotateOrFlipJiggleRedo(_ historyState: HistoryStateRotateOrFlipJiggle) {
+    @MainActor func applyHistoryStateRotateOrFlipJiggleRedo(_ historyState: HistoryStateRotateOrFlipJiggle) {
         if let selectedJiggle = jiggleDocument.getJiggle(historyState.jiggleIndex) {
             historyState.fileBufferAfter.readReset()
             _ = selectedJiggle.load(fileBuffer: historyState.fileBufferAfter,
@@ -95,7 +95,7 @@ extension JiggleViewModel {
         }
     }
     
-    func applyHistoryStateRotateOrFlipGuideRedo(_ historyState: HistoryStateRotateOrFlipGuide) {
+    @MainActor func applyHistoryStateRotateOrFlipGuideRedo(_ historyState: HistoryStateRotateOrFlipGuide) {
         if let selectedJiggle = jiggleDocument.getJiggle(historyState.jiggleIndex) {
             if let selectedGuide = selectedJiggle.getGuide(historyState.guideIndex) {
                 
@@ -114,7 +114,7 @@ extension JiggleViewModel {
         }
     }
     
-    func applyHistoryStateMoveWeightGraphPositionRedo(_ historyState: HistoryStateMoveWeightGraphPosition) {
+    @MainActor func applyHistoryStateMoveWeightGraphPositionRedo(_ historyState: HistoryStateMoveWeightGraphPosition) {
         let isFirstControlPoint = historyState.isFirstControlPoint
         let isLastControlPoint = historyState.isLastControlPoint
         let guideIndex = historyState.guideIndex
@@ -138,7 +138,7 @@ extension JiggleViewModel {
         }
     }
     
-    func applyHistoryStateMoveWeightGraphTangentRedo(_ historyState: HistoryStateMoveWeightGraphTangent) {
+    @MainActor func applyHistoryStateMoveWeightGraphTangentRedo(_ historyState: HistoryStateMoveWeightGraphTangent) {
         if let selectedJiggle = jiggleDocument.getJiggle(historyState.jiggleIndex) {
             let isFirstControlPoint = historyState.isFirstControlPoint
             let isLastControlPoint = historyState.isLastControlPoint
@@ -170,7 +170,7 @@ extension JiggleViewModel {
         }
     }
     
-    func applyHistoryStateResetWeightGraphRedo(_ historyState: HistoryStateResetWeightGraph) {
+    @MainActor func applyHistoryStateResetWeightGraphRedo(_ historyState: HistoryStateResetWeightGraph) {
         if let selectedJiggle = jiggleDocument.getJiggle(historyState.jiggleIndex) {
             selectedJiggle.weightCurveControlPointStart.isManualHeightEnabled = false
             selectedJiggle.weightCurveControlPointStart.isManualTanHandleEnabled = false
@@ -199,7 +199,7 @@ extension JiggleViewModel {
     //  a.) getMeshCommandForNewJiggle
     // Weight Ring Actions:
     //  a.) getGuideCommandForNewJiggle (to all)
-    func applyHistoryStateCreateJiggleRedo(_ historyState: HistoryStateCreateJiggle) {
+    @MainActor func applyHistoryStateCreateJiggleRedo(_ historyState: HistoryStateCreateJiggle) {
         let newJiggle = JigglePartsFactory.shared.withdrawJiggle()
         newJiggle.load(jiggleEngine: jiggleEngine)
         historyState.readReset()
@@ -215,7 +215,7 @@ extension JiggleViewModel {
     // [Verified]
     // Mesh Actions:
     //  a.) switchSelectedJiggle
-    func applyHistoryStateRemoveJiggleRedo(_ historyState: HistoryStateRemoveJiggle) {
+    @MainActor func applyHistoryStateRemoveJiggleRedo(_ historyState: HistoryStateRemoveJiggle) {
         _ = jiggleDocument.attemptRemoveJiggle(historyState.jiggleIndex,
                                                isHistoryAction: true,
                                                displayMode: displayMode,
@@ -226,7 +226,7 @@ extension JiggleViewModel {
     // [Verified]
     // Mesh Actions:
     //  a.) affine only
-    func applyHistoryStateTransformJiggleRedo(_ historyState: HistoryStateTransformJiggle) {
+    @MainActor func applyHistoryStateTransformJiggleRedo(_ historyState: HistoryStateTransformJiggle) {
         if let selectedJiggle = jiggleDocument.getJiggle(historyState.jiggleIndex) {
             selectedJiggle.center = historyState.endCenter
             selectedJiggle.scale = historyState.endScale
@@ -244,7 +244,7 @@ extension JiggleViewModel {
     // Mesh Actions:
     //  a.) Spline to selected jiggle.
     //  b.) switchSelectedJiggle
-    func applyHistoryStateMoveControlPointRedo(_ historyState: HistoryStateMoveControlPoint) {
+    @MainActor func applyHistoryStateMoveControlPointRedo(_ historyState: HistoryStateMoveControlPoint) {
         if let selectedJiggle = jiggleDocument.getJiggle(historyState.jiggleIndex) {
             selectedJiggle.selectedJiggleControlPointIndex = historyState.controlPointIndex
             if let selectedControlPoint = selectedJiggle.getSelectedJiggleControlPoint() {
@@ -262,7 +262,7 @@ extension JiggleViewModel {
     // Mesh Actions:
     //  a.) Spline to selected jiggle.
     //  b.) switchSelectedJiggle
-    func applyHistoryStateCreateControlPointRedo(_ historyState: HistoryStateCreateControlPoint) {
+    @MainActor func applyHistoryStateCreateControlPointRedo(_ historyState: HistoryStateCreateControlPoint) {
         if let selectedJiggle = jiggleDocument.getJiggle(historyState.jiggleIndex) {
             selectedJiggle.insertJiggleControlPoint(historyState.point.x,
                                                     historyState.point.y,
@@ -279,7 +279,7 @@ extension JiggleViewModel {
     // Mesh Actions:
     //  a.) Spline to selected jiggle.
     //  b.) switchSelectedJiggle
-    func applyHistoryStateRemoveControlPointRedo(_ historyState: HistoryStateRemoveControlPoint) {
+    @MainActor func applyHistoryStateRemoveControlPointRedo(_ historyState: HistoryStateRemoveControlPoint) {
         if let selectedJiggle = jiggleDocument.getJiggle(historyState.jiggleIndex) {
             _ = selectedJiggle.removeJiggleControlPoint(historyState.controlPointIndex)
             jiggleDocument.refreshJiggleControlPointAndSelect(at: historyState.jiggleIndex,
@@ -297,7 +297,7 @@ extension JiggleViewModel {
     //  b.) Re-Spline added weight ring.
     //  c.) Re-Paint other weight rings.
     //  d.) select
-    func applyHistoryStateCreateGuideRedo(_ historyState: HistoryStateCreateGuide) {
+    @MainActor func applyHistoryStateCreateGuideRedo(_ historyState: HistoryStateCreateGuide) {
         if let selectedJiggle = jiggleDocument.getJiggle(historyState.jiggleIndex) {
             let newGuide = JigglePartsFactory.shared.withdrawGuide()
             newGuide.load(jiggleEngine: jiggleEngine, jiggle: selectedJiggle)
@@ -322,7 +322,7 @@ extension JiggleViewModel {
     //  b.) Re-Spline added weight ring.
     //  c.) Re-Paint other weight rings.
     //  d.) select
-    func applyHistoryStateDeleteGuideRedo(_ historyState: HistoryStateDeleteGuide) {
+    @MainActor func applyHistoryStateDeleteGuideRedo(_ historyState: HistoryStateDeleteGuide) {
         if let selectedJiggle = jiggleDocument.getJiggle(historyState.jiggleIndex) {
             _ = jiggleDocument.attemptDeleteGuide(selectedJiggle,
                                                   historyState.weightCurveIndex - 1,
@@ -342,7 +342,7 @@ extension JiggleViewModel {
     //  b.) Re-Spline affine weight ring.
     //  c.) Re-Paint other weight rings.
     //  d.) switchSelectedJiggle
-    func applyHistoryStateTransformGuideRedo(_ historyState: HistoryStateTransformGuide) {
+    @MainActor func applyHistoryStateTransformGuideRedo(_ historyState: HistoryStateTransformGuide) {
         if let selectedJiggle = jiggleDocument.getJiggle(historyState.jiggleIndex) {
             if let selectedGuide = selectedJiggle.getGuide(historyState.weightCurveIndex - 1) {
                 selectedGuide.center = historyState.endCenter
@@ -363,7 +363,7 @@ extension JiggleViewModel {
     //  b.) Re-Spline affine weight ring.
     //  c.) Re-Paint other weight rings.
     //  d.) switchSelectedJiggle
-    func applyHistoryStateMoveGuideControlPointRedo(_ historyState: HistoryStateMoveGuideControlPoint) {
+    @MainActor func applyHistoryStateMoveGuideControlPointRedo(_ historyState: HistoryStateMoveGuideControlPoint) {
         if let selectedJiggle = jiggleDocument.getJiggle(historyState.jiggleIndex) {
             if let selectedGuide = selectedJiggle.getGuide(historyState.weightCurveIndex - 1) {
                 selectedGuide.selectedJiggleControlPointIndex = historyState.guideControlPointIndex
@@ -384,7 +384,7 @@ extension JiggleViewModel {
     // Mesh Actions:
     //  a.) refreshGuideModify.
     //  b.) switchSelectedJiggle
-    func applyHistoryStateCreateGuideControlPointRedo(_ historyState: HistoryStateCreateGuideControlPoint) {
+    @MainActor func applyHistoryStateCreateGuideControlPointRedo(_ historyState: HistoryStateCreateGuideControlPoint) {
         if let selectedJiggle = jiggleDocument.getJiggle(historyState.jiggleIndex) {
             if let selectedGuide = selectedJiggle.getGuide(historyState.weightCurveIndex - 1) {
                 selectedGuide.insertJiggleControlPoint(historyState.point.x,
@@ -404,7 +404,7 @@ extension JiggleViewModel {
     // Mesh Actions:
     //  a.) refreshGuideModify.
     //  b.) switchSelectedJiggle
-    func applyHistoryStateDeleteGuideControlPointRedo(_ historyState: HistoryStateDeleteGuideControlPoint) {
+    @MainActor func applyHistoryStateDeleteGuideControlPointRedo(_ historyState: HistoryStateDeleteGuideControlPoint) {
         if let selectedJiggle = jiggleDocument.getJiggle(historyState.jiggleIndex) {
             if let selectedGuide = selectedJiggle.getGuide(historyState.weightCurveIndex - 1) {
                 selectedGuide.removeJiggleControlPoint(historyState.guideControlPointIndex)
@@ -422,7 +422,7 @@ extension JiggleViewModel {
     // Mesh Actions:
     //  a.) refreshGuideModify.
     //  b.) switchSelectedJiggle
-    func applyHistoryStateMoveWeightCenterRedo(_ historyState: HistoryStateMoveWeightCenter) {
+    @MainActor func applyHistoryStateMoveWeightCenterRedo(_ historyState: HistoryStateMoveWeightCenter) {
         if let selectedJiggle = jiggleDocument.getJiggle(historyState.jiggleIndex) {
             selectedJiggle.guideCenter = historyState.endCenter
             jiggleDocument.refreshWeightCenterModify(jiggle: selectedJiggle,
@@ -435,7 +435,7 @@ extension JiggleViewModel {
         }
     }
     
-    func applyHistoryStateMoveJiggleCenterRedo(_ historyState: HistoryStateMoveJiggleCenter) {
+    @MainActor func applyHistoryStateMoveJiggleCenterRedo(_ historyState: HistoryStateMoveJiggleCenter) {
         if let selectedJiggle = jiggleDocument.getJiggle(historyState.jiggleIndex) {
             selectedJiggle.offsetCenter = historyState.endCenter
             jiggleDocument.switchSelectedJiggle(newSelectedJiggleIndex: historyState.jiggleIndex,
@@ -445,7 +445,7 @@ extension JiggleViewModel {
         }
     }
     
-    func applyHistoryStateLoopAttributeOneRedo(_ historyState: HistoryStateLoopAttributeOne) {
+    @MainActor func applyHistoryStateLoopAttributeOneRedo(_ historyState: HistoryStateLoopAttributeOne) {
         
         if let jiggleViewController = jiggleViewController {
             if let selectedJiggle = jiggleDocument.getJiggle(historyState.jiggleIndex) {
@@ -495,7 +495,7 @@ extension JiggleViewModel {
         }
     }
     
-    func applyHistoryStateLoopAttributesAllRedo(_ historyState: HistoryStateLoopAttributesAll) {
+    @MainActor func applyHistoryStateLoopAttributesAllRedo(_ historyState: HistoryStateLoopAttributesAll) {
         
         if let jiggleViewController = ApplicationController.shared.jiggleViewController {
             //if let selectedJiggle = jiggleDocument.getJiggle(historyState.jiggleIndex) {
@@ -569,7 +569,7 @@ extension JiggleViewModel {
         }
     }
     
-    func applyHistoryStateContinuousAttributeOneRedo(_ historyState: HistoryStateContinuousAttributeOne) {
+    @MainActor func applyHistoryStateContinuousAttributeOneRedo(_ historyState: HistoryStateContinuousAttributeOne) {
         
         if let selectedJiggle = jiggleDocument.getJiggle(historyState.jiggleIndex) {
             
@@ -589,7 +589,7 @@ extension JiggleViewModel {
         
     }
     
-    func applyHistoryStateContinuousAttributesAllRedo(_ historyState: HistoryStateContinuousAttributesAll) {
+    @MainActor func applyHistoryStateContinuousAttributesAllRedo(_ historyState: HistoryStateContinuousAttributesAll) {
         
         let countA = historyState.endAttributes.count
         let countB = jiggleDocument.jiggleCount

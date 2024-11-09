@@ -8,40 +8,40 @@
 import UIKit
 
 protocol PrimaryOrSecondaryMenuConforming: AnyObject where Self: UIView {
-    var isModeAnimating: Bool { set get }
+    @MainActor var isModeAnimating: Bool { set get }
     
     associatedtype VideoRecordViewType: MenuPartWithRowsConforming
-    var videoRecordView: VideoRecordViewType { set get }
-    var videoRecordViewLeftConstraint: NSLayoutConstraint { set get }
+    @MainActor var videoRecordView: VideoRecordViewType { set get }
+    @MainActor var videoRecordViewLeftConstraint: NSLayoutConstraint { set get }
     
     associatedtype VideoExportViewType: MenuPartWithRowsConforming
-    var videoExportView: VideoExportViewType { set get }
-    var videoExportViewLeftConstraint: NSLayoutConstraint { set get }
+    @MainActor var videoExportView: VideoExportViewType { set get }
+    @MainActor var videoExportViewLeftConstraint: NSLayoutConstraint { set get }
     
     associatedtype ZoomViewType: MenuPartWithRowsConforming
-    var zoomView: ZoomViewType { set get }
-    var zoomViewLeftConstraint: NSLayoutConstraint { set get }
+    @MainActor var zoomView: ZoomViewType { set get }
+    @MainActor var zoomViewLeftConstraint: NSLayoutConstraint { set get }
 }
 
 // On iPad, this is the whole menu (except top and bottom book-ends)
 // On iPhone, this is the top menu, all of it.
 protocol PrimaryMenuConforming: AnyObject, PrimaryOrSecondaryMenuConforming where Self: UIView {
     associatedtype StandardContainerViewType: PrimaryMenuStandardContainerConforming
-    var standardContainerView: StandardContainerViewType { set get }
-    var standardContainerViewLeftConstraint: NSLayoutConstraint { set get }
+    @MainActor var standardContainerView: StandardContainerViewType { set get }
+    @MainActor var standardContainerViewLeftConstraint: NSLayoutConstraint { set get }
 }
 
 // On iPhone, this is the bottom menu, all of it.
 protocol SecondaryMenuConforming: AnyObject, PrimaryOrSecondaryMenuConforming where Self: UIView {
     associatedtype StandardViewType: MenuPartWithRowsConforming
-    var standardView: StandardViewType { set get }
-    var standardViewLeftConstraint: NSLayoutConstraint { set get }
+    @MainActor var standardView: StandardViewType { set get }
+    @MainActor var standardViewLeftConstraint: NSLayoutConstraint { set get }
 }
 
 protocol BottomMenuConforming: AnyObject, PrimaryOrSecondaryMenuConforming where Self: UIView {
     associatedtype StandardContainerViewType: MenuPartWithRowsConforming
-    var standardContainerView: StandardContainerViewType { set get }
-    var standardContainerViewLeftConstraint: NSLayoutConstraint { set get }
+    @MainActor var standardContainerView: StandardContainerViewType { set get }
+    @MainActor var standardContainerViewLeftConstraint: NSLayoutConstraint { set get }
 }
 
 // On iPad, the whole menu is "PrimaryMenuStandardContainerConforming"
@@ -52,62 +52,60 @@ protocol BottomMenuConforming: AnyObject, PrimaryOrSecondaryMenuConforming where
 
 protocol PrimaryMenuStandardContainerConforming: AnyObject where Self: UIView {
     
-    var isModeAnimating: Bool { set get }
+    @MainActor var isModeAnimating: Bool { set get }
     
-    func handleDarkModeDidChange()
-    func handleSelectedJiggleDidChange()
-    func handleSelectedSwatchDidChange()
-    
-    
+    @MainActor func handleDarkModeDidChange()
+    @MainActor func handleSelectedJiggleDidChange()
+    @MainActor func handleSelectedSwatchDidChange()
     
     associatedtype GraphContainerViewType: GraphContainerConforming
-    var graphContainerView: GraphContainerViewType { set get }
-    var graphContainerViewLeftConstraint: NSLayoutConstraint { set get }
+    @MainActor var graphContainerView: GraphContainerViewType { set get }
+    @MainActor var graphContainerViewLeftConstraint: NSLayoutConstraint { set get }
     
     associatedtype TimeLineContainerViewType: TimeLineContainerConforming
-    var timeLineContainerView: TimeLineContainerViewType { set get }
-    var timeLineContainerViewLeftConstraint: NSLayoutConstraint { set get }
+    @MainActor var timeLineContainerView: TimeLineContainerViewType { set get }
+    @MainActor var timeLineContainerViewLeftConstraint: NSLayoutConstraint { set get }
     
     // This is the *TOP* menu, which juggles along-side
     // the graph... It's either the graph or this...
     associatedtype TopMenuViewType: MenuPartWithRowsConforming
-    var topMenuView: TopMenuViewType { set get }
-    var topMenuViewLeftConstraint: NSLayoutConstraint { set get }
+    @MainActor var topMenuView: TopMenuViewType { set get }
+    @MainActor var topMenuViewLeftConstraint: NSLayoutConstraint { set get }
     
     // On the iPad, sometimes we want to:
     //  1.) Animate the graph and *NOT* animate the "top" menu
     //  2.) At the same time, animate the "bottom" menu.
     
-    func getSecondaryMenu() -> (any MenuPartWithRowsConforming)?
+    @MainActor func getSecondaryMenu() -> (any MenuPartWithRowsConforming)?
     
 }
 
 protocol GraphContainerConforming: AnyObject where Self: UIView {
-    var graphClippingView: GraphClippingView { set get }
-    var graphView: GraphView { set get }
+    @MainActor var graphClippingView: GraphClippingView { set get }
+    @MainActor var graphView: GraphView { set get }
 }
 
 protocol TimeLineContainerConforming: AnyObject where Self: UIView {
-    var timeLineClippingView: TimeLineClippingView { set get }
-    var timeLineView: TimeLineView { set get }
+    @MainActor var timeLineClippingView: TimeLineClippingView { set get }
+    @MainActor var timeLineView: TimeLineView { set get }
 }
 
 protocol MenuPartWithRowsConforming: AnyObject where Self: UIView {
     
-    var toolInterfaceLayoutRelay: ToolInterfaceLayoutRelay { get }
+    @MainActor var toolInterfaceLayoutRelay: ToolInterfaceLayoutRelay { get }
     
-    var rowViews: [ToolRowView] { get set }
-    var separatorViews: [UIView] { get set }
+    @MainActor var rowViews: [ToolRowView] { get set }
+    @MainActor var separatorViews: [UIView] { get set }
     
-    func getNumberOfRows() -> Int
-    func getToolRow(at index: Int) -> ToolRow?
+    @MainActor func getNumberOfRows() -> Int
+    @MainActor func getToolRow(at index: Int) -> ToolRow?
     
-    func handleDarkModeDidChange()
+    @MainActor func handleDarkModeDidChange()
 }
 
 extension MenuPartWithRowsConforming {
     
-    func _handleDarkModeDidChange() {
+    @MainActor func _handleDarkModeDidChange() {
         for rowView in rowViews {
             rowView.handleDarkModeDidChange(orientation: toolInterfaceLayoutRelay.orientation)
         }
@@ -122,11 +120,11 @@ extension MenuPartWithRowsConforming {
         }
     }
     
-    func handleDarkModeDidChange() {
+    @MainActor func handleDarkModeDidChange() {
         _handleDarkModeDidChange()
     }
     
-    private func getToolRows() -> [ToolRow] {
+    @MainActor private func getToolRows() -> [ToolRow] {
         let numberOfRows = getNumberOfRows()
         var toolRows = [ToolRow]()
         for rowIndex in 0..<numberOfRows {
@@ -164,7 +162,7 @@ extension MenuPartWithRowsConforming {
         }
     }
     
-    func setupRows(width: Int,
+    @MainActor func setupRows(width: Int,
                    offset: Int,
                    rowHeight: Int,
                    rowSeparatorHeight: Int,
@@ -284,7 +282,7 @@ extension MenuPartWithRowsConforming {
         }
     }
     
-    private func generateRowView(at index: Int, width: Int, orientation: Orientation) -> ToolRowView {
+    @MainActor private func generateRowView(at index: Int, width: Int, orientation: Orientation) -> ToolRowView {
         
         if index >= 0 && index < getNumberOfRows() {
             if let toolRow = getToolRow(at: index) {
@@ -317,17 +315,17 @@ extension MenuPartWithRowsConforming {
 
 extension PrimaryMenuStandardContainerConforming {
     
-    func refreshGraphDisplay() {
+    @MainActor func refreshGraphDisplay() {
         graphContainerView.graphClippingView.setNeedsDisplay()
         graphContainerView.graphView.setNeedsDisplay()
     }
     
-    func refreshTimeLineDisplay() {
+    @MainActor func refreshTimeLineDisplay() {
         timeLineContainerView.timeLineClippingView.setNeedsDisplay()
         timeLineContainerView.timeLineView.setNeedsDisplay()
     }
     
-    func animateFromTopMenuToGraph(reversed: Bool, time: CGFloat) {
+    @MainActor func animateFromTopMenuToGraph(reversed: Bool, time: CGFloat) {
         timeLineContainerView.deactivate()
         isModeAnimating = true
         transitionChildren(previousView: topMenuView, previousConstraint: topMenuViewLeftConstraint,
@@ -337,7 +335,7 @@ extension PrimaryMenuStandardContainerConforming {
         }
     }
 
-    func animateFromGraphToTopMenu(reversed: Bool, time: CGFloat) {
+    @MainActor func animateFromGraphToTopMenu(reversed: Bool, time: CGFloat) {
         timeLineContainerView.deactivate()
         isModeAnimating = true
         transitionChildren(previousView: graphContainerView, previousConstraint: graphContainerViewLeftConstraint,
@@ -347,7 +345,7 @@ extension PrimaryMenuStandardContainerConforming {
         }
     }
 
-    func animateFromTopMenuToTimeLine(reversed: Bool, time: CGFloat) {
+    @MainActor func animateFromTopMenuToTimeLine(reversed: Bool, time: CGFloat) {
         graphContainerView.deactivate()
         isModeAnimating = true
         transitionChildren(previousView: topMenuView, previousConstraint: topMenuViewLeftConstraint,
@@ -357,7 +355,7 @@ extension PrimaryMenuStandardContainerConforming {
         }
     }
 
-    func animateFromTimeLineToTopMenu(reversed: Bool, time: CGFloat) {
+    @MainActor func animateFromTimeLineToTopMenu(reversed: Bool, time: CGFloat) {
         graphContainerView.deactivate()
         isModeAnimating = true
         transitionChildren(previousView: timeLineContainerView, previousConstraint: timeLineContainerViewLeftConstraint,
@@ -367,7 +365,7 @@ extension PrimaryMenuStandardContainerConforming {
         }
     }
 
-    func animateFromTimeLineToGraph(reversed: Bool, time: CGFloat) {
+    @MainActor func animateFromTimeLineToGraph(reversed: Bool, time: CGFloat) {
         topMenuView.deactivate()
         isModeAnimating = true
         transitionChildren(previousView: timeLineContainerView, previousConstraint: timeLineContainerViewLeftConstraint,
@@ -377,7 +375,7 @@ extension PrimaryMenuStandardContainerConforming {
         }
     }
 
-    func animateFromGraphToTimeLine(reversed: Bool, time: CGFloat) {
+    @MainActor func animateFromGraphToTimeLine(reversed: Bool, time: CGFloat) {
         topMenuView.deactivate()
         isModeAnimating = true
         transitionChildren(previousView: graphContainerView, previousConstraint: graphContainerViewLeftConstraint,
@@ -387,21 +385,21 @@ extension PrimaryMenuStandardContainerConforming {
         }
     }
 
-    func snapToTopMenu() {
+    @MainActor func snapToTopMenu() {
         topMenuView.activate()
         topMenuViewLeftConstraint.constant = 0.0
         timeLineContainerView.deactivate()
         graphContainerView.deactivate()
     }
 
-    func snapToTimeLine() {
+    @MainActor func snapToTimeLine() {
         timeLineContainerView.activate()
         timeLineContainerViewLeftConstraint.constant = 0.0
         topMenuView.deactivate()
         graphContainerView.deactivate()
     }
 
-    func snapToGraph() {
+    @MainActor func snapToGraph() {
         graphContainerView.activate()
         graphContainerViewLeftConstraint.constant = 0.0
         topMenuView.deactivate()
@@ -412,7 +410,7 @@ extension PrimaryMenuStandardContainerConforming {
 
 extension PrimaryMenuConforming {
     
-    func animateFromStandardToVideoExport(reversed: Bool, time: CGFloat) {
+    @MainActor func animateFromStandardToVideoExport(reversed: Bool, time: CGFloat) {
         videoRecordView.deactivate()
         zoomView.deactivate()
         isModeAnimating = true
@@ -423,7 +421,7 @@ extension PrimaryMenuConforming {
         }
     }
     
-    func animateFromVideoExportToStandard(reversed: Bool, time: CGFloat) {
+    @MainActor func animateFromVideoExportToStandard(reversed: Bool, time: CGFloat) {
         videoRecordView.deactivate()
         zoomView.deactivate()
         isModeAnimating = true
@@ -434,7 +432,7 @@ extension PrimaryMenuConforming {
         }
     }
     
-    func animateFromStandardToVideoRecord(reversed: Bool, time: CGFloat) {
+    @MainActor func animateFromStandardToVideoRecord(reversed: Bool, time: CGFloat) {
         videoExportView.deactivate()
         zoomView.deactivate()
         isModeAnimating = true
@@ -445,7 +443,7 @@ extension PrimaryMenuConforming {
         }
     }
     
-    func animateFromVideoRecordToStandard(reversed: Bool, time: CGFloat) {
+    @MainActor func animateFromVideoRecordToStandard(reversed: Bool, time: CGFloat) {
         videoExportView.deactivate()
         zoomView.deactivate()
         isModeAnimating = true
@@ -456,7 +454,7 @@ extension PrimaryMenuConforming {
         }
     }
     
-    func animateFromVideoRecordToVideoExport(reversed: Bool, time: CGFloat) {
+    @MainActor func animateFromVideoRecordToVideoExport(reversed: Bool, time: CGFloat) {
         standardContainerView.deactivate()
         zoomView.deactivate()
         isModeAnimating = true
@@ -467,7 +465,7 @@ extension PrimaryMenuConforming {
         }
     }
     
-    func animateFromVideoExportToVideoRecord(reversed: Bool, time: CGFloat) {
+    @MainActor func animateFromVideoExportToVideoRecord(reversed: Bool, time: CGFloat) {
         standardContainerView.deactivate()
         zoomView.deactivate()
         isModeAnimating = true
@@ -478,7 +476,7 @@ extension PrimaryMenuConforming {
         }
     }
     
-    func animateFromVideoExportToZoom(reversed: Bool, time: CGFloat) {
+    @MainActor func animateFromVideoExportToZoom(reversed: Bool, time: CGFloat) {
         standardContainerView.deactivate()
         videoRecordView.deactivate()
         isModeAnimating = true
@@ -489,7 +487,7 @@ extension PrimaryMenuConforming {
         }
     }
     
-    func animateFromZoomToVideoExport(reversed: Bool, time: CGFloat) {
+    @MainActor func animateFromZoomToVideoExport(reversed: Bool, time: CGFloat) {
         standardContainerView.deactivate()
         videoRecordView.deactivate()
         isModeAnimating = true
@@ -500,7 +498,7 @@ extension PrimaryMenuConforming {
         }
     }
     
-    func animateFromVideoRecordToZoom(reversed: Bool, time: CGFloat) {
+    @MainActor func animateFromVideoRecordToZoom(reversed: Bool, time: CGFloat) {
         standardContainerView.deactivate()
         videoExportView.deactivate()
         isModeAnimating = true
@@ -511,7 +509,7 @@ extension PrimaryMenuConforming {
         }
     }
     
-    func animateFromZoomToVideoRecord(reversed: Bool, time: CGFloat) {
+    @MainActor func animateFromZoomToVideoRecord(reversed: Bool, time: CGFloat) {
         standardContainerView.deactivate()
         videoExportView.deactivate()
         isModeAnimating = true
@@ -522,7 +520,7 @@ extension PrimaryMenuConforming {
         }
     }
     
-    func animateFromStandardToZoom(reversed: Bool, time: CGFloat) {
+    @MainActor func animateFromStandardToZoom(reversed: Bool, time: CGFloat) {
         videoRecordView.deactivate()
         videoExportView.deactivate()
         isModeAnimating = true
@@ -533,7 +531,7 @@ extension PrimaryMenuConforming {
         }
     }
     
-    func animateFromZoomToStandard(reversed: Bool, time: CGFloat) {
+    @MainActor func animateFromZoomToStandard(reversed: Bool, time: CGFloat) {
         videoRecordView.deactivate()
         videoExportView.deactivate()
         isModeAnimating = true
@@ -544,7 +542,7 @@ extension PrimaryMenuConforming {
         }
     }
     
-    func snapToStandard() {
+    @MainActor func snapToStandard() {
         standardContainerView.activate()
         standardContainerViewLeftConstraint.constant = 0.0
         videoRecordView.deactivate()
@@ -552,7 +550,7 @@ extension PrimaryMenuConforming {
         zoomView.deactivate()
     }
     
-    func snapToVideoRecord() {
+    @MainActor func snapToVideoRecord() {
         videoRecordView.activate()
         videoRecordViewLeftConstraint.constant = 0.0
         standardContainerView.deactivate()
@@ -560,7 +558,7 @@ extension PrimaryMenuConforming {
         zoomView.deactivate()
     }
     
-    func snapToVideoExport() {
+    @MainActor func snapToVideoExport() {
         videoExportView.activate()
         videoExportViewLeftConstraint.constant = 0.0
         standardContainerView.deactivate()
@@ -568,7 +566,7 @@ extension PrimaryMenuConforming {
         zoomView.deactivate()
     }
     
-    func snapToZoom() {
+    @MainActor func snapToZoom() {
         zoomView.activate()
         zoomViewLeftConstraint.constant = 0.0
         standardContainerView.deactivate()
@@ -890,7 +888,7 @@ extension PrimaryMenuConforming {
 
 extension SecondaryMenuConforming {
     
-    func animateFromStandardToVideoExport(reversed: Bool, time: CGFloat) {
+    @MainActor func animateFromStandardToVideoExport(reversed: Bool, time: CGFloat) {
         videoRecordView.deactivate()
         zoomView.deactivate()
         isModeAnimating = true
@@ -901,7 +899,7 @@ extension SecondaryMenuConforming {
         }
     }
     
-    func animateFromVideoExportToStandard(reversed: Bool, time: CGFloat) {
+    @MainActor func animateFromVideoExportToStandard(reversed: Bool, time: CGFloat) {
         videoRecordView.deactivate()
         zoomView.deactivate()
         isModeAnimating = true
@@ -912,7 +910,7 @@ extension SecondaryMenuConforming {
         }
     }
     
-    func animateFromStandardToVideoRecord(reversed: Bool, time: CGFloat) {
+    @MainActor func animateFromStandardToVideoRecord(reversed: Bool, time: CGFloat) {
         videoExportView.deactivate()
         zoomView.deactivate()
         isModeAnimating = true
@@ -923,7 +921,7 @@ extension SecondaryMenuConforming {
         }
     }
     
-    func animateFromVideoRecordToStandard(reversed: Bool, time: CGFloat) {
+    @MainActor func animateFromVideoRecordToStandard(reversed: Bool, time: CGFloat) {
         videoExportView.deactivate()
         zoomView.deactivate()
         isModeAnimating = true
@@ -934,7 +932,7 @@ extension SecondaryMenuConforming {
         }
     }
     
-    func animateFromVideoRecordToVideoExport(reversed: Bool, time: CGFloat) {
+    @MainActor func animateFromVideoRecordToVideoExport(reversed: Bool, time: CGFloat) {
         standardView.deactivate()
         zoomView.deactivate()
         isModeAnimating = true
@@ -945,7 +943,7 @@ extension SecondaryMenuConforming {
         }
     }
     
-    func animateFromVideoExportToVideoRecord(reversed: Bool, time: CGFloat) {
+    @MainActor func animateFromVideoExportToVideoRecord(reversed: Bool, time: CGFloat) {
         standardView.deactivate()
         zoomView.deactivate()
         isModeAnimating = true
@@ -956,7 +954,7 @@ extension SecondaryMenuConforming {
         }
     }
     
-    func animateFromVideoExportToZoom(reversed: Bool, time: CGFloat) {
+    @MainActor func animateFromVideoExportToZoom(reversed: Bool, time: CGFloat) {
         standardView.deactivate()
         videoRecordView.deactivate()
         isModeAnimating = true
@@ -967,7 +965,7 @@ extension SecondaryMenuConforming {
         }
     }
     
-    func animateFromZoomToVideoExport(reversed: Bool, time: CGFloat) {
+    @MainActor func animateFromZoomToVideoExport(reversed: Bool, time: CGFloat) {
         standardView.deactivate()
         videoRecordView.deactivate()
         isModeAnimating = true
@@ -978,7 +976,7 @@ extension SecondaryMenuConforming {
         }
     }
     
-    func animateFromVideoRecordToZoom(reversed: Bool, time: CGFloat) {
+    @MainActor func animateFromVideoRecordToZoom(reversed: Bool, time: CGFloat) {
         standardView.deactivate()
         videoExportView.deactivate()
         isModeAnimating = true
@@ -989,7 +987,7 @@ extension SecondaryMenuConforming {
         }
     }
     
-    func animateFromZoomToVideoRecord(reversed: Bool, time: CGFloat) {
+    @MainActor func animateFromZoomToVideoRecord(reversed: Bool, time: CGFloat) {
         standardView.deactivate()
         videoExportView.deactivate()
         isModeAnimating = true
@@ -1000,7 +998,7 @@ extension SecondaryMenuConforming {
         }
     }
     
-    func animateFromStandardToZoom(reversed: Bool, time: CGFloat) {
+    @MainActor func animateFromStandardToZoom(reversed: Bool, time: CGFloat) {
         videoRecordView.deactivate()
         videoExportView.deactivate()
         isModeAnimating = true
@@ -1011,7 +1009,7 @@ extension SecondaryMenuConforming {
         }
     }
     
-    func animateFromZoomToStandard(reversed: Bool, time: CGFloat) {
+    @MainActor func animateFromZoomToStandard(reversed: Bool, time: CGFloat) {
         videoRecordView.deactivate()
         videoExportView.deactivate()
         isModeAnimating = true
@@ -1022,7 +1020,7 @@ extension SecondaryMenuConforming {
         }
     }
     
-    func snapToStandard() {
+    @MainActor func snapToStandard() {
         standardView.activate()
         standardViewLeftConstraint.constant = 0.0
         videoRecordView.deactivate()
@@ -1030,7 +1028,7 @@ extension SecondaryMenuConforming {
         zoomView.deactivate()
     }
     
-    func snapToVideoRecord() {
+    @MainActor func snapToVideoRecord() {
         videoRecordView.activate()
         videoRecordViewLeftConstraint.constant = 0.0
         standardView.deactivate()
@@ -1038,7 +1036,7 @@ extension SecondaryMenuConforming {
         zoomView.deactivate()
     }
     
-    func snapToVideoExport() {
+    @MainActor func snapToVideoExport() {
         videoExportView.activate()
         videoExportViewLeftConstraint.constant = 0.0
         standardView.deactivate()
@@ -1046,7 +1044,7 @@ extension SecondaryMenuConforming {
         zoomView.deactivate()
     }
     
-    func snapToZoom() {
+    @MainActor func snapToZoom() {
         zoomView.activate()
         zoomViewLeftConstraint.constant = 0.0
         standardView.deactivate()

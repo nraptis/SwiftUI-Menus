@@ -9,7 +9,7 @@ import Foundation
 
 extension ToolInterfaceViewModel {
     
-    func getAllRows() -> [ToolRow] {
+    @MainActor func getAllRows() -> [ToolRow] {
         var result = [ToolRow]()
         result.append(contentsOf: rowsZoom)
         result.append(contentsOf: rowsVideoRecord)
@@ -117,16 +117,26 @@ extension ToolInterfaceViewModel {
                 .buttonTimeLineAmplify,
                 .buttonTimeLineDampen,
                 .buttonTimeLineFlipAll,
+                .buttonTimeLineFlipCurrentChannelVertical,
+                .buttonTimeLineFlipCurrentChannelHorizontal,
                 .stepperTimelinePointCount,
                 .checkBoxAnimationLoopApplyToAll,
-                .enterModeContinuousPage1,
-                .enterModeContinuousPage2,
-                .enterModeContinuousPage3,
-                .enterModeAnimationContinuous,
-                .exitModeContinuousPage1,
-                .exitModeContinuousPage2,
-                .exitModeContinuousPage3,
-                .exitModeAnimationContinuous,
+                .enterModeLoopsPage1,
+                .enterModeLoopsPage2,
+                .enterModeLoopsPage3,
+                .exitModeLoopsPage1,
+                .exitModeLoopsPage2,
+                .exitModeLoopsPage3,
+                .enterModeTimeLinePage1,
+                .enterModeTimeLinePage2,
+                .enterModeTimeLinePage3,
+                .exitModeTimeLinePage1,
+                .exitModeTimeLinePage2,
+                .exitModeTimeLinePage3,
+                .enterModeAnimationLoops,
+                .exitModeAnimationLoops,
+                .enterModeTimeLine,
+                .exitModeTimeLine,
         ]
     }
     
@@ -154,22 +164,14 @@ extension ToolInterfaceViewModel {
             .buttonContinuousResetStartRotation,
             .buttonContinuousResetEndRotation,
             .checkBoxAnimationContinuousApplyToAll,
-            .enterModeLoopsPage1,
-            .enterModeLoopsPage2,
-            .enterModeLoopsPage3,
-            .exitModeLoopsPage1,
-            .exitModeLoopsPage2,
-            .exitModeLoopsPage3,
-            .enterModeTimeLinePage1,
-            .enterModeTimeLinePage2,
-            .enterModeTimeLinePage3,
-            .exitModeTimeLinePage1,
-            .exitModeTimeLinePage2,
-            .exitModeTimeLinePage3,
-            .enterModeAnimationLoops,
-            .exitModeAnimationLoops,
-            .enterModeTimeLine,
-            .exitModeTimeLine,
+            .enterModeContinuousPage1,
+            .enterModeContinuousPage2,
+            .enterModeContinuousPage3,
+            .enterModeAnimationContinuous,
+            .exitModeContinuousPage1,
+            .exitModeContinuousPage2,
+            .exitModeContinuousPage3,
+            .exitModeAnimationContinuous,
         ]
     }
     
@@ -193,31 +195,27 @@ extension ToolInterfaceViewModel {
         ]
     }
     
-    private func refreshAllRows() {
-        Task { @MainActor in
-            let allRows = getAllRows()
-            for row in allRows {
-                for node in row.nodes {
-                    node.magicalViewModel.refresh()
-                }
+    @MainActor private func refreshAllRows() {
+        let allRows = getAllRows()
+        for row in allRows {
+            for node in row.nodes {
+                node.magicalViewModel.refresh()
             }
-            
         }
     }
     
-    private func refreshAllRowsMatching(elements: [ToolInterfaceElement]) {
-        Task { @MainActor in
-            if elements.count > 0 {
-                var elementSet = Set<ToolInterfaceElement>()
-                for element in elements {
-                    elementSet.insert(element)
-                }
-                let allRows = getAllRows()
-                for row in allRows {
-                    for node in row.nodes {
-                        if elementSet.contains(node.element) {
-                            node.magicalViewModel.refresh()
-                        }
+    @MainActor private func refreshAllRowsMatching(elements: [ToolInterfaceElement]) {
+        
+        if elements.count > 0 {
+            var elementSet = Set<ToolInterfaceElement>()
+            for element in elements {
+                elementSet.insert(element)
+            }
+            let allRows = getAllRows()
+            for row in allRows {
+                for node in row.nodes {
+                    if elementSet.contains(node.element) {
+                        node.magicalViewModel.refresh()
                     }
                 }
             }
@@ -227,107 +225,114 @@ extension ToolInterfaceViewModel {
     @MainActor func handleTimeLineUpdate() {
         refreshAllRowsMatching(elements: getAllTimeLineElements())
     }
-    
-    func handleTimePointOrTanHandleUpdate() {
-        
-    }
-    
-    func handleSelectedTimeLineSwatchDidChange() {
+
+    @MainActor func handleSelectedTimeLineSwatchDidChange() {
         refreshAllRowsMatching(elements: [
             .sliderTimeLineFrameOffset,
         ])
     }
     
     @MainActor func handleSelectedJiggleDidChange() {
-        var elements: [ToolInterfaceElement] = []
-        elements.append(contentsOf: getAllJigglesElements())
-        elements.append(contentsOf: getAllGuidesElements())
-        elements.append(contentsOf: getAllGraphElements())
-        elements.append(contentsOf: getAllGrabElements())
-        elements.append(contentsOf: getAllCommonElements())
-        elements.append(contentsOf: getAllTimeLineElements())
-        elements.append(contentsOf: getAllContinuousElements())
-        refreshAllRowsMatching(elements: elements)
+        //var elements: [ToolInterfaceElement] = []
+        //elements.append(contentsOf: getAllJigglesElements())
+        //elements.append(contentsOf: getAllGuidesElements())
+        //elements.append(contentsOf: getAllGraphElements())
+        //elements.append(contentsOf: getAllGrabElements())
+        //elements.append(contentsOf: getAllCommonElements())
+        //elements.append(contentsOf: getAllTimeLineElements())
+        //elements.append(contentsOf: getAllContinuousElements())
+        refreshAllRows()
     }
     
-    func handleTimelinePointCountDidChange() {
+    @MainActor func handleTimelinePointCountDidChange() {
         refreshAllRowsMatching(elements: [
             .stepperTimelinePointCount,
         ])
     }
     
-    func handleZoomEnabledDidChange() {
+    @MainActor func handleZoomEnabledDidChange() {
         refreshAllRowsMatching(elements: [
             
         ])
     }
     
-    func handleRecordingEnabledDidChange() {
+    @MainActor func handleVideoExportEnabledDidChange() {
+        refreshAllRowsMatching(elements: [
+            
+        ])
+    }
+    
+    @MainActor func handleVideoRecordEnabledDidChange() {
+        refreshAllRowsMatching(elements: [
+            
+        ])
+    }
+    
+    @MainActor func handleRecordingEnabledDidChange() {
         refreshAllRowsMatching(elements: [
             
             
         ])
     }
     
-    func handleResetZoomActiveDidChange() {
+    @MainActor func handleResetZoomActiveDidChange() {
         refreshAllRowsMatching(elements: [
             
             
         ])
     }
     
-    func handleWeightCurveGraphEnabledDidChange() {
+    @MainActor func handleWeightCurveGraphEnabledDidChange() {
         refreshAllRowsMatching(elements: [
             
         ])
     }
     
-    func handleGuidesEnabledDidChange() {
+    @MainActor func handleGuidesEnabledDidChange() {
         
     }
     
-    func handleAnimationLoopsEnabledDidChange() {
+    @MainActor func handleAnimationLoopsEnabledDidChange() {
         refreshAllRowsMatching(elements: [
             
         ])
     }
     
-    func handleAnimationContinuousEnabledDidChange() {
+    @MainActor func handleAnimationContinuousEnabledDidChange() {
         refreshAllRowsMatching(elements: [
             
         ])
     }
     
-    func handleLoopsPageDidChange() {
+    @MainActor func handleLoopsPageDidChange() {
         refreshAllRowsMatching(elements: [
             
         ])
     }
     
-    func handleTimeLinePageDidChange() {
+    @MainActor func handleGraphPageDidChange() {
         refreshAllRowsMatching(elements: [
             
         ])
     }
     
-    //T.I.V.M.
-    func handleContinuousPageDidChange() {
+    @MainActor func handleTimeLinePageDidChange() {
+        refreshAllRowsMatching(elements: [
+            
+        ])
+    }
+    
+    @MainActor func handleContinuousPageDidChange() {
         refreshAllRowsMatching(elements: [
 
         ])
     }
     
-    func handleGraphPage2DidChange() {
-        
-    }
-    
-    
-    func handleTimeLineEnabledDidChange() {
+    @MainActor func handleTimeLineEnabledDidChange() {
 
     }
     
-    func handleCreatorModesDidChange() {
-        
+    @MainActor func handleCreatorModesDidChange() {
         var elements: [ToolInterfaceElement] = []
         elements.append(contentsOf: getAllJigglesElements())
         elements.append(contentsOf: getAllGuidesElements())
@@ -335,203 +340,171 @@ extension ToolInterfaceViewModel {
         refreshAllRowsMatching(elements: elements)
     }
     
-    func handleJigglesDidChange() {
+    @MainActor func handleJigglesDidChange() {
         //TODO: More, More
         refreshAllRowsMatching(elements: [
             
         ])
     }
     
-    func handleControlPointsDidChange() {
+    @MainActor func handleControlPointsDidChange() {
         refreshAllRowsMatching(elements: [
             .createSwatchAddAndRemoveJigglePoints
         ])
     }
     
-    func handleDocumentModeDidChange() {
+    @MainActor func handleDocumentModeDidChange() {
         refreshAllRowsMatching(elements: [
             .mainTabDocumentMode
         ])
     }
     
-    func handleEditModeDidChange() {
+    @MainActor func handleEditModeDidChange() {
         refreshAllRowsMatching(elements: [
             .segmentEditMode
         ])
     }
     
-    func handleWeightModeDidChange() {
+    @MainActor func handleWeightModeDidChange() {
         refreshAllRowsMatching(elements: [
             .segmentWeightMode
         ])
     }
     
-    func handleUndoRedoDidChange() {
-        // DONE!
+    @MainActor func handleUndoRedoDidChange() {
         refreshAllRowsMatching(elements: [.buttonRedo,
                                           .buttonUndo])
     }
     
-    func handleDarkModeDidChange() {
+    @MainActor func handleDarkModeDidChange() {
         refreshAllRowsMatching(elements: [.checkBoxDarkMode])
     }
     
-    func handleFrozenJigglesDidChange() {
-        refreshAllRowsMatching(elements: [.buttonFreezeSelectedJiggle,
-                                          .buttonFreezeSelectedGuide,
-                                          .buttonUnfreezeAllJiggles,
-                                          .buttonUnfreezeAllGuides,
-                                          .buttonSelectNextJiggle,
-                                          .buttonSelectPreviousJiggle,
-                                          .buttonSelectNextGuide,
-                                          .buttonSelectPreviousGuide,
-                                          
-            .createSwatchMakeAndDrawJiggle,
-                                          .createSwatchMakeAndDrawGuide,
-                                          .createSwatchAddAndRemoveJigglePoints,
-                                          .createSwatchAddAndRemoveGuidePoints,
-                                          
-        ])
+    @MainActor func handleFrozenJigglesDidChange() {
+        var elements: [ToolInterfaceElement] = []
+        elements.append(contentsOf: getAllJigglesElements())
+        refreshAllRowsMatching(elements: elements)
     }
     
-    func handleFrozenGuidesDidChange() {
-        refreshAllRowsMatching(elements: [
-            .buttonFreezeSelectedGuide,
-            .buttonUnfreezeAllGuides,
-            .buttonSelectNextGuide,
-            .buttonSelectPreviousGuide,
-            .createSwatchMakeAndDrawGuide,
-            .createSwatchAddAndRemoveGuidePoints,
-            
-        ])
+    @MainActor func handleFrozenGuidesDidChange() {
+        var elements: [ToolInterfaceElement] = []
+        elements.append(contentsOf: getAllGuidesElements())
+        refreshAllRowsMatching(elements: elements)
     }
     
-    func handleStereoscopicDidChange() {
+    @MainActor func handleStereoscopicDidChange() {
         refreshAllRowsMatching(elements: [
             .checkBoxStereoscopicEnabled
         ])
     }
     
-    func handleAnimationGrabAppliedToAllDidChange() {
-        
-        refreshAllRowsMatching(elements: [
-            .checkBoxAnimationGrabApplyToAll
-        ])
+    @MainActor func handleAnimationGrabAppliedToAllDidChange() {
+        var elements: [ToolInterfaceElement] = []
+        elements.append(contentsOf: getAllGrabElements())
+        refreshAllRowsMatching(elements: elements)
     }
     
-    func handleAnimationLoopsAppliedToAllDidChange() {
-        refreshAllRowsMatching(elements: [
-            .checkBoxAnimationLoopApplyToAll
-        ])
+    @MainActor func handleAnimationLoopsAppliedToAllDidChange() {
+        var elements: [ToolInterfaceElement] = []
+        elements.append(contentsOf: getAllTimeLineElements())
+        refreshAllRowsMatching(elements: elements)
     }
     
-    func handleAnimationContinuousAppliedToAllDidChange() {
-        refreshAllRowsMatching(elements: [
-            .checkBoxAnimationContinuousApplyToAll,
-            .buttonContinuousSyncFrames,
-            .buttonContinuousResetDuration,
-            .buttonContinuousResetFrameOffset,
-            .buttonContinuousResetAngleVertical,
-            .buttonContinuousResetAngleHorizontal,
-            .buttonContinuousResetAngleDiag1,
-            .buttonContinuousResetAngleDiag2,
-            .buttonContinuousResetSwoop,
-            .buttonContinuousResetStartScale,
-            .buttonContinuousResetEndScale,
-            .buttonContinuousResetStartRotation,
-            .buttonContinuousResetEndRotation,
-        ])
+    @MainActor func handleAnimationContinuousAppliedToAllDidChange() {
+        var elements: [ToolInterfaceElement] = []
+        elements.append(contentsOf: getAllContinuousElements())
+        refreshAllRowsMatching(elements: elements)
     }
     
-    func handleJiggleSpeedDidChange() {
+    @MainActor func handleJiggleSpeedDidChange() {
         refreshAllRowsMatching(elements: [.sliderJiggleSpeed])
     }
     
-    func handleJigglePowerDidChange() {
+    @MainActor func handleJigglePowerDidChange() {
         refreshAllRowsMatching(elements: [.sliderJigglePower])
     }
     
-    func handleJiggleDampenDidChange() {
+    @MainActor func handleJiggleDampenDidChange() {
         refreshAllRowsMatching(elements: [.sliderJiggleDampen])
     }
     
-    func handleContinuousDisableGrabDidChange() {
+    @MainActor func handleContinuousDisableGrabDidChange() {
         refreshAllRowsMatching(elements: [.checkBoxContinuousDisableGrab])
         print("handleContinuousDisableGrabDidChange...")
     }
     
-    func handleContinuousAngleDidChange() {
+    @MainActor func handleContinuousAngleDidChange() {
         refreshAllRowsMatching(elements: [.sliderContinuousAngle])
         print("handleContinuousAngleDidChange...")
     }
     
-    func handleContinuousDurationDidChange() {
+    @MainActor func handleContinuousDurationDidChange() {
         refreshAllRowsMatching(elements: [.sliderContinuousDuration])
     }
     
-    func handleContinuousPowerDidChange() {
+    @MainActor func handleContinuousPowerDidChange() {
         refreshAllRowsMatching(elements: [.sliderContinuousPower])
     }
     
-    func handleContinuousSwoopDidChange() {
+    @MainActor func handleContinuousSwoopDidChange() {
         refreshAllRowsMatching(elements: [.sliderContinuousSwoop])
     }
     
-    func handleContinuousFrameOffsetDidChange() {
+    @MainActor func handleContinuousFrameOffsetDidChange() {
         refreshAllRowsMatching(elements: [.sliderContinuousFrameOffset])
     }
     
-    func handleContinuousStartScaleDidChange() {
+    @MainActor func handleContinuousStartScaleDidChange() {
         refreshAllRowsMatching(elements: [.sliderContinuousStartScale])
     }
     
-    func handleContinuousEndScaleDidChange() {
+    @MainActor func handleContinuousEndScaleDidChange() {
         refreshAllRowsMatching(elements: [.sliderContinuousEndScale])
     }
     
-    func handleContinuousStartRotationDidChange() {
+    @MainActor func handleContinuousStartRotationDidChange() {
         refreshAllRowsMatching(elements: [.sliderContinuousStartRotation])
     }
     
-    func handleContinuousEndRotationDidChange() {
+    @MainActor func handleContinuousEndRotationDidChange() {
         refreshAllRowsMatching(elements: [.sliderContinuousEndRotation])
     }
     
-    func handleSliderActiveDidChange() {
+    @MainActor func handleSliderActiveDidChange() {
+        //var elements: [ToolInterfaceElement] = []
+        //elements.append(contentsOf: getAllJigglesElements())
+        //elements.append(contentsOf: getAllGuidesElements())
+        //elements.append(contentsOf: getAllGraphElements())
+        //elements.append(contentsOf: getAllGrabElements())
+        //elements.append(contentsOf: getAllCommonElements())
+        //elements.append(contentsOf: getAllTimeLineElements())
+        //elements.append(contentsOf: getAllContinuousElements())
+        //refreshAllRowsMatching(elements: elements)
+        refreshAllRows()
+    }
+    
+    @MainActor func handleContinuousUpdate() {
         var elements: [ToolInterfaceElement] = []
-        elements.append(contentsOf: getAllJigglesElements())
-        elements.append(contentsOf: getAllGuidesElements())
-        elements.append(contentsOf: getAllGraphElements())
-        elements.append(contentsOf: getAllGrabElements())
-        
+        elements.append(contentsOf: getAllContinuousElements())
         elements.append(contentsOf: getAllCommonElements())
+        refreshAllRowsMatching(elements: elements)
+    }
+    
+    @MainActor func handleContinuousDraggedJigglesDidChange() {
+        var elements: [ToolInterfaceElement] = []
+        elements.append(contentsOf: getAllContinuousElements())
+        elements.append(contentsOf: getAllCommonElements())
+        refreshAllRowsMatching(elements: elements)
+    }
+    
+    @MainActor func handleTimeLineDraggedJigglesDidChange() {
+        var elements: [ToolInterfaceElement] = []
         elements.append(contentsOf: getAllTimeLineElements())
-        elements.append(contentsOf: getAllContinuousElements())
-        refreshAllRowsMatching(elements: elements)
-    }
-    
-    func handleContinuousDraggedJigglesDidChange() {
-        var elements: [ToolInterfaceElement] = []
-        elements.append(contentsOf: getAllContinuousElements())
         elements.append(contentsOf: getAllCommonElements())
         refreshAllRowsMatching(elements: elements)
     }
     
-    func handleContinuousUpdate() {
-        var elements: [ToolInterfaceElement] = []
-        elements.append(contentsOf: getAllContinuousElements())
-        elements.append(contentsOf: getAllCommonElements())
-        refreshAllRowsMatching(elements: elements)
-    }
-    
-    func handleTimeLineDraggedJigglesDidChange() {
-        var elements: [ToolInterfaceElement] = []
-        elements.append(contentsOf: getAllTimeLineElements())
-        elements.append(contentsOf: getAllCommonElements())
-        refreshAllRowsMatching(elements: elements)
-    }
-    
-    func handleGraphDraggedJigglesDidChange() {
+    @MainActor func handleGraphDraggedJigglesDidChange() {
         var elements: [ToolInterfaceElement] = []
         elements.append(contentsOf: getAllGraphElements())
         elements.append(contentsOf: getAllCommonElements())

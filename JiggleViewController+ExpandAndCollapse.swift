@@ -9,7 +9,7 @@ import UIKit
 
 extension JiggleViewController {
     
-    func toolActionPhoneToggleTopMenu() {
+    @MainActor func toolActionPhoneToggleTopMenu() {
         if jiggleViewModel.isPhoneTopMenuExpanded {
             toolActionPhoneCollapseTopMenu()
         } else {
@@ -17,7 +17,7 @@ extension JiggleViewController {
         }
     }
     
-    func toolActionPhoneToggleBottomMenu() {
+    @MainActor func toolActionPhoneToggleBottomMenu() {
         if jiggleViewModel.isPhoneBottomMenuExpanded {
             toolActionPhoneCollapseBottomMenu()
         } else {
@@ -25,7 +25,7 @@ extension JiggleViewController {
         }
     }
     
-    func toolActionPhoneExpandTopMenu() {
+    @MainActor func toolActionPhoneExpandTopMenu() {
         if toolInterfaceViewModel.isBlocked { return }
         if Device.isPad { return }
         if jiggleViewModel.isPhoneTopMenuExpanded == false {
@@ -41,7 +41,7 @@ extension JiggleViewController {
         }
     }
     
-    func toolActionPhoneCollapseTopMenu() {
+    @MainActor func toolActionPhoneCollapseTopMenu() {
         if toolInterfaceViewModel.isBlocked { return }
         if Device.isPad { return }
         if jiggleViewModel.isPhoneTopMenuExpanded == true {
@@ -56,7 +56,7 @@ extension JiggleViewController {
         }
     }
     
-    func toolActionPhoneExpandBottomMenu() {
+    @MainActor func toolActionPhoneExpandBottomMenu() {
         if toolInterfaceViewModel.isBlocked { return }
         if Device.isPad { return }
         if jiggleViewModel.isPhoneBottomMenuExpanded == false {
@@ -72,7 +72,7 @@ extension JiggleViewController {
         }
     }
     
-    func toolActionPhoneCollapseBottomMenu() {
+    @MainActor func toolActionPhoneCollapseBottomMenu() {
         if toolInterfaceViewModel.isBlocked { return }
         if Device.isPad { return }
         if jiggleViewModel.isPhoneBottomMenuExpanded == true {

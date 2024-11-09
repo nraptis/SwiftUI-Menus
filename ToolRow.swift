@@ -24,8 +24,8 @@ class ToolRow {
     var nodesDidChangePublisher_AnimatedStep1 = PassthroughSubject<Bool, Never>()
     var nodesDidChangePublisher_AnimatedStep2 = PassthroughSubject<(Bool, CGFloat), Never>()
     
-    var _widthConstraint: NSLayoutConstraint?
-    func getWidthConstraint(_ view: UIView) -> NSLayoutConstraint {
+    @MainActor var _widthConstraint: NSLayoutConstraint?
+    @MainActor func getWidthConstraint(_ view: UIView) -> NSLayoutConstraint {
         if let result = _widthConstraint {
             return result
         }
@@ -40,8 +40,8 @@ class ToolRow {
         return result
     }
     
-    var _leftConstraint: NSLayoutConstraint?
-    func getLeftConstraint(_ view: UIView, _ parent: UIView) -> NSLayoutConstraint {
+    @MainActor var _leftConstraint: NSLayoutConstraint?
+    @MainActor func getLeftConstraint(_ view: UIView, _ parent: UIView) -> NSLayoutConstraint {
         if let result = _leftConstraint {
             return result
         }
@@ -55,9 +55,9 @@ class ToolRow {
         return result
     }
     
-    private(set) var previousNodes = [ToolNode]()
-    private(set) var nodes = [ToolNode]()
-    private(set) var centerPinnedElement: ToolInterfaceElement?
+    @MainActor private(set) var previousNodes = [ToolNode]()
+    @MainActor private(set) var nodes = [ToolNode]()
+    @MainActor private(set) var centerPinnedElement: ToolInterfaceElement?
     
     @MainActor func refreshAllNodes() {
         for node in nodes {
@@ -142,7 +142,7 @@ class ToolRow {
         nodesDidChangePublisher_AnimatedStep2.send((reversed, time))
     }
     
-    func getCenterPinnedNode() -> ToolNode? {
+    @MainActor func getCenterPinnedNode() -> ToolNode? {
         if let centerPinnedElement = centerPinnedElement {
             for node in nodes {
                 if node.element == centerPinnedElement {
@@ -153,7 +153,7 @@ class ToolRow {
         return nil
     }
     
-    static func getCenterPinnedNode(centerPinnedElement: ToolInterfaceElement?, nodes: [ToolNode]) -> ToolNode? {
+    @MainActor static func getCenterPinnedNode(centerPinnedElement: ToolInterfaceElement?, nodes: [ToolNode]) -> ToolNode? {
         if let centerPinnedElement = centerPinnedElement {
             for node in nodes {
                 if node.element == centerPinnedElement {
@@ -164,15 +164,15 @@ class ToolRow {
         return nil
     }
     
-    func removePreviousNodes() {
+    @MainActor func removePreviousNodes() {
         previousNodes.removeAll(keepingCapacity: true)
     }
     
-    func removeNodes() {
+    @MainActor func removeNodes() {
         nodes.removeAll(keepingCapacity: true)
     }
     
-    init(slot: ToolRowSlot) {
+    @MainActor init(slot: ToolRowSlot) {
         self.slot = slot
     }
     

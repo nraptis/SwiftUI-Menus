@@ -14,7 +14,7 @@ import Foundation
     }
     
     override func refresh() {
-        super.refresh()
+        
         
     }
     

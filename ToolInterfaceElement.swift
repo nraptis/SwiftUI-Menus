@@ -27,8 +27,8 @@ enum ToolInterfaceElementType: UInt16 {
 
 struct ToolInterfaceElementTable {
     
-    static var lookUpTable = [ToolInterfaceElement: ToolInterfaceElementType]()
-    static func build() {
+    @MainActor static var lookUpTable = [ToolInterfaceElement: ToolInterfaceElementType]()
+    @MainActor static func build() {
         
         lookUpTable[.checkBoxDarkMode] = .checkBox
         lookUpTable[.checkBoxGyroscopeEnabled] = .checkBox
@@ -87,6 +87,8 @@ struct ToolInterfaceElementTable {
         lookUpTable[.buttonTimeLineAmplify] = .button
         lookUpTable[.buttonTimeLineDampen] = .button
         lookUpTable[.buttonTimeLineFlipAll] = .button
+        lookUpTable[.buttonTimeLineFlipCurrentChannelHorizontal] = .button
+        lookUpTable[.buttonTimeLineFlipCurrentChannelVertical] = .button
         lookUpTable[.buttonTimeLineSyncFrames] = .button
         
         lookUpTable[.buttonSelectNextJigglePoint] = .button
@@ -132,6 +134,17 @@ struct ToolInterfaceElementTable {
         lookUpTable[.buttonContinuousResetStartRotation] = .button
         lookUpTable[.buttonContinuousResetEndRotation] = .button
         
+        lookUpTable[.buttonContinuousInvertAngles] = .button
+        lookUpTable[.buttonContinuousInvertRotation] = .button
+        lookUpTable[.buttonContinuousInvertSwoop] = .button
+        lookUpTable[.buttonContinuousShuffleGroup1] = .button
+        lookUpTable[.buttonContinuousShuffleGroup2] = .button
+        lookUpTable[.buttonContinuousShuffleGroup3] = .button
+        lookUpTable[.buttonContinuousSwapRotation] = .button        
+        lookUpTable[.buttonContinuousResetGroup1] = .button
+        lookUpTable[.buttonContinuousResetGroup2] = .button
+        lookUpTable[.buttonContinuousResetGroup3] = .button
+
         
         lookUpTable[.buttonImageImporterRotateRight] = .button
         lookUpTable[.buttonImageImporterRotateLeft] = .button
@@ -152,7 +165,7 @@ struct ToolInterfaceElementTable {
         lookUpTable[.enterModeVideoRecord] = .enterMode
         lookUpTable[.enterModeVideoExport] = .enterMode
         lookUpTable[.enterModeTimeLine] = .enterMode
-        lookUpTable[.enterModeGraphPage2] = .enterMode
+        
         lookUpTable[.enterModeLoopsPage1] = .enterMode
         lookUpTable[.enterModeLoopsPage2] = .enterMode
         lookUpTable[.enterModeLoopsPage3] = .enterMode
@@ -163,6 +176,9 @@ struct ToolInterfaceElementTable {
                 lookUpTable[.enterModeContinuousPage2] = .enterMode
                 lookUpTable[.enterModeContinuousPage3] = .enterMode
         lookUpTable[.enterModeAnimationContinuous] = .enterMode
+        lookUpTable[.enterModeGraphPage1] = .enterMode
+                lookUpTable[.enterModeGraphPage2] = .enterMode
+                lookUpTable[.enterModeGraphPage3] = .enterMode
         
         
         lookUpTable[.exitModeZoom] = .exitMode
@@ -173,7 +189,6 @@ struct ToolInterfaceElementTable {
         lookUpTable[.exitModeVideoExport] = .exitMode
         lookUpTable[.exitModeTimeLine] = .exitMode
         lookUpTable[.exitModeAnimationContinuous] = .exitMode
-        lookUpTable[.exitModeGraphPage2] = .exitMode
         
         
         lookUpTable[.exitModeLoopsPage1] = .exitMode
@@ -186,6 +201,11 @@ struct ToolInterfaceElementTable {
         lookUpTable[.exitModeContinuousPage1] = .exitMode
                 lookUpTable[.exitModeContinuousPage2] = .exitMode
                 lookUpTable[.exitModeContinuousPage3] = .exitMode
+        
+        lookUpTable[.exitModeGraphPage1] = .exitMode
+                lookUpTable[.exitModeGraphPage2] = .exitMode
+                lookUpTable[.exitModeGraphPage3] = .exitMode
+        
         
         lookUpTable[.greenButtonCreateScene] = .greenButton
         lookUpTable[.greenButtonDone] = .greenButton
@@ -312,6 +332,9 @@ enum ToolInterfaceElement: UInt16 {
     case buttonTimeLineAmplify
     case buttonTimeLineDampen
     case buttonTimeLineFlipAll
+    case buttonTimeLineFlipCurrentChannelHorizontal
+    case buttonTimeLineFlipCurrentChannelVertical
+    
     
     case buttonContinuousSyncFrames
     case buttonContinuousResetDuration
@@ -325,6 +348,17 @@ enum ToolInterfaceElement: UInt16 {
     case buttonContinuousResetEndScale
     case buttonContinuousResetStartRotation
     case buttonContinuousResetEndRotation
+    case buttonContinuousInvertAngles
+    case buttonContinuousInvertRotation
+    case buttonContinuousInvertSwoop
+    case buttonContinuousShuffleGroup1
+    case buttonContinuousShuffleGroup2
+    case buttonContinuousShuffleGroup3
+    case buttonContinuousSwapRotation
+    case buttonContinuousResetGroup1
+    case buttonContinuousResetGroup2
+    case buttonContinuousResetGroup3
+    
     
     case buttonImageImporterRotateRight
     case buttonImageImporterRotateLeft
@@ -346,7 +380,6 @@ enum ToolInterfaceElement: UInt16 {
     case enterModeVideoRecord
     case enterModeVideoExport
     case enterModeTimeLine
-    case enterModeGraphPage2
     
     case enterModeLoopsPage1
     case enterModeLoopsPage2
@@ -357,6 +390,9 @@ enum ToolInterfaceElement: UInt16 {
     case enterModeContinuousPage1
     case enterModeContinuousPage2
     case enterModeContinuousPage3
+    case enterModeGraphPage1
+        case enterModeGraphPage2
+        case enterModeGraphPage3
     
     case enterModeAnimationContinuous
     
@@ -368,7 +404,7 @@ enum ToolInterfaceElement: UInt16 {
     case exitModeVideoExport
     case exitModeTimeLine
     case exitModeAnimationContinuous
-    case exitModeGraphPage2
+    
     case exitModeLoopsPage1
     case exitModeLoopsPage2
     case exitModeLoopsPage3
@@ -378,6 +414,9 @@ enum ToolInterfaceElement: UInt16 {
     case exitModeContinuousPage1
     case exitModeContinuousPage2
     case exitModeContinuousPage3
+    case exitModeGraphPage1
+        case exitModeGraphPage2
+        case exitModeGraphPage3
     
     case greenButtonCreateScene
     case greenButtonDone
@@ -418,7 +457,7 @@ enum ToolInterfaceElement: UInt16 {
     
     case favoringOneLineLabel
     
-    var type: ToolInterfaceElementType {
+    @MainActor var type: ToolInterfaceElementType {
         guard let result = ToolInterfaceElementTable.lookUpTable[self] else {
             fatalError("Expected a type lookup for \(self)")
         }

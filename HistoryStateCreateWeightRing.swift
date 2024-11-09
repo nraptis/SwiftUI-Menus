@@ -12,9 +12,9 @@ class HistoryStateCreateGuide: HistoryState {
     let jiggleIndex: Int
     let fileBuffer = FileBuffer()
     convenience init(jiggleIndex: Int,
-                     guide: Guide) {
+                     fileBuffer: FileBuffer) {
         self.init(jiggleIndex: jiggleIndex)
-        guide.save(fileBuffer: fileBuffer)
+        self.fileBuffer.copy(fileBuffer: fileBuffer)
     }
     
     required init(jiggleIndex: Int) {

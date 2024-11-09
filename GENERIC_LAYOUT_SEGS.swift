@@ -95,7 +95,7 @@ struct GENERIC_SEGMENT_LAYOUT {
         let buttonLayouts: [HORIZONTAL_LAYOUT_STACKED]
     }
     
-    static func computeStacked(layoutSchemeType: LayoutScheme.Type,
+    @MainActor static func computeStacked(layoutSchemeType: LayoutScheme.Type,
                                layoutWidth: Int,
                                orientation: Orientation,
                                infoList: [SEGMENT_LAYOUT_INFO],
@@ -339,7 +339,7 @@ struct GENERIC_SEGMENT_LAYOUT {
         return StackedResponse(globalLayout: globalLayout, buttonLayouts: buttonLayouts)
     }
     
-    static func computeLong(layoutSchemeType: LayoutScheme.Type,
+    @MainActor static func computeLong(layoutSchemeType: LayoutScheme.Type,
                             layoutWidth: Int,
                             orientation: Orientation,
                             infoList: [SEGMENT_LAYOUT_INFO],

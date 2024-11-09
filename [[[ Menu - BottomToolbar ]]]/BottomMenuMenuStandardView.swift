@@ -9,8 +9,8 @@ import UIKit
 
 class BottomMenuMenuStandardView: UIView, MenuPartWithRowsConforming {
 
-    var separatorViews = [UIView]()
-    var rowViews = [ToolRowView]()
+    @MainActor var separatorViews = [UIView]()
+    @MainActor var rowViews = [ToolRowView]()
     func getNumberOfRows() -> Int {
         ToolInterfaceTheme.getBottomMenuStandardRowCount(orientation: toolInterfaceViewModel.orientation)
     }

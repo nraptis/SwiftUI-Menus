@@ -289,4 +289,312 @@ extension ToolInterfaceFactory {
         return continuousResetSwoopToolNode
     }
     
+    static func getContinuousInvertAnglesButtonToolNode(orientation: Orientation,
+                                                        neighborTypeLeft: ToolInterfaceElementType?,
+                                                        neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+        
+        let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextContinuousInvertAnglesLine1()
+        let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextContinuousInvertAnglesLine2()
+        let iconPack = LooseConvertibleIconLibrary.menuC
+        let configuration = ToolInterfaceElementButtonConfiguration(iconPack: iconPack,
+                                                                    orientation: orientation,
+                                                                    nameLabelLine1: textLine1,
+                                                                    nameLabelLine2: textLine2)
+        let flex = Self.getButtonFlex(orientation: orientation,
+                                      configuration: configuration,
+                                      neighborTypeLeft: neighborTypeLeft,
+                                      neighborTypeRight: neighborTypeRight)
+        
+        let viewModelContinuousInvertAngles = MagicalButtonViewModelContinuousInvertAngles(orientation: orientation,
+                                                                                           buttonConfiguration: configuration)
+        let continuousInvertAnglesToolNode = ToolNode(id: getToolNodeID(),
+                                                      element: .buttonContinuousInvertAngles,
+                                                      flex: flex,
+                                                      magicalViewModel: viewModelContinuousInvertAngles,
+                                                      neighborTypeLeft: neighborTypeLeft,
+                                                      neighborTypeRight: neighborTypeRight)
+        viewModelContinuousInvertAngles.refresh()
+        return continuousInvertAnglesToolNode
+    }
+    
+    static func getContinuousInvertRotationButtonToolNode(orientation: Orientation,
+                                                          neighborTypeLeft: ToolInterfaceElementType?,
+                                                          neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+        
+        let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextContinuousInvertRotationLine1()
+        let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextContinuousInvertRotationLine2()
+        let iconPack = LooseConvertibleIconLibrary.menuC
+        let configuration = ToolInterfaceElementButtonConfiguration(iconPack: iconPack,
+                                                                    orientation: orientation,
+                                                                    nameLabelLine1: textLine1,
+                                                                    nameLabelLine2: textLine2)
+        let flex = Self.getButtonFlex(orientation: orientation,
+                                      configuration: configuration,
+                                      neighborTypeLeft: neighborTypeLeft,
+                                      neighborTypeRight: neighborTypeRight)
+        
+        let viewModelContinuousInvertRotation = MagicalButtonViewModelContinuousInvertRotation(orientation: orientation,
+                                                                                               buttonConfiguration: configuration)
+        let continuousInvertRotationToolNode = ToolNode(id: getToolNodeID(),
+                                                        element: .buttonContinuousInvertRotation,
+                                                        flex: flex,
+                                                        magicalViewModel: viewModelContinuousInvertRotation,
+                                                        neighborTypeLeft: neighborTypeLeft,
+                                                        neighborTypeRight: neighborTypeRight)
+        viewModelContinuousInvertRotation.refresh()
+        return continuousInvertRotationToolNode
+    }
+    
+    static func getContinuousInvertSwoopButtonToolNode(orientation: Orientation,
+                                                       neighborTypeLeft: ToolInterfaceElementType?,
+                                                       neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+        
+        let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextContinuousInvertSwoopLine1()
+        let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextContinuousInvertSwoopLine2()
+        let iconPack = LooseConvertibleIconLibrary.menuC
+        let configuration = ToolInterfaceElementButtonConfiguration(iconPack: iconPack,
+                                                                    orientation: orientation,
+                                                                    nameLabelLine1: textLine1,
+                                                                    nameLabelLine2: textLine2)
+        let flex = Self.getButtonFlex(orientation: orientation,
+                                      configuration: configuration,
+                                      neighborTypeLeft: neighborTypeLeft,
+                                      neighborTypeRight: neighborTypeRight)
+        
+        let viewModelContinuousInvertSwoop = MagicalButtonViewModelContinuousInvertSwoop(orientation: orientation,
+                                                                                         buttonConfiguration: configuration)
+        let continuousInvertSwoopToolNode = ToolNode(id: getToolNodeID(),
+                                                     element: .buttonContinuousInvertSwoop,
+                                                     flex: flex,
+                                                     magicalViewModel: viewModelContinuousInvertSwoop,
+                                                     neighborTypeLeft: neighborTypeLeft,
+                                                     neighborTypeRight: neighborTypeRight)
+        viewModelContinuousInvertSwoop.refresh()
+        return continuousInvertSwoopToolNode
+    }
+    
+    static func getContinuousResetFrameOffsetButtonToolNode(orientation: Orientation,
+                                                            neighborTypeLeft: ToolInterfaceElementType?,
+                                                            neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+        
+        let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextContinuousResetFrameOffsetLine1()
+        let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextContinuousResetFrameOffsetLine2()
+        let iconPack = LooseConvertibleIconLibrary.menuC
+        let configuration = ToolInterfaceElementButtonConfiguration(iconPack: iconPack,
+                                                                    orientation: orientation,
+                                                                    nameLabelLine1: textLine1,
+                                                                    nameLabelLine2: textLine2)
+        let flex = Self.getButtonFlex(orientation: orientation,
+                                      configuration: configuration,
+                                      neighborTypeLeft: neighborTypeLeft,
+                                      neighborTypeRight: neighborTypeRight)
+        
+        let viewModelContinuousResetFrameOffset = MagicalButtonViewModelContinuousResetFrameOffset(orientation: orientation,
+                                                                                                   buttonConfiguration: configuration)
+        let continuousResetFrameOffsetToolNode = ToolNode(id: getToolNodeID(),
+                                                          element: .buttonContinuousResetFrameOffset,
+                                                          flex: flex,
+                                                          magicalViewModel: viewModelContinuousResetFrameOffset,
+                                                          neighborTypeLeft: neighborTypeLeft,
+                                                          neighborTypeRight: neighborTypeRight)
+        viewModelContinuousResetFrameOffset.refresh()
+        return continuousResetFrameOffsetToolNode
+    }
+    
+    static func getContinuousShuffleGroup1ButtonToolNode(orientation: Orientation,
+                                                         neighborTypeLeft: ToolInterfaceElementType?,
+                                                         neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+        
+        let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextContinuousShuffleGroup1Line1()
+        let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextContinuousShuffleGroup1Line2()
+        let iconPack = LooseConvertibleIconLibrary.menuC
+        let configuration = ToolInterfaceElementButtonConfiguration(iconPack: iconPack,
+                                                                    orientation: orientation,
+                                                                    nameLabelLine1: textLine1,
+                                                                    nameLabelLine2: textLine2)
+        let flex = Self.getButtonFlex(orientation: orientation,
+                                      configuration: configuration,
+                                      neighborTypeLeft: neighborTypeLeft,
+                                      neighborTypeRight: neighborTypeRight)
+        
+        let viewModelContinuousShuffleGroup1 = MagicalButtonViewModelContinuousShuffleGroup1(orientation: orientation,
+                                                                                             buttonConfiguration: configuration)
+        let continuousShuffleGroup1ToolNode = ToolNode(id: getToolNodeID(),
+                                                       element: .buttonContinuousShuffleGroup1,
+                                                       flex: flex,
+                                                       magicalViewModel: viewModelContinuousShuffleGroup1,
+                                                       neighborTypeLeft: neighborTypeLeft,
+                                                       neighborTypeRight: neighborTypeRight)
+        viewModelContinuousShuffleGroup1.refresh()
+        return continuousShuffleGroup1ToolNode
+    }
+    
+    static func getContinuousShuffleGroup2ButtonToolNode(orientation: Orientation,
+                                                         neighborTypeLeft: ToolInterfaceElementType?,
+                                                         neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+        
+        let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextContinuousShuffleGroup2Line1()
+        let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextContinuousShuffleGroup2Line2()
+        let iconPack = LooseConvertibleIconLibrary.menuC
+        let configuration = ToolInterfaceElementButtonConfiguration(iconPack: iconPack,
+                                                                    orientation: orientation,
+                                                                    nameLabelLine1: textLine1,
+                                                                    nameLabelLine2: textLine2)
+        let flex = Self.getButtonFlex(orientation: orientation,
+                                      configuration: configuration,
+                                      neighborTypeLeft: neighborTypeLeft,
+                                      neighborTypeRight: neighborTypeRight)
+        
+        let viewModelContinuousShuffleGroup2 = MagicalButtonViewModelContinuousShuffleGroup2(orientation: orientation,
+                                                                                             buttonConfiguration: configuration)
+        let continuousShuffleGroup2ToolNode = ToolNode(id: getToolNodeID(),
+                                                       element: .buttonContinuousShuffleGroup2,
+                                                       flex: flex,
+                                                       magicalViewModel: viewModelContinuousShuffleGroup2,
+                                                       neighborTypeLeft: neighborTypeLeft,
+                                                       neighborTypeRight: neighborTypeRight)
+        viewModelContinuousShuffleGroup2.refresh()
+        return continuousShuffleGroup2ToolNode
+    }
+    
+    static func getContinuousShuffleGroup3ButtonToolNode(orientation: Orientation,
+                                                         neighborTypeLeft: ToolInterfaceElementType?,
+                                                         neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+        
+        let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextContinuousShuffleGroup3Line1()
+        let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextContinuousShuffleGroup3Line2()
+        let iconPack = LooseConvertibleIconLibrary.menuC
+        let configuration = ToolInterfaceElementButtonConfiguration(iconPack: iconPack,
+                                                                    orientation: orientation,
+                                                                    nameLabelLine1: textLine1,
+                                                                    nameLabelLine2: textLine2)
+        let flex = Self.getButtonFlex(orientation: orientation,
+                                      configuration: configuration,
+                                      neighborTypeLeft: neighborTypeLeft,
+                                      neighborTypeRight: neighborTypeRight)
+        
+        let viewModelContinuousShuffleGroup3 = MagicalButtonViewModelContinuousShuffleGroup3(orientation: orientation,
+                                                                                             buttonConfiguration: configuration)
+        let continuousShuffleGroup3ToolNode = ToolNode(id: getToolNodeID(),
+                                                       element: .buttonContinuousShuffleGroup3,
+                                                       flex: flex,
+                                                       magicalViewModel: viewModelContinuousShuffleGroup3,
+                                                       neighborTypeLeft: neighborTypeLeft,
+                                                       neighborTypeRight: neighborTypeRight)
+        viewModelContinuousShuffleGroup3.refresh()
+        return continuousShuffleGroup3ToolNode
+    }
+    
+    static func getContinuousResetGroup1ButtonToolNode(orientation: Orientation,
+                                                       neighborTypeLeft: ToolInterfaceElementType?,
+                                                       neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+        
+        let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextContinuousResetGroup1Line1()
+        let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextContinuousResetGroup1Line2()
+        let iconPack = LooseConvertibleIconLibrary.menuC
+        let configuration = ToolInterfaceElementButtonConfiguration(iconPack: iconPack,
+                                                                    orientation: orientation,
+                                                                    nameLabelLine1: textLine1,
+                                                                    nameLabelLine2: textLine2)
+        let flex = Self.getButtonFlex(orientation: orientation,
+                                      configuration: configuration,
+                                      neighborTypeLeft: neighborTypeLeft,
+                                      neighborTypeRight: neighborTypeRight)
+        
+        let viewModelContinuousResetGroup1 = MagicalButtonViewModelContinuousResetGroup1(orientation: orientation,
+                                                                                         buttonConfiguration: configuration)
+        let continuousResetGroup1ToolNode = ToolNode(id: getToolNodeID(),
+                                                     element: .buttonContinuousResetGroup1,
+                                                     flex: flex,
+                                                     magicalViewModel: viewModelContinuousResetGroup1,
+                                                     neighborTypeLeft: neighborTypeLeft,
+                                                     neighborTypeRight: neighborTypeRight)
+        viewModelContinuousResetGroup1.refresh()
+        return continuousResetGroup1ToolNode
+    }
+    
+    static func getContinuousResetGroup2ButtonToolNode(orientation: Orientation,
+                                                       neighborTypeLeft: ToolInterfaceElementType?,
+                                                       neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+        
+        let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextContinuousResetGroup2Line1()
+        let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextContinuousResetGroup2Line2()
+        let iconPack = LooseConvertibleIconLibrary.menuC
+        let configuration = ToolInterfaceElementButtonConfiguration(iconPack: iconPack,
+                                                                    orientation: orientation,
+                                                                    nameLabelLine1: textLine1,
+                                                                    nameLabelLine2: textLine2)
+        let flex = Self.getButtonFlex(orientation: orientation,
+                                      configuration: configuration,
+                                      neighborTypeLeft: neighborTypeLeft,
+                                      neighborTypeRight: neighborTypeRight)
+        
+        let viewModelContinuousResetGroup2 = MagicalButtonViewModelContinuousResetGroup2(orientation: orientation,
+                                                                                         buttonConfiguration: configuration)
+        let continuousResetGroup2ToolNode = ToolNode(id: getToolNodeID(),
+                                                     element: .buttonContinuousResetGroup2,
+                                                     flex: flex,
+                                                     magicalViewModel: viewModelContinuousResetGroup2,
+                                                     neighborTypeLeft: neighborTypeLeft,
+                                                     neighborTypeRight: neighborTypeRight)
+        viewModelContinuousResetGroup2.refresh()
+        return continuousResetGroup2ToolNode
+    }
+    
+    static func getContinuousResetGroup3ButtonToolNode(orientation: Orientation,
+                                                       neighborTypeLeft: ToolInterfaceElementType?,
+                                                       neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+        
+        let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextContinuousResetGroup3Line1()
+        let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextContinuousResetGroup3Line2()
+        let iconPack = LooseConvertibleIconLibrary.menuC
+        let configuration = ToolInterfaceElementButtonConfiguration(iconPack: iconPack,
+                                                                    orientation: orientation,
+                                                                    nameLabelLine1: textLine1,
+                                                                    nameLabelLine2: textLine2)
+        let flex = Self.getButtonFlex(orientation: orientation,
+                                      configuration: configuration,
+                                      neighborTypeLeft: neighborTypeLeft,
+                                      neighborTypeRight: neighborTypeRight)
+        
+        let viewModelContinuousResetGroup3 = MagicalButtonViewModelContinuousResetGroup3(orientation: orientation,
+                                                                                         buttonConfiguration: configuration)
+        let continuousResetGroup3ToolNode = ToolNode(id: getToolNodeID(),
+                                                     element: .buttonContinuousResetGroup3,
+                                                     flex: flex,
+                                                     magicalViewModel: viewModelContinuousResetGroup3,
+                                                     neighborTypeLeft: neighborTypeLeft,
+                                                     neighborTypeRight: neighborTypeRight)
+        viewModelContinuousResetGroup3.refresh()
+        return continuousResetGroup3ToolNode
+    }
+    
+    static func getContinuousSwapRotationButtonToolNode(orientation: Orientation,
+                                                        neighborTypeLeft: ToolInterfaceElementType?,
+                                                        neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
+        
+        let textLine1 = ToolInterfaceStringLibraryButtons.buttonTextContinuousSwapRotationLine1()
+        let textLine2 = ToolInterfaceStringLibraryButtons.buttonTextContinuousSwapRotationLine2()
+        let iconPack = LooseConvertibleIconLibrary.menuC
+        let configuration = ToolInterfaceElementButtonConfiguration(iconPack: iconPack,
+                                                                    orientation: orientation,
+                                                                    nameLabelLine1: textLine1,
+                                                                    nameLabelLine2: textLine2)
+        let flex = Self.getButtonFlex(orientation: orientation,
+                                      configuration: configuration,
+                                      neighborTypeLeft: neighborTypeLeft,
+                                      neighborTypeRight: neighborTypeRight)
+        
+        let viewModelContinuousSwapRotation = MagicalButtonViewModelContinuousSwapRotation(orientation: orientation,
+                                                                                           buttonConfiguration: configuration)
+        let continuousSwapRotationToolNode = ToolNode(id: getToolNodeID(),
+                                                      element: .buttonContinuousSwapRotation,
+                                                      flex: flex,
+                                                      magicalViewModel: viewModelContinuousSwapRotation,
+                                                      neighborTypeLeft: neighborTypeLeft,
+                                                      neighborTypeRight: neighborTypeRight)
+        viewModelContinuousSwapRotation.refresh()
+        return continuousSwapRotationToolNode
+    }
+    
 }

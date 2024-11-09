@@ -17,7 +17,6 @@ import Foundation
     
     override func refresh() {
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
-            
             if jiggleViewModel.getTimeLineDraggingStatus() {
                 refreshDisabled()
             } else if jiggleViewModel.isAnySliderActive {

@@ -9,16 +9,8 @@ import Foundation
 import Observation
 import Combine
 
-
-// These are the menu flavors
-
-// JiggleAffine
-// JigglePoints
-
-
-
-var toolNodeBaseID = UInt16(0)
-func getToolNodeID() -> UInt16 {
+@MainActor var toolNodeBaseID = UInt16(0)
+@MainActor func getToolNodeID() -> UInt16 {
     toolNodeBaseID += 1
     return toolNodeBaseID
 }
@@ -47,7 +39,7 @@ func getToolNodeID() -> UInt16 {
     @ObservationIgnored var darkModeDidChangePublisher = PassthroughSubject<Void, Never>()
     @ObservationIgnored var purchasedDidChangePublisher = PassthroughSubject<Void, Never>()
     
-    let layoutRelay = ToolInterfaceLayoutRelay()
+    @MainActor let layoutRelay = ToolInterfaceLayoutRelay()
     
     //
     // So, per this thought, we want the category for ALL POSSIBLE rows...
@@ -57,7 +49,7 @@ func getToolNodeID() -> UInt16 {
     
     @ObservationIgnored weak var jiggleViewController: JiggleViewController?
     
-    func getRow(slot: ToolRowSlot) -> ToolRow? {
+    @MainActor func getRow(slot: ToolRowSlot) -> ToolRow? {
         if Device.isPad {
             for row in rowsDraggable {
                 if row.slot == slot {
@@ -79,13 +71,13 @@ func getToolNodeID() -> UInt16 {
         return nil
     }
     
-    private func generateRow(slot: ToolRowSlot) -> ToolRow {
+    @MainActor private func generateRow(slot: ToolRowSlot) -> ToolRow {
         let result = ToolRow(slot: slot)
         //result.configuration = .unknown
         return result
     }
     
-    static func calculateLayoutStackingCategory(width: Int,
+    @MainActor static func calculateLayoutStackingCategory(width: Int,
                                                 height: Int,
                                                 nodes: [ToolNode],
                                                 centerPinnedElement: ToolInterfaceElement?,
@@ -108,7 +100,7 @@ func getToolNodeID() -> UInt16 {
                                                slot: slot)
     }
     
-    static func calculateLayoutStackingCategory(orientation: Orientation,
+    @MainActor static func calculateLayoutStackingCategory(orientation: Orientation,
                                                 width: Int,
                                                 height: Int,
                                                 nodes: [ToolNode],
@@ -131,7 +123,7 @@ func getToolNodeID() -> UInt16 {
                                                slot: slot)
     }
     
-    static func calculateLayoutStackingCategory(orientation: Orientation,
+    @MainActor static func calculateLayoutStackingCategory(orientation: Orientation,
                                                 width: Int,
                                                 height: Int,
                                                 nodes: [ToolNode],
@@ -157,7 +149,7 @@ func getToolNodeID() -> UInt16 {
         return result
     }
     
-    func calculateLayoutStackingCategory(width: Int,
+    @MainActor func calculateLayoutStackingCategory(width: Int,
                                          height: Int,
                                          categories: [ToolInterfaceLayoutStackingCategory],
                                          calculators: [RowStackingCategoryCalculator]) -> ToolInterfaceLayoutStackingCategory {
@@ -200,7 +192,7 @@ func getToolNodeID() -> UInt16 {
     
     
     
-    var isRowAnimationActive: Bool {
+    @MainActor var isRowAnimationActive: Bool {
         for row in getAllRows() {
             if row.isRowAnimationActive {
                 return true
@@ -210,7 +202,11 @@ func getToolNodeID() -> UInt16 {
     }
     
     @ObservationIgnored let orientation: Orientation
-    @ObservationIgnored unowned var jiggleViewModel: JiggleViewModel!
+    
+    //TODO: Nick Hook
+    //@ObservationIgnored unowned var jiggleViewModel: JiggleViewModel!
+    @ObservationIgnored weak var jiggleViewModel: JiggleViewModel?
+    
     @MainActor init(orientation: Orientation, jiggleViewModel: JiggleViewModel) {
         
         self.orientation = orientation
@@ -503,7 +499,7 @@ func getToolNodeID() -> UInt16 {
     var weightCurveGraphEnabledUpdateCancellable: AnyCancellable?
     var jigglesDidChangeCancellable: AnyCancellable?
     
-    var controlPointsDidChangeCancellable: AnyCancellable?
+    @MainActor var controlPointsDidChangeCancellable: AnyCancellable?
     
     
     var creatorModeUpdateCancellable: AnyCancellable?
@@ -523,143 +519,80 @@ func getToolNodeID() -> UInt16 {
     var selectedJiggleDidChangeCancellable: AnyCancellable?
     var selectedTimeLineSwatchDidChangeCancellable: AnyCancellable?
     
-    func publisherLinkUp() {
+    @MainActor func publisherLinkUp() {
+        
+        guard let jiggleViewModel = jiggleViewModel else {
+            return
+        }
         
         jigglesDidChangeCancellable = jiggleViewModel
             .jiggleDocument
             .jigglesDidChangePublisher
             .sink { [weak self] in
-                if let self = self {
-                    self.handleJigglesDidChange()
-                }
+                //Task { @MainActor [weak self] in
+                    if let self = self {
+                        self.handleJigglesDidChange()
+                    }
+                //}
             }
         
         controlPointsDidChangeCancellable = jiggleViewModel
             .jiggleDocument
             .controlPointsDidChangePublisher
             .sink { [weak self] in
-                if let self = self {
-                    self.handleControlPointsDidChange()
-                }
+                //Task { @MainActor [weak self] in
+                    if let self = self {
+                        self.handleControlPointsDidChange()
+                    }
+                //}
             }
         
         
         resetZoomActiveUpdateCancellable = jiggleViewModel
             .resetZoomActiveUpdatePublisher
-            .sink { [weak self] _ in
-                if let self = self {
-                    self.handleResetZoomActiveDidChange()
-                }
+            .sink { [weak self] in
+                //Task { @MainActor [weak self] in
+                    if let self = self {
+                        self.handleResetZoomActiveDidChange()
+                    }
+                //}
             }
-        
-        /*
-        weightCurveGraphEnabledUpdateCancellable = jiggleViewModel
-            .weightCurveGraphEnabledUpdatePublisher
-            .sink { [weak self] _ in
-                if let self = self {
-                    self.handleWeightCurveGraphEnabledDidChange()
-                }
-            }
-        */
         
         selectedJiggleDidChangeCancellable = jiggleViewModel
             .jiggleDocument
             .selectedJiggleDidChangePublisher
-            .sink {
-                Task { @MainActor [weak self] in
+            .sink { [weak self] in
+                //Task { @MainActor [weak self] in
                     if let self = self {
                         self.handleSelectedJiggleDidChange()
                     }
-                }
+                //}
             }
         
         
         selectedTimeLineSwatchDidChangeCancellable = jiggleViewModel
             .jiggleDocument
             .selectedTimeLineSwatchUpdatePublisher
-            .sink { [weak self] _ in
-                if let self = self {
-                    self.handleSelectedTimeLineSwatchDidChange()
-                }
+            .sink { [weak self] in
+                //Task { @MainActor [weak self] in
+                    if let self = self {
+                        self.handleSelectedTimeLineSwatchDidChange()
+                    }
+                //}
             }
         
         creatorModeUpdateCancellable = jiggleViewModel
             .jiggleDocument
             .creatorModeUpdatePublisher
-            .sink { [weak self] _ in
-                if let self = self {
-                    self.handleCreatorModesDidChange()
-                }
+            .sink { [weak self] in
+                //Task { @MainActor [weak self] in
+                    if let self = self {
+                        self.handleCreatorModesDidChange()
+                    }
+                //}
             }
         
     }
-    
-    /*
-    @MainActor static func getSpacerToolNode(neighborTypeLeft: ToolInterfaceElementType?,
-                                  neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
-        return getSpacerToolNode(neighborTypeLeft: neighborTypeLeft,
-                                 neighborTypeRight: neighborTypeRight,
-                                 defaultWidth: 0)
-    }
-    
-    @MainActor static func getSpacerToolNode(neighborTypeLeft: ToolInterfaceElementType?,
-                                  neighborTypeRight: ToolInterfaceElementType?,
-                                  defaultWidth: Int) -> ToolNode {
-        if let jiggleDocument = ApplicationController.shared.jiggleDocument {
-            return getSpacerToolNode(neighborTypeLeft: neighborTypeLeft,
-                                     neighborTypeRight: neighborTypeRight,
-                                     orientation: jiggleDocument.orientation,
-                                     defaultWidth: defaultWidth)
-        } else if let rootViewModel = ApplicationController.rootViewModel {
-            return getSpacerToolNode(neighborTypeLeft: neighborTypeLeft,
-                                     neighborTypeRight: neighborTypeRight,
-                                     orientation: rootViewModel.orientation,
-                                     defaultWidth: defaultWidth)
-        } else {
-            return getSpacerToolNode(neighborTypeLeft: neighborTypeLeft,
-                                     neighborTypeRight: neighborTypeRight,
-                                     orientation: .portrait,
-                                     defaultWidth: defaultWidth)
-        }
-    }
-    
-    @MainActor static func getSpacerToolNode(neighborTypeLeft: ToolInterfaceElementType?,
-                                  neighborTypeRight: ToolInterfaceElementType?,
-                                  orientation: Orientation,
-                                  defaultWidth: Int) -> ToolNode {
-        ToolNode(id: getToolNodeID(),
-                 element: .spacer,
-                 flex: .spacer(.init(defaultWidth: defaultWidth)),
-                 magicalViewModel: MagicalViewModel(orientation: orientation),
-                 neighborTypeLeft: neighborTypeLeft,
-                 neighborTypeRight: neighborTypeRight)
-    }
-    
-    @MainActor static func getFavoringOneLineLabelToolNode(orientation: Orientation,
-                                  minimumWidth: Int,
-                                  text: String,
-                                  neighborTypeLeft: ToolInterfaceElementType?,
-                                                neighborTypeRight: ToolInterfaceElementType?) -> ToolNode {
-        
-        let configuration = ToolInterfaceElementFavoringOneLineLabelConfiguration(orientation: orientation,
-                                                                                  text: text)
-        let viewModel = MagicalFavoringOneLineLabelViewModel(orientation: orientation,
-                                                             favoringOneLineLabelConfiguration: configuration)
-        
-        let flex = Self.getFavoringOneLineLabelFlex(orientation: orientation,
-                                                                      configuration: configuration,
-                                                                      minimumWidth: minimumWidth,
-                                                                      neighborTypeLeft: neighborTypeLeft,
-                                                                      neighborTypeRight: neighborTypeRight)
-        
-        return ToolNode(id: getToolNodeID(),
-                        element: .favoringOneLineLabel,
-                        flex: flex,
-                        magicalViewModel: viewModel,
-                        neighborTypeLeft: neighborTypeLeft,
-                        neighborTypeRight: neighborTypeRight)
-    }
-    */
     
     @MainActor func layoutAllRowsPhone(menuWidthWithSafeArea: Int, rowHeight: Int, safeAreaLeft: Int, safeAreaRight: Int) {
         if menuWidthWithSafeArea != layoutRelay.menuWidthWithSafeArea ||
@@ -762,95 +695,7 @@ func getToolNodeID() -> UInt16 {
         }
     }
     
-    /*
-    @MainActor func getRowBluePrintEmpty() -> RowBluePrint {
-        RowBluePrint(nodes: [], configuration: .empty)
-    }
-    
-    @MainActor func getRowBluePrint_Top_Secondary1_Empty() -> RowBluePrint {
-        return RowBluePrint(nodes: [], configuration: .top_Secondary1_Empty)
-    }
-    
-    @MainActor func getRowBluePrint_Top_Secondary2_Empty() -> RowBluePrint {
-        return RowBluePrint(nodes: [], configuration: .top_Secondary2_Empty)
-    }
-    
-    @MainActor func getRowBluePrint_Bottom_Secondary2_Empty() -> RowBluePrint {
-        return RowBluePrint(nodes: [], configuration: .bottom_Secondary2_Empty)
-    }
-    
-    @MainActor func getRowBluePrint_Bottom_Secondary1_Empty() -> RowBluePrint {
-        return RowBluePrint(nodes: [], configuration: .bottom_Secondary1_Empty)
-    }
-    */
-    
-    //TODO: This is used?
-    /*
-    @MainActor func getRowBluePrintVideoRecord() -> RowBluePrint {
-        let nodes = [
-            getExitVideoRecordExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-        
-            getEnterVideoExportEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-        ]
-    
-        return RowBluePrint(nodes: nodes, configuration: .video_record_1, centerPinnedElement: nil)
-    }
-    
-    @MainActor func getRowBluePrintVideoExport1() -> RowBluePrint {
-        let nodes = [
-            getExitVideoExportExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getEnterVideoRecordEnterModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getMainMenuTextIconButtonToolNode(neighborTypeLeft: .spacer, neighborTypeRight: nil)
-        ]
-        return RowBluePrint(nodes: nodes, configuration: .video_export_1, centerPinnedElement: nil)
-    }
-    
-    
-    @MainActor func getRowBluePrintVideoExport2() -> RowBluePrint {
-        let nodes = [
-            Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getMenuButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
-        ]
-        return RowBluePrint(nodes: nodes, configuration: .video_export_2, centerPinnedElement: nil)
-    }
-    
-    
-    @MainActor func getRowBluePrintZoom1() -> RowBluePrint {
-        let nodes = [
-            getZoomExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            
-            Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-        ]
-    
-        return RowBluePrint(nodes: nodes, configuration: .zoom_1, centerPinnedElement: nil)
-    }
-    
-    @MainActor func getRowBluePrintZoom2() -> RowBluePrint {
-        let nodes = [
-            getZoomAmountSliderToolNode(widthCategory: .fullWidth, neighborTypeLeft: nil, neighborTypeRight: nil)
-        ]
-    
-        return RowBluePrint(nodes: nodes, configuration: .zoom_2, centerPinnedElement: nil)
-    }
-    
-    @MainActor func getRowBluePrintZoom3() -> RowBluePrint {
-        let nodes = [
-            getZoomExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            
-            Self.getSpacerToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getZoomExitModeToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            
-            getZoomResetButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil),
-            getZoomJiggleButtonToolNode(neighborTypeLeft: nil, neighborTypeRight: nil)
-            
-        ]
-        return RowBluePrint(nodes: nodes, configuration: .zoom_3, centerPinnedElement: nil)
-    }
-     */
-    
-    var isBlocked: Bool {
+    @MainActor var isBlocked: Bool {
         
         if isBlockedExceptForHistory {
             return true
@@ -868,7 +713,7 @@ func getToolNodeID() -> UInt16 {
         return false
     }
     
-    var isBlockedExceptForHistory: Bool {
+    @MainActor var isBlockedExceptForHistory: Bool {
         
         /*
         switch jiggleViewModel._storedDocumentModeTransitionState {
@@ -938,8 +783,10 @@ func getToolNodeID() -> UInt16 {
     }
     
     var isBlockedAnyTransition: Bool {
-        if jiggleViewModel.isDisplayTransitionActive {
-            return true
+        if let jiggleViewModel {
+            if jiggleViewModel.isDisplayTransitionActive {
+                return true
+            }
         }
         return false
     }
@@ -951,8 +798,6 @@ func getToolNodeID() -> UInt16 {
     func publishPurchasedDidChange() {
         purchasedDidChangePublisher.send(())
     }
-    
-    
     
     @MainActor func snapRowContent(configuration: any InterfaceConfigurationConforming,
                         toolRows: [ToolRow]) {
@@ -1049,7 +894,7 @@ func getToolNodeID() -> UInt16 {
         }
     }
     
-    func getCurrentInterfaceConfiguration() -> any InterfaceConfigurationConforming {
+    @MainActor func getCurrentInterfaceConfiguration() -> any InterfaceConfigurationConforming {
         if Device.isPad {
             return getCurrentInterfaceConfigurationPad()
         } else {
@@ -1057,7 +902,7 @@ func getToolNodeID() -> UInt16 {
         }
     }
     
-    func getCurrentInterfaceConfigurationPad() -> InterfaceConfigurationPad {
+    @MainActor func getCurrentInterfaceConfigurationPad() -> InterfaceConfigurationPad {
         var result = InterfaceConfigurationPad()
         if let jiggleViewModel = jiggleViewModel {
             result.isExpanded = jiggleViewModel.isPadMenuExpanded
@@ -1067,7 +912,7 @@ func getToolNodeID() -> UInt16 {
             result.isAnimationLoopsEnabled = jiggleViewModel.jiggleDocument.isAnimationLoopsEnabled
             result.isTimeLineEnabled = jiggleViewModel.jiggleDocument.isTimeLineEnabled
             //result.isTimeLinePage2Enabled = jiggleViewModel.isTimeLinePage2Enabled
-            result.isGraphPage2Enabled = jiggleViewModel.isGraphPage2Enabled
+            //result.isGraphPage2Enabled = jiggleViewModel.isGraphPage2Enabled
             //result.isAnimationContinuousPage2Enabled = jiggleViewModel.isAnimationContinuousPage2Enabled
             
             result.isGraphEnabled = jiggleViewModel.isGraphEnabled
@@ -1081,11 +926,13 @@ func getToolNodeID() -> UInt16 {
             result.animationTimeLinePage = jiggleViewModel.jiggleDocument.animationTimeLinePage
             result.animationContinuousPage = jiggleViewModel.jiggleDocument.animationContinuousPage
             
+            result.graphPage = jiggleViewModel.jiggleDocument.graphPage
+            
         }
         return result
     }
     
-    func getCurrentInterfaceConfigurationPhone() -> InterfaceConfigurationPhone {
+    @MainActor func getCurrentInterfaceConfigurationPhone() -> InterfaceConfigurationPhone {
         var result = InterfaceConfigurationPhone()
         if let jiggleViewModel = jiggleViewModel {
             result.isExpandedTop = jiggleViewModel.isPhoneTopMenuExpanded
@@ -1096,7 +943,7 @@ func getToolNodeID() -> UInt16 {
             result.isAnimationLoopsEnabled = jiggleViewModel.jiggleDocument.isAnimationLoopsEnabled
             result.isTimeLineEnabled = jiggleViewModel.jiggleDocument.isTimeLineEnabled
             //result.isTimeLinePage2Enabled = jiggleViewModel.isTimeLinePage2Enabled
-            result.isGraphPage2Enabled = jiggleViewModel.isGraphPage2Enabled
+            //result.isGraphPage2Enabled = jiggleViewModel.isGraphPage2Enabled
             //result.isAnimationContinuousPage2Enabled = jiggleViewModel.isAnimationContinuousPage2Enabled
             result.isGraphEnabled = jiggleViewModel.isGraphEnabled
             result.isZoomEnabled = jiggleViewModel.isZoomEnabled
@@ -1108,6 +955,8 @@ func getToolNodeID() -> UInt16 {
             result.animationLoopsPage = jiggleViewModel.jiggleDocument.animationLoopsPage
             result.animationTimeLinePage = jiggleViewModel.jiggleDocument.animationTimeLinePage
             result.animationContinuousPage = jiggleViewModel.jiggleDocument.animationContinuousPage
+            
+            result.graphPage = jiggleViewModel.jiggleDocument.graphPage
         }
         return result
     }

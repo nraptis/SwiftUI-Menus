@@ -10,7 +10,7 @@ import Foundation
 class DialogBoxRowModelEmptySpace: DialogBoxRowModel {
     
     let height: Int
-    init(height: Int) {
+    @MainActor init(height: Int) {
         self.height = height
         super.init(rowModelType: .emptySpace)
     }

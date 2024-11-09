@@ -13,6 +13,10 @@ import Combine
     
     @ObservationIgnored var orientation = Orientation.portrait
     
+    @MainActor init() {
+        
+    }
+    
     @MainActor var menuWidthWithSafeArea = 320
     @MainActor var rowHeight = 44
     @MainActor var safeAreaLeft: Int = 0

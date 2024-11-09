@@ -47,11 +47,6 @@ extension ToolInterfaceFactory {
             return getTimeLineExitModeToolNode(orientation: orientation,
                                                neighborTypeLeft: neighborTypeLeft,
                                                neighborTypeRight: neighborTypeRight)
-            
-        case .graphPage2:
-            return getGraphPage2ExitModeToolNode(orientation: orientation,
-                                                 neighborTypeLeft: neighborTypeLeft,
-                                                 neighborTypeRight: neighborTypeRight)
         case .loopsPage1:
             return getLoopsPage1ExitModeToolNode(orientation: orientation,
                                                  neighborTypeLeft: neighborTypeLeft,
@@ -90,6 +85,19 @@ extension ToolInterfaceFactory {
             return getContinuousPage3ExitModeToolNode(orientation: orientation,
                                                       neighborTypeLeft: neighborTypeLeft,
                                                       neighborTypeRight: neighborTypeRight)
+            
+        case .graphPage1:
+            return getGraphPage1ExitModeToolNode(orientation: orientation,
+                                                 neighborTypeLeft: neighborTypeLeft,
+                                                 neighborTypeRight: neighborTypeRight)
+        case .graphPage2:
+            return getGraphPage2ExitModeToolNode(orientation: orientation,
+                                                 neighborTypeLeft: neighborTypeLeft,
+                                                 neighborTypeRight: neighborTypeRight)
+        case .graphPage3:
+            return getGraphPage3ExitModeToolNode(orientation: orientation,
+                                                 neighborTypeLeft: neighborTypeLeft,
+                                                 neighborTypeRight: neighborTypeRight)
         }
     }
 }

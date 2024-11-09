@@ -9,7 +9,7 @@ import Foundation
 
 class DialogBoxRowModelEditRings: DialogBoxRowModel {
     
-    init() {
+    @MainActor init() {
         super.init(rowModelType: .editRings)
     }
     
@@ -19,7 +19,7 @@ class DialogBoxRowModelEditRings: DialogBoxRowModel {
     }
     
     private var isGenerating: Bool = false
-    func generate() {
+    @MainActor func generate() {
         
         if isGenerating { return }
         
@@ -40,17 +40,29 @@ class DialogBoxRowModelEditRings: DialogBoxRowModel {
         }
         
         guard let ringBuilderViewController = ringBuilderViewController, let ringBuilderDialogBoxView = ringBuilderDialogBoxView else {
-            ApplicationController.rootViewController.pushDialogBox(DialogBoxModel.unknownError) { _ in }
+            if let rootViewController = ApplicationController.rootViewController {
+                rootViewController.pushDialogBox(DialogBoxModel.unknownError) { _ in
+                    
+                }
+            }
             return
         }
         
         guard let jiggleViewModel = ApplicationController.shared.jiggleViewModel else {
-            ApplicationController.rootViewController.pushDialogBox(DialogBoxModel.unknownError) { _ in }
+            if let rootViewController = ApplicationController.rootViewController {
+                rootViewController.pushDialogBox(DialogBoxModel.unknownError) { _ in
+                    
+                }
+            }
             return
         }
         
         guard let selectedJiggle = jiggleViewModel.getSelectedJiggle() else {
-            ApplicationController.rootViewController.pushDialogBox(DialogBoxModel.noJiggleSelected) { _ in }
+            if let rootViewController = ApplicationController.rootViewController {
+                rootViewController.pushDialogBox(DialogBoxModel.noJiggleSelected) { _ in
+                    
+                }
+            }
             return
         }
         
@@ -69,19 +81,25 @@ class DialogBoxRowModelEditRings: DialogBoxRowModel {
                 
                 
                 if response.numberOfRingsGenerated <= 0 {
-                    ApplicationController.rootViewController.replaceDialogBox(DialogBoxModel.generatedNoGuides) { _ in
-                        ringBuilderDialogBoxView.loadingViewHide()
-                        self.isGenerating = false
+                    if let rootViewController = ApplicationController.rootViewController {
+                        rootViewController.replaceDialogBox(DialogBoxModel.generatedNoGuides) { _ in
+                            ringBuilderDialogBoxView.loadingViewHide()
+                            self.isGenerating = false
+                        }
                     }
                 } else if response.numberOfRingsGenerated < response.numberOfRingsRequested {
-                    ApplicationController.rootViewController.replaceDialogBox(DialogBoxModel.generatedLessGuides(numberOfRingsGenerated: response.numberOfRingsGenerated, numberOfRingsRequested: response.numberOfRingsRequested)) { _ in
-                        ringBuilderDialogBoxView.loadingViewHide()
-                        self.isGenerating = false
+                    if let rootViewController = ApplicationController.rootViewController {
+                        rootViewController.replaceDialogBox(DialogBoxModel.generatedLessGuides(numberOfRingsGenerated: response.numberOfRingsGenerated, numberOfRingsRequested: response.numberOfRingsRequested)) { _ in
+                            ringBuilderDialogBoxView.loadingViewHide()
+                            self.isGenerating = false
+                        }
                     }
                 } else {
-                    ApplicationController.rootViewController.popDialogBox() { _ in
-                        ringBuilderDialogBoxView.loadingViewHide()
-                        self.isGenerating = false
+                    if let rootViewController = ApplicationController.rootViewController {
+                        rootViewController.popDialogBox() { _ in
+                            ringBuilderDialogBoxView.loadingViewHide()
+                            self.isGenerating = false
+                        }
                     }
                 }
             }

@@ -11,18 +11,20 @@ extension ToolInterfaceViewModel {
     
     @MainActor func getRowRecipe_Pad_Portrait_LoopsPage3_Top_Primary() -> RowRecipe {
         let inrs: [INR] = [
-            .favoringOneLineLabel(.init(minimumWidth: 0, text: "[A.L3]")),
             .button(.menu),
             .checkBox(.darkMode),
             .spacer,
-            .checkBox(.stereoscopic)
+            .checkBox(.stereoscopic),
+            .enterMode(.videoRecord),
         ]
         return RowRecipe(inrs: inrs)
     }
     
     @MainActor func getRowRecipe_Pad_Portrait_LoopsPage3_Top_Secondary() -> RowRecipe {
         let inrs: [INR] = [
-            
+            .exitMode(.loopsPage3),
+            .spacer,
+            .enterMode(.loopsPage1)
             
         ]
         return RowRecipe(inrs: inrs)
@@ -30,9 +32,7 @@ extension ToolInterfaceViewModel {
     
     @MainActor func getRowRecipe_Pad_Portrait_LoopsPage3_Top_Tertiary() -> RowRecipe {
         let inrs: [INR] = [
-            .exitMode(.loopsPage3),
-            .spacer,
-            .enterMode(.loopsPage1)
+            
         ]
         return RowRecipe(inrs: inrs)
     }
@@ -48,8 +48,8 @@ extension ToolInterfaceViewModel {
     
     @MainActor func getRowRecipe_Pad_Portrait_LoopsPage3_Bottom_Secondary() -> RowRecipe {
         let inrs: [INR] = [
-            .checkBox(.animationLoopApplyToAll),
-            .spacer,
+            .button(.timeLineSyncFrames),
+            .slider(.init(widthCategory: .stretch, slider: .timeLineDuration)),
             .button(.zoomReset),
         ]
         return RowRecipe(inrs: inrs)
@@ -59,7 +59,7 @@ extension ToolInterfaceViewModel {
         let inrs: [INR] = [
             .button_pair(.undo, .redo),
             .mainTab(.documentMode),
-            .enterMode(.videoRecord),
+            .checkBox(.animationLoopApplyToAll),
         ]
         return RowRecipe(inrs: inrs, centerPinnedElement: .mainTabDocumentMode)
     }

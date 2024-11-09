@@ -65,7 +65,7 @@ class HistoryController {
         return false
     }
     
-    func undo() {
+    @MainActor func undo() {
         let index = isMostRecentActionRedo ? historyIndex : (historyIndex - 1)
         let historyState = historyStack[index]
         if let jiggleViewController = jiggleViewController {
@@ -76,7 +76,7 @@ class HistoryController {
         isMostRecentActionRedo = false
     }
     
-    func redo() {
+    @MainActor func redo() {
         let index = isMostRecentActionUndo ? historyIndex : (historyIndex + 1)
         let historyState = historyStack[index]
         if let jiggleViewController = jiggleViewController {

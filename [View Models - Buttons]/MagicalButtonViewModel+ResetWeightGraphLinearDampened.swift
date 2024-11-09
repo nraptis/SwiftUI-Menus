@@ -18,15 +18,18 @@ import Foundation
     
     override func refresh() {
         if let jiggleViewModel = ApplicationController.shared.jiggleViewModel {
-            switch jiggleViewModel.jiggleDocument.creatorMode {
-            case .none:
-                refreshEnabled()
-            default:
+            if jiggleViewModel.isAnySliderActive {
                 refreshDisabled()
+                return
             }
+            
+            if jiggleViewModel.getGraphDraggingStatus() {
+                refreshDisabled()
+                return
+            }
+
+            refreshEnabled()
         }
-        
-        super.refresh()
     }
     
     deinit {

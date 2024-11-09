@@ -19,7 +19,7 @@ struct DisplayFrame {
     let contentFrameWidth: Int
     let contentFrameHeight: Int
     
-    static func with(configuration: InterfaceConfigurationConforming,
+    @MainActor static func with(configuration: InterfaceConfigurationConforming,
                      orientation: Orientation,
                      safeAreaLeft: Int,
                      safeAreaRight: Int,
@@ -59,9 +59,6 @@ struct DisplayFrame {
             } else {
                 contentBottom = appHeight + phoneMenuCollapseOffset
             }
-        } else if let configurationPhone = configuration as? InterfaceConfigurationPhone {
-            contentTop = safeAreaTop
-            contentBottom = appHeight - safeAreaBottom
         }
         
         let contentFrameWidth = (appWidth - (safeAreaLeft + safeAreaRight))

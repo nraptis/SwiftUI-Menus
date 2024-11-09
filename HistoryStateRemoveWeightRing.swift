@@ -15,10 +15,10 @@ class HistoryStateDeleteGuide: HistoryState {
     let fileBuffer = FileBuffer()
     convenience init(jiggleIndex: Int,
                      weightCurveIndex: Int,
-                     guide: Guide) {
+                     fileBuffer: FileBuffer) {
         self.init(jiggleIndex: jiggleIndex,
                   weightCurveIndex: weightCurveIndex)
-        guide.save(fileBuffer: fileBuffer)
+        self.fileBuffer.copy(fileBuffer: fileBuffer)
     }
     
     required init(jiggleIndex: Int,

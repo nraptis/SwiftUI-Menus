@@ -21,7 +21,7 @@ struct FramedLongIconPack: TextIconPackable {
         self.planePhonePortrait_0 = planePhonePortrait_0
     }
     
-    func getTextIcon(orientation: Orientation,
+    @MainActor func getTextIcon(orientation: Orientation,
                      layoutSchemeFlavor: LayoutSchemeFlavor,
                      numberOfLines: Int,
                      isDarkMode: Bool,

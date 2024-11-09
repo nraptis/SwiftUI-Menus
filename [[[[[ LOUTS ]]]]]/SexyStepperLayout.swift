@@ -130,7 +130,7 @@ struct StepperLayout: LayoutScheme {
         6
     }
     
-    static func getCornerRadius(orientation: Orientation) -> Int {
+    @MainActor static func getCornerRadius(orientation: Orientation) -> Int {
         if Device.isPad {
             return 6
         } else {
@@ -138,7 +138,7 @@ struct StepperLayout: LayoutScheme {
         }
     }
     
-    static func getLineThickness(orientation: Orientation) -> Int {
+    @MainActor static func getLineThickness(orientation: Orientation) -> Int {
         return 1
     }
     

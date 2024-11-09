@@ -64,6 +64,8 @@ enum INR_Button: UInt8 {
     case timeLineInvertVertical //
     case timeLineInvertHorizontal //
     case timeLineFlipAll //
+    case timeLineFlipCurrentChannelHorizontal
+    case timeLineFlipCurrentChannelVertical
     case timeLineDampen //
     case timeLineAmplify //
     case timeLineSyncFrames //
@@ -93,6 +95,17 @@ enum INR_Button: UInt8 {
     case continuousResetStartScale
     case continuousResetSwoop
     case continuousSyncFrames
+    case continuousInvertAngles
+    case continuousInvertRotation
+    case continuousInvertSwoop
+    case continuousResetFrameOffset
+    case continuousShuffleGroup1
+    case continuousShuffleGroup2
+    case continuousShuffleGroup3
+    case continuousResetGroup1
+        case continuousResetGroup2
+        case continuousResetGroup3
+    case continuousSwapRotation
     
     // {Image Importer}
     case imageImporterButtonBack
@@ -149,7 +162,6 @@ enum INR_EnterMode: UInt8 {
     case animationLoops
     case animationContinuous
     case timeLine
-    case graphPage2
     
     case loopsPage1
     case loopsPage2
@@ -162,6 +174,10 @@ enum INR_EnterMode: UInt8 {
     case continuousPage1
     case continuousPage2
     case continuousPage3
+    
+    case graphPage1
+    case graphPage2
+    case graphPage3
 }
 
 enum INR_ExitMode: UInt8 {
@@ -173,7 +189,6 @@ enum INR_ExitMode: UInt8 {
     case animationLoops
     case animationContinuous
     case timeLine
-    case graphPage2
     
     case loopsPage1
     case loopsPage2
@@ -186,6 +201,10 @@ enum INR_ExitMode: UInt8 {
     case continuousPage1
     case continuousPage2
     case continuousPage3
+    
+    case graphPage1
+    case graphPage2
+    case graphPage3
 }
 
 enum INR_MainTab: UInt8 {

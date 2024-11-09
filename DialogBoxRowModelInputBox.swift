@@ -12,7 +12,7 @@ class DialogBoxRowModelInputBox: DialogBoxRowModel {
     let text: String?
     let placeholder: String
     var action: ((String?) -> Void)?
-    init(text: String?, placeholder: String, action: @escaping ((String?) -> Void)) {
+    @MainActor init(text: String?, placeholder: String, action: @escaping ((String?) -> Void)) {
         self.text = text
         self.placeholder = placeholder
         self.action = action

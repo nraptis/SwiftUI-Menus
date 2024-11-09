@@ -24,7 +24,7 @@ class ToolNode {
         }
     }
     
-    init(id: UInt16,
+    @MainActor init(id: UInt16,
          element: ToolInterfaceElement,
          flex: ToolInterfaceElementFlex,
          //toolInterfaceViewModel: ToolInterfaceViewModel,

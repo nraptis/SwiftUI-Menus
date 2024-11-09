@@ -11,51 +11,49 @@ extension ToolInterfaceViewModel {
     
     @MainActor func getRowRecipe_Pad_Portrait_AnimationContinuousPage1_Top_Primary() -> RowRecipe {
         let inrs: [INR] = [
-            .favoringOneLineLabel(.init(minimumWidth: 0, text: "[A.C1]")),
             .button(.menu),
             .checkBox(.darkMode),
-            .slider(.init(widthCategory: .halfWidthLeft, slider: .continuousAngle)),
+            .spacer,
+            .checkBox(.stereoscopic),
+            .enterMode(.videoRecord),
         ]
         return RowRecipe(inrs: inrs)
     }
     
     @MainActor func getRowRecipe_Pad_Portrait_AnimationContinuousPage1_Top_Secondary() -> RowRecipe {
         let inrs: [INR] = [
-            .slider(.init(widthCategory: .halfWidthLeft, slider: .continuousDuration)),
-            .slider(.init(widthCategory: .halfWidthRight, slider: .continuousPower)),
+            .exitMode(.continuousPage1),
+            .slider(.init(widthCategory: .stretch, slider: .continuousDuration)),
+            .enterMode(.continuousPage2),
         ]
         return RowRecipe(inrs: inrs)
     }
     
-    
     @MainActor func getRowRecipe_Pad_Portrait_AnimationContinuousPage1_Top_Tertiary() -> RowRecipe {
         let inrs: [INR] = [
-            .button_pair(.continuousResetAngleVertical, .continuousResetAngleHorizontal),
-            .spacer,
-            .button_pair(.continuousResetAngleDiag1, .continuousResetAngleDiag2),
+            
+            .exitMode(.animationContinuous),
+            .slider(.init(widthCategory: .stretch, slider: .continuousPower)),
+            .button(.continuousResetAngleDiag1),
         ]
         return RowRecipe(inrs: inrs)
     }
     
     @MainActor func getRowRecipe_Pad_Portrait_AnimationContinuousPage1_Bottom_Tertiary() -> RowRecipe {
         let inrs: [INR] = [
-            
-            .exitMode(.continuousPage1),
-            .button_pair(.continuousResetSwoop, .continuousSyncFrames),
-            .button_pair(.continuousResetAngleHorizontal, .continuousResetAngleVertical),
-            
-            .enterMode(.continuousPage2),
+            .button(.continuousResetAngleDiag2),
+            .slider(.init(widthCategory: .stretch, slider: .continuousAngle)),
+            .checkBox(.continuousDisableGrabEnabled),
         ]
         return RowRecipe(inrs: inrs)
     }
     
     @MainActor func getRowRecipe_Pad_Portrait_AnimationContinuousPage1_Bottom_Secondary() -> RowRecipe {
         let inrs: [INR] = [
-            .exitMode(.animationContinuous),
-            .checkBox(.animationContinuousApplyToAll),
-            .checkBox(.continuousDisableGrabEnabled),
-            .spacer,
-            .button_pair(.continuousSyncFrames, .zoomReset),
+            .button(.continuousSyncFrames),
+            .dividerSpacerDivider,
+            .button_triplet(.continuousShuffleGroup1, .continuousInvertAngles, .continuousResetGroup1),
+            .dividerSpacerDivider,
             .button(.zoomReset)
         ]
         return RowRecipe(inrs: inrs)
@@ -65,8 +63,9 @@ extension ToolInterfaceViewModel {
         let inrs: [INR] = [
             .button_pair(.undo, .redo),
             .mainTab(.documentMode),
-            .enterMode(.videoRecord),
+            .checkBox(.animationContinuousApplyToAll),
         ]
         return RowRecipe(inrs: inrs, centerPinnedElement: .mainTabDocumentMode)
     }
+    
 }

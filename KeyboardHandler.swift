@@ -16,7 +16,7 @@ class KeyboardHandler: NSObject {
     var willExpandHandler: ((_ : CGFloat, _ : TimeInterval, _ : UIView.AnimationOptions) -> Void)? //height, duration, animation options
     var willCollapseHandler: ((_ :  TimeInterval, _ : UIView.AnimationOptions) -> Void)? //duration, animation options
     
-    private static var resizeEpsilon: CGFloat = 24.0
+    private static let resizeEpsilon: CGFloat = 24.0
 
     override init() {
         super.init()
@@ -26,7 +26,7 @@ class KeyboardHandler: NSObject {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidChangeHeight), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
     }
 
-    static func dismissKeyboard() {
+    @MainActor static func dismissKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
     

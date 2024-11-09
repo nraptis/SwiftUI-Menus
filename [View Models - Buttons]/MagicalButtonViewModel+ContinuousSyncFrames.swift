@@ -17,7 +17,6 @@ import Foundation
     
     override func refresh() {
         refreshEnabled()
-        super.refresh()
     }
     
     deinit {

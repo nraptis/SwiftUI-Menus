@@ -10,7 +10,7 @@ import Foundation
 class DialogBoxRowModelTitleBar: DialogBoxRowModel {
     
     let title: String
-    init(title: String) {
+    @MainActor init(title: String) {
         self.title = title
         super.init(rowModelType: .titleBar)
     }

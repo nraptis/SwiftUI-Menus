@@ -9,11 +9,11 @@ import UIKit
 
 struct DividerLayout {
     
-    static func getPillWidthTiny(orientation: Orientation) -> Int {
+    @MainActor static func getPillWidthTiny(orientation: Orientation) -> Int {
         return 2
     }
     
-    static func getPillHeightTiny(orientation: Orientation) -> Int {
+    @MainActor static func getPillHeightTiny(orientation: Orientation) -> Int {
         
         if Device.isPad {
             return 38
@@ -27,11 +27,11 @@ struct DividerLayout {
         }
     }
     
-    static func getPillWidthHuge(orientation: Orientation) -> Int {
+    @MainActor static func getPillWidthHuge(orientation: Orientation) -> Int {
         return 2
     }
     
-    static func getPillHeightHuge(orientation: Orientation) -> Int {
+    @MainActor static func getPillHeightHuge(orientation: Orientation) -> Int {
         if Device.isPad {
             return 46
         } else {
@@ -44,7 +44,7 @@ struct DividerLayout {
         }
     }
         
-    static func getMinimumLengthForSpacerDividerSpacerToHaveTwoDividers(orientation: Orientation) -> Int {
+    @MainActor static func getMinimumLengthForSpacerDividerSpacerToHaveTwoDividers(orientation: Orientation) -> Int {
         let pillWidthHuge = Self.getPillWidthHuge(orientation: orientation)
         return (pillWidthHuge + pillWidthHuge + 8)
     }

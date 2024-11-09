@@ -9,29 +9,29 @@ import UIKit
 import simd
 
 protocol GestureViewDelegate: AnyObject {
-    func touchesBegan(touches: [UITouch], points: [Math.Point], allTouchCount: Int)
-    func touchesMoved(touches: [UITouch], points: [Math.Point], isFromRelease: Bool, allTouchCount: Int)
-    func touchesEnded(touches: [UITouch], points: [Math.Point], allTouchCount: Int)
+    @MainActor func touchesBegan(touches: [UITouch], points: [Math.Point], allTouchCount: Int)
+    @MainActor func touchesMoved(touches: [UITouch], points: [Math.Point], isFromRelease: Bool, allTouchCount: Int)
+    @MainActor func touchesEnded(touches: [UITouch], points: [Math.Point], allTouchCount: Int)
     
-    func allGestureRecognizersWereCancelled()
-    func allTouchesWereCancelled(touches: [UITouch], points: [Math.Point])
+    @MainActor func allGestureRecognizersWereCancelled()
+    @MainActor func allTouchesWereCancelled(touches: [UITouch], points: [Math.Point])
     
-    func gestureRecognizerShouldBegin(point: Math.Point) -> Bool
-    func gestureRecognizerShouldReceiveTouch(point: Math.Point) -> Bool
+    @MainActor func gestureRecognizerShouldBegin(point: Math.Point) -> Bool
+    @MainActor func gestureRecognizerShouldReceiveTouch(point: Math.Point) -> Bool
     
-    func attemptPanBegan(center: Math.Point, numberOfTouches: Int) -> Bool
-    func attemptPanMoved(center: Math.Point, numberOfTouches: Int) -> Bool
-    func attemptPanEnded(center: Math.Point, releaseDir: Math.Vector, releaseMagnitude: Float) -> Bool
+    @MainActor func attemptPanBegan(center: Math.Point, numberOfTouches: Int) -> Bool
+    @MainActor func attemptPanMoved(center: Math.Point, numberOfTouches: Int) -> Bool
+    @MainActor func attemptPanEnded(center: Math.Point, releaseDir: Math.Vector, releaseMagnitude: Float) -> Bool
     
-    func attemptPinchBegan(center: Math.Point, scale: Float, numberOfTouches: Int) -> Bool
-    func attemptPinchMoved(center: Math.Point, scale: Float, numberOfTouches: Int) -> Bool
-    func attemptPinchEnded(center: Math.Point, scale: Float) -> Bool
+    @MainActor func attemptPinchBegan(center: Math.Point, scale: Float, numberOfTouches: Int) -> Bool
+    @MainActor func attemptPinchMoved(center: Math.Point, scale: Float, numberOfTouches: Int) -> Bool
+    @MainActor func attemptPinchEnded(center: Math.Point, scale: Float) -> Bool
     
-    func attemptRotateBegan(center: Math.Point, rotation: Float, numberOfTouches: Int) -> Bool
-    func attemptRotateMoved(center: Math.Point, rotation: Float, numberOfTouches: Int) -> Bool
-    func attemptRotateEnded(center: Math.Point, rotation: Float) -> Bool
+    @MainActor func attemptRotateBegan(center: Math.Point, rotation: Float, numberOfTouches: Int) -> Bool
+    @MainActor func attemptRotateMoved(center: Math.Point, rotation: Float, numberOfTouches: Int) -> Bool
+    @MainActor func attemptRotateEnded(center: Math.Point, rotation: Float) -> Bool
     
-    func handleDoubleTap(center: Math.Point, numberOfTouches: Int)
+    @MainActor func handleDoubleTap(center: Math.Point, numberOfTouches: Int)
 }
 
 class GestureView: UIView {

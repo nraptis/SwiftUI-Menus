@@ -66,44 +66,44 @@ enum LayoutSchemeSqueeze {
 
 protocol LayoutScheme {
     
-    static func getWallPaddingLeft(orientation: Orientation) -> Int
-    static func getWallPaddingRight(orientation: Orientation) -> Int
+    @MainActor static func getWallPaddingLeft(orientation: Orientation) -> Int
+    @MainActor static func getWallPaddingRight(orientation: Orientation) -> Int
     
-    static func getValueLabelFont(orientation: Orientation, flavor: LayoutSchemeFlavor) -> UIFont
-    static func getValuePaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
-    static func getValuePaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
+    @MainActor static func getValueLabelFont(orientation: Orientation, flavor: LayoutSchemeFlavor) -> UIFont
+    @MainActor static func getValuePaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
+    @MainActor static func getValuePaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
     
-    static func getNameLabelFont(orientation: Orientation, flavor: LayoutSchemeFlavor) -> UIFont
-    static func getNameLabelVerticalSpacing(orientation: Orientation, flavor: LayoutSchemeFlavor) -> Int
+    @MainActor static func getNameLabelFont(orientation: Orientation, flavor: LayoutSchemeFlavor) -> UIFont
+    @MainActor static func getNameLabelVerticalSpacing(orientation: Orientation, flavor: LayoutSchemeFlavor) -> Int
 
-    static func getOutsideBoxPaddingTop(orientation: Orientation) -> Int
-    static func getOutsideBoxPaddingBottom(orientation: Orientation) -> Int
+    @MainActor static func getOutsideBoxPaddingTop(orientation: Orientation) -> Int
+    @MainActor static func getOutsideBoxPaddingBottom(orientation: Orientation) -> Int
     
-    static func getOutsideBoxPaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
+    @MainActor static func getOutsideBoxPaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
                                                 neighborTypeRight: ToolInterfaceElementType?) -> Int
-    static func getOutsideBoxPaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
+    @MainActor static func getOutsideBoxPaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze, neighborTypeLeft: ToolInterfaceElementType?,
                                                  neighborTypeRight: ToolInterfaceElementType?) -> Int
     
-    static func getHeroPaddingLeftStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
-    static func getHeroPaddingLeftLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
-    static func getHeroPaddingRightStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
-    static func getHeroPaddingRightLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
+    @MainActor static func getHeroPaddingLeftStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
+    @MainActor static func getHeroPaddingLeftLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
+    @MainActor static func getHeroPaddingRightStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
+    @MainActor static func getHeroPaddingRightLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
     
-    static func getHeroPaddingTopStacked(orientation: Orientation, numberOfLines: Int) -> Int
-    static func getHeroPaddingBottomStacked(orientation: Orientation, numberOfLines: Int) -> Int
+    @MainActor static func getHeroPaddingTopStacked(orientation: Orientation, numberOfLines: Int) -> Int
+    @MainActor static func getHeroPaddingBottomStacked(orientation: Orientation, numberOfLines: Int) -> Int
     
-    static func getSlavePaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
-    static func getSlavePaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
+    @MainActor static func getSlavePaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
+    @MainActor static func getSlavePaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
     
-    static func getAccentPaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
-    static func getAccentPaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
+    @MainActor static func getAccentPaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
+    @MainActor static func getAccentPaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
     
-    static func getHeroSpacingLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
+    @MainActor static func getHeroSpacingLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int
 }
 
 extension LayoutScheme {
     
-    static func getWallPaddingLeft(orientation: Orientation) -> Int {
+    @MainActor static func getWallPaddingLeft(orientation: Orientation) -> Int {
         if Device.isPad {
             return 8
         } else {
@@ -115,7 +115,7 @@ extension LayoutScheme {
         }
     }
     
-    static func getWallPaddingRight(orientation: Orientation) -> Int {
+    @MainActor static func getWallPaddingRight(orientation: Orientation) -> Int {
         if Device.isPad {
             return 8
         } else {
@@ -127,7 +127,7 @@ extension LayoutScheme {
         }
     }
     
-    static func getValuePaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+    @MainActor static func getValuePaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
         switch squeeze {
         case .squeezed:
             return 2
@@ -137,7 +137,8 @@ extension LayoutScheme {
             return 8
         }
     }
-    static func getValuePaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+    
+    @MainActor static func getValuePaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
         switch squeeze {
         case .squeezed:
             return 2
@@ -168,70 +169,7 @@ extension LayoutScheme {
     }
     */
     
-    static func getHeroPaddingLeftStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
-        if Device.isPad {
-            switch squeeze {
-            case .squeezed:
-                return 2
-            case .standard:
-                return 4
-            case .relaxed:
-                return 6
-            }
-        } else {
-            switch squeeze {
-            case .squeezed:
-                return 1
-            case .standard:
-                return 2
-            case .relaxed:
-                return 4
-            }
-        }
-    }
-    static func getHeroPaddingLeftLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
-        if Device.isPad {
-            switch squeeze {
-            case .squeezed:
-                return 2
-            case .standard:
-                return 4
-            case .relaxed:
-                return 6
-            }
-        } else {
-            switch squeeze {
-            case .squeezed:
-                return 1
-            case .standard:
-                return 2
-            case .relaxed:
-                return 4
-            }
-        }
-    }
-    static func getHeroPaddingRightStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
-        if Device.isPad {
-            switch squeeze {
-            case .squeezed:
-                return 2
-            case .standard:
-                return 4
-            case .relaxed:
-                return 6
-            }
-        } else {
-            switch squeeze {
-            case .squeezed:
-                return 1
-            case .standard:
-                return 2
-            case .relaxed:
-                return 4
-            }
-        }
-    }
-    static func getHeroPaddingRightLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+    @MainActor static func getHeroPaddingLeftStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
         if Device.isPad {
             switch squeeze {
             case .squeezed:
@@ -253,28 +191,7 @@ extension LayoutScheme {
         }
     }
     
-    static func getSlavePaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
-        if Device.isPad {
-            switch squeeze {
-            case .squeezed:
-                return 2
-            case .standard:
-                return 4
-            case .relaxed:
-                return 6
-            }
-        } else {
-            switch squeeze {
-            case .squeezed:
-                return 1
-            case .standard:
-                return 2
-            case .relaxed:
-                return 4
-            }
-        }
-    }
-    static func getSlavePaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+    @MainActor static func getHeroPaddingLeftLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
         if Device.isPad {
             switch squeeze {
             case .squeezed:
@@ -296,28 +213,7 @@ extension LayoutScheme {
         }
     }
     
-    static func getAccentPaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
-        if Device.isPad {
-            switch squeeze {
-            case .squeezed:
-                return 2
-            case .standard:
-                return 4
-            case .relaxed:
-                return 6
-            }
-        } else {
-            switch squeeze {
-            case .squeezed:
-                return 1
-            case .standard:
-                return 2
-            case .relaxed:
-                return 4
-            }
-        }
-    }
-    static func getAccentPaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+    @MainActor static func getHeroPaddingRightStacked(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
         if Device.isPad {
             switch squeeze {
             case .squeezed:
@@ -339,7 +235,117 @@ extension LayoutScheme {
         }
     }
     
-    static func getHeroSpacingLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+    @MainActor static func getHeroPaddingRightLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        if Device.isPad {
+            switch squeeze {
+            case .squeezed:
+                return 2
+            case .standard:
+                return 4
+            case .relaxed:
+                return 6
+            }
+        } else {
+            switch squeeze {
+            case .squeezed:
+                return 1
+            case .standard:
+                return 2
+            case .relaxed:
+                return 4
+            }
+        }
+    }
+    
+    @MainActor static func getSlavePaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        if Device.isPad {
+            switch squeeze {
+            case .squeezed:
+                return 2
+            case .standard:
+                return 4
+            case .relaxed:
+                return 6
+            }
+        } else {
+            switch squeeze {
+            case .squeezed:
+                return 1
+            case .standard:
+                return 2
+            case .relaxed:
+                return 4
+            }
+        }
+    }
+    
+    @MainActor static func getSlavePaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        if Device.isPad {
+            switch squeeze {
+            case .squeezed:
+                return 2
+            case .standard:
+                return 4
+            case .relaxed:
+                return 6
+            }
+        } else {
+            switch squeeze {
+            case .squeezed:
+                return 1
+            case .standard:
+                return 2
+            case .relaxed:
+                return 4
+            }
+        }
+    }
+    
+    @MainActor static func getAccentPaddingLeft(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        if Device.isPad {
+            switch squeeze {
+            case .squeezed:
+                return 2
+            case .standard:
+                return 4
+            case .relaxed:
+                return 6
+            }
+        } else {
+            switch squeeze {
+            case .squeezed:
+                return 1
+            case .standard:
+                return 2
+            case .relaxed:
+                return 4
+            }
+        }
+    }
+    
+    @MainActor static func getAccentPaddingRight(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
+        if Device.isPad {
+            switch squeeze {
+            case .squeezed:
+                return 2
+            case .standard:
+                return 4
+            case .relaxed:
+                return 6
+            }
+        } else {
+            switch squeeze {
+            case .squeezed:
+                return 1
+            case .standard:
+                return 2
+            case .relaxed:
+                return 4
+            }
+        }
+    }
+    
+    @MainActor static func getHeroSpacingLong(orientation: Orientation, squeeze: LayoutSchemeSqueeze) -> Int {
         if Device.isPad {
             switch squeeze {
             case .squeezed:
@@ -365,7 +371,7 @@ extension LayoutScheme {
 
 extension LayoutScheme {
 
-    static func getNameLabelTextWidth(line1: String?,
+    @MainActor static func getNameLabelTextWidth(line1: String?,
                                       line2: String?,
                                       orientation: Orientation,
                                       flavor: LayoutSchemeFlavor) -> Int {
@@ -373,14 +379,14 @@ extension LayoutScheme {
         return ToolInterfaceTheme.getTextWidth(line1: line1, line2: line2, font: font)
     }
     
-    static func getNameLabelTextWidth(line1: String?,
+    @MainActor static func getNameLabelTextWidth(line1: String?,
                                       orientation: Orientation,
                                       flavor: LayoutSchemeFlavor) -> Int {
         let font = Self.getNameLabelFont(orientation: orientation, flavor: flavor)
         return ToolInterfaceTheme.getTextWidth(line1: line1, font: font)
     }
     
-    static func getValueLabelTextWidth(line1: String?,
+    @MainActor static func getValueLabelTextWidth(line1: String?,
                                        line2: String?,
                                        orientation: Orientation,
                                        flavor: LayoutSchemeFlavor) -> Int {
@@ -388,7 +394,7 @@ extension LayoutScheme {
         return ToolInterfaceTheme.getTextWidth(line1: line1, line2: line2, font: font)
     }
     
-    static func getValueLabelTextWidth(line1: String?,
+    @MainActor static func getValueLabelTextWidth(line1: String?,
                                        orientation: Orientation,
                                        flavor: LayoutSchemeFlavor) -> Int {
         let font = Self.getValueLabelFont(orientation: orientation, flavor: flavor)

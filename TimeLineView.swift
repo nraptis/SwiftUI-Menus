@@ -257,6 +257,128 @@ class TimeLineView: UIView {
         let height = (frameHeight - paddingV - paddingV)
         let maxX = minX + width
         let maxY = minY + height
+        let midX = minX + (maxX - minX) * 0.5
+        let midY = minY + (maxY - minY) * 0.5
+        let midX25 = minX + (maxX - minX) * 0.25
+        let midX75 = minX + (maxX - minX) * 0.75
+        let midY25 = minY + (maxY - minY) * 0.25
+        let midY75 = minY + (maxY - minY) * 0.75
+        
+        let midXQ1L1 = minX + (midX - minX) * 0.25
+        let midXQ1L2 = minX + (midX - minX) * 0.75
+        let midXQ2L1 = midX + (maxX - midX) * 0.25
+        let midXQ2L2 = midX + (maxX - midX) * 0.75
+        
+        let thickLineColor: UIColor
+        let thinLineColor: UIColor
+        let superThinLineColor: UIColor
+        if ApplicationController.isDarkModeEnabled {
+            thickLineColor = ToolInterfaceTheme._graphLineStrokeDark.withAlphaComponent(0.15)
+            thinLineColor = ToolInterfaceTheme._graphLineStrokeDark.withAlphaComponent(0.1)
+            superThinLineColor = ToolInterfaceTheme._graphLineStrokeDark.withAlphaComponent(0.05)
+        } else {
+            thickLineColor = ToolInterfaceTheme._graphLineStrokeLight.withAlphaComponent(0.2)
+            thinLineColor = ToolInterfaceTheme._graphLineStrokeLight.withAlphaComponent(0.15)
+            superThinLineColor = ToolInterfaceTheme._graphLineStrokeLight.withAlphaComponent(0.1)
+        }
+        
+        context.saveGState()
+        context.setLineWidth(ToolInterfaceTheme.graphCurveStrokeThickness * 0.2)
+        context.setStrokeColor(thinLineColor.cgColor)
+        context.setLineCap(.round)
+        context.move(to: CGPoint(x: midXQ1L1, y: minY))
+        context.addLine(to: CGPoint(x: midXQ1L1, y: maxY))
+        context.strokePath()
+        context.restoreGState()
+        
+        context.saveGState()
+        context.setLineWidth(ToolInterfaceTheme.graphCurveStrokeThickness * 0.2)
+        context.setStrokeColor(thinLineColor.cgColor)
+        context.setLineCap(.round)
+        context.move(to: CGPoint(x: midXQ1L2, y: minY))
+        context.addLine(to: CGPoint(x: midXQ1L2, y: maxY))
+        context.strokePath()
+        context.restoreGState()
+        
+        
+        context.saveGState()
+        context.setLineWidth(ToolInterfaceTheme.graphCurveStrokeThickness * 0.2)
+        context.setStrokeColor(thinLineColor.cgColor)
+        context.setLineCap(.round)
+        context.move(to: CGPoint(x: midXQ2L1, y: minY))
+        context.addLine(to: CGPoint(x: midXQ2L1, y: maxY))
+        context.strokePath()
+        context.restoreGState()
+        
+        context.saveGState()
+        context.setLineWidth(ToolInterfaceTheme.graphCurveStrokeThickness * 0.2)
+        context.setStrokeColor(thinLineColor.cgColor)
+        context.setLineCap(.round)
+        context.move(to: CGPoint(x: midXQ2L2, y: minY))
+        context.addLine(to: CGPoint(x: midXQ2L2, y: maxY))
+        context.strokePath()
+        context.restoreGState()
+        
+        
+        context.saveGState()
+        context.setLineWidth(ToolInterfaceTheme.graphCurveStrokeThickness * 0.3)
+        context.setStrokeColor(superThinLineColor.cgColor)
+        context.setLineCap(.round)
+        context.move(to: CGPoint(x: midX25, y: minY))
+        context.addLine(to: CGPoint(x: midX25, y: maxY))
+        context.strokePath()
+        context.restoreGState()
+        
+        context.saveGState()
+        context.setLineWidth(ToolInterfaceTheme.graphCurveStrokeThickness * 0.3)
+        context.setStrokeColor(thinLineColor.cgColor)
+        context.setLineCap(.round)
+        context.move(to: CGPoint(x: midX75, y: minY))
+        context.addLine(to: CGPoint(x: midX75, y: maxY))
+        context.strokePath()
+        context.restoreGState()
+        
+        context.saveGState()
+        context.setLineWidth(ToolInterfaceTheme.graphCurveStrokeThickness * 0.3)
+        context.setStrokeColor(thinLineColor.cgColor)
+        context.setLineCap(.round)
+        context.move(to: CGPoint(x: minX, y: midY25))
+        context.addLine(to: CGPoint(x: maxX, y: midY25))
+        context.strokePath()
+        context.restoreGState()
+        
+        context.saveGState()
+        context.setLineWidth(ToolInterfaceTheme.graphCurveStrokeThickness * 0.3)
+        context.setStrokeColor(thinLineColor.cgColor)
+        context.setLineCap(.round)
+        context.move(to: CGPoint(x: minX, y: midY75))
+        context.addLine(to: CGPoint(x: maxX, y: midY75))
+        context.strokePath()
+        context.restoreGState()
+        
+        
+        context.saveGState()
+        context.setLineWidth(ToolInterfaceTheme.graphCurveStrokeThickness * 0.4)
+        context.setStrokeColor(thickLineColor.cgColor)
+        context.setLineCap(.round)
+        context.move(to: CGPoint(x: midX, y: minY))
+        context.addLine(to: CGPoint(x: midX, y: maxY))
+        context.strokePath()
+        context.restoreGState()
+        
+        context.saveGState()
+        context.setLineWidth(ToolInterfaceTheme.graphCurveStrokeThickness * 0.4)
+        context.setStrokeColor(thickLineColor.cgColor)
+        context.setLineCap(.round)
+        context.move(to: CGPoint(x: minX, y: midY))
+        context.addLine(to: CGPoint(x: maxX, y: midY))
+        context.strokePath()
+        context.restoreGState()
+        
+        
+        
+        
+       
         
         var position = Float(0.0)
         let x = minX + 0.0 * width
@@ -779,11 +901,7 @@ class TimeLineView: UIView {
             _handleTimeLineSelection(controlIndex: bestControlPointIndex)
             
             controlPointDidChange = false
-            
-            if let toolInterfaceViewModel = jiggleViewModel.toolInterfaceViewModel {
-                toolInterfaceViewModel.handleTimePointOrTanHandleUpdate()
-            }
-            
+
             jiggleViewModel.timeLineDragNotifyStarted()
         }
         
@@ -837,11 +955,7 @@ class TimeLineView: UIView {
             _handleTimeLineSelection(controlIndex: bestControlTanIndex)
             
             controlTanDidChange = false
-            
-            if let toolInterfaceViewModel = jiggleViewModel.toolInterfaceViewModel {
-                toolInterfaceViewModel.handleTimePointOrTanHandleUpdate()
-            }
-            
+
             jiggleViewModel.timeLineDragNotifyStarted()
         }
         
@@ -1116,11 +1230,7 @@ class TimeLineView: UIView {
                 if controlPointDidChange {
                     jiggleViewModel.recordTimeLineHistoryForTimeLineViewDrag()
                 }
-                
-                if let toolInterfaceViewModel = jiggleViewModel.toolInterfaceViewModel {
-                    toolInterfaceViewModel.handleTimePointOrTanHandleUpdate()
-                }
-                
+
                 selectedTimeLineControlPointTouch = nil
                 selectedTimeLineControlTanTouch = nil
                 jiggleViewModel.timeLineDragNotifyFinished()
@@ -1136,10 +1246,6 @@ class TimeLineView: UIView {
             if let jiggleViewModel = jiggleViewModel {
                 if controlTanDidChange {
                     jiggleViewModel.recordTimeLineHistoryForTimeLineViewDrag()
-                }
-                
-                if let toolInterfaceViewModel = jiggleViewModel.toolInterfaceViewModel {
-                    toolInterfaceViewModel.handleTimePointOrTanHandleUpdate()
                 }
                 
                 selectedTimeLineControlPointTouch = nil

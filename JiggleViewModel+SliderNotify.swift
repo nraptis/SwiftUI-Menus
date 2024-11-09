@@ -10,7 +10,7 @@ import Foundation
 extension JiggleViewModel {
     
     
-    func notifySliderStartedJigglePower(value: Float) {
+    @MainActor func notifySliderStartedJigglePower(value: Float) {
         print("notifySliderStartedJigglePower: \(value)")
         //sliderStartedJigglePowerValue = value
         sliderStartedJigglePowerValueNodes.removeAll(keepingCapacity: true)
@@ -23,7 +23,7 @@ extension JiggleViewModel {
         ANY_sliderActiveNotify(whichSlider: .sliderJigglePower)
     }
     
-    func notifySliderFinishedJigglePower(value: Float) {
+    @MainActor func notifySliderFinishedJigglePower(value: Float) {
         print("notifySliderFinishedJigglePower: \(value)")
         var historyStateNodes = [HistorySingleJiggleValueNode]()
         for jiggleIndex in 0..<jiggleDocument.jiggleCount {
@@ -45,7 +45,7 @@ extension JiggleViewModel {
         ANY_sliderInactiveNotify()
     }
     
-    func notifySliderStartedJiggleSpeed(value: Float) {
+    @MainActor func notifySliderStartedJiggleSpeed(value: Float) {
         print("notifySliderStartedJiggleSpeed: \(value)")
         sliderStartedJiggleSpeedValueNodes.removeAll(keepingCapacity: true)
         for jiggleIndex in 0..<jiggleDocument.jiggleCount {
@@ -57,7 +57,7 @@ extension JiggleViewModel {
         ANY_sliderActiveNotify(whichSlider: .sliderJiggleSpeed)
     }
     
-    func notifySliderFinishedJiggleSpeed(value: Float) {
+    @MainActor func notifySliderFinishedJiggleSpeed(value: Float) {
         print("notifySliderFinishedJiggleSpeed: \(value)")
         var historyStateNodes = [HistorySingleJiggleValueNode]()
         for jiggleIndex in 0..<jiggleDocument.jiggleCount {
@@ -79,7 +79,7 @@ extension JiggleViewModel {
         ANY_sliderInactiveNotify()
     }
     
-    func notifySliderStartedJiggleDampen(value: Float) {
+    @MainActor func notifySliderStartedJiggleDampen(value: Float) {
         print("notifySliderStartedJiggleDampen: \(value)")
         sliderStartedJiggleDampenValueNodes.removeAll(keepingCapacity: true)
         for jiggleIndex in 0..<jiggleDocument.jiggleCount {
@@ -91,7 +91,7 @@ extension JiggleViewModel {
         ANY_sliderActiveNotify(whichSlider: .sliderJiggleDampen)
     }
     
-    func notifySliderFinishedJiggleDampen(value: Float) {
+    @MainActor func notifySliderFinishedJiggleDampen(value: Float) {
         print("notifySliderFinishedJiggleDampen: \(value)")
         var historyStateNodes = [HistorySingleJiggleValueNode]()
         for jiggleIndex in 0..<jiggleDocument.jiggleCount {
@@ -114,7 +114,7 @@ extension JiggleViewModel {
         ANY_sliderInactiveNotify()
     }
     
-    func notifySliderStartedTimeLineDuration(value: Float) {
+    @MainActor func notifySliderStartedTimeLineDuration(value: Float) {
         print("notifySliderStartedTimeLineDuration: \(value)")
         
         if isAnimationLoopsAppliedToAll {
@@ -130,7 +130,7 @@ extension JiggleViewModel {
         ANY_sliderActiveNotify(whichSlider: .sliderTimeLineDuration)
     }
     
-    func notifySliderFinishedTimeLineDuration(value: Float) {
+    @MainActor func notifySliderFinishedTimeLineDuration(value: Float) {
         print("notifySliderFinishedTimeLineDuration: \(value)")
         if jiggleDocument.snapShotLoopAttributeIsAppliedToAll {
             let startAttributes = jiggleDocument.snapShotLoopAttributesAll
@@ -174,7 +174,7 @@ extension JiggleViewModel {
         ANY_sliderInactiveNotify()
     }
     
-    func notifySliderStartedTimeLineFrameOffset(value: Float) {
+    @MainActor func notifySliderStartedTimeLineFrameOffset(value: Float) {
         print("notifySliderStartedTimeLineFrameOffset: \(value)")
         
         if isAnimationLoopsAppliedToAll {
@@ -190,7 +190,7 @@ extension JiggleViewModel {
         ANY_sliderActiveNotify(whichSlider: .sliderTimeLineFrameOffset)
     }
     
-    func notifySliderFinishedTimeLineFrameOffset(value: Float) {
+    @MainActor func notifySliderFinishedTimeLineFrameOffset(value: Float) {
         print("notifySliderFinishedTimeLineFrameOffset: \(value)")
         
         if jiggleDocument.snapShotLoopAttributeIsAppliedToAll {
@@ -237,7 +237,7 @@ extension JiggleViewModel {
         ANY_sliderInactiveNotify()
     }
     
-    func continuousSliderHistoryStarted(attributeType: ContinuousAttributeType) {
+    @MainActor func continuousSliderHistoryStarted(attributeType: ContinuousAttributeType) {
         if isAnimationContinuousAppliedToAll {
             jiggleDocument.snapShotContinuousAttributesAll(attributeType: attributeType,
                                                            selectedJiggleIndex: jiggleDocument.selectedJiggleIndex)
@@ -247,7 +247,7 @@ extension JiggleViewModel {
         }
     }
     
-    func continuousSliderHistoryinished(attributeType: ContinuousAttributeType) {
+    @MainActor func continuousSliderHistoryinished(attributeType: ContinuousAttributeType) {
         if jiggleDocument.snapShotContinuousAttributeIsAppliedToAll {
             let startAttributes = jiggleDocument.snapShotContinuousAttributesAll
             if startAttributes.count > 0 {
@@ -282,7 +282,7 @@ extension JiggleViewModel {
         
     }
     
-    func notifySliderStartedContinuousDuration(value: Float) {
+    @MainActor func notifySliderStartedContinuousDuration(value: Float) {
         print("notifySliderStartedContinuousDuration: \(value)")
         
         continuousSliderHistoryStarted(attributeType: .continuousDuration)
@@ -290,7 +290,7 @@ extension JiggleViewModel {
         ANY_sliderActiveNotify(whichSlider: .sliderContinuousDuration)
     }
     
-    func notifySliderFinishedContinuousDuration(value: Float) {
+    @MainActor func notifySliderFinishedContinuousDuration(value: Float) {
         print("notifySliderFinishedContinuousDuration: \(value)")
         
         continuousSliderHistoryinished(attributeType: .continuousDuration)
@@ -298,7 +298,7 @@ extension JiggleViewModel {
         ANY_sliderInactiveNotify()
     }
     
-    func notifySliderStartedContinuousFrameOffset(value: Float) {
+    @MainActor func notifySliderStartedContinuousFrameOffset(value: Float) {
         print("notifySliderStartedContinuousFrameOffset: \(value)")
         
         continuousSliderHistoryStarted(attributeType: .continuousFrameOffset)
@@ -306,7 +306,7 @@ extension JiggleViewModel {
         ANY_sliderActiveNotify(whichSlider: .sliderContinuousFrameOffset)
     }
     
-    func notifySliderFinishedContinuousFrameOffset(value: Float) {
+    @MainActor func notifySliderFinishedContinuousFrameOffset(value: Float) {
         print("notifySliderFinishedContinuousFrameOffset: \(value)")
 
         continuousSliderHistoryinished(attributeType: .continuousFrameOffset)
@@ -314,7 +314,7 @@ extension JiggleViewModel {
         ANY_sliderInactiveNotify()
     }
     
-    func notifySliderStartedContinuousAngle(value: Float) {
+    @MainActor func notifySliderStartedContinuousAngle(value: Float) {
         print("notifySliderStartedContinuousAngle: \(value)")
         
         continuousSliderHistoryStarted(attributeType: .continuousAngle)
@@ -322,7 +322,7 @@ extension JiggleViewModel {
         ANY_sliderActiveNotify(whichSlider: .sliderContinuousAngle)
     }
     
-    func notifySliderFinishedContinuousAngle(value: Float) {
+    @MainActor func notifySliderFinishedContinuousAngle(value: Float) {
         print("notifySliderFinishedContinuousAngle: \(value)")
         
         continuousSliderHistoryinished(attributeType: .continuousAngle)
@@ -330,7 +330,7 @@ extension JiggleViewModel {
         ANY_sliderInactiveNotify()
     }
     
-    func notifySliderStartedContinuousPower(value: Float) {
+    @MainActor func notifySliderStartedContinuousPower(value: Float) {
         print("notifySliderStartedContinuousPower: \(value)")
         
         continuousSliderHistoryStarted(attributeType: .continuousPower)
@@ -338,7 +338,7 @@ extension JiggleViewModel {
         ANY_sliderActiveNotify(whichSlider: .sliderContinuousPower)
     }
     
-    func notifySliderFinishedContinuousPower(value: Float) {
+    @MainActor func notifySliderFinishedContinuousPower(value: Float) {
         print("notifySliderFinishedContinuousPower: \(value)")
 
         continuousSliderHistoryinished(attributeType: .continuousPower)
@@ -346,7 +346,7 @@ extension JiggleViewModel {
         ANY_sliderInactiveNotify()
     }
     
-    func notifySliderStartedContinuousSwoop(value: Float) {
+    @MainActor func notifySliderStartedContinuousSwoop(value: Float) {
         print("notifySliderStartedContinuousSwoop: \(value)")
         
         continuousSliderHistoryStarted(attributeType: .continuousSwoop)
@@ -354,7 +354,7 @@ extension JiggleViewModel {
         ANY_sliderActiveNotify(whichSlider: .sliderContinuousSwoop)
     }
     
-    func notifySliderFinishedContinuousSwoop(value: Float) {
+    @MainActor func notifySliderFinishedContinuousSwoop(value: Float) {
         print("notifySliderFinishedContinuousSwoop: \(value)")
         
         continuousSliderHistoryinished(attributeType: .continuousSwoop)
@@ -362,7 +362,7 @@ extension JiggleViewModel {
         ANY_sliderInactiveNotify()
     }
     
-    func notifySliderStartedContinuousStartRotation(value: Float) {
+    @MainActor func notifySliderStartedContinuousStartRotation(value: Float) {
         print("notifySliderStartedContinuousStartRotation: \(value)")
         
         continuousSliderHistoryStarted(attributeType: .continuousStartRotation)
@@ -370,7 +370,7 @@ extension JiggleViewModel {
         ANY_sliderActiveNotify(whichSlider: .sliderContinuousStartRotation)
     }
     
-    func notifySliderFinishedContinuousStartRotation(value: Float) {
+    @MainActor func notifySliderFinishedContinuousStartRotation(value: Float) {
         print("notifySliderFinishedContinuousStartRotation: \(value)")
         
         continuousSliderHistoryinished(attributeType: .continuousStartRotation)
@@ -378,7 +378,7 @@ extension JiggleViewModel {
         ANY_sliderInactiveNotify()
     }
     
-    func notifySliderStartedContinuousEndRotation(value: Float) {
+    @MainActor func notifySliderStartedContinuousEndRotation(value: Float) {
         print("notifySliderStartedContinuousEndRotation: \(value)")
         
         continuousSliderHistoryStarted(attributeType: .continuousEndRotation)
@@ -386,7 +386,7 @@ extension JiggleViewModel {
         ANY_sliderActiveNotify(whichSlider: .sliderContinuousEndRotation)
     }
     
-    func notifySliderFinishedContinuousEndRotation(value: Float) {
+    @MainActor func notifySliderFinishedContinuousEndRotation(value: Float) {
         print("notifySliderFinishedContinuousEndRotation: \(value)")
         
         continuousSliderHistoryinished(attributeType: .continuousEndRotation)
@@ -394,7 +394,7 @@ extension JiggleViewModel {
         ANY_sliderInactiveNotify()
     }
     
-    func notifySliderStartedContinuousStartScale(value: Float) {
+    @MainActor func notifySliderStartedContinuousStartScale(value: Float) {
         print("notifySliderStartedContinuousStartScale: \(value)")
         
         continuousSliderHistoryStarted(attributeType: .continuousStartScale)
@@ -402,7 +402,7 @@ extension JiggleViewModel {
         ANY_sliderActiveNotify(whichSlider: .sliderContinuousStartScale)
     }
     
-    func notifySliderFinishedContinuousStartScale(value: Float) {
+    @MainActor func notifySliderFinishedContinuousStartScale(value: Float) {
         print("notifySliderFinishedContinuousStartScale: \(value)")
         
         continuousSliderHistoryinished(attributeType: .continuousStartScale)
@@ -410,7 +410,7 @@ extension JiggleViewModel {
         ANY_sliderInactiveNotify()
     }
     
-    func notifySliderStartedContinuousEndScale(value: Float) {
+    @MainActor func notifySliderStartedContinuousEndScale(value: Float) {
         print("notifySliderStartedContinuousEndScale: \(value)")
         
         continuousSliderHistoryStarted(attributeType: .continuousEndScale)
@@ -418,7 +418,7 @@ extension JiggleViewModel {
         ANY_sliderActiveNotify(whichSlider: .sliderContinuousEndScale)
     }
     
-    func notifySliderFinishedContinuousEndScale(value: Float) {
+    @MainActor func notifySliderFinishedContinuousEndScale(value: Float) {
         print("notifySliderFinishedContinuousEndScale: \(value)")
         
         continuousSliderHistoryinished(attributeType: .continuousEndScale)
@@ -426,13 +426,13 @@ extension JiggleViewModel {
         ANY_sliderInactiveNotify()
     }
     
-    func notifySliderStartedZoomAmount(value: Float) {
+    @MainActor func notifySliderStartedZoomAmount(value: Float) {
         print("notifySliderStartedZoomAmount: \(value)")
 
         
     }
     
-    func notifySliderFinishedZoomAmount(value: Float) {
+    @MainActor func notifySliderFinishedZoomAmount(value: Float) {
         print("notifySliderFinishedZoomAmount: \(value)")
         
         

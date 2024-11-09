@@ -72,7 +72,7 @@ struct GreenButtonLayout: LayoutScheme {
         }
     }
     
-    static func getCornerRadiusOuter(orientation: Orientation) -> Int {
+    @MainActor static func getCornerRadiusOuter(orientation: Orientation) -> Int {
         if Device.isPad {
             return 12
         } else {
@@ -84,7 +84,7 @@ struct GreenButtonLayout: LayoutScheme {
         }
     }
     
-    static func getCornerRadius(orientation: Orientation) -> Int {
+    @MainActor static func getCornerRadius(orientation: Orientation) -> Int {
         if Device.isPad {
             return 12
         } else {

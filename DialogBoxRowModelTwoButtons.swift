@@ -12,7 +12,7 @@ class DialogBoxRowModelTwoButtons: DialogBoxRowModel {
     let buttonLeft: DialogBoxButtonModel
     let buttonRight: DialogBoxButtonModel
     
-    init(buttonLeft: DialogBoxButtonModel, buttonRight: DialogBoxButtonModel) {
+    @MainActor init(buttonLeft: DialogBoxButtonModel, buttonRight: DialogBoxButtonModel) {
         self.buttonLeft = buttonLeft
         self.buttonRight = buttonRight
         super.init(rowModelType: .twoButtons)

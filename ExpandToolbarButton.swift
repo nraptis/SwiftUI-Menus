@@ -83,7 +83,11 @@ class ExpandToolbarButton: DrawableButton, UIGestureRecognizerDelegate {
     }
     
     @objc func handleLongPress() {
-        guard let rootView = ApplicationController.rootViewController.view else {
+        guard let rootViewController = ApplicationController.rootViewController else {
+            return
+        }
+            
+        guard let rootView = rootViewController.view else {
             return
         }
         let point = longPressRecognizer.location(in: rootView)

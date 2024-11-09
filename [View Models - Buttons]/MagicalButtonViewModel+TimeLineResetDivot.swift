@@ -27,7 +27,7 @@ import Foundation
                 refreshEnabled()
             }
         }
-        super.refresh()
+        
     }
     
     deinit {

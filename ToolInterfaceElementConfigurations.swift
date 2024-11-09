@@ -27,7 +27,7 @@ struct ToolInterfaceElementStepperConfiguration {
     let minimumValue: Int
     let maximumValue: Int
     
-    init(iconPack: FramedConvertibleIconPack,
+    @MainActor init(iconPack: FramedConvertibleIconPack,
          incrementPack: FramedLongIconPack,
          decrementPack: FramedLongIconPack,
          orientation: Orientation,
@@ -108,7 +108,7 @@ struct ToolInterfaceElementCreateSwatchButtonConfiguration: Identifiable {
     let nameLabelWidthLarge: Int
     let nameLabelWidthMedium: Int
     let nameLabelWidthSmall: Int
-    init(id: UInt8,
+    @MainActor init(id: UInt8,
          iconPack: FramedLongIconPack,
          orientation: Orientation,
          nameLabelLine1: String?,
@@ -151,7 +151,7 @@ struct ToolInterfaceElementMainTabButtonConfiguration: Identifiable {
     let nameLabelWidthLarge: Int
     let nameLabelWidthMedium: Int
     let nameLabelWidthSmall: Int
-    init(id: UInt8,
+    @MainActor init(id: UInt8,
          iconPack: FramedLongIconPack,
          orientation: Orientation,
          nameLabelLine1: String?,
@@ -197,7 +197,7 @@ struct ToolInterfaceElementSegmentedPickerButtonConfiguration: Identifiable {
     let nameLabelWidthStackedLarge: Int
     let nameLabelWidthStackedMedium: Int
     let nameLabelWidthStackedSmall: Int
-    init(id: UInt8,
+    @MainActor init(id: UInt8,
          iconPack: FramedConvertibleIconPack,
          orientation: Orientation,
          nameLabelLine1: String?,
@@ -244,7 +244,7 @@ struct ToolInterfaceElementGreenButtonConfiguration {
     let nameLabelWidthLarge: Int
     let nameLabelWidthMedium: Int
     let nameLabelWidthSmall: Int
-    init(iconPack: FramedLongIconPack,
+    @MainActor init(iconPack: FramedLongIconPack,
          orientation: Orientation,
          nameLabelLine1: String?,
          nameLabelLine2: String?) {
@@ -279,7 +279,7 @@ struct ToolInterfaceElementChangeModeConfiguration {
     let nameLabelWidthStackedLarge: Int
     let nameLabelWidthStackedMedium: Int
     let nameLabelWidthStackedSmall: Int
-    init(iconPack: FramedConvertibleIconPack,
+    @MainActor init(iconPack: FramedConvertibleIconPack,
          accentPack: FramedLongIconPack,
          orientation: Orientation,
          nameLabelLine1: String?,
@@ -323,7 +323,7 @@ struct ToolInterfaceElementCheckBoxConfiguration {
     let nameLabelWidthStackedLarge: Int
     let nameLabelWidthStackedMedium: Int
     let nameLabelWidthStackedSmall: Int
-    init(iconPack: FramedConvertibleIconPack,
+    @MainActor init(iconPack: FramedConvertibleIconPack,
          orientation: Orientation,
          nameLabelLine1: String?,
          nameLabelLine2: String?) {
@@ -391,7 +391,7 @@ struct ToolInterfaceElementSliderConfiguration {
     
     let widthCategory: ToolInterfaceElementSliderWidthCategory
     
-    init(orientation: Orientation,
+    @MainActor init(orientation: Orientation,
          nameLabelLine1: String?,
          nameLabelLine2: String?,
          friend_1_nameLabelLine1: String?,
@@ -528,7 +528,7 @@ struct ToolInterfaceElementButtonConfiguration {
     let nameLabelWidthStackedLarge: Int
     let nameLabelWidthStackedMedium: Int
     let nameLabelWidthStackedSmall: Int
-    init(iconPack: LooseConvertibleIconPack,
+    @MainActor init(iconPack: LooseConvertibleIconPack,
          orientation: Orientation,
          nameLabelLine1: String?,
          nameLabelLine2: String?) {
@@ -567,7 +567,7 @@ struct ToolInterfaceElementFavoringOneLineLabelConfiguration {
     let twoLineText2: String
     let twoLineWidth: Int
     
-    init(orientation: Orientation,
+    @MainActor init(orientation: Orientation,
          text: String) {
         
         oneLineText = text

@@ -11,7 +11,7 @@ class DialogBoxRowModelOneButton: DialogBoxRowModel {
     
     let button: DialogBoxButtonModel
     
-    init(button: DialogBoxButtonModel) {
+    @MainActor init(button: DialogBoxButtonModel) {
         self.button = button
         super.init(rowModelType: .oneButton)
     }
